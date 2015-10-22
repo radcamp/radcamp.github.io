@@ -10,25 +10,25 @@ PoreCamp 2015
 
 **Organisers / Chief Instructors**
 
-Nick Loman, University of Birmingham
-Josh Quick, University of Birmingham
-Mick Watson, Edinburgh Genomics
-Matt Loose, University of Nottingham
+  - Nick Loman, Institute of Microbiology and Infection, University of Birmingham
+  - Matt Loose, DeepSeq, University of Nottingham
+  - Mick Watson, Edinburgh Genomics, The Roslin Institute
+  - Josh Quick, University of Birmingham
 
-**Guest Invited Lecturers**
+**Special Invited Guest Lecturers**
 
-Jared Simpson, Ontario Institute for Cancer Research
-John Tyson, UBC Vancouver
-Justin O'Grady, University of East Anglia
+  - Jared Simpson, Ontario Institute for Cancer Research
+  - John Tyson, University of British Columbia, Vancouver
+  - Justin O'Grady, University of East Anglia
 
 **Teaching Assistants**
 
-Emily Richardson, University of Birmingham
-Judith Risse, Edinburgh Genomics
+  - Emily Richardson, University of Birmingham
+  - Judith Risse, Edinburgh Genomics
 
 ## Sponsors
 
-Oxford Nanopore
+Oxford Nanopore Technologies
 Edinburgh Genomics
 MicrobesNG
 CLIMB
@@ -37,34 +37,61 @@ NERC-NBAF
 
 ## Admission Information
 
-Price: £550 per person (accommodation not included)
-10 bursaries for NERC-NBAF students
+**Cost**: 550 UK Pounds per person (accommodation not included)
+
+Bursaries are available: 10 bursaries for NERC-NBAF students
 CLIMB bursaries (?)
 
 ## Accommodation options
 
-On campus: Venue Birmingham:
+**Venue Birmingham**
 £50 per night - only 14 rooms on the Monday, 28 rooms on the other days
 
 ## Admission criteria
 
- - Member of the MinION Access Programme
- - Basic “hands-on” experience of the MinION and/or of MinION data analysis
- - Background in either bioinformatics or wet lab work
- - Must attend ALL FIVE days of the course
+Places are **strictly limited**. Places will be allocated according
+to the following strict criteria:
 
+You must:
+ - be a member of the MinION Access Programme
+ - have basic “hands-on” experience of the MinION and/or of MinION data analysis
+ - have a background in either bioinformatics or wet lab work
+ - be able to attend ALL FIVE days of the course
 
-	Admissions form:
+In the event the course is over subscribed, the instructors will
+allocate places according to the strength of the application form
+and the applicant's relevant experience.
 
-	Name
+## How to Apply
 
-	Institution
+**Applications close on Friday, 6th November 2015 at 6pm UK time.**
 
-	PI (if applicable)
+Return this form to info@microbesng.uk with the subject line:
 
-	What kind of samples do you intend to run on the MinION for your work?
+PORECAMP APPLICATION
 
-	Are any of these samples ones you would like to bring with you? Please note that any data generated during the course will be released openly and described, therefore anything you would not be happy to have released do not bring. Please detail a) the type of sample b) basic information about DNA volumes and QC c) any potential biosafety implications of this sample type.
+	Name:
+	Academic qualifications:
+	Institution:
+	Group (if applicable):
+	Research interests (up to 100 words):
+	Reason for wanting to attend course (up to 200 words):
+	Experience with nanopore sequencing so far (up to 200 words):
+	Background (check all that apply)
+	[ ] Wet lab molecular biology
+	[ ] Bioinformatics analysis
+	What kind of samples do you intend to run on the MinION?
+	If permitted, would you like to bring samples along to run? **
+
+	** All data generated during the course will be made openly
+	available online. Therefore do not propose to bring any
+	samples that you would not like to release data for.
+
+	If you would like to bring samples, please detail
+	1) type of sample
+	2) details of available DNA (volume, conc, quality)
+	3) any potential biosafety implications, or specify none.
+
 
 ## Draft schedule
 
