@@ -1,9 +1,8 @@
 ###########
 # site.title
 
-title:    'Planet Jekyll Starter Theme'
-subtitle: 'Another Minimalistic Static Site Quick Starter Theme'
-
+title:    'PoreCamp'
+subtitle: 'A bootcamp to learn about operating the Oxford Nanopore MinION'
 
 ## note:
 #  use site.path in your templates to make it work for both protocols e.g. http and https
