@@ -28,12 +28,12 @@ PoreCamp 2015
 
 ## Sponsors
 
- - Oxford Nanopore Technologies
- - Edinburgh Genomics
- - MicrobesNG
- - CLIMB
- - DeepSeq
- - NERC-NBAF
+  - Oxford Nanopore Technologies
+  - Edinburgh Genomics
+  - MicrobesNG
+  - CLIMB
+  - DeepSeq
+  - NERC-NBAF
 
 ## Admission Information
 
@@ -53,10 +53,11 @@ Places are **strictly limited**. Places will be allocated according
 to the following strict criteria:
 
 You must:
- - be a member of the MinION Access Programme
- - have basic “hands-on” experience of the MinION and/or of MinION data analysis
- - have a background in either bioinformatics or wet lab work
- - be able to attend ALL FIVE days of the course
+
+  - be a member of the MinION Access Programme
+  - have basic “hands-on” experience of the MinION and/or of MinION data analysis
+  - have a background in either bioinformatics or wet lab work
+  - be able to attend ALL FIVE days of the course
 
 In the event the course is over subscribed, the instructors will
 allocate places according to the strength of the application form
@@ -85,7 +86,9 @@ PORECAMP APPLICATION
 
 	** All data generated during the course will be made openly
 	available online. Therefore do not propose to bring any
-	samples that you would not like to release data for.
+	samples that you would not like to release data for. There
+	is no obligation to bring samples, in which case we will
+	
 
 	If you would like to bring samples, please detail
 	1) type of sample
