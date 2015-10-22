@@ -28,12 +28,12 @@ PoreCamp 2015
 
 ## Sponsors
 
-Oxford Nanopore Technologies
-Edinburgh Genomics
-MicrobesNG
-CLIMB
-DeepSeq
-NERC-NBAF
+ - Oxford Nanopore Technologies
+ - Edinburgh Genomics
+ - MicrobesNG
+ - CLIMB
+ - DeepSeq
+ - NERC-NBAF
 
 ## Admission Information
 
