@@ -8,6 +8,17 @@ title:  Welcome to PoreCamp
 PoreCamp 2015
 14th December - 18th December 2015
 
+PoreCamp is a training bootcamp based around Oxford Nanopore
+MinION sequencing. It is a unique opportunity to learn about
+this exciting new sequencing platform from some of the leading
+experts in the field. 
+
+PoreCamp will be entirely hands-on and the relatively high
+cost of entry reflects the costs of running the course;
+participants will have hands-on exposure to sequence library
+preparation, operation of the MinION and small group
+interactive bioinformatics teaching.
+
 **Organisers / Chief Instructors**
 
   - Nick Loman, Institute of Microbiology and Infection, University of Birmingham
