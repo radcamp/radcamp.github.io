@@ -38,6 +38,7 @@ interactive bioinformatics teaching.
   - Emily Richardson, University of Birmingham
   - Judith Risse, Edinburgh Genomics
   - Solomon Mwaigwisya, University of East Anglia
+  - Pablo Fuentes-Utrilla, University of Birmingham
 
 ## Sponsors
 

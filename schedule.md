@@ -14,9 +14,13 @@ title:  Porecamp Schedule
   - Nanopore workflow
   - Group session: Designing a nanopore experiment
 
-Then, days 2, 3 and 4 will be rotating lab work in three groups of three:
-
 Dinner out in Birmingham.
+
+## Rotating Schedule
+
+Days 2-4 are operated in rotation. Students will be split into three groups. The
+groups will rotate daily through i) library preparation ii) sequencing and 
+iii) bioinformatics.
 
 # Day 2: Library Preparation
 
