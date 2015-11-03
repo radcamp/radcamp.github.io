@@ -89,12 +89,11 @@ and the applicant's relevant experience.
 
 ## How to Apply
 
-**Applications close on Friday, 6th November 2015 at 6pm UK time.**
+**Applications close on Wedneday, 11th November 2015 at 6pm UK time.**
 
 If you are successful you will sent a link to make payment online via credit card.
 
 Please refer to the <a href="PorecampApplicationForm.docx">application form</a>.
 
 Send completed application forms to Jennie Law, <a href="mailto:courses@microbesng.uk">courses@microbesng.uk</a>
-PORECAMP APPLICATION
 
