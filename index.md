@@ -98,4 +98,6 @@ If you are successful you will sent a link to make payment online via credit car
 Please refer to the <a href="PorecampApplicationForm.docx">application form</a>.
 
 Send completed application forms to Jennie Law, <a href="mailto:courses@microbesng.uk">courses@microbesng.uk</a>
+<br>
+To apply for a NERC bursary, please also send forms to Bert Overduin, <a href="mailto:bert.overduin@ed.ac.uk">bert.overduin@ed.ac.uk</a>
 
