@@ -93,7 +93,7 @@ and the applicant's relevant experience.
 
 ## How to Apply
 
-**Applications close on Wedneday, 11th November 2015 at 6pm UK time.**
+**Applications close on Wednesday, 11th November 2015 at 6pm UK time.**
 
 If you are successful you will sent a link to make payment online via credit card.
 
