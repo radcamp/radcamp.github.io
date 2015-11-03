@@ -7,14 +7,16 @@ title:  Porecamp Schedule
 
 # Day 1: Group Lectures and Discussion (afternoon only)
 
-History of second/third generation sequencing, nanopore in context
-Introduction to nanopore sequencing
-Introduction to applications
-Understanding nanopore data
-Nanopore workflow
-Group session: Designing a nanopore experiment
+  - History of second/third generation sequencing, nanopore in context
+  - Introduction to nanopore sequencing
+  - Introduction to applications (focus on microbial applications)
+  - Understanding nanopore data
+  - Nanopore workflow
+  - Group session: Designing a nanopore experiment
 
 Then, days 2, 3 and 4 will be rotating lab work in three groups of three:
+
+Dinner out in Birmingham.
 
 # Day 2: Library Preparation
 
@@ -27,6 +29,8 @@ Library prep:
   - Protocols (Native, PCR, PreCR, Low-input)
   - Run through SQK-MAP-006 on different samples (as above)
   - Josh run through and then students attempt their own
+
+Student organised dinner.
 
 # Day 3: Sequencing
 
@@ -45,6 +49,8 @@ Sequencing:
   - Data management strategies
   - Interrogation of ongoing runs: minoTour, poretools
 
+Student organised dinner.
+
 # Day 4: Bioinformatics
 
 ## Run by Nick Loman and Mick Watson
@@ -59,6 +65,8 @@ Sequencing:
   - Scaffolding of short reads (SSPACE-LongRead)
   - Hybrid de novo assembly (SPAdes)
   - Discussion of pure de novo assembly (Celera, nanopolish)
+
+Dinner with instructors.
 
 # Day 5: Wrap-up, discussion (morning only)
 
