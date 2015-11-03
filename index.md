@@ -62,7 +62,7 @@ UK applicants only.
 Please refer to the <a href="PorecampApplicationForm.docx">application form</a>.
 
 Send completed application forms to Jennie Law, <a href="mailto:courses@microbesng.uk">courses@microbesng.uk</a>
-To apply for a NERC bursary, please also send forms to Bert Overduin, <<a href="mailto:bert.overduin@ed.ac.uk">bert.overduin@ed.ac.uk</a>
+To apply for a NERC bursary, please also send forms to Bert Overduin, <a href="mailto:bert.overduin@ed.ac.uk">bert.overduin@ed.ac.uk</a>
 
 ## Accommodation options
 
