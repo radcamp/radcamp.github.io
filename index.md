@@ -8,6 +8,8 @@ title:  Welcome to PoreCamp
 PoreCamp 2015
 14th December - 18th December 2015
 
+University of Birmingham, UK
+
 PoreCamp is a training bootcamp based around Oxford Nanopore
 MinION sequencing. It is a unique opportunity to learn about
 this exciting new sequencing platform from some of the leading
@@ -48,9 +50,12 @@ interactive bioinformatics teaching.
 
 ## Admission Information
 
+This course is open to all applicants including those from outside of the UK.
+
 **Cost**: 500 UK Pounds per person excluding VAT (accommodation not included)
 
-Bursaries are available: 10 bursaries from NERC and 5 bursaries from CLIMB.
+Bursaries are available: 10 bursaries from NERC and 5 bursaries from CLIMB for
+UK applicants only.
 
 27 places are available.
 
@@ -71,8 +76,8 @@ to the following strict criteria:
 You must:
 
   - be a member of the MinION Access Programme
-  - have basic “hands-on” experience of the MinION and/or of MinION data analysis
-  - have a background in either bioinformatics or wet lab work
+  - have basic “hands-on” experience of the MinION and/or MinION data analysis
+  - have a background in either bioinformatics and/or wet lab work
   - be able to attend ALL FIVE days of the course
 
 In the event the course is over subscribed, the instructors will
