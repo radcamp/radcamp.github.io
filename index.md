@@ -59,7 +59,7 @@ UK applicants only.
 
 27 places are available.
 
-Please refer to the <a href="PorecampApplicationForm.doc">application form</a>.
+Please refer to the <a href="PorecampApplicationForm.docx">application form</a>.
 
 Send completed application forms to Jennie Law, <a href="mailto:courses@microbesng.uk">courses@microbesng.uk</a>
 
