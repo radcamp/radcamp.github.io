@@ -17,7 +17,7 @@ experts in the field.
 
 PoreCamp will be entirely hands-on and the relatively high
 cost of entry reflects the costs of running the course;
-participants will have hands-on exposure to sequence library
+participants will gain practical experience of sequence library
 preparation, operation of the MinION and small group
 interactive bioinformatics teaching.
 
