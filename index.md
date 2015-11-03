@@ -66,7 +66,10 @@ Send completed application forms to Jennie Law, <a href="mailto:courses@microbes
 ## Accommodation options
 
 **Venue Birmingham**
-£50 per night - only 14 rooms on the Monday, 28 rooms on the other days
+£50 per night - only 14 rooms on the Monday, 28 rooms on the other days. Visit
+<a href="http://www.venuebirmingham.com">venuebirmingham.com</a>.
+
+Alternative accommodation options in the City Centre are being explored.
 
 ## Admission criteria
 
