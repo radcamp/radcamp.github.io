@@ -41,12 +41,14 @@ interactive bioinformatics teaching.
 
 ## Sponsors
 
+<a href="https://genomics.ed.ac.uk"><img src="logos/eg_logo_white.png" alt="Edinburgh Genomics" border=0 width="250"></a>
+
+<a href="http://www.nerc.ac.uk"><img src="logso/nerc-logo-large.jpg" alt='NERC' width="250" border=0></a>
+
   - Oxford Nanopore Technologies
-  - Edinburgh Genomics
   - MicrobesNG
   - CLIMB
   - DeepSeq
-  - NERC-NBAF
 
 ## Admission Information
 
