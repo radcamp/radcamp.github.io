@@ -8,6 +8,7 @@ title:  Welcome to PoreCamp
 PoreCamp 2015
 14th December - 18th December 2015
 
+Centre for Computional Biology / Institute of Microbiology and Infection
 University of Birmingham, UK
 
 PoreCamp is a training bootcamp based around Oxford Nanopore
@@ -44,6 +45,7 @@ interactive bioinformatics teaching.
 
 ![Edinburgh Genomics](logos/eg_logo_white.png)
 ![NERC](logos/nerc-logo-large.jpg)
+![CCB](logos/ccb.png)
 
   - Oxford Nanopore Technologies
   - MicrobesNG
@@ -54,7 +56,7 @@ interactive bioinformatics teaching.
 
 This course is open to all applicants including those from outside of the UK.
 
-**Cost**: 500 UK Pounds per person excluding VAT (accommodation not included)
+**Cost**: 500 UK Pounds per person (accommodation not included)
 
 Bursaries are available: 10 bursaries from NERC and 5 bursaries from CLIMB for
 UK applicants only.
