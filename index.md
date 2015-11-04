@@ -41,12 +41,11 @@ interactive bioinformatics teaching.
   - Solomon Mwaigwisya, University of East Anglia
   - Pablo Fuentes-Utrilla, University of Birmingham
 
-## Sponsors
+## Porecamp
+
+Thank you to the following organisations for providing support (time, bursaries, reagents, space) to Porecamp:
 
 ![Sponsors](logos/sponsors.png)
-
-  - Oxford Nanopore Technologies
-  - DeepSeq
 
 ## Admission Information
 
