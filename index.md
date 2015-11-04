@@ -43,11 +43,7 @@ interactive bioinformatics teaching.
 
 ## Sponsors
 
-![Edinburgh Genomics](logos/eg_logo_white.png)
-![NERC](logos/nerc-logo-large.jpg)
-![CCB](logos/ccb.png)
-![CLIMB](logos/MRCCLIMB_RGB1-300x90.jpg)
-![MicrobesNG](logos/microbesNG-logo-RGB-300x170.png)
+![Sponsors](logos/sponsors.png)
 
   - Oxford Nanopore Technologies
   - DeepSeq
