@@ -43,11 +43,9 @@ interactive bioinformatics teaching.
 
 ## Sponsors
 
-<p>
 ![Edinburgh Genomics](logos/eg_logo_white.png)
 ![NERC](logos/nerc-logo-large.jpg)
 ![CCB](logos/ccb.png)
-</p>
 
   - Oxford Nanopore Technologies
   - MicrobesNG
