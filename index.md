@@ -46,10 +46,10 @@ interactive bioinformatics teaching.
 ![Edinburgh Genomics](logos/eg_logo_white.png)
 ![NERC](logos/nerc-logo-large.jpg)
 ![CCB](logos/ccb.png)
+![CLIMB](MRCCLIMB_RGB1-300x90.jpg)
+![MicrobesNG](microbesNG-logo-RGB-300x170.png)
 
   - Oxford Nanopore Technologies
-  - MicrobesNG
-  - CLIMB
   - DeepSeq
 
 ## Admission Information
