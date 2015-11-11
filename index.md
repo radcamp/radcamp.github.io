@@ -53,8 +53,7 @@ This course is open to all applicants including those from outside of the UK.
 
 **Cost**: 500 UK Pounds per person (accommodation not included)
 
-Bursaries are available: 10 bursaries from NERC and 5 bursaries from CLIMB for
-UK applicants only.
+Bursaries are available **for UK applicants only**: 10 bursaries from NERC and 5 bursaries from CLIMB.
 
 27 places are available.
 
