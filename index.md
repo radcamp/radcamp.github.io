@@ -37,7 +37,7 @@ interactive bioinformatics teaching.
 **Teaching Assistants**
 
   - Emily Richardson, University of Birmingham
-  - Judith Risse, Edinburgh Genomics
+  - Rob Stewart, Edinburgh Genomics
   - Solomon Mwaigwisya, University of East Anglia
   - Pablo Fuentes-Utrilla, University of Birmingham
 
@@ -46,22 +46,6 @@ interactive bioinformatics teaching.
 Thank you to the following organisations for providing support (time, bursaries, reagents, space) to Porecamp:
 
 ![Sponsors](logos/sponsors.png)
-
-## Admission Information
-
-This course is open to all applicants including those from outside of the UK.
-
-**Cost**: 500 UK Pounds per person (accommodation not included)
-
-Bursaries are available **for UK applicants only**: 10 bursaries from NERC and 5 bursaries from CLIMB.
-
-27 places are available.
-
-Please refer to the <a href="PorecampApplicationForm.docx">application form</a>.
-
-Send completed application forms to Jennie Law, <a href="mailto:courses@microbesng.uk">courses@microbesng.uk</a>
-<br>
-To apply for a NERC bursary, please also send forms to Bert Overduin, <a href="mailto:bert.overduin@ed.ac.uk">bert.overduin@ed.ac.uk</a>
 
 ## Accommodation options
 
@@ -89,13 +73,5 @@ and the applicant's relevant experience.
 
 ## How to Apply
 
-**Applications close on Wednesday, 11th November 2015 at 6pm UK time.**
-
-If you are successful you will sent a link to make payment online via credit card.
-
-Please refer to the <a href="PorecampApplicationForm.docx">application form</a>.
-
-Send completed application forms to Jennie Law, <a href="mailto:courses@microbesng.uk">courses@microbesng.uk</a>
-<br>
-To apply for a NERC bursary, please also send forms to Bert Overduin, <a href="mailto:bert.overduin@ed.ac.uk">bert.overduin@ed.ac.uk</a>
+**Applications for Porecamp 1 (December 2015) have closed, please keep an eye out for future Porecamps in 2016.**
 
