@@ -404,7 +404,7 @@ data-contained-object-id=
 <tr>
 <th data-placeholder-text="Header 1">Tuesday 15th</th>
 <th data-placeholder-text="Header 2">Sample preparation (Josh Quick
-&amp; Justin O&acirc;&euro;&trade;Grady)<br/>
+&amp; Justin O'Grady)<br/>
 TA: Pablo Fuentes-Utrilla, Solomon Mwaigwisya</th>
 </tr>
 </thead>
