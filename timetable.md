@@ -338,6 +338,10 @@ tr.footer_top_spacing td {
 
 </style>
 
+<p>
+All group activities (coffee, lectures and reportage) and bioinformatics practicals will be held in the Centre for Computational Biology, 3rd floor Haworth Building, Univeristy of Birmingham. Lab practicals held in the Biosciences teaching laboratory.
+</p>
+
 <div class=
 "manuscript-author-list MPParagraphStyle_FBC59AED-F34B-414B-844D-6AD0587DE28F">
 </div>
