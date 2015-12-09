@@ -1,3 +1,8 @@
+---
+layout: default
+title:  Porecamp Timetable
+---
+
 <style type="text/css">
 .MPParagraphStyle_41E411E3-4111-4AF1-80A4-339C975B384B
 {
