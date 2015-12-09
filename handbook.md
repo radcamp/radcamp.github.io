@@ -1,6 +1,6 @@
 ---
 layout: default
-title:  Porecamp Schedule
+title:  Porecamp Course Handbook
 ---
 
 # {{ page.title }}
