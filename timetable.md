@@ -489,8 +489,7 @@ and Metrichor</td>
 </tr>
 <tr>
 <td data-placeholder-text="Data">16:00</td>
-<td data-placeholder-text="Data">Demonstration: Barcode balancing
-with Read-Until</td>
+<td data-placeholder-text="Data">Demonstration: Dynamic balancing with read until</td>
 </tr>
 <tr>
 <td data-placeholder-text="Data">17:30</td>
