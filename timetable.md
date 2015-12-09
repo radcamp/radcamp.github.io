@@ -337,10 +337,7 @@ tr.footer_top_spacing td {
 }
 
 </style>
-<title></title>
-</head>
-<body>
---- layout: default title: Porecamp Timetable ---
+
 <div class=
 "manuscript-author-list MPParagraphStyle_FBC59AED-F34B-414B-844D-6AD0587DE28F">
 </div>
@@ -373,7 +370,7 @@ data-contained-object-id=
 </tr>
 <tr>
 <td data-placeholder-text="Data">15:00</td>
-<td data-placeholder-text="Data">Group lecture: Introducing the MinION platform (all) "</td>
+<td data-placeholder-text="Data">Group lecture: Introducing the MinION platform (all)</td>
 </tr>
 <tr>
 <td data-placeholder-text="Data">16:30</td>
@@ -410,7 +407,7 @@ Solomon Mwaigwisya</th>
 <tbody>
 <tr>
 <td data-placeholder-text="Data">09:00</td>
-<td data-placeholder-text="Data">Coffee Lecture: Justin O'Grady: Nanopore sequencing for diagnostics</td>
+<td data-placeholder-text="Data">Coffee Seminar: Justin O'Grady: Nanopore sequencing for diagnostics</td>
 </tr>
 <tr>
 <td data-placeholder-text="Data">09:30</td>
@@ -425,9 +422,7 @@ sample</td>
 <tr>
 <td data-placeholder-text="Data">13:00</td>
 <td data-placeholder-text="Data">Lunch &amp; seminar<br/>
-Jared Simpson:
-&acirc;&euro;&oelig;Understanding squiggle data and error
-correction&acirc;&euro;</td>
+Jared Simpson: Understanding squiggle data and error correction</td>
 </tr>
 <tr>
 <td data-placeholder-text="Data">14:30</td>
@@ -468,7 +463,7 @@ data-contained-object-id=
 <tbody>
 <tr>
 <td data-placeholder-text="Data">09:00</td>
-<td data-placeholder-text="Data">Coffee Lecture: Run until (Matt Loose)</td>
+<td data-placeholder-text="Data">Coffee Seminar: Run until (Matt Loose)</td>
 </tr>
 <tr>
 <td data-placeholder-text="Data">09:30</td>
@@ -482,9 +477,7 @@ configuring run scripts</td>
 </tr>
 <tr>
 <td data-placeholder-text="Data">13:00</td>
-<td data-placeholder-text="Data">Lunch &amp; seminarJustin
-O&acirc;&euro;&trade;Grady: &acirc;&euro;&oelig;MinION for
-infectious disease diagnostics&acirc;&euro;</td>
+<td data-placeholder-text="Data">Lunch seminar: Nanoopre bioinformatics (Mick Watson)</td>
 </tr>
 <tr>
 <td data-placeholder-text="Data">14:00</td>
@@ -530,7 +523,7 @@ Loman &amp; Mick Watson)TA: Rob Stewart, Emily Richardson</th>
 <tbody>
 <tr>
 <td data-placeholder-text="Data">09:00</td>
-<td data-placeholder-text="Data">Coffee Lecture: Accurate variant calling (Nick Loman)</td>
+<td data-placeholder-text="Data">Coffee Seminar: Accurate variant calling (Nick Loman)</td>
 </tr>
 <tr>
 <td data-placeholder-text="Data">09:30</td>
@@ -544,9 +537,7 @@ data</td>
 </tr>
 <tr>
 <td data-placeholder-text="Data">13:00</td>
-<td data-placeholder-text="Data">Lunch &amp; seminar:Josh Quick:
-&acirc;&euro;&oelig;A portable nanopore sequencing
-system&acirc;&euro;</td>
+<td data-placeholder-text="Data">Lunch &amp; seminar:Josh Quick: Deploying a portable nanopore sequencing system</td>
 </tr>
 <tr>
 <td data-placeholder-text="Data">14:00</td>
