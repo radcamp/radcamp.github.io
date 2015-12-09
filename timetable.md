@@ -400,14 +400,14 @@ data-contained-object-id=
 <tr>
 <th data-placeholder-text="Header 1">Tuesday 15th</th>
 <th data-placeholder-text="Header 2">Sample preparation (Josh Quick
-&amp; Justin O&acirc;&euro;&trade;Grady)TA: Pablo Fuentes-Utrillo,
-Solomon Mwaigwisya</th>
+&amp; Justin O&acirc;&euro;&trade;Grady)<br/>
+TA: Pablo Fuentes-Utrilla, Solomon Mwaigwisya</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td data-placeholder-text="Data">09:00</td>
-<td data-placeholder-text="Data">Coffee Seminar: Justin O'Grady: Nanopore sequencing for diagnostics</td>
+<td data-placeholder-text="Data">Coffee seminar: Nanopore sequencing for diagnostics (Justin O'Grady)</td>
 </tr>
 <tr>
 <td data-placeholder-text="Data">09:30</td>
@@ -421,8 +421,7 @@ sample</td>
 </tr>
 <tr>
 <td data-placeholder-text="Data">13:00</td>
-<td data-placeholder-text="Data">Lunch &amp; seminar<br/>
-Jared Simpson: Understanding squiggle data and error correction</td>
+<td data-placeholder-text="Data">Lunch seminar: Understanding squiggle data and error correction (Jared Simpson)</td>
 </tr>
 <tr>
 <td data-placeholder-text="Data">14:30</td>
@@ -463,7 +462,7 @@ data-contained-object-id=
 <tbody>
 <tr>
 <td data-placeholder-text="Data">09:00</td>
-<td data-placeholder-text="Data">Coffee Seminar: Run until (Matt Loose)</td>
+<td data-placeholder-text="Data">Coffee seminar: Run until (Matt Loose)</td>
 </tr>
 <tr>
 <td data-placeholder-text="Data">09:30</td>
@@ -517,13 +516,14 @@ data-contained-object-id=
 <tr>
 <th data-placeholder-text="Header 1">Thursday 17th</th>
 <th data-placeholder-text="Header 2">MinION bioinformatics (Nick
-Loman &amp; Mick Watson)TA: Rob Stewart, Emily Richardson</th>
+Loman &amp; Mick Watson)
+<br/>TA: Rob Stewart, Emily Richardson</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td data-placeholder-text="Data">09:00</td>
-<td data-placeholder-text="Data">Coffee Seminar: Accurate variant calling (Nick Loman)</td>
+<td data-placeholder-text="Data">Coffee seminar: Accurate variant calling (Nick Loman)</td>
 </tr>
 <tr>
 <td data-placeholder-text="Data">09:30</td>
@@ -537,7 +537,7 @@ data</td>
 </tr>
 <tr>
 <td data-placeholder-text="Data">13:00</td>
-<td data-placeholder-text="Data">Lunch &amp; seminar:Josh Quick: Deploying a portable nanopore sequencing system</td>
+<td data-placeholder-text="Data">Lunch seminar: Deploying a portable nanopore sequencing system (Josh Quick)</td>
 </tr>
 <tr>
 <td data-placeholder-text="Data">14:00</td>
