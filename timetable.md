@@ -382,7 +382,8 @@ data-contained-object-id=
 </tr>
 <tr>
 <td data-placeholder-text="Data">18:30</td>
-<td data-placeholder-text="Data">Group Dinner with instructors</td>
+<td data-placeholder-text="Data">Leave for group dinner with instructors<br>
+Restaurant <a href="http://mughaleazam.co.uk/contact/">Mughal-E-Azam</a>, Stratford Road, Sparkhill</td>
 </tr>
 </tbody>
 <tfoot style="display: table-footer-group;">
