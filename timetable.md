@@ -379,7 +379,7 @@ data-contained-object-id=
 <tr>
 <td data-placeholder-text="Data">15:00</td>
 <td data-placeholder-text="Data">Group lecture: Introducing the MinION platform (all)<br/>
-<a href="pdf/Porecamp_What_a_Good_Library_Looks_Like.pdf">What a good library looks like</a> (Justin O'Grady)</td>
+<a href="pdf/Porecamp_What_a_Good_Library_Looks_Like.pptx">What a good library looks like</a> (Justin O'Grady)</td>
 </tr>
 <tr>
 <td data-placeholder-text="Data">16:30</td>
