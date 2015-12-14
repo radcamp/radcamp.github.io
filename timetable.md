@@ -374,11 +374,12 @@ data-contained-object-id=
 </tr>
 <tr>
 <td data-placeholder-text="Data">14:30</td>
-<td data-placeholder-text="Data">Introduction to Porecamp (Nick Loman)</td>
+<td data-placeholder-text="Data"><a href="pdf/Porecamp_Introduction.pptx">Introduction to Porecamp</a> (Nick Loman)</td>
 </tr>
 <tr>
 <td data-placeholder-text="Data">15:00</td>
-<td data-placeholder-text="Data">Group lecture: Introducing the MinION platform (all)</td>
+<td data-placeholder-text="Data">Group lecture: Introducing the MinION platform (all)<br/>
+<a href="pdf/Porecamp_What_a_Good_Library_Looks_Like.pdf">What a good library looks like</a> (Justin O'Grady)</td>
 </tr>
 <tr>
 <td data-placeholder-text="Data">16:30</td>
