@@ -342,6 +342,10 @@ tr.footer_top_spacing td {
 All group activities (coffee, lectures and reportage) and bioinformatics practicals will be held in the Centre for Computational Biology, 3rd floor Haworth Building, Univeristy of Birmingham. Lab practicals held in the Biosciences teaching laboratory.
 </p>
 
+<b>Getting to the Centre for Computational Biology</b>
+
+<p>Centre for Computational Biology is in the Haworth Building. It is a very short walk from the University (Birmingham) train station. When coming out of the train station turn left and go DOWN the hill. It is well sign posted on your RIGHT. It is building Y2 (yellow) on the <a href="http://www.birmingham.ac.uk/Documents/university/edgbaston-campus-map.pdf">campus map</a>.</p>
+
 <div class=
 "manuscript-author-list MPParagraphStyle_FBC59AED-F34B-414B-844D-6AD0587DE28F">
 </div>
