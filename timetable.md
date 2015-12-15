@@ -431,7 +431,7 @@ sample</td>
 </tr>
 <tr>
 <td data-placeholder-text="Data">13:00</td>
-<td data-placeholder-text="Data">Lunch seminar: Understanding squiggle data and error correction (Jared Simpson)</td>
+<td data-placeholder-text="Data">Lunch seminar: <a href="pdf/151215_jts_porecamp.pdf">Understanding squiggle data and error correction</a> (Jared Simpson)</td>
 </tr>
 <tr>
 <td data-placeholder-text="Data">14:30</td>
