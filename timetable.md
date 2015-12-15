@@ -548,8 +548,7 @@ Loman &amp; Mick Watson)
 </tr>
 <tr>
 <td data-placeholder-text="Data">14:00</td>
-<td data-placeholder-text="Data">Lab practical: Assembling nanopore
-data and error correction</td>
+<td data-placeholder-text="Data">Lab practical: <a href="http://nbviewer.ipython.org/github/PoreCamp/porecamp.github.io/blob/master/tutorials/Identification%20and%20assembly%20practical.ipynb">Assembling nanopore data</a></td>
 </tr>
 <tr>
 <td data-placeholder-text="Data">17:30</td>
