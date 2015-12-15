@@ -536,8 +536,7 @@ Loman &amp; Mick Watson)
 </tr>
 <tr>
 <td data-placeholder-text="Data">09:30</td>
-<td data-placeholder-text="Data">Lab practical: Exploring FAST5
-data with poRe and poretools</td>
+<td data-placeholder-text="Data">Lab practical: <a href="https://github.com/mw55309/PoreCamp/blob/master/PoreCamp.md">Exploring FAST5 data with poRe and poretools</a></td>
 </tr>
 <tr>
 <td data-placeholder-text="Data">11:00</td>
