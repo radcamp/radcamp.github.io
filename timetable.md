@@ -540,8 +540,7 @@ Loman &amp; Mick Watson)
 </tr>
 <tr>
 <td data-placeholder-text="Data">11:00</td>
-<td data-placeholder-text="Data">Lab practical: Aligning nanopore
-data</td>
+<td data-placeholder-text="Data">Lab practical: <a href="http://nbviewer.ipython.org/github/PoreCamp/porecamp.github.io/blob/master/tutorials/Mapping%20Practical.ipynb">Mapping nanopore reads and variant calling</a></td>
 </tr>
 <tr>
 <td data-placeholder-text="Data">13:00</td>
