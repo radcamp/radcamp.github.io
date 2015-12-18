@@ -481,8 +481,7 @@ data-contained-object-id=
 </tr>
 <tr>
 <td data-placeholder-text="Data">10:30</td>
-<td data-placeholder-text="Data">Lab practical: MinKNOW and
-configuring run scripts</td>
+<td data-placeholder-text="Data">Lab practical: <a href="pdf/Porecamp_RunningMinION_JT.pdf">MinKNOW and configuring run scripts</a>< (John Tyson)/td>
 </tr>
 <tr>
 <td data-placeholder-text="Data">13:00</td>
