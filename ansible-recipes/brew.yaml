@@ -6,11 +6,13 @@
       register: default_path
 
     - name: brew deps
-      apt: pkg=build-essential
-      apt: pkg=curl
-      apt: pkg=git
-      apt: pkg=python-setuptools
-      apt: pkg=ruby
+      apt: pkg={{ item }} 
+      with_items:
+        - build-essential
+        - curl
+        - git
+        - python-setuptools
+        - ruby
 
     - name: install brew
       git: repo=https://github.com/Linuxbrew/brew.git dest=/home/ubuntu/.linuxbrew version=HEAD accept_hostkey=yes
@@ -26,3 +28,5 @@
     - name: brew bwa
       homebrew: name=homebrew/science/bwa state=present
 
+    - name: brew samtools
+      homebrew: name=homebrew/science/samtools state=present
