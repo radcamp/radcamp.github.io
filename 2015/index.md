@@ -7,10 +7,9 @@ title:  PoreCamp 2015
 
 [Welcome](index.md) - [Timetable](timetable.md) - [Handbook](handbook.md)
 
-14 - 18th December 2015  
+14 - 18 December 2015  
 Centre for Computional Biology / Institute of Microbiology and Infection  
 University of Birmingham, UK
-
 
 PoreCamp is a training bootcamp based around Oxford Nanopore
 MinION sequencing. It is a unique opportunity to learn about

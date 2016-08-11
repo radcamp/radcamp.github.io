@@ -47,3 +47,4 @@ title:  Course handbook for Porecamp 2016
 - Scaffolding of short reads (SSPACE-LongRead)
 - Hybrid de novo assembly (SPAdes)
 - Discussion of pure de novo assembly (Celera, nanopolish)
+

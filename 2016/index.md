@@ -10,7 +10,8 @@ University of Exeter
 Penryn Campus, Cornwall  
 UK
 
-Welcome to Penryn and the University of Exeter. We are delighted to welcome you to the course and hope you will learn and enjoy much during the next week. 
+Welcome to Penryn and the University of Exeter. We are delighted to welcome you
+to the course and hope you will learn and enjoy much during the next week. 
 
 This year, it is hosted by the [Exeter Sequencing Service](http://sequencing.exeter.ac.uk/) at the [Penryn Campus, Cornwall](http://www.exeter.ac.uk/visit/campuses/penryn/) of the University of Exeter.
 
