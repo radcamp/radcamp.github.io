@@ -6,29 +6,19 @@ body {
   font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 
-a, a:visited {
+a {
   color: #4183C4;
+  text-decoration: none;
+}
+
+a:visited {
+  color: #373366;
   text-decoration: none;
 }
 
 a:hover {
   color: #156cc2;
   text-decoration: underline;
-}
-
-h1 {
-  color: #3c4c85;
-  font-size: 0.6em;
-}
-
-h2 {
-  color: #789044;
-  font-size: 0.6em;
-}
-
-h3 {
-  color: #dab71f;
-  font-size: 0.6em;
 }
 
 #header {
@@ -50,3 +40,17 @@ h3 {
   padding: 6px;
 }
 
+h1 {
+  color: #3c4c85;
+  font-size: 0.6em;
+}
+
+h2 {
+  color: #789044;
+  font-size: 0.6em;
+}
+
+h3 {
+  color: #dab71f;
+  font-size: 0.6em;
+}
