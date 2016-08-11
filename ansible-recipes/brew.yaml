@@ -1,0 +1,28 @@
+---
+- hosts: local
+  sudo: yes
+  tasks:
+    - command: echo "$PATH"
+      register: default_path
+
+    - name: brew deps
+      apt: pkg=build-essential
+      apt: pkg=curl
+      apt: pkg=git
+      apt: pkg=python-setuptools
+      apt: pkg=ruby
+
+    - name: install brew
+      git: repo=https://github.com/Linuxbrew/brew.git dest=/home/ubuntu/.linuxbrew version=HEAD accept_hostkey=yes
+      register: linuxbrew
+
+- hosts: local
+- environment:
+     PATH: "/home/ubuntu/.linuxbrew/bin:{{default_path.stdout}}"
+     MANPATH: "/home/ubuntu/.linuxbrew/man"
+     INFOPATH: "/home/ubuntu/.linuxbrew/info"
+  hosts: local
+  tasks:
+    - name: brew bwa
+      homebrew: name=homebrew/science/bwa state=present
+

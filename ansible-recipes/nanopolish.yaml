@@ -1,0 +1,19 @@
+---
+- hosts: local
+  tasks:
+   - name: build-essential
+     apt: pkg=build-essential state=installed update_cache=true
+
+   - name: zlib
+     apt: pkg=zlib1g-dev state=installed update_cache=true
+
+   - name: nanopolish 
+     git: repo=https://github.com/jts/nanopolish.git dest=/home/ubuntu/src/nanopolish-master version=HEAD accept_hostkey=yes
+     register: nanopolishgit
+
+   - name: build nanopolish
+     when: nanopolishgit|success
+     make:
+        chdir: /home/ubuntu/src/nanopolish-master
+        params:
+            NUM_THREADS: 8
