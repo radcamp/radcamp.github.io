@@ -481,7 +481,7 @@ data-contained-object-id=
 </tr>
 <tr>
 <td data-placeholder-text="Data">10:30</td>
-<td data-placeholder-text="Data">Lab practical: <a href="pdf/Porecamp_RunningMinION_JT.pdf">MinKNOW and configuring run scripts</a>< (John Tyson)/td>
+<td data-placeholder-text="Data">Lab practical: <a href="pdf/Porecamp_RunningMinION_JT.pdf">MinKNOW and configuring run scripts</a> (John Tyson)</td>
 </tr>
 <tr>
 <td data-placeholder-text="Data">13:00</td>
@@ -539,7 +539,7 @@ Loman &amp; Mick Watson)
 </tr>
 <tr>
 <td data-placeholder-text="Data">11:00</td>
-<td data-placeholder-text="Data">Lab practical: <a href="http://nbviewer.ipython.org/github/PoreCamp/porecamp.github.io/blob/master/tutorials/Mapping%20Practical.ipynb">Mapping nanopore reads and variant calling</a></td>
+<td data-placeholder-text="Data">Lab practical: <a href="http://nbviewer.ipython.org/github/PoreCamp/porecamp.github.io/blob/master/2015/tutorials/Mapping%20Practical.ipynb">Mapping nanopore reads and variant calling</a></td>
 </tr>
 <tr>
 <td data-placeholder-text="Data">13:00</td>
@@ -547,7 +547,7 @@ Loman &amp; Mick Watson)
 </tr>
 <tr>
 <td data-placeholder-text="Data">14:00</td>
-<td data-placeholder-text="Data">Lab practical: <a href="http://nbviewer.ipython.org/github/PoreCamp/porecamp.github.io/blob/master/tutorials/Identification%20and%20assembly%20practical.ipynb">Assembling nanopore data</a></td>
+<td data-placeholder-text="Data">Lab practical: <a href="http://nbviewer.ipython.org/github/PoreCamp/porecamp.github.io/blob/master/2015/tutorials/Identification%20and%20assembly%20practical.ipynb">Assembling nanopore data</a></td>
 </tr>
 <tr>
 <td data-placeholder-text="Data">17:30</td>
