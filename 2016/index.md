@@ -5,7 +5,10 @@ title:  Welcome to PoreCamp 2016
 
 # {{ page.title }}
 
-15-19 August 2016, University of Exeter, Penryn Campus, Cornwall, UK
+15 - 19 August 2016  
+University of Exeter  
+Penryn Campus, Cornwall  
+UK
 
 Welcome to Penryn and the University of Exeter. We are delighted to welcome you to the course and hope you will learn and enjoy much during the next week. 
 
