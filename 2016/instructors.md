@@ -3,7 +3,9 @@ layout: default
 title:  Instructors at PoreCamp 2016
 ---
 
-# Course coordinators
+# {{ page.title }}
+
+# Coordinators
 
 - [Konrad Paszkiewicz](http://biosciences.exeter.ac.uk/staff/?web_id=konrad_paszkiewicz) (University of Exeter, UK)
 - [M D Sharma](http://biosciences.exeter.ac.uk/staff/index.php?web_id=Manmohan_Sharma) (http://biosciences.exeter.ac.uk/staff/index.php?web_id=Manmohan_Sharma) (University of Exeter, UK)

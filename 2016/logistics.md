@@ -3,6 +3,8 @@ layout: default
 title:  Logistics for PoreCamp 2016
 ---
 
+# {{ page.title }}
+
 # Can I arrive earlier or leave later than scheduled?
 
 Yes, please contact Victoria Sutcliffe at FXPlus to arrange accommodation for a longer

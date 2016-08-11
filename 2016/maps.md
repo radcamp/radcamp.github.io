@@ -3,6 +3,8 @@ layout: default
 title:  Transport and campus maps for Porecamp 2016
 ---
 
+# {{ page.title }}
+
 # Campus address
 
 University of Exeter  
@@ -16,10 +18,8 @@ Cornwall TR10 9FE
 
 [Map](https://www.google.com/maps/d/edit?mid=1ltOMwUeVgGT0Vow3OQ5x4eDuits) of course and excusion locations.
 
-# Map of entire Penryn Campus
+# Penryn Campus
 
 ![alt text](image/penryncampus-entire.png)
-
-# Buildings at Penryn Campus
 
 ![alt text](image/penryncampus-zoom.png)

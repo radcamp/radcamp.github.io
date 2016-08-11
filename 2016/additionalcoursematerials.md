@@ -3,6 +3,8 @@ layout: default
 title:  Additional course materials for PoreCamp 2016
 ---
 
+# {{ page.title }}
+
 # General
 
 - Laboratory safety

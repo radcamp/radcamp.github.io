@@ -3,6 +3,8 @@ layout: default
 title:  Course handbook for Porecamp 2016
 ---
 
+# {{ page.title }}
+
 # Group lectures and discussion
 
 - History of second/third generation sequencing, nanopore in context

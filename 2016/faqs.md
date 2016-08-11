@@ -3,6 +3,8 @@ layout: default
 title:  Course FAQs for PoreCamp 2016
 ---
 
+# {{ page.title }}
+
 Welcome to Penryn and the University of Exeter. We are delighted to welcome you to the
 course and hope you will learn and enjoy much during the next week.
 

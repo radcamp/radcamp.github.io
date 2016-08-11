@@ -3,6 +3,8 @@ layout: default
 title:  Emergency contacts for PoreCamp 2016
 ---
 
+# {{ page.title }}
+
 # Course organiser
 
 Konrad Paszkiewicz  
