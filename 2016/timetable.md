@@ -3,7 +3,9 @@ layout: default
 title:  Timetable for Porecamp 2016
 ---
 
-All group activities (coffee, lectures and reportage) and bioinformatics practicals will be held in the Exchange, Penryn Campus (Cornwall), University of Birmingham.
+# {{ page.title }}
+
+All group activities (coffee, lectures and reportage) and bioinformatics practicals will be held in the Exchange, Penryn Campus (Cornwall), University of Exeter.
 
 # Monday 15th August: Introduction
 
