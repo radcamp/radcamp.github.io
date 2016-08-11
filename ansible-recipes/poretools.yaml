@@ -1,0 +1,12 @@
+---
+- hosts: local
+  sudo: yes
+  tasks:
+    - name: install pip
+      apt: name=python-pip
+
+    - name: install matplotlib
+      apt: name=python-matplotlib
+
+    - name: pip poretools
+      pip: name=poretools
