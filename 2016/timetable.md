@@ -23,8 +23,8 @@ Rotations: Group A Library Prep, Group B MinION Running, Group C Bioinformatics
 
 - 09:00 : Group update in Yellow Seminar Room
 - 09:15 : Practicals
-- ??:?? : Lunchtime seminar: Understanding event calling and MinION data (**Matt Loose**)
-- ??:?? : Practicals (continued)
+- 13:00 : Lunchtime seminar: Understanding event calling and MinION data (**Matt Loose**)
+- 14:00 : Practicals (continued)
  
 # Wednesday 17th August: Practicals
 
@@ -32,8 +32,8 @@ Rotations: Group A MinION running, Group B Bioinformatics, Group C library Prep
 
 - 09:00 : Group update in Yellow Seminar Room
 - 09:15 : Practicals
-- ??:?? : Lunchtime seminar: Title TBA (**John Tyson**)
-- ??:?? : Practicals (continued)
+- 13:00 : Lunchtime seminar: Title TBA (**John Tyson**)
+- 14:00 : Practicals (continued)
  
 # Thursday 18th August: Practicals
 
@@ -41,8 +41,8 @@ Rotations: Group A Bioinformatics, Group B library prep, Group C MinION running
 
 - 09:00 : Group update in Yellow Seminar Room
 - 09:15 : Practicals
-- ??:?? : Lunchtime seminar: Utilising nanopore sequencing for biothreat detection (**Claire Lonsdale**)
-- ??:?? : Practicals (continued)
+- 13:00 : Lunchtime seminar: Utilising nanopore sequencing for biothreat detection (**Claire Lonsdale**)
+- 14:00 : Practicals (continued)
 
 # Friday 19th August: Data analysis and conclusions
 
@@ -63,6 +63,7 @@ MinION Running
 
 Bioinformatics
 
-- [General introduction to FAST5 files](https://github.com/mw55309/PoreCamp/blob/master/PoreCamp.md) (Nick Loman)
-- [Mapping and variant calling on Ebola](http://nbviewer.jupyter.org/github/PoreCamp/porecamp.github.io/blob/master/tutorials/Mapping%20Practical.ipynb) (Nick Loman)
-- [De novo and hybrid assembly](http://nbviewer.jupyter.org/github/PoreCamp/porecamp.github.io/blob/master/tutorials/Identification%20and%20assembly%20practical.ipynb) (Camilla Ip)
+- Logging into CLIMB (Nick Loman)
+- General introduction to FAST5 files (Nick Loman)
+- Mapping and variant calling on Ebola (Nick Loman)
+- De novo and hybrid assembly (Camilla Ip)

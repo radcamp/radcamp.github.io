@@ -9,7 +9,7 @@ The series was founded by Nick Loman and Josh Quick in 2015 and has been run as 
 
 PoreCamp2016 is about to commence! From 15-19 August, 42 participants from 13 countries will be at the Penryn Campus (Cornwall) of the University of Exeter.
 
-Follow us on [Twitter](https://twitter.com/search?q=%23porecamp&src=typd) with #porecamp
+Follow us on [Twitter](https://twitter.com/search?q=%23porecamp2016&src=typd) with #porecamp2016
 
 # What is nanopore sequencing?
 
