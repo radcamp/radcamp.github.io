@@ -3,6 +3,7 @@
  */
 
 body {
+  color: 8b8878;
   font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 
@@ -26,15 +27,15 @@ a:hover {
 }
 
 #header .big {
-  color: #008b8b;
+  color: #009acd;
   font-size:   140%;
   font-family: "Arial Black","Helvetica Neue",Helvetica,Arial,sans-serif;
   font-weight: bold;
 }
 
 #header .small {
-  font-size:    90%;
   color:        grey;
+  font-size:    90%;
   padding-left: 15px;
 }
 
