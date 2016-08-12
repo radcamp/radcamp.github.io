@@ -5,7 +5,7 @@ title:  PoreCamp 2015
 
 # {{ page.title }}
 
-[Welcome](index.md) - [Timetable](timetable.md) - [Handbook](handbook.md)
+[Welcome](index.html) - [Timetable](timetable.html) - [Handbook](handbook.html)
 
 14 - 18 December 2015  
 Centre for Computional Biology / Institute of Microbiology and Infection  
