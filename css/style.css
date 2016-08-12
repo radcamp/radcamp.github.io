@@ -26,7 +26,9 @@ a:hover {
 }
 
 #header .big {
+  color: #008b8b;
   font-size:   140%;
+  font-family: "Arial Black","Helvetica Neue",Helvetica,Arial,sans-serif;
   font-weight: bold;
 }
 
