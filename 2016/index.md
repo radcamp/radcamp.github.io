@@ -15,7 +15,7 @@ to the course and hope you will learn and enjoy much during the next week.
 
 This year, it is hosted by the [Exeter Sequencing Service](http://sequencing.exeter.ac.uk/) at the [Penryn Campus, Cornwall](http://www.exeter.ac.uk/visit/campuses/penryn/) of the University of Exeter.
 
-## Information for participants
+# Information for participants
 
 - [Logistics](logistics.html)
 - [Course FAQs](faqs.html)
@@ -25,10 +25,10 @@ This year, it is hosted by the [Exeter Sequencing Service](http://sequencing.exe
 - [Instructors](instructors.html)
 - [Emergency contacts](contacts.html)
 
-## Social
+# Social
 
 Next week, we welcome [42 participants from 13 countries](image/participantspercountry.png). Follow us on [Twitter](https://twitter.com/search?q=%23porecamp&src=typd) with #porecamp
 
-## Registration
+# Registration
 
 [Registration](http://www.exeter.ac.uk/news/events/details/index.php?event=5790) for PoreCamp2016 has now closed. Please keep an eye out for future PoreCamps in 2017.
