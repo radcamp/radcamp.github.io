@@ -27,14 +27,14 @@ a:hover {
 }
 
 #header .big {
-  color: #009acd;
+  color: black;
   font-size:   140%;
   font-family: "Arial Black","Helvetica Neue",Helvetica,Arial,sans-serif;
   font-weight: bold;
 }
 
 #header .small {
-  color:        #009acd;
+  color:        grey;
   font-size:    90%;
   padding-left: 15px;
 }
@@ -44,7 +44,7 @@ a:hover {
 }
 
 h1 {
-  color: #5f9ea0;
+  color: #009acd;
   font-size: 110%;
   font-family: "Trebuchet MS", Georgia, "Times New Roman", san-serif;
 }
