@@ -61,9 +61,14 @@ MinION Running
 
 - XXXX
 
-Bioinformatics
+Bioinformatics tutorials
 
-- Logging into CLIMB (Nick Loman)
-- General introduction to FAST5 files (Nick Loman)
-- Mapping and variant calling on Ebola (Nick Loman)
-- De novo and hybrid assembly (Camilla Ip)
+- [00. Using the Linux command-line](tutorials/PoreCamp2016-00-Linux.pdf) (hand-out)
+- [01. Using CLIMB](tutorials/PoreCamp2016-01-CLIMB.pdf) (Nick Loman)
+- [02. Understanding your MinION data](tutorials/PoreCamp2016-02-MinIONData.pdf) (Nick Loman)
+- [03. Mapping and variant calling on Ebola](../2015/tutorials/Mapping Practical.ipynb) (Nick Loman)
+- 04. De novo and hybrid assembly (Camilla Ip)
+
+Analysis Notes
+- 05. BeachSeq (Nick Loman)
+- 06. Analysis tips (Nick Loman)
