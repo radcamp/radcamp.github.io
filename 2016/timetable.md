@@ -51,7 +51,7 @@ Rotations: Group A Bioinformatics, Group B library prep, Group C MinION running
 - 10:15 : Lab practical: Bioinformatics continued
 - 13:00 : Lunch and wrap up (Nick Loman & Konrad Paszkiewicz)
 
-# Teaching materials for practicals
+# Teaching materials
 
 Library Prep
 
@@ -63,6 +63,7 @@ MinION Running
 
 Bioinformatics tutorials
 
+- [Logging onto CLIMB server desktop with X2GO](tutorials/PoreCamp2016-CLIMBDesktopWithX2Go.pdf)
 - [00. Using the Linux command-line](tutorials/PoreCamp2016-00-Linux.pdf) (hand-out)
 - [01. Using CLIMB](tutorials/PoreCamp2016-01-CLIMB.pdf) (Nick Loman)
 - [02. Understanding your MinION data](tutorials/PoreCamp2016-02-MinIONData.pdf) (Nick Loman)
