@@ -27,7 +27,7 @@ This year, it is hosted by the [Exeter Sequencing Service](http://sequencing.exe
 
 # Social
 
-Next week, we welcome [42 participants from 13 countries](image/participantspercountry.png). Follow us on [Twitter](https://twitter.com/search?q=%23porecamp2016&src=typd) with #porecamp2016
+Next week, we welcome [42 participants from 13 countries](image/participantspercountry.png). Follow us on [Twitter](https://twitter.com/search?q=%23porecamp&src=typd) with #porecamp
 
 # Registration
 
