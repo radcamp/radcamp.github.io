@@ -30,7 +30,7 @@ The programme and teaching materials for previous courses can be found at:
 
 # Registration
 
-Applications for Porecamp 2016 (August 2016) have closed, please keep an eye out for future Porecamps in 2017.
+Applications for Porecamp 2016 (August 2016) have closed, please keep an eye out for future Porecamps next year.
 
 # Admission Criteria
 

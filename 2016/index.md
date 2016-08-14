@@ -23,7 +23,6 @@ This year, it is hosted by the [Exeter Sequencing Service](http://sequencing.exe
 - [Course timetable and teaching materials](timetable.html)
 - [Additional course materials](additionalcoursematerials.html)
 - [Instructors](instructors.html)
-- [Emergency contacts](contacts.html)
 
 # Social
 
@@ -31,4 +30,4 @@ Next week, we welcome [42 participants from 13 countries](image/participantsperc
 
 # Registration
 
-[Registration](http://www.exeter.ac.uk/news/events/details/index.php?event=5790) for PoreCamp2016 has now closed. Please keep an eye out for future PoreCamps in 2017.
+[Registration](http://www.exeter.ac.uk/news/events/details/index.php?event=5790) for PoreCamp2016 has now closed. Please keep an eye out for future PoreCamps next year.
