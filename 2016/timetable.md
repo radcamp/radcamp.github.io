@@ -62,24 +62,19 @@ Shared results
 
 Library Prep
 
-- XXXX
+To be added.
 
 MinION Running
 
-- XXXX
+To be added.
 
 Bioinformatics tutorials
 
 - [Logging onto CLIMB server desktop with X2GO](tutorials/PoreCamp2016-CLIMBDesktopWithX2Go.pdf)
 - [Fungal strains](tutorials/PoreCamp2016_fungal_strains.docx)
 
-- [00. Using the Linux command-line](tutorials/PoreCamp2016-00-Linux.pdf) (hand-out)
-- [01. Using CLIMB](tutorials/PoreCamp2016-01-CLIMB.pdf) (Nick Loman)
-- [02. Understanding your MinION data](tutorials/PoreCamp2016-02-MinIONData.pdf) (Nick Loman)
-- [03. Mapping and variant calling on Ebola](../2015/tutorials/Mapping Practical.ipynb) (Nick Loman)
-- De novo and hybrid assembly (Camilla Ip)
-
-Analysis Notes
-
-- BeachSeq (Nick Loman)
-- Analysis tips (Nick Loman)
+- [00. Using the Linux command-line](tutorials/PoreCamp2016-00-Linux.pdf)
+- [01. Using CLIMB](tutorials/PoreCamp2016-01-CLIMB.pdf)
+- [02. Understanding your MinION data](tutorials/PoreCamp2016-02-MinIONData.pdf)
+- [03. Mapping and variant calling on Ebola](../2015/tutorials/Mapping Practical.ipynb)
+- De novo and hybrid assembly
