@@ -21,7 +21,6 @@ This year, it is hosted by the [Exeter Sequencing Service](http://sequencing.exe
 - [Course FAQs](faqs.html)
 - [Transport info and maps](maps.html)
 - [Course timetable and teaching materials](timetable.html)
-- [Additional course materials](additionalcoursematerials.html)
 - [Instructors](instructors.html)
 
 # Social
