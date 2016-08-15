@@ -77,4 +77,4 @@ Bioinformatics tutorials
 - [01. Using CLIMB](tutorials/PoreCamp2016-01-CLIMB.pdf)
 - [02. Understanding your MinION data](tutorials/PoreCamp2016-02-MinIONData.pdf)
 - [03. Mapping and variant calling on Ebola](../2015/tutorials/Mapping Practical.ipynb)
-- De novo and hybrid assembly
+- [04. De novo and hybrid assembly](tutorials/PoreCamp2016-04-Assembly.pdf)
