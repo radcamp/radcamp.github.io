@@ -11,10 +11,13 @@ All group activities (coffee, lectures and reportage) and bioinformatics practic
 
 - 12:30 : Registration and welcome buffet in Yellow Seminar Room
 - 14:30 : Introduction to Porecamp (**Konrad Paszkiewicz**)
-- 15:00 : Overview of the MinION platform (**Josh Quick**)
-- 15:30 : Making a good library (**Justin O’Grady**)
-- 16:30 : Designing your own experiment (Led by **Josh Quick**, but primarily evaluating QC of participant submitted samples, 1-2 minute talks by participants outlining their QC and their sample. Assigning individuals to rotation groups. Basic laboratory safety.)
-- 18:30 : Settle into accommodation (collect keys from Glasney Lodge)
+- 14:50 : Laboratory Safety (**MD Sharma**)
+- 15:00 : Participants and their projects (**Matt Loose**)
+- 15:30 : Overview of the MinION platform (**Josh Quick**)
+- 16:15 : Making a good library (**Justin O’Grady**)
+- 16:45 : Break and informal discussion on perfect MinION experiment
+- 17:30 : Group discussion on your perfect MinION experiment? (**Matt Loose**)
+- 18:00 : Settle into accommodation (collect keys from Glasney Lodge)
 - 19:30 : Group dinner on campus (Lower Stannary room in the Daphne Du Maurier building)
  
 # Tuesday 16th August: Practicals
