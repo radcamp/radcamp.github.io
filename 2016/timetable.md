@@ -53,6 +53,10 @@ Rotations: Group A Bioinformatics, Group B library prep, Group C MinION running
 
 # Teaching materials
 
+Shared results
+
+- [PoreCamp2016-Participant Google Drive folder](https://drive.google.com/open?id=0B3IdS6JcXsEWY3BwcUJzZ3lzR2M)
+
 Library Prep
 
 - XXXX
