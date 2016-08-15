@@ -11,8 +11,8 @@ All group activities (coffee, lectures and reportage) and bioinformatics practic
 
 - 12:30 : Registration and welcome buffet in Yellow Seminar Room
 - 14:30 : Introduction to Porecamp (**Konrad Paszkiewicz**)
-- 15:00 : Overview of the MinION platform (**Nick Loman**)
-- 15:30 : [Making a good library](../2015/pdf/Porecamp_What_a_Good_Library_Looks_Like.pptx) (**Justin O’Grady**)
+- 15:00 : Overview of the MinION platform (**Josh Quick**)
+- 15:30 : Making a good library (**Justin O’Grady**)
 - 16:30 : Designing your own experiment (Led by **Josh Quick**, but primarily evaluating QC of participant submitted samples, 1-2 minute talks by participants outlining their QC and their sample. Assigning individuals to rotation groups. Basic laboratory safety.)
 - 18:30 : Settle into accommodation (collect keys from Glasney Lodge)
 - 19:30 : Group dinner on campus (Lower Stannary room in the Daphne Du Maurier building)
@@ -64,6 +64,8 @@ MinION Running
 Bioinformatics tutorials
 
 - [Logging onto CLIMB server desktop with X2GO](tutorials/PoreCamp2016-CLIMBDesktopWithX2Go.pdf)
+- [Fungal genomes](tutorials/PoreCamp2016_fungal_strains.docx)
+
 - [00. Using the Linux command-line](tutorials/PoreCamp2016-00-Linux.pdf) (hand-out)
 - [01. Using CLIMB](tutorials/PoreCamp2016-01-CLIMB.pdf) (Nick Loman)
 - [02. Understanding your MinION data](tutorials/PoreCamp2016-02-MinIONData.pdf) (Nick Loman)
