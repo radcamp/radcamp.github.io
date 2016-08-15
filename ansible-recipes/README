@@ -69,4 +69,4 @@ brew install homebrew/science/bcftools
 brew install homebrew/science/picard-tools
 brew install homebrew/science/spades
 # Konrad manually installed nanocall
-
+brew install homebrew/science/vcflib
