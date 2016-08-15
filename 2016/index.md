@@ -17,7 +17,7 @@ This year, it is hosted by the [Exeter Sequencing Service](http://sequencing.exe
 
 # Information for participants
 
-- [Rotation groups A/B/C](https://drive.google.com/open?id=0B3IdS6JcXsEWY3BwcUJzZ3lzR2M)
+- [Rotation groups A/B/C](https://drive.google.com/open?id=1Yg_HqxJ4xCvysbxzi09aCN0_PEjIl9mivT9Zxxnlwg8)
 - [Logistics](logistics.html)
 - [Course FAQs](faqs.html)
 - [Transport info and maps](maps.html)
