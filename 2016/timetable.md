@@ -41,7 +41,7 @@ Rotations: Group A Bioinformatics, Group B library prep, Group C MinION running
 
 - 09:00 : Group update in Yellow Seminar Room
 - 09:15 : Practicals
-- 13:00 : Lunchtime seminar: Utilising nanopore sequencing for biothreat detection (**Claire Lonsdale**)
+- 13:00 : Lunchtime seminar: [Utilising nanopore sequencing for biothreat detection](lectures/PoreCamp2016_Lonsdale_BiothreatDetection.pptx) (**Claire Lonsdale**)
 - 14:00 : Practicals (continued)
 
 # Friday 19th August: Data analysis and conclusions
