@@ -64,7 +64,7 @@ MinION Running
 Bioinformatics tutorials
 
 - [Logging onto CLIMB server desktop with X2GO](tutorials/PoreCamp2016-CLIMBDesktopWithX2Go.pdf)
-- [Fungal genomes](tutorials/PoreCamp2016_fungal_strains.docx)
+- [Fungal strains](tutorials/PoreCamp2016_fungal_strains.docx)
 
 - [00. Using the Linux command-line](tutorials/PoreCamp2016-00-Linux.pdf) (hand-out)
 - [01. Using CLIMB](tutorials/PoreCamp2016-01-CLIMB.pdf) (Nick Loman)
