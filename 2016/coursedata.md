@@ -15,9 +15,11 @@ Username: groupX (where X is 1 to 9)
 These directories are not writable, so you will not be able to save anything to these directories and accidentally corrupt the data.
 
 Ebola R7 data
+
 - /data2/minion/R7/Ebola/PRJEB10571_ERR1014225  
 
 Ecoli R9 data
+
 - R9 data for 1D library: /data2/minion/R9/Ecoli/E_coli_K12_1D_9.2_SpotON
 - R9 data for 2D library: /data2/minion/R9/Ecoli/EcoliR92D (limited to 20,000 reads only, to make tutorials quicker)
 
@@ -35,5 +37,5 @@ Ecoli R9 data
 
 # Where to save your analysis files
 
-/data2/analysis/GroupA/YOURMINIGROUPNAME
+- /data2/analysis/GroupA/YOURMINIGROUPNAME
 
