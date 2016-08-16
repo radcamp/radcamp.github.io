@@ -33,7 +33,7 @@ Ecoli R9 data
 
 - /data2/refdata/NC_000913 - E coli K-12 MG1655
 - /data2/refdata/ontlambdafull - Whole genome of the lambda phage, the spike-in used in the MinION experiments is approx. the last 3.6kb
-- /data2/refdata/EcoliK12MG1655_[1|2].fastq.gz - Illumina reads from the [SPAdes](http://spades.bioinf.spbau.ru/spades_test_datasets/ecoli_mc/) website
+- /data2/refdata/EcoliK12MG1655_1.fastq.gz and _2.fastq.gz - Illumina reads from the [SPAdes](http://spades.bioinf.spbau.ru/spades_test_datasets/ecoli_mc/) website
 
 # Where to save your analysis files
 
