@@ -10,6 +10,10 @@ title:  Course data PoreCamp 2016
 IP address: 147.188.173.84  
 Username: groupX (where X is 1 to 9)
 
+# Rstudio through a web interface
+
+- From your laptop, http://147.188.173.84:8773/ then log in using your CLIMB username and password
+
 # Historical MinION data on 147.188.173.84
 
 These directories are not writable, so you will not be able to save anything to these directories and accidentally corrupt the data.
