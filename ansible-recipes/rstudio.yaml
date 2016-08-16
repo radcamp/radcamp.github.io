@@ -27,6 +27,13 @@
     r_packages:
       - name: dplyr
       - name: ggplot2
+      - name: shiny
+      - name: svDialogs
+      - name: data.table
+      - name: bit64
+      - name: rhdf5
+        type: bioconductor
+
 
 - hosts: all
   sudo: yes

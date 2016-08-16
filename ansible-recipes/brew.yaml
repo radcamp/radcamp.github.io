@@ -47,7 +47,6 @@
         - homebrew/science/mafft
         - homebrew/science/metaphlan
         - homebrew/science/sspace-longread
-        - homebrew/science/rstudio-server
         - homebrew/science/bcftools
         - homebrew/science/picard-tools
         - homebrew/science/spades
