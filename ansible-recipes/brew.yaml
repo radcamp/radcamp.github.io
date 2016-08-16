@@ -1,6 +1,5 @@
 ---
 - hosts: local
-  sudo: yes
   tasks:
     - command: echo "$PATH"
       register: default_path
@@ -14,10 +13,6 @@
         - python-setuptools
         - ruby
 
-    - name: install brew
-      git: repo=https://github.com/Linuxbrew/brew.git dest=/home/ubuntu/.linuxbrew version=HEAD accept_hostkey=yes
-      register: linuxbrew
-
 - hosts: local
 - environment:
      PATH: "/home/ubuntu/.linuxbrew/bin:{{default_path.stdout}}"
@@ -25,8 +20,36 @@
      INFOPATH: "/home/ubuntu/.linuxbrew/info"
   hosts: local
   tasks:
+    - name: install brew
+      git: repo=https://github.com/Linuxbrew/brew.git dest=/home/ubuntu/.linuxbrew version=HEAD accept_hostkey=yes update=yes force=yes
+      register: linuxbrew
+
     - name: brew bwa
       homebrew: name=homebrew/science/bwa state=present
 
     - name: brew samtools
       homebrew: name=homebrew/science/samtools state=present
+
+    - homebrew: name={{item}}
+      with_items:
+        - homebrew/science/samtools
+        - homebrew/science/canu
+        - homebrew/science/busco
+        - homebrew/science/miniasm
+        - homebrew/science/minimap
+        - homebrew/science/quast
+        - homebrew/science/eilon
+        - homebrew/science/bwa
+        - homebrew/science/last
+        - homebrew/science/kraken
+        - homebrew/science/mummer
+        - homebrew/science/nucmer
+        - homebrew/science/mafft
+        - homebrew/science/metaphlan
+        - homebrew/science/sspace-longread
+        - homebrew/science/rstudio-server
+        - homebrew/science/bcftools
+        - homebrew/science/picard-tools
+        - homebrew/science/spades
+        - homebrew/science/vcflib
+

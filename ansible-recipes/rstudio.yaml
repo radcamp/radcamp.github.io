@@ -22,6 +22,15 @@
 - hosts: all
   sudo: yes
   roles:
+    - tersmitten.r
+  vars:
+    r_packages:
+      - name: dplyr
+      - name: ggplot2
+
+- hosts: all
+  sudo: yes
+  roles:
     - tersmitten.rstudio-server
   vars:
     - rstudio_server_www_port: 8773
