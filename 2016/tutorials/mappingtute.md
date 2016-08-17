@@ -17,9 +17,12 @@ The reads are already on the PoreCamp2016 server in /data/raw/hist/Ebola_R7 (dow
 
 You will be putting files into a sub-directory of your  home directory.
 
-```cd  
+```
+<p>
+cd  
 mkdir AssemblyTute  
 cd AssemblyTute  
+<p>
 ```
 
 ## Extract the data using poretools
