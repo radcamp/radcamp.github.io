@@ -137,15 +137,16 @@ We need to index the new BAM file that nanopolish eventalign produced:
 
 ```samtools index Ebola2D.eventalign.bam```
 
+Copy the model files into your current directory from: /data2/models/ into your current directory.
+
+```cp /data2/models/* .```
+
 And now we need to get the variants in VCF format:
 
 ```nanopolish-r7 variants --progress -t 1 --reads Ebola2D.fasta -o Ebola2D.vcf -b Ebola2D.sorted.bam -e Ebola2D.eventalign.bam -g EM_079517.fasta -vv -w "EM_079517:0-20000" --snp```
 
 It is actually possible to use different models with nanopolish variants specifying the model filenames --models-fofn offset_models.fofn. In this case we swap the original 5-mer model for a 6-mer model.
 
-Copy the model files into your current directory from: /data2/models/ into your current directory.
-
-```cp /home/ubuntu/src/nanopolish­master/etc/r9­models/* .```
 
 Compare this list with the list of variants that you already eyeballed. How do they compare?
 
