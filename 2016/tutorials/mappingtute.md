@@ -40,6 +40,10 @@ We can use wget to download a file on the web directory to our server
 
 ```wget https://raw.githubusercontent.com/nickloman/ebov/master/refs/EM_079517.fasta```
 
+If you are running in X2Go run:
+
+``source ~/.bash_profile``
+
 And then create the bwa index file required to run bwa mem later
 
 ```bwa index EM_079517.fasta```
@@ -48,8 +52,9 @@ And then create the bwa index file required to run bwa mem later
 
 And now we actually map the reads, convert the SAM output to BAM format and then sort it by mapping coordinate (rather than read name) and save it as Ebola2D.sorted.bam and create the SAM index file required to run other samtools subtools later.
 
-```bwa mem -x ont2d EM_079517.fasta Ebola2D.fasta | samtools view -bS - | samtools sort -o Ebola2D.sorted.bam -
-samtools index Ebola2D.sorted.bam```
+```bwa mem -x ont2d EM_079517.fasta Ebola2D.fasta | samtools view -bS - | samtools sort -o Ebola2D.sorted.bam -```
+
+```samtools index Ebola2D.sorted.bam```
 
 ## Basic QC of the data
 
