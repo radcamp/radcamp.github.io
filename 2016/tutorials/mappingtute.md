@@ -67,10 +67,10 @@ We can also plot the read depth across the reference genome by using the output 
 
 First, in a web browser, open 147.188.173.84:8773 then type in your CLIMB username and password. Then Rstudio should open for you and you can type the following:
 
-```library(ggplot2)
-cov=read.table("Ebola2D.coverage.txt", sep="\t")
-cov[1,]
-ggplot(cov, aes(x=V3, y=V4)) + geom_histogram(stat="identity") + xlab("Coverage") + ylab("Count")```
+```library(ggplot2)  
+cov=read.table("Ebola2D.coverage.txt", sep="\t")  
+cov[1,]  
+ggplot(cov, aes(x=V3, y=V4)) + geom_bar(stat="identity") + xlab("Coverage") + ylab("Count")```
 
 You could also do something similar using the output of samtools depth if you have time later.
 
@@ -150,7 +150,7 @@ Did nanopolish get anything wrong? Could you figure out a way of filtering the V
 
 ## SNP calling with 6-mer model
 
-```nanopolish variants --progress -t 1 --reads Ebola2D.fasta -o Ebola2D.6mer.vcf -b Ebola2D.sorted.bam -e Ebola2D.eventalign.bam -g EM_079517.fasta -vv -w "EM_079517:0-20000" --snp```
+```nanopolish-r7 variants --progress -t 1 --reads Ebola2D.fasta -o Ebola2D.6mer.vcf -b Ebola2D.sorted.bam -e Ebola2D.eventalign.bam -g EM_079517.fasta -vv -w "EM_079517:0-20000" --snp```
 
 How does the new VCF Ebola2D.6mer.vcf look compared with the old one?
 
