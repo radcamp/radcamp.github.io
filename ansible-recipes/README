@@ -79,4 +79,7 @@ brew install homebrew/science/igv
 sudo apt-get install texlive
 sudo apt-get install texstudio
 sudo apt-get install texlive-latex-extra
+# prokka was already present, but databases may not be set up, so ran that
+export PATH=/home/ubuntu/.linuxbrew/Cellar/prokka/1.11_1/bin:$PATH
+prokka --setupdb
 
