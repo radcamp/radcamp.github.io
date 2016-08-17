@@ -7,13 +7,13 @@ title:  Mapping tutorial for Porecamp 2016
 
 In this tutorial we will explore the types of data that the MinION produces, and try to look at the error mode by visual inspection of alignments.
 
-# Data
+## Data
 
 We'll be using one sample sequenced for the Nick and Josh's [Ebola sequencing project](http://www.nature.com/nature/journal/v530/n7589/full/nature16996.html).
 
 The reads are already on the PoreCamp2016 server in /data/raw/hist/Ebola_R7 (downloaded from the ENA project [PRJEB10571](http://www.ebi.ac.uk/ena/data/view/PRJEB10571) sample ERR1014225).
 
-# Working directory
+## Working directory
 
 You will be putting files into a sub-directory of your  home directory.
 
@@ -22,7 +22,7 @@ mkdir AssemblyTute
 cd AssemblyTute
 ```
 
-# Extract the data using poretools
+## Extract the data using poretools
 
 [poretools](http://poretools.readthedocs.io/en/latest/content/examples.html#poretools-fastq) is a tool for extracting and interrogating nanopore data [published](http://bioinformatics.oxfordjournals.org/content/early/2014/08/19/bioinformatics.btu555.abstract) by Nick Loman and Aaron Quinlan.
 
@@ -34,7 +34,7 @@ How many reads do we have?
 
 ```grep ">" Ebola2D.fasta | wc -l```
 
-# Download the reference genome
+## Download the reference genome
 
 We can use wget to download a file on the web directory to our server
 
@@ -44,14 +44,14 @@ And then create the bwa index file required to run bwa mem later
 
 ```bwa index EM_079517.fasta```
 
-# Map the reads
+## Map the reads
 
 And now we actually map the reads, convert the SAM output to BAM format and then sort it by mapping coordinate (rather than read name) and save it as Ebola2D.sorted.bam and create the SAM index file required to run other samtools subtools later.
 
 ```bwa mem -x ont2d EM_079517.fasta Ebola2D.fasta | samtools view -bS - | samtools sort -o Ebola2D.sorted.bam -
 samtools index Ebola2D.sorted.bam```
 
-# Basic QC of the data
+## Basic QC of the data
 
 As a first QC of the aligned reads, we can run samtools stats
 
@@ -74,7 +74,7 @@ ggplot(cov, aes(x=V3, y=V4)) + geom_histogram(stat="identity") + xlab("Coverage"
 
 You could also do something similar using the output of samtools depth if you have time later.
 
-# Consolidating your knowledge
+## Consolidating your knowledge
 
 Now, repeat this process from the beginning, but do it for a different dataset, choose from:
 
@@ -88,7 +88,7 @@ Now, repeat this process from the beginning, but do it for a different dataset, 
 - How does the number of reads change?
 - How does the mapping frequency change?
 
-# Inspecting alignments
+## Inspecting alignments
 
 Now, let's download the BAM file and inspect the alignment. My favoured tool for this is Tablet. It requires Java.
 
@@ -106,7 +106,7 @@ Inspect the alignment.
 
 Have a look at the error profile. Are some parts of the genome better than others? Can you correlate this with the sequence?
 
-# Variant calling
+## Variant calling
 
 The Ebola virus mutation rate is in the order of 1.2 x 10^-3 mutations/site/year. The genome size is 19000 bases long. This sample was collected about a year after the reference genome. Approximately how many SNPs do you expect to see?
 
@@ -114,7 +114,7 @@ Call SNPs - by eye!
 
 - Make a list of SNPs - which ones are hard to assess?
 
-# Variant calling with nanopolish
+## Variant calling with nanopolish
 
 Calling variants with nanopolish relies on squiggle data to generate the best consensus and gives a nicer result.
 
@@ -148,13 +148,13 @@ Did nanopolish spot things that you didn't?
 
 Did nanopolish get anything wrong? Could you figure out a way of filtering the VCF to remove these errors?
 
-# SNP calling with 6-mer model
+## SNP calling with 6-mer model
 
 ```nanopolish variants --progress -t 1 --reads Ebola2D.fasta -o Ebola2D.6mer.vcf -b Ebola2D.sorted.bam -e Ebola2D.eventalign.bam -g EM_079517.fasta -vv -w "EM_079517:0-20000" --snp```
 
 How does the new VCF Ebola2D.6mer.vcf look compared with the old one?
 
-# Software versions
+## Software versions
 
 This tutorial was tested with the following software versions:
 
