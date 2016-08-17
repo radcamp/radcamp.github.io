@@ -68,5 +68,6 @@ Bioinformatics tutorials
 - [00. Using the Linux command-line](tutorials/PoreCamp2016-00-Linux.pdf)
 - [01. Using CLIMB](tutorials/PoreCamp2016-01-CLIMB.pdf)
 - [02. Understanding your MinION data](tutorials/PoreCamp2016-02-MinIONData.pdf)
+- [Example nanook report](tutorials/nanookreport_example.pdf)
 - [03. Mapping and variant calling on Ebola](tutorials/mappingtute.html)
 - [04. De novo and hybrid assembly](tutorials/PoreCamp2016-04-Assembly.pdf)
