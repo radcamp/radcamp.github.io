@@ -75,7 +75,7 @@ First, in a web browser, open 147.188.173.84:8773 then type in your group userna
 library(ggplot2)  
 cov=read.table("Ebola2D.coverage.txt", sep="\t")  
 cov[1,]  
-ggplot(cov, aes(x=V3, y=V4)) + geom_bar(stat="identity")
+ggplot(cov, aes(x=V3, y=V4)) + geom_bar(stat='identity') + xlab('coverage') + ylab('count')
 
 You could also do something similar using the output of samtools depth if you have time later.
 
