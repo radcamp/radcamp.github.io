@@ -143,7 +143,7 @@ We need to index the new BAM file that nanopolish eventalign produced:
 
 And now we need to get the variants in VCF format:
 
-```nanopolish-r7 variants --progress -t 1 --reads Ebola2D.fasta -o Ebola2D.vcf -b Ebola2D.sorted.bam -e Ebola2D.eventalign.bam -g EM_079517.fasta -vv -w "EM_079517:0-20000" --snp```
+```nanopolish-r7 variants --progress -t 1 --reads Ebola2D.fasta -o Ebola2D.vcf -b Ebola2D.sorted.bam -e Ebola2D.eventalign.bam -g EM_079517.fasta -vv -w "EM_079517:0-20000" --snp > Ebola2D.eventalign.vcf```
 
 It is actually possible to use different models with nanopolish variants specifying the model filenames --models-fofn offset_models.fofn. In this case we swap the original 5-mer model for a 6-mer model.
 
