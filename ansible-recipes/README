@@ -75,4 +75,8 @@ brew install homebrew/science/prokka
 pip install biopython
 # set PYTHONPATH=/usr/local/lib/python2.7/dist­packages
 brew install homebrew/science/igv
+# Packages needed to run nanook - tried brew install texlive but got error, and texstudio didn't exist, so did it with apt-get
+sudo apt-get install texlive
+sudo apt-get install texstudio
+sudo apt-get install texlive-latex-extra
 
