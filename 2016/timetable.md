@@ -68,6 +68,5 @@ Bioinformatics tutorials
 - [00. Using the Linux command-line](tutorials/PoreCamp2016-00-Linux.pdf)
 - [01. Using CLIMB](tutorials/PoreCamp2016-01-CLIMB.pdf)
 - [02. Understanding your MinION data](tutorials/PoreCamp2016-02-MinIONData.pdf)
-- [03. Mapping and variant calling on Ebola](https://github.com/PoreCamp/porecamp.github.io/blob/master/2016/tutorials/Mapping%20Practical.ipynb)
 - [03. Mapping and variant calling on Ebola](tutorials/mappingtute.html)
 - [04. De novo and hybrid assembly](tutorials/PoreCamp2016-04-Assembly.pdf)
