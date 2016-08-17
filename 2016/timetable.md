@@ -31,7 +31,7 @@ Rotations: Group A Library Prep, Group B MinION Running, Group C Bioinformatics
  
 # Wednesday 17th August: Practicals
 
-Rotations: Group A MinION running, Group B Bioinformatics, Group C library Prep
+Rotations: Group A Bioinformatics, Group B Library Prep, Group C MinION Running
 
 - 09:00 : Group update in Yellow Seminar Room
 - 09:15 : Practicals
@@ -40,7 +40,7 @@ Rotations: Group A MinION running, Group B Bioinformatics, Group C library Prep
  
 # Thursday 18th August: Practicals
 
-Rotations: Group A Bioinformatics, Group B library prep, Group C MinION running
+Rotations: Group A MinION Running, Group B Bioinformatics, Group C Library Prep
 
 - 09:00 : Group update in Yellow Seminar Room
 - 09:15 : Practicals
@@ -60,14 +60,6 @@ Shared results
 
 - [PoreCamp2016-Participant Google Drive folder](https://drive.google.com/open?id=0B3IdS6JcXsEWY3BwcUJzZ3lzR2M)
 
-Library Prep
-
-To be added.
-
-MinION Running
-
-To be added.
-
 Bioinformatics tutorials
 
 - [Logging onto CLIMB server desktop with X2GO](tutorials/PoreCamp2016-CLIMBDesktopWithX2Go.pdf)
@@ -76,5 +68,7 @@ Bioinformatics tutorials
 - [00. Using the Linux command-line](tutorials/PoreCamp2016-00-Linux.pdf)
 - [01. Using CLIMB](tutorials/PoreCamp2016-01-CLIMB.pdf)
 - [02. Understanding your MinION data](tutorials/PoreCamp2016-02-MinIONData.pdf)
-- [03. Mapping and variant calling on Ebola](https://github.com/PoreCamp/porecamp.github.io/blob/master/2016/tutorials/Mapping%20Practical.ipynb)
+- [Example nanook report](tutorials/nanookreport_example.pdf)
+- [03. Mapping and variant calling on Ebola](tutorials/mappingtute.html)
 - [04. De novo and hybrid assembly](tutorials/PoreCamp2016-04-Assembly.pdf)
+- [05. Genome annotation](tutorials/annotation.html)
