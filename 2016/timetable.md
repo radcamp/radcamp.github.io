@@ -71,3 +71,4 @@ Bioinformatics tutorials
 - [Example nanook report](tutorials/nanookreport_example.pdf)
 - [03. Mapping and variant calling on Ebola](tutorials/mappingtute.html)
 - [04. De novo and hybrid assembly](tutorials/PoreCamp2016-04-Assembly.pdf)
+- [05. Genome annotation](tutorials/annotation.html)
