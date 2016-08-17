@@ -143,16 +143,22 @@ We need to index the new BAM file that nanopolish eventalign produced:
 
 And now we need to get the variants in VCF format:
 
-```nanopolish-r7 variants --progress -t 1 --reads Ebola2D.fasta -o Ebola2D.vcf -b Ebola2D.sorted.bam -e Ebola2D.eventalign.bam -g EM_079517.fasta -vv -w "EM_079517:0-20000" --snp > Ebola2D.eventalign.vcf```
+```nanopolish-r7 variants --progress -t 1 --reads Ebola2D.fasta -o Ebola2D.vcf -b Ebola2D.sorted.bam -e Ebola2D.eventalign.bam -g EM_079517.fasta -vv -w "EM_079517:0-20000" --snp 2> Ebola2D.eventalign.vcf.tmp
+tail -n +3 Ebola2D.eventalign.vcf.tmp > Ebola2D.eventalign.vcf
+rm Ebola2D.eventalign.vcf.tmp
+```
 
 It is actually possible to use different models with nanopolish variants specifying the model filenames --models-fofn offset_models.fofn. In this case we swap the original 5-mer model for a 6-mer model.
-
 
 Compare this list with the list of variants that you already eyeballed. How do they compare?
 
 Did nanopolish spot things that you didn't?
 
 Did nanopolish get anything wrong? Could you figure out a way of filtering the VCF to remove these errors?
+
+To get the consensus sequence from the reference, vcf and bam file:
+
+```/home/ubuntu/scripts/margin_cons.py EM_079517.fasta Ebola2D.eventalign.vcf Ebola2D.sorted.bam > Ebola2D.eventalign.consensus.fasta 2> Ebola2D.eventalign.variants.txt```
 
 ## SNP calling with 6-mer model
 
@@ -166,3 +172,4 @@ This tutorial was tested with the following software versions:
 
 - samtools version 1.3.1 
 - bwa version 0.7.15-r1140
+
