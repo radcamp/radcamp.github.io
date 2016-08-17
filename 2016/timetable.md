@@ -31,7 +31,7 @@ Rotations: Group A Library Prep, Group B MinION Running, Group C Bioinformatics
  
 # Wednesday 17th August: Practicals
 
-Rotations: Group A MinION running, Group B Bioinformatics, Group C library Prep
+Rotations: Group A Bioinformatics, Group B Library Prep, Group C MinION Running
 
 - 09:00 : Group update in Yellow Seminar Room
 - 09:15 : Practicals
@@ -40,7 +40,7 @@ Rotations: Group A MinION running, Group B Bioinformatics, Group C library Prep
  
 # Thursday 18th August: Practicals
 
-Rotations: Group A Bioinformatics, Group B library prep, Group C MinION running
+Rotations: Group A MinION Running, Group B Bioinformatics, Group C Library Prep
 
 - 09:00 : Group update in Yellow Seminar Room
 - 09:15 : Practicals
@@ -59,14 +59,6 @@ Rotations: Group A Bioinformatics, Group B library prep, Group C MinION running
 Shared results
 
 - [PoreCamp2016-Participant Google Drive folder](https://drive.google.com/open?id=0B3IdS6JcXsEWY3BwcUJzZ3lzR2M)
-
-Library Prep
-
-To be added.
-
-MinION Running
-
-To be added.
 
 Bioinformatics tutorials
 
