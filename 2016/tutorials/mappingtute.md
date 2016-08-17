@@ -140,7 +140,7 @@ It is actually possible to use different models with nanopolish variants specify
 
 Copy the model files into your current directory from: /data2/models/ into your current directory.
 
-```cp \­p /home/ubuntu/src/nanopolish­master/etc/r9­models/* .```
+```cp /home/ubuntu/src/nanopolish­master/etc/r9­models/* .```
 
 Compare this list with the list of variants that you already eyeballed. How do they compare?
 
