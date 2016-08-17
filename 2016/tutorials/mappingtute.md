@@ -129,6 +129,10 @@ To call variants, there are three steps:
 - align the events with nanopolish eventalign
 - call a VCF with nanopolish variants
 
+Copy the model files into your current directory from: /data2/models/ into your current directory.
+
+```cp /data2/models/* .```
+
 We've already aligned the reads (output file from BWA was Ebola2D.sorted.bam)
 
 ```nanopolish-r7 eventalign --reads Ebola2D.fasta -b Ebola2D.sorted.bam -g EM_079517.fasta --sam | samtools view -bS - | samtools sort -o Ebola2D.eventalign.bam -```
@@ -136,10 +140,6 @@ We've already aligned the reads (output file from BWA was Ebola2D.sorted.bam)
 We need to index the new BAM file that nanopolish eventalign produced:
 
 ```samtools index Ebola2D.eventalign.bam```
-
-Copy the model files into your current directory from: /data2/models/ into your current directory.
-
-```cp /data2/models/* .```
 
 And now we need to get the variants in VCF format:
 
