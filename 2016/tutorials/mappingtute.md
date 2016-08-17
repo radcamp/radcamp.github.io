@@ -131,7 +131,7 @@ To call variants, there are three steps:
 
 We've already aligned the reads (output file from BWA was Ebola2D.sorted.bam)
 
-```nanopolish-r7 eventalign --reads Ebola2D.fasta -b Ebola2D.sorted.bam -g EM_079517.fasta --sam | samtools view -bS - | samtools sort - -o Ebola2D.eventalign.bam```
+```nanopolish-r7 eventalign --reads Ebola2D.fasta -b Ebola2D.sorted.bam -g EM_079517.fasta --sam | samtools view -bS - | samtools sort -o Ebola2D.eventalign.bam -```
 
 We need to index the new BAM file that nanopolish eventalign produced:
 
