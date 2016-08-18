@@ -61,8 +61,10 @@ And now we actually map the reads, convert the SAM output to BAM format and then
 
 As a first QC of the aligned reads, we can run samtools stats
 
-```samtools stats Ebola2D.sorted.bam > Ebola2D.stats.txt  
-head -n 40 Ebola2D.stats.txt```
+```
+samtools stats Ebola2D.sorted.bam > Ebola2D.stats.txt  
+head -n 40 Ebola2D.stats.txt
+```
 
 - How many reads were mapped?
 - What was the average length of the reads?
