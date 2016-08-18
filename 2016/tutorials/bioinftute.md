@@ -7,9 +7,10 @@ title:  Notes from Nick's intro for bioinformatics on Thu 18 Aug Porecamp 2016
 
 # QC approaches
 
-Issues:  
-- read lengths, read number, data yield
-- blast a few reads to see what it is
+Issues
+
+- read lengths, read number, data yield  
+- blast a few reads to see what it is  
 
 Software:  
 - [poretools](http://poretools.readthedocs.io/en/latest/)
