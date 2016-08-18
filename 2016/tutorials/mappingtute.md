@@ -106,6 +106,13 @@ Now, let's download the BAM file and inspect the alignment. My favoured tool for
 
 https://ics.hutton.ac.uk/tablet/
 
+You need to copy the files from the server to your laptop using a GUI interface like WinSCP or filezilla or use the scp command in a terminal window or PuTTY by typing the following on your laptop:
+
+```
+cd /path/to/your/workingdirectory  
+scp groupX@147.188.173.136:/path/to/your/something.bam .  
+```
+
 You need to load the following two files into Tablet:
 
 alignment file: Ebola2D.sorted.bam reference file: EM_079517.fasta
