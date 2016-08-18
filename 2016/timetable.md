@@ -35,7 +35,7 @@ Rotations: Group A Bioinformatics, Group B Library Prep, Group C MinION Running
 
 - 09:00 : Group update in Yellow Seminar Room
 - 09:15 : Practicals
-- 13:00 : Lunchtime seminar: [MinION Running](PoreCamp2016_Running_MinION.pptx) (**John Tyson**)
+- 13:00 : Lunchtime seminar: [MinION Running](lectures/PoreCamp2016_Running_MinION.pptx) (**John Tyson**)
 - 14:00 : Practicals (continued)
  
 # Thursday 18th August: Practicals
