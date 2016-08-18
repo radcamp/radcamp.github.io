@@ -83,3 +83,6 @@ sudo apt-get install texlive-latex-extra
 export PATH=/home/ubuntu/.linuxbrew/Cellar/prokka/1.11_1/bin:$PATH
 prokka --setupdb
 sudo pip install pyvcf
+# Download Linux (64 bit) from https://ics.hutton.ac.uk/tablet/download-tablet/
+chmod u+x /home/ubuntu/src/tablet/tablet_linux_x64_1_15_09_01.sh
+/home/ubuntu/src/tablet/tablet_linux_x64_1_15_09_01.sh
