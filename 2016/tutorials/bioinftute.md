@@ -104,7 +104,7 @@ Typical hybrid assembly pathway
 
 # Genome Annotation
 
-- (prokka](http://www.vicbioinformatics.com/software.prokka.shtml)
+- [prokka](http://www.vicbioinformatics.com/software.prokka.shtml)
 
 # CLIMB
 
