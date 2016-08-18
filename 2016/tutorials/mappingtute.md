@@ -79,7 +79,7 @@ First, in a web browser, open 147.188.173.136:8773 then type in your group usern
 
 ```
 library(ggplot2)  
-cov=read.table("Ebola2D.coverage.txt", sep="\t")  
+cov=read.table("/path/to/your/Ebola2D.coverage.txt", sep="\t")  
 cov[1,]  
 ggplot(cov, aes(x=V3, y=V4)) + geom_bar(stat='identity') + xlab('coverage') + ylab('count')
 ```
@@ -149,7 +149,9 @@ Copy the model files into your current directory from: /data2/models/ into your 
 
 We've already aligned the reads (output file from BWA was Ebola2D.sorted.bam)
 
-```nanopolish-r7 eventalign --reads Ebola2D.fasta -b Ebola2D.sorted.bam -g EM_079517.fasta --sam | samtools view -bS - | samtools sort -o Ebola2D.eventalign.bam -```
+```
+nanopolish-r7 eventalign --reads Ebola2D.fasta -b Ebola2D.sorted.bam -g EM_079517.fasta --sam | samtools view -bS - | samtools sort -o Ebola2D.eventalign.bam -
+```
 
 We need to index the new BAM file that nanopolish eventalign produced:
 
