@@ -75,10 +75,12 @@ We can also plot the read depth across the reference genome by using the output 
 
 First, in a web browser, open 147.188.173.136:8773 then type in your group username and password. Then Rstudio should open for you and you can type the following:
 
+```
 library(ggplot2)  
 cov=read.table("Ebola2D.coverage.txt", sep="\t")  
 cov[1,]  
 ggplot(cov, aes(x=V3, y=V4)) + geom_bar(stat='identity') + xlab('coverage') + ylab('count')
+```
 
 You could also do something similar using the output of samtools depth if you have time later.
 
