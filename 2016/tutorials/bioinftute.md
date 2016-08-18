@@ -12,30 +12,35 @@ Issues
 - read lengths, read number, data yield  
 - blast a few reads to see what it is  
 
-Software:  
+Software
+
 - [poretools](http://poretools.readthedocs.io/en/latest/)
 - [poRe](https://github.com/mw55309/poRe_docs)
 - [poreminion](https://github.com/JohnUrban/poreminion)
 
 # Mapping vs Assembly
 
-Issues  
+Issues
+
 - might not have a reference
 - consensus assembly may not capture the diversity in the system
 
 Assembly better when have  
+
 - no references
 - lots of repeats between query sequence and reference genome
 - polymorphisms
 - structural variations
 
-Mapping-based approaches better when:
+Mapping-based approaches better when
+
 - population-genetic studies of SNPs
 - get high coverage and you get to see the alignments
 
 # Mapping
 
-Mapping-related software 
+Mapping-related software
+
 - [nanook](https://github.com/TGAC/NanoOK) (QC of mapped reads, gives nice reads)
 - [bwa] mem -x ont2d (http://bio-bwa.sourceforge.net/)
 - smalt (used by class by illumina only far)
@@ -48,6 +53,7 @@ Mapping-related software
 - [diamond](https://ab.inf.uni-tuebingen.de/software/diamond) (for short reads in protein space, an accelerated blastx, output can be input to megan)
 
 How to call variants after mapping?
+
 - samtools mpileup
 - [GATK](https://software.broadinstitute.org/gatk/download/)
 - [nanopolish](https://github.com/jts/nanopolish)
@@ -55,13 +61,16 @@ How to call variants after mapping?
 # De novo assembly
 
 How much data do you need for an assembly
+
 - only really need 10x coverage (lambda-waterman statistics - how much data do you need to see every part of the genome at least once - for human, need about 7-8x coverage)
 
 Assembler types
+
 - OLC assemblers (overlap layout consensus, CANU best for nanopore)
 - de Bruijn assemblers (uses k-mers)
 
 Software
+
 - [CANU](https://github.com/marbl/canu) (new celera assembler for long reads)
 - [miniasm](https://github.com/lh3/miniasm) (OL (no consensus) assembly - very fast, but no correction stage)
 - [racon](https://github.com/isovic/racon)
@@ -71,9 +80,11 @@ Software
 - busco (for eukaryotes)
 
 Research and development
+
 - Jared working on getting near-perfect de novo genomes - want to get to 99.99999%
 
 Typical de novo pathway
+
 - nanopore reads -> de novo assembly -> de novo error correction -> final assembly
 - nanopore reads -> de novo assembly -> short-read error correction -> final assembly
 - nanopore reads -> CANU or miniasm -> assembly
@@ -82,6 +93,7 @@ Typical de novo pathway
 - nanopore reads -> CANU or miniasm -> assembly -> assembly + short reads -> pilon -> polished assembly
 
 Typical hybrid assembly pathway
+
 - nanopore reads + illumina -> spades -> polished assembly
 
 # Species identification (taxonomic assignment of reads)
