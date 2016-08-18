@@ -74,10 +74,10 @@ Software
 - [CANU](https://github.com/marbl/canu) (new celera assembler for long reads)
 - [miniasm](https://github.com/lh3/miniasm) (OL (no consensus) assembly - very fast, but no correction stage)
 - [racon](https://github.com/isovic/racon)
-- velvet
-- allpaths
-- idba
-- busco (for eukaryotes)
+- [IDBA-UD](http://i.cs.hku.hk/~alse/hkubrg/projects/idba_ud/)
+- [busco](http://busco.ezlab.org/) (for eukaryotes)
+- [velvet](https://www.ebi.ac.uk/~zerbino/velvet/) (for short reads)
+- [ALLPATHS-LG](http://software.broadinstitute.org/allpaths-lg/blog/)
 
 Research and development
 
