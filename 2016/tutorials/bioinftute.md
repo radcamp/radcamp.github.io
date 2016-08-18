@@ -85,11 +85,11 @@ Research and development
 
 Typical de novo pathway
 
-- nanopore reads -> de novo assembly -> de novo error correction -> final assembly
-- nanopore reads -> de novo assembly -> short-read error correction -> final assembly
+- nanopore reads -> de novo assembly -> de novo error correction -> polished assembly
+- nanopore reads -> de novo assembly -> short-read error correction -> polished assembly
 - nanopore reads -> CANU or miniasm -> assembly
 - nanopore reads -> miniasm -> assembly -> racon -> polished assembly
-- nanopore reads -> CANU or miniasm -> assembly -> assembly + events -> nanopolish -> final assembly
+- nanopore reads -> CANU or miniasm -> assembly -> assembly + events -> nanopolish -> polished assembly
 - nanopore reads -> CANU or miniasm -> assembly -> assembly + short reads -> pilon -> polished assembly
 
 Typical hybrid assembly pathway
