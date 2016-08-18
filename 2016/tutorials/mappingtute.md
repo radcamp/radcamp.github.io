@@ -7,6 +7,8 @@ title:  Mapping tutorial for Porecamp 2016
 
 In this tutorial we will explore the types of data that the MinION produces, and try to look at the error mode by visual inspection of alignments.
 
+WARNING: You might get strange errors when copying and pasting commands from this file into a terminal window if the text contains double-quote characters. In these situations, please type in the double-quotes yourself.
+
 ## Data
 
 We'll be using one sample sequenced for the Nick and Josh's [Ebola sequencing project](http://www.nature.com/nature/journal/v530/n7589/full/nature16996.html).
