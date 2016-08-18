@@ -110,3 +110,8 @@ Typical hybrid assembly pathway
 
 Can download PoreCamp2016 CLIMB image, then run it on virtual box or Amazon services.
 
+# Q and A
+
+Where do the short fragments come from in the read length distribution?  
+- Best theory is that it's from the bead beating to break the cell wall of gram-positive bacteria and extract the DNA.
+
