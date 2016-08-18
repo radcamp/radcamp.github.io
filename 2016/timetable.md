@@ -62,6 +62,7 @@ Shared results
 
 Bioinformatics tutorials
 
+- [Nick's bioinformatics lectures](tutorials/bioinftute.html)
 - [Logging onto CLIMB server desktop with X2GO](tutorials/PoreCamp2016-CLIMBDesktopWithX2Go.pdf)
 - [Fungal strains](tutorials/PoreCamp2016_fungal_strains.docx)
 
