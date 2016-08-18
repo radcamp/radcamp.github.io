@@ -7,7 +7,7 @@ title:  Course data PoreCamp 2016
 
 # Servers
 
-IP address: 147.188.173.84  
+IP address: 147.188.173.136  
 Username: groupX (where X is 1, 2, ...)
 
 # Rstudio through a web interface

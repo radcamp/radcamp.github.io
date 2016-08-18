@@ -71,7 +71,7 @@ We can also plot the read depth across the reference genome by using the output 
 
 ```grep "^COV" Ebola2D.stats.txt > Ebola2D.coverage.txt```
 
-First, in a web browser, open 147.188.173.84:8773 then type in your group username and password. Then Rstudio should open for you and you can type the following:
+First, in a web browser, open 147.188.173.136:8773 then type in your group username and password. Then Rstudio should open for you and you can type the following:
 
 library(ggplot2)  
 cov=read.table("Ebola2D.coverage.txt", sep="\t")  
