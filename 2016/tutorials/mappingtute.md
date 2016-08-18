@@ -145,7 +145,9 @@ To call variants, there are three steps:
 
 Copy the model files into your current directory from: /data2/models/ into your current directory.
 
-```cp /data2/models/* .```
+```
+cp /data2/models/* .
+```
 
 We've already aligned the reads (output file from BWA was Ebola2D.sorted.bam)
 
@@ -160,11 +162,7 @@ We need to index the new BAM file that nanopolish eventalign produced:
 And now we need to get the variants in VCF format:
 
 ```
-nanopolish-r7 variants --progress -t 1 --reads Ebola2D.fasta -o Ebola2D.vcf -b Ebola2D.sorted.bam -e Ebola2D.eventalign.bam -g EM_079517.fasta -vv -w EM_079517:0-20000 --snp 2> Ebola2D.eventalign.vcf.tmp  
-
-tail -n +3 Ebola2D.eventalign.vcf.tmp > Ebola2D.eventalign.vcf  
-
-rm Ebola2D.eventalign.vcf.tmp  
+nanopolish-r7 variants --progress -t 1 --reads Ebola2D.fasta -o Ebola2D.eventalign.vcf -b Ebola2D.sorted.bam -e Ebola2D.eventalign.bam -g EM_079517.fasta -vv -w EM_079517:0-20000 --snp
 ```
 
 It is actually possible to use different models with nanopolish variants specifying the model filenames --models-fofn offset_models.fofn. In this case we swap the original 5-mer model for a 6-mer model.
@@ -177,7 +175,9 @@ Did nanopolish get anything wrong? Could you figure out a way of filtering the V
 
 To get the consensus sequence from the reference, vcf and bam file:
 
-```/home/ubuntu/scripts/margin_cons.py EM_079517.fasta Ebola2D.eventalign.vcf Ebola2D.sorted.bam > Ebola2D.eventalign.consensus.fasta 2> Ebola2D.eventalign.variants.txt```
+```
+/home/ubuntu/scripts/margin_cons.py EM_079517.fasta Ebola2D.eventalign.vcf Ebola2D.sorted.bam > Ebola2D.eventalign.consensus.fasta 2> Ebola2D.eventalign.variants.txt
+```
 
 ## SNP calling with 6-mer model
 
