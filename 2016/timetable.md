@@ -75,4 +75,5 @@ Bioinformatics tutorials
 - [05. Genome annotation](tutorials/annotation.html)
 
 - [Barcode demultiplexing](tutorials/barcode-demultiplexing.html)
+- [Porecamp virtual machine](tutorials/porecamp-virtual-machine.html)
 
