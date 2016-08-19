@@ -181,7 +181,7 @@ To get the consensus sequence from the reference, vcf and bam file:
 
 ## SNP calling with 6-mer model
 
-```nanopolish-r7 variants --progress -t 1 --reads Ebola2D.fasta -o Ebola2D.6mer.vcf -b Ebola2D.sorted.bam -e Ebola2D.eventalign.bam -g EM_079517.fasta -vv -w "EM_079517:0-20000" --snp```
+```nanopolish-r7 variants --progress -t 1 --reads Ebola2D.fasta -o Ebola2D.6mer.vcf -b Ebola2D.sorted.bam -e Ebola2D.eventalign.bam -g EM_079517.fasta -vv -w "EM_079517:0-20000" --snp --models-fofn offset_models.fofn```
 
 How does the new VCF Ebola2D.6mer.vcf look compared with the old one?
 
