@@ -16,5 +16,5 @@ title:  Datasets generated at Porecamp 2016
 
 ## 04: Mycobacterium smegmatis R9 1D Rapid Library
 
-  - <a href="http://s3.climb.ac.uk/nanopore/04_Msmegmatis_R9_1D_Rapid_basecalled.tar">M. smegmastic K-12 1D Rapid</a>, 371 gb fast5 files
+  - <a href="http://s3.climb.ac.uk/nanopore/04_Msmegmatis_R9_1D_Rapid_basecalled.tar">M. smegmatis 1D Rapid</a>, 371 gb fast5 files
 
