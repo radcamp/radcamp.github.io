@@ -8,7 +8,7 @@ title:  Datasets generated at Porecamp 2016
 ## 01: E. coli K-12 R9 1D Rapid Library
 
   - <a href="http://s3.climb.ac.uk/nanopore/01_Ecoli_K12_R9_1D_Rapid_basecalled.tar" 
-    >All reads: E. coli K-12 1D Rapid</a>, 556 gb FAST5 tar archive file
+    >All reads: E. coli K-12 1D Rapid</a>, 518 gb FAST5 tar archive file
   - <a href="http://s3.climb.ac.uk/nanopore/01_Ecoli_K12_R9_1D_Rapid_basecalled.pass.fastq"
     >1D pass: E. coli K-12 1D Rapid</a>, 202032 reads, 3.47gb fastq file
   - <a href="http://s3.climb.ac.uk/nanopore/01_Ecoli_K12_R9_1D_Rapid_basecalled.fail.fastq"
