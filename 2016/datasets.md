@@ -21,5 +21,5 @@ title:  Datasets generated at Porecamp 2016
   - <a href="http://s3.climb.ac.uk/nanopore/04_Msmegmatis_R9_1D_Rapid_basecalled.pass.fastq"
     >1D pass: M. smegmatis 1D Rapid</a>, 160225 reads, 2.8gb fastq file
   - <a href="http://s3.climb.ac.uk/nanopore/01_Ecoli_K12_R9_1D_Rapid_basecalled.fail.fastq"
-    >1D fail: M. smegmastis 1D Rapid</a>, 60361 reads, 0.65gb fastq file
+    >1D fail: M. smegmatis 1D Rapid</a>, 60361 reads, 0.65gb fastq file
 
