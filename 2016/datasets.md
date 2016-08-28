@@ -12,9 +12,14 @@ title:  Datasets generated at Porecamp 2016
   - <a href="http://s3.climb.ac.uk/nanopore/01_Ecoli_K12_R9_1D_Rapid_basecalled.pass.fastq"
     >1D pass: E. coli K-12 1D Rapid</a>, 202032 reads, 3.47gb fastq file
   - <a href="http://s3.climb.ac.uk/nanopore/01_Ecoli_K12_R9_1D_Rapid_basecalled.fail.fastq"
-    >1D pass: E. coli K-12 1D Rapid</a>, 139461 reads, 1.85gb fastq file
+    >1D fail: E. coli K-12 1D Rapid</a>, 139461 reads, 1.85gb fastq file
 
 ## 04: Mycobacterium smegmatis R9 1D Rapid Library
 
-  - <a href="http://s3.climb.ac.uk/nanopore/04_Msmegmatis_R9_1D_Rapid_basecalled.tar">M. smegmatis 1D Rapid</a>, 371 gb fast5 files
+  - <a href="http://s3.climb.ac.uk/nanopore/04_Msmegmatis_R9_1D_Rapid_basecalled.tar"
+    >All reads: M. smegmatis 1D Rapid</a>, 371 gb fast5 files
+  - <a href="http://s3.climb.ac.uk/nanopore/04_Msmegmatis_R9_1D_Rapid_basecalled.pass.fastq"
+    >1D pass: M. smegmatis 1D Rapid</a>, 160225 reads, 2.8gb fastq file
+  - <a href="http://s3.climb.ac.uk/nanopore/01_Ecoli_K12_R9_1D_Rapid_basecalled.fail.fastq"
+    >1D fail: M. smegmastis 1D Rapid</a>, 60361 reads, 0.65gb fastq file
 
