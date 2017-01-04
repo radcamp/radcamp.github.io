@@ -5,9 +5,11 @@ title:  Welcome to PoreCamp
 
 PoreCamp is a training bootcamp based around [Oxford Nanopore MinION](https://www2.nanoporetech.com//products-services/minion-mki) sequencing. It is a unique opportunity to learn about this exciting new sequencing platform from some of the leading experts in the field.
 
-The series was founded by Nick Loman and Josh Quick in 2015 and has been run as a 1-week hands-on course.
+The series was founded by Nick Loman, Matt Loose and Mick Watson in 2015 and has been run as a 1-week hands-on course led by Nick, Matt, Josh Quick, Justin O'Grady and John Tyson.
 
-PoreCamp2016 is about to commence! From 15-19 August, 42 participants from 13 countries will be at the Penryn Campus (Cornwall) of the University of Exeter.
+Porecamp2017 is scheduled for June in Birmingham (exact dates tbc).
+
+In the meantime, a spin-off <a href="https://porecamp-au.github.io/">Porecamp AU</a> is being run in Melbourne in Feb 2017.
 
 Follow us on [Twitter](https://twitter.com/search?q=%23porecamp&src=typd) with #porecamp
 

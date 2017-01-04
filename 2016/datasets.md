@@ -23,3 +23,14 @@ title:  Datasets generated at Porecamp 2016
   - <a href="http://s3.climb.ac.uk/nanopore/01_Ecoli_K12_R9_1D_Rapid_basecalled.fail.fastq"
     >1D fail: M. smegmatis 1D Rapid</a>, 60361 reads, 0.65gb fastq file
 
+## 06: Lil' shrimpy R9 1D Rapid Library
+
+  - <a href="06_ShrimpSeq_R9_1D_rapid_basecalled.tar"
+    >All reads: ShrimpSeq 1D Rapid</a>, FAST5 tar archive file</a>
+  - <a href="http://s3.climb.ac.uk/nanopore/06_ShrimpSeq_R9_1D_rapid_basecalled.tar"
+    >1D pass: ShrimpSeq 1D Rapid</a>, x reads, x file
+  - <a href="http://s3.climb.ac.uk/nanopore/06_ShrimpSeq_R9_1D_rapid_basecalled.tar"
+    >1D fail: ShrimpSeq 1D Rapid</a>, x reads, x file
+
+
+
