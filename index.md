@@ -27,8 +27,14 @@ PoreCamp is currently run as a 1-week course. It is entirely hands-on. The aim i
 
 The programme and teaching materials for previous courses can be found at:
 
+- [PoreCamp2017](2017/index.html) (3 - 7 July 2016, University of Birmingham0
 - [PoreCamp2016](2016/index.html) (15 - 19 August 2016, University of Exeter, Penryn Campus, Cornwall)
 - [PoreCamp2015](2015/index.html) (14 - 18 December 2015, University of Birmingham)
+
+## Affiliated events
+
+- [PoreCamp Australia](https://porecamp-au.github.io/) (8 - 10 February 2016)
+- PoreCamp US - details coming soon!
 
 # Registration
 
