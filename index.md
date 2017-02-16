@@ -7,9 +7,7 @@ PoreCamp is a training bootcamp based around [Oxford Nanopore MinION](https://ww
 
 The series was founded by Nick Loman, Matt Loose and Mick Watson in 2015 and has been run as a 1-week hands-on course led by Nick, Matt, Josh Quick, Justin O'Grady and John Tyson.
 
-Porecamp2017 is scheduled for June in Birmingham (exact dates tbc).
-
-In the meantime, a spin-off <a href="https://porecamp-au.github.io/">Porecamp AU</a> is being run in Melbourne in Feb 2017.
+The next Porecamp is [PoreCamp2017](2017/index.html) on 3 - 7 July 2016 at the University of Birmingham, UK.
 
 Follow us on [Twitter](https://twitter.com/search?q=%23porecamp&src=typd) with #porecamp
 
@@ -27,18 +25,13 @@ PoreCamp is currently run as a 1-week course. It is entirely hands-on. The aim i
 
 The programme and teaching materials for previous courses can be found at:
 
-- [PoreCamp2017](2017/index.html) (3 - 7 July 2016, University of Birmingham0
 - [PoreCamp2016](2016/index.html) (15 - 19 August 2016, University of Exeter, Penryn Campus, Cornwall)
 - [PoreCamp2015](2015/index.html) (14 - 18 December 2015, University of Birmingham)
 
 ## Affiliated events
 
-- [PoreCamp Australia](https://porecamp-au.github.io/) (8 - 10 February 2016)
+- [PoreCamp Australia](https://porecamp-au.github.io/) (8 - 10 February 2017)
 - PoreCamp US - details coming soon!
-
-# Registration
-
-Applications for Porecamp 2016 (August 2016) have closed, please keep an eye out for future Porecamps next year.
 
 # Admission Criteria
 
