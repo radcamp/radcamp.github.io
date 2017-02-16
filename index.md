@@ -13,7 +13,7 @@ Follow us on [Twitter](https://twitter.com/search?q=%23porecamp&src=typd) with #
 
 # What is nanopore sequencing?
 
-The Oxford Nanopore is a USB-size DNA sequencer which is capable of producing up to 1Gbase of sequence data with read lengths limited primarily by the input material. One of its key advantages is to produce data in near-real time - the system has been used to monitor the [Ebola outbreak](http://www.nature.com/nature/journal/v530/n7589/full/nature16996.html) in 2015, the [Zika outbreak](http://zibraproject.github.io/) in 2016, and in July 2016 became the first sequencer in [space](http://www.nasa.gov/mission_pages/station/research/experiments/2181.html).
+The Oxford Nanopore is a USB-size DNA sequencer which is capable of producing up to 10 Gbase of sequence data with read lengths limited primarily by the input material. One of its key advantages is to produce data in near-real time - the system has been used to monitor the [Ebola outbreak](http://www.nature.com/nature/journal/v530/n7589/full/nature16996.html) in 2015, the [Zika outbreak](http://zibraproject.github.io/) in 2016, and in July 2016 became the first sequencer in [space](http://www.nasa.gov/mission_pages/station/research/experiments/2181.html). The Porecamp instructors recently [sequenced a whole human genome](http://github.com/nanopore-wgs-consortium/NA12878) with this technology.
 
 # Who should attend?
 
