@@ -21,7 +21,7 @@ Any researchers wanting training in library preparation, running the MinION Oxfo
 
 # Course structure and programme
 
-PoreCamp is currently run as a 1-week course. It is entirely hands-on. The aim is to provide hands-on training by researchers, for researchers in library preparation, running the instrument and the analysis of data as well as the opportunity to meet the current world leaders.
+PoreCamp is currently run as a 1-week course. It is entirely hands-on. The aim is to provide hands-on training by researchers, for researchers in library preparation, running the instrument and the analysis of data as well as the opportunity to meet and discuss applications with nanopore sequencing experts. As of Porecamp 2016 each course features a sequencing field trip to explore the portable capabilities of the device.
 
 The programme and teaching materials for previous courses can be found at:
 
