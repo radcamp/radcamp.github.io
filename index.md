@@ -39,12 +39,12 @@ Places are **strictly limited**. Places will be allocated according to the follo
 
 You must:
 
-- be a member of the MinION Access Programme;
+- have a MinION;
 - have basic hands-on experience of the MinION and/or MinION data analysis;
 - have a background in either bioinformatics and/or wet lab work; and
 - be able to attend ALL FIVE days of the course; this is non-negotiable.
 
-In the event the course is over subscribed, the instructors will allocate places according to the strength of the application and the applicant’s relevant experience.
+In the event the course is over-subscribed, the instructors will allocate places according to the strength of the application and the applicant’s relevant experience.
 
 # Acknowledgements
 
