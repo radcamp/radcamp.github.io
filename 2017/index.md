@@ -46,5 +46,5 @@ Payments must be made by credit card.
 Registrations close on the 20th March 2017.
 
 Please download and complete the <a href="PorecampApplicationForm2017.docx">application form</a> and return
-to Jennie Law <j dot law at bham dot ac uk>
+to Jennie Law ```j dot law at bham dot ac uk```
 
