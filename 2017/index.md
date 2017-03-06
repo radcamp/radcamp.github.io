@@ -11,10 +11,12 @@ Birmingham, UK
 
 # Instructors
 
-  - Nick Loman, Josh Quick (University of Birmingham)
+  - Nick Loman (University of Birmingham)
+  - Josh "771kb" Quick (University of Birmingham)
   - Matt Loose (University of Nottingham)
   - John Tyson (University of British Columbia, Vancouver)
-  - Emily Richardson, Pablo Fuentes-Utrilla (MicrobesNG, University of Birmingham)
+  - Emily Richardson (MicrobesNG, University of Birmingham)
+  - Pablo Fuentes-Utrilla (MicrobesNG, University of Birmingham)
   - more instructors to be announced shortly
 
 # Admission Criteria
