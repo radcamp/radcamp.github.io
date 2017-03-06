@@ -33,6 +33,14 @@ will be over by lunchtime on Friday.
 
 In the event the course is over-subscribed, the instructors will allocate places according to the strength of the application and the applicant’s relevant experience.
 
+# Admission Fee 
+
+Porecamp 2017 is £600 which includes the cost of the reagents and consumables used.
+The course registration fee does not include accommodation which is likely to cost
+~£50-75/night.
+
+Payments must be made by credit card.
+
 # Registration
 
 Please download and complete the <a href="PorecampApplicationForm2017.docx">application form</a> and return
