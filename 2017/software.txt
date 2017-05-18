@@ -14,7 +14,7 @@ Samtools 1.2
 NGM-LR https://github.com/philres/ngmlr
 
 # polishing / variant calling
-nanopolish (need to check for version that works with albacore 1.1.1)
+nanopolish (take latest GitHub HEAD which works with albacore 1.1.1)
 
 # assembly
 Canu 1.5
