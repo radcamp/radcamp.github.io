@@ -25,5 +25,15 @@ sudo make prefix=/usr/local/ install
 # not sure why this went wrong but this seems to fix it
 sudo ln -s /usr/local/bin/samtools /usr/bin/samtools
 
+# bcftools
+wget https://github.com/samtools/bcftools/releases/download/1.4.1/bcftools-1.4.1.tar.bz2
+bunzip2 < bcftools-1.4.1.tar.bz2 | tar xvf -
+cd bcftools-1.4.1/
+sudo make
+sudo make prefix=/usr/local/ install
+
+
+
+
 
 
