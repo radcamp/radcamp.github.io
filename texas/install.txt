@@ -70,6 +70,29 @@ sudo mv SPAdes-3.10.1-Linux /usr/local/
 # BioPerl
 sudo apt-get install bioperl
 
+# Kraken
+wget https://ccb.jhu.edu/software/kraken/dl/kraken-0.10.5-beta.tgz
+gunzip < kraken-0.10.5-beta.tgz | tar xvf -
+cd kraken-0.10.5-beta/
+sudo ./install_kraken.sh /usr/local/kraken
+
+## will need to do export PATH=/usr/local/kraken/:$PATH
+
+# Centrifuge
+wget ftp://ftp.ccb.jhu.edu/pub/infphilo/centrifuge/downloads/centrifuge-1.0.3-beta-Linux_x86_64.zip
+unzip centrifuge-1.0.3-beta-Linux_x86_64.zip
+sudo mv centrifuge-1.0.3-beta /usr/local/
+
+## will need to do export PATH=/usr/local/centrifuge-1.0.3-beta/:$PATH
+
+# Sourmash
+sudo apt-get install python-matplotlib
+sudo pip install sourmash
+
+## NEEDS X - either ssh -X or shh -Y or putty with X forwarding enabled
+
+
+
 
 
 
