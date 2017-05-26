@@ -51,6 +51,16 @@ sudo make
 sudo mv nanopolish/ /usr/local/
 sudo ln -s /usr/local/nanopolish/nanopolish /usr/local/bin/nanopolish
 
+# Canu
+sudo apt-get install default-jre
+sudo apt-get install gnuplot-x11
+https://github.com/marbl/canu/releases/download/v1.5/canu-1.5.Linux-amd64.tar.xz
+xz -dc canu-1.5.Linux-amd64.tar.xz | tar -xf -
+sudo mv canu-1.5 /usr/local/
+
+## will need to export PATH=$PATH:/usr/local/canu-1.5/Linux-amd64/bin/
+
+
 
 
 
