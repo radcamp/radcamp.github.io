@@ -48,6 +48,8 @@ sudo apt-get install python-biopython
 git clone --recursive https://github.com/jts/nanopolish.git
 cd nanopolish/
 sudo make
+sudo mv nanopolish/ /usr/local/
+sudo ln -s /usr/local/nanopolish/nanopolish /usr/local/bin/nanopolish
 
 
 
