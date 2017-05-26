@@ -41,6 +41,16 @@ cd ..
 sudo mv graphmap/ /usr/local/
 sudo ln -s /usr/local/graphmap/bin/Linux-x64/graphmap /usr/local/bin/graphmap
 
+# BioPython
+sudo apt-get install python-biopython
+
+# Nanopolish
+git clone --recursive https://github.com/jts/nanopolish.git
+cd nanopolish/
+sudo make
+
+
+
 
 
 
