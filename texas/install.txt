@@ -32,6 +32,18 @@ cd bcftools-1.4.1/
 sudo make
 sudo make prefix=/usr/local/ install
 
+# GraphMap
+git clone https://github.com/isovic/graphmap.git
+cd graphmap
+make modules
+make
+cd ..
+sudo mv graphmap/ /usr/local/
+sudo ln -s /usr/local/graphmap/bin/Linux-x64/graphmap /usr/local/bin/graphmap
+
+
+
+
 
 
 
