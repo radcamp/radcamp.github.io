@@ -60,6 +60,19 @@ sudo mv canu-1.5 /usr/local/
 
 ## will need to export PATH=$PATH:/usr/local/canu-1.5/Linux-amd64/bin/
 
+# SPAdes
+wget http://cab.spbu.ru/files/release3.10.1/SPAdes-3.10.1-Linux.tar.gz
+gunzip < SPAdes-3.10.1-Linux.tar.gz | tar xvf -
+sudo mv SPAdes-3.10.1-Linux /usr/local/
+
+## will need to export PATH=$PATH:/usr/local/SPAdes-3.10.1-Linux/bin/
+
+# BioPerl
+sudo apt-get install bioperl
+
+
+
+
 
 
 
