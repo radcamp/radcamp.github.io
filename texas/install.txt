@@ -1,5 +1,9 @@
 # R
 sudo apt-get install r-base-core
+sudo R
+install.packages(c("ggplot2","shiny","svDialogs","data.table","bit64"))
+source("http://www.bioconductor.org/biocLite.R")
+biocLite("rhdf5")
 
 # poretools
 sudo apt-get install git python-setuptools python-dev cython libhdf5-serial-dev
