@@ -16,3 +16,14 @@ sudo python3 setup.py install
 # BWA
 sudo apt-get install bwa
 
+# Samtools
+wget https://github.com/samtools/samtools/releases/download/1.4.1/samtools-1.4.1.tar.bz2
+bunzip2 < samtools-1.4.1.tar.bz2 | tar xvf -
+cd samtools-1.4.1/
+sudo make
+sudo make prefix=/usr/local/ install
+# not sure why this went wrong but this seems to fix it
+sudo ln -s /usr/local/bin/samtools /usr/bin/samtools
+
+
+
