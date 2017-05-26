@@ -1,0 +1,18 @@
+# R
+sudo apt-get install r-base-core
+
+# poretools
+sudo apt-get install git python-setuptools python-dev cython libhdf5-serial-dev
+pip install h5py
+git clone https://github.com/arq5x/poretools
+cd poretools
+sudo python setup.py install
+
+# PoreChop
+git clone https://github.com/rrwick/Porechop.git
+cd Porechop
+sudo python3 setup.py install
+
+# BWA
+sudo apt-get install bwa
+
