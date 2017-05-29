@@ -59,3 +59,28 @@ Any HDF5 file can be opened using hdfview and browsed/edited in a GUI
 ```sh
 hdfview MAP006-1/MAP006-1_downloads/pass/LomanLabz_PC_Ecoli_K12_MG1655_20150924_MAP006_1_5005_1_ch150_file24_strand.fast5 &
 ```
+
+
+
+## Basic QC in poRe
+
+poRe is a library for R available from [SourceForge](https://sourceforge.net/projects/rpore/) and published in [bioinformatics](http://bioinformatics.oxfordjournals.org/content/31/1/114).  poRe is incredibly simple to install and relies simply on R 3.0 or above and a few additional libraries.
+
+The poRe library is set up to read v1.1 data by default, and offers users parameters to enable reading of v1.0 data.  Let's start it up.
+
+```sh
+R
+```
+```R
+library(poRe)
+```
+
+We can read a pre-computed meta-data file
+```R
+meta <- read.table("WIMPpass_3497.poRe.meta.txt", sep="\t", header=TRUE)
+```
+
+And plot yield over time
+```R
+yield <- plot.cumulative.yield(meta)
+```
