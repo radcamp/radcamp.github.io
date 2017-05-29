@@ -1,7 +1,4 @@
----
-layout: default
-title:  Welcome to PoreCamp
----
+### Welcome to PoreCamp
 
 PoreCamp is a training bootcamp based around [Oxford Nanopore MinION](https://www2.nanoporetech.com//products-services/minion-mki) sequencing. It is a unique opportunity to learn about this exciting new sequencing platform from some of the leading experts in the field.
 
