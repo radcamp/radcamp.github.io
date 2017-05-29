@@ -84,3 +84,16 @@ And plot yield over time
 ```R
 yield <- plot.cumulative.yield(meta)
 ```
+
+And we can dp some ggplots too
+
+```
+library(ggplot2)
+
+# 2D over time
+ggplot(yield, aes(x=time,y=cum.2d)) + geom_line() 
+
+# all over time
+melty <- melt(yield, id="time", variable.name="read.type", value.name="length")
+ggplot(melty, aes(x=time,y=length, color=read.type)) + geom_line() 
+```
