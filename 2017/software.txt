@@ -30,3 +30,8 @@ BioPython
 BioPerl
 R - with rhdf5, ggplot2, poRe, shiny, svDialogs, data.table, bit64
 download*.pl scripts from https://github.com/mw55309/Kraken_db_install_scripts
+
+# things I forgot
+minimap
+miniasm
+racon
