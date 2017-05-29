@@ -97,3 +97,58 @@ ggplot(yield, aes(x=time,y=cum.2d)) + geom_line()
 melty <- melt(yield, id="time", variable.name="read.type", value.name="length")
 ggplot(melty, aes(x=time,y=length, color=read.type)) + geom_line() 
 ```
+
+## Extracting FASTQ/A using Poretools
+
+Poretools is a somewhat popular package for extracting data and information from FAST5 files.  Extracting FASTA and FASTQ is easy:
+
+```sh
+# extract FASTQ
+poretools fastq directory_of_fast5
+
+# extract FASTA
+poretools fasta directory_of_fast5
+```
+
+The default is to extract all types of sequence data (template, complement and 2D) if present.  You can control this with --type:
+
+```sh
+poretools fastq --type all test_data/
+poretools fastq --type fwd test_data/
+poretools fastq --type rev test_data/
+poretools fastq --type 2D test_data/
+poretools fastq --type fwd,rev test_data/
+```
+
+## Extracting FASTQ/A using Nanopolish
+
+Nanopolish has many cool features, but the one we will focus on here is FASTQ and FASTA extraction
+
+```sh
+nanopolish extract directory_of_fast5
+```
+
+By default nanopolish extracts FASTA.  If you want FASTQ, then
+
+```sh
+nanopolish extract -q  directory_of_fast5
+```
+
+Nanopolish defaults to "2d-or-template", and this can be controlled using the --type option:
+
+```sh
+nanopolish extract -q --type=template directory_of_fast5
+nanopolish extract -q --type=complement directory_of_fast5
+nanopolish extract -q --type=2d directory_of_fast5
+```
+
+To recursively extract from a diretory, use -r
+
+```sh
+nanopolish extract -r directory_of_fast5
+```
+
+## Extracting FASTQ/A using poRe
+
+
+## Extracting FASTQ/A and Metadata using poRe GUIs
