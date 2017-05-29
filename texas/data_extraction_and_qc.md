@@ -2,11 +2,7 @@
 
 ## File formats
 
-Oxford Nanopore are very bad at releasing official definitions of file formats, therefore much guess work is involved.  
-Most of the time (still true as I type...) working with ONT data means working with FAST5 files - these are in fact HDF5 files, a
-binary, compressed format that stores structured data in a single file and allows random access to subsets of that data.  With
-a plethora of base callers now available, and several iterations of MinKNOW and the ONT chemistry, it really is very hard to keep up
-with all of the different FAST5 formats.  Expect some difficulty.
+Oxford Nanopore are very bad at releasing official definitions of file formats, therefore much guess work is involved.  Most of the time (still true as I type...) working with ONT data means working with FAST5 files - these are in fact HDF5 files, a binary, compressed format that stores structured data in a single file and allows random access to subsets of that data.  With a plethora of base callers now available, and several iterations of MinKNOW and the ONT chemistry, it really is very hard to keep up with all of the different FAST5 formats.  Expect some difficulty.
 
 Whilst ONT base-callers now output FASTQ, it is not well formatted FASTQ and we currently don't recommend using it.
 
