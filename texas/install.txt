@@ -95,6 +95,31 @@ sudo pip install sourmash
 
 ## NEEDS X - either ssh -X or shh -Y or putty with X forwarding enabled
 
+# Racon
+git clone https://github.com/isovic/racon.git
+cd racon
+make modules
+# edited Makefile and changed all instances of "-j" to "-j 1"
+make tools
+make 
+cd ..
+sudo mv racon /usr/local/
+
+# minimap and miniasm
+git clone https://github.com/lh3/minimap && (cd minimap && make)
+git clone https://github.com/lh3/miniasm && (cd miniasm && make)
+cd ..
+sudo mv minimap /usr/local/
+sudo mv miniasm /usr/local/
+
+# LAST
+sudo apt install last-align
+
+# BLAST
+# is already installed
+
+
+
 
 
 
