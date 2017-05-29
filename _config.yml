@@ -1,23 +1,2 @@
-###########
-# site.title
-
-title:    'PoreCamp'
-subtitle: 'A bootcamp to learn about operating the Oxford Nanopore MinION'
-
-## note:
-#  use site.path in your templates to make it work for both protocols e.g. http and https
-#  use site.url only inside the web feed template (e.g. requires full url incl. protocol)
-#    note: for root path use empty string e.g. '' - do NOT include trailing slash e.g. /
-
-path:  ''
-url:   'http://porecamp.github.io'
-
-
-#########################
-# more settings
-
-markdown: kramdown
-
-exclude:
-- README.md
+theme: jekyll-theme-minimal
 

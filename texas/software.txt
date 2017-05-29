@@ -1,0 +1,37 @@
+# BaseCalling
+albacore 1.1.1 
+
+# QC / extraction
+PoreChop (https://github.com/rrwick/Porechop)
+poRe (depends on R) - wait for latest version!
+poretools
+nanook
+
+# mapping
+BWA 0.7.15
+GraphMap
+Samtools 1.2
+NGM-LR https://github.com/philres/ngmlr
+
+# polishing / variant calling
+nanopolish (take latest GitHub HEAD which works with albacore 1.1.1)
+
+# assembly
+Canu 1.5
+SPAdes 3.9
+
+# WTFIT
+kraken v0.10.5-beta - with mini db
+centrifuge v1.0.3-beta - with Bacteria, Archaea, Viruses, Human db
+sourmash - with "Genbank k=31, 2017.05.09" db
+
+# Infrastructure
+BioPython
+BioPerl
+R - with rhdf5, ggplot2, poRe, shiny, svDialogs, data.table, bit64
+download*.pl scripts from https://github.com/mw55309/Kraken_db_install_scripts
+
+# things I forgot
+minimap
+miniasm
+racon
