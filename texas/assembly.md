@@ -1,5 +1,9 @@
 # Assembly
 
+* [Canu](#canu)
+* [Minimap and Miniasm](#minimap-and-miniasm)
+* [SPAdes hybrid](#spades-hybrid)
+
 ## Canu
 
 [Canu](https://canu.readthedocs.io/en/latest/) is one of the best de novo assemblers available for long reads - it's a fork and updated version of the Celera assembler that was used to assemble the human genome.  
@@ -66,7 +70,21 @@ $ canu -p ecoli \
 ```
 This puts output in directory ecoli-oxford with prefix "ecoli".  We estimate the genome size, tell canu NOT to use HPC (as we don't have one for porecamp) and give it some ONT data as fasta
 
-## Minimap + miniasm
+## Minimap and miniasm
+
+Minimap and miniasm are ultrafast tools for (i) mapping and (ii) assembly.  Designed for long, noisy reads, they do not have a correction or consensus step, and therefore the resulting assemblies are contiguous (i.e. long) but very noisy (i.e. full of errors)
+
+We start with an all against all comparison:
+
+```sh
+minimap -Sw5 -L100 -m0 -t8 reads.fq reads.fq | gzip -1 > reads.paf.gz
+```
+
+Then we can assemble
+
+```sh
+miniasm -f reads.fq reads.paf.gz > reads.gfa
+```
 
 ## SPAdes hybrid
 
