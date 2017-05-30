@@ -1,5 +1,13 @@
 # Data Extraction and QC
 
+* [File formats](#file-formats)
+* [Using HDF5 command line tools](#using-hdf5-command-line-tools)
+* [Browsing HDF5 files](#browsing-hdf5-files)
+* [Extracting FASTQ/A using Poretools](#extracting-fastqa-using-poretools)
+* [Extracting FASTQ/A using Nanopolish](#extracting-fastqa-using-nanopolish)
+* [Extracting FASTQ/A using poRe](#extracting-fastqa-using-pore)
+* [Extracting FASTQ/A and Metadata using poRe GUIs](#extracting-fastqa-and-metadata-using-pore-guis)
+
 ## File formats
 
 Oxford Nanopore are very bad at releasing official definitions of file formats, therefore much guess work is involved.  Most of the time (still true as I type...) working with ONT data means working with FAST5 files - these are in fact HDF5 files, a binary, compressed format that stores structured data in a single file and allows random access to subsets of that data.  With a plethora of base callers now available, and several iterations of MinKNOW and the ONT chemistry, it really is very hard to keep up with all of the different FAST5 formats.  Expect some difficulty.
