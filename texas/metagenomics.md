@@ -7,7 +7,7 @@ The key point about these metagenomics pipelines is that they cannot find what t
 However, they are still very useful and these are often the first tools used when we want to know "what the hell is it?"
 
 ## Kraken
-.
+
 Kraken builds its own database from genoems and contsucts a massive KMER index linked to the various levels of taxonomy.  The default database that comes with Kraken is constructed from the "complete bacterial, archaeal, and viral genomes in RefSeq (as of Dec. 8, 2014)".  So (1) it's out of date, and (2) there are no fungi and protozoa in there.  Also by focusing on "complete" genomes, the size of the database is tiny as compared to e.g. including draft genomes.
 
 ### Kraken databases
