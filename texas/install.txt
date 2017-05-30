@@ -118,6 +118,16 @@ sudo apt install last-align
 # BLAST
 # is already installed
 
+# Jellyfish
+wget http://www.cbcb.umd.edu/software/jellyfish/jellyfish-1.1.11.tar.gz
+gunzip < jellyfish-1.1.11.tar.gz | tar xvf -
+cd jellyfish-1.1.11
+sudo ./configure --prefix=/usr/local/
+sudo make
+sudo make install
+export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
+
+
 
 
 
