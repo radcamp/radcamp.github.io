@@ -1,9 +1,4 @@
----
-layout: default
-title:  Welcome to PoreCamp 2017
----
-
-# {{ page.title }}
+# Welcome to PoreCamp Texas (2017)
 
 Monday 5 - 9 June 2017
 Texas A&M
@@ -12,10 +7,19 @@ Texas A&M
 
 # Instructors
 
-  - Nick Loman (University of Birmingham)
-  - Josh "771kb" Quick (University of Birmingham)
-  - Matt Loose (University of Nottingham)
-  - John Tyson (University of British Columbia, Vancouver)
-  - Mick Watson (University of Edinburgh, UK)
+* Nick Loman (University of Birmingham)
+* Josh "771kb" Quick (University of Birmingham)
+* Matt Loose (University of Nottingham)
+* John Tyson (University of British Columbia, Vancouver)
+* Mick Watson (University of Edinburgh, UK)
+
+# Recipes
+
+* [Basecalling](http://porecamp.github.io/texas/basecalling)
+* [Adapter trimming](http://porecamp.github.io/texas/adapter_trimming)
+* [Data extraction andc basic QC](http://porecamp.github.io/texas/data_extraction_and_qc)
+* [Alignment, polishing and variant calling](http://porecamp.github.io/texas/mapping_polishing_and_variant_calling)
+* [Assembly](http://porecamp.github.io/texas/assembly)
+* [Metagenomics](http://porecamp.github.io/texas/metagenomics)
 
 
