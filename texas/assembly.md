@@ -12,9 +12,13 @@ It is quite a complex beast that has HPC integration built in - though you can t
 
 Run canu without any options to get help:
 
+```sh
+canu
 ```
-$ canu
 
+This produces:
+
+```
 usage: canu [-version] \
             [-correct | -trim | -assemble | -trim-assemble] \
             [-s <assembly-specifications-file>] \
@@ -62,11 +66,11 @@ By default canu runs these one after the other, but they can be run individually
 An example "full pipeline" command would be:
 
 ```sh
-$ canu -p ecoli \
-       -d ecoli-oxford \
-       genomeSize=4.8m \
-       useGrid=false \
-       -nanopore-raw oxford.fasta
+canu -p ecoli \
+     -d ecoli-oxford \
+     genomeSize=4.8m \
+     useGrid=false \
+     -nanopore-raw oxford.fasta
 ```
 This puts output in directory ecoli-oxford with prefix "ecoli".  We estimate the genome size, tell canu NOT to use HPC (as we don't have one for porecamp) and give it some ONT data as fasta
 
@@ -94,6 +98,10 @@ Again, running spades.py will show you the options:
 
 ```sh
 spades.py
+```
+
+This produces:
+```
 SPAdes genome assembler v3.10.1
 
 Usage: /usr/local/SPAdes-3.10.1-Linux/bin/spades.py [options] -o <output_dir>
