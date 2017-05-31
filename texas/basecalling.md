@@ -5,7 +5,11 @@ We will be using albacore 1.1.1, which is available to download from the ONT com
 If we run without any options, then we get usage instructions:
 
 ```sh
-$ read_fast5_basecaller.py
+read_fast5_basecaller.py
+```
+
+This produces:
+```
 usage: read_fast5_basecaller.py [-h] [-l] [-v] -i INPUT -t WORKER_THREADS -s
                                 SAVE_PATH [-f FLOWCELL] [-k KIT] [--barcoding]
                                 [-c CONFIG] [-d DATA_PATH] [-b] [-r]
@@ -16,7 +20,11 @@ read_fast5_basecaller.py: error: the following arguments are required: -i/--inpu
 And if we run with -h, we get a bit more help ;-)
 
 ```sh
-$ read_fast5_basecaller.py -h
+read_fast5_basecaller.py -h
+```
+
+Produces:
+```
 usage: read_fast5_basecaller.py [-h] [-l] [-v] -i INPUT -t WORKER_THREADS -s
                                 SAVE_PATH [-f FLOWCELL] [-k KIT] [--barcoding]
                                 [-c CONFIG] [-d DATA_PATH] [-b] [-r]
@@ -61,7 +69,12 @@ optional arguments:
 It's really important to know the workflow you used in sequencing to be able to basecall.  We can list possible options:
 
 ```sh
-$ read_fast5_basecaller.py -l
+read_fast5_basecaller.py -l
+```
+
+This produces a list of available configs:
+
+```
 Parsing config files in /opt/albacore.
 Available flowcell + kit combinations are:
 flowcell    kit         barcoding  config file
