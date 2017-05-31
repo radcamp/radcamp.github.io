@@ -43,5 +43,28 @@ This will create a large kmer index file in a directory with the same name as yo
 
 ## Centrifuge
 
+Centrifuge uses the burrows-wheeler transform and an FM index to vastly reduce the size of an index/database used for metagenomic classification.  This means centrifuge databases are far smaller than Kraken databases, and centrifuge claims to be able to search the entirety of nt.
+
+### Centrifuge databases
+
+Centrifuge is similar to Kraken in that it enables the user to build custom databases for searching - with the added advantage that Cnetrifuge claims to be able to search the entirety of nt!  [Prebuilt databases are available](https://ccb.jhu.edu/software/centrifuge/) and there is a lot of documentation on how to build your own database [on the website](https://ccb.jhu.edu/software/centrifuge/manual.shtml#database-download-and-index-building)
+
+Something like:
+
+```sh
+# download taxonomy to folder "taxonomy"
+centrifuge-download -o taxonomy taxonomy
+
+# download all viral genomes from RefSeq to folder "library"
+centrifuge-download -o library -m -d "viral" refseq > seqid2taxid.map
+
+# create concatenated fasta file
+cat library/*/*.fna > input-sequences.fna
+
+## build centrifuge index with 4 threads
+centrifuge-build -p 4 --conversion-table seqid2taxid.map \
+                 --taxonomy-tree taxonomy/nodes.dmp --name-table taxonomy/names.dmp \
+                 input-sequences.fna viral_centrifuge
+```
 
 ## Sourmash
