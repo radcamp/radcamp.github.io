@@ -211,7 +211,7 @@ Trimming adapters from read ends
 
 
 Splitting reads containing middle adapters
-8987fc4b-323c-40db-a9ed-173094f1c811_Classification_template:1D_000:template BIOL05525_20160519_FNFAD02943_MN16880_sequencing_run_MockRare_19v16_FAD02943_1                              1572_ch139_read1468_strand minion_brown_metagenome/fast5/BIOL05525_20160519_FNFAD02943_MN16880_sequencing_run_MockRare_19v16_FAD02943_11572_ch139_read1468_                              strand.fast5
+8987fc4b-323c-40db-a9ed-173094f1c811_Classification_template:1D_000:template BIOL05525_20160519_FNFAD02943_MN16880_sequencing_run_MockRare_19v16_FAD02943_1                              1572_ch139_read1468_strand minion_brown_metagenome/fast5/BIOL05525_20160519_FNFAD02943_MN16880_sequencing_run_MockRare_19v16_FAD02943_11572_ch139_read1468_strand.fast5
   SQK-MAP006_Y_Bottom_SK64 (read coords: 399-419, identity: 86.4%)
 
 1 / 3494 reads were split based on middle adapters
