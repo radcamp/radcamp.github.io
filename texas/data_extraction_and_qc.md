@@ -95,7 +95,7 @@ library(poRe)
 
 We can read a pre-computed meta-data file
 ```R
-meta <- read.table("WIMPpass_3497.poRe.meta.txt", sep="\t", header=TRUE)
+meta <- read.table("/vol_b/public_data/minion_brown_metagenome/brown_metagenome.meta.txt", sep="\t", header=TRUE)
 ```
 
 And plot yield over time
@@ -115,6 +115,44 @@ ggplot(yield, aes(x=time,y=cum.2d)) + geom_line()
 melty <- melt(yield, id="time", variable.name="read.type", value.name="length")
 ggplot(melty, aes(x=time,y=length, color=read.type)) + geom_line() 
 ```
+
+We can plot read lengths:
+
+```R
+lens <- plot.length.histogram(meta)
+```
+
+To be honest, these are pretty bad, so there are some alternatives:
+
+```R
+ggplot(data=meta, aes(tlen)) + geom_histogram()
+```
+
+Or plot all three:
+
+```R
+meltl <- melt(meta[,c("filename","tlen","clen","len2d")], id="filename", variable.name="read.type", value.name="length")
+
+
+# Overlaid histograms
+ggplot(meltl, aes(x=length, fill=read.type)) + geom_histogram(binwidth=1000, alpha=.5, position="identity") 
+
+# Interleaved histograms
+ggplot(meltl, aes(x=length, fill=read.type)) + geom_histogram(binwidth=1000, position="dodge")
+
+# Density plots
+ggplot(meltl, aes(x=length, colour=read.type)) + geom_density()
+
+# Density plots with semi-transparent fill
+ggplot(meltl, aes(x=length, fill=read.type)) + geom_density(alpha=.3)
+```
+
+Obviously this is old data and 2D has been retired, so let's look at [Nick's whale data](http://lab.loman.net/2017/03/09/ultrareads-for-nanopore/) which is more recent:
+
+```R
+# to do
+```
+
 
 ## Extracting metadata using poRe
 
