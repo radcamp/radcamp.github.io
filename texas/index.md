@@ -7,11 +7,11 @@ Texas A&M
 
 # Instructors
 
-* Nick Loman (University of Birmingham)
+* Nick "iron man" Loman (University of Birmingham)
 * Josh "771kb" Quick (University of Birmingham)
-* Matt Loose (University of Nottingham)
-* John Tyson (University of British Columbia, Vancouver)
-* Mick Watson (University of Edinburgh, UK)
+* Matt "read until" Loose (University of Nottingham)
+* John "the tinker" Tyson (University of British Columbia, Vancouver)
+* Mick "metagenomics" Watson (University of Edinburgh, UK)
 
 # Recipes
 
