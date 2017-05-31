@@ -18,46 +18,53 @@ Whilst ONT base-callers now output FASTQ, it is not well formatted FASTQ and we 
 
 h5ls and h5dump can be quite useful.
 
-h5ls reveals the structure of fast5 files.  Adding the -r flag makes this recursive:
+h5ls reveals the structure of fast5 files. 
 
 ```sh
-h5ls MAP006-1/LomanLabz_PC_Ecoli_K12_MG1655_20150924_MAP006_1_5005_1_ch480_file17_strand.fast5
+h5ls /vol_b/public_data/minion_ecoli_sample/nanopore2_20170301_FNFAF09967_MN17024_mux_scan_170301_MG1655_PC_RAD002_76964_ch420_read41_strand.fast5
 ```
 ```
 Analyses                 Group
-Sequences                Group
+Raw                      Group
 UniqueGlobalKey          Group
 ```
 
  Adding the -r flag makes this recursive
  ```sh
- h5ls -r MAP006-1/LomanLabz_PC_Ecoli_K12_MG1655_20150924_MAP006_1_5005_1_ch480_file17_strand.fast5
+ h5ls -r /vol_b/public_data/minion_ecoli_sample/nanopore2_20170301_FNFAF09967_MN17024_mux_scan_170301_MG1655_PC_RAD002_76964_ch420_read41_strand.fast5
  ```
  ```
 /                        Group
 /Analyses                Group
-/Analyses/EventDetection_000 Group
-/Analyses/EventDetection_000/Configuration Group
-/Analyses/EventDetection_000/Configuration/abasic_detection Group
-/Analyses/EventDetection_000/Configuration/event_detection Group
-/Analyses/EventDetection_000/Configuration/hairpin_detection Group
-/Analyses/EventDetection_000/Reads Group
-/Analyses/EventDetection_000/Reads/Read_16 Group
-/Analyses/EventDetection_000/Reads/Read_16/Events Dataset {1614/Inf}
-/Sequences               Group
-/Sequences/Meta          Group
+/Analyses/Basecall_1D_000 Group
+/Analyses/Basecall_1D_000/BaseCalled_template Group
+/Analyses/Basecall_1D_000/BaseCalled_template/Events Dataset {37390}
+/Analyses/Basecall_1D_000/BaseCalled_template/Fastq Dataset {SCALAR}
+/Analyses/Basecall_1D_000/Configuration Group
+/Analyses/Basecall_1D_000/Configuration/basecall_1d Group
+/Analyses/Basecall_1D_000/Summary Group
+/Analyses/Basecall_1D_000/Summary/basecall_1d_template Group
+/Analyses/Segmentation_000 Group
+/Analyses/Segmentation_000/Configuration Group
+/Analyses/Segmentation_000/Configuration/event_detection Group
+/Analyses/Segmentation_000/Configuration/stall_removal Group
+/Analyses/Segmentation_000/Summary Group
+/Analyses/Segmentation_000/Summary/segmentation Group
+/Raw                     Group
+/Raw/Reads               Group
+/Raw/Reads/Read_41       Group
+/Raw/Reads/Read_41/Signal Dataset {192202/Inf}
 /UniqueGlobalKey         Group
 /UniqueGlobalKey/channel_id Group
 /UniqueGlobalKey/context_tags Group
 /UniqueGlobalKey/tracking_id Group
-```
 
-(the above is an old 2D FAST5 file and has not been base-called yet)
+```
 
 Unsurprisingly h5dump dumps the entire file to STDOUT
 
 ```sh
-h5dump MAP006-1/MAP006-1_downloads/pass/LomanLabz_PC_Ecoli_K12_MG1655_20150924_MAP006_1_5005_1_ch150_file24_strand.fast5
+h5dump /vol_b/public_data/minion_ecoli_sample/nanopore2_20170301_FNFAF09967_MN17024_mux_scan_170301_MG1655_PC_RAD002_76964_ch420_read41_strand.fast5
 ```
 
 ## Browsing HDF5 files
@@ -65,10 +72,8 @@ h5dump MAP006-1/MAP006-1_downloads/pass/LomanLabz_PC_Ecoli_K12_MG1655_20150924_M
 Any HDF5 file can be opened using hdfview and browsed/edited in a GUI
 
 ```sh
-hdfview MAP006-1/MAP006-1_downloads/pass/LomanLabz_PC_Ecoli_K12_MG1655_20150924_MAP006_1_5005_1_ch150_file24_strand.fast5 &
+hdfview /vol_b/public_data/minion_ecoli_sample/nanopore2_20170301_FNFAF09967_MN17024_mux_scan_170301_MG1655_PC_RAD002_76964_ch420_read41_strand.fast5 &
 ```
-
-
 
 ## Basic QC in poRe
 
@@ -79,6 +84,9 @@ The poRe library is set up to read v1.1 data by default, and offers users parame
 ```sh
 R
 ```
+
+Then, within R:
+
 ```R
 library(poRe)
 ```
@@ -105,6 +113,28 @@ ggplot(yield, aes(x=time,y=cum.2d)) + geom_line()
 melty <- melt(yield, id="time", variable.name="read.type", value.name="length")
 ggplot(melty, aes(x=time,y=length, color=read.type)) + geom_line() 
 ```
+
+## Extracting metadata using poRe
+
+By far the easiest and quickest way to extract metadata in poRe is by using the extractMeta script from the [poRe_scripts repo](https://github.com/mw55309/poRe_scripts):
+
+```sh
+extractMeta -h
+```
+
+This is a compute intensive operation, so it's best to use multiple cores:
+
+```sh
+extractMeta -c 4 /vol_b/public_data/minion_brown_metagenome > brown_metagenome.meta.txt
+```
+
+Or for a larger sample
+
+```sh
+extractMeta -c 4 /vol_b/public_data/minion_ecoli_sample > ecoli_sample.meta.txt
+```
+
+These can then be loaded and visualised in R as above
 
 ## Extracting FASTQ/A using Poretools
 
@@ -158,5 +188,12 @@ nanopolish extract -r directory_of_fast5
 
 ## Extracting FASTQ/A using poRe
 
+Again, we can do this using the extractSequence script from the [poRe_scripts repo](https://github.com/mw55309/poRe_scripts):
+
+```sh
+extractSequence -h
+```
+
+This tool will extract FASTA/Q which is identical in form to nanopolish, which is useful for downstream processing
 
 ## Extracting FASTQ/A and Metadata using poRe GUIs
