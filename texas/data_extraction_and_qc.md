@@ -131,20 +131,26 @@ ggplot(data=meta, aes(tlen)) + geom_histogram()
 Or plot all three:
 
 ```R
-meltl <- melt(meta[,c("filename","tlen","clen","len2d")], id="filename", variable.name="read.type", value.name="length")
+meltl <- melt(meta[,c("filename","tlen","clen","len2d")], id="filename", 
+                                                          variable.name="read.type", 
+                                                          value.name="length")
 
 
 # Overlaid histograms
-ggplot(meltl, aes(x=length, fill=read.type)) + geom_histogram(binwidth=1000, alpha=.5, position="identity") 
+ggplot(meltl, aes(x=length, fill=read.type)) 
+       + geom_histogram(binwidth=1000, alpha=.5, position="identity") 
 
 # Interleaved histograms
-ggplot(meltl, aes(x=length, fill=read.type)) + geom_histogram(binwidth=1000, position="dodge")
+ggplot(meltl, aes(x=length, fill=read.type)) 
+       + geom_histogram(binwidth=1000, position="dodge")
 
 # Density plots
-ggplot(meltl, aes(x=length, colour=read.type)) + geom_density()
+ggplot(meltl, aes(x=length, colour=read.type)) 
+       + geom_density()
 
 # Density plots with semi-transparent fill
-ggplot(meltl, aes(x=length, fill=read.type)) + geom_density(alpha=.3)
+ggplot(meltl, aes(x=length, fill=read.type)) 
+       + geom_density(alpha=.3)
 ```
 
 Obviously this is old data and 2D has been retired, so let's look at [Nick's whale data](http://lab.loman.net/2017/03/09/ultrareads-for-nanopore/) which is more recent:
