@@ -68,3 +68,9 @@ centrifuge-build -p 4 --conversion-table seqid2taxid.map \
 ```
 
 ## Sourmash
+
+MinHash is a dimensionality-reduction technique that can be applied to genomes, metagenomes or raw reads.  In short, any sequence dataset is deconstructed into its constituent kmers, and each kmer is passed through a hash function to obtain a 32- or 64-bit hash.  Essentially, the more hash's two datasets share, the more similar they are.  In practice, often a subset of hashes are compared rather than the whole dataset.
+
+Sourmash is an implementation of MinHash sketches, which we use here because the authors have created MinHash databases of [60k microbial genomes in RefSeq](http://sourmash.readthedocs.io/en/latest/databases.html) and [100k microbial genomes in GenBank](http://sourmash.readthedocs.io/en/latest/databases.html).
+
+
