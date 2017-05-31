@@ -3,6 +3,8 @@
 * [File formats](#file-formats)
 * [Using HDF5 command line tools](#using-hdf5-command-line-tools)
 * [Browsing HDF5 files](#browsing-hdf5-files)
+* [Basic QC in poRe](#basic-qc-in-pore)
+* [Extracting metadata using poRe](#extracting-metadata-using-pore)
 * [Extracting FASTQ/A using Poretools](#extracting-fastqa-using-poretools)
 * [Extracting FASTQ/A using Nanopolish](#extracting-fastqa-using-nanopolish)
 * [Extracting FASTQ/A using poRe](#extracting-fastqa-using-pore)
