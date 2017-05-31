@@ -135,7 +135,6 @@ meltl <- melt(meta[,c("filename","tlen","clen","len2d")], id="filename",
                                                           variable.name="read.type", 
                                                           value.name="length")
 
-
 # Overlaid histograms
 ggplot(meltl, aes(x=length, fill=read.type)) 
        + geom_histogram(binwidth=1000, alpha=.5, position="identity") 
