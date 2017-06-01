@@ -97,8 +97,14 @@ centrifuge -x /vol_b/public_data/centrifuge_dbs/p_compressed \
            -U /vol_b/public_data/minion_brown_metagenome/brown_metagenome.2D.10.fasta \
            -f \
            --threads 8
-           
 ```
+
+And then we can see the results:
+
+```sh
+cat centrifuge_report.tsv
+```
+
 
 ### Centrifuge databases
 
