@@ -174,3 +174,32 @@ the recovered matches hit 3.7% of the query
 
 Whilst we find E coli this is fairly disappointing as the data are from a mix of many genomes.  However, MinHash sketches work best when we have good coverage, and in this instance, we don't.  This particular dataset was from a staggered mock community where [E coli was the biggest component](https://oup.silverchair-cdn.com/oup/backfile/Content_public/Journal/gigascience/6/3/10.1093_gigascience_gix007/1/gix007fig3.jpeg?Expires=1496431671&Signature=eiUU4cVbvFvJcl8QurasjjhGLcPy3ggztdyIyaF3K4XjS5n65AbzpLrtoNVgb9pHoWsTobnE1ZGjPFH1qr5WVlzRptFXaEIYCkXW-IgV-fAll192D8~v4A7-In4FyEZRG~tXVproafHLGOxjA4D1RXQHukdPt6uuDTrDXgP96pZi1TMADwHaK0QWJZt9qElaDl~YLtmst4~wfRDA3v2eMfDptN9ZdC235X-0iKg9t6TolOTnlXZEn6a1e06KIVqbQ1XmDzG7hRe1DpRTdg1jNSMAvb7JbViVMiJhxK1U7tJaqsHvn39iCAIz19BYf4Zr3AL~gRNoVjHVr0Y~hagwQQ__&Key-Pair-Id=APKAIUCZBIA4LVPAVW3Q).
 
+We can relax the threshold to see more results
+
+```sh
+sourmash gather -k 31 
+                --threshold-bp 100 brown_metagenome.sig /vol_b/public_data/sourmash_dbs/genbank-k31.sbt.json
+```
+
+Which produces
+
+```
+loaded query: /vol_b/public_data/minion_brow... (k=31, DNA)
+loaded SBT /vol_b/public_data/sourmash_dbs/genbank-k31.sbt.json
+
+overlap     p_query p_match
+---------   ------- --------
+320.0 kbp     3.6%    6.7%      AFVX01000096.1 Escherichia coli XH140...
+10.0 kbp      0.1%    0.2%      LEEW01000001.1 Pseudomonas aeruginosa...
+10.0 kbp      0.1%    0.6%      FLOK01000001.1 Helicobacter pylori is...
+10.0 kbp      0.1%    0.5%      AHTB01000001.1 Streptococcus mutans B...
+220.0 kbp     2.5%    0.2%      CDLB01000001.1 Escherichia coli O26:H...
+10.0 kbp      0.1%    0.2%      AKVW01000001.1 Rhodobacter sphaeroide...
+160.0 kbp     1.8%    0.2%      ABHR01000186.1 Escherichia coli O157:...
+300.0 kbp     3.3%    0.2%      JWSO01000004.1 Escherichia coli strai...
+
+found 8 matches total;
+the recovered matches hit 4.3% of the query
+```
+
+Which is a little better :)
