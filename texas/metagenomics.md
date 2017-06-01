@@ -94,7 +94,7 @@ Centrifuge can be run with something like
 
 ```sh
 centrifuge -x /vol_b/public_data/centrifuge_dbs/p_compressed \
-           -r /vol_b/public_data/minion_brown_metagenome/brown_metagenome.2D.10.fasta \
+           -U /vol_b/public_data/minion_brown_metagenome/brown_metagenome.2D.10.fasta \
            -f \
            --threads 8
            
