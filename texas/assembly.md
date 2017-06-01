@@ -66,13 +66,27 @@ By default canu runs these one after the other, but they can be run individually
 An example "full pipeline" command would be:
 
 ```sh
-canu -p ecoli \
-     -d ecoli-oxford \
-     genomeSize=4.8m \
+canu -p meta \
+     -d meta \
+     genomeSize=40m \
      useGrid=false \
-     -nanopore-raw oxford.fasta
+     -nanopore-raw /vol_b/public_data/minion_brown_metagenome/brown_metagenome.2D.10.fasta
 ```
-This puts output in directory ecoli-oxford with prefix "ecoli".  We estimate the genome size, tell canu NOT to use HPC (as we don't have one for porecamp) and give it some ONT data as fasta
+This puts output in directory meta with prefix "meta".  We estimate the genome size, tell canu NOT to use HPC (as we don't have one for porecamp) and give it some ONT data as fasta.
+
+This runs pretty quickly but doesn't assemble anything.  It's a low coverage synthetic metagenome, so no surprise.  It does produce corrected reads though!  These could be used in the metagenomics practical (hint!)
+
+Now try the E coli subset:
+
+```sh
+canu -p ecoli      
+     -d ecoli      
+     genomeSize=4.8m      
+     useGrid=false      
+     -nanopore-raw /vol_b/public_data/minion_ecoli_sample/ecoli_sample.template.fasta
+```
+
+This one will take a bit longer ;)
 
 ## Minimap and miniasm
 
