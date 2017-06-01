@@ -17,7 +17,7 @@ kraken --db /vol_b/public_data/kraken_dbs/minikraken_20141208/ \
        --threads 10 \
        --fasta-input \
        --preload \
-       --output brown_metagenome.2D.kraken /vol_b/public_data/minion_brown_metagenome/brown_metagenome.2D.10.fasta
+       --output brown_metagenome.2D.kraken /vol_b/public_data/minion_brown_metagenome/brown_metagenome.2D.fasta
 ```
 
 We can see the output:
