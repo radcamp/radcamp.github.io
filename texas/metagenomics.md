@@ -10,6 +10,51 @@ However, they are still very useful and these are often the first tools used whe
 
 Kraken builds its own database from genoems and contsucts a massive KMER index linked to the various levels of taxonomy.  The default database that comes with Kraken is constructed from the "complete bacterial, archaeal, and viral genomes in RefSeq (as of Dec. 8, 2014)".  So (1) it's out of date, and (2) there are no fungi and protozoa in there.  Also by focusing on "complete" genomes, the size of the database is tiny as compared to e.g. including draft genomes.
 
+Kraken can be run with:
+
+```sh
+kraken --db /vol_b/public_data/kraken_dbs/minikraken_20141208/ \
+       --threads 10 \
+       --fasta-input \
+       --preload \
+       --output brown_metagenome.2D.kraken /vol_b/public_data/minion_brown_metagenome/brown_metagenome.2D.10.fasta
+```
+
+We can see the output:
+
+```
+Loading database... complete.
+3497 sequences (9.14 Mbp) processed in 0.457s (458.6 Kseq/m, 1198.23 Mbp/m).
+  2606 sequences classified (74.52%)
+  891 sequences unclassified (25.48%)
+```
+
+The output is just a text file:
+
+```sh
+head brown_metagenome.2D.kraken
+```
+
+And we can generate a report:
+
+```sh
+kraken-report --db /vol_b/public_data/kraken_dbs/minikraken_20141208/ brown_metagenome.2D.kraken \
+              > brown_metagenome.2D.kraken.report
+```
+
+Some people prefer a different format
+
+```sh
+kraken-mpa-report --db /vol_b/public_data/kraken_dbs/minikraken_20141208/ brown_metagenome.2D.kraken \
+              > brown_metagenome.2D.kraken.mpa.report
+```
+
+We can get a report of the predicted genera:
+
+```sh
+cat brown_metagenome.2D.kraken.report | awk '$4=="G"'
+```
+
 ### Kraken databases
 
 Mick Watson has written some Perl scripts that will download and build kraken databases for bacteria, archaea, fungi, protozoans and viruses at various stages of completion.  
