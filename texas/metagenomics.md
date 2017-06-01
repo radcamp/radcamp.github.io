@@ -90,6 +90,16 @@ This will create a large kmer index file in a directory with the same name as yo
 
 Centrifuge uses the burrows-wheeler transform and an FM index to vastly reduce the size of an index/database used for metagenomic classification.  This means centrifuge databases are far smaller than Kraken databases, and centrifuge claims to be able to search the entirety of nt.
 
+Centrifuge can be run with something like
+
+```sh
+centrifuge -x /vol_b/public_data/centrifuge_dbs/p_compressed \
+           -r /vol_b/public_data/minion_brown_metagenome/brown_metagenome.2D.10.fasta \
+           -f \
+           --threads 8
+           
+```
+
 ### Centrifuge databases
 
 Centrifuge is similar to Kraken in that it enables the user to build custom databases for searching - with the added advantage that Cnetrifuge claims to be able to search the entirety of nt!  [Prebuilt databases are available](https://ccb.jhu.edu/software/centrifuge/) and there is a lot of documentation on how to build your own database [on the website](https://ccb.jhu.edu/software/centrifuge/manual.shtml#database-download-and-index-building)
