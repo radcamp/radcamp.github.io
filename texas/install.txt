@@ -93,6 +93,22 @@ sudo mv centrifuge-1.0.3-beta /usr/local/
 sudo apt-get install python-matplotlib
 sudo pip install sourmash
 
+# wrong version!
+pip uninstall sourmash
+
+sudo apt-get install python3-venv
+sudo apt-get install python3-dev
+
+# as porecampusa
+python3.5 -m venv ~/sourmash.py3
+ . ~/sourmash.py3/bin/activate
+pip install -U pip
+pip install -U Cython
+pip install -U jupyter jupyter_client ipython pandas matplotlib scipy scikit-learn khmer
+
+pip install https://github.com/dib-lab/sourmash/archive/master.zip
+
+
 ## NEEDS X - either ssh -X or shh -Y or putty with X forwarding enabled
 
 # Racon
