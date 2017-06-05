@@ -104,6 +104,18 @@ Then we can assemble
 miniasm -f reads.fq reads.paf.gz > reads.gfa
 ```
 
+Convert GFA to FASTA:
+
+```sh
+awk '/^S/{print ">"$2"\n"$3}' reads.gfa | fold > reads.fa
+```
+
+And then count how many contigs:
+
+```sh
+grep ">" reads.fa | wc -l
+```
+
 ## SPAdes hybrid
 
 When you have both Illumina and Nanopore data, then SPAdes remains a good option for hybrid assembly - SPAdes was used to produce the [B fragilis assembly](https://gigascience.biomedcentral.com/articles/10.1186/s13742-015-0101-6) by Mick Watson's group.
