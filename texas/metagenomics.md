@@ -128,6 +128,30 @@ centrifuge-build -p 4 --conversion-table seqid2taxid.map \
                  input-sequences.fna viral_centrifuge
 ```
 
+As we are sequencing a Jester King beer/yeast, here is the script we used to download and built a Centrifuge fungi db:
+
+```sh
+# download taxonomy
+centrifuge-download -o taxonomy taxonomy
+
+# the default - download "Complete Genome" level
+# assemblie of fungi from RefSeq
+centrifuge-download -o complete_genomes -m -d "fungi" refseq > seqid2taxid.map
+
+# download the other levels - Chromosome Contig Scaffold
+for s in Chromosome Contig Scaffold; do
+centrifuge-download -a $s -o $s -m -d fungi refseq >>  seqid2taxid.map
+done
+
+# create input fna
+cat complete_genomes/*/*.fna Chromosome/*/*.fna Contig/*/*.fna Scaffold/*/*.fna > input-sequences.fna
+
+# build it
+centrifuge-build -p 4 --conversion-table seqid2taxid.map \
+                 --taxonomy-tree taxonomy/nodes.dmp --name-table taxonomy/names.dmp \
+                 input-sequences.fna fungi_centrifuge
+```
+
 ## Sourmash
 
 MinHash is a dimensionality-reduction technique that can be applied to genomes, metagenomes or raw reads.  In short, any sequence dataset is deconstructed into its constituent kmers, and each kmer is passed through a hash function to obtain a 32- or 64-bit hash.  Essentially, the more hash's two datasets share, the more similar they are.  In practice, often a subset of hashes are compared rather than the whole dataset.
