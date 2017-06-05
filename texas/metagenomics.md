@@ -13,11 +13,11 @@ Kraken builds its own database from genoems and contsucts a massive KMER index l
 Kraken can be run with:
 
 ```sh
-kraken --db /vol_b/public_data/kraken_dbs/minikraken_20141208/ \
+kraken --db /vol_c/public_data/kraken_dbs/minikraken_20141208/ \
        --threads 10 \
        --fasta-input \
        --preload \
-       --output brown_metagenome.2D.kraken /vol_b/public_data/minion_brown_metagenome/brown_metagenome.2D.fasta
+       --output brown_metagenome.2D.kraken /vol_c/public_data/minion_brown_metagenome/brown_metagenome.2D.fasta
 ```
 
 We can see the output:
@@ -38,14 +38,14 @@ head brown_metagenome.2D.kraken
 And we can generate a report:
 
 ```sh
-kraken-report --db /vol_b/public_data/kraken_dbs/minikraken_20141208/ brown_metagenome.2D.kraken \
+kraken-report --db /vol_c/public_data/kraken_dbs/minikraken_20141208/ brown_metagenome.2D.kraken \
               > brown_metagenome.2D.kraken.report
 ```
 
 Some people prefer a different format
 
 ```sh
-kraken-mpa-report --db /vol_b/public_data/kraken_dbs/minikraken_20141208/ brown_metagenome.2D.kraken \
+kraken-mpa-report --db /vol_c/public_data/kraken_dbs/minikraken_20141208/ brown_metagenome.2D.kraken \
               > brown_metagenome.2D.kraken.mpa.report
 ```
 
@@ -93,8 +93,8 @@ Centrifuge uses the burrows-wheeler transform and an FM index to vastly reduce t
 Centrifuge can be run with something like
 
 ```sh
-centrifuge -x /vol_b/public_data/centrifuge_dbs/p_compressed \
-           -U /vol_b/public_data/minion_brown_metagenome/brown_metagenome.2D.10.fasta \
+centrifuge -x /vol_c/public_data/centrifuge_dbs/p_compressed \
+           -U /vol_c/public_data/minion_brown_metagenome/brown_metagenome.2D.10.fasta \
            -f \
            --threads 8
 ```
@@ -188,21 +188,21 @@ If we want to search anything against a database, we need to first create a mash
 ```sh
 sourmash compute -k 31 
                 --scaled 10000 
-                -o brown_metagenome.sig /vol_b/public_data/minion_brown_metagenome/brown_metagenome.2D.fasta
+                -o brown_metagenome.sig /vol_c/public_data/minion_brown_metagenome/brown_metagenome.2D.fasta
 
 ```
 
 We should now have file brown_metagenome.sig in our directory.  We can search RefSeq using this:
 
 ```sh
-sourmash gather -k 31 brown_metagenome.sig /vol_b/public_data/sourmash_dbs/refseq-k31.sbt.json
+sourmash gather -k 31 brown_metagenome.sig /vol_c/public_data/sourmash_dbs/refseq-k31.sbt.json
 ```
 
 This produces:
 
 ```
-loaded query: /vol_b/public_data/minion_brow... (k=31, DNA)
-loaded SBT /vol_b/public_data/sourmash_dbs/refseq-k31.sbt.json
+loaded query: /vol_c/public_data/minion_brow... (k=31, DNA)
+loaded SBT /vol_c/public_data/sourmash_dbs/refseq-k31.sbt.json
 
 overlap     p_query p_match
 ---------   ------- --------
@@ -216,13 +216,13 @@ the recovered matches hit 3.7% of the query
 We can also search 100k genomes in GenBank
 
 ```sh
-sourmash gather -k 31 brown_metagenome.sig /vol_b/public_data/sourmash_dbs/genbank-k31.sbt.json
+sourmash gather -k 31 brown_metagenome.sig /vol_c/public_data/sourmash_dbs/genbank-k31.sbt.json
 ```
 
 This produces:
 ```
-loaded query: /vol_b/public_data/minion_brow... (k=31, DNA)
-loaded SBT /vol_b/public_data/sourmash_dbs/genbank-k31.sbt.json
+loaded query: /vol_c/public_data/minion_brow... (k=31, DNA)
+loaded SBT /vol_c/public_data/sourmash_dbs/genbank-k31.sbt.json
 
 overlap     p_query p_match
 ---------   ------- --------
@@ -239,14 +239,14 @@ We can relax the threshold to see more results
 
 ```sh
 sourmash gather -k 31 
-                --threshold-bp 100 brown_metagenome.sig /vol_b/public_data/sourmash_dbs/genbank-k31.sbt.json
+                --threshold-bp 100 brown_metagenome.sig /vol_c/public_data/sourmash_dbs/genbank-k31.sbt.json
 ```
 
 Which produces
 
 ```
-loaded query: /vol_b/public_data/minion_brow... (k=31, DNA)
-loaded SBT /vol_b/public_data/sourmash_dbs/genbank-k31.sbt.json
+loaded query: /vol_c/public_data/minion_brow... (k=31, DNA)
+loaded SBT /vol_c/public_data/sourmash_dbs/genbank-k31.sbt.json
 
 overlap     p_query p_match
 ---------   ------- --------
