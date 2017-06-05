@@ -74,7 +74,7 @@ Then let's imagine we have a directory full of FNA files (the download_*.pl scri
 
 ```sh
 for f in `ls mydir/*.fna`; do
-  kraken-build --add-to-library --db $DB_NAME $f
+  kraken-build --add-to-library $f --db $DB_NAME
 done
 ```
 
