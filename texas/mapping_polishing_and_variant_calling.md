@@ -51,16 +51,25 @@ And then create the bwa index file required to run bwa mem later
 
 ## Map the reads
 
-And now we actually map the reads, convert the SAM output to BAM format and then sort it by mapping coordinate (rather than read name) and save it as Ebola2D.sorted.bam and create the SAM index file required to run other samtools subtools later.
+And now we actually map the reads, convert the SAM output to BAM format and then sort it by mapping coordinate (rather than read name) and save it as Ebola2D.sorted.bam and create the SAM index file required to run other ``samtools`` subtools later.
 
-```bwa mem -x ont2d EM_079517.fasta Ebola2D.fasta > Ebola2D.sam
+```
+bwa mem -x ont2d EM_079517.fasta Ebola2D.fasta > Ebola2D.sam
 samtools view -bS Ebola2D.sam > Ebola2D.bam
 samtools sort -o Ebola2D.sorted.bam Ebola2D.bam
 ```
 
-```bwa mem -x ont2d EM_079517.fasta Ebola2D.fasta | samtools view -bS - | samtools sort -o Ebola2D.sorted.bam -```
+There's another way to do the same thing, without all the intermediate files, using the pipe operator.
 
-```samtools index Ebola2D.sorted.bam```
+```
+bwa mem -x ont2d EM_079517.fasta Ebola2D.fasta | samtools view -bS - | samtools sort -o Ebola2D.sorted.bam -
+```
+
+Finally, index the reads:
+
+```
+samtools index Ebola2D.sorted.bam
+```
 
 ## Basic QC of the data
 
@@ -78,7 +87,7 @@ We can also plot the read depth across the reference genome by using the output 
 
 ```grep "^COV" Ebola2D.stats.txt > Ebola2D.coverage.txt```
 
-First, in a web browser, open 147.188.173.136:8773 then type in your group username and password. Then Rstudio should open for you and you can type the following:
+First, in a web browser, connect to your server via a web browser on port 8773 (i.e. http://youserveraddress:8773) then type in your group username and password. Then Rstudio should open for you and you can type the following:
 
 ```
 library(ggplot2)  
@@ -113,7 +122,7 @@ You need to copy the files from the server to your laptop using a GUI interface 
 
 ```
 cd /path/to/your/workingdirectory  
-scp groupX@147.188.173.136:/path/to/your/something.bam .  
+scp username@yourserveraddress:/path/to/your/something.bam .  
 ```
 
 You need to load the following two files into Tablet:
@@ -146,52 +155,13 @@ To call variants, there are three steps:
 - align the events with nanopolish eventalign
 - call a VCF with nanopolish variants
 
-Copy the model files into your current directory from: /data2/models/ into your current directory.
-
-```
-cp /data2/models/* .
-```
-
-We've already aligned the reads (output file from BWA was Ebola2D.sorted.bam)
-
-```
-nanopolish-r7 eventalign --reads Ebola2D.fasta -b Ebola2D.sorted.bam -g EM_079517.fasta --sam | samtools view -bS - | samtools sort -o Ebola2D.eventalign.bam -
-```
-
-We need to index the new BAM file that nanopolish eventalign produced:
-
-```samtools index Ebola2D.eventalign.bam```
-
 And now we need to get the variants in VCF format:
 
 ```
-nanopolish-r7 variants --progress -t 1 --reads Ebola2D.fasta -o Ebola2D.eventalign.vcf -b Ebola2D.sorted.bam -e Ebola2D.eventalign.bam -g EM_079517.fasta -vv -w EM_079517:0-20000 --snp
+nanopolish variants --reads Ebola2D.fasta --bam Ebola2D.sorted.bam --genome EM_079517.fasta --ploidy 1 > Ebola2D.vcf
 ```
-
-It is actually possible to use different models with nanopolish variants specifying the model filenames --models-fofn offset_models.fofn. In this case we swap the original 5-mer model for a 6-mer model.
-
-Compare this list with the list of variants that you already eyeballed. How do they compare?
 
 Did nanopolish spot things that you didn't?
 
 Did nanopolish get anything wrong? Could you figure out a way of filtering the VCF to remove these errors?
-
-To get the consensus sequence from the reference, vcf and bam file:
-
-```
-/home/ubuntu/scripts/margin_cons.py EM_079517.fasta Ebola2D.eventalign.vcf Ebola2D.sorted.bam > Ebola2D.eventalign.consensus.fasta 2> Ebola2D.eventalign.variants.txt
-```
-
-## SNP calling with 6-mer model
-
-```nanopolish-r7 variants --progress -t 1 --reads Ebola2D.fasta -o Ebola2D.6mer.vcf -b Ebola2D.sorted.bam -e Ebola2D.eventalign.bam -g EM_079517.fasta -vv -w "EM_079517:0-20000" --snp --models-fofn offset_models.fofn```
-
-How does the new VCF Ebola2D.6mer.vcf look compared with the old one?
-
-## Software versions
-
-This tutorial was tested with the following software versions:
-
-- samtools version 1.3.1 
-- bwa version 0.7.15-r1140
 
