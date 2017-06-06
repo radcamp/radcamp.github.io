@@ -1,6 +1,6 @@
 ---
 layout: default
-title:  Mapping tutorial for Porecamp 2016
+title:  Mapping tutorial for Porecamp Texas
 ---
 
 # {{ page.title }}
