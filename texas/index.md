@@ -21,5 +21,6 @@ Texas A&M
 * [Alignment, polishing and variant calling](http://porecamp.github.io/texas/mapping_polishing_and_variant_calling)
 * [Assembly](http://porecamp.github.io/texas/assembly)
 * [Metagenomics](http://porecamp.github.io/texas/metagenomics)
+* [Misc skills](http://porecamp.github.io/texas/misc_skills)
 
 
