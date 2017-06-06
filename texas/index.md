@@ -17,7 +17,7 @@ Texas A&M
 
 * [Basecalling](http://porecamp.github.io/texas/basecalling)
 * [Adapter trimming](http://porecamp.github.io/texas/adapter_trimming)
-* [Data extraction andc basic QC](http://porecamp.github.io/texas/data_extraction_and_qc)
+* [Data extraction and basic QC](http://porecamp.github.io/texas/data_extraction_and_qc)
 * [Alignment, polishing and variant calling](http://porecamp.github.io/texas/mapping_polishing_and_variant_calling)
 * [Assembly](http://porecamp.github.io/texas/assembly)
 * [Metagenomics](http://porecamp.github.io/texas/metagenomics)
