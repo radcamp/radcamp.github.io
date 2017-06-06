@@ -24,7 +24,7 @@ h5ls and h5dump can be quite useful.
 h5ls reveals the structure of fast5 files. 
 
 ```sh
-h5ls /vol_b/public_data/minion_ecoli_sample/nanopore2_20170301_FNFAF09967_MN17024_mux_scan_170301_MG1655_PC_RAD002_76964_ch420_read41_strand.fast5
+h5ls /vol_c/public_data/minion_ecoli_sample/nanopore2_20170301_FNFAF09967_MN17024_mux_scan_170301_MG1655_PC_RAD002_76964_ch420_read41_strand.fast5
 ```
 ```
 Analyses                 Group
@@ -34,7 +34,7 @@ UniqueGlobalKey          Group
 
  Adding the -r flag makes this recursive
  ```sh
- h5ls -r /vol_b/public_data/minion_ecoli_sample/nanopore2_20170301_FNFAF09967_MN17024_mux_scan_170301_MG1655_PC_RAD002_76964_ch420_read41_strand.fast5
+ h5ls -r /vol_c/public_data/minion_ecoli_sample/nanopore2_20170301_FNFAF09967_MN17024_mux_scan_170301_MG1655_PC_RAD002_76964_ch420_read41_strand.fast5
  ```
  ```
 /                        Group
@@ -67,7 +67,7 @@ UniqueGlobalKey          Group
 Unsurprisingly h5dump dumps the entire file to STDOUT
 
 ```sh
-h5dump /vol_b/public_data/minion_ecoli_sample/nanopore2_20170301_FNFAF09967_MN17024_mux_scan_170301_MG1655_PC_RAD002_76964_ch420_read41_strand.fast5
+h5dump /vol_c/public_data/minion_ecoli_sample/nanopore2_20170301_FNFAF09967_MN17024_mux_scan_170301_MG1655_PC_RAD002_76964_ch420_read41_strand.fast5
 ```
 
 ## Browsing HDF5 files
@@ -75,7 +75,7 @@ h5dump /vol_b/public_data/minion_ecoli_sample/nanopore2_20170301_FNFAF09967_MN17
 Any HDF5 file can be opened using hdfview and browsed/edited in a GUI
 
 ```sh
-hdfview /vol_b/public_data/minion_ecoli_sample/nanopore2_20170301_FNFAF09967_MN17024_mux_scan_170301_MG1655_PC_RAD002_76964_ch420_read41_strand.fast5 &
+hdfview /vol_c/public_data/minion_ecoli_sample/nanopore2_20170301_FNFAF09967_MN17024_mux_scan_170301_MG1655_PC_RAD002_76964_ch420_read41_strand.fast5 &
 ```
 
 ## Basic QC in poRe
@@ -105,7 +105,7 @@ library(poRe)
 
 We can read a pre-computed meta-data file
 ```R
-meta <- read.table("/vol_b/public_data/minion_brown_metagenome/brown_metagenome.meta.txt", sep="\t", header=TRUE)
+meta <- read.table("/vol_c/public_data/minion_brown_metagenome/brown_metagenome.meta.txt", sep="\t", header=TRUE)
 ```
 
 And plot yield over time
@@ -179,13 +179,13 @@ extractMeta -h
 This is a compute intensive operation, so it's best to use multiple cores:
 
 ```sh
-extractMeta -c 4 /vol_b/public_data/minion_brown_metagenome > brown_metagenome.meta.txt
+extractMeta -c 4 /vol_c/public_data/minion_brown_metagenome > brown_metagenome.meta.txt
 ```
 
 Or for a larger sample
 
 ```sh
-extractMeta -c 4 /vol_b/public_data/minion_ecoli_sample > ecoli_sample.meta.txt
+extractMeta -c 4 /vol_c/public_data/minion_ecoli_sample > ecoli_sample.meta.txt
 ```
 
 These can then be loaded and visualised in R as above
