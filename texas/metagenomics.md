@@ -74,7 +74,7 @@ Then let's imagine we have a directory full of FNA files (the download_*.pl scri
 
 ```sh
 for f in `ls mydir/*.fna`; do
-  kraken-build --add-to-library --db $DB_NAME $f
+  kraken-build --add-to-library $f --db $DB_NAME
 done
 ```
 
@@ -126,6 +126,30 @@ cat library/*/*.fna > input-sequences.fna
 centrifuge-build -p 4 --conversion-table seqid2taxid.map \
                  --taxonomy-tree taxonomy/nodes.dmp --name-table taxonomy/names.dmp \
                  input-sequences.fna viral_centrifuge
+```
+
+As we are sequencing a Jester King beer/yeast, here is the script we used to download and built a Centrifuge fungi db:
+
+```sh
+# download taxonomy
+centrifuge-download -o taxonomy taxonomy
+
+# the default - download "Complete Genome" level
+# assemblie of fungi from RefSeq
+centrifuge-download -o complete_genomes -m -d "fungi" refseq > seqid2taxid.map
+
+# download the other levels - Chromosome Contig Scaffold
+for s in Chromosome Contig Scaffold; do
+centrifuge-download -a $s -o $s -m -d fungi refseq >>  seqid2taxid.map
+done
+
+# create input fna
+cat complete_genomes/*/*.fna Chromosome/*/*.fna Contig/*/*.fna Scaffold/*/*.fna > input-sequences.fna
+
+# build it
+centrifuge-build -p 4 --conversion-table seqid2taxid.map \
+                 --taxonomy-tree taxonomy/nodes.dmp --name-table taxonomy/names.dmp \
+                 input-sequences.fna fungi_centrifuge
 ```
 
 ## Sourmash
