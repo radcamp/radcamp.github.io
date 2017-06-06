@@ -5,6 +5,7 @@
 * [Browsing HDF5 files](#browsing-hdf5-files)
 * [Basic QC in poRe](#basic-qc-in-pore)
 * [Extracting metadata using poRe](#extracting-metadata-using-pore)
+* [Parsing the sequencing summary file](#parsing-the-sequencing-summary-file)
 * [Extracting FASTQ/A using Poretools](#extracting-fastqa-using-poretools)
 * [Extracting FASTQ/A using Nanopolish](#extracting-fastqa-using-nanopolish)
 * [Extracting FASTQ/A using poRe](#extracting-fastqa-using-pore)
@@ -81,11 +82,20 @@ hdfview /vol_b/public_data/minion_ecoli_sample/nanopore2_20170301_FNFAF09967_MN1
 
 poRe is a library for R available from [SourceForge](https://sourceforge.net/projects/rpore/) and published in [bioinformatics](http://bioinformatics.oxfordjournals.org/content/31/1/114).  poRe is incredibly simple to install and relies simply on R 3.0 or above and a few additional libraries.
 
-The poRe library is set up to read v1.1 data by default, and offers users parameters to enable reading of v1.0 data.  Let's start it up.
+The poRe library is set up to read v1.1 data by default, and offers users parameters to enable reading of v1.0 data.  
+
+You can start R from the command-line:
 
 ```sh
 R
 ```
+
+Alternatively, navigate to the Rstudio server for your given VM using any browser on your laptpop:
+
+* [RStudio VM1](http://129.114.17.40:8773/)
+* [RStudio VM2](http://129.114.17.49:8773/)
+
+Log-in with your linux credentials
 
 Then, within R:
 
@@ -158,7 +168,6 @@ Obviously this is old data and 2D has been retired, so let's look at [Nick's wha
 # to do
 ```
 
-
 ## Extracting metadata using poRe
 
 By far the easiest and quickest way to extract metadata in poRe is by using the extractMeta script from the [poRe_scripts repo](https://github.com/mw55309/poRe_scripts):
@@ -180,6 +189,29 @@ extractMeta -c 4 /vol_b/public_data/minion_ecoli_sample > ecoli_sample.meta.txt
 ```
 
 These can then be loaded and visualised in R as above
+
+## Parsing the sequencing summary file
+
+After base-calling with Albacore, you'll find a file called sequencing_summary.txt.  We can read this in R:
+
+```R
+ss <- read.table("/mnt/porecamp_usa/outputs/monday_test_2/sequencing_summary.txt", sep="\t", header=TRUE)
+head(ss)
+```
+
+Then we can plot yield over time:
+
+```R
+# order by start time
+so <- ss[order(ss$start_time),]
+
+# get X and Y vectors
+tplot <- so$start_time - mind
+ctlen <- cumsum(so$sequence_length_template)
+
+# plot it
+plot(tplot, ctlen)
+```
 
 ## Extracting FASTQ/A using Poretools
 
@@ -242,3 +274,9 @@ extractSequence -h
 This tool will extract FASTA/Q which is identical in form to nanopolish, which is useful for downstream processing
 
 ## Extracting FASTQ/A and Metadata using poRe GUIs
+
+Start up R or RStduio and run:
+
+```R
+pore_parallel()
+```
