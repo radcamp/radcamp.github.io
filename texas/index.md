@@ -23,6 +23,11 @@ Texas A&M
 * [Metagenomics](http://porecamp.github.io/texas/metagenomics)
 * [Misc skills](http://porecamp.github.io/texas/misc_skills)
 
+# Slides
+
+* [Mick Watson](https://github.com/PoreCamp/porecamp.github.io/blob/master/texas/slides/MickWatson_LondonCalling2017.pptx?raw=true)
+* [Matt Loose](https://github.com/PoreCamp/porecamp.github.io/blob/master/texas/slides/loose_porecampusa.pdf?raw=true)
+
 # Bioinformatics template
 
 * [Bioinformatics template](https://docs.google.com/document/d/1wg_zTZZ8cEwaD2Sm1bJnTEJEh_zes1z4BxFs-MPnysM/edit?usp=sharing)
