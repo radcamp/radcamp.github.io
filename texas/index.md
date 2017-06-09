@@ -23,4 +23,14 @@ Texas A&M
 * [Metagenomics](http://porecamp.github.io/texas/metagenomics)
 * [Misc skills](http://porecamp.github.io/texas/misc_skills)
 
+# Bioinformatics template
+
+* [Bioinformatics template](https://docs.google.com/document/d/1wg_zTZZ8cEwaD2Sm1bJnTEJEh_zes1z4BxFs-MPnysM/edit?usp=sharing)
+
+# Bioinformatics results
+
+* [Bioinformatics day one](https://docs.google.com/document/d/1FBCtK4EGqHDkmGidkS5sbVLHTuNFFolIXd1gl-RJPfU/edit?usp=sharing)
+* [Bioinformatics day two](https://docs.google.com/document/d/1cbvvL8IerF1Ta83JD_th8rJUs71_UqLnhhqRgTxll7I/edit?usp=sharing)
+* [Bioinformatics day three](https://docs.google.com/document/d/15GYwh9ETeYchLVfbeJKlXSvurGbm0MKi77aYCvjsaKA/edit?usp=sharing)
+
 
