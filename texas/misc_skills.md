@@ -7,6 +7,12 @@ Albacore FASTQ has the odd blank line in it which breaks a lot of software tools
 grep . albacore.fastq > fixed.fastq
 ```
 
+If you have a bunch of FASTQ files from albacore, try:
+
+```sh
+cat *.fastq | grep . > fixed.combined.fastq
+```
+
 ## Extracting a sequence from a multi-fasta
 
 If you want to extract a single sequence from a FASTA file, we can do this with samtools faidx. 

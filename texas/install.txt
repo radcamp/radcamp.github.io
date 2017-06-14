@@ -143,6 +143,16 @@ sudo make
 sudo make install
 export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
 
+# prodigal
+sudo apt-get install prodigal
+
+# artemis
+sudo apt-get install artemis
+
+
+# edit your .bashrc to include:
+# PATH=$PATH:/usr/local/canu-1.5/Linux-amd64/bin/:/usr/local/centrifuge-1.0.3-beta:/usr/local/graphmap/bin/Linux-x64:/usr/local/kraken/:/usr/local/miniasm:/usr/local/minimap:/usr/local/nanopolish:/usr/local/racon:/usr/local/SPAdes-3.10.1-Linux/bin
+
 
 
 
