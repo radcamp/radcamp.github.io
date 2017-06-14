@@ -9,15 +9,16 @@ Monday 3 - 7 July 2017
 University of Birmingham
 Birmingham, UK
 
-# Instructors
+# Instructors and Facilitators
 
   - Nick Loman (University of Birmingham)
   - Josh "771kb" Quick (University of Birmingham)
   - Matt Loose (University of Nottingham)
   - John Tyson (University of British Columbia, Vancouver)
+  - Claire Lonsdale (Dstl Porton Down, UK)
   - Emily Richardson (MicrobesNG, University of Birmingham)
   - Pablo Fuentes-Utrilla (MicrobesNG, University of Birmingham)
-  - more instructors to be announced shortly
+  - Kirstyn Brunker (University of Glasgow, UK)
 
 # Admission Criteria
 

@@ -1,6 +1,6 @@
-# Datasets
+# Public datasets
 
-All data is stored in ``/vol_c/public_data``
+All public data is stored in ``/vol_c/public_data``
 
 ## minion_ecoli_whales
 
@@ -21,6 +21,8 @@ MiSeq K12 data
 ## minion_brown_metagenom2
 
 4 species mix
+
+
 
 - E. coli R9.4 ultra long reads
   - exercises: de novo assembly, minimal dataset, GraphMap
