@@ -1,0 +1,8 @@
+---
+- hosts: all
+  become: yes
+  become_method: sudo
+  tasks:
+    - pip:
+        name: ncbi-genome-download
+

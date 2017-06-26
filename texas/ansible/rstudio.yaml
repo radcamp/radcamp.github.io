@@ -1,0 +1,44 @@
+---
+- hosts: local
+  sudo: yes
+  tasks:
+    - apt_repository: repo='deb http://cran.rstudio.com/bin/linux/ubuntu xenial/' state=present
+    - apt_key: keyserver=keyserver.ubuntu.com id=E084DAB9
+
+  handlers:
+    - name: Update apt repository
+      apt: update_cache=yes
+
+- hosts: local
+  sudo: yes
+  tasks:
+    - name: Install R
+      action: apt pkg={{item}} state=present update_cache=yes
+      with_items:
+        - r-base
+        - r-base-dev
+        - r-recommended
+
+- hosts: all
+  sudo: yes
+  roles:
+    - tersmitten.r
+  vars:
+    r_packages:
+      - name: dplyr
+      - name: ggplot2
+      - name: shiny
+      - name: svDialogs
+      - name: data.table
+      - name: bit64
+      - name: rhdf5
+        type: bioconductor
+
+
+- hosts: all
+  sudo: yes
+  roles:
+    - tersmitten.rstudio-server
+  vars:
+    - rstudio_server_www_port: 8773
+

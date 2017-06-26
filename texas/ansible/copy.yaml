@@ -1,0 +1,10 @@
+---
+- hosts: all
+  become: yes
+  become_method: sudo
+  tasks:
+    - copy:
+        src: centrifuge-kreport
+        dest: /usr/local/bin/centrifuge-kreport
+        mode: "u+x,g+x,a+x"
+
