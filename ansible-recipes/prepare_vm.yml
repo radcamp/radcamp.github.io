@@ -1,0 +1,234 @@
+### tested with ansible 2.3.1 and ubuntu-16.04-server-cloudimg-amd64-disk1.img  
+
+---
+
+- hosts: all
+  remote_user: ubuntu
+  become: yes
+  gather_facts: false
+
+  tasks:
+  - name: install python2
+    raw: test -e /usr/bin/python || (apt -y update && apt install -y python-minimal)
+
+  - name: get hostname
+    command: /bin/hostname
+    register: vhostname
+
+  - name: fix /etc/hosts
+    lineinfile:
+      path: /etc/hosts
+      regexp: '^127\.0\.0\.1'
+      line: "127.0.0.1 localhost {{ vhostname.stdout }}"
+      owner: root
+      group: root
+      mode: 0644
+
+  - name: install packages
+    apt: name={{ item }} state=installed
+    with_items:
+    - python-pip
+    - r-base-core
+    - git
+    - python-setuptools
+    - python-dev
+    - cython
+    - libhdf5-serial-dev
+    - libfreetype6-dev
+    - python-matplotlib
+    - bwa
+    - python-biopython
+    - default-jre
+    - gnuplot-x11
+    - bioperl
+    - python3-venv
+    - python3-dev
+    - prodigal
+    - artemis
+    - last-align
+
+  - name: install R packages
+    shell: R -e "install.packages(c('ggplot2','shiny','svDialogs','data.table','bit64'),repos='https://cloud.r-project.org/')"
+
+  - name: install biocLite
+    shell: R -e 'source("http://www.bioconductor.org/biocLite.R"); biocLite("rhdf5")'
+
+  - name: install h5py
+    pip: name=h5py
+
+  - name: git poretools
+    git: repo=https://github.com/arq5x/poretools dest=/tmp/poretools
+
+  - name: install poretools
+    command: python setup.py install
+    args:
+      chdir: /tmp/poretools
+
+  - name: git porechop
+    git: repo=https://github.com/rrwick/Porechop.git dest=/tmp/porechop
+
+  - name: install porechop
+    command: python3 setup.py install
+    args:
+      chdir: /tmp/porechop
+
+  - name: grab samtools
+    get_url: url=https://github.com/samtools/samtools/releases/download/1.4.1/samtools-1.4.1.tar.bz2 dest=/tmp/samtools.tar.bz2
+
+  - name: extract samtools
+    unarchive: src=/tmp/samtools.tar.bz2 dest=/tmp/ copy=no
+
+  - name: install samtools
+    command: make install
+    args:
+      chdir: /tmp/samtools-1.4.1
+
+  - name: grab bcftools
+    get_url: url=https://github.com/samtools/bcftools/releases/download/1.4.1/bcftools-1.4.1.tar.bz2 dest=/tmp/bcftools.tar.bz2
+
+  - name: extract bcftools
+    unarchive: src=/tmp/bcftools.tar.bz2 dest=/tmp/ copy=no
+
+  - name: install bcftools
+    command: make install
+    args:
+      chdir: /tmp/bcftools-1.4.1
+
+  - name: git graphmap
+    git: repo=https://github.com/isovic/graphmap.git dest=/tmp/graphmap
+
+  - name: make graphmap modules
+    command: make modules
+    args:
+      chdir: /tmp/graphmap
+
+  - name: make graphmap 
+    command: make
+    args:
+      chdir: /tmp/graphmap
+
+  - name: copy graphmap
+    copy: src=/tmp/graphmap/bin/Linux-x64/graphmap dest=/usr/local/bin/graphmap remote_src=true
+
+  - name: git nanopolish
+    git: repo=https://github.com/jts/nanopolish.git dest=/tmp/nanopolish recursive=yes
+
+  - name: make nanopolish
+    command: make
+    args:
+      chdir: /tmp/nanopolish
+
+  - name: copy nanopolish
+    copy: src=/tmp/nanopolish/nanopolish dest=/usr/local/bin/nanopolish remote_src=true
+
+  - name: grab canu
+    get_url: url=https://github.com/marbl/canu/releases/download/v1.5/canu-1.5.Linux-amd64.tar.xz dest=/tmp/canu-1.5.Linux-amd64.tar.xz
+
+  - name: extract canu
+    unarchive: src=/tmp/canu-1.5.Linux-amd64.tar.xz dest=/usr/local/ copy=no
+
+  - name: grab spades
+    get_url: url=http://cab.spbu.ru/files/release3.10.1/SPAdes-3.10.1-Linux.tar.gz dest=/tmp/SPAdes-3.10.1-Linux.tar.gz
+
+  - name: extract spades
+    unarchive: src=/tmp/SPAdes-3.10.1-Linux.tar.gz dest=/usr/local/ copy=no
+
+  - name: grab centrifuge
+    get_url: url=ftp://ftp.ccb.jhu.edu/pub/infphilo/centrifuge/downloads/centrifuge-1.0.3-beta-Linux_x86_64.zip dest=/tmp/centrifuge-1.0.3-beta-Linux_x86_64.zip
+
+  - name: extract centrifuge
+    unarchive: src=/tmp/centrifuge-1.0.3-beta-Linux_x86_64.zip dest=/usr/local/ copy=no
+
+  - name: grab kraken
+    get_url: url=https://ccb.jhu.edu/software/kraken/dl/kraken-0.10.5-beta.tgz dest=/tmp/kraken-0.10.5-beta.tgz
+
+  - name: exctact kraken
+    unarchive: src=/tmp/kraken-0.10.5-beta.tgz dest=/tmp copy=no
+    
+  - name: install kraken
+    command: ./install_kraken.sh /usr/local/kraken
+    args:
+      chdir: /tmp/kraken-0.10.5-beta/
+
+  - name: add stuff to PATH
+    lineinfile:
+      dest=/etc/environment
+      state=present
+      backrefs=yes
+      regexp='PATH=(["]*)((?!.*?{{item}}).*?)(["]*)$'
+      line="PATH=\1\2:{{item}}\3"
+    with_items:
+    - /usr/local/canu-1.5/Linux-amd64/bin
+    - /usr/local/SPAdes-3.10.1-Linux/bin
+    - /usr/local/centrifuge-1.0.3-beta
+    - /usr/local/kraken
+
+  - name: install sourmash
+    pip: name=sourmash
+
+  - name: uninstall sourmash
+    pip: name=sourmash
+
+  - name: install virtualenv
+    pip: name=virtualenv
+
+  - name: install pip
+    pip: name=pip virtualenv=~/sourmash.py3 virtualenv_python=python3.5
+    become: no
+
+  - name: install cython, jupyter etc...
+    pip: name={{ item }} virtualenv=~/sourmash.py3 virtualenv_python=python3.5
+    with_items:
+    - Cython
+    - jupyter
+    - jupyter_client
+    - ipython
+    - pandas
+    - matplotlib
+    - scipy
+    - scikit-learn
+    - khmer
+    become: no
+
+  - name: git racon
+    git: repo=https://github.com/isovic/racon.git dest=/tmp/racon force=yes
+
+  - name: make racon modules
+    command: make modules
+    args:
+      chdir: /tmp/racon
+
+  - name: make racon tools
+    command: make tools
+    args:
+      chdir: /tmp/racon
+
+  - name: make racon
+    command: make
+    args:
+      chdir: /tmp/racon
+
+  - name: copy racon
+    copy: src=/tmp/racon/bin/racon dest=/usr/local/bin/racon force=yes remote_src=true mode=0755
+
+  - name: git minimap
+    git: repo=https://github.com/lh3/minimap dest=/tmp/minimap force=yes
+
+  - name: make minimap
+    command: make 
+    args:
+      chdir: /tmp/minimap
+
+  - name: copy minimap
+    copy: src=/tmp/minimap/minimap dest=/usr/local/bin/minimap force=yes remote_src=true mode=0755
+
+  - name: git miniasm
+    git: repo=https://github.com/lh3/miniasm dest=/tmp/miniasm force=yes
+
+  - name: make miniasm
+    command: make 
+    args:
+      chdir: /tmp/miniasm
+
+  - name: copy miniasm
+    copy: src=/tmp/miniasm/miniasm dest=/usr/local/bin/miniasm force=yes remote_src=true mode=0755
