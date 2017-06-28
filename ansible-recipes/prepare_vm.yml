@@ -111,7 +111,7 @@
       chdir: /tmp/graphmap
 
   - name: copy graphmap
-    copy: src=/tmp/graphmap/bin/Linux-x64/graphmap dest=/usr/local/bin/graphmap remote_src=true
+    copy: src=/tmp/graphmap/bin/Linux-x64/graphmap dest=/usr/local/bin/graphmap remote_src=true mode=0755
 
   - name: git nanopolish
     git: repo=https://github.com/jts/nanopolish.git dest=/tmp/nanopolish recursive=yes
@@ -122,7 +122,7 @@
       chdir: /tmp/nanopolish
 
   - name: copy nanopolish
-    copy: src=/tmp/nanopolish/nanopolish dest=/usr/local/bin/nanopolish remote_src=true
+    copy: src=/tmp/nanopolish/nanopolish dest=/usr/local/bin/nanopolish remote_src=true mode=0755
 
   - name: grab canu
     get_url: url=https://github.com/marbl/canu/releases/download/v1.5/canu-1.5.Linux-amd64.tar.xz dest=/tmp/canu-1.5.Linux-amd64.tar.xz
