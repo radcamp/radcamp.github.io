@@ -46,6 +46,9 @@
     - prodigal
     - artemis
     - last-align
+    - seqtk
+    - libssl-dev
+    - python3-pip
 
   - name: install R packages
     shell: R -e "install.packages(c('ggplot2','shiny','svDialogs','data.table','bit64'),repos='https://cloud.r-project.org/')"
@@ -259,3 +262,24 @@
   - name: run ldconfig
     command: /sbin/ldconfig
     when: ldsoconfupdated.changed
+
+  - name: install ncbi-genome-download
+    pip: name=ncbi-genome-download
+
+  - name: add nanopore key
+    apt_key: url=https://mirror.oxfordnanoportal.com/apt/ont-repo.pub state=present
+
+  - name: add nanopore repo
+    apt_repository:
+      repo: deb http://mirror.oxfordnanoportal.com/apt trusty-stable non-free
+      state: present
+      filename: nanoporetech
+
+  - name: install python3-ont-fast5-api
+    apt: name=python3-ont-fast5-api state=installed allow_unauthenticated=yes
+
+  - name: install python3-ont-albacore
+    apt: deb=https://mirror.oxfordnanoportal.com/software/analysis/python3-ont-albacore_1.2.3-1~xenial_all.deb allow_unauthenticated=yes
+
+  - name: install ont-albacore wheel
+    pip: name=https://mirror.oxfordnanoportal.com/software/analysis/ont_albacore-1.2.3-cp35-cp35m-manylinux1_x86_64.whl executable=pip3
