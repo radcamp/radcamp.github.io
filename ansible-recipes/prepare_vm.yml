@@ -1,4 +1,4 @@
-### tested with ansible 2.3.1 and ubuntu-16.04-server-cloudimg-amd64-disk1.img  
+### tested with ansible 2.3.1 and ubuntu 16.04 cloud image on CLIMB
 
 ---
 
@@ -49,13 +49,16 @@
     - seqtk
     - libssl-dev
     - python3-pip
+    - hdf5-tools
+    - texlive
+    - texlive-latex-extra
 
   - name: install R packages
-    shell: R -e "install.packages(c('ggplot2','shiny','svDialogs','data.table','bit64'),repos='https://cloud.r-project.org/')"
+    shell: R -e "install.packages(c('ggplot2','shiny','svDialogs','data.table','bit64','scales','gridExtra','reshape'),repos='https://cloud.r-project.org/')"
 
   - name: install biocLite
     shell: R -e 'source("http://www.bioconductor.org/biocLite.R"); biocLite("rhdf5")'
-
+  
   - name: install h5py
     pip: name=h5py
 
@@ -153,6 +156,19 @@
     args:
       chdir: /tmp/kraken-0.10.5-beta/
 
+  - name: grab kraken db
+    get_url: url=https://ccb.jhu.edu/software/kraken/dl/minikraken.tgz dest=/tmp/minikraken.tgz
+
+  - name: exctract kraken db
+    unarchive: src=/tmp/minikraken.tgz dest=/usr/local/ copy=no
+
+  - name: set KRAKEN_DB_PATH
+    copy:
+      content: "export KRAKEN_DEFAULT_DB=/usr/local/minikraken_20141208"
+      dest: /etc/profile.d/krakendb.sh
+      mode: 0755
+      force: yes
+
   - name: add stuff to PATH
     lineinfile:
       dest=/etc/environment
@@ -165,6 +181,7 @@
     - /usr/local/SPAdes-3.10.1-Linux/bin
     - /usr/local/centrifuge-1.0.3-beta
     - /usr/local/kraken
+    - /usr/local/NanoOK/bin
 
   - name: install sourmash
     pip: name=sourmash
@@ -283,3 +300,27 @@
 
   - name: install ont-albacore wheel
     pip: name=https://mirror.oxfordnanoportal.com/software/analysis/ont_albacore-1.2.3-cp35-cp35m-manylinux1_x86_64.whl executable=pip3
+
+  - name: grab centrifuge-kreport
+    get_url: url=https://raw.githubusercontent.com/PoreCamp/porecamp.github.io/master/texas/ansible/centrifuge-kreport dest=/usr/local/bin/centrifuge-kreport mode=0755 
+
+  - name: grab poRe
+    get_url: url='https://downloads.sourceforge.net/project/rpore/0.24/poRe_0.24.tar.gz?r=https%3A%2F%2Fsourceforge.net%2Fprojects%2Frpore%2F&ts=1498651612&use_mirror=10gbps-io' dest=/tmp/poRe_0.24.tar.gz
+
+  - name: install poRe
+    shell: R CMD INSTALL /tmp/poRe_0.24.tar.gz
+
+  - name: git nanook
+    git: repo=https://github.com/TGAC/NanoOK.git  dest=/usr/local/NanoOK/
+
+  - name: set NANOOK_DIR
+    copy:
+      content: "export NANOOK_DIR=/usr/local/NanoOK"
+      dest: /etc/profile.d/nanook.sh
+      mode: 0755
+
+  - name: grab ngmlr
+    unarchive: src=https://github.com/philres/ngmlr/releases/download/v0.2.5/ngmlr-0.2.5-beta-linux-x86_64.tar.gz dest=/tmp remote_src=yes
+
+  - name: copy ngmlr
+    copy: src=/tmp/ngmlr-0.2.5/ngmlr dest=/usr/local/bin/ngmlr remote_src=true mode=0755
