@@ -232,3 +232,30 @@
 
   - name: copy miniasm
     copy: src=/tmp/miniasm/miniasm dest=/usr/local/bin/miniasm force=yes remote_src=true mode=0755
+
+  - name: grab jellyfish
+    get_url: url=http://www.cbcb.umd.edu/software/jellyfish/jellyfish-1.1.11.tar.gz dest=/tmp/jellyfish-1.1.11.tar.gz
+
+  - name: extract jellyfish
+    unarchive: src=/tmp/jellyfish-1.1.11.tar.gz dest=/tmp/ copy=no
+
+  - name: configure jellyfish
+    command: "./configure"
+    args:
+      chdir: /tmp/jellyfish-1.1.11
+
+  - name: make install jellyfish
+    command: make install
+    args:
+      chdir: /tmp/jellyfish-1.1.11
+
+  - name: add /usr/local/lib to ld.so.conf
+    copy:
+      content: "/usr/local/lib"
+      dest: /etc/ld.so.conf.d/usrlocallib.conf
+      mode: 0644 
+    register: ldsoconfupdated
+
+  - name: run ldconfig
+    command: /sbin/ldconfig
+    when: ldsoconfupdated.changed
