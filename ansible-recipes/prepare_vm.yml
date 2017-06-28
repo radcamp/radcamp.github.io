@@ -62,6 +62,9 @@
   - name: install h5py
     pip: name=h5py
 
+  - name: install biopython
+    pip: name=biopython
+
   - name: git poretools
     git: repo=https://github.com/arq5x/poretools dest=/tmp/poretools
 
@@ -183,12 +186,6 @@
     - /usr/local/kraken
     - /usr/local/NanoOK/bin
 
-  - name: install sourmash
-    pip: name=sourmash
-
-  - name: uninstall sourmash
-    pip: name=sourmash
-
   - name: install virtualenv
     pip: name=virtualenv
 
@@ -208,6 +205,7 @@
     - scipy
     - scikit-learn
     - khmer
+    - https://github.com/dib-lab/sourmash/archive/master.zip
     become: no
 
   - name: git racon
