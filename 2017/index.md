@@ -9,9 +9,13 @@ Monday 3 - 7 July 2017
 University of Birmingham
 Birmingham, UK
 
+# Organisers
+
+  - Jennie Law (MicrobesNG, University of Birmingham)
+  - Nick Loman (University of Birmingham)
+
 # Instructors and Facilitators
 
-  - Nick Loman (University of Birmingham)
   - Josh "771kb" Quick (University of Birmingham)
   - Matt Loose (University of Nottingham)
   - John Tyson (University of British Columbia, Vancouver)
@@ -19,6 +23,7 @@ Birmingham, UK
   - Emily Richardson (MicrobesNG, University of Birmingham)
   - Pablo Fuentes-Utrilla (MicrobesNG, University of Birmingham)
   - Kirstyn Brunker (University of Glasgow, UK)
+  - Radoslaw Poplaswki (CLIMB, University of Birmingham)
 
 # Admission Criteria
 
