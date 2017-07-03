@@ -13,7 +13,7 @@ Kraken builds its own database from genoems and contsucts a massive KMER index l
 Kraken can be run with:
 
 ```sh
-kraken --db /vol_c/public_data/kraken_dbs/minikraken_20141208/ \
+kraken --db /home/data/references/kraken/minikraken_20141208/ \
        --threads 10 \
        --fasta-input \
        --preload \
@@ -38,14 +38,14 @@ head brown_metagenome.2D.kraken
 And we can generate a report:
 
 ```sh
-kraken-report --db /vol_c/public_data/kraken_dbs/minikraken_20141208/ brown_metagenome.2D.kraken \
+kraken-report --db /home/data/references/kraken/minikraken_20141208/ brown_metagenome.2D.kraken \
               > brown_metagenome.2D.kraken.report
 ```
 
 Some people prefer a different format
 
 ```sh
-kraken-mpa-report --db /vol_c/public_data/kraken_dbs/minikraken_20141208/ brown_metagenome.2D.kraken \
+kraken-mpa-report --db /home/data/references/kraken/minikraken_20141208/ brown_metagenome.2D.kraken \
               > brown_metagenome.2D.kraken.mpa.report
 ```
 
@@ -93,7 +93,7 @@ Centrifuge uses the burrows-wheeler transform and an FM index to vastly reduce t
 Centrifuge can be run with something like
 
 ```sh
-centrifuge -x /vol_c/public_data/centrifuge_dbs/p_compressed \
+centrifuge -x /home/data/references/centrifuge/p_compressed \
            -U /vol_c/public_data/minion_brown_metagenome/brown_metagenome.2D.10.fasta \
            -f \
            --threads 8
