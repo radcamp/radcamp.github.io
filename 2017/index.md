@@ -23,7 +23,7 @@ Birmingham, UK
   - Emily Richardson (MicrobesNG, University of Birmingham)
   - Pablo Fuentes-Utrilla (MicrobesNG, University of Birmingham)
   - Kirstyn Brunker (University of Glasgow, UK)
-  - Radoslaw Poplaswki (CLIMB, University of Birmingham)
+  - Radoslaw Poplawski (CLIMB, University of Birmingham)
 
 # Bioinformatics Recipes
 

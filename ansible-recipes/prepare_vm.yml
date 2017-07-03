@@ -24,11 +24,22 @@
       group: root
       mode: 0644
 
+  - name: add R repo
+    apt_repository: repo='deb http://cran.rstudio.com/bin/linux/ubuntu xenial/' state=present
+
+  - name: add R repo key
+    apt_key: keyserver=keyserver.ubuntu.com id=E084DAB9
+
+  - name: update apt cache
+    apt: update_cache=yes
+
   - name: install packages
     apt: name={{ item }} state=installed
     with_items:
     - python-pip
     - r-base-core
+    - r-base-dev
+    - r-recommended
     - git
     - python-setuptools
     - python-dev
@@ -52,9 +63,10 @@
     - hdf5-tools
     - texlive
     - texlive-latex-extra
+    - cmake
 
   - name: install R packages
-    shell: R -e "install.packages(c('ggplot2','shiny','svDialogs','data.table','bit64','scales','gridExtra','reshape'),repos='https://cloud.r-project.org/')"
+    shell: R -e "install.packages(c('dplyr','bioconductor','ggplot2','shiny','svDialogs','data.table','bit64','scales','gridExtra','reshape'),repos='https://cloud.r-project.org/')"
 
   - name: install biocLite
     shell: R -e 'source("http://www.bioconductor.org/biocLite.R"); biocLite("rhdf5")'
@@ -322,3 +334,19 @@
 
   - name: copy ngmlr
     copy: src=/tmp/ngmlr-0.2.5/ngmlr dest=/usr/local/bin/ngmlr remote_src=true mode=0755
+
+  - name: git assembly-stats
+    git: repo=https://github.com/sanger-pathogens/assembly-stats.git dest=/tmp/assembly-stats
+
+  - name: create build dir for assembly-stats
+    file: path=/tmp/assembly-stats/build state=directory mode=0755
+
+  - name: build and install assebly-stats
+    command: "{{ item }}"
+    args:
+      chdir: /tmp/assembly-stats/build
+    with_items:
+    - cmake ..
+    - make
+    - make test
+    - make install 
