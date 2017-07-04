@@ -27,11 +27,12 @@ Birmingham, UK
 
 # Bioinformatics Recipes
 
-* [Basecalling](http://porecamp.github.io/texas/basecalling)
-* [Adapter trimming](http://porecamp.github.io/texas/adapter_trimming)
-* [Data extraction and basic QC](http://porecamp.github.io/texas/data_extraction_and_qc)
-* [Alignment, polishing and variant calling](http://porecamp.github.io/texas/mapping_polishing_and_variant_calling)
-* [Assembly](http://porecamp.github.io/texas/assembly)
-* [Metagenomics](http://porecamp.github.io/texas/metagenomics)
-* [Misc skills](http://porecamp.github.io/texas/misc_skills)
+* [Basecalling](http://porecamp.github.io/2017/basecalling)
+* [Adapter trimming](http://porecamp.github.io/2017/adapter_trimming)
+* [Data extraction and basic QC](http://porecamp.github.io/2017/data_extraction_and_qc)
+* [Alignment, polishing and variant calling](http://porecamp.github.io/2017/mapping_polishing_and_variant_calling)
+* [Assembly](http://porecamp.github.io/2017/assembly)
+* [Assembly QC](http://porecamp.github.io/2017/assembly_qc)
+* [Metagenomics](http://porecamp.github.io/2017/metagenomics)
+* [Misc skills](http://porecamp.github.io/2017/misc_skills)
 
