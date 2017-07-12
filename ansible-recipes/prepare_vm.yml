@@ -24,6 +24,25 @@
       group: root
       mode: 0644
 
+#  - name : enable password auth
+#    lineinfile:
+#      path: /etc/ssh/sshd_config
+#      regexp: '^PasswordAuthentication'
+#      line: "PasswordAuthentication yes"
+#      owner: root
+#      group: root
+#      mode: 0644
+
+#  - name: load passwords
+#    include_vars: user_passwords.yml
+#    tags: users
+
+#  - name: create users
+#    user: name="{{item.key}}" password="{{item.value}}" shell="/bin/bash" update_password=always
+#    with_dict: "{{ user_passwords }}"
+#    register: user_results
+#    tags: users
+
   - name: add R repo
     apt_repository: repo='deb http://cran.rstudio.com/bin/linux/ubuntu xenial/' state=present
 
@@ -40,6 +59,9 @@
     - r-base-core
     - r-base-dev
     - r-recommended
+#    - "r-base-core=3.4.0*"
+#    - "r-base-dev=3.4.0*"
+#    - "r-recommended=3.4.0*"
     - git
     - python-setuptools
     - python-dev
@@ -197,6 +219,8 @@
     - /usr/local/centrifuge-1.0.3-beta
     - /usr/local/kraken
     - /usr/local/NanoOK/bin
+    - /usr/local/prokka/bin
+    - /usr/local/barrnap/bin
 
   - name: install virtualenv
     pip: name=virtualenv
@@ -204,21 +228,14 @@
   - name: install pip
     pip: name=pip virtualenv=~/sourmash.py3 virtualenv_python=python3.5
     become: no
+#    become_user: "{{item.key}}"
+#    with_dict: "{{ user_passwords }}"
 
   - name: install cython, jupyter etc...
-    pip: name={{ item }} virtualenv=~/sourmash.py3 virtualenv_python=python3.5
-    with_items:
-    - Cython
-    - jupyter
-    - jupyter_client
-    - ipython
-    - pandas
-    - matplotlib
-    - scipy
-    - scikit-learn
-    - khmer
-    - https://github.com/dib-lab/sourmash/archive/master.zip
+    pip: name=https://github.com/dib-lab/sourmash/archive/master.zip virtualenv=~/sourmash.py3 virtualenv_python=python3.5
     become: no
+#    become_user: "{{item.key}}"
+#    with_dict: "{{ user_passwords }}"
 
   - name: git racon
     git: repo=https://github.com/isovic/racon.git dest=/tmp/racon force=yes
@@ -262,6 +279,17 @@
 
   - name: copy miniasm
     copy: src=/tmp/miniasm/miniasm dest=/usr/local/bin/miniasm force=yes remote_src=true mode=0755
+
+  - name: grab barrnap
+    git: repo=https://github.com/tseemann/barrnap.git dest=/usr/local/barrnap
+
+  - name: grab prokka
+    git: repo=https://github.com/tseemann/prokka.git dest=/usr/local/prokka
+
+  - name: prokka setup db
+    command: bin/prokka --setupdb
+    args:
+      chdir: /usr/local/prokka
 
   - name: grab jellyfish
     get_url: url=http://www.cbcb.umd.edu/software/jellyfish/jellyfish-1.1.11.tar.gz dest=/tmp/jellyfish-1.1.11.tar.gz
@@ -329,6 +357,12 @@
       dest: /etc/profile.d/nanook.sh
       mode: 0755
 
+  - name: create centrifuge db dir
+    file: /home/data/references/centrifuge/ state=directory owner=root group=root mode=0755
+
+  - name: grab centrifuge db
+    unarchive: src=ftp://ftp.ccb.jhu.edu/pub/infphilo/centrifuge/data/p_compressed+h+v.tar.gz dest=/home/data/references/centrifuge/ remote_src=yes
+ 
   - name: grab ngmlr
     unarchive: src=https://github.com/philres/ngmlr/releases/download/v0.2.5/ngmlr-0.2.5-beta-linux-x86_64.tar.gz dest=/tmp remote_src=yes
 
