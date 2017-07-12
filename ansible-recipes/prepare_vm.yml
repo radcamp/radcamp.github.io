@@ -358,7 +358,7 @@
       mode: 0755
 
   - name: create centrifuge db dir
-    file: /home/data/references/centrifuge/ state=directory owner=root group=root mode=0755
+    file: name=/home/data/references/centrifuge/ state=directory owner=root group=root mode=0755
 
   - name: grab centrifuge db
     unarchive: src=ftp://ftp.ccb.jhu.edu/pub/infphilo/centrifuge/data/p_compressed+h+v.tar.gz dest=/home/data/references/centrifuge/ remote_src=yes
