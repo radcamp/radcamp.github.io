@@ -25,34 +25,14 @@ Birmingham, UK
   - Kirstyn Brunker (University of Glasgow, UK)
   - Radoslaw Poplawski (CLIMB, University of Birmingham)
 
-# Admission Criteria
+# Bioinformatics Recipes
 
-Places are **strictly limited**. Places will be allocated according to the following strict criteria.
-
-You must:
-
-- have a MinION;
-- have basic hands-on experience of the MinION and/or MinION data analysis;
-- have a background in either bioinformatics and/or wet lab work; and
-- be able to attend ALL FIVE days of the course; this is non-negotiable.
-
-This year the course will start on Monday morning, so be prepared to travel on Sunday. The course
-will be over by lunchtime on Friday.
-
-In the event the course is over-subscribed, the instructors will allocate places according to the strength of the application and the applicant’s relevant experience.
-
-# Admission Fee 
-
-Porecamp 2017 is £600 which includes the cost of the reagents and consumables used.
-The course registration fee does not include accommodation which is likely to cost
-~£50-75/night.
-
-Payments must be made by credit card.
-
-# Registration
-
-Registrations close on the 20th March 2017.
-
-Please download and complete the <a href="PorecampApplicationForm2017.docx">application form</a> and return
-to Jennie Law ```j dot law at bham dot ac uk```
+* [Basecalling](http://porecamp.github.io/2017/basecalling)
+* [Adapter trimming](http://porecamp.github.io/2017/adapter_trimming)
+* [Data extraction and basic QC](http://porecamp.github.io/2017/data_extraction_and_qc)
+* [Alignment, polishing and variant calling](http://porecamp.github.io/2017/mapping_polishing_and_variant_calling)
+* [Assembly](http://porecamp.github.io/2017/assembly)
+* [Assembly QC](http://porecamp.github.io/2017/assembly_qc)
+* [Metagenomics](http://porecamp.github.io/2017/metagenomics)
+* [Misc skills](http://porecamp.github.io/2017/misc_skills)
 
