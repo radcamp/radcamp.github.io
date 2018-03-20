@@ -3,6 +3,8 @@
 ## What is Sing-a-Pore Camp?
 Sing-a-Pore Camp 2018 is the seventh edition of the PoreCamp series, founded by Nick Loman, Matt Loose and Mick Watson in 2015. It is a five-day training bootcamp based around the Oxford Nanopore Technology (ONT)’s MinION sequencing system. The workshop will be a unique opportunity to get hands-on experience in generating and analysing MinION data from some of the leading experts in the field – Nick Loman, Josh Quick, Matt Loose and John Tyson will join local host Niranjan Nagarajan for five days of sequencing, bioinformatics, and general merriment.
 
+Sing-a-Pore Camp 2018 is hosted by the Genome Institute of Singapore (GIS), a research institute of the Agency for Science, Technology and Research (A*STAR).
+
 ## When and where will Sing-a-Pore Camp take place?
 The workshop will run all day Tuesday, 18th September through all day Saturday, 22nd September, 2018. A detailed timetable is available [here](timetable.md). We’ll be based at the Genome Institute of Singapore at the Genome Building, Biopolis, Singapore. For more details on getting to the Genome Building, click [here](location.md).
 
