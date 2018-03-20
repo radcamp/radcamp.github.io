@@ -28,4 +28,4 @@ The programme and teaching materials for previous courses can be found at:
 During Sing-a-Pore Camp 2018, we will be sequencing multiple samples. Some of these will be provided by participants, while others will be prepared by the instructor team. Please do not count on Sing-a-Pore Camp 2018 as a source of data for your experiment and please do not sequence anything that is incredibly precious - if one of your samples is sequenced, it will be multiplexed with others on a run and you will not have a full flow cell’s worth of data. We cannot guarantee how much sequence data your sample will produce, and the sample will be used in its entirety - there will be none left. To streamline sequencing, please bring a sample with at least 1ug of extracted genomic DNA. We will not be sequencing metagenomic samples, nor human samples, during the workshop.
 
 ## Contact Us
-**Please direct all questions about the workshop to [singaporecamp2018@gmail.com](singaporecamp2018@gmail.com)**
+**Please direct all questions about the workshop to <a href="mailto:singaporecamp2018@gmail.com">singaporecamp2018@gmail.com</a>**
