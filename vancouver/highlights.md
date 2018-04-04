@@ -1,4 +1,4 @@
-[Register now for PoreCamp Highlights](https://www.eventbrite.com/e/porecamp-vancouver-one-day-highlights-session-registration-friday-may-4-tickets-43071424791) - registration closes **Friday, April 13, 2018**
+[Register now for PoreCamp Highlights](https://www.eventbrite.com/e/porecamp-vancouver-one-day-highlights-session-registration-friday-may-4-tickets-43071424791) - registration closes **Friday, April 27, 2018**
 
 ## PoreCamp Highlights: a Day-Long MinION Training Workshop, May 4, 2018 - Vancouver, BC
 
@@ -38,7 +38,7 @@ Curious what we'll be covering? The programme and teaching materials for previou
   * [PoreCamp2017](https://porecamp.github.io/2017/index.html) (3 - 7 July 2017, University of Birmingham)
   
 ## Registration and fees  
-[Register now for PoreCamp Highlights](https://www.eventbrite.com/e/porecamp-vancouver-one-day-highlights-session-registration-friday-may-4-tickets-43071424791) - registration closes **Friday, April 13, 2018**. The workshop fee is $150CAD.
+[Register now for PoreCamp Highlights](https://www.eventbrite.com/e/porecamp-vancouver-one-day-highlights-session-registration-friday-may-4-tickets-43071424791) - registration closes **Friday, April 27, 2018**. The workshop fee is $150CAD.
 
 ## Instructor Team
 The workshop will be a unique opportunity to learn about generating and analyzing MinION data from some of the leading experts in the field – [Nick Loman](http://lab.loman.net/), [Josh Quick](http://lab.loman.net/), [Matt Loose](https://www.nottingham.ac.uk/life-sciences/people/matt.loose), [John Tyson](http://snutchlab.msl.ubc.ca/labmembers/), [Jared Simpson](http://simpsonlab.github.io/), and [Lauren Cowley](https://scholar.google.com/citations?user=t2_rH0kAAAAJ&hl=en) will join local hosts [Jennifer Gardy](http://www.spph.ubc.ca/person/jennifer-gardy/), [David Ng](http://popperfont.net/), [Robin Coope](http://www.bcgsc.ca/), and [Steve Pleasance](http://www.bcgsc.ca/).
