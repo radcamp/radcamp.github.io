@@ -23,7 +23,7 @@ The programme and teaching materials for previous courses can be found at:
   * [PoreCamp2017](https://porecamp.github.io/2017/index.html) (3 - 7 July 2017, University of Birmingham)
 
 ## Registration
-Registration for the full camp has closed; the waitlist is also full. ([Registration is open for the Highlights workshop](https://www.eventbrite.com/e/porecamp-vancouver-one-day-highlights-session-registration-friday-may-4-tickets-43071424791)) and will close on Friday, April 13 or when our 36 places have been filled, whichever comems first.
+Registration for the full camp has closed; the waitlist is also full. ([Registration is open for the Highlights workshop](https://www.eventbrite.com/e/porecamp-vancouver-one-day-highlights-session-registration-friday-may-4-tickets-43071424791)) and will close on Friday, April 27 or when our 36 places have been filled, whichever comems first.
 
 ## Contact Us
 **Please direct all questions about the workshop to [porecampvancouver@gmail.com](mailto:porecampvancouver@gmail.com)**
