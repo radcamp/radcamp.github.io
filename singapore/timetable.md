@@ -36,7 +36,7 @@ Participants will work in three teams, which will be formed on Tuesday. On Wedne
 **Saturday, 22nd September**
   *	8:30-9:30: Deploying a portable nanopore sequencing system, Josh Quick (Seminar Room)
   *	9:30-10:45: Field trip
-  *	10:45-5:30: Sequencing at the beach?
+  *	10:45-5:30: Sequencing at the beach or Botanic Gardens
   *	5:30: Closing party (venue tbc)
 
 **Key to locations:**
