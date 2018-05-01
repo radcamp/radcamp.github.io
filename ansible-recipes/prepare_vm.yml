@@ -24,24 +24,42 @@
       group: root
       mode: 0644
 
-#  - name : enable password auth
-#    lineinfile:
-#      path: /etc/ssh/sshd_config
-#      regexp: '^PasswordAuthentication'
-#      line: "PasswordAuthentication yes"
-#      owner: root
-#      group: root
-#      mode: 0644
+  - name : enable password auth
+    lineinfile:
+      path: /etc/ssh/sshd_config
+      regexp: '^PasswordAuthentication'
+      line: "PasswordAuthentication yes"
+      owner: root
+      group: root
+      mode: 0644
 
-#  - name: load passwords
-#    include_vars: user_passwords.yml
-#    tags: users
+  - name: install HWE kernel
+    apt: name=linux-generic-hwe-16.04 state=latest
 
-#  - name: create users
-#    user: name="{{item.key}}" password="{{item.value}}" shell="/bin/bash" update_password=always
-#    with_dict: "{{ user_passwords }}"
-#    register: user_results
-#    tags: users
+  - name: install numad
+    apt: name={{ item }} state=latest
+    with_items:
+      - numad
+      - numactl
+
+  - name: start numad service
+    service: name=numad state=started enabled=yes
+
+  - name: load users and  passwords
+    include_vars: users.yml
+    tags: users
+
+  - name: create users
+    user: name="{{ item.key }}" password="{{ item.value }}" shell="/bin/bash" update_password=on_create
+    with_dict: "{{ user_passwords }}"
+    register: user_results
+    tags: users
+
+  - name: install conda and conda packages
+    include_tasks: conda.yml
+    become_user: "{{ item.item.key }}"
+    with_items:
+      - "{{ user_results.results }}"
 
   - name: add R repo
     apt_repository: repo='deb http://cran.rstudio.com/bin/linux/ubuntu xenial/' state=present
@@ -53,51 +71,163 @@
     apt: update_cache=yes
 
   - name: install packages
-    apt: name={{ item }} state=installed
+    apt: name={{ item }} state=present
     with_items:
+    - build-essential
     - python-pip
+    - python3-pip
     - r-base-core
     - r-base-dev
     - r-recommended
-#    - "r-base-core=3.4.0*"
-#    - "r-base-dev=3.4.0*"
-#    - "r-recommended=3.4.0*"
     - git
     - python-setuptools
     - python-dev
     - cython
-    - libhdf5-serial-dev
-    - libfreetype6-dev
-    - python-matplotlib
-    - bwa
-    - python-biopython
     - default-jre
     - gnuplot-x11
     - bioperl
-    - python3-venv
-    - python3-dev
-    - prodigal
-    - artemis
-    - last-align
-    - seqtk
     - libssl-dev
-    - python3-pip
-    - hdf5-tools
     - texlive
     - texlive-latex-extra
     - cmake
+    - artemis
+    - last-align
+    - hdf5-tools
+    - libdatetime-perl
+    - libxml-simple-perl
+    - libdigest-md5-perl
+    - libfreetype6-dev
+    - pkg-config
+    - seqtk
+    - mummer
 
-  - name: install R packages
-    shell: R -e "install.packages(c('dplyr','bioconductor','ggplot2','shiny','svDialogs','data.table','bit64','scales','gridExtra','reshape'),repos='https://cloud.r-project.org/')"
+#  - name: install R packages
+#    shell: R -e "install.packages(c('dplyr','bioconductor','ggplot2','shiny','svDialogs','data.table','bit64','scales','gridExtra','reshape'),repos='https://cloud.r-project.org/')"
 
-  - name: install biocLite
-    shell: R -e 'source("http://www.bioconductor.org/biocLite.R"); biocLite("rhdf5")'
-  
-  - name: install h5py
-    pip: name=h5py
+#  - name: install biocLite
+#    shell: R -e 'source("http://www.bioconductor.org/biocLite.R"); biocLite("rhdf5")'
+#
+  - name: install rstudio
+    apt: deb=https://download2.rstudio.org/rstudio-server-1.1.447-amd64.deb
+    
 
-  - name: install biopython
-    pip: name=biopython
+  - name: grab kraken
+    get_url: url=https://ccb.jhu.edu/software/kraken/dl/kraken-1.0.tgz dest=/tmp/kraken-1.0.tgz
+
+  - name: exctact kraken
+    unarchive: src=/tmp/kraken-1.0.tgz dest=/tmp copy=no
+    
+  - name: install kraken
+    command: ./install_kraken.sh /usr/local/kraken
+    args:
+      chdir: /tmp/kraken-1.0/
+
+  - name: add kraken to PATH
+    copy:
+      content: 'PATH=$PATH:/usr/local/kraken'
+      dest: /etc/profile.d/kraken-path.sh
+      mode: 0755
+      force: yes
+
+#  - name: grab kraken db
+#    get_url: url=https://ccb.jhu.edu/software/kraken/dl/minikraken_20171019_8GB.tgz dest=/tmp/minikraken.tgz
+#
+#  - name: exctract kraken db
+#    unarchive: src=/tmp/minikraken.tgz dest=/usr/local/ copy=no
+
+  - name: set KRAKEN_DB_PATH
+    copy:
+      content: "export KRAKEN_DEFAULT_DB=/usr/local/minikraken_20171019_8GB/"
+      dest: /etc/profile.d/krakendb.sh
+      mode: 0755
+      force: yes
+
+  - name: add nanopore key
+    apt_key: url=https://mirror.oxfordnanoportal.com/apt/ont-repo.pub state=present
+
+  - name: add nanopore repo
+    apt_repository:
+      repo: deb http://mirror.oxfordnanoportal.com/apt trusty-stable non-free
+      state: present
+      filename: nanoporetech
+
+  - name: install python3-ont-fast5-api
+    apt: name=python3-ont-fast5-api state=installed allow_unauthenticated=yes
+
+  - name: install ont-albacore wheel
+    pip: name=https://mirror.oxfordnanoportal.com/software/analysis/ont_albacore-2.1.10-cp35-cp35m-manylinux1_x86_64.whl executable=pip3
+
+  - name: grab centrifuge-kreport
+    get_url: url=https://raw.githubusercontent.com/infphilo/centrifuge/master/centrifuge-kreport dest=/usr/local/bin/centrifuge-kreport mode=0755 
+
+  - name: grab poRe
+    get_url: url='https://downloads.sourceforge.net/project/rpore/0.24/poRe_0.24.tar.gz?r=https%3A%2F%2Fsourceforge.net%2Fprojects%2Frpore%2F&ts=1498651612&use_mirror=10gbps-io' dest=/tmp/poRe_0.24.tar.gz
+
+  - name: install poRe
+    shell: R CMD INSTALL /tmp/poRe_0.24.tar.gz
+
+  - name: git nanook
+    git: repo=https://github.com/TGAC/NanoOK.git  dest=/usr/local/NanoOK/
+
+  - name: set NANOOK_DIR
+    copy:
+      content: "export NANOOK_DIR=/usr/local/NanoOK"
+      dest: /etc/profile.d/nanook.sh
+      mode: 0755
+
+  - name: grab ngmlr
+    unarchive: src=https://github.com/philres/ngmlr/releases/download/v0.2.6/ngmlr-0.2.6-beta-linux-x86_64.tar.gz dest=/tmp remote_src=yes
+
+  - name: copy ngmlr
+    copy: src=/tmp/ngmlr-0.2.6/ngmlr dest=/usr/local/bin/ngmlr remote_src=true mode=0755
+
+  - name: git assembly-stats
+    git: repo=https://github.com/sanger-pathogens/assembly-stats.git dest=/tmp/assembly-stats
+
+  - name: create build dir for assembly-stats
+    file: path=/tmp/assembly-stats/build state=directory mode=0755
+
+  - name: build and install assebly-stats
+    command: "{{ item }}"
+    args:
+      chdir: /tmp/assembly-stats/build
+    with_items:
+    - cmake ..
+    - make
+    - make test
+    - make install 
+
+  - name: grab centrifuge
+    get_url: url=ftp://ftp.ccb.jhu.edu/pub/infphilo/centrifuge/downloads/centrifuge-1.0.3-beta-Linux_x86_64.zip dest=/tmp/centrifuge-1.0.3-beta-Linux_x86_64.zip
+
+  - name: extract centrifuge
+    unarchive: src=/tmp/centrifuge-1.0.3-beta-Linux_x86_64.zip dest=/usr/local/ copy=no
+
+  - name: add centriuge to PATH
+    copy:
+      content: 'PATH=$PATH:/usr/local/centrifuge-1.0.3-beta'
+      dest: /etc/profile.d/centrifuge-path.sh
+      mode: 0755
+      force: yes
+
+#  - name: create centrifuge db dir
+#    file: name=/home/data/references/centrifuge/ state=directory owner=root group=root mode=0755
+
+#  - name: grab centrifuge db
+#    unarchive: src=ftp://ftp.ccb.jhu.edu/pub/infphilo/centrifuge/data/p_compressed+h+v.tar.gz dest=/home/data/references/centrifuge/ remote_src=yes
+
+  - name: install pip stuff
+    pip: name="{{item}}"
+    with_items:
+      - h5py
+      - biopython
+      - ncbi-genome-download
+
+  - name: install pip3 stuff
+    pip: name="{{item}}" executable=pip3
+    with_items:
+      - sourmash
+      - circlator
 
   - name: git poretools
     git: repo=https://github.com/arq5x/poretools dest=/tmp/poretools
@@ -115,8 +245,34 @@
     args:
       chdir: /tmp/porechop
 
+  - name: grab prokka
+    git: repo=https://github.com/tseemann/prokka.git dest=/usr/local/prokka
+
+  - name: grab barrnap
+    git: repo=https://github.com/tseemann/barrnap.git dest=/usr/local/barrnap
+
+  - name: prokka setup db
+    command: bin/prokka --setupdb
+    args:
+      chdir: /usr/local/prokka
+
+  - name: add prokka to PATH
+    copy:
+      content: 'PATH=$PATH:/usr/local/prokka/bin:/usr/local/barrnap/bin'
+      dest: /etc/profile.d/samtools.sh
+      mode: 0755
+      force: yes
+
+  - name: grab prodigal
+    git: repo=https://github.com/hyattpd/Prodigal.git dest=/usr/local/prodigal
+
+  - name: install prodigal
+    command: make install
+    args:
+      chdir: /usr/local/prodigal
+
   - name: grab samtools
-    get_url: url=https://github.com/samtools/samtools/releases/download/1.4.1/samtools-1.4.1.tar.bz2 dest=/tmp/samtools.tar.bz2
+    get_url: url=https://github.com/samtools/samtools/releases/download/1.8/samtools-1.8.tar.bz2 dest=/tmp/samtools.tar.bz2
 
   - name: extract samtools
     unarchive: src=/tmp/samtools.tar.bz2 dest=/tmp/ copy=no
@@ -124,10 +280,10 @@
   - name: install samtools
     command: make install
     args:
-      chdir: /tmp/samtools-1.4.1
+      chdir: /tmp/samtools-1.8
 
   - name: grab bcftools
-    get_url: url=https://github.com/samtools/bcftools/releases/download/1.4.1/bcftools-1.4.1.tar.bz2 dest=/tmp/bcftools.tar.bz2
+    get_url: url=https://github.com/samtools/bcftools/releases/download/1.8/bcftools-1.8.tar.bz2 dest=/tmp/bcftools.tar.bz2
 
   - name: extract bcftools
     unarchive: src=/tmp/bcftools.tar.bz2 dest=/tmp/ copy=no
@@ -135,7 +291,14 @@
   - name: install bcftools
     command: make install
     args:
-      chdir: /tmp/bcftools-1.4.1
+      chdir: /tmp/bcftools-1.8
+
+  - name: add samtools to PATH
+    copy:
+      content: 'PATH=$PATH:/usr/local/samtools:/usr/local/bcftools'
+      dest: /etc/profile.d/samtools.sh
+      mode: 0755
+      force: yes
 
   - name: git graphmap
     git: repo=https://github.com/isovic/graphmap.git dest=/tmp/graphmap
@@ -165,99 +328,54 @@
     copy: src=/tmp/nanopolish/nanopolish dest=/usr/local/bin/nanopolish remote_src=true mode=0755
 
   - name: grab canu
-    get_url: url=https://github.com/marbl/canu/releases/download/v1.5/canu-1.5.Linux-amd64.tar.xz dest=/tmp/canu-1.5.Linux-amd64.tar.xz
+    get_url: url=https://github.com/marbl/canu/releases/download/v1.7/canu-1.7.Linux-amd64.tar.xz dest=/tmp/canu-1.7.Linux-amd64.tar.xz
 
   - name: extract canu
-    unarchive: src=/tmp/canu-1.5.Linux-amd64.tar.xz dest=/usr/local/ copy=no
+    unarchive: src=/tmp/canu-1.7.Linux-amd64.tar.xz dest=/usr/local/ copy=no
 
-  - name: grab spades
-    get_url: url=http://cab.spbu.ru/files/release3.10.1/SPAdes-3.10.1-Linux.tar.gz dest=/tmp/SPAdes-3.10.1-Linux.tar.gz
-
-  - name: extract spades
-    unarchive: src=/tmp/SPAdes-3.10.1-Linux.tar.gz dest=/usr/local/ copy=no
-
-  - name: grab centrifuge
-    get_url: url=ftp://ftp.ccb.jhu.edu/pub/infphilo/centrifuge/downloads/centrifuge-1.0.3-beta-Linux_x86_64.zip dest=/tmp/centrifuge-1.0.3-beta-Linux_x86_64.zip
-
-  - name: extract centrifuge
-    unarchive: src=/tmp/centrifuge-1.0.3-beta-Linux_x86_64.zip dest=/usr/local/ copy=no
-
-  - name: grab kraken
-    get_url: url=https://ccb.jhu.edu/software/kraken/dl/kraken-0.10.5-beta.tgz dest=/tmp/kraken-0.10.5-beta.tgz
-
-  - name: exctact kraken
-    unarchive: src=/tmp/kraken-0.10.5-beta.tgz dest=/tmp copy=no
-    
-  - name: install kraken
-    command: ./install_kraken.sh /usr/local/kraken
-    args:
-      chdir: /tmp/kraken-0.10.5-beta/
-
-  - name: grab kraken db
-    get_url: url=https://ccb.jhu.edu/software/kraken/dl/minikraken.tgz dest=/tmp/minikraken.tgz
-
-  - name: exctract kraken db
-    unarchive: src=/tmp/minikraken.tgz dest=/usr/local/ copy=no
-
-  - name: set KRAKEN_DB_PATH
+  - name: add canu to PATH
     copy:
-      content: "export KRAKEN_DEFAULT_DB=/usr/local/minikraken_20141208"
-      dest: /etc/profile.d/krakendb.sh
+      content: 'PATH=$PATH:/usr/local/canu-1.7/Linux-amd64/bin'
+      dest: /etc/profile.d/samtools.sh
       mode: 0755
       force: yes
 
-  - name: add stuff to PATH
-    lineinfile:
-      dest=/etc/environment
-      state=present
-      backrefs=yes
-      regexp='PATH=(["]*)((?!.*?{{item}}).*?)(["]*)$'
-      line="PATH=\1\2:{{item}}\3"
-    with_items:
-    - /usr/local/canu-1.5/Linux-amd64/bin
-    - /usr/local/SPAdes-3.10.1-Linux/bin
-    - /usr/local/centrifuge-1.0.3-beta
-    - /usr/local/kraken
-    - /usr/local/NanoOK/bin
-    - /usr/local/prokka/bin
-    - /usr/local/barrnap/bin
+  - name: grab spades
+    get_url: url=http://spades.bioinf.spbau.ru/release3.11.1/SPAdes-3.11.1-Linux.tar.gz dest=/tmp/SPAdes-3.11.1-Linux.tar.gz
 
-  - name: install virtualenv
-    pip: name=virtualenv
+  - name: extract spades
+    unarchive: src=/tmp/SPAdes-3.11.1-Linux.tar.gz dest=/usr/local/ copy=no
 
-  - name: install pip
-    pip: name=pip virtualenv=~/sourmash.py3 virtualenv_python=python3.5
-    become: no
-#    become_user: "{{item.key}}"
-#    with_dict: "{{ user_passwords }}"
+  - name: add spadesto PATH
+    copy:
+      content: 'PATH=$PATH:/usr/local/SPAdes-3.11.1-Linux/bin'
+      dest: /etc/profile.d/samtools.sh
+      mode: 0755
+      force: yes
 
-  - name: install cython, jupyter etc...
-    pip: name=https://github.com/dib-lab/sourmash/archive/master.zip virtualenv=~/sourmash.py3 virtualenv_python=python3.5
-    become: no
-#    become_user: "{{item.key}}"
-#    with_dict: "{{ user_passwords }}"
+  - name: git unicycler
+    git: repo=https://github.com/rrwick/Unicycler.git dest=/tmp/unicycler
+
+  - name: install unicycler
+    command: python3 setup.py install
+    args:
+      chdir: /tmp/unicycler
 
   - name: git racon
-    git: repo=https://github.com/isovic/racon.git dest=/tmp/racon force=yes
+    git: repo=https://github.com/isovic/racon.git dest=/tmp/racon recursive=yes force=yes
 
-  - name: make racon modules
-    command: make modules
+  - name: mkdir build racon dir
+    file: path=/tmp/racon/build state=directory
+
+  - name: build racon
+    command: "{{ item }}"
     args:
-      chdir: /tmp/racon
-
-  - name: make racon tools
-    command: make tools
-    args:
-      chdir: /tmp/racon
-
-  - name: make racon
-    command: make
-    args:
-      chdir: /tmp/racon
-
-  - name: copy racon
-    copy: src=/tmp/racon/bin/racon dest=/usr/local/bin/racon force=yes remote_src=true mode=0755
-
+      chdir: /tmp/racon/build
+    with_items:
+    - cmake ..
+    - make 
+    - make install
+    
   - name: git minimap
     git: repo=https://github.com/lh3/minimap dest=/tmp/minimap force=yes
 
@@ -280,107 +398,16 @@
   - name: copy miniasm
     copy: src=/tmp/miniasm/miniasm dest=/usr/local/bin/miniasm force=yes remote_src=true mode=0755
 
-  - name: grab barrnap
-    git: repo=https://github.com/tseemann/barrnap.git dest=/usr/local/barrnap
-
-  - name: grab prokka
-    git: repo=https://github.com/tseemann/prokka.git dest=/usr/local/prokka
-
-  - name: prokka setup db
-    command: bin/prokka --setupdb
-    args:
-      chdir: /usr/local/prokka
-
   - name: grab jellyfish
-    get_url: url=http://www.cbcb.umd.edu/software/jellyfish/jellyfish-1.1.11.tar.gz dest=/tmp/jellyfish-1.1.11.tar.gz
+    get_url: url=https://github.com/gmarcais/Jellyfish/releases/download/v2.2.10/jellyfish-linux dest=/usr/local/bin/jellyfish mode=0755
 
-  - name: extract jellyfish
-    unarchive: src=/tmp/jellyfish-1.1.11.tar.gz dest=/tmp/ copy=no
+  - name: grab pilon
+    get_url: url=https://github.com/broadinstitute/pilon/releases/download/v1.22/pilon-1.22.jar dest=/usr/local/pilon-1.22.jar mode=0644
 
-  - name: configure jellyfish
-    command: "./configure"
-    args:
-      chdir: /tmp/jellyfish-1.1.11
-
-  - name: make install jellyfish
-    command: make install
-    args:
-      chdir: /tmp/jellyfish-1.1.11
-
-  - name: add /usr/local/lib to ld.so.conf
+  - name: add pilon to PATH
     copy:
-      content: "/usr/local/lib"
-      dest: /etc/ld.so.conf.d/usrlocallib.conf
-      mode: 0644 
-    register: ldsoconfupdated
-
-  - name: run ldconfig
-    command: /sbin/ldconfig
-    when: ldsoconfupdated.changed
-
-  - name: install ncbi-genome-download
-    pip: name=ncbi-genome-download
-
-  - name: add nanopore key
-    apt_key: url=https://mirror.oxfordnanoportal.com/apt/ont-repo.pub state=present
-
-  - name: add nanopore repo
-    apt_repository:
-      repo: deb http://mirror.oxfordnanoportal.com/apt trusty-stable non-free
-      state: present
-      filename: nanoporetech
-
-  - name: install python3-ont-fast5-api
-    apt: name=python3-ont-fast5-api state=installed allow_unauthenticated=yes
-
-  - name: install python3-ont-albacore
-    apt: deb=https://mirror.oxfordnanoportal.com/software/analysis/python3-ont-albacore_1.2.3-1~xenial_all.deb allow_unauthenticated=yes
-
-  - name: install ont-albacore wheel
-    pip: name=https://mirror.oxfordnanoportal.com/software/analysis/ont_albacore-1.2.3-cp35-cp35m-manylinux1_x86_64.whl executable=pip3
-
-  - name: grab centrifuge-kreport
-    get_url: url=https://raw.githubusercontent.com/PoreCamp/porecamp.github.io/master/texas/ansible/centrifuge-kreport dest=/usr/local/bin/centrifuge-kreport mode=0755 
-
-  - name: grab poRe
-    get_url: url='https://downloads.sourceforge.net/project/rpore/0.24/poRe_0.24.tar.gz?r=https%3A%2F%2Fsourceforge.net%2Fprojects%2Frpore%2F&ts=1498651612&use_mirror=10gbps-io' dest=/tmp/poRe_0.24.tar.gz
-
-  - name: install poRe
-    shell: R CMD INSTALL /tmp/poRe_0.24.tar.gz
-
-  - name: git nanook
-    git: repo=https://github.com/TGAC/NanoOK.git  dest=/usr/local/NanoOK/
-
-  - name: set NANOOK_DIR
-    copy:
-      content: "export NANOOK_DIR=/usr/local/NanoOK"
-      dest: /etc/profile.d/nanook.sh
+      content: 'alias pilon="java -Xmx16G -jar /usr/local/pilon-1.22.jar"'
+      dest: /etc/profile.d/pilon.sh
       mode: 0755
+      force: yes
 
-  - name: create centrifuge db dir
-    file: name=/home/data/references/centrifuge/ state=directory owner=root group=root mode=0755
-
-  - name: grab centrifuge db
-    unarchive: src=ftp://ftp.ccb.jhu.edu/pub/infphilo/centrifuge/data/p_compressed+h+v.tar.gz dest=/home/data/references/centrifuge/ remote_src=yes
- 
-  - name: grab ngmlr
-    unarchive: src=https://github.com/philres/ngmlr/releases/download/v0.2.5/ngmlr-0.2.5-beta-linux-x86_64.tar.gz dest=/tmp remote_src=yes
-
-  - name: copy ngmlr
-    copy: src=/tmp/ngmlr-0.2.5/ngmlr dest=/usr/local/bin/ngmlr remote_src=true mode=0755
-
-  - name: git assembly-stats
-    git: repo=https://github.com/sanger-pathogens/assembly-stats.git dest=/tmp/assembly-stats
-
-  - name: create build dir for assembly-stats
-    file: path=/tmp/assembly-stats/build state=directory mode=0755
-
-  - name: build and install assebly-stats
-    command: "{{ item }}"
-    args:
-      chdir: /tmp/assembly-stats/build
-    with_items:
-    - cmake ..
-    - make
-    - make test
-    - make install 
