@@ -1,0 +1,35 @@
+---
+
+  - name: grab miniconda installer
+    get_url: url=https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh dest=/tmp/miniconda.sh mode=0755
+
+  - name: test if conda is installed
+    stat: path="~/miniconda3/bin/conda"
+    become_user: "{{ item.item.key }}"
+    register: condainstalled
+
+  - name: install conda if not installed
+    command: /tmp/miniconda.sh -b
+    become_user: "{{ item.item.key }}"
+    when: not condainstalled.stat.exists
+
+  - name: check if conda is in PATH
+    shell: "grep miniconda3 ~/.bashrc"
+    register: condainpath
+    become_user: "{{ item.item.key }}"
+    ignore_errors: true
+
+  - name: add conda to PATH
+    lineinfile: path="/home/{{ item.item.key }}/.bashrc" line="export PATH=/home/{{ item.item.key }}/miniconda3/bin:$PATH"
+    become_user: "{{ item.item.key }}"
+    when: condainpath.stdout == ""
+
+  - name: precreate conda dir
+    file: path="/home/{{ item.item.key }}/.conda/pkgs" owner="{{ item.item.key }}" group="{{ item.item.key }}" state=directory
+
+  - name: precreate conda environments.txt
+    file: path="/home/{{ item.item.key }}/.conda/environments.txt" owner="{{ item.item.key }}" group="{{ item.item.key }}" state=touch
+
+  - name: add extra conda channels
+    command: "/home/{{ item.item.key }}/miniconda3/bin/conda config --add channels bioconda"
+    become_user: "{{ item.item.key }}"
