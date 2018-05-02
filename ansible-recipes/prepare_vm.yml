@@ -101,12 +101,12 @@
     - seqtk
     - mummer
 
-#  - name: install R packages
-#    shell: R -e "install.packages(c('dplyr','bioconductor','ggplot2','shiny','svDialogs','data.table','bit64','scales','gridExtra','reshape'),repos='https://cloud.r-project.org/')"
+  - name: install R packages
+    shell: R -e "install.packages(c('dplyr','bioconductor','ggplot2','shiny','svDialogs','data.table','bit64','scales','gridExtra','reshape'),repos='https://cloud.r-project.org/')"
 
-#  - name: install biocLite
-#    shell: R -e 'source("http://www.bioconductor.org/biocLite.R"); biocLite("rhdf5")'
-#
+  - name: install biocLite
+    shell: R -e 'source("http://www.bioconductor.org/biocLite.R"); biocLite("rhdf5")'
+
   - name: install rstudio
     apt: deb=https://download2.rstudio.org/rstudio-server-1.1.447-amd64.deb
     
@@ -336,7 +336,7 @@
   - name: add canu to PATH
     copy:
       content: 'PATH=$PATH:/usr/local/canu-1.7/Linux-amd64/bin'
-      dest: /etc/profile.d/samtools.sh
+      dest: /etc/profile.d/canu.sh
       mode: 0755
       force: yes
 
@@ -346,7 +346,7 @@
   - name: extract spades
     unarchive: src=/tmp/SPAdes-3.11.1-Linux.tar.gz dest=/usr/local/ copy=no
 
-  - name: add spadesto PATH
+  - name: add spades to PATH
     copy:
       content: 'PATH=$PATH:/usr/local/SPAdes-3.11.1-Linux/bin'
       dest: /etc/profile.d/samtools.sh
