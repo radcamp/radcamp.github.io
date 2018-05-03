@@ -155,7 +155,7 @@
     apt: name=python3-ont-fast5-api state=installed allow_unauthenticated=yes
 
   - name: install ont-albacore wheel
-    pip: name=https://mirror.oxfordnanoportal.com/software/analysis/ont_albacore-2.1.10-cp35-cp35m-manylinux1_x86_64.whl executable=pip3
+    pip: name=https://mirror.oxfordnanoportal.com/software/analysis/ont_albacore-2.2.7-cp35-cp35m-manylinux1_x86_64.whl executable=pip3
 
   - name: grab centrifuge-kreport
     get_url: url=https://raw.githubusercontent.com/infphilo/centrifuge/master/centrifuge-kreport dest=/usr/local/bin/centrifuge-kreport mode=0755 
