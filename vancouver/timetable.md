@@ -15,8 +15,8 @@ Participants will work in three teams, which will be formed on Monday. On Tuesda
   * 1:00-5:00: PoreCamp Lectures (MSL Theatre)
   * 5:15-7:30: Opening Reception (AMS Nest Roof Deck)
 
-**Tuesday, May 8**
-  * 8:30-9:00: Group Discussion (Bubble Room)
+**Tuesday, MGroup Discussionay 8**
+  * 8:30-9:00: Bioinformatics Prep (Bubble Room)
   * 9:00-12:15: Rotation 1 - Morning
   * 12:15-1:00: Lunch (on your own)
   * 1:00-1:45: Whale-Watching with Matt Loose (Bubble Room)
