@@ -1,3 +1,0 @@
-sudo ansible-galaxy install tersmitten.r
-sudo ansible-galaxy install tersmitten.rstudio-server
-

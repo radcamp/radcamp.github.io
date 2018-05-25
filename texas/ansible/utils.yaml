@@ -1,8 +1,0 @@
----
-- hosts: all
-  sudo: yes
-  tasks:
-    - name: Install R
-      action: apt pkg={{item}} state=present update_cache=yes
-      with_items:
-        - seqtk
