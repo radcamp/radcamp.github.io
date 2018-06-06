@@ -9,8 +9,9 @@
 # Course structure and programme
 
 
-The programme and teaching materials for previous courses can be found at:
+## Upcoming events:
 
+* [RADCamp2018-AF-Biota (Brazil)](AF-Biota/index.md)
 
 # Admission Criteria
 
