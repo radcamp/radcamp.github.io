@@ -25,21 +25,14 @@ São Paulo, Brasil
 
 Times            | Monday | Tuesday | Wednesday
 -----            | ------ | ------- | ---------
-9-12:30     | Cluster basics and ipyrad part I | Clustering analysis ([Structure](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-structure-pedicularis.ipynb)/[PCA]()) | Demographic anaylsis (momi2)
+9-12:30     | [Cluster basics](cluster_basics.md) and ipyrad part I | Clustering analysis ([Structure](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-structure-pedicularis.ipynb)/[PCA]()) | Demographic anaylsis ([momi2](https://nbviewer.jupyter.org/github/radcamp/radcamp.github.io/blob/master/AF-Biota/cookbook-ipyrad-momi2.ipynb)
 12:30-14:00 | Lunchy | Lunchy | Lunchy
-14:00-17:00 |ipyrad part II | Phylogenetic inference (RAxML) | Assisted work session (hack your own data)
+14:00-17:00 |ipyrad part II | Phylogenetic inference ([RAxML](https://nbviewer.jupyter.org/github/radcamp/radcamp.github.io/blob/master/AF-Biota/cookbook-ipyrad-raxml.ipynb) | Assisted work session (hack your own data)
 
 
-# Bioinformatics Recipes
+# Additional ipyrad analysis cookbooks
 
-This is just skel structure from the porecamp code, so it'll have to get updated.
-
-* [Basecalling]()
-* [Adapter trimming]()
-* [Data extraction and basic QC]()
-* [Alignment, polishing and variant calling]()
-* [Assembly]()
-* [Assembly QC]()
-* [Metagenomics]()
-* [Misc skills]()
-
+* [Tetrad - A Quartet-based species tree method](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-tetrad.ipynb)
+* [BPP - Bayesian inference under a multi-species coalescent model](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-bpp-species-delimitation.ipynb)
+* [Bucky - Phylogenetic concordance analysis](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-bucky.ipynb)
+* [ABBA-BABA - Admixture analysis](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-abba-baba.ipynb)
