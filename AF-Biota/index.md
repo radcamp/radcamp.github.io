@@ -25,7 +25,7 @@ São Paulo, Brasil
 
 Times            | Monday | Tuesday | Wednesday
 -----            | ------ | ------- | ---------
-9-12:30     | Cluster basics and ipyrad part I | Clustering analysis (Structure/PCA) | Demographic anaylsis (momi2)
+9-12:30     | Cluster basics and ipyrad part I | Clustering analysis ([Structure](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-structure-pedicularis.ipynb)/[PCA]()) | Demographic anaylsis (momi2)
 12:30-14:00 | Lunchy | Lunchy | Lunchy
 14:00-17:00 |ipyrad part II | Phylogenetic inference (RAxML) | Assisted work session (hack your own data)
 
