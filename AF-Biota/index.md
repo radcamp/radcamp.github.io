@@ -17,7 +17,7 @@ São Paulo, Brasil
   - Laura Bertola (CCNY)
   - Mariana Vasconcellos (CCNY)
   - Roberta Damasceno
-  - Marcello Reginato
+  - Marcelo Reginato
   - Greg Thom
 
 # Schedule
