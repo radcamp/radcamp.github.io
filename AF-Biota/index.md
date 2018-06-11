@@ -9,17 +9,16 @@ Monday 16 - 18 July 2018\
 Universidade de São Paulo\
 São Paulo, Brasil
 
-# Organisers
+# Organisers, Instructors, and Facilitators
 
   - Ana Carnaval (CCNY)
   - Cris Miyaki (USP)
   - Isaac Overcast (CCNY)
   - Laura Bertola (CCNY)
   - Mariana Vasconcellos (CCNY)
-
-# Instructors and Facilitators
-
-  - Put people here
+  - Roberta Damasceno
+  - Marcello Reginato
+  - Greg Thom
 
 # Schedule
 
