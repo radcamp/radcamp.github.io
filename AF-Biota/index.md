@@ -24,7 +24,7 @@ São Paulo, Brasil
 
 Times            | Monday | Tuesday | Wednesday
 -----            | ------ | ------- | ---------
-9:00-12:30     | [Cluster basics](cluster_basics.md) and [ipyrad part I](full_tutorial_CLI.md) | Clustering analysis ([Structure](https://nbviewer.jupyter.org/github/radcamp/radcamp.github.io/blob/master/AF-Biota/cookbook-ipyrad-structure.ipynb)/[PCA]()) | Demographic anaylsis ([momi2](https://nbviewer.jupyter.org/github/radcamp/radcamp.github.io/blob/master/AF-Biota/cookbook-ipyrad-momi2.ipynb))
+9:00-12:30     | [Cluster basics](cluster_basics.md) and [ipyrad part I](full_tutorial_CLI.md) | Clustering analysis ([Structure](https://nbviewer.jupyter.org/github/radcamp/radcamp.github.io/blob/master/AF-Biota/cookbook-ipyrad-structure.ipynb)/[PCA](https://github.com/radcamp/radcamp.github.io/blob/master/AF-Biota/cookbook-PCA-pedicularis.ipynb) | Demographic anaylsis ([momi2](https://nbviewer.jupyter.org/github/radcamp/radcamp.github.io/blob/master/AF-Biota/cookbook-ipyrad-momi2.ipynb))
 12:30-14:00 | Lunchy | Lunchy | Lunchy
 14:00-17:00 |ipyrad part II | Phylogenetic inference ([RAxML](https://nbviewer.jupyter.org/github/radcamp/radcamp.github.io/blob/master/AF-Biota/cookbook-ipyrad-raxml.ipynb)) | Assisted work session (hack your own data)
 
