@@ -32,7 +32,7 @@ simulated data you could complete the whole tutorial in an afternoon.
 
 First make a new directory and fetch & extract the test data.
 
-```
+``` %%bash
 ## The curl command needs a capital o, not a zero
 mkdir ipyrad-test
 cd ipyrad-test
@@ -60,7 +60,7 @@ requires you to pass in a name for your assembly. In the example we use
 analysing your own data you might call your parameters file something
 more informative, like the name of your organism.
 
-``` {.sourceCode .bash}
+``` %%bash
 ipyrad -n ipyrad-test
 ```
 
@@ -69,7 +69,7 @@ This will create a file in the current directory called
 parameter followed by a \#\# mark, then the name of the parameter, and
 then a short description of its purpose. Lets take a look at it.
 
-``` {.sourceCode .bash}
+``` %%bash
 cat params-ipyrad-test.txt
 ```
 
@@ -113,7 +113,7 @@ be compressed with gzip so that they have a .gz ending, but they do not
 need to be. The location of these files should be entered on line 2 of
 the params file. Below are the first three reads in the example file.
 
-``` {.sourceCode .bash}
+``` %%bash
 ## For your personal edification here is what this is doing:
 ##  gzip -c: Tells gzip to unzip the file and write the contents to the screen
 ##  head -n 12: Grabs the first 12 lines of the fastq file. Fastq files
@@ -163,14 +163,14 @@ Lets take a look at the barcodes file for the simulated data. You'll see
 sample names (left) and their barcodes (right) each on a separate line
 with a tab between them.
 
-``` {.sourceCode .bash}
+``` %%bash
 cat ./data/rad_example_barcodes.txt
 ```
 
 Now lets run step 1! For the simulated data this will take &lt; 1
 minute.
 
-``` {.sourceCode .bash}
+``` %%bash
 ## -p indicates the params file we wish to use
 ## -s indicates the step to run
 ipyrad -p params-ipyrad-test.txt -s 1
