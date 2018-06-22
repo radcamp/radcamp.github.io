@@ -36,10 +36,12 @@ that the 2 high frequency alleles are good reads and the rest are
 probably junk. This step is pretty straightforward, and pretty fast. Run
 it thusly:
 
-``` {.sourceCode .bash}
+```
+%%bash
 ipyrad -p params-ipyrad-test.txt -s 4
 ```
 
+```
 > --------------------------------------------------
 >
 > :   ipyrad \[v.0.1.47\] Interactive assembly and analysis of RADseq
@@ -55,11 +57,14 @@ ipyrad -p params-ipyrad-test.txt -s 4
 >
 >     :   Saving Assembly.
 >
+```
+
 In terms of results, there isn't as much to look at as in previous
 steps, though you can invoke the `-r` flag to see the estimated
 heterozygosity and error rate per sample.
 
-``` {.sourceCode .bash}
+```
+%%bash
 ipyrad -p params-ipyrad-test.txt -r
 ```
 
@@ -70,10 +75,12 @@ Step 5 uses the inferred error rate and heterozygosity to call the
 consensus of sequences within each cluster. Here we are identifying what
 we believe to be the real haplotypes at each locus within each sample.
 
-``` {.sourceCode .bash}
+```
+%%bash
 ipyrad -p params-ipyrad-test.txt -s 5
 ```
 
+```
 > --------------------------------------------------
 >
 > :   ipyrad \[v.0.1.47\] Interactive assembly and analysis of RADseq
@@ -91,9 +98,12 @@ ipyrad -p params-ipyrad-test.txt -s 5
 >         rate (mean, std): 0.00075, 0.00002 heterozyg. (mean, std):
 >         0.00196, 0.00018 Saving Assembly.
 >
+```
+
 Again we can ask for the results:
 
-``` {.sourceCode .bash}
+```
+%%bash
 ipyrad -p params-ipyrad-test.txt -r
 ```
 
@@ -111,10 +121,12 @@ clustering threshold as step 3 to identify sequences between samples
 that are probably sampled from the same locus, based on sequence
 similarity.
 
-``` {.sourceCode .bash}
+```
+%%bash
 ipyrad -p params-ipyrad-test.txt -s 6
 ```
 
+```
 > -------------------------------------------------- ipyrad \[v.0.1.47\]
 >
 > :   Interactive assembly and analysis of RADseq data
@@ -127,18 +139,22 @@ ipyrad -p params-ipyrad-test.txt -s 6
 >
 >     :   Saving Assembly.
 >
+```
+
 Since in general the stats for results of each step are sample based,
 the output of `-r` at this point is less useful. You can still try it
 though.
 
-``` {.sourceCode .bash}
+```
+%%bash
 ipyrad -p params-ipyrad-test.txt -r
 ```
 
 It might be more enlightening to consider the output of step 6 by
 examining the file that contains the reads clustered across samples:
 
-``` {.sourceCode .bash}
+```
+%%bash
 gunzip -c ipyrad-test_consens/ipyrad-test_catclust.gz | head -n 30 | less
 ```
 
@@ -164,7 +180,8 @@ conservative.
 
 After running step 7 like so:
 
-``` {.sourceCode .bash}
+```
+%%bash
 ipyrad -p params-ipyrad-test.txt -s 7
 ```
 
