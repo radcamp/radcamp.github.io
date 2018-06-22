@@ -166,7 +166,7 @@ with a tab between them.
 cat ./data/rad_example_barcodes.txt
 ```
 
-Now lets run step 1! For the simulated data this will take &lt; 1
+Now lets run step 1! For the simulated data this will take <1
 minute.
 
 ``` 
