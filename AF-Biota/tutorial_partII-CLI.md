@@ -85,8 +85,7 @@ ipyrad -p params-ipyrad-test.txt -s 5
 >
 > --------------------------------------------------
 >
-> loading Assembly: ipyrad-test
->     ~/Documents/ipyrad/tests/ipyrad-test.json 
+> loading Assembly: ipyrad-test ~/Documents/ipyrad/tests/ipyrad-test.json 
 >     ipyparallel setup:Local connection to 4 Engines
 >
 > Step5: Consensus base calling
@@ -133,7 +132,7 @@ ipyrad -p params-ipyrad-test.txt -s 6
 >
 > Step6: Clustering across 12 samples at 0.85 similarity
 >
-> Saving Assembly.
+>   Saving Assembly.
 >
 ```
 
