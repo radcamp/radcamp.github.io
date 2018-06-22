@@ -43,13 +43,13 @@ ipyrad -p params-ipyrad-test.txt -s 4
 
 ```
 > --------------------------------------------------
-> ipyrad \[v.0.1.47\] 
+> ipyrad [v.0.1.47] 
 > Interactive assembly and analysis of RADseq data
 > --------------------------------------------------
 >
 > loading Assembly: ipyrad-test
->     \[/private/tmp/ipyrad-test/ipyrad-test.json\] ipyparallel setup:
->     Local connection to 4 Engines
+>     ~/Documents/ipyrad/tests/ipyrad-test.json 
+>     ipyparallel setup: Local connection to 4 Engines
 >
 > Step4: Joint estimation of error rate and heterozygosity
 >
@@ -80,14 +80,14 @@ ipyrad -p params-ipyrad-test.txt -s 5
 
 ```
 > --------------------------------------------------
-> ipyrad \[v.0.1.47\] 
+> ipyrad [v.0.1.47] 
 > Interactive assembly and analysis of RADseq data
 >
 > --------------------------------------------------
 >
 > loading Assembly: ipyrad-test
->     \[/private/tmp/ipyrad-test/ipyrad-test.json\] ipyparallel setup:
->     Local connection to 4 Engines
+>     ~/Documents/ipyrad/tests/ipyrad-test.json 
+>     ipyparallel setup:Local connection to 4 Engines
 >
 > Step5: Consensus base calling
 >
@@ -125,10 +125,10 @@ ipyrad -p params-ipyrad-test.txt -s 6
 
 ```
 > -------------------------------------------------- 
-> ipyrad \[v.0.1.47\]
+> ipyrad [v.0.1.47]
 > Interactive assembly and analysis of RADseq data
 > -------------------------------------------------- 
-> loading Assembly: ipyrad-test \[/private/tmp/ipyrad-test/ipyrad-test.json\]
+> loading Assembly: ipyrad-test ~/Documents/ipyrad/tests/ipyrad-test.json
 >   ipyparallel setup: Local connection to 4 Engines
 >
 > Step6: Clustering across 12 samples at 0.85 similarity
