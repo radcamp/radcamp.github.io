@@ -1,7 +1,7 @@
 ipyrad command line tutorial - Part I
 ============================
 
-This is the full tutorial for the command line interface for ipyrad. In
+This is the first part of the full tutorial for the command line interface for ipyrad. In
 this tutorial we'll walk through the entire assembly and analysis
 process. This is meant as a broad introduction to familiarize users with
 the general workflow, and some of the parameters and terminology. For
