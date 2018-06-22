@@ -89,19 +89,13 @@ hold all the output for this assembly. By default this creates a new
 directory named by the assembly\_name parameter in the project\_dir
 directory. For this tutorial this directory will be called: ./ipyrad-test
 
-<div class="admonition warning">
-
-Once you start an assembly do not attempt to move or rename
-
-</div>
-
-the project directory. ipyrad **relies** on the location of this
+Once you start an assembly do not attempt to move or rename the project directory. ipyrad relies on the location of this
 directory remaining the same throught the analysis for an assembly. If
 you wish to test different values for parameters such as minimum
 coverage or clustering threshold we provide a simple facility for
 branching assemblies that handles all the file management for you. Once
 you complete the intro tutorial you can see
-Branching assemblies &lt;advanced\_CLI&gt; for more info.
+[Branching assemblies](https://ipyrad.readthedocs.io/tutorial_advanced_cli.html) for more info.
 
 Input data format
 =================
@@ -116,7 +110,8 @@ be compressed with gzip so that they have a .gz ending, but they do not
 need to be. The location of these files should be entered on line 2 of
 the params file. Below are the first three reads in the example file.
 
-``` %%bash
+``` 
+%%bash
 ## For your personal edification here is what this is doing:
 ##  gzip -c: Tells gzip to unzip the file and write the contents to the screen
 ##  head -n 12: Grabs the first 12 lines of the fastq file. Fastq files
@@ -166,19 +161,22 @@ Lets take a look at the barcodes file for the simulated data. You'll see
 sample names (left) and their barcodes (right) each on a separate line
 with a tab between them.
 
-``` %%bash
+``` 
+%%bash
 cat ./data/rad_example_barcodes.txt
 ```
 
 Now lets run step 1! For the simulated data this will take &lt; 1
 minute.
 
-``` %%bash
+``` 
+%%bash
 ## -p indicates the params file we wish to use
 ## -s indicates the step to run
 ipyrad -p params-ipyrad-test.txt -s 1
 ```
 
+```
 > -------------------------------------------------- ipyrad \[v.0.1.47\]
 >
 > :   Interactive assembly and analysis of RADseq data
@@ -191,6 +189,8 @@ ipyrad -p params-ipyrad-test.txt -s 1
 >
 >     :   Saving Assembly.
 >
+```
+
 There are 4 main parts to this step:
 
 :   -   Create a new assembly. Since this is our first time running any
@@ -205,7 +205,8 @@ There are 4 main parts to this step:
 Have a look at the results of this step in the `ipyrad-test_fastqs`
 output directory:
 
-``` {.sourceCode .bash}
+``` 
+%%bash
 ls ipyrad-test_fastqs 
 ```
 
@@ -214,7 +215,8 @@ demultiplexed for each sample. Fortunately ipyrad tracks the state of
 all your steps in your current assembly, so at any time you can ask for
 results by invoking the `-r` flag.
 
-``` {.sourceCode .bash}
+```
+%%bash
 ## -r fetches informative results from currently 
 ##      executed steps
 ipyrad -p params-ipyrad-test.txt -r
@@ -224,7 +226,8 @@ If you want to get even **more** info ipyrad tracks all kinds of wacky
 stats and saves them to a file inside the directories it creates for
 each step. For instance to see full stats for step 1:
 
-``` {.sourceCode .bash}
+```
+%%bash
 cat ./ipyrad-test_fastqs/s1_demultiplex_stats.txt
 ```
 
@@ -241,10 +244,12 @@ default value of 0 (zero), meaning it filters only based on quality
 scores of base calls. The filtered files are written to a new directory
 called `ipyrad-test_edits`.
 
-``` {.sourceCode .bash}
+```
+%%bash
 ipyrad -p params-ipyrad-test.txt -s 2
 ```
 
+```
 > -------------------------------------------------- ipyrad \[v.0.1.47\]
 >
 > :   Interactive assembly and analysis of RADseq data
@@ -257,23 +262,30 @@ ipyrad -p params-ipyrad-test.txt -s 2
 >
 >     :   Saving Assembly.
 >
+```
+
 Again, you can look at the results output by this step and also some
 handy stats tracked for this assembly.
 
 ```
+%%bash
 ## View the output of step 2
 ls ipyrad-test_edits
 ```
 
-``` {.sourceCode .bash}
+```
+%%bash
 ## Get current stats including # raw reads and # reads
 ## after filtering.
 ipyrad -p params-ipyrad-test.txt -r
 ```
 
-You might also take a gander at the filtered reads: .. code-block:: bash
+You might also take a gander at the filtered reads: 
 
+```
+%%bash
 > head -n 12 ./ipyrad-test\_fastqs/[1A\_0\_R1]().fastq
+```
 
 Step 3: clustering within-samples
 =================================
@@ -305,10 +317,12 @@ impatient).
 
 Now lets run step 3:
 
-``` {.sourceCode .bash}
+```
+%%bash
 ipyrad -p params-ipyrad-test.txt -s 3
 ```
 
+```
 > -------------------------------------------------- ipyrad \[v.0.1.47\]
 >
 > :   Interactive assembly and analysis of RADseq data
@@ -321,6 +335,8 @@ ipyrad -p params-ipyrad-test.txt -s 3
 >
 >     :   Saving Assembly.
 >
+```
+
 Again we can examine the results. The stats output tells you how many
 clusters were found, and the number of clusters that pass the mindepth
 thresholds. We'll go into more detail about mindepth settings in some of
@@ -329,7 +345,8 @@ default step 3 will filter out clusters that only have a handful of
 reads on the assumption that these are probably all mostly due to
 sequencing error.
 
-``` {.sourceCode .bash}
+```
+%%bash
 ipyrad -p params-ipyrad-test.txt -r
 ```
 
@@ -338,6 +355,7 @@ each sample in `./ipryad-test_clust_0.85/`. You can get a feel for what
 this looks like by examining a portion of one of the files.
 
 ```
+%%bash
 ## Same as above, gunzip -c means print to the screen and 
 ## `head -n 28` means just show me the first 28 lines. If 
 ## you're interested in what more of the loci look like
