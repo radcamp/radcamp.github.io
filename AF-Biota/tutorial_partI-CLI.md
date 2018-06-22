@@ -32,7 +32,8 @@ simulated data you could complete the whole tutorial in an afternoon.
 
 First make a new directory and fetch & extract the test data.
 
-``` %%bash
+``` 
+%%bash
 ## The curl command needs a capital o, not a zero
 mkdir ipyrad-test
 cd ipyrad-test
@@ -60,7 +61,8 @@ requires you to pass in a name for your assembly. In the example we use
 analysing your own data you might call your parameters file something
 more informative, like the name of your organism.
 
-``` %%bash
+``` 
+%%bash
 ipyrad -n ipyrad-test
 ```
 
@@ -69,7 +71,8 @@ This will create a file in the current directory called
 parameter followed by a \#\# mark, then the name of the parameter, and
 then a short description of its purpose. Lets take a look at it.
 
-``` %%bash
+``` 
+%%bash
 cat params-ipyrad-test.txt
 ```
 
