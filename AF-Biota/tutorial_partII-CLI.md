@@ -53,7 +53,7 @@ ipyrad -p params-ipyrad-test.txt -s 4
 >
 > Step4: Joint estimation of error rate and heterozygosity
 >
->   Saving Assembly.
+>     Saving Assembly.
 >
 ```
 
