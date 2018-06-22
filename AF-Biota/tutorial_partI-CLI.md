@@ -258,7 +258,7 @@ ipyrad -p params-ipyrad-test.txt -s 2
 Again, you can look at the results output by this step and also some
 handy stats tracked for this assembly.
 
-``` {.sourceCode .bash}
+```
 ## View the output of step 2
 ls ipyrad-test_edits
 ```
@@ -335,7 +335,7 @@ Again, the final output of step 3 is dereplicated, clustered files for
 each sample in `./ipryad-test_clust_0.85/`. You can get a feel for what
 this looks like by examining a portion of one of the files.
 
-``` {.sourceCode .bash}
+```
 ## Same as above, gunzip -c means print to the screen and 
 ## `head -n 28` means just show me the first 28 lines. If 
 ## you're interested in what more of the loci look like
