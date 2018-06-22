@@ -24,7 +24,7 @@ Getting Started
 ===============
 
 If you haven't already installed ipyrad go here first:
-Installation &lt;installation&gt;
+Installation [installation](https://ipyrad.readthedocs.io/installation.html#installation)
 
 We provide a very small sample data set that we recommend using for this
 tutorial. Full datasets can take days and days to run, whereas with the
