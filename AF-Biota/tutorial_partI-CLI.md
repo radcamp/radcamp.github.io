@@ -115,10 +115,10 @@ the params file. Below are the first three reads in the example file.
 ## For your personal edification here is what this is doing:
 ##  gzip -c: Tells gzip to unzip the file and write the contents to the screen
 ##  head -n 12: Grabs the first 12 lines of the fastq file. Fastq files
-##      have 4 lines per read, so the value of `-n` should be a multiple of 4
+##  have 4 lines per read, so the value of `-n` should be a multiple of 4
 ##  cut -c 1-90: Trim the length of each line to 90 characters
-##      we don't really need to see the whole sequence we're just trying
-##      to get an idea.
+##  we don't really need to see the whole sequence we're just trying
+##  to get an idea.
 
 gzip -c ./data/rad_example_R1_.fastq.gz | head -n 12 | cut -c 1-90
 ```
