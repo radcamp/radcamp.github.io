@@ -308,11 +308,11 @@ You'll more than likely want to experiment with this value, but 0.85 is
 a reliable default, balancing over-splitting of loci vs over-lumping.
 Don't mess with this until you feel comfortable with the overall
 workflow, and also until you've learned about
-Branching assemblies &lt;advanced\_CLI&gt;.
+[Branching assemblies](https://ipyrad.readthedocs.io/tutorial_advanced_cli.html).
 
 Later you will learn how to incorporate information from a reference
 genome to improve clustering at this this step. For now, bide your time
-(but see Reference sequence mapping &lt;advanced\_CLI&gt; if you're
+(but see [Reference sequence mapping](https://ipyrad.readthedocs.io/tutorial_advanced_cli.html) if you're
 impatient).
 
 Now lets run step 3:
