@@ -32,7 +32,7 @@ simulated data you could complete the whole tutorial in an afternoon.
 
 First make a new directory and fetch & extract the test data.
 
-``` {.sourceCode .bash}
+```
 ## The curl command needs a capital o, not a zero
 mkdir ipyrad-test
 cd ipyrad-test
