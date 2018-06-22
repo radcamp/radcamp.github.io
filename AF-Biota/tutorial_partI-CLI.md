@@ -177,17 +177,16 @@ ipyrad -p params-ipyrad-test.txt -s 1
 ```
 
 ```
-> -------------------------------------------------- ipyrad \[v.0.1.47\]
+> -------------------------------------------------- 
+> ipyrad \[v.0.1.47\]
+> Interactive assembly and analysis of RADseq data
+> -------------------------------------------------- 
+> New Assembly: ipyrad-test
+>    ipyparallel setup: Local connection to 4 Engines
 >
-> :   Interactive assembly and analysis of RADseq data
+> Step1: Demultiplexing fastq data to Samples.
 >
-> -------------------------------------------------- New Assembly: ipyrad-test
->
-> :   ipyparallel setup: Local connection to 4 Engines
->
->     Step1: Demultiplexing fastq data to Samples.
->
->     :   Saving Assembly.
+>    Saving Assembly.
 >
 ```
 
@@ -250,17 +249,15 @@ ipyrad -p params-ipyrad-test.txt -s 2
 ```
 
 ```
-> -------------------------------------------------- ipyrad \[v.0.1.47\]
+> -------------------------------------------------- 
+> ipyrad \[v.0.1.47\]
+> Interactive assembly and analysis of RADseq data
+> -------------------------------------------------- 
+> loading Assembly: ipyrad-test \[/private/tmp/ipyrad-test/ipyrad-test.json\]
+>   ipyparallel setup: Local connection to 4 Engines
 >
-> :   Interactive assembly and analysis of RADseq data
->
-> -------------------------------------------------- loading Assembly: ipyrad-test \[/private/tmp/ipyrad-test/ipyrad-test.json\]
->
-> :   ipyparallel setup: Local connection to 4 Engines
->
->     Step2: Filtering reads
->
->     :   Saving Assembly.
+> Step2: Filtering reads
+>   Saving Assembly.
 >
 ```
 
@@ -323,17 +320,15 @@ ipyrad -p params-ipyrad-test.txt -s 3
 ```
 
 ```
-> -------------------------------------------------- ipyrad \[v.0.1.47\]
+> -------------------------------------------------- 
+> ipyrad \[v.0.1.47\]
+> Interactive assembly and analysis of RADseq data
+> -------------------------------------------------- 
+> loading Assembly: ipyrad-test \[/private/tmp/ipyrad-test/ipyrad-test.json\]
+>   ipyparallel setup: Local connection to 4 Engines
 >
-> :   Interactive assembly and analysis of RADseq data
->
-> -------------------------------------------------- loading Assembly: ipyrad-test \[/private/tmp/ipyrad-test/ipyrad-test.json\]
->
-> :   ipyparallel setup: Local connection to 4 Engines
->
->     Step3: Clustering/Mapping reads
->
->     :   Saving Assembly.
+> Step3: Clustering/Mapping reads
+>   Saving Assembly.
 >
 ```
 
