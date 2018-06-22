@@ -178,7 +178,7 @@ ipyrad -p params-ipyrad-test.txt -s 1
 
 ```
 > -------------------------------------------------- 
-> ipyrad \[v.0.1.47\]
+> ipyrad [v.0.1.47]
 > Interactive assembly and analysis of RADseq data
 > -------------------------------------------------- 
 > New Assembly: ipyrad-test
@@ -250,13 +250,14 @@ ipyrad -p params-ipyrad-test.txt -s 2
 
 ```
 > -------------------------------------------------- 
-> ipyrad \[v.0.1.47\]
+> ipyrad [v.0.1.47]
 > Interactive assembly and analysis of RADseq data
 > -------------------------------------------------- 
-> loading Assembly: ipyrad-test \[/private/tmp/ipyrad-test/ipyrad-test.json\]
+> loading Assembly: ipyrad-test ~/Documents/ipyrad/tests/ipyrad-test.json
 >   ipyparallel setup: Local connection to 4 Engines
 >
 > Step2: Filtering reads
+>   
 >   Saving Assembly.
 >
 ```
@@ -281,7 +282,7 @@ You might also take a gander at the filtered reads:
 
 ```
 %%bash
-> head -n 12 ./ipyrad-test\_fastqs/[1A\_0\_R1]().fastq
+> head -n 12 ./ipyrad-test_fastqs/1A_0_R1.fastq
 ```
 
 Step 3: clustering within-samples
@@ -321,13 +322,14 @@ ipyrad -p params-ipyrad-test.txt -s 3
 
 ```
 > -------------------------------------------------- 
-> ipyrad \[v.0.1.47\]
+> ipyrad [v.0.1.47]
 > Interactive assembly and analysis of RADseq data
 > -------------------------------------------------- 
-> loading Assembly: ipyrad-test \[/private/tmp/ipyrad-test/ipyrad-test.json\]
+> loading Assembly: ipyrad-test ~/Documents/ipyrad/tests/ipyrad-test.json
 >   ipyparallel setup: Local connection to 4 Engines
 >
 > Step3: Clustering/Mapping reads
+>
 >   Saving Assembly.
 >
 ```
