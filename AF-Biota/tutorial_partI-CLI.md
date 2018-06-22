@@ -146,13 +146,13 @@ individual fastq.gz files for each sample.
 **NB:** You'll notice the name of this output directory bears a strong
 resemblence to the name of the assembly we chose at the time of the
 params file creation. Assembling rad-seq type sequence data requires a
-lot of different steps, and these steps generate a \_[LOT]() of
+lot of different steps, and these steps generate a **lot** of
 intermediary files. ipyrad organizes these files into directories, and
 it prepends the name of your assembly to each directory with data that
 belongs to it. One result of this is that you can have multiple
 assemblies of the same raw data with different parameter settings and
 you don't have to manage all the files yourself! (See
-Branching assemblies &lt;advanced\_CLI&gt; for more info). Another
+[Branching assemblies](https://ipyrad.readthedocs.io/tutorial_advanced_cli.html) for more info). Another
 result is that **you should not rename or move any of the directories
 inside your project directory**, unless you know what you're doing or
 you don't mind if your assembly breaks.
