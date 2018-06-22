@@ -84,8 +84,7 @@ these two lines to look like this, and then save it:
 Once we start running the analysis this will create a new directory to
 hold all the output for this assembly. By default this creates a new
 directory named by the assembly\_name parameter in the project\_dir
-directory. For this tutorial this directory will be called: ..
-parsed-literal:: ./ipyrad-test
+directory. For this tutorial this directory will be called: ./ipyrad-test
 
 <div class="admonition warning">
 
