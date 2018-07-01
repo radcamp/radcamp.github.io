@@ -43,10 +43,15 @@ ssh <username>@lem.ib.usp.br
 ## Command line basics
 Put some stuff here about navigating the home directory, maybe mkdir, pwd, cd.
 
+```
+mkdir ipyrad-workshop
+```
+**Special Note:** Notice that the above directory we are making is not called `ipyrad workshop`. This is **very important**, as spaces in directory names are known to cause havoc on HPC systems. All linux based operating systems do not recognize file or directory names that include spaces because spaces act as default delimiters between arguments to commands. There are ways around this (for example Mac OS has half-baked "spaces in file names" support) but it will be so much for the better to get in the habit now of *never including spaces in file or directory names*.
+
 ## Download and Install Software
 [Conda](https://conda.io/docs/) is a command line software installation tool based on python. It will allow us to install and run various useful applications inside our home directory that we would otherwise have to hassle the HPC admins to install for us. Conda provides an isolated environment for each user, allowing us all to manage our own independent suites of applications, based on our own computing needs.
 
-64-Bit Python2.7 conda installer for linux is here: https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh, so copy and paste this link into the commands as below:
+64-Bit Python2.7 conda installer for linux is here:[https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh](https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh), so copy and paste this link into the commands as below:
 
 ```sh
 cd ~
@@ -54,18 +59,23 @@ wget https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh
 ```
 > **Note:** The `~` in the `cd` command is a special character on linux systems that means "My Home Directory" (e.g. `/home/isaac`).
 
-After the download finishes you can execute the conda installer: `bash https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh`. Accept the license terms, and use the default conda directory (mine is `/home/isaac/miniconda2`). After the install completes it will ask about modifying your PATH, and you should say 'yes' for this. 
+After the download finishes you can execute the conda installer: 
+
+```
+bash https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh
+```
+Accept the license terms, and use the default conda directory (mine is `/home/isaac/miniconda2`). After the install completes it will ask about modifying your PATH, and you should say 'yes' for this. Next run the following two commands:
 
 ```sh
 source .bashrc
 which python
 ```
-This will show you the path to the python binary, which will now be in your personal minconda directory:
+The `source` command tells the server to recognize the conda install (you only ever have to do this once, so don't worry too much about remembering it). This will show you the path to the python binary, which will now be in your personal minconda directory:
 ```
 /home/isaac/miniconda2/bin/python
 ```
 
-### Install some useful tools
+### Install ipyrad and fastqc
 Conda gives us access to an amazing array of all kinds of analysis tools (including [ipyrad](http://ipyrad.readthedocs.io/) for both analyzing and manipulating all kinds of data. Here we'll just scratch the surface by installing [ipyrad](http://ipyrad.readthedocs.io/), the RAD-Seq assembly and analysis tool that we'll use throughout the workshop, and [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/), an application for filtering fasta files based on several quality control metrics.
 
 ```sh
@@ -87,7 +97,7 @@ qt-5.9.6             | 86.7 MB | ###############################################
 freetype-2.9.1       |  821 KB | ################################################################################################################################# | 100% 
 wcwidth-0.1.7        |   25 KB | ################################################################################################################################# | 100%
 ```
-These are all the dependencies of ipyrad and fastqc that conda knows will be needed and installs automatically for you. Once the process is complete (may take several minutes), you can verify the install by asking what version of each of these apps is now available for you on the cluster.
+These (and many more) are all the dependencies of ipyrad and fastqc. Dependencies can include libraries, frameworks, and/or other applications that we make use of in the architecture of our software. Conda knows all about which dependencies will be needed and installs them automatically for you. Once the process is complete (may take several minutes), you can verify the install by asking what version of each of these apps is now available for you on the cluster.
 
 ```
 isaac@darwin:~$ ipyrad --version
@@ -98,7 +108,20 @@ FastQC v0.11.7
 > **Note:** The `isaac@darwin:~$` here is my 'prompt', which is the server's indication to me that it is ready to receive commands. You should have a similar prompt, but your name will obviously be different. If you see a prompt in a command you can assume we are just asking you to type the commands at your prompt in a similar fashion.
 
 ## Fetch the raw data
+We will be reanalysing RAD-Seq data for *Anoles punctatus* sampled from across their distribution on the South American continent and published in [Prates et al 2016](http://www.pnas.org/content/pnas/113/29/7978.full.pdf). The original dataset included 84 individuals, utilized the Genotyping-By-Sequencing (GBS) single-enzyme library prep protocol [Ellshire et al 2011](http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0019379), sequenced 150bp single-end on an Illumina Hi-Seq and resulted in final raw sequence counts on the order of 1e6 per sample.
+
+We will be using a subset of 10 individual distributed along the coastal extent of the central and northern Atlantic forest. Additionally, raw reads have been randomly downsampled to 2.5e5 per sample, in order to create a dataset that will be computationally tractable for 20 people to run simultaneously with the expectation of finishing in a reasonable time.
+
+```
+cp /scratch/af-biota/raw_data/a_punctatus.tgz .
+```
+
 
 
 ## FastQC for quality control
+We will undertake a further reduction of the data as part of ipyrad's internal QC process during step 2.
 
+# References
+Elshire, R. J., Glaubitz, J. C., Sun, Q., Poland, J. A., Kawamoto, K., Buckler, E. S., & Mitchell, S. E. (2011). A robust, simple genotyping-by-sequencing (GBS) approach for high diversity species. PloS one, 6(5), e19379.
+
+Prates, I., Xue, A. T., Brown, J. L., Alvarado-Serrano, D. F., Rodrigues, M. T., Hickerson, M. J., & Carnaval, A. C. (2016). Inferring responses to climate dynamics from historical demography in neotropical forest lizards. Proceedings of the National Academy of Sciences, 113(29), 7978-7985.
