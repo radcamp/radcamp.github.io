@@ -66,12 +66,12 @@ This will show you the path to the python binary, which will now be in your pers
 ```
 
 ### Install some useful tools
-Conda gives us access to an amazing array of all kinds of analysis tools (including [ipyrad](http://ipyrad.readthedocs.io/) for both analyzing and manipulating all kinds of data. Here we'll just scratch the surface by installing [jupyter](http://jupyter.readthedocs.io), a graphical python programming environment, and [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/), an application for filtering fasta files based on quality control metrics.
+Conda gives us access to an amazing array of all kinds of analysis tools (including [ipyrad](http://ipyrad.readthedocs.io/) for both analyzing and manipulating all kinds of data. Here we'll just scratch the surface by installing [ipyrad](http://ipyrad.readthedocs.io/), the RAD-Seq assembly and analysis tool that we'll use throughout the workshop, and [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/), an application for filtering fasta files based on several quality control metrics.
 
 ```sh
-conda install -c bioconda jupyter fastqc
+conda install -c ipyrad -c bioconda ipyrad fastqc
 ```
-> **Note:** The `-c` flag indicates that we're asking conda to fetch apps from the `bioconda` channel. Channels are seperate repositories of apps maintained by independent developers. Later, you'll see that we have an `ipyrad` channel as well.
+> **Note:** The `-c` flag indicates that we're asking conda to fetch apps from the `ipyrad` and `bioconda` channels. Channels are seperate repositories of apps maintained by independent developers.
 
 After you type `y` to proceed with install, this command will produce a lot of output that looks like this:
 ```
@@ -87,11 +87,11 @@ qt-5.9.6             | 86.7 MB | ###############################################
 freetype-2.9.1       |  821 KB | ################################################################################################################################# | 100% 
 wcwidth-0.1.7        |   25 KB | ################################################################################################################################# | 100%
 ```
-These are all the dependencies of fastqc and jupyter that conda knows they need and installs automatically for you. Once the process is complete (may take several minutes), you can verify the install by asking what version of each of these apps is now available for you on the cluster.
+These are all the dependencies of ipyrad and fastqc that conda knows will be needed and installs automatically for you. Once the process is complete (may take several minutes), you can verify the install by asking what version of each of these apps is now available for you on the cluster.
 
 ```
-isaac@darwin:~$ jupyter --version
-4.4.0
+isaac@darwin:~$ ipyrad --version
+ipyrad 0.7.28
 isaac@darwin:~$ fastqc --version
 FastQC v0.11.7
 ```
