@@ -38,8 +38,27 @@ ssh <username>@lem.ib.usp.br
 > **Note on usage:** In command line commands we'll use the convention of wrapping variable names in angle-brackets. For example, in the command above you should substitute your own username for `<username>`.
 
 # Command line basics
+Put some stuff here about navigating the home directory, maybe mkdir, pwd, cd.
+
+# Download and Install Conda
+Conda is a command line software installation tool based on python. It will allow us to install and run various useful applications inside our home directory that we would otherwise have to hassle the HPC admins to install for us. Conda provides an isolated environment for each user, allowing us all to manage our own independent suites of applications, based on our own computing needs.
+
+64-Bit Python2.7 conda installers for the major platforms are here: [Windows](https://repo.continuum.io/miniconda/Miniconda2-latest-Windows-x86_64.exe), [Mac](https://repo.continuum.io/miniconda/Miniconda2-latest-MacOSX-x86_64.sh), [Linux](https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh)
+
+```sh
+cd ~
+wget <paste_your_conda_link_here>
+```
+> **Note:** The `~` in the `cd` command is a special character on linux systems that means "My Home Directory".
+
+## Install some useful tools
+
+```sh
+conda install jupyter fastqc
+```
 
 # Fetch the raw data
+
 
 # FastQC for quality control
 
