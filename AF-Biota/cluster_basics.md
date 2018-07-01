@@ -43,7 +43,7 @@ ssh <username>@lem.ib.usp.br
 Put some stuff here about navigating the home directory, maybe mkdir, pwd, cd.
 
 ## Download and Install Conda
-Conda is a command line software installation tool based on python. It will allow us to install and run various useful applications inside our home directory that we would otherwise have to hassle the HPC admins to install for us. Conda provides an isolated environment for each user, allowing us all to manage our own independent suites of applications, based on our own computing needs.
+[Conda](https://conda.io/docs/) is a command line software installation tool based on python. It will allow us to install and run various useful applications inside our home directory that we would otherwise have to hassle the HPC admins to install for us. Conda provides an isolated environment for each user, allowing us all to manage our own independent suites of applications, based on our own computing needs.
 
 64-Bit Python2.7 conda installer for linux is here: https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh, so copy and paste this link into the commands as below:
 
@@ -51,7 +51,7 @@ Conda is a command line software installation tool based on python. It will allo
 cd ~
 wget https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh
 ```
-> **Note:** The `~` in the `cd` command is a special character on linux systems that means "My Home Directory".
+> **Note:** The `~` in the `cd` command is a special character on linux systems that means "My Home Directory" (e.g. `/home/isaac`).
 
 After the download finishes you can execute the conda installer: `bash https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh`. Accept the license terms, and use the default conda directory (mine is `/home/isaac/miniconda2`). After the install completes it will ask about modifying your PATH, and you should say 'yes' for this. 
 
@@ -71,6 +71,22 @@ Conda gives us access to an amazing array of all kinds of analysis tools (includ
 conda install -c bioconda jupyter fastqc
 ```
 > **Note:** The `-c` flag indicates that we're asking conda to fetch apps from the `bioconda` channel. Channels are seperate repositories of apps maintained by independent developers. Later, you'll see that we have an `ipyrad` channel as well.
+
+After you type `y` to proceed with install, this command will produce a lot of output that looks like this:
+```
+libxml2-2.9.8        |  2.0 MB | ################################################################################################################################# | 100%
+expat-2.2.5          |  186 KB | ################################################################################################################################# | 100% 
+singledispatch-3.4.0 |   15 KB | ################################################################################################################################# | 100%
+pandocfilters-1.4.2  |   12 KB | ################################################################################################################################# | 100% 
+pandoc-2.2.1         | 21.0 MB | ################################################################################################################################# | 100%
+mistune-0.8.3        |  266 KB | ################################################################################################################################# | 100% 
+send2trash-1.5.0     |   16 KB | ################################################################################################################################# | 100%
+gstreamer-1.14.0     |  3.8 MB | ################################################################################################################################# | 100% 
+qt-5.9.6             | 86.7 MB | ################################################################################################################################# | 100%
+freetype-2.9.1       |  821 KB | ################################################################################################################################# | 100% 
+wcwidth-0.1.7        |   25 KB | ################################################################################################################################# | 100%
+```
+These are all the dependencies of fastqc and jupyter that conda knows they need and installs automatically for you.
 
 ## Fetch the raw data
 
