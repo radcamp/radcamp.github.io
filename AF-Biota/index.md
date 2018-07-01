@@ -5,8 +5,8 @@ title:  Welcome to RadCamp 2018 - The AF-BIOTA Addition
 
 # {{ page.title }}
 
-Monday 16 - 18 July 2018\
-Universidade de São Paulo\
+Monday 16 - 18 July 2018  
+Universidade de São Paulo  
 São Paulo, Brasil
 
 # Organisers, Instructors, and Facilitators
