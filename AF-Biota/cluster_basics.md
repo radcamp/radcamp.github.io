@@ -86,7 +86,15 @@ qt-5.9.6             | 86.7 MB | ###############################################
 freetype-2.9.1       |  821 KB | ################################################################################################################################# | 100% 
 wcwidth-0.1.7        |   25 KB | ################################################################################################################################# | 100%
 ```
-These are all the dependencies of fastqc and jupyter that conda knows they need and installs automatically for you.
+These are all the dependencies of fastqc and jupyter that conda knows they need and installs automatically for you. Once the process is complete (may take several minutes), you can verify the install by asking what version of each of these apps is now available for you on the cluster.
+
+```
+isaac@darwin:~$ jupyter --version
+4.4.0
+isaac@darwin:~$ fastqc --version
+FastQC v0.11.7
+```
+> **Note:** The `isaac@darwin:~$` here is my 'prompt', which is the command lines indication to me that it is ready to receive commands. You should have a similar prompt, but your name will obviously be different. If you see a prompt in a command you can assume we are just asking you to type the commands at your prompt in a similar fashion.
 
 ## Fetch the raw data
 
