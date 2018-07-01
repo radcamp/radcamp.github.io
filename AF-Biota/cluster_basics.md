@@ -94,7 +94,7 @@ isaac@darwin:~$ jupyter --version
 isaac@darwin:~$ fastqc --version
 FastQC v0.11.7
 ```
-> **Note:** The `isaac@darwin:~$` here is my 'prompt', which is the command lines indication to me that it is ready to receive commands. You should have a similar prompt, but your name will obviously be different. If you see a prompt in a command you can assume we are just asking you to type the commands at your prompt in a similar fashion.
+> **Note:** The `isaac@darwin:~$` here is my 'prompt', which is the server's indication to me that it is ready to receive commands. You should have a similar prompt, but your name will obviously be different. If you see a prompt in a command you can assume we are just asking you to type the commands at your prompt in a similar fashion.
 
 ## Fetch the raw data
 
