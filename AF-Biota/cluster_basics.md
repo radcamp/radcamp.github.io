@@ -70,13 +70,13 @@ Accept the license terms, and use the default conda directory (mine is `/home/is
 source .bashrc
 which python
 ```
-The `source` command tells the server to recognize the conda install (you only ever have to do this once, so don't worry too much about remembering it). This will show you the path to the python binary, which will now be in your personal minconda directory:
+The `source` command tells the server to recognize the conda install (you only ever have to do this once, so don't worry too much about remembering it). The `which` command will show you the path to the python binary, which will now be in your personal minconda directory:
 ```
 /home/isaac/miniconda2/bin/python
 ```
 
 ### Install ipyrad and fastqc
-Conda gives us access to an amazing array of all kinds of analysis tools (including [ipyrad](http://ipyrad.readthedocs.io/) for both analyzing and manipulating all kinds of data. Here we'll just scratch the surface by installing [ipyrad](http://ipyrad.readthedocs.io/), the RAD-Seq assembly and analysis tool that we'll use throughout the workshop, and [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/), an application for filtering fasta files based on several quality control metrics.
+Conda gives us access to an amazing array of all kinds of analysis tools for both analyzing and manipulating all kinds of data. Here we'll just scratch the surface by installing [ipyrad](http://ipyrad.readthedocs.io/), the RAD-Seq assembly and analysis tool that we'll use throughout the workshop, and [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/), an application for filtering fasta files based on several quality control metrics.
 
 ```sh
 conda install -c ipyrad -c bioconda ipyrad fastqc
@@ -108,14 +108,22 @@ FastQC v0.11.7
 > **Note:** The `isaac@darwin:~$` here is my 'prompt', which is the server's indication to me that it is ready to receive commands. You should have a similar prompt, but your name will obviously be different. If you see a prompt in a command you can assume we are just asking you to type the commands at your prompt in a similar fashion.
 
 ## Fetch the raw data
-We will be reanalysing RAD-Seq data for *Anoles punctatus* sampled from across their distribution on the South American continent and published in [Prates et al 2016](http://www.pnas.org/content/pnas/113/29/7978.full.pdf). The original dataset included 84 individuals, utilized the Genotyping-By-Sequencing (GBS) single-enzyme library prep protocol [Ellshire et al 2011](http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0019379), sequenced 150bp single-end on an Illumina Hi-Seq and resulted in final raw sequence counts on the order of 1e6 per sample.
+We will be reanalysing RAD-Seq data from *Anoles punctatus* sampled from across their distribution on the South American continent and published in [Prates et al 2016](http://www.pnas.org/content/pnas/113/29/7978.full.pdf). The original dataset included 84 individuals, utilized the Genotyping-By-Sequencing (GBS) single-enzyme library prep protocol [Ellshire et al 2011](http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0019379), sequenced 150bp single-end on an Illumina Hi-Seq and resulted in final raw sequence counts on the order of 1e6 per sample.
 
 We will be using a subset of 10 individual distributed along the coastal extent of the central and northern Atlantic forest. Additionally, raw reads have been randomly downsampled to 2.5e5 per sample, in order to create a dataset that will be computationally tractable for 20 people to run simultaneously with the expectation of finishing in a reasonable time.
 
+The subset, truncated raw data is located in a special folder on the HPC system. You can *change directory* into your ipyrad working directory, and then copy the raw data with these commands:
 ```
+cd ipyrad-workshop
 cp /scratch/af-biota/raw_data/a_punctatus.tgz .
 ```
+**Note:** The form of the copy command is `copy <source> <destination>`. Here the source file is clear, it's simply the data file you want to copy. The destination is `.`, which is another linux shortcut that means "My current directory", or "Right here in the directory I'm in".
 
+Finally, you'll notice the raw data is in `.tgz` format, which is similar to a zip archive. We can unpack our raw data in the current directory using `tar`:
+```
+tar -xvzf a_punctatus.tgz
+```
+**Point of interest:** All linux commands, such as `tar`, can have their behavior modified by passing various arguments. Here the arguments are `-x` to "Extract" the archive file; `-v` to add "verbosity" by printing progress to the screen; `z` to "unzip" the archive during extraction; and `-f` to "force" the extraction which prevents `tar` from pestering you with decisions.
 
 
 ## FastQC for quality control
