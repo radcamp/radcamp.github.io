@@ -2,6 +2,7 @@ Activities we'll cover this morning:
 
 * [Connecting to the cluster](#ssh-intro): [Windows](#ssh-for-windows)/[Mac/linux](#ssh-for-mac)
 * [Basic command line navigation](#command-line-basics)
+* [Setting up the computing environment](#download-and-install-software)
 * [Fetching the data](#fetch-the-raw-data)
 * [Basic quality control (FastQC)](#fastqc-for-quality-control)
 
@@ -42,7 +43,7 @@ ssh <username>@lem.ib.usp.br
 ## Command line basics
 Put some stuff here about navigating the home directory, maybe mkdir, pwd, cd.
 
-## Download and Install Conda
+## Download and Install Software
 [Conda](https://conda.io/docs/) is a command line software installation tool based on python. It will allow us to install and run various useful applications inside our home directory that we would otherwise have to hassle the HPC admins to install for us. Conda provides an isolated environment for each user, allowing us all to manage our own independent suites of applications, based on our own computing needs.
 
 64-Bit Python2.7 conda installer for linux is here: https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh, so copy and paste this link into the commands as below:
