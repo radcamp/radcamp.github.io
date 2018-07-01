@@ -29,13 +29,13 @@ Unlike laptop or desktop computers cluster systems typically (almost exclusively
 Windows computers need to use a 3rd party app for connecting to remote computers. The best app for this in my experience is [puTTY](https://www.putty.org/), a free SSH client. Right click and "Save link as" on the [64-bit binary executable link](https://the.earth.li/~sgtatham/putty/latest/w64/putty.exe).
 
 ## SSH for mac
-Mac computers are built top of a unix-like operating system so they already have an SSH client built in which you can access through the Terminal app. In a Finder window open Applications->Utilities->Terminal
-
-> **Note on usage:** In commands we will run at the command line we'll use the convention of wrapping variable names in angle-brackets. For example in the command below you should substitute your own username for `<username>`.
+Mac computers are built top of a unix-like operating system so they already have an SSH client built in which you can access through the Terminal app. In a Finder window open Applications->Utilities->Terminal, then you can start an ssh session like this:
 
 ```sh
 ssh <username>@lem.ib.usp.br
 ```
+
+> **Note on usage:** In command line commands we'll use the convention of wrapping variable names in angle-brackets. For example, in the command above you should substitute your own username for `<username>`.
 
 # Command line basics
 
