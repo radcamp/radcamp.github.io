@@ -74,6 +74,7 @@ which python
 ```
 The `source` command tells the server to recognize the conda install (you only ever have to do this once, so don't worry too much about remembering it). The `which` command will show you the path to the python binary, which will now be in your personal minconda directory:
 ```
+isaac@darwin:~$ which python
 /home/isaac/miniconda2/bin/python
 ```
 
@@ -175,18 +176,32 @@ Approx 95% complete for punc_IBSPCRIB0361_R1_.fastq.gz
 Approx 100% complete for punc_IBSPCRIB0361_R1_.fastq.gz
 Analysis complete for punc_IBSPCRIB0361_R1_.fastq.gz
 ```
+If you feel so inclined you can QC all the raw data using a wildcard substitution:
+```
+fastqc -o fastqc-results raws/*
+```
+**Note:** The `*` here is a special command line character that means "Everything that matches this pattern". So here `raws/*` matches _everything_ in the raws directory. Equivalent (though more verbose) statements are: `ls raws/*.gz`, `ls raws/*.fastq.gz`, `ls raws/*_R1_.fastq.gz`. All of these will list all the files in the `raws` directory. **Special Challenge:** Can you construct an `ls` command using wildcards that only lists samples in the `raws` directory that include the digit 5 in their sample name?
+
+Examining the output directory you'll see something like this:
+```
+isaac@darwin:~/ipyrad-workshop$ ls fastqc-results/
+punc_IBSPCRIB0361_R1__fastqc.html  punc_JFT773_R1__fastqc.html    punc_MTR17744_R1__fastqc.html  punc_MTR34414_R1__fastqc.html  punc_MTRX1478_R1__fastqc.html
+punc_IBSPCRIB0361_R1__fastqc.zip   punc_JFT773_R1__fastqc.zip     punc_MTR17744_R1__fastqc.zip   punc_MTR34414_R1__fastqc.zip   punc_MTRX1478_R1__fastqc.zip
+punc_ICST764_R1__fastqc.html       punc_MTR05978_R1__fastqc.html  punc_MTR21545_R1__fastqc.html  punc_MTRX1468_R1__fastqc.html  punc_MUFAL9635_R1__fastqc.html
+punc_ICST764_R1__fastqc.zip        punc_MTR05978_R1__fastqc.zip   punc_MTR21545_R1__fastqc.zip   punc_MTRX1468_R1__fastqc.zip   punc_MUFAL9635_R1__fastqc.zip
+```
 
 Now we have output files that include html and images depicting lots of information about the quality of our reads, but we can't inspect these because we only have a CLI interface. How do we get access to the output of FastQC?
 
 ### Inspecting FastQC Results with Jupyter Notebooks
-[Jupyter notebooks](http://jupyter.org/) are primarily a way to generate reproducible scientific analysis workflows in python. Here we will just use jupyter notebooks as a convenient way to view graphical files that live on the cluster without having to go through all the trouble of downloading them. Jupyter was already installed as a dependency of ipyrad, so we just need to set a password before we can launch it. This command will prompt you for a new password for your notebook:
+[Jupyter notebooks](http://jupyter.org/) are primarily a way to generate reproducible scientific analysis workflows in python. Here we will just use jupyter notebooks as a convenient way to view graphical files that live on the cluster without having to go through all the trouble of downloading them. Jupyter was already installed as a dependency of ipyrad, so we just need to set a password before we can launch it. This command will prompt you for a new password for your notebook (you will only ever have to do this once):
 ```
 jupyter notebook passwd
 ```
 
 Each notebook must have a unique port number to run on. We have assigned unique port numbers for each workshop attendee, which you can find here: [AF-Biota workshop port #s](https://github.com/radcamp/radcamp.github.io/blob/master/AF-Biota/participants.txt). 
 ```
-jupyter notebook --no-browser --port <my_port_number>
+jupyter notebook --no-browser --port <my_port_number &
 ```
 
 # References
