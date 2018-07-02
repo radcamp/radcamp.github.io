@@ -142,12 +142,12 @@ The first step of any RAD-Seq assembly is to inspect your raw data to estimate o
 
 Run fastqc first, then use the notebook install as a hook to get people looking at the results.
 
-### Inspecting FastQC Results with Jupyter Notebooks
-[Jupyter notebooks](http://jupyter.org/) are primarily a way to generate reproducible scientific analysis workflows in python. Here we will just use jupyter notebooks as a convenient way to view graphical files that live on the cluster without having to go through all the trouble of downloading them. 
+Now we have output files that include html and images depicting lots of information about the quality of our reads, but we can't inspect these because we only have a CLI interface. How do we get access to the output of FastQC?
 
+### Inspecting FastQC Results with Jupyter Notebooks
+[Jupyter notebooks](http://jupyter.org/) are primarily a way to generate reproducible scientific analysis workflows in python. Here we will just use jupyter notebooks as a convenient way to view graphical files that live on the cluster without having to go through all the trouble of downloading them. Jupyter was already installed as a dependency of ipyrad, so we just need to set a password before we can launch it. This command will prompt you for a new password for your notebook:
 ```
-mkdir .jupyter
-cp /scratch/af-biota/config/jupyter_notebook_config.py .jupyter/
+jupyter notebook passwd
 ```
 
 Each notebook must have a unique port number to run on. We have assigned unique port numbers for each workshop attendee, which you can find here: [AF-Biota workshop port #s](https://github.com/radcamp/radcamp.github.io/blob/master/AF-Biota/participants.txt). 
