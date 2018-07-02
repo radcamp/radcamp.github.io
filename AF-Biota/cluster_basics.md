@@ -7,7 +7,7 @@ The bulk of the activities this morning involve getting oriented on the cluster 
 * [Fetching the data](#fetch-the-raw-data)
 * [Basic quality control (FastQC)](#fastqc-for-quality-control)
 
-## Stuff We want people to know about the cluster
+## USP Zoology HPC Facility Info
 Computational resources for the duration of this workshop have been generously provided by the Zoology HPC facility, with special thanks to Diogo Melo for technical support and Roberta Damasceno for coordinating access. The cluster we will be using is located at:
 ```
 lem.ib.usp.br
@@ -25,15 +25,15 @@ n procs	| 1 (2)	| 1 (16)	| 1 (32)	| 1 (16)
 walltime (hrs)	| 4 (24)	| 4 (24)	| 24 (720) |	24 (720)
 					
 ## SSH Intro
-Unlike laptop or desktop computers cluster systems typically (almost exclusively) do not have graphical user input interfaces. Interacting with an HPC system therefore requires use of the command line to establish connection, and for running programs and submitting jobs remotely on the cluster.
+Unlike laptop or desktop computers, cluster systems typically (almost exclusively) do not have graphical user input interfaces. Interacting with an HPC system therefore requires use of the command line to establish a connection, and for running programs and submitting jobs remotely on the cluster.
 
 ### SSH for windows
 Windows computers need to use a 3rd party app for connecting to remote computers. The best app for this in my experience is [puTTY](https://www.putty.org/), a free SSH client. Right click and "Save link as" on the [64-bit binary executable link](https://the.earth.li/~sgtatham/putty/latest/w64/putty.exe).
 
 Put more stuff here about how to use puTTY to connect.
 
-### SSH for mac
-Mac computers are built top of a unix-like operating system so they already have an SSH client built in which you can access through the Terminal app. In a Finder window open Applications->Utilities->Terminal, then you can start an ssh session like this:
+### SSH for mac/linux
+Linux operating systems come preinstalled with an ssh command line client, which we will assume linux users are aware of how to use. Mac computers are built top of a linux-like operating system so they too ship with an SSH client, which can be accessed through the Terminal app. In a Finder window open Applications->Utilities->Terminal, then you can start an ssh session like this:
 
 ```sh
 ssh <username>@lem.ib.usp.br
@@ -112,16 +112,16 @@ FastQC v0.11.7
 ## Fetch the raw data
 We will be reanalysing RAD-Seq data from *Anoles punctatus* sampled from across their distribution on the South American continent and published in [Prates et al 2016](http://www.pnas.org/content/pnas/113/29/7978.full.pdf). The original dataset included 84 individuals, utilized the Genotyping-By-Sequencing (GBS) single-enzyme library prep protocol [Ellshire et al 2011](http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0019379), sequenced 150bp single-end on an Illumina Hi-Seq and resulted in final raw sequence counts on the order of 1e6 per sample.
 
-We will be using a subset of 10 individual distributed along the coastal extent of the central and northern Atlantic forest. Additionally, raw reads have been randomly downsampled to 2.5e5 per sample, in order to create a dataset that will be computationally tractable for 20 people to run simultaneously with the expectation of finishing in a reasonable time.
+We will be using a subset of 10 individuals distributed along the coastal extent of the central and northern Atlantic forest. Additionally, raw reads have been randomly downsampled to 2.5e5 per sample, in order to create a dataset that will be computationally tractable for 20 people to run simultaneously with the expectation of finishing in a reasonable time.
 
-The subset, truncated raw data is located in a special folder on the HPC system. You can *change directory* into your ipyrad working directory, and then copy the raw data with these commands:
+The subset of truncated raw data is located in a special folder on the HPC system. You can *change directory* into your ipyrad working directory, and then copy the raw data with these commands:
 ```
 cd ipyrad-workshop
 cp /scratch/af-biota/raw_data/a_punctatus.tgz .
 ```
 > **Note:** The form of the copy command is `copy <source> <destination>`. Here the source file is clear, it's simply the data file you want to copy. The destination is `.`, which is another linux shortcut that means "My current directory", or "Right here in the directory I'm in".
 
-Finally, you'll notice the raw data is in `.tgz` format, which is similar to a zip archive. We can unpack our raw data in the current directory using `tar`:
+Finally, you'll notice the raw data is in `.tgz` format, which is similar to a zip archive. We can unpack our raw data in the current directory using the `tar` command:
 ```
 tar -xvzf a_punctatus.tgz
 ```
@@ -140,7 +140,20 @@ isaac@darwin:~/ipyrad-workshop$
 ## FastQC for quality control
 The first step of any RAD-Seq assembly is to inspect your raw data to estimate overall quality. At this stage you can then attempt to improve your dataset by identifying and removing samples with failed sequencing. Another key QC procedure involves inspecting average quality scores per base position and trimming read edges, which is where low quality base-calls tend to accumulate.
 
-We will undertake a further reduction of the data as part of ipyrad's internal QC process during step 2.
+Run fastqc first, then use the notebook install as a hook to get people looking at the results.
+
+### Inspecting FastQC Results with Jupyter Notebooks
+[Jupyter notebooks](http://jupyter.org/) are primarily a way to generate reproducible scientific analysis workflows in python. Here we will just use jupyter notebooks as a convenient way to view graphical files that live on the cluster without having to go through all the trouble of downloading them. 
+
+```
+mkdir .jupyter
+cp /scratch/af-biota/config/jupyter_notebook_config.py .jupyter/
+```
+
+Each notebook must have a unique port number to run on. We have assigned unique port numbers for each workshop attendee, which you can find here: [AF-Biota workshop port #s](https://github.com/radcamp/radcamp.github.io/blob/master/AF-Biota/participants.txt). 
+```
+jupyter notebook --no-browser --port <my_port_number>
+```
 
 # References
 Elshire, R. J., Glaubitz, J. C., Sun, Q., Poland, J. A., Kawamoto, K., Buckler, E. S., & Mitchell, S. E. (2011). A robust, simple genotyping-by-sequencing (GBS) approach for high diversity species. PloS one, 6(5), e19379.
