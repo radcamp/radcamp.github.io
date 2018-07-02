@@ -138,9 +138,43 @@ isaac@darwin:~/ipyrad-workshop$
 ```
 
 ## FastQC for quality control
-The first step of any RAD-Seq assembly is to inspect your raw data to estimate overall quality. At this stage you can then attempt to improve your dataset by identifying and removing samples with failed sequencing. Another key QC procedure involves inspecting average quality scores per base position and trimming read edges, which is where low quality base-calls tend to accumulate.
+The first step of any RAD-Seq assembly is to inspect your raw data to estimate overall quality. At this stage you can then attempt to improve your dataset by identifying and removing samples with failed sequencing. Another key QC procedure involves inspecting average quality scores per base position and trimming read edges, which is where low quality base-calls tend to accumulate. In preperation for running fastqc on our files we need to make an output directory because it creates quite a bit of output that we want to keep organized:
 
-Run fastqc first, then use the notebook install as a hook to get people looking at the results.
+```
+cd ~/ipyrad-workshop
+mkdir fastqc-results
+```
+Now run fastqc on one of the samples:
+```
+fastqc -o fastqc-results raws/punc_IBSPCRIB0361_R1_.fastq.gz
+```
+**Note:** The `-o` flag tells fastqc where to write output files. **Especially Notice** the *relative path* to the raw file. The difference between *relative* and *absolute* paths is an important one to learn. Relative paths are specified with respect to the current working directory. Since I am in `/home/isaac/ipyrad-workshop`, and this is the directory the `raws` directory is in, I can simply reference it directly. If I was in any other directory I could specify the *absolute path* to the target fastq.gz file which would be `/home/isaac/ipyrad-workshop/raws/punc_IBSPCRIB0361_R1_.fastq.gz`. Absolute paths are always more precise, but also always (often _much_) longer.
+
+FastQC will indicate its progress in the terminal. This toy data will run quite quickly, but real data can take somewhat longer to analyse (10s of minutes).
+```
+Started analysis of punc_IBSPCRIB0361_R1_.fastq.gz
+Approx 5% complete for punc_IBSPCRIB0361_R1_.fastq.gz
+Approx 10% complete for punc_IBSPCRIB0361_R1_.fastq.gz
+Approx 15% complete for punc_IBSPCRIB0361_R1_.fastq.gz
+Approx 20% complete for punc_IBSPCRIB0361_R1_.fastq.gz
+Approx 25% complete for punc_IBSPCRIB0361_R1_.fastq.gz
+Approx 30% complete for punc_IBSPCRIB0361_R1_.fastq.gz
+Approx 35% complete for punc_IBSPCRIB0361_R1_.fastq.gz
+Approx 40% complete for punc_IBSPCRIB0361_R1_.fastq.gz
+Approx 45% complete for punc_IBSPCRIB0361_R1_.fastq.gz
+Approx 50% complete for punc_IBSPCRIB0361_R1_.fastq.gz
+Approx 55% complete for punc_IBSPCRIB0361_R1_.fastq.gz
+Approx 60% complete for punc_IBSPCRIB0361_R1_.fastq.gz
+Approx 65% complete for punc_IBSPCRIB0361_R1_.fastq.gz
+Approx 70% complete for punc_IBSPCRIB0361_R1_.fastq.gz
+Approx 75% complete for punc_IBSPCRIB0361_R1_.fastq.gz
+Approx 80% complete for punc_IBSPCRIB0361_R1_.fastq.gz
+Approx 85% complete for punc_IBSPCRIB0361_R1_.fastq.gz
+Approx 90% complete for punc_IBSPCRIB0361_R1_.fastq.gz
+Approx 95% complete for punc_IBSPCRIB0361_R1_.fastq.gz
+Approx 100% complete for punc_IBSPCRIB0361_R1_.fastq.gz
+Analysis complete for punc_IBSPCRIB0361_R1_.fastq.gz
+```
 
 Now we have output files that include html and images depicting lots of information about the quality of our reads, but we can't inspect these because we only have a CLI interface. How do we get access to the output of FastQC?
 
