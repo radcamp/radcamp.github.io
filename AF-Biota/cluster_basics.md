@@ -201,7 +201,7 @@ jupyter notebook passwd
 
 Each notebook must have a unique port number to run on. We have assigned unique port numbers for each workshop attendee, which you can find here: [AF-Biota workshop port #s](https://github.com/radcamp/radcamp.github.io/blob/master/AF-Biota/participants.txt). 
 ```
-jupyter notebook --no-browser --port <my_port_number &
+jupyter notebook --no-browser --port <my_port_number> &
 ```
 
 # References
