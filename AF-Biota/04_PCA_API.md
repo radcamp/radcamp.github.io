@@ -1,7 +1,7 @@
 
-## Cookbook: *PCA* analyses
+# Cookbook: *PCA* analyses
 
-As part of the `ipyrad.analysis` toolkit we've created convenience functions for easily performing exploratory principal component analysis (PCA) on your data. PCA is a very standard dimension-reduction technique that is often used to get a general sense of how samples are related to one another. PCA has the advantage over STRUCTURE type analyeses in that it is very fast. Similar to STRUCTURE, PCA can be used to produce simple and intuitive plots that can be used to guide downstream analysis. There are three very nice papers that talk about the application and interpretation of PCA in the context of population genetics:
+As part of the `ipyrad.analysis` toolkit we've created convenience functions for easily performing exploratory principal component analysis (PCA) on your data. PCA is a very standard dimension-reduction technique that is often used to get a general sense of how samples are related to one another. PCA has the advantage over STRUCTURE type analyases in that it is very fast. Similar to STRUCTURE, PCA can be used to produce simple and intuitive plots that can be used to guide downstream analysis. These are three very nice papers that talk about the application and interpretation of PCA in the context of population genetics:
 
 [Reich et al (2008) Principal component analysis of genetic data](https://www.nature.com/articles/ng0508-491)
 
@@ -10,17 +10,22 @@ As part of the `ipyrad.analysis` toolkit we've created convenience functions for
 [McVean (2009) A genealogical interpretation of principal components analysis](http://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1000686)
 
 
-
 ### A note on Jupyter/IPython
-This is a Jupyter notebook, a reproducible and executable document. The code in this notebook is Python (2.7), and should be executed either in a jupyter-notebook, like this one, or in an IPython terminal. Execute each cell in order to reproduce our entire analysis. The example data set used in this analysis is from the [empirical example ipyrad tutorial](http://ipyrad.readthedocs.io/pedicularis_.html).
+ipyrad analysis tools are best run inside Jupyter notebooks, which provide a reproducible and executable document. ipyrad and all dependencies (including jupyter) should have been installed in a previous workshop session. If not, you can always run this command in a terminal window on the cluster:
 
-### Required software
-You can easily install the required software for this notebook with a locally installed `conda` environment. Just run the commented code below in a terminal. If you are working on an HPC cluster you **do not need** administrator privileges to install the software in this way, since it is only installed locally.
+```
+conda install ipyrad -c ipyrad
+```
 
+### Getting Set up with Jupyter Notebooks
+[Jupyter notebooks](http://jupyter.org/) are primarily a way to generate reproducible scientific analysis workflows in python. Here we will just use jupyter notebooks as a convenient way to view graphical files that live on the cluster without having to go through all the trouble of downloading them. Jupyter was already installed as a dependency of ipyrad, so we just need to set a password before we can launch it. This command will prompt you for a new password for your notebook (you will only ever have to do this once):
+```
+jupyter notebook passwd
+```
 
-```python
-## conda install ipyrad -c ipyrad
-## conda install -c conda-forge scikit-allel
+Each notebook must have a unique port number to run on. We have assigned unique port numbers for each workshop attendee, which you can find here: [AF-Biota workshop port #s](https://github.com/radcamp/radcamp.github.io/blob/master/AF-Biota/participants.txt). 
+```
+jupyter notebook --no-browser --port <my_port_number> &
 ```
 
 ### Import Python libraries
