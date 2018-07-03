@@ -1,4 +1,4 @@
----
+--
 layout: default
 title:  Welcome to RadCamp 2018 - The AF-BIOTA Addition
 ---
@@ -24,9 +24,9 @@ São Paulo, Brasil
 
 Times            | Monday | Tuesday | Wednesday
 -----            | ------ | ------- | ---------
-9:00-12:30     | [Cluster basics](cluster_basics.md) and [ipyrad part I](tutorial_partI-CLI.md) | Clustering analysis ([Structure](https://nbviewer.jupyter.org/github/radcamp/radcamp.github.io/blob/master/AF-Biota/cookbook-ipyrad-structure.ipynb)/[PCA](https://nbviewer.jupyter.org/github/radcamp/radcamp.github.io/blob/master/AF-Biota/cookbook-PCA-pedicularis.ipynb)) | Demographic anaylsis ([momi2](https://nbviewer.jupyter.org/github/radcamp/radcamp.github.io/blob/master/AF-Biota/cookbook-ipyrad-momi2.ipynb))
+9:00-12:30     | [Cluster basics](01_cluster_basics.md) and [ipyrad part I](02_ipyrad_partI_CLI.md) | Clustering analysis ([PCA](04_PCA_API.md) & [Structure](05_STRUCTURE_API.md)) | Demographic anaylsis ([momi2](07_momi2_API.md))
 12:30-14:00 | Lunchy | Lunchy | Lunchy
-14:00-17:00 |[ipyrad part II](tutorial_partII-CLI.md) | Phylogenetic inference ([RAxML](https://nbviewer.jupyter.org/github/radcamp/radcamp.github.io/blob/master/AF-Biota/cookbook-ipyrad-raxml.ipynb)) | Assisted work session (hack your own data)
+14:00-17:00 |[ipyrad part II](03_ipyrad_partII_CLI.md) | Phylogenetic inference ([RAxML](06_RAxML_API.md)) | Assisted work session (hack your own data)
 
 ## Additional ipyrad analysis cookbooks
 
