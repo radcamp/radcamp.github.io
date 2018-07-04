@@ -38,29 +38,56 @@ Very roughly speaking, ipyrad exists to transform raw data coming off the sequen
 * Cluster across Samples
 * Apply filters and write output formats
 
+**NB:** Assembling rad-seq type sequence data requires a
+lot of different steps, and these steps generate a **lot** of
+intermediary files. ipyrad organizes these files into directories, and
+it prepends the name of your assembly to each directory with data that
+belongs to it. One result of this is that you can have multiple
+assemblies of the same raw data with different parameter settings and
+you don't have to manage all the files yourself! (See
+[Branching assemblies](https://ipyrad.readthedocs.io/tutorial_advanced_cli.html) for more info). Another
+result is that **you should not rename or move any of the directories
+inside your project directory**, unless you know what you're doing or
+you don't mind if your assembly breaks.
+
 # Getting Started
 
 If you haven't already installed ipyrad go here first: [installation](https://ipyrad.readthedocs.io/installation.html#installation)
 
-Lets take a quick look again at the raw data files, to be sure they are
-where we expect them:
-```
-cd ~/ipyrad-workshop
-ls -lh raws/
+## Working with the cluster
 
--rw-rw-r-- 1 isaac isaac 15M Jul  2 21:42 punc_IBSPCRIB0361_R1_.fastq.gz
--rw-rw-r-- 1 isaac isaac 15M Jul  2 21:42 punc_ICST764_R1_.fastq.gz
--rw-rw-r-- 1 isaac isaac 16M Jul  2 21:42 punc_JFT773_R1_.fastq.gz
--rw-rw-r-- 1 isaac isaac 15M Jul  2 21:42 punc_MTR05978_R1_.fastq.gz
--rw-rw-r-- 1 isaac isaac 16M Jul  2 21:42 punc_MTR17744_R1_.fastq.gz
--rw-rw-r-- 1 isaac isaac 14M Jul  2 21:42 punc_MTR21545_R1_.fastq.gz
--rw-rw-r-- 1 isaac isaac 16M Jul  2 21:42 punc_MTR34414_R1_.fastq.gz
--rw-rw-r-- 1 isaac isaac 14M Jul  2 21:42 punc_MTRX1468_R1_.fastq.gz
--rw-rw-r-- 1 isaac isaac 15M Jul  2 21:42 punc_MTRX1478_R1_.fastq.gz
--rw-rw-r-- 1 isaac isaac 15M Jul  2 21:42 punc_MUFAL9635_R1_.fastq.gz
+We will run all our assembly and analysis on the UPC cluster inside
+an "interactive" job. This will allow us to run our proccesses on 
+compute nodes, but still be able to remain at the command line so 
+we can easily monitor progress. First, open an SSH connection to
+the cluster:
+```
+ssh isaac@lem.ib.usp.br 
 ```
 
-# Create a new parameters file
+### Submitting an interactive job to the cluster
+
+Now we will submit an interactive job with relatively modest resource
+requests. Remember, you can see default resource allocations for all
+cluster queues [here](USP_Cluster_Info.md).
+```
+## -q proto         - Submit a job to the 'prototyping' queue
+## -l nodes=1:ppn=2 - Request 2 processes on the target compute node
+## -l mem=64        - Request 64Gb of main memory
+## -I               - Use 'interactive' mode (get a terminal on the compute node)
+
+qsub -q proto -l nodes=1:ppn=2 -l mem=64gb -I
+```
+The output should look something like this:
+```
+qsub: waiting for job 24816.darwin to start
+qsub: job 24816.darwin ready
+```
+
+### Inspecting running cluster processes
+
+
+## Create a new parameters file
 
 ipyrad uses a text file to hold all the parameters for a given assembly.
 Start by creating a new parameters file with the `-n` flag. This flag
@@ -70,6 +97,7 @@ analysing your own data you might call your parameters file something
 more informative, like the name of your organism.
 
 ``` 
+cd ~/ipyrad-workshop
 ipyrad -n anolis
 ```
 
@@ -155,14 +183,6 @@ intermediate directories will be of the form: `/home/<username/ipyrad-workshop/a
 
 > **Note:** Again, the `./` notation indicates the current working directory. You can always view the current working directory with the `pwd` command (**p**rint **w**orking **d**irectory).
 
-## Very Important: Do not move files or directories by hand
-Once you start an assembly do not attempt to move or rename the project directory
-or any other intermediate files or directories. ipyrad **relies** on the location of 
-this directory remaining the same throught the analysis for an assembly. If you 
-wish to test different values for parameters such as minimum coverage or clustering 
-threshold we provide a simple facility for branching assemblies that handles all 
-the file management for you. Once you complete the intro tutorial you can see [Branching assemblies](https://ipyrad.readthedocs.io/tutorial_advanced_cli.html) for more info.
-
 # Input data format
 
 Before we get started let's take a look at what the raw data looks like.
@@ -174,8 +194,6 @@ faster if they happen to be split into multiple files). The file/s may
 be compressed with gzip so that they have a .gz ending, but they do not
 need to be. The location of these files should be entered on line 3 of
 the params file. Below are the first three reads of one of the Anolis files.
-
-> **Note on demultiplexing:** More commonly, sequencing facilities will give you one giant .gz file that contains all the sequences from your run. This situation only slightly modifies step 1, and does not modify further steps, so we will refer you to the full ipyrad tutorial for guidance in this case.
 
 ``` 
 ## For your personal edification here is what this is doing:
@@ -210,42 +228,18 @@ behind how quality scores are encoded.
 These are 96bp single-end reads prepared as GBS. The first five bases (TGCAT) 
 form the the restriction site overhang. All following bases make up the sequence data.
 
-# Step 1: Demultiplex the raw data files
+# Step 1: Loading the raw data files
 
-Step 1 reads in the barcodes file and the raw data. It scans through the
-raw data and sorts each read based on the mapping of samples to
-barcodes. At the end of this step we'll have a new directory in our
-project\_dir called `anolis_fastqs`. Inside this directory will be
-individual fastq.gz files for each sample.
+With reads already demultiplexed to samples, step 1 simply scans through 
+the raw data, verifies the input format, and counts reads per sample. It 
+doesn't create any new directories or modify the raw files in any way.
 
-**NB:** You'll notice the name of this output directory bears a strong
-resemblence to the name of the assembly we chose at the time of the
-params file creation. Assembling rad-seq type sequence data requires a
-lot of different steps, and these steps generate a **lot** of
-intermediary files. ipyrad organizes these files into directories, and
-it prepends the name of your assembly to each directory with data that
-belongs to it. One result of this is that you can have multiple
-assemblies of the same raw data with different parameter settings and
-you don't have to manage all the files yourself! (See
-[Branching assemblies](https://ipyrad.readthedocs.io/tutorial_advanced_cli.html) for more info). Another
-result is that **you should not rename or move any of the directories
-inside your project directory**, unless you know what you're doing or
-you don't mind if your assembly breaks.
+> **Note on step 1:** More commonly, rather than returning demultiplexed samples as we have here, sequencing facilities will give you one giant .gz file that contains all the sequences from your run. This situation only slightly modifies step 1, and does not modify further steps, so we will refer you to the [full ipyrad tutorial](http://ipyrad.readthedocs.io/tutorial_intro_cli.html) for guidance in this case.
 
-Lets take a look at the barcodes file for the simulated data. You'll see
-sample names (left) and their barcodes (right) each on a separate line
-with a tab between them.
-
-``` 
-%%bash
-cat ./data/rad_example_barcodes.txt
-```
-
-Now lets run step 1! For the simulated data this will take <1
+Now lets run step 1! For the Anolis data this will take <1
 minute.
 
 ``` 
-%%bash
 ## -p indicates the params file we wish to use
 ## -s indicates the step to run
 ipyrad -p params-anolis.txt -s 1
