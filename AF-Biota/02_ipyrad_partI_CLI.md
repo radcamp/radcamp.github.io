@@ -1,79 +1,91 @@
-ipyrad command line tutorial - Part I
-============================
+# ipyrad command line tutorial - Part I
 
-This is the first part of the full tutorial for the command line interface for ipyrad. In
+This is the first part of the full tutorial for the command line interface (**CLI**) for ipyrad. In
 this tutorial we'll walk through the entire assembly and analysis
 process. This is meant as a broad introduction to familiarize users with
-the general workflow, and some of the parameters and terminology. For
-simplicity we'll use single-end RAD-Seq as the example data, but the
-core concepts will apply to assembly of other data types (GBS and
-paired-end).
+the general workflow, and some of the parameters and terminology. We will 
+continue with assembly and analysis of the Anolis dataset of 
+Prates *et al* 2016, which we fetched during the previous QC analysis step.
+This data was generated with the GBS protocol and sequenced single-end (SE), 
+but the core concepts will apply to assembly of other data types (ddRAD and
+paired-end (PE)).
 
 If you are new to RADseq analyses, this tutorial will provide a simple
 overview of how to execute ipyrad, what the data files look like, how to
 check that your analysis is working, and what the final output formats
 will be.
 
-Each cell in this tutorial beginning with the header (%%bash) indicates
-that the code should be executed in a command line shell, for example by
-copying and pasting the text into your terminal (but excluding the
-%%bash header). All lines in code cells beginning with \#\# are comments
-and should not be copied and executed.
+Each grey cell in this tutorial indicates code that should be executed 
+in a command line shell on the USP cluster, for example by copying and 
+pasting the text into your terminal. All lines in code cells  beginning 
+with \#\# are comments and should not be copied and executed.
 
-Getting Started
-===============
+```
+## Example Code Cell.
+## Create an empty file in my home directory called `watdo.txt`
+
+touch ~/watdo.txt
+```
+
+# Getting Started
 
 If you haven't already installed ipyrad go here first:
 Installation [installation](https://ipyrad.readthedocs.io/installation.html#installation)
 
-We provide a very small sample data set that we recommend using for this
-tutorial. Full datasets can take days and days to run, whereas with the
-simulated data you could complete the whole tutorial in an afternoon.
+This Anolis has been heavily subsampled and truncated to facilitate 
+reasonable runtimes for this workshop. Full datasets can take days or 
+even weeks to run, depending on read length, genome size, and sequencing
+effort.
 
-First make a new directory and fetch & extract the test data.
-
+Lets take a look again at the raw data files:
 ``` 
-%%bash
-## The curl command needs a capital o, not a zero
-mkdir ipyrad-test
-cd ipyrad-test
-curl -O https://github.com/dereneaton/ipyrad/blob/master/tests/ipsimdata.tar.gz
-tar -xvzf ipyrad_tutorial_data.tgz
+cd ~/ipyrad-workshop
+ls -l raws/
+
+-rw-rw-r-- 1 isaac isaac 15433105 Jul  2 21:42 punc_IBSPCRIB0361_R1_.fastq.gz
+-rw-rw-r-- 1 isaac isaac 15394079 Jul  2 21:42 punc_ICST764_R1_.fastq.gz
+-rw-rw-r-- 1 isaac isaac 15770295 Jul  2 21:42 punc_JFT773_R1_.fastq.gz
+-rw-rw-r-- 1 isaac isaac 14733948 Jul  2 21:42 punc_MTR05978_R1_.fastq.gz
+-rw-rw-r-- 1 isaac isaac 16130880 Jul  2 21:42 punc_MTR17744_R1_.fastq.gz
+-rw-rw-r-- 1 isaac isaac 14678658 Jul  2 21:42 punc_MTR21545_R1_.fastq.gz
+-rw-rw-r-- 1 isaac isaac 15854902 Jul  2 21:42 punc_MTR34414_R1_.fastq.gz
+-rw-rw-r-- 1 isaac isaac 14535185 Jul  2 21:42 punc_MTRX1468_R1_.fastq.gz
+-rw-rw-r-- 1 isaac isaac 15295867 Jul  2 21:42 punc_MTRX1478_R1_.fastq.gz
+-rw-rw-r-- 1 isaac isaac 15440869 Jul  2 21:42 punc_MUFAL9635_R1_.fastq.gz
 ```
 
-You should now see a folder in your current directory called `data`.
-This directory contains two files we'll be using: -
-`rad_example_R1_.fastq.gz` - Illumina fastQ formatted reads (gzip
-compressed) - `rad_example_barcodes.txt` - Mapping of barcodes to sample
-IDs
+In this workshop we will be analysing data that has already been demultiplexed 
+(i.e. sorted to samples). Some sequencing facilities will give you data in this 
+way, and it is also quite common to have retreive demux'd data from the [sequence read 
+archive](https://www.ncbi.nlm.nih.gov/sra), if for example you are reanalysing 
+someone else's data. More commonly, sequencing facilities will give you one 
+giant `.gz` file that contains all the sequences from your run. In this case 
+you would need a barcode file mapping sample names to barcode sequences. This 
+situation only slightly modifies step 1, and does not modify further steps, 
+so we will refer you to the [full ipyrad tutorial](http://ipyrad.readthedocs.io/tutorial_intro_cli.html) for guidance in this case.
 
-It also contains many other simulated datasets, as well as a simulated
-reference genome, so you can experiment with other datatypes after you
-get comfortable with RAD.
-
-Create a new parameters file
-============================
+# Create a new parameters file
 
 ipyrad uses a text file to hold all the parameters for a given assembly.
 Start by creating a new parameters file with the `-n` flag. This flag
 requires you to pass in a name for your assembly. In the example we use
-`ipyrad-test` but the name can be anything at all. Once you start
+`anolis` but the name can be anything at all. Once you start
 analysing your own data you might call your parameters file something
 more informative, like the name of your organism.
 
 ``` 
 %%bash
-ipyrad -n ipyrad-test
+ipyrad -n anolis
 ```
 
 This will create a file in the current directory called
-`params-ipyrad-test.txt`. The params file lists on each line one
+`params-anolis.txt`. The params file lists on each line one
 parameter followed by a \#\# mark, then the name of the parameter, and
 then a short description of its purpose. Lets take a look at it.
 
 ``` 
 %%bash
-cat params-ipyrad-test.txt
+cat params-anolis.txt
 ```
 
 In general the defaults are sensible, and we won't mess with them for
@@ -81,13 +93,13 @@ now, but there are a few parameters we *must* change. We need to set the
 path to the raw data we want to analyse, and we need to set the path to
 the barcodes file.
 
-In your favorite text editor open `params-ipyrad-test.txt` and change
+In your favorite text editor open `params-anolis.txt` and change
 these two lines to look like this, and then save it:
 
 Once we start running the analysis this will create a new directory to
 hold all the output for this assembly. By default this creates a new
 directory named by the assembly\_name parameter in the project\_dir
-directory. For this tutorial this directory will be called: ./ipyrad-test
+directory. For this tutorial this directory will be called: ./anolis
 
 Once you start an assembly do not attempt to move or rename the project directory. ipyrad relies on the location of this
 directory remaining the same throught the analysis for an assembly. If
