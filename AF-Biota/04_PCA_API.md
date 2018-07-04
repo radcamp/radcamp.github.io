@@ -3,30 +3,52 @@
 
 As part of the `ipyrad.analysis` toolkit we've created convenience functions for easily performing exploratory principal component analysis (PCA) on your data. PCA is a very standard dimension-reduction technique that is often used to get a general sense of how samples are related to one another. PCA has the advantage over STRUCTURE type analyases in that it is very fast. Similar to STRUCTURE, PCA can be used to produce simple and intuitive plots that can be used to guide downstream analysis. These are three very nice papers that talk about the application and interpretation of PCA in the context of population genetics:
 
-[Reich et al (2008) Principal component analysis of genetic data](https://www.nature.com/articles/ng0508-491)
-
-[Novembre & Stephens (2008) Interpreting principal component analyses of spatial population genetic variation](https://www.nature.com/articles/ng.139)
-
-[McVean (2009) A genealogical interpretation of principal components analysis](http://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1000686)
+* [Reich et al (2008) Principal component analysis of genetic data](https://www.nature.com/articles/ng0508-491)
+* [Novembre & Stephens (2008) Interpreting principal component analyses of spatial population genetic variation](https://www.nature.com/articles/ng.139)
+* [McVean (2009) A genealogical interpretation of principal components analysis](http://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1000686)
 
 
-### A note on Jupyter/IPython
-ipyrad analysis tools are best run inside Jupyter notebooks, which provide a reproducible and executable document. ipyrad and all dependencies (including jupyter) should have been installed in a previous workshop session. If not, you can always run this command in a terminal window on the cluster:
+**Maybe a good idea to just split notebook install/setup/config into a whole other .md file so it can be referenced from other tutorials.**
 
+# A note on Jupyter/IPython
+[Jupyter notebooks](http://jupyter.org/) are primarily a way to generate reproducible scientific analysis workflows in python. ipyrad analysis tools are best run inside Jupyter notebooks, as the analysis can be monitored and tweaked and provides a self-documenting workflow. 
+
+**Insert a picture and some docs here to help people understand how notebooks and ssh tunnels work.**
+
+# Getting Set up with Jupyter Notebooks
+
+* [Install prerequisites (if necessary)](#installing-dependencies)
+* Establish jupyter notebook ssh tunnel: [Windows](#windows-ssh-tunnel-configuration) - [Mac/Linux](#mac-ssh-tunnel-configuration)
+* [Set Jupyter notebook password](#set-jupyter-notebook-password)
+* [Start remote notebook server](#run-notebook-server)
+
+## Installing Dependencies
+
+ipyrad and all dependencies (including jupyter) should have been installed in a previous workshop session. If not, you can always run this command in a terminal window on the cluster:
 ```
 conda install ipyrad -c ipyrad
 ```
 
-### Getting Set up with Jupyter Notebooks
-[Jupyter notebooks](http://jupyter.org/) are primarily a way to generate reproducible scientific analysis workflows in python. Here we will just use jupyter notebooks as a convenient way to view graphical files that live on the cluster without having to go through all the trouble of downloading them. Jupyter was already installed as a dependency of ipyrad, so we just need to set a password before we can launch it. This command will prompt you for a new password for your notebook (you will only ever have to do this once):
+## SSH Tunnel Configuration
+Each notebook must have a unique port number to run on. We have assigned unique port numbers for each workshop attendee, which you can find here: [AF-Biota workshop port #s](https://github.com/radcamp/radcamp.github.io/blob/master/AF-Biota/participants.txt). 
+
+### Windows SSH Tunnel Configuration
+
+### Mac SSH Tunnel Configuration
+
+
+## Set Jupyter Notebook Password
+Jupyter was already installed as a dependency of ipyrad, so we just need to set a password before we can launch it. This command will prompt you for a new password for your notebook (you will only ever have to do this once on the HPC):
 ```
 jupyter notebook passwd
 ```
 
-Each notebook must have a unique port number to run on. We have assigned unique port numbers for each workshop attendee, which you can find here: [AF-Biota workshop port #s](https://github.com/radcamp/radcamp.github.io/blob/master/AF-Biota/participants.txt). 
+## Run Notebook Server
 ```
 jupyter notebook --no-browser --port <my_port_number> &
 ```
+
+# *PCA* analyses
 
 ### Import Python libraries
 The call to `%matplotlib inline` here enables support for plotting directly inside the notebook.
