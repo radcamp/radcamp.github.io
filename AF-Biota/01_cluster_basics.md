@@ -6,6 +6,7 @@ The bulk of the activities this morning involve getting oriented on the cluster 
 * [Setting up the computing environment](#download-and-install-software)
 * [Fetching the data](#fetch-the-raw-data)
 * [Basic quality control (FastQC)](#fastqc-for-quality-control)
+* [Viewing and interpreting FAstQC results](#inspecting-fastqc-utput)
 
 ## USP Zoology HPC Facility Info
 Computational resources for the duration of this workshop have been generously provided by the Zoology HPC facility, with special thanks to Diogo Melo for technical support and Roberta Damasceno for coordinating access. The cluster we will be using is located at:
@@ -139,7 +140,11 @@ isaac@darwin:~/ipyrad-workshop$
 ```
 
 ## FastQC for quality control
-The first step of any RAD-Seq assembly is to inspect your raw data to estimate overall quality. At this stage you can then attempt to improve your dataset by identifying and removing samples with failed sequencing. Another key QC procedure involves inspecting average quality scores per base position and trimming read edges, which is where low quality base-calls tend to accumulate. In preperation for running fastqc on our files we need to make an output directory because it creates quite a bit of output that we want to keep organized:
+The first step of any RAD-Seq assembly is to inspect your raw data to estimate overall quality. At this stage you can then attempt to improve your dataset by identifying and removing samples with failed sequencing. Another key QC procedure involves inspecting average quality scores per base position and trimming read edges, which is where low quality base-calls tend to accumulate. As an example, here is a somewhat typical base sequence quality report for R1 of a 300bp paired-end Illumina run of ezrad data:
+
+![png](01_cluster_basics_files/fastqc-quality-example.png)
+
+In preperation for running fastqc on our files we need to make an output directory because it creates quite a bit of output that we want to keep organized:
 
 ```
 cd ~/ipyrad-workshop
@@ -193,16 +198,8 @@ punc_ICST764_R1__fastqc.zip        punc_MTR05978_R1__fastqc.zip   punc_MTR21545_
 
 Now we have output files that include html and images depicting lots of information about the quality of our reads, but we can't inspect these because we only have a CLI interface. How do we get access to the output of FastQC?
 
-### Inspecting FastQC Results with Jupyter Notebooks
-[Jupyter notebooks](http://jupyter.org/) are primarily a way to generate reproducible scientific analysis workflows in python. Here we will just use jupyter notebooks as a convenient way to view graphical files that live on the cluster without having to go through all the trouble of downloading them. Jupyter was already installed as a dependency of ipyrad, so we just need to set a password before we can launch it. This command will prompt you for a new password for your notebook (you will only ever have to do this once):
-```
-jupyter notebook passwd
-```
+### Inspecting FastQC Output
 
-Each notebook must have a unique port number to run on. We have assigned unique port numbers for each workshop attendee, which you can find here: [AF-Biota workshop port #s](https://github.com/radcamp/radcamp.github.io/blob/master/AF-Biota/participants.txt). 
-```
-jupyter notebook --no-browser --port <my_port_number> &
-```
 
 # References
 Elshire, R. J., Glaubitz, J. C., Sun, Q., Poland, J. A., Kawamoto, K., Buckler, E. S., & Mitchell, S. E. (2011). A robust, simple genotyping-by-sequencing (GBS) approach for high diversity species. PloS one, 6(5), e19379.
