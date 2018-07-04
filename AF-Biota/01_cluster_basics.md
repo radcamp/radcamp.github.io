@@ -205,13 +205,13 @@ punc_ICST764_R1__fastqc.zip        punc_MTR05978_R1__fastqc.zip   punc_MTR21545_
 
 Now we have output files that include html and images depicting lots of information about the quality of our reads, but we can't inspect these because we only have a CLI interface on the cluster. How do we get access to the output of FastQC?
 
-### Inspecting FastQC Output (sftp)
+### Obtaining FastQC Output (sftp)
 
 Moving files between the cluster and your local computer is a very common task, and this will typically be accomplished with a secure file transfer protocol (**sftp**) client. Various Free/Open Source GUI tools exist but we recommend [WinSCP](https://winscp.net/eng/download.php) for Windows and [Cyberduck](https://cyberduck.io/) for MacOS. 
 
-**Add stuff here when we decide how people should fetch their own fastqc results**
+**I think we should let people use GUI, so we should fill in just a teense more here**
 
-### 
+### Instpecting and Interpreting FastQC Output
 
 Just taking a random one, lets spend a moment looking at the results from `punc_JFT773_R1__fastqc.html`. Opening up this html file, on the left you'll see a summary of all the results, which highlights areas FastQC indicates may be worth further examination. We will only look at a few of these.
 
@@ -225,7 +225,8 @@ For the Anolis data the sequence quality per base is uniformly quite high, with 
 
 Now lets look at the `Per base sequece content`, which FastQC highlights with a scary red **X**.
 ![png](01_cluster_basics_files/anolis-base-content.png)
-The squiggles indicate base composition per base position averaged across the reads. It looks like the signal FastQC is concerned about here is related to the *extreme* base composition bias of the first 5 positions. We so happen to know this is a result of the restriction overhang, and so is in fact of no concern. Now lets look at `Adapter Content`:
+
+The squiggles indicate base composition per base position averaged across the reads. It looks like the signal FastQC is concerned about here is related to the *extreme* base composition bias of the first 5 positions. We happen to know this is a result of the restriction overhang, and so is in fact of no concern. Now lets look at `Adapter Content`:
 
 ![png](01_cluster_basics_files/anolis-adapters.png)
 
