@@ -42,8 +42,9 @@ Very roughly speaking, ipyrad exists to transform raw data coming off the sequen
 
 If you haven't already installed ipyrad go here first: [installation](https://ipyrad.readthedocs.io/installation.html#installation)
 
-Lets take a look again at the raw data files:
-``` 
+Lets take a quick look again at the raw data files, to be sure they are
+where we expect them:
+```
 cd ~/ipyrad-workshop
 ls -lh raws/
 
@@ -58,16 +59,6 @@ ls -lh raws/
 -rw-rw-r-- 1 isaac isaac 15M Jul  2 21:42 punc_MTRX1478_R1_.fastq.gz
 -rw-rw-r-- 1 isaac isaac 15M Jul  2 21:42 punc_MUFAL9635_R1_.fastq.gz
 ```
-
-In this workshop we will be analysing data that has already been demultiplexed 
-(i.e. sorted to samples), so you can see one `.gz` file per sample. Also, this Anolis 
-data has been heavily subsampled and truncated to facilitate reasonable runtimes for this workshop. 
-Each sample contains exactly 250,000 reads, and consumes ~15Mb of disk space. Real data
-will contain millions of reads/gigabytes of data per sample. Also, full datasets 
-can take days or even weeks to run, depending on read length, genome size, and 
-sequencing effort.
-
-> **Note on demultiplexing:** More commonly, sequencing facilities will give you one giant `.gz` file that contains all the sequences from your run. This situation only slightly modifies step 1, and does not modify further steps, so we will refer you to the [full ipyrad tutorial](http://ipyrad.readthedocs.io/tutorial_intro_cli.html) for guidance in this case.
 
 # Create a new parameters file
 
@@ -139,31 +130,40 @@ on the keyboard for navigating around the file. Nano accepts a few special
 keyboard commands for doing things other than modifying text, and it lists 
 these on the bottom of the frame. 
 
-Change the following parameter values to match these:
+We need to specify that the raw data files are in the `raws` directory, that 
+our data used the `gbs` library prep protocol, and that the overhang left by 
+our restriction enzyme is `TGCAT` (reflecting the use of EcoT22I by Prates 
+et al). Change the following values in the params file to match these:
 ```
 ./raws/*.gz                    ## [4] [sorted_fastq_path]: Location of demultiplexed/sorted fastq files
 gbs                            ## [7] [datatype]: Datatype (see docs): rad, gbs, ddrad, etc.
 TGCAT,                         ## [8] [restriction_overhang]: Restriction overhang (cut1,) or (cut1, cut2)
 ```
 
-After you change these parameters you may save and exit nano by typing CTRL+O 
-(to write **O**utput), and then CTRL+X (to e**X**it the program).
+After you change these parameters you may save and exit nano by typing CTRL+o 
+(to write **O**utput), and then CTRL+x (to e**X**it the program).
 
-Once we start running the analysis this will create a new directory to
-hold all the output for this assembly. By default this creates a new
-directory named by the assembly\_name parameter in the project\_dir
-directory. For this tutorial this directory will be called: ./anolis
+> **Note:** The `CTRL+x` notation indicates that you should hold down the control
+key (which is often styled 'ctrl') and then push 'x'.
 
-Once you start an assembly do not attempt to move or rename the project directory. ipyrad relies on the location of this
-directory remaining the same throught the analysis for an assembly. If
-you wish to test different values for parameters such as minimum
-coverage or clustering threshold we provide a simple facility for
-branching assemblies that handles all the file management for you. Once
-you complete the intro tutorial you can see
-[Branching assemblies](https://ipyrad.readthedocs.io/tutorial_advanced_cli.html) for more info.
+Once we start running the analysis ipyrad will create several new 
+directories to hold the output of each step for this assembly. By 
+default the new directories are created in the `project\_dir`
+directory and use the prefix specified by the assembly\_name parameter.
+Because we use `./` for the `project\_dir` for this tutorial, all these 
+intermediate directories will be of the form: `/home/<username/ipyrad-workshop/anolis_*`.
 
-Input data format
-=================
+> **Note:** Again, the `./` notation indicates the current working directory. You can always view the current working directory with the `pwd` command (**p**rint **w**orking **d**irectory).
+
+## Very Important: Do not move files or directories by hand
+Once you start an assembly do not attempt to move or rename the project directory
+or any other intermediate files or directories. ipyrad **relies** on the location of 
+this directory remaining the same throught the analysis for an assembly. If you 
+wish to test different values for parameters such as minimum coverage or clustering 
+threshold we provide a simple facility for branching assemblies that handles all 
+the file management for you. Once you complete the intro tutorial you can see [Branching assemblies](https://ipyrad.readthedocs.io/tutorial_advanced_cli.html) for more info.
+
+# Input data format
 
 Before we get started let's take a look at what the raw data looks like.
 
@@ -172,35 +172,45 @@ Your input data will be in fastQ format, usually ending in `.fq`,
 multiple files, or all within a single file (de-multiplexing goes much
 faster if they happen to be split into multiple files). The file/s may
 be compressed with gzip so that they have a .gz ending, but they do not
-need to be. The location of these files should be entered on line 2 of
-the params file. Below are the first three reads in the example file.
+need to be. The location of these files should be entered on line 3 of
+the params file. Below are the first three reads of one of the Anolis files.
+
+> **Note on demultiplexing:** More commonly, sequencing facilities will give you one giant .gz file that contains all the sequences from your run. This situation only slightly modifies step 1, and does not modify further steps, so we will refer you to the full ipyrad tutorial for guidance in this case.
 
 ``` 
-%%bash
 ## For your personal edification here is what this is doing:
-##  gzip -c: Tells gzip to unzip the file and write the contents to the screen
+##  gunzip -c: Tells gzip to unzip the file and write the contents to the screen
 ##  head -n 12: Grabs the first 12 lines of the fastq file. Fastq files
 ##  have 4 lines per read, so the value of `-n` should be a multiple of 4
-##  cut -c 1-90: Trim the length of each line to 90 characters
-##  we don't really need to see the whole sequence we're just trying
-##  to get an idea.
 
-gzip -c ./data/rad_example_R1_.fastq.gz | head -n 12 | cut -c 1-90
+gunzip -c ./raws/punc_IBSPCRIB0361_R1_.fastq.gz | head -n 12
 ```
-
 And here's the output:
+```
+@D00656:123:C6P86ANXX:8:2201:3857:34366 1:Y:0:8
+TGCATGTTTATTGTCTATGTAAAAGGAAAAGCCATGCTATCAGAGATTGGCCTGGGGGGGGGGGGCAAATACATGAAAAAGGGAAAGGCAAAATG
++
+;=11>111>1;EDGB1;=DG1=>1:EGG1>:>11?CE1<>1<1<E1>ED1111:00CC..86DG>....//8CDD/8C/....68..6.:8....
+@D00656:123:C6P86ANXX:8:2201:5076:34300 1:N:0:8
+TGCATATGAACCCCAACCTCCCCATCACATTCCACCATAGCAATCAGTTTCCTCTCTTCCTTCTTCTTGACCTCTCCACCTCAAAGGCAACTGCA
++
+@;BFGEBCC11=/;/E/CFGGGG1ECCE:EFDFCGGGGGGG11EFGGGGGCGG:B0=F0=FF0=F:FG:FDG00:;@DGGDG@0:E0=C>DGCF0
+@D00656:123:C6P86ANXX:8:2201:5042:34398 1:N:0:8
+TGCATTCAAAGGGAGAAGAGTACAGAAACCAAGCACATATTTGAAAAATGCAAGATCGGAAGAGCGGTTCAGCAGGAATGCCGAGACCGATCTCG
++
+GGGGGGGCGGGGGGGGGGGGGEGGGFGGGGGGEGGGGGGGGGGGGGFGGGEGGGGGGGGGGGGGGGGGGGGGGGGGGGEGGGGGGGGG@@DGGGG
+```
 
 Each read takes four lines. The first is the name of the read (its
 location on the plate). The second line contains the sequence data. The
-third line is a spacer. And the fourth line the quality scores for the
-base calls. In this case arbitrarily high since the data were simulated.
+third line is unused. And the fourth line is the quality scores for the
+base calls. The [FASTQ wikipedia page](https://en.wikipedia.org/wiki/FASTQ_format) has a good figure depicting the logic
+behind how quality scores are encoded.
 
-These are 100 bp single-end reads prepared as RADseq. The first six
-bases form the barcode and the next five bases (TGCAG) the restriction
-site overhang. All following bases make up the sequence data.
+These are 96bp single-end reads prepared as GBS. The first five bases (TGCAT) 
+form the the restriction site overhang. All following bases make up the sequence data.
 
-Step 1: Demultiplex the raw data files
-======================================
+# Step 1: Demultiplex the raw data files
 
 Step 1 reads in the barcodes file and the raw data. It scans through the
 raw data and sorts each read based on the mapping of samples to
