@@ -27,42 +27,47 @@ with \#\# are comments and should not be copied and executed.
 touch ~/watdo.txt
 ```
 
+# Overview of Assembly Steps
+Very roughly speaking, ipyrad exists to transform raw data coming off the sequencing instrument into output files that you can use for downstream analysis. The basic steps of this process are as follows:
+
+* Demultiplex/Load Raw Data
+* Trim and Quality Control
+* Cluster within Samples
+* Calculate Error Rate and Heterozygosity
+* Call consensus sequences
+* Cluster across Samples
+* Apply filters and write output formats
+
 # Getting Started
 
-If you haven't already installed ipyrad go here first:
-Installation [installation](https://ipyrad.readthedocs.io/installation.html#installation)
-
-This Anolis has been heavily subsampled and truncated to facilitate 
-reasonable runtimes for this workshop. Full datasets can take days or 
-even weeks to run, depending on read length, genome size, and sequencing
-effort.
+If you haven't already installed ipyrad go here first: [installation](https://ipyrad.readthedocs.io/installation.html#installation)
 
 Lets take a look again at the raw data files:
 ``` 
 cd ~/ipyrad-workshop
-ls -l raws/
+ls -lh raws/
 
--rw-rw-r-- 1 isaac isaac 15433105 Jul  2 21:42 punc_IBSPCRIB0361_R1_.fastq.gz
--rw-rw-r-- 1 isaac isaac 15394079 Jul  2 21:42 punc_ICST764_R1_.fastq.gz
--rw-rw-r-- 1 isaac isaac 15770295 Jul  2 21:42 punc_JFT773_R1_.fastq.gz
--rw-rw-r-- 1 isaac isaac 14733948 Jul  2 21:42 punc_MTR05978_R1_.fastq.gz
--rw-rw-r-- 1 isaac isaac 16130880 Jul  2 21:42 punc_MTR17744_R1_.fastq.gz
--rw-rw-r-- 1 isaac isaac 14678658 Jul  2 21:42 punc_MTR21545_R1_.fastq.gz
--rw-rw-r-- 1 isaac isaac 15854902 Jul  2 21:42 punc_MTR34414_R1_.fastq.gz
--rw-rw-r-- 1 isaac isaac 14535185 Jul  2 21:42 punc_MTRX1468_R1_.fastq.gz
--rw-rw-r-- 1 isaac isaac 15295867 Jul  2 21:42 punc_MTRX1478_R1_.fastq.gz
--rw-rw-r-- 1 isaac isaac 15440869 Jul  2 21:42 punc_MUFAL9635_R1_.fastq.gz
+-rw-rw-r-- 1 isaac isaac 15M Jul  2 21:42 punc_IBSPCRIB0361_R1_.fastq.gz
+-rw-rw-r-- 1 isaac isaac 15M Jul  2 21:42 punc_ICST764_R1_.fastq.gz
+-rw-rw-r-- 1 isaac isaac 16M Jul  2 21:42 punc_JFT773_R1_.fastq.gz
+-rw-rw-r-- 1 isaac isaac 15M Jul  2 21:42 punc_MTR05978_R1_.fastq.gz
+-rw-rw-r-- 1 isaac isaac 16M Jul  2 21:42 punc_MTR17744_R1_.fastq.gz
+-rw-rw-r-- 1 isaac isaac 14M Jul  2 21:42 punc_MTR21545_R1_.fastq.gz
+-rw-rw-r-- 1 isaac isaac 16M Jul  2 21:42 punc_MTR34414_R1_.fastq.gz
+-rw-rw-r-- 1 isaac isaac 14M Jul  2 21:42 punc_MTRX1468_R1_.fastq.gz
+-rw-rw-r-- 1 isaac isaac 15M Jul  2 21:42 punc_MTRX1478_R1_.fastq.gz
+-rw-rw-r-- 1 isaac isaac 15M Jul  2 21:42 punc_MUFAL9635_R1_.fastq.gz
 ```
 
 In this workshop we will be analysing data that has already been demultiplexed 
-(i.e. sorted to samples). Some sequencing facilities will give you data in this 
-way, and it is also quite common to have retreive demux'd data from the [sequence read 
-archive](https://www.ncbi.nlm.nih.gov/sra), if for example you are reanalysing 
-someone else's data. More commonly, sequencing facilities will give you one 
-giant `.gz` file that contains all the sequences from your run. In this case 
-you would need a barcode file mapping sample names to barcode sequences. This 
-situation only slightly modifies step 1, and does not modify further steps, 
-so we will refer you to the [full ipyrad tutorial](http://ipyrad.readthedocs.io/tutorial_intro_cli.html) for guidance in this case.
+(i.e. sorted to samples), so you can see one `.gz` file per sample. Also, this Anolis 
+data has been heavily subsampled and truncated to facilitate reasonable runtimes for this workshop. 
+Each sample contains exactly 250,000 reads, and consumes ~15Mb of disk space. Real data
+will contain millions of reads/gigabytes of data per sample. Also, full datasets 
+can take days or even weeks to run, depending on read length, genome size, and 
+sequencing effort.
+
+> **Note on demultiplexing:** More commonly, sequencing facilities will give you one giant `.gz` file that contains all the sequences from your run. This situation only slightly modifies step 1, and does not modify further steps, so we will refer you to the [full ipyrad tutorial](http://ipyrad.readthedocs.io/tutorial_intro_cli.html) for guidance in this case.
 
 # Create a new parameters file
 
@@ -74,7 +79,6 @@ analysing your own data you might call your parameters file something
 more informative, like the name of your organism.
 
 ``` 
-%%bash
 ipyrad -n anolis
 ```
 
@@ -84,17 +88,66 @@ parameter followed by a \#\# mark, then the name of the parameter, and
 then a short description of its purpose. Lets take a look at it.
 
 ``` 
-%%bash
 cat params-anolis.txt
+
+------- ipyrad params file (v.0.7.28)-------------------------------------------
+anolis                         ## [0] [assembly_name]: Assembly name. Used to name output directories for assembly steps
+./                             ## [1] [project_dir]: Project dir (made in curdir if not present)
+                               ## [2] [raw_fastq_path]: Location of raw non-demultiplexed fastq files
+                               ## [3] [barcodes_path]: Location of barcodes file
+                               ## [4] [sorted_fastq_path]: Location of demultiplexed/sorted fastq files
+denovo                         ## [5] [assembly_method]: Assembly method (denovo, reference, denovo+reference, denovo-reference)
+                               ## [6] [reference_sequence]: Location of reference sequence file
+rad                            ## [7] [datatype]: Datatype (see docs): rad, gbs, ddrad, etc.
+TGCAG,                         ## [8] [restriction_overhang]: Restriction overhang (cut1,) or (cut1, cut2)
+5                              ## [9] [max_low_qual_bases]: Max low quality base calls (Q<20) in a read
+33                             ## [10] [phred_Qscore_offset]: phred Q score offset (33 is default and very standard)
+6                              ## [11] [mindepth_statistical]: Min depth for statistical base calling
+6                              ## [12] [mindepth_majrule]: Min depth for majority-rule base calling
+10000                          ## [13] [maxdepth]: Max cluster depth within samples
+0.85                           ## [14] [clust_threshold]: Clustering threshold for de novo assembly
+0                              ## [15] [max_barcode_mismatch]: Max number of allowable mismatches in barcodes
+0                              ## [16] [filter_adapters]: Filter for adapters/primers (1 or 2=stricter)
+35                             ## [17] [filter_min_trim_len]: Min length of reads after adapter trim
+2                              ## [18] [max_alleles_consens]: Max alleles per site in consensus sequences
+5, 5                           ## [19] [max_Ns_consens]: Max N's (uncalled bases) in consensus (R1, R2)
+8, 8                           ## [20] [max_Hs_consens]: Max Hs (heterozygotes) in consensus (R1, R2)
+4                              ## [21] [min_samples_locus]: Min # samples per locus for output
+20, 20                         ## [22] [max_SNPs_locus]: Max # SNPs per locus (R1, R2)
+8, 8                           ## [23] [max_Indels_locus]: Max # of indels per locus (R1, R2)
+0.5                            ## [24] [max_shared_Hs_locus]: Max # heterozygous sites per locus (R1, R2)
+0, 0, 0, 0                     ## [25] [trim_reads]: Trim raw read edges (R1>, <R1, R2>, <R2) (see docs)
+0, 0, 0, 0                     ## [26] [trim_loci]: Trim locus edges (see docs) (R1>, <R1, R2>, <R2)
+p, s, v                        ## [27] [output_formats]: Output formats (see docs)
+                               ## [28] [pop_assign_file]: Path to population assignment file
 ```
 
-In general the defaults are sensible, and we won't mess with them for
-now, but there are a few parameters we *must* change. We need to set the
-path to the raw data we want to analyse, and we need to set the path to
-the barcodes file.
+In general the defaults are sensible, and we won't mess with them for now, 
+but there are a few parameters we *must* change: the path to the raw data, 
+the dataype, and the restriction overhang sequence.
 
-In your favorite text editor open `params-anolis.txt` and change
-these two lines to look like this, and then save it:
+We will use the `nano` text editor to modify `params-anolis.txt` and change
+these parameters:
+
+```
+nano params-anlis.txt
+```
+![png](02_ipyrad_partI_CLI_files/ipyrad_part1_nano.png)
+
+Nano is a command line editor, so you'll need to use only the arrow keys 
+on the keyboard for navigating around the file. Nano accepts a few special
+keyboard commands for doing things other than modifying text, and it lists 
+these on the bottom of the frame. 
+
+Change the following parameter values to match these:
+```
+./raws/*.gz                    ## [4] [sorted_fastq_path]: Location of demultiplexed/sorted fastq files
+gbs                            ## [7] [datatype]: Datatype (see docs): rad, gbs, ddrad, etc.
+TGCAT,                         ## [8] [restriction_overhang]: Restriction overhang (cut1,) or (cut1, cut2)
+```
+
+After you change these parameters you may save and exit nano by typing CTRL+O 
+(to write **O**utput), and then CTRL+X (to e**X**it the program).
 
 Once we start running the analysis this will create a new directory to
 hold all the output for this assembly. By default this creates a new
