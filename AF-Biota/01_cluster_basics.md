@@ -146,7 +146,8 @@ The first step of any RAD-Seq assembly is to inspect your raw data to estimate o
 
 On the X-axis you see the position on the read in base-pairs and on the Y-axis you see information about [Phred quality score](https://en.wikipedia.org/wiki/Phred_quality_score) per base for all reads, including median (center red line), IQR (yellow box), and 10%-90% (whiskers). This figure depicts a common artifact of current Illumina chemistry, whereby quality scores per base drop off precipitously toward the ends of reads. The purpose of using FastQC to examine reads is to determine whether and how much to trim our reads to reduce sequencing error interfering with basecalling. In the above figure, as in most real dataset, we can see there is a tradeoff between throwing out data to increase overall quality by trimming for shorter length, and retaining data to increase value obtained from sequencing with the result of increasing noise toward the ends of reads.
 
-In preperation for running fastqc on our files we need to make an output directory because it creates quite a bit of output that we want to keep organized:
+### Running FastQC on the Anolis data
+In preperation for running FastQC on our raw data we need to make an output directory to keep the FastQC results organized:
 
 ```
 cd ~/ipyrad-workshop
