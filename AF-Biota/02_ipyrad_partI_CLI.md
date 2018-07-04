@@ -122,13 +122,32 @@ p, s, v                        ## [27] [output_formats]: Output formats (see doc
                                ## [28] [pop_assign_file]: Path to population assignment file
 ```
 
-In general the defaults are sensible, and we won't mess with them for
-now, but there are a few parameters we *must* change. We need to set the
-path to the raw data, the dataype, and the restriction
-overhang sequence.
+In general the defaults are sensible, and we won't mess with them for now, 
+but there are a few parameters we *must* change: the path to the raw data, 
+the dataype, and the restriction overhang sequence.
 
-In your favorite text editor open `params-anolis.txt` and change
-these two lines to look like this, and then save it:
+We will use the `nano` text editor to modify `params-anolis.txt` and change
+these parameters:
+
+```
+nano params-anlis.txt
+```
+![png](02_ipyrad_partI_CLI_files/ipyrad_part1_nano.png)
+
+Nano is a command line editor, so you'll need to use only the arrow keys 
+on the keyboard for navigating around the file. Nano accepts a few special
+keyboard commands for doing things other than modifying text, and it lists 
+these on the bottom of the frame. 
+
+Change the following parameter values to match these:
+```
+./raws/*.gz                    ## [4] [sorted_fastq_path]: Location of demultiplexed/sorted fastq files
+gbs                            ## [7] [datatype]: Datatype (see docs): rad, gbs, ddrad, etc.
+TGCAT,                         ## [8] [restriction_overhang]: Restriction overhang (cut1,) or (cut1, cut2)
+```
+
+After you change these parameters you may save and exit nano by typing CTRL+O 
+(to write **O**utput), and then CTRL+X (to e**X**it the program).
 
 Once we start running the analysis this will create a new directory to
 hold all the output for this assembly. By default this creates a new
