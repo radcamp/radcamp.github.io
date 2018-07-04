@@ -152,7 +152,7 @@ Step 1: Demultiplex the raw data files
 Step 1 reads in the barcodes file and the raw data. It scans through the
 raw data and sorts each read based on the mapping of samples to
 barcodes. At the end of this step we'll have a new directory in our
-project\_dir called `ipyrad-test_fastqs`. Inside this directory will be
+project\_dir called `anolis_fastqs`. Inside this directory will be
 individual fastq.gz files for each sample.
 
 **NB:** You'll notice the name of this output directory bears a strong
@@ -185,7 +185,7 @@ minute.
 %%bash
 ## -p indicates the params file we wish to use
 ## -s indicates the step to run
-ipyrad -p params-ipyrad-test.txt -s 1
+ipyrad -p params-anolis.txt -s 1
 ```
 
 ```
@@ -193,7 +193,7 @@ ipyrad -p params-ipyrad-test.txt -s 1
 > ipyrad [v.0.1.47]
 > Interactive assembly and analysis of RADseq data
 > -------------------------------------------------- 
-> New Assembly: ipyrad-test
+> New Assembly: anolis
 >    ipyparallel setup: Local connection to 4 Engines
 >
 > Step1: Demultiplexing fastq data to Samples.
@@ -213,12 +213,12 @@ There are 4 main parts to this step:
     -   Actually do the demuliplexing.
     -   Save the state of the assembly.
 
-Have a look at the results of this step in the `ipyrad-test_fastqs`
+Have a look at the results of this step in the `anolis_fastqs`
 output directory:
 
 ``` 
 %%bash
-ls ipyrad-test_fastqs 
+ls anolis_fastqs 
 ```
 
 A more informative metric of success might be the number of raw reads
@@ -230,7 +230,7 @@ results by invoking the `-r` flag.
 %%bash
 ## -r fetches informative results from currently 
 ##      executed steps
-ipyrad -p params-ipyrad-test.txt -r
+ipyrad -p params-anolis.txt -r
 ```
 
 If you want to get even **more** info ipyrad tracks all kinds of wacky
@@ -239,7 +239,7 @@ each step. For instance to see full stats for step 1:
 
 ```
 %%bash
-cat ./ipyrad-test_fastqs/s1_demultiplex_stats.txt
+cat ./anolis_fastqs/s1_demultiplex_stats.txt
 ```
 
 And you'll see a ton of fun stuff I won't copy here in the interest of
@@ -253,11 +253,11 @@ detect Illumina adapters in your reads, which is sometimes a problem
 with homebrew type library preparations. Here the filter is set to the
 default value of 0 (zero), meaning it filters only based on quality
 scores of base calls. The filtered files are written to a new directory
-called `ipyrad-test_edits`.
+called `anolis_edits`.
 
 ```
 %%bash
-ipyrad -p params-ipyrad-test.txt -s 2
+ipyrad -p params-anolis.txt -s 2
 ```
 
 ```
@@ -265,7 +265,7 @@ ipyrad -p params-ipyrad-test.txt -s 2
 > ipyrad [v.0.1.47]
 > Interactive assembly and analysis of RADseq data
 > -------------------------------------------------- 
-> loading Assembly: ipyrad-test ~/Documents/ipyrad/tests/ipyrad-test.json
+> loading Assembly: anolis ~/Documents/ipyrad/tests/anolis.json
 >   ipyparallel setup: Local connection to 4 Engines
 >
 > Step2: Filtering reads
@@ -280,21 +280,21 @@ handy stats tracked for this assembly.
 ```
 %%bash
 ## View the output of step 2
-ls ipyrad-test_edits
+ls anolis_edits
 ```
 
 ```
 %%bash
 ## Get current stats including # raw reads and # reads
 ## after filtering.
-ipyrad -p params-ipyrad-test.txt -r
+ipyrad -p params-anolis.txt -r
 ```
 
 You might also take a gander at the filtered reads: 
 
 ```
 %%bash
-> head -n 12 ./ipyrad-test_fastqs/1A_0_R1.fastq
+> head -n 12 ./anolis_fastqs/1A_0_R1.fastq
 ```
 
 Step 3: clustering within-samples
@@ -302,7 +302,7 @@ Step 3: clustering within-samples
 
 Step 3 de-replicates and then clusters reads within each sample by the
 set clustering threshold and then writes the clusters to new files in a
-directory called `ipyrad-test_clust_0.85`. Intuitively we are trying to
+directory called `anolis_clust_0.85`. Intuitively we are trying to
 identify all the reads that map to the same locus within each sample.
 The clustering threshold specifies the minimum percentage of sequence
 similarity below which we will consider two reads to have come from
@@ -329,7 +329,7 @@ Now lets run step 3:
 
 ```
 %%bash
-ipyrad -p params-ipyrad-test.txt -s 3
+ipyrad -p params-anolis.txt -s 3
 ```
 
 ```
@@ -337,7 +337,7 @@ ipyrad -p params-ipyrad-test.txt -s 3
 > ipyrad [v.0.1.47]
 > Interactive assembly and analysis of RADseq data
 > -------------------------------------------------- 
-> loading Assembly: ipyrad-test ~/Documents/ipyrad/tests/ipyrad-test.json
+> loading Assembly: anolis ~/Documents/ipyrad/tests/anolis.json
 >   ipyparallel setup: Local connection to 4 Engines
 >
 > Step3: Clustering/Mapping reads
@@ -356,7 +356,7 @@ sequencing error.
 
 ```
 %%bash
-ipyrad -p params-ipyrad-test.txt -r
+ipyrad -p params-anolis.txt -r
 ```
 
 Again, the final output of step 3 is dereplicated, clustered files for
@@ -370,7 +370,7 @@ this looks like by examining a portion of one of the files.
 ## you're interested in what more of the loci look like
 ## you can increase the number of lines you ask head for,
 ## e.g. ... | head -n 100
-gunzip -c ipyrad-test_clust_0.85/1A_0.clustS.gz | head -n 28
+gunzip -c anolis_clust_0.85/1A_0.clustS.gz | head -n 28
 ```
 
 Reads that are sufficiently similar (based on the above sequence

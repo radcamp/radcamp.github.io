@@ -38,7 +38,7 @@ it thusly:
 
 ```
 %%bash
-ipyrad -p params-ipyrad-test.txt -s 4
+ipyrad -p params-anolis.txt -s 4
 ```
 
 ```
@@ -47,8 +47,8 @@ ipyrad -p params-ipyrad-test.txt -s 4
 > Interactive assembly and analysis of RADseq data
 > --------------------------------------------------
 >
-> loading Assembly: ipyrad-test
->     ~/Documents/ipyrad/tests/ipyrad-test.json 
+> loading Assembly: anolis
+>     ~/Documents/ipyrad/tests/anolis.json 
 >     ipyparallel setup: Local connection to 4 Engines
 >
 > Step4: Joint estimation of error rate and heterozygosity
@@ -63,7 +63,7 @@ heterozygosity and error rate per sample.
 
 ```
 %%bash
-ipyrad -p params-ipyrad-test.txt -r
+ipyrad -p params-anolis.txt -r
 ```
 
 Step 5: Consensus base calls
@@ -75,7 +75,7 @@ we believe to be the real haplotypes at each locus within each sample.
 
 ```
 %%bash
-ipyrad -p params-ipyrad-test.txt -s 5
+ipyrad -p params-anolis.txt -s 5
 ```
 
 ```
@@ -85,7 +85,7 @@ ipyrad -p params-ipyrad-test.txt -s 5
 >
 > --------------------------------------------------
 >
-> loading Assembly: ipyrad-test ~/Documents/ipyrad/tests/ipyrad-test.json 
+> loading Assembly: anolis ~/Documents/ipyrad/tests/anolis.json 
 >     ipyparallel setup:Local connection to 4 Engines
 >
 > Step5: Consensus base calling
@@ -100,7 +100,7 @@ Again we can ask for the results:
 
 ```
 %%bash
-ipyrad -p params-ipyrad-test.txt -r
+ipyrad -p params-anolis.txt -r
 ```
 
 And here the important information is the number of `reads_consens`.
@@ -119,7 +119,7 @@ similarity.
 
 ```
 %%bash
-ipyrad -p params-ipyrad-test.txt -s 6
+ipyrad -p params-anolis.txt -s 6
 ```
 
 ```
@@ -127,7 +127,7 @@ ipyrad -p params-ipyrad-test.txt -s 6
 > ipyrad [v.0.1.47]
 > Interactive assembly and analysis of RADseq data
 > -------------------------------------------------- 
-> loading Assembly: ipyrad-test ~/Documents/ipyrad/tests/ipyrad-test.json
+> loading Assembly: anolis ~/Documents/ipyrad/tests/anolis.json
 >   ipyparallel setup: Local connection to 4 Engines
 >
 > Step6: Clustering across 12 samples at 0.85 similarity
@@ -142,7 +142,7 @@ though.
 
 ```
 %%bash
-ipyrad -p params-ipyrad-test.txt -r
+ipyrad -p params-anolis.txt -r
 ```
 
 It might be more enlightening to consider the output of step 6 by
@@ -150,11 +150,11 @@ examining the file that contains the reads clustered across samples:
 
 ```
 %%bash
-gunzip -c ipyrad-test_consens/ipyrad-test_catclust.gz | head -n 30 | less
+gunzip -c anolis_consens/anolis_catclust.gz | head -n 30 | less
 ```
 
-The final output of step 6 is a file in `ipyrad-test_consens` called
-`ipyrad-test_catclust.gz`. This file contains all aligned reads across
+The final output of step 6 is a file in `anolis_consens` called
+`anolis_catclust.gz`. This file contains all aligned reads across
 all samples. Executing the above command you'll see the output below
 which shows all the reads that align at one particular locus. You'll see
 the sample name of each read followed by the sequence of the read at
@@ -177,10 +177,10 @@ After running step 7 like so:
 
 ```
 %%bash
-ipyrad -p params-ipyrad-test.txt -s 7
+ipyrad -p params-anolis.txt -s 7
 ```
 
-A new directory is created called `ipyrad-test_outfiles`. This directory
+A new directory is created called `anolis_outfiles`. This directory
 contains all the output files specified in the params file. The default
 is to create all supported output files which include .phy, .nex, .geno,
 .treemix, .str, as well as many others.
