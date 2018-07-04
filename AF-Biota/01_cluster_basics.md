@@ -144,6 +144,8 @@ The first step of any RAD-Seq assembly is to inspect your raw data to estimate o
 
 ![png](01_cluster_basics_files/fastqc-quality-example.png)
 
+
+
 In preperation for running fastqc on our files we need to make an output directory because it creates quite a bit of output that we want to keep organized:
 
 ```
@@ -200,6 +202,7 @@ Now we have output files that include html and images depicting lots of informat
 
 ### Inspecting FastQC Output
 
+**Add stuff here when we decide how people should fetch their own fastqc results**
 
 # References
 Elshire, R. J., Glaubitz, J. C., Sun, Q., Poland, J. A., Kawamoto, K., Buckler, E. S., & Mitchell, S. E. (2011). A robust, simple genotyping-by-sequencing (GBS) approach for high diversity species. PloS one, 6(5), e19379.
