@@ -392,30 +392,49 @@ $ ipyrad -p params-anolis.txt -s 2 -c 2
 ```
 
 The filtered files are written to a new directory called `anolis_edits`. Again, 
-you can look at the results output by this step and also some handy stats tracked for this assembly.
+you can look at the results output by this step and also some handy stats tracked 
+for this assembly.
 
 ```
-%%bash
 ## View the output of step 2
-ls anolis_edits
+$ cat anolis_edits/s2_rawedit_stats.txt 
+                   reads_raw  trim_adapter_bp_read1  trim_quality_bp_read1  reads_filtered_by_Ns  reads_filtered_by_minlen  reads_passed_filter
+punc_IBSPCRIB0361     250000                 108761                 160210                    66                     12415               237519
+punc_ICST764          250000                 107320                 178463                    68                     13117               236815
+punc_JFT773           250000                 110684                 190803                    46                      9852               240102
+punc_MTR05978         250000                 102932                 144773                    54                     12242               237704
+punc_MTR17744         250000                 103394                 211363                    55                      9549               240396
+punc_MTR21545         250000                 119191                 161709                    63                     21972               227965
+punc_MTR34414         250000                 109207                 193401                    54                     16372               233574
+punc_MTRX1468         250000                 119746                 134069                    45                     19052               230903
+punc_MTRX1478         250000                 116009                 184189                    53                     16549               233398
+punc_MUFAL9635        250000                 114492                 182877                    61                     18071               231868
 ```
 
 ```
-%%bash
-## Get current stats including # raw reads and # reads
-## after filtering.
-ipyrad -p params-anolis.txt -r
+## Get current stats including # raw reads and # reads  after filtering.
+$ ipyrad -p params-anolis.txt -r
 ```
 
 You might also take a gander at the filtered reads: 
 
 ```
-%%bash
-> head -n 12 ./anolis_fastqs/1A_0_R1.fastq
+$ head -n 12 ./anolis_fastqs/1A_0_R1.fastq
+@D00656:123:C6P86ANXX:8:2201:3857:34366 1:Y:0:8
+TGCATGTTTATTGTCTATGTAAAAGGAAAAGCCATGCTATCAGAGATTGGCCTGGGGGGGGGGGGCAAATACATG
++
+;=11>111>1;EDGB1;=DG1=>1:EGG1>:>11?CE1<>1<1<E1>ED1111:00CC..86DG>....//8CDD
+@D00656:123:C6P86ANXX:8:2201:5076:34300 1:N:0:8
+TGCATATGAACCCCAACCTCCCCATCACATTCCACCATAGCAATCAGTTTCCTCTCTTCCTTCTTCTTGACCTCT
++
+@;BFGEBCC11=/;/E/CFGGGG1ECCE:EFDFCGGGGGGG11EFGGGGGCGG:B0=F0=FF0=F:FG:FDG00:
+@D00656:123:C6P86ANXX:8:2201:5042:34398 1:N:0:8
+TGCATTCAAAGGGAGAAGAGTACAGAAACCAAGCACATATTTGAAAAATGCA
++
+GGGGGGGCGGGGGGGGGGGGGEGGGFGGGGGGEGGGGGGGGGGGGGFGGGEG
 ```
 
-Step 3: clustering within-samples
-=================================
+# Step 3: clustering within-samples
 
 Step 3 de-replicates and then clusters reads within each sample by the
 set clustering threshold and then writes the clusters to new files in a
