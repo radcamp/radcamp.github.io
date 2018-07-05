@@ -226,13 +226,13 @@ $ ipyrad -p params-anolis.txt -s 6 -c 2
   [####################] 100%  building database     | 0:00:00
 ```
 In-depth operations of step 6:
-* concat/shuffle input - 
-* clustering across - 
-* building clusters - 
-* aligning clusters - 
-* database indels - 
-* indexing clusters - 
-* building database - 
+* concat/shuffle input - Gathering all consensus files and preprocessing to improve performance.
+* clustering across - Cluster by similarity threshold across samples.
+* building clusters - Group similar reads into clusters
+* aligning clusters - Align within each cluster
+* database indels - Post-processing indels
+* indexing clusters - Post-processing clusters
+* building database - Gathering all data into a unified format
 
 Since in general the stats for results of each step are sample based, 
 the output of `-r` will only display what we had seen after step 5, 
@@ -329,8 +329,18 @@ create two different version of phylip output, one including the full
 sequence `anolis.phy` and one including only variable sites `anolis.snps.phy`, 
 as well as `anolis.vcf`, and the `anolis.loci` (which is ipyrad's internal 
 format). The other important file here is the `anolis_stats.txt` which gives
-extensive and detailed stats about the final assembly.
+extensive and detailed stats about the final assembly. A quick overview of the
+blocks in this file:
 
+This block indicates how filtering is impacting your final dataset. Each
+filter is applied in order from top to bottom, and the number of loci
+removed because of each filter is shown in the `applied_order` column. The
+total number of `retained_loci` after each filtering step is displayed in
+the final column. This is a good place for inspecting how your filtering
+thresholds are impacting your final dataset. For example, you might see
+that most loci are being filterd by `min_sample_locus` (a very common
+result), in which case you might reduce this threshold in your params file
+and re-run step 7 in order to retain more loci.
 ```
 ## The number of loci caught by each filter.
 ## ipyrad API location: [assembly].stats_dfs.s7_filters
@@ -346,6 +356,10 @@ filtered_by_max_alleles               872             68           2918
 total_filtered_loci                  2918              0           2918
 ```
 
+A simple summary of the number of loci retained for each sample in the
+final dataset. Pretty straightforward. If you have some samples that have
+very low sample_coverage here it might be good to remove them and re-run
+step 7.
 ```
 ## The number of loci recovered for each Sample.
 ## ipyrad API location: [assembly].stats_dfs.s7_samples
@@ -363,6 +377,17 @@ punc_MTRX1478                 1807
 punc_MUFAL9635                1628
 ```
 
+`locus_coverage` indicates the number of loci that contain exactly a given
+number of samples, and `sum_coverage` is just the running total of these
+in ascending order. So here, if it weren't being filtered, locus coverage 
+in the `1` column would indicate singletons (only one sample at this locus), 
+and locus coverage in the `10` column indicates loci with full coverage 
+(all samples have data at these loci).
+
+**Note:** It's important to notice that locus coverage below your 
+`min_sample_locus` parameter setting will all naturally equal 0, since 
+by definition these are being removed.
+
 ```
 ## The number of loci for which N taxa have data.
 ## ipyrad API location: [assembly].stats_dfs.s7_loci
@@ -379,6 +404,19 @@ punc_MUFAL9635                1628
 9              237          2722
 10             196          2918
 ```
+
+Whereas the previous block indicated samples per locus, here we 
+are looking at SNPs per locus. In a similar fashion as above,
+these columns record the counts of loci containing given numbers
+of variable sites and parsimony informative sites (pis). For example,
+in the `2` row, this indicates the number of loci with 2 variable
+sites (174), and the number of loci with 2 pis (48). The `sum_*`
+columns simply indicate the running total in ascending order.
+
+**Note:** This block can be a little tricky because loci can
+end up getting double-counted. For example, a locus with 1 pis,
+and 2 autapomorphies will be counted once in the 3 row for `var`,
+and once in the 1 row for `pis`. Apply care with these values.
 
 ```
 ## The distribution of SNPs (var and pis) per locus.
@@ -407,6 +445,7 @@ punc_MUFAL9635                1628
 17     1     1904     0      621
 ```
 
+The final block displays statistics for each sample in the final dataset. Many of these stats will already be familiar, but this provides a nice compact view on how each sample is represented in the output. The one new stat here is `loci_in_assembly`, which indicates how many loci each sample has data for.
 ```
 ## Final Sample stats summary
 
