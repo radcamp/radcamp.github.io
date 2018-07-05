@@ -569,11 +569,9 @@ c26ec07b3e3e77d3167341d100fd2d4e;size=1;-
 
 Reads that are sufficiently similar (based on the above sequence
 similarity threshold) are grouped together in clusters separated by
-"//". For the first cluster above there is clearly one allele
-(homozygote) and one read with a (simulated) sequencing error. For the
-second cluster it seems there are two alleles (heterozygote), and a
-couple reads with sequencing errors. For the third cluster it's a bit
-harder to say. Is this a homozygote with lots of sequencing errors, or a
-heterozygote with few reads for one of the alleles?
+"//". For the second and fourth clusters above these are *probably* homozygous 
+with some sequencing error, but it's hard to tell. For the first and third
+clusters are there are truly two alleles (heterozygote)? Is it a homozygote 
+with lots of sequencing errors, or a heterozygote with few reads for one of the alleles?
 
 Thankfully, untangling this mess is what step 4 is all about.
