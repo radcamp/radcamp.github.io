@@ -15,16 +15,21 @@ overview of how to execute ipyrad, what the data files look like, how to
 check that your analysis is working, and what the final output formats
 will be.
 
-Each grey cell in this tutorial indicates code that should be executed 
-in a command line shell on the USP cluster, for example by copying and 
-pasting the text into your terminal. All lines in code cells  beginning 
-with \#\# are comments and should not be copied and executed.
+Each grey cell in this tutorial indicates a command line interaction. 
+Lines starting with `$ ` indicate a command that should be executed 
+in a terminal connected to the USP cluster, for example by copying and 
+pasting the text into your terminal. All lines in code cells beginning 
+with \#\# are comments and should not be copied and executed. All
+other lines should be interpreted as output from the issued commands.
 
 ```
 ## Example Code Cell.
 ## Create an empty file in my home directory called `watdo.txt`
+$ touch ~/watdo.txt
 
-touch ~/watdo.txt
+## Print "wat" to the screen
+$ echo "wat"
+wat
 ```
 
 # Overview of Assembly Steps
@@ -62,30 +67,54 @@ compute nodes, but still be able to remain at the command line so
 we can easily monitor progress. First, open an SSH connection to
 the cluster:
 ```
-ssh isaac@lem.ib.usp.br 
+ssh <username>@lem.ib.usp.br 
 ```
 
 ### Submitting an interactive job to the cluster
 
 Now we will submit an interactive job with relatively modest resource
-requests. Remember, you can see default resource allocations for all
-cluster queues [here](USP_Cluster_Info.md).
+requests. Remember, you can see default and maximum resource allocations 
+for all cluster queues [here](USP_Cluster_Info.md).
 ```
 ## -q proto         - Submit a job to the 'prototyping' queue
 ## -l nodes=1:ppn=2 - Request 2 processes on the target compute node
 ## -l mem=64        - Request 64Gb of main memory
 ## -I               - Use 'interactive' mode (get a terminal on the compute node)
 
-qsub -q proto -l nodes=1:ppn=2 -l mem=64gb -I
-```
-The output should look something like this:
-```
+$ qsub -q proto -l nodes=1:ppn=2 -l mem=64gb -I
 qsub: waiting for job 24816.darwin to start
 qsub: job 24816.darwin ready
 ```
+Depending on cluster usage the job submission script can take more
+or less time to, but the USP cluster is normally quite fast, so it this
+request shouldn't take more than a few moments. Once you see the 
+`qsub: job XXXX.darwin ready` message this indicates that your 
+interactive job request was successful and your terminal is now 
+running on a compute node. 
 
 ### Inspecting running cluster processes
+At any time you can ask the cluster for the status of your jobs with the 
+`qstat` command. For a simple `qstat` call, the most interesting column
+is marked `S` (meaning "status"). The most common values for this field
+are:
+* R - Job is running
+* Q - job is Queued (boo!)
+* C - Job is completed (yay!)
+```
+$ qstat
+Job ID                    Name             User            Time Use S Queue
+------------------------- ---------------- --------------- -------- - -----
+24817.darwin              STDIN            isaac           00:00:00 R proto
 
+## Ask more detailed information about job status with the `-r` flag
+$ qstat -r
+
+darwin:
+                                                                                  Req'd       Req'd       Elap
+Job ID                  Username    Queue    Jobname          SessID  NDS   TSK   Memory      Time    S   Time
+----------------------- ----------- -------- ---------------- ------ ----- ------ --------- --------- - ---------
+24817.darwin            isaac       proto    STDIN             38014     1      2      64gb  04:00:00 R  00:00:07
+```                                                                       
 
 ## Create a new parameters file
 
