@@ -98,7 +98,7 @@ FastQC v0.11.7
 > **Note:** The `isaac@darwin:~$` here is my 'prompt', which is the server's indication to me that it is ready to receive commands. You should have a similar prompt, but your name will obviously be different. If you see a prompt in a command you can assume we are just asking you to type the commands at your prompt in a similar fashion.
 
 ## Fetch the raw data
-We will be reanalysing RAD-Seq data from *Anoles punctatus* sampled from across their distribution on the South American continent and published in [Prates et al 2016](http://www.pnas.org/content/pnas/113/29/7978.full.pdf). The original dataset included 84 individuals, utilized the Genotyping-By-Sequencing (GBS) single-enzyme library prep protocol [Ellshire et al 2011](http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0019379), sequenced 150bp single-end on an Illumina Hi-Seq and resulted in final raw sequence counts on the order of 1e6 per sample.
+We will be reanalysing RAD-Seq data from *Anolis punctatus* sampled from across their distribution on the South American continent and published in [Prates et al 2016](http://www.pnas.org/content/pnas/113/29/7978.full.pdf). The original dataset included 43 individuals of *A. punctatus*, utilized the Genotyping-By-Sequencing (GBS) single-enzyme library prep protocol [Ellshire et al 2011](http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0019379), sequenced 150bp single-end on an Illumina Hi-Seq and resulted in final raw sequence counts on the order of 1e6 per sample.
 
 We will be using a subset of 10 individuals distributed along the coastal extent of the central and northern Atlantic forest. Additionally, raw reads have been randomly downsampled to 2.5e5 per sample, in order to create a dataset that will be computationally tractable for 20 people to run simultaneously with the expectation of finishing in a reasonable time.
 
@@ -137,7 +137,7 @@ In contrast, here is a somewhat typical base sequence quality report for R1 of a
 This figure depicts a common artifact of current Illumina chemistry, whereby quality scores per base drop off precipitously toward the ends of reads, with the effect being magnified for read lengths > 150bp. The purpose of using FastQC to examine reads is to determine whether and how much to trim our reads to reduce sequencing error interfering with basecalling. In the above figure, as in most real dataset, we can see there is a tradeoff between throwing out data to increase overall quality by trimming for shorter length, and retaining data to increase value obtained from sequencing with the result of increasing noise toward the ends of reads.
 
 ### Running FastQC on the Anolis data
-In preperation for running FastQC on our raw data we need to make an output directory to keep the FastQC results organized:
+In preparation for running FastQC on our raw data we need to make an output directory to keep the FastQC results organized:
 
 ```
 cd ~/ipyrad-workshop
@@ -212,7 +212,7 @@ For the Anolis data the sequence quality per base is uniformly quite high, with 
 Now lets look at the `Per base sequece content`, which FastQC highlights with a scary red **X**.
 ![png](01_cluster_basics_files/anolis-base-content.png)
 
-The squiggles indicate base composition per base position averaged across the reads. It looks like the signal FastQC is concerned about here is related to the *extreme* base composition bias of the first 5 positions. We happen to know this is a result of the restriction overhang, and so is in fact of no concern. Now lets look at `Adapter Content`:
+The squiggles indicate base composition per base position averaged across the reads. It looks like the signal FastQC is concerned about here is related to the *extreme* base composition bias of the first 5 positions. We happen to know this is a result of the restriction enzyme overhang present in all reads (`TGCAT` in this case for the EcoT22I enzyme used), and so it is in fact of no concern. Now lets look at `Adapter Content`:
 
 ![png](01_cluster_basics_files/anolis-adapters.png)
 
