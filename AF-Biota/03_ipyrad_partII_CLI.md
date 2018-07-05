@@ -1,30 +1,82 @@
-ipyrad command line tutorial - Part II
-============================
+* ipyrad command line tutorial - Part II
 
 This is the second part of the full tutorial for the command line interface for ipyrad. 
 
-Each cell in this tutorial beginning with the header (%%bash) indicates
-that the code should be executed in a command line shell, for example by
-copying and pasting the text into your terminal (but excluding the
-%%bash header). All lines in code cells beginning with \#\# are comments
-and should not be copied and executed.
+Each grey cell in this tutorial indicates a command line interaction. 
+Lines starting with `$ ` indicate a command that should be executed 
+in a terminal connected to the USP cluster, for example by copying and 
+pasting the text into your terminal. All lines in code cells beginning 
+with \#\# are comments and should not be copied and executed. All
+other lines should be interpreted as output from the issued commands.
 
-Step 3: Recap
-=========================================================
+```
+## Example Code Cell.
+## Create an empty file in my home directory called `watdo.txt`
+$ touch ~/watdo.txt
 
-Remember you clustered your reads in Step 3. Reads that are sufficiently similar (based on the above sequence
-similarity threshold) are grouped together in clusters separated by
-"//". For the first cluster below there is clearly one allele
-(homozygote) and one read with a (simulated) sequencing error. For the
-second cluster it seems there are two alleles (heterozygote), and a
-couple reads with sequencing errors. For the third cluster it's a bit
-harder to say. Is this a homozygote with lots of sequencing errors, or a
-heterozygote with few reads for one of the alleles?
+## Print "wat" to the screen
+$ echo "wat"
+wat
+```
 
-Thankfully, untangling this mess is what step 4 is all about.
+* Step 3: Recap
 
-Step 4: Joint estimation of heterozygosity and error rate
-=========================================================
+Recall that we clustered reads within samples in Step 3. Reads that are sufficiently 
+similar (based on the specified sequence similarity threshold) are grouped together in clusters separated by
+"//". We examined the `head` of one of the sample cluster files at the end of the last exercise, but
+here we've cherry picked a couple clusters with more pronounced features.
+
+Here's a nice homozygous cluster, with probably one read with sequencing error:
+```
+0082e23d9badff5470eeb45ac0fdd2bd;size=5;*
+TGCATGTAGTGAAGTCCGCTGTGTACTTGCGAGAGAATGAGTAGTCCTTCATGCA
+a2c441646bb25089cd933119f13fb687;size=1;+
+TGCATGTAGTGAAGTCCGCTGTGTACTTGCGAGAGAATGAGCAGTCCTTCATGCA
+```
+
+Here's a probable heterozygote, a little bit messier:
+```
+0091f3b72bfc97c4705b4485c2208bdb;size=3;*
+TGCATACAC----GCACACA----GTAGTAGTACTACTTTTTGTTAACTGCAGCATGCA
+9c57902b4d8e22d0cda3b93f1b361e78;size=3;-
+TGCATACAC----ACACACAACCAGTAGTAGTATTACTTTTTGTTAACTGCAGCATGCA
+d48b3c7b5a0f1840f54f6c7808ca726e;size=1;+
+TGCATACAC----ACAAACAACCAGTTGTAGTACTACTTTTTGTTAACTGCAGCATGAA
+fac0c64aeb8afaa5dfecd5254b81b3c0;size=1;+
+TGCATACAC----GCACACAACCAGTAGTAGTACTACTTTTTGTTAACTGCAGCATGTA
+f31cbca6df64e7b9cb4142f57e607a88;size=1;-
+TGCATGCACACACGCACGCAACCAGTAGTTGTACTACTTTTTGTTAACTGCAGCATGCA
+935063406d92c8c995d313b3b22c6484;size=1;-
+TGCATGCATACACGCCCACAACCAGTAGTAGTACAACTTTATGTTAACTGCAGCATGCA
+d25fcc78f14544bcb42629ed2403ce74;size=1;+
+TGCATACAC----GCACACAACCAGTAGTAGTACTACTTTTTGTTAATTGCAGCATGCA
+```
+
+Here's a nasty one!
+```
+008a116c7a22d6af3541f87b36a8d895;size=3;*
+TGCATTCCTATGGGAATCATGAAGGGGCTTCTCTCTCCCTCA-TTTTTAAAGCGACCCTTTCCAAACTTGGTACAT----
+a7bde31f2034d2e544400c62b1d3cbd5;size=2;+
+TGCATTCCTATGGGAAACATGAAGGGACTTCTCTCTCCCTCG-TTTTTAAAGTGACTCTGTCCAAACTTGGTACAT----
+107e1390e1ac8564619a278fdae3f009;size=2;+
+TGCATTCCTATGGGAAACATGAAGGGGGTTCTCTCTCCCTCG-ATTTTAAAGCGACCCTGTCCAAACTTGGTACAT----
+8f870175fb30eed3027b7aec436e93e6;size=2;+
+TGCATTCCTATGGGAATCATGGAAGGGCTTCTCTCTCCCTCA-TTTTTAAAGCAACCCTGACCAAAGTTGGTACAT----
+445157bc1e7540734bf963eb8629d827;size=2;+
+TGCATTCCTACGGGAATCATGGAGGGGCTTCTCTCTCCCTCG-TTTTTAAAGCGACCCTGACCAAACTTGGTACAT----
+9ddd2d8b6fb52157f17648682d09afda;size=1;+
+TGCATTCCTATGAGAAACATGATGGGGCTTCTCTTTCCCTCATTTTTT--AGTTAGCCTTACCAAAGTTGGTACATT---
+fc86d48758313be18587d6f185e5c943;size=1;+
+TGCATTCCTGTGGGAAACATGAAGGGGCTTCTCTCTCCATCA-TTTTTAAAGCGACCCTGATCAAATTTGGTACAT----
+243a5acbee6cd9cd223252a8bb65667e;size=1;+
+TGCATTCCTATGGGAAACATGAAAGGGTTTCTCTCTCCCTCG-TTTTAAAAGCGACCCTGTCCAAACATGGTACAT----
+55e50e131ec21fce8021f22de49bb7be;size=1;+
+TGCATTCCAATGGGAAACATGAAAGGGCTTCTCTCTCCCTCG-TTTTTAAAGCGACCCTGTCCAAACTTGGTACAT----
+```
+
+For this final cluster it's really hard to call by eye, that's why we make the computer do it! 
+
+# Step 4: Joint estimation of heterozygosity and error rate
 
 Jointly estimate sequencing error rate and heterozygosity to help us
 figure out which reads are "real" and which are sequencing error. We
@@ -37,24 +89,19 @@ probably junk. This step is pretty straightforward, and pretty fast. Run
 it thusly:
 
 ```
-%%bash
-ipyrad -p params-anolis.txt -s 4
-```
+$ ipyrad -p params-anolis.txt -s 4 -c 2
 
-```
-> --------------------------------------------------
-> ipyrad [v.0.1.47] 
-> Interactive assembly and analysis of RADseq data
-> --------------------------------------------------
->
-> loading Assembly: anolis
->     ~/Documents/ipyrad/tests/anolis.json 
->     ipyparallel setup: Local connection to 4 Engines
->
-> Step4: Joint estimation of error rate and heterozygosity
->
->     Saving Assembly.
->
+ -------------------------------------------------------------
+  ipyrad [v.0.7.28]
+  Interactive assembly and analysis of RAD-seq data
+ -------------------------------------------------------------
+  loading Assembly: anolis
+  from saved path: ~/ipyrad-workshop/anolis.json
+  establishing parallel connection:
+  host compute node: [2 cores] on darwin
+  
+  Step 4: Joint estimation of error rate and heterozygosity
+  [####################] 100%  inferring [H, E]      | 0:00:54
 ```
 
 In terms of results, there isn't as much to look at as in previous
@@ -62,9 +109,23 @@ steps, though you can invoke the `-r` flag to see the estimated
 heterozygosity and error rate per sample.
 
 ```
-%%bash
-ipyrad -p params-anolis.txt -r
+$ ipyrad -p params-anolis.txt -r
+
+Summary stats of Assembly anolis
+------------------------------------------------
+                   state  reads_raw  reads_passed_filter  clusters_total  clusters_hidepth  hetero_est  error_est
+punc_IBSPCRIB0361      4     250000               237519           56312              4223    0.021430   0.013049
+punc_ICST764           4     250000               236815           60626              4302    0.024175   0.013043
+punc_JFT773            4     250000               240102           61304              5214    0.019624   0.012015
+punc_MTR05978          4     250000               237704           61615              4709    0.021119   0.011083
+punc_MTR17744          4     250000               240396           62422              5170    0.021159   0.011778
+punc_MTR21545          4     250000               227965           55845              3614    0.024977   0.013339
+punc_MTR34414          4     250000               233574           61242              4278    0.024175   0.013043
+punc_MTRX1468          4     250000               230903           54411              3988    0.023192   0.012638
+punc_MTRX1478          4     250000               233398           57299              4155    0.022146   0.012881
+punc_MUFAL9635         4     250000               231868           59249              3866    0.025000   0.013622
 ```
+These are pretty typical error rates and heterozygosity estimates. Typically error rate will be much lower than heterozygosity (on the order of 10x lower). Here these are both somewhat high, so this might indicate our  clustering threshold value is too low. We'll just proceed with the assembly as is, for now, but if this were real data I would recommend branching here and trying several different clustering threshold values.
 
 Step 5: Consensus base calls
 ============================
