@@ -61,7 +61,7 @@ If you haven't already installed ipyrad go here first: [installation](https://ip
 
 ## Working with the cluster
 
-We will run all our assembly and analysis on the UPC cluster inside
+We will run all our assembly and analysis on the USP cluster inside
 an "interactive" job. This will allow us to run our proccesses on 
 compute nodes, but still be able to remain at the command line so 
 we can easily monitor progress. First, open an SSH connection to
