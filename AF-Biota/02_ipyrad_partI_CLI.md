@@ -229,7 +229,7 @@ first three reads of one of the Anolis files.
 ##  head -n 12: Grabs the first 12 lines of the fastq file. Fastq files
 ##  have 4 lines per read, so the value of `-n` should be a multiple of 4
 
-$gunzip -c ./raws/punc_IBSPCRIB0361_R1_.fastq.gz | head -n 12
+$ gunzip -c ./raws/punc_IBSPCRIB0361_R1_.fastq.gz | head -n 12
 
 @D00656:123:C6P86ANXX:8:2201:3857:34366 1:Y:0:8
 TGCATGTTTATTGTCTATGTAAAAGGAAAAGCCATGCTATCAGAGATTGGCCTGGGGGGGGGGGGCAAATACATGAAAAAGGGAAAGGCAAAATG
@@ -267,12 +267,12 @@ Now lets run step 1! For the Anolis data this will take <1 minute.
 **Special Note:** In interactive mode on the USP cluster please be aware
 of *always* specifying the number of cores with the `-c` flag. If you
 do not specify the number of cores ipyrad assumes you want **all** of
-them, and this will make your run **very** fast, but it might aggravate
+them, and this will make your run **very** fast, but it might **aggravate**
 the cluster admins.
 ``` 
 ## -p    the params file we wish to use
 ## -s    the step to run
-## -c    the number of cores to allocate
+## -c    the number of cores to allocate   <-- Important!
 $ ipyrad -p params-anolis.txt -s 1 -c 2
 
  -------------------------------------------------------------
@@ -290,14 +290,10 @@ $ ipyrad -p params-anolis.txt -s 1 -c 2
 
 There are 4 main parts to this step:
 
-:   -   Create a new assembly. Since this is our first time running any
-        steps we need to initialize our assembly.
-    -   Start the parallel cluster. ipyrad uses a parallelization
-        library called ipyparallel. Every time we start a step we fire
-        up the parallel clients. This makes your assemblies go
-        **smokin'** fast.
-    -   Actually do the demuliplexing.
-    -   Save the state of the assembly.
+1. Create a new assembly. Since this is our first time running any steps we need to initialize our assembly.
+2. Start the parallel cluster. ipyrad uses a parallelization library called ipyparallel. Every time we start a step we fire up the parallel clients. This makes your assemblies go **smokin'** fast.
+3. Actually import the raw data.
+4. Save the state of the assembly.
 
 Have a look at the results of this step in the `anolis_fastqs`
 output directory:
