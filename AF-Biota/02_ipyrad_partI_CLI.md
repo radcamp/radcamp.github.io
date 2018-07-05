@@ -419,7 +419,8 @@ $ ipyrad -p params-anolis.txt -r
 You might also take a gander at the filtered reads: 
 
 ```
-$ head -n 12 ./anolis_fastqs/1A_0_R1.fastq
+$ gunzip -c anolis_edits/punc_IBSPCRIB0361.trimmed_R1_.fastq.gz | head -n 12
+
 @D00656:123:C6P86ANXX:8:2201:3857:34366 1:Y:0:8
 TGCATGTTTATTGTCTATGTAAAAGGAAAAGCCATGCTATCAGAGATTGGCCTGGGGGGGGGGGGCAAATACATG
 +
@@ -433,6 +434,13 @@ TGCATTCAAAGGGAGAAGAGTACAGAAACCAAGCACATATTTGAAAAATGCA
 +
 GGGGGGGCGGGGGGGGGGGGGEGGGFGGGGGGEGGGGGGGGGGGGGFGGGEG
 ```
+
+This is actually really cool, because we can already see the results of 
+both of our applied parameters. All reads have been trimmed to 75bp, 
+and the third read had adapter contamination removed (you can tell because
+it's shorter than 75bp). As an exercise you can go back up to the 
+section where we looked at the raw data initially and see if you can 
+identify the adapter sequence in this read.
 
 # Step 3: clustering within-samples
 
@@ -456,30 +464,29 @@ Don't mess with this until you feel comfortable with the overall
 workflow, and also until you've learned about
 [Branching assemblies](https://ipyrad.readthedocs.io/tutorial_advanced_cli.html).
 
-Later you will learn how to incorporate information from a reference
-genome to improve clustering at this this step. For now, bide your time
-(but see [Reference sequence mapping](https://ipyrad.readthedocs.io/tutorial_advanced_cli.html) if you're
-impatient).
+It's also possible to incorporate information from a reference
+genome to improve clustering at this this step, if such a resources is
+available for your organism (or one that is relatively closely related).
+We will not cover reference based assemblies in this workshop, but you 
+can refer to the [ipyrad documentation](https://ipyrad.readthedocs.io/tutorial_advanced_cli.html) for more information.
 
 Now lets run step 3:
 
 ```
-%%bash
-ipyrad -p params-anolis.txt -s 3
-```
+$ ipyrad -p params-anolis.txt -s 3 -c 2
 
-```
-> -------------------------------------------------- 
-> ipyrad [v.0.1.47]
-> Interactive assembly and analysis of RADseq data
-> -------------------------------------------------- 
-> loading Assembly: anolis ~/Documents/ipyrad/tests/anolis.json
->   ipyparallel setup: Local connection to 4 Engines
->
-> Step3: Clustering/Mapping reads
->
->   Saving Assembly.
->
+ -------------------------------------------------------------
+  ipyrad [v.0.7.28]
+  Interactive assembly and analysis of RAD-seq data
+ -------------------------------------------------------------
+  loading Assembly: anolis
+  from saved path: ~/ipyrad-workshop/anolis.json
+  establishing parallel connection:
+  host compute node: [2 cores] on darwin
+
+  Step 3: Clustering/Mapping reads
+  [####################] 100%  dereplicating         | 0:00:11  
+
 ```
 
 Again we can examine the results. The stats output tells you how many
@@ -491,22 +498,17 @@ reads on the assumption that these are probably all mostly due to
 sequencing error.
 
 ```
-%%bash
-ipyrad -p params-anolis.txt -r
+$ ipyrad -p params-anolis.txt -r
 ```
 
 Again, the final output of step 3 is dereplicated, clustered files for
-each sample in `./ipryad-test_clust_0.85/`. You can get a feel for what
+each sample in `./anolis_clust_0.85/`. You can get a feel for what
 this looks like by examining a portion of one of the files.
 
 ```
-%%bash
-## Same as above, gunzip -c means print to the screen and 
-## `head -n 28` means just show me the first 28 lines. If 
-## you're interested in what more of the loci look like
-## you can increase the number of lines you ask head for,
-## e.g. ... | head -n 100
-gunzip -c anolis_clust_0.85/1A_0.clustS.gz | head -n 28
+## Same as above, `gunzip -c` unzips and prints to the screen and 
+## `head -n 28` means just show me the first 28 lines. 
+$ gunzip -c anolis_clust_0.85/punc_IBSPCRIB0361.clustS.gz | head -n 28
 ```
 
 Reads that are sufficiently similar (based on the above sequence
