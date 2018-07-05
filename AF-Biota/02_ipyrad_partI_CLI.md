@@ -100,6 +100,7 @@ are:
 * R - Job is running
 * Q - job is Queued (boo!)
 * C - Job is completed (yay!)
+
 ```
 ## Check the status of my running job on the 'proto' Queue
 $ qstat
@@ -295,50 +296,81 @@ There are 4 main parts to this step:
 3. Actually import the raw data.
 4. Save the state of the assembly.
 
-Have a look at the results of this step in the `anolis_fastqs`
-output directory:
-
-``` 
-%%bash
-ls anolis_fastqs 
-```
-
-A more informative metric of success might be the number of raw reads
-demultiplexed for each sample. Fortunately ipyrad tracks the state of
-all your steps in your current assembly, so at any time you can ask for
-results by invoking the `-r` flag.
+As a convenience ipyrad internally tracks the state of all your steps in your 
+current assembly, so at any time you can ask for results by invoking the `-r` flag.
 
 ```
-%%bash
 ## -r fetches informative results from currently 
 ##      executed steps
-ipyrad -p params-anolis.txt -r
+$ ipyrad -p params-anolis.txt -r
+
+Summary stats of Assembly anolis
+------------------------------------------------
+                   state  reads_raw
+punc_IBSPCRIB0361      1     250000
+punc_ICST764           1     250000
+punc_JFT773            1     250000
+punc_MTR05978          1     250000
+punc_MTR17744          1     250000
+punc_MTR21545          1     250000
+punc_MTR34414          1     250000
+punc_MTRX1468          1     250000
+punc_MTRX1478          1     250000
+punc_MUFAL9635         1     250000
+
+
+Full stats files
+------------------------------------------------
+step 1: ./anolis_s1_demultiplex_stats.txt
+step 2: None
+step 3: None
+step 4: None
+step 5: None
+step 6: None
+step 7: None
 ```
 
 If you want to get even **more** info ipyrad tracks all kinds of wacky
 stats and saves them to a file inside the directories it creates for
-each step. For instance to see full stats for step 1:
+each step. For instance to see full stats for step 1 (the wackyness
+of the step 1 stats at this point isn't very interesting, but we'll
+see stats for later steps are more verbose):
 
+``` 
+$ cat anolis_s1_demultiplex_stats.txt 
+
+                   reads_raw
+punc_IBSPCRIB0361     250000
+punc_ICST764          250000
+punc_JFT773           250000
+punc_MTR05978         250000
+punc_MTR17744         250000
+punc_MTR21545         250000
+punc_MTR34414         250000
+punc_MTRX1468         250000
+punc_MTRX1478         250000
+punc_MUFAL9635        250000```
 ```
-%%bash
-cat ./anolis_fastqs/s1_demultiplex_stats.txt
-```
 
-And you'll see a ton of fun stuff I won't copy here in the interest of
-conserving space. Please go look for yourself if you're interested.
-
-Step 2: Filter reads
-====================
+# Step 2: Filter reads
 
 This step filters reads based on quality scores, and can be used to
 detect Illumina adapters in your reads, which is sometimes a problem
-with homebrew type library preparations. Here the filter is set to the
-default value of 0 (zero), meaning it filters only based on quality
-scores of base calls. The filtered files are written to a new directory
-called `anolis_edits`.
+under couple different library prep scenarios. Recalling from our
+exploration of the data with FastQC we have some problem with adapters,
+and a little noise toward the 3' end. To account for this we will  trim
+reads to 75bp and set adapter filtering to be quite aggressive. 
+Edit your params file again with `nano`:
+```
+nano params-anolis.txt
+```
+and change the following two parameter settings:
+```
+2                               ## [16] [filter_adapters]: Filter for adapters/primers (1 or 2=stricter)
+0, 75, 0, 0                     ## [25] [trim_reads]: Trim raw read edges (R1>, <R1, R2>, <R2) (see docs)
+```
 
 ```
-%%bash
 ipyrad -p params-anolis.txt -s 2
 ```
 
@@ -356,8 +388,8 @@ ipyrad -p params-anolis.txt -s 2
 >
 ```
 
-Again, you can look at the results output by this step and also some
-handy stats tracked for this assembly.
+The filtered files are written to a new directory called `anolis_edits`. Again, 
+you can look at the results output by this step and also some handy stats tracked for this assembly.
 
 ```
 %%bash
