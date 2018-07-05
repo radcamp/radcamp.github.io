@@ -67,7 +67,7 @@ compute nodes, but still be able to remain at the command line so
 we can easily monitor progress. First, open an SSH connection to
 the cluster:
 ```
-ssh <username>@lem.ib.usp.br 
+$ ssh <username>@lem.ib.usp.br 
 ```
 
 ### Submitting an interactive job to the cluster
@@ -101,6 +101,7 @@ are:
 * Q - job is Queued (boo!)
 * C - Job is completed (yay!)
 ```
+## Check the status of my running job on the 'proto' Queue
 $ qstat
 Job ID                    Name             User            Time Use S Queue
 ------------------------- ---------------- --------------- -------- - -----
@@ -126,8 +127,8 @@ analysing your own data you might call your parameters file something
 more informative, like the name of your organism.
 
 ``` 
-cd ~/ipyrad-workshop
-ipyrad -n anolis
+$ cd ~/ipyrad-workshop
+$ ipyrad -n anolis
 ```
 
 This will create a file in the current directory called
@@ -136,8 +137,7 @@ parameter followed by a \#\# mark, then the name of the parameter, and
 then a short description of its purpose. Lets take a look at it.
 
 ``` 
-cat params-anolis.txt
-
+$ cat params-anolis.txt
 ------- ipyrad params file (v.0.7.28)-------------------------------------------
 anolis                         ## [0] [assembly_name]: Assembly name. Used to name output directories for assembly steps
 ./                             ## [1] [project_dir]: Project dir (made in curdir if not present)
@@ -178,7 +178,7 @@ We will use the `nano` text editor to modify `params-anolis.txt` and change
 these parameters:
 
 ```
-nano params-anlis.txt
+$ nano params-anlis.txt
 ```
 ![png](02_ipyrad_partI_CLI_files/ipyrad_part1_nano.png)
 
@@ -201,13 +201,13 @@ After you change these parameters you may save and exit nano by typing CTRL+o
 (to write **O**utput), and then CTRL+x (to e**X**it the program).
 
 > **Note:** The `CTRL+x` notation indicates that you should hold down the control
-key (which is often styled 'ctrl') and then push 'x'.
+key (which is often styled 'ctrl' on the keyboard) and then push 'x'.
 
 Once we start running the analysis ipyrad will create several new 
 directories to hold the output of each step for this assembly. By 
-default the new directories are created in the `project\_dir`
-directory and use the prefix specified by the assembly\_name parameter.
-Because we use `./` for the `project\_dir` for this tutorial, all these 
+default the new directories are created in the `project_dir`
+directory and use the prefix specified by the `assembly_name` parameter.
+Because we use `./` for the `project_dir` for this tutorial, all these 
 intermediate directories will be of the form: `/home/<username/ipyrad-workshop/anolis_*`.
 
 > **Note:** Again, the `./` notation indicates the current working directory. You can always view the current working directory with the `pwd` command (**p**rint **w**orking **d**irectory).
@@ -217,12 +217,11 @@ intermediate directories will be of the form: `/home/<username/ipyrad-workshop/a
 Before we get started let's take a look at what the raw data looks like.
 
 Your input data will be in fastQ format, usually ending in `.fq`,
-`.fastq`, `.fq.gz`, or `.fastq.gz`. Your data could be split among
-multiple files, or all within a single file (de-multiplexing goes much
-faster if they happen to be split into multiple files). The file/s may
-be compressed with gzip so that they have a .gz ending, but they do not
-need to be. The location of these files should be entered on line 3 of
-the params file. Below are the first three reads of one of the Anolis files.
+`.fastq`, `.fq.gz`, or `.fastq.gz`. The file/s may be compressed with 
+gzip so that they have a .gz ending, but they do not need to be. When loading
+pre-demultiplexed data (as we are with the Anolis data) the location 
+of raw sample files should be entered on line 3 of the params file. Below are the 
+first three reads of one of the Anolis files.
 
 ``` 
 ## For your personal edification here is what this is doing:
@@ -230,10 +229,8 @@ the params file. Below are the first three reads of one of the Anolis files.
 ##  head -n 12: Grabs the first 12 lines of the fastq file. Fastq files
 ##  have 4 lines per read, so the value of `-n` should be a multiple of 4
 
-gunzip -c ./raws/punc_IBSPCRIB0361_R1_.fastq.gz | head -n 12
-```
-And here's the output:
-```
+$gunzip -c ./raws/punc_IBSPCRIB0361_R1_.fastq.gz | head -n 12
+
 @D00656:123:C6P86ANXX:8:2201:3857:34366 1:Y:0:8
 TGCATGTTTATTGTCTATGTAAAAGGAAAAGCCATGCTATCAGAGATTGGCCTGGGGGGGGGGGGCAAATACATGAAAAAGGGAAAGGCAAAATG
 +
@@ -248,13 +245,13 @@ TGCATTCAAAGGGAGAAGAGTACAGAAACCAAGCACATATTTGAAAAATGCAAGATCGGAAGAGCGGTTCAGCAGGAATG
 GGGGGGGCGGGGGGGGGGGGGEGGGFGGGGGGEGGGGGGGGGGGGGFGGGEGGGGGGGGGGGGGGGGGGGGGGGGGGGEGGGGGGGGG@@DGGGG
 ```
 
-Each read takes four lines. The first is the name of the read (its
+Each read is composed of four lines. The first is the name of the read (its
 location on the plate). The second line contains the sequence data. The
 third line is unused. And the fourth line is the quality scores for the
 base calls. The [FASTQ wikipedia page](https://en.wikipedia.org/wiki/FASTQ_format) has a good figure depicting the logic
 behind how quality scores are encoded.
 
-These are 96bp single-end reads prepared as GBS. The first five bases (TGCAT) 
+The Anolis data are 96bp single-end reads prepared as GBS. The first five bases (TGCAT) 
 form the the restriction site overhang. All following bases make up the sequence data.
 
 # Step 1: Loading the raw data files
@@ -265,27 +262,30 @@ doesn't create any new directories or modify the raw files in any way.
 
 > **Note on step 1:** More commonly, rather than returning demultiplexed samples as we have here, sequencing facilities will give you one giant .gz file that contains all the sequences from your run. This situation only slightly modifies step 1, and does not modify further steps, so we will refer you to the [full ipyrad tutorial](http://ipyrad.readthedocs.io/tutorial_intro_cli.html) for guidance in this case.
 
-Now lets run step 1! For the Anolis data this will take <1
-minute.
+Now lets run step 1! For the Anolis data this will take <1 minute.
 
+**Special Note:** In interactive mode on the USP cluster please be aware
+of *always* specifying the number of cores with the `-c` flag. If you
+do not specify the number of cores ipyrad assumes you want **all** of
+them, and this will make your run **very** fast, but it might aggravate
+the cluster admins.
 ``` 
-## -p indicates the params file we wish to use
-## -s indicates the step to run
-ipyrad -p params-anolis.txt -s 1
-```
+## -p    the params file we wish to use
+## -s    the step to run
+## -c    the number of cores to allocate
+$ ipyrad -p params-anolis.txt -s 1 -c 2
 
-```
-> -------------------------------------------------- 
-> ipyrad [v.0.1.47]
-> Interactive assembly and analysis of RADseq data
-> -------------------------------------------------- 
-> New Assembly: anolis
->    ipyparallel setup: Local connection to 4 Engines
->
-> Step1: Demultiplexing fastq data to Samples.
->
->    Saving Assembly.
->
+ -------------------------------------------------------------
+  ipyrad [v.0.7.28]
+  Interactive assembly and analysis of RAD-seq data
+ -------------------------------------------------------------
+  New Assembly: anolis
+  establishing parallel connection:
+  host compute node: [2 cores] on darwin
+
+  Step 1: Loading sorted fastq data to Samples
+  [####################] 100%  loading reads         | 0:00:04  
+  10 fastq files loaded to 10 Samples.
 ```
 
 There are 4 main parts to this step:
