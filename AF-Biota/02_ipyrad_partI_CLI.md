@@ -292,12 +292,12 @@ $ ipyrad -p params-anolis.txt -s 1 -c 2
   10 fastq files loaded to 10 Samples.
 ```
 
-There are 4 main parts to this step:
-
-1. Create a new assembly. Since this is our first time running any steps we need to initialize our assembly.
-2. Start the parallel cluster. ipyrad uses a parallelization library called ipyparallel. Every time we start a step we fire up the parallel clients. This makes your assemblies go **smokin'** fast.
-3. Actually import the raw data.
-4. Save the state of the assembly.
+## In-depth operations of running an ipyrad step
+Any time ipyrad is invoked it performs a few housekeeping operations: 
+1. Load the assembly object - Since this is our first time running any steps we need to initialize our assembly.
+2. Start the parallel cluster - ipyrad uses a parallelization library called ipyparallel. Every time we start a step we fire up the parallel clients. This makes your assemblies go **smokin'** fast.
+3. Do the work - Actually perform the work of the requested step(s) (in this case loading in sample reads).
+4. Save, clean up, and exit -  Save the state of the assembly, and spin down the ipyparallel cluster.
 
 As a convenience ipyrad internally tracks the state of all your steps in your 
 current assembly, so at any time you can ask for results by invoking the `-r` flag.
@@ -500,8 +500,7 @@ $ ipyrad -p params-anolis.txt -s 3 -c 2
   [####################] 100%  concatenating         | 0:00:04```
 ```
 
-There are 6 main parts to this step:
-
+In-depth operations of step 3:
 * dereplicating - Merge all identical reads
 * clustering - Find reads matching by sequence similarity threshold
 * building clusters - Group similar reads into clusters
