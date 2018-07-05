@@ -270,6 +270,7 @@ of *always* specifying the number of cores with the `-c` flag. If you
 do not specify the number of cores ipyrad assumes you want **all** of
 them, and this will make your run **very** fast, but it might **aggravate**
 the cluster admins.
+
 ``` 
 ## -p    the params file we wish to use
 ## -s    the step to run
@@ -354,38 +355,40 @@ punc_MUFAL9635        250000```
 
 # Step 2: Filter reads
 
-This step filters reads based on quality scores, and can be used to
-detect Illumina adapters in your reads, which is sometimes a problem
-under couple different library prep scenarios. Recalling from our
-exploration of the data with FastQC we have some problem with adapters,
-and a little noise toward the 3' end. To account for this we will  trim
-reads to 75bp and set adapter filtering to be quite aggressive. 
-Edit your params file again with `nano`:
+This step filters reads based on quality scores and maximum number of
+uncalled bases, and can be used to detect Illumina adapters in your 
+reads, which is sometimes a problem under couple different library 
+prep scenarios. Recalling from our exploration of the data with FastQC 
+we have some problem with adapters, and a little noise toward the 3' 
+end. To account for this we will trim reads to 75bp and set adapter 
+filtering to be quite aggressive. Edit your params file again with `nano`:
+
 ```
 nano params-anolis.txt
 ```
+
 and change the following two parameter settings:
+
 ```
 2                               ## [16] [filter_adapters]: Filter for adapters/primers (1 or 2=stricter)
 0, 75, 0, 0                     ## [25] [trim_reads]: Trim raw read edges (R1>, <R1, R2>, <R2) (see docs)
 ```
+**Note:** Saving and quitting from `nano`: `CTRL+o` then `CTRL+w`
 
 ```
-ipyrad -p params-anolis.txt -s 2
-```
+$ ipyrad -p params-anolis.txt -s 2 -c 2
 
-```
-> -------------------------------------------------- 
-> ipyrad [v.0.1.47]
-> Interactive assembly and analysis of RADseq data
-> -------------------------------------------------- 
-> loading Assembly: anolis ~/Documents/ipyrad/tests/anolis.json
->   ipyparallel setup: Local connection to 4 Engines
->
-> Step2: Filtering reads
->   
->   Saving Assembly.
->
+ -------------------------------------------------------------
+  ipyrad [v.0.7.28]
+  Interactive assembly and analysis of RAD-seq data
+ -------------------------------------------------------------
+  loading Assembly: anolis
+  from saved path: ~/ipyrad-workshop/anolis.json
+  establishing parallel connection:
+  host compute node: [2 cores] on darwin
+
+  Step 2: Filtering reads 
+  [####################] 100%  processing reads      | 0:01:02  ```
 ```
 
 The filtered files are written to a new directory called `anolis_edits`. Again, 
