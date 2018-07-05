@@ -1,10 +1,10 @@
 # ipyrad command line tutorial - Part I
 
-This is the first part of the full tutorial for the command line interface (**CLI**) for ipyrad. In
-this tutorial we'll walk through the entire assembly and analysis
-process. This is meant as a broad introduction to familiarize users with
-the general workflow, and some of the parameters and terminology. We will 
-continue with assembly and analysis of the Anolis dataset of 
+This is the first part of the full tutorial for the command line interface 
+(**CLI**) for ipyrad. In this tutorial we'll walk through the entire assembly 
+and analysis process. This is meant as a broad introduction to familiarize 
+users with the general workflow, and some of the parameters and terminology. 
+We will  continue with assembly and analysis of the Anolis dataset of 
 Prates *et al* 2016, which we fetched during the previous QC analysis step.
 This data was generated with the GBS protocol and sequenced single-end (SE), 
 but the core concepts will apply to assembly of other data types (ddRAD and
@@ -33,24 +33,26 @@ wat
 ```
 
 # Overview of Assembly Steps
-Very roughly speaking, ipyrad exists to transform raw data coming off the sequencing instrument into output files that you can use for downstream analysis. The basic steps of this process are as follows:
+Very roughly speaking, ipyrad exists to transform raw data coming off the 
+sequencing instrument into output files that you can use for downstream 
+analysis. The basic steps of this process are as follows:
 
-* Demultiplex/Load Raw Data
-* Trim and Quality Control
-* Cluster within Samples
-* Calculate Error Rate and Heterozygosity
-* Call consensus sequences
-* Cluster across Samples
-* Apply filters and write output formats
+* Step 1 - Demultiplex/Load Raw Data
+* Step 2 - Trim and Quality Control
+* Step 3 - Cluster within Samples
+* Step 4 - Calculate Error Rate and Heterozygosity
+* Step 5 - Call consensus sequences
+* Step 6 - Cluster across Samples
+* Step 7 - Apply filters and write output formats
 
-**NB:** Assembling rad-seq type sequence data requires a
-lot of different steps, and these steps generate a **lot** of
-intermediary files. ipyrad organizes these files into directories, and
-it prepends the name of your assembly to each directory with data that
-belongs to it. One result of this is that you can have multiple
-assemblies of the same raw data with different parameter settings and
-you don't have to manage all the files yourself! (See
-[Branching assemblies](https://ipyrad.readthedocs.io/tutorial_advanced_cli.html) for more info). Another
+**Note on files in the project directory:** Assembling rad-seq type 
+sequence data requires a lot of different steps, and these steps 
+generate a **lot** of intermediary files. ipyrad organizes these files 
+into directories, and it prepends the name of your assembly to each 
+directory with data that belongs to it. One result of this is that 
+you can have multiple assemblies of the same raw data with different 
+parameter settings and you don't have to manage all the files yourself! 
+(See [Branching assemblies](https://ipyrad.readthedocs.io/tutorial_advanced_cli.html) for more info). Another
 result is that **you should not rename or move any of the directories
 inside your project directory**, unless you know what you're doing or
 you don't mind if your assembly breaks.
@@ -469,6 +471,11 @@ genome to improve clustering at this this step, if such a resources is
 available for your organism (or one that is relatively closely related).
 We will not cover reference based assemblies in this workshop, but you 
 can refer to the [ipyrad documentation](https://ipyrad.readthedocs.io/tutorial_advanced_cli.html) for more information.
+
+**Note on performance:** Steps 3 and 6 generally take considerably 
+longer than any of the steps, due to the resource intensive clustering 
+and alignment phases. These can take on the order of 10-100x as long 
+as the next longest running step.
 
 Now lets run step 3:
 
