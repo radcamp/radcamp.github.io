@@ -22,9 +22,10 @@ wat
 * Step 3: Recap
 
 Recall that we clustered reads within samples in Step 3. Reads that are sufficiently 
-similar (based on the specified sequence similarity threshold) are grouped together in clusters separated by
-"//". We examined the `head` of one of the sample cluster files at the end of the last exercise, but
-here we've cherry picked a couple clusters with more pronounced features.
+similar (based on the specified sequence similarity threshold) are grouped together 
+in clusters separated by "//". We examined the `head` of one of the sample cluster 
+files at the end of the last exercise, but here we've cherry picked a couple 
+clusters with more pronounced features.
 
 Here's a nice homozygous cluster, with probably one read with sequencing error:
 ```
@@ -34,7 +35,7 @@ a2c441646bb25089cd933119f13fb687;size=1;+
 TGCATGTAGTGAAGTCCGCTGTGTACTTGCGAGAGAATGAGCAGTCCTTCATGCA
 ```
 
-Here's a probable heterozygote, a little bit messier:
+Here's a probable heterozygote, a little bit messier (note the indels):
 ```
 0091f3b72bfc97c4705b4485c2208bdb;size=3;*
 TGCATACAC----GCACACA----GTAGTAGTACTACTTTTTGTTAACTGCAGCATGCA
@@ -78,9 +79,9 @@ For this final cluster it's really hard to call by eye, that's why we make the c
 
 # Step 4: Joint estimation of heterozygosity and error rate
 
-Jointly estimate sequencing error rate and heterozygosity to help us
-figure out which reads are "real" and which are sequencing error. We
-need to know which reads are "real" because in diploid organisms there
+In this step we jointly estimate sequencing error rate and heterozygosity to 
+help us figure out which reads are "real" and which include sequencing error. 
+We need to know which reads are "real" because in diploid organisms there
 are a maximum of 2 alleles at any given locus. If we look at the raw
 data and there are 5 or ten different "alleles", and 2 of them are very
 high frequency, and the rest are singletons then this gives us evidence
@@ -125,51 +126,71 @@ punc_MTRX1468          4     250000               230903           54411        
 punc_MTRX1478          4     250000               233398           57299              4155    0.022146   0.012881
 punc_MUFAL9635         4     250000               231868           59249              3866    0.025000   0.013622
 ```
-These are pretty typical error rates and heterozygosity estimates. Typically error rate will be much lower than heterozygosity (on the order of 10x lower). Here these are both somewhat high, so this might indicate our  clustering threshold value is too low. We'll just proceed with the assembly as is, for now, but if this were real data I would recommend branching here and trying several different clustering threshold values.
+These are pretty typical error rates and heterozygosity estimates. Under
+normal conditions error rate will be much lower than heterozygosity (on 
+the order of 10x lower). Here these are both somewhat high, so this might 
+indicate our clustering threshold value is too low. We'll just proceed 
+with the assembly as is, for now, but if this were real data I would 
+recommend branching here and trying several different clustering threshold 
+values.
 
-Step 5: Consensus base calls
-============================
+# Step 5: Consensus base calls
 
-Step 5 uses the inferred error rate and heterozygosity to call the
-consensus of sequences within each cluster. Here we are identifying what
+Step 5 uses the inferred error rate and heterozygosity per sample to call 
+the consensus of sequences within each cluster. Here we are identifying what
 we believe to be the real haplotypes at each locus within each sample.
 
 ```
-%%bash
-ipyrad -p params-anolis.txt -s 5
-```
+$ ipyrad -p params-anolis.txt -s 5 -c 2
 
-```
-> --------------------------------------------------
-> ipyrad [v.0.1.47] 
-> Interactive assembly and analysis of RADseq data
->
-> --------------------------------------------------
->
-> loading Assembly: anolis ~/Documents/ipyrad/tests/anolis.json 
->     ipyparallel setup:Local connection to 4 Engines
->
-> Step5: Consensus base calling
->
->      Diploid base calls and paralog filter (max haplos = 2) error
->      rate (mean, std): 0.00075, 0.00002 heterozyg. (mean, std):
->      0.00196, 0.00018 Saving Assembly.
->
-```
+ -------------------------------------------------------------
+  ipyrad [v.0.7.28]
+  Interactive assembly and analysis of RAD-seq data
+ -------------------------------------------------------------
+  loading Assembly: anolis
+  from saved path: ~/ipyrad-workshop/anolis.json
+  establishing parallel connection:
+  host compute node: [2 cores] on darwin
 
-Again we can ask for the results:
-
+  Step 5: Consensus base calling 
+  Mean error  [0.01265 sd=0.00079]
+  Mean hetero [0.02270 sd=0.00187]
+  [####################] 100%  calculating depths    | 0:00:08
+  [####################] 100%  chunking clusters     | 0:00:07
+  [####################] 100%  consens calling       | 0:02:23
 ```
-%%bash
-ipyrad -p params-anolis.txt -r
-```
+Steps here are:
+* calculating depths - A simple refinement of the H/E estimates.
+* chunking clusters - Again, breaking big files into smaller chunks to aid parallelization.
+* consensus calling - Actually perform the consensus sequence calling
 
 And here the important information is the number of `reads_consens`.
-This is the number of "good" reads within each sample that we'll send on
-to the next step.
+This is the number of retained reads within each sample that we'll send on
+to the next step. Retained reads must pass filters on read depth tolerance 
+(both `mindepth_majrule` and `maxdepth`), maximum number of uncalled
+bases (`max_Ns_consens`) and maximum number of heterozygous sites 
+(`max_Hs_consens`) per consensus sequence. This number will almost always
+be lower than `clusters_hidepth`.
 
-Step 6: Cluster across samples
-==============================
+```
+$ ipyrad -p params-anolis.txt -r
+
+Summary stats of Assembly anolis
+------------------------------------------------
+                   state  reads_raw  reads_passed_filter  clusters_total  clusters_hidepth  hetero_est  error_est  reads_consens
+punc_IBSPCRIB0361      5     250000               237519           56312              4223    0.021430   0.013049           3753
+punc_ICST764           5     250000               236815           60626              4302    0.024175   0.013043           3759
+punc_JFT773            5     250000               240102           61304              5214    0.019624   0.012015           4698
+punc_MTR05978          5     250000               237704           61615              4709    0.021119   0.011083           4223
+punc_MTR17744          5     250000               240396           62422              5170    0.021159   0.011778           4558
+punc_MTR21545          5     250000               227965           55845              3614    0.024977   0.013339           3145
+punc_MTR34414          5     250000               233574           61242              4278    0.024175   0.013043           3751
+punc_MTRX1468          5     250000               230903           54411              3988    0.023192   0.012638           3586
+punc_MTRX1478          5     250000               233398           57299              4155    0.022146   0.012881           3668
+punc_MUFAL9635         5     250000               231868           59249              3866    0.025000   0.013622           3369
+```
+
+# Step 6: Cluster across samples
 
 Step 6 clusters consensus sequences across samples. Now that we have
 good estimates for haplotypes within samples we can try to identify
@@ -177,6 +198,11 @@ similar sequences at each locus between samples. We use the same
 clustering threshold as step 3 to identify sequences between samples
 that are probably sampled from the same locus, based on sequence
 similarity.
+
+**Note on performance of each step:** Steps 3 and 6 generally take 
+considerably longer than any of the steps, due to the resource 
+intensive clustering and alignment phases. These can take on the order
+of 10-100x as long as the next longest running step.
 
 ```
 %%bash
