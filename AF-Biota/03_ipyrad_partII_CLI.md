@@ -1,6 +1,11 @@
 # ipyrad command line tutorial - Part II
 
-This is the second part of the full tutorial for the command line interface for ipyrad. 
+This is the second part of the full tutorial for the command line interface 
+for ipyrad. In the previous section we imported our data, did some QC, and 
+created clusters of similar reads within each sample. In this section, 
+we now continue with the assembly, with the goal of calling bases, clustering
+across samples based on consensus sequence similarity, and then finally
+writing output in various useful formats.
 
 Each grey cell in this tutorial indicates a command line interaction. 
 Lines starting with `$ ` indicate a command that should be executed 
