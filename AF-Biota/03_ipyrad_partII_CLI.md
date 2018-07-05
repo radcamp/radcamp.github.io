@@ -1,4 +1,4 @@
-* ipyrad command line tutorial - Part II
+# ipyrad command line tutorial - Part II
 
 This is the second part of the full tutorial for the command line interface for ipyrad. 
 
@@ -19,7 +19,7 @@ $ echo "wat"
 wat
 ```
 
-* Step 3: Recap
+# Step 3: Recap
 
 Recall that we clustered reads within samples in Step 3. Reads that are sufficiently 
 similar (based on the specified sequence similarity threshold) are grouped together 
@@ -159,7 +159,7 @@ $ ipyrad -p params-anolis.txt -s 5 -c 2
   [####################] 100%  chunking clusters     | 0:00:07
   [####################] 100%  consens calling       | 0:02:23
 ```
-Steps here are:
+In-depth operations of step 5:
 * calculating depths - A simple refinement of the H/E estimates.
 * chunking clusters - Again, breaking big files into smaller chunks to aid parallelization.
 * consensus calling - Actually perform the consensus sequence calling
@@ -205,72 +205,132 @@ intensive clustering and alignment phases. These can take on the order
 of 10-100x as long as the next longest running step.
 
 ```
-%%bash
-ipyrad -p params-anolis.txt -s 6
-```
+$ ipyrad -p params-anolis.txt -s 6 -c 2
 
-```
-> -------------------------------------------------- 
-> ipyrad [v.0.1.47]
-> Interactive assembly and analysis of RADseq data
-> -------------------------------------------------- 
-> loading Assembly: anolis ~/Documents/ipyrad/tests/anolis.json
->   ipyparallel setup: Local connection to 4 Engines
->
-> Step6: Clustering across 12 samples at 0.85 similarity
->
->   Saving Assembly.
->
-```
+ -------------------------------------------------------------
+  ipyrad [v.0.7.28]
+  Interactive assembly and analysis of RAD-seq data
+ -------------------------------------------------------------
+  loading Assembly: anolis
+  from saved path: ~/ipyrad-workshop/anolis.json
+  establishing parallel connection:
+  host compute node: [2 cores] on darwin
 
-Since in general the stats for results of each step are sample based,
-the output of `-r` at this point is less useful. You can still try it
-though.
+  Step 6: Clustering at 0.85 similarity across 10 samples
+  [####################] 100%  concat/shuffle input  | 0:00:01
+  [####################] 100%  clustering across     | 0:00:10
+  [####################] 100%  building clusters     | 0:00:02
+  [####################] 100%  aligning clusters     | 0:00:22
+  [####################] 100%  database indels       | 0:00:01
+  [####################] 100%  indexing clusters     | 0:00:09
+  [####################] 100%  building database     | 0:00:00
+```
+In-depth operations of step 6:
+* concat/shuffle input - 
+* clustering across - 
+* building clusters - 
+* aligning clusters - 
+* database indels - 
+* indexing clusters - 
+* building database - 
 
-```
-%%bash
-ipyrad -p params-anolis.txt -r
-```
+Since in general the stats for results of each step are sample based, 
+the output of `-r` will only display what we had seen after step 5, 
+so this is not that informative.
 
 It might be more enlightening to consider the output of step 6 by
 examining the file that contains the reads clustered across samples:
 
 ```
-%%bash
-gunzip -c anolis_consens/anolis_catclust.gz | head -n 30 | less
+$ gunzip -c anolis_consens/anolis_catclust.gz | head -n 28
+
+punc_IBSPCRIB0361_10
+TGCATGCAACTGGAGTGAGGTGGTTTGCATTGATTGCTGTATATTCAATGCAAGCAACAGGAATGAAGTGGATTTCTTTGGTCACTATATACTCAATGCA
+punc_IBSPCRIB0361_1647
+TGCATGCAACAGGAGTGANGTGrATTTCTTTGRTCACTGTAyANTCAATGYA
+//
+//
+punc_IBSPCRIB0361_100
+TGCATCTCAACGTGGTCTCGTCACATTTCAAGGCGCACATCAGAATGCAGTACAATAATCCCTCCCCAAATGCA
+punc_MUFAL9635_687
+TGCATCTCAACATGGTCTCGTCACATTTCAAGGCGCACATCAGAATGCAGTACAATAATCCCTCCCCAAATGCA
+punc_ICST764_3619
+TGCATCTCAACGTGGTCTCGTCACATTTCAAGGCGCACATCAGAATGCAGTACAATAATCCCTCCCCAAATGCA
+punc_JFT773_4219
+TGCATCTCAACGTGGTCTCGTCACATTTCAAGGCGCACATCAGAATGCAGTACAATAATCCCTCCCCAAATGCA
+punc_MTR05978_111
+TGCATCTCAACGTGGTCTCGTCACATTTCAAGGCGCACATCAGAATGCAGTACAATAATCCCTCCCCAAATGCA
+punc_MTR17744_1884
+TGCATCTCAACGTGGTCTCGTCACATTTCAAGGCGCACATCAGAATGCA-------------------------
+punc_MTR34414_3503
+TGCATCTCAACGTGGTCTCGTCACATTTCAAGGCGCACATCAGAATGCAGTACAATAATCCCTCCCCAAATGCA
+//
+//
+punc_IBSPCRIB0361_1003
+TGCATAATGGACTTTATGGACTCCATGCCGTCGTTGCACGTACCGTAATTGTGAAATGCAAGATCGGGAGCGGTT
+punc_MTRX1478_1014
+TGCATAATGGACTTTATGGACTCCATGCCGTCGTTGCACGTACCGTAATTGTGAAATGCA---------------
+//
+//
 ```
 
-The final output of step 6 is a file in `anolis_consens` called
+The final output of step 6 is a file in `anolis_across` called
 `anolis_catclust.gz`. This file contains all aligned reads across
 all samples. Executing the above command you'll see the output below
 which shows all the reads that align at one particular locus. You'll see
 the sample name of each read followed by the sequence of the read at
 that locus for that sample. If you wish to examine more loci you can
 increase the number of lines you want to view by increasing the value
-you pass to `head` in the above command (e.g. `... | head -n 300 | less`
+you pass to `head` in the above command (e.g. `... | head -n 300`).
 
-Step 7: Filter and write output files
-=====================================
+# Step 7: Filter and write output files
 
 The final step is to filter the data and write output files in many
 convenient file formats. First we apply filters for maximum number of
 indels per locus, max heterozygosity per locus, max number of snps per
 locus, and minimum number of samples per locus. All these filters are
-configurable in the params file and you are encouraged to explore
+configurable in the params file. You are encouraged to explore
 different settings, but the defaults are quite good and quite
 conservative.
 
 After running step 7 like so:
 
 ```
-%%bash
-ipyrad -p params-anolis.txt -s 7
+$ ipyrad -p params-anolis.txt -s 7 -c 2
+                                                                                                                                                                          
+ -------------------------------------------------------------
+  ipyrad [v.0.7.28]
+  Interactive assembly and analysis of RAD-seq data
+ -------------------------------------------------------------
+  loading Assembly: anolis
+  from saved path: ~/ipyrad-workshop/anolis.json
+  establishing parallel connection:
+  host compute node: [2 cores] on darwin
+  
+  Step 7: Filter and write output files for 10 Samples
+  [####################] 100%  filtering loci        | 0:00:10
+  [####################] 100%  building loci/stats   | 0:00:01
+  [####################] 100%  building vcf file     | 0:00:05
+  [####################] 100%  writing vcf file      | 0:00:00
+  [####################] 100%  building arrays       | 0:00:01
+  [####################] 100%  writing outfiles      | 0:00:00
+  Outfiles written to: ~/ipyrad-workshop/anolis_outfiles
 ```
 
 A new directory is created called `anolis_outfiles`. This directory
-contains all the output files specified in the params file. The default
-is to create all supported output files which include .phy, .nex, .geno,
-.treemix, .str, as well as many others.
+contains all the output files specified by the `output_formats` parameter
+in the params file. The default is set to create two different version
+of phylip output, one including the full sequence `anolis.phy` and one
+including only variable sites `anolis.snps.phy`, as well as `anolis.vcf`,
+and the `anolis.loci` (which is ipyrad's internal format). All supported
+output formats can be generated by editing the `params-anolis.txt` and 
+setting the requested `output_formats` to `*` (again, the wildcard character):
+```
+*                        ## [27] [output_formats]: Output formats (see docs)
+```
+
+After this you will need to re-run step 7, but this time including the `-f`
+flag, to force overwriting the output files that were previously generated.
 
 Congratulations! You've completed your first toy assembly. Now you can
 try applying what you've learned to assemble your own real data. Please
@@ -278,3 +338,7 @@ consult the docs for many of the more powerful features of ipyrad
 including reference sequence mapping, assembly branching, and
 post-processing analysis including svdquartets and many population
 genetic summary statistics.
+
+```
+$ ipyrad -p params-anolis.txt -s 7 -c 2 -f
+```
