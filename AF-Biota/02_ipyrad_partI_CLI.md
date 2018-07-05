@@ -486,8 +486,21 @@ $ ipyrad -p params-anolis.txt -s 3 -c 2
 
   Step 3: Clustering/Mapping reads
   [####################] 100%  dereplicating         | 0:00:11  
-
+  [####################] 100%  clustering            | 0:19:35
+  [####################] 100%  building clusters     | 0:00:06
+  [####################] 100%  chunking              | 0:00:01
+  [####################] 100%  aligning              | 0:14:27
+  [####################] 100%  concatenating         | 0:00:04```
 ```
+
+There are 6 main parts to this step:
+
+* dereplicating - Merge all identical reads
+* clustering - Find reads matching by sequence similarity threshold
+* building clusters - Group similar reads into clusters
+* chunking - Subsample cluster files to improve performance of alignment step
+* aligning - Align all clusters
+* concatenating - Gather chunked clusters into one full file of aligned clusters
 
 Again we can examine the results. The stats output tells you how many
 clusters were found, and the number of clusters that pass the mindepth
@@ -499,6 +512,20 @@ sequencing error.
 
 ```
 $ ipyrad -p params-anolis.txt -r
+
+Summary stats of Assembly anolis
+------------------------------------------------
+                   state  reads_raw  reads_passed_filter  clusters_total  clusters_hidepth
+punc_IBSPCRIB0361      3     250000               237519           56312              4223
+punc_ICST764           3     250000               236815           60626              4302
+punc_JFT773            3     250000               240102           61304              5214
+punc_MTR05978          3     250000               237704           61615              4709
+punc_MTR17744          3     250000               240396           62422              5170
+punc_MTR21545          3     250000               227965           55845              3614
+punc_MTR34414          3     250000               233574           61242              4278
+punc_MTRX1468          3     250000               230903           54411              3988
+punc_MTRX1478          3     250000               233398           57299              4155
+punc_MUFAL9635         3     250000               231868           59249              3866
 ```
 
 Again, the final output of step 3 is dereplicated, clustered files for
@@ -509,11 +536,40 @@ this looks like by examining a portion of one of the files.
 ## Same as above, `gunzip -c` unzips and prints to the screen and 
 ## `head -n 28` means just show me the first 28 lines. 
 $ gunzip -c anolis_clust_0.85/punc_IBSPCRIB0361.clustS.gz | head -n 28
+
+000e3bb624e3bd7e91b47238b7314dc6;size=4;*
+TGCATATCACAAGAGAAGAAAGCCACTAATTAAGGGGAAAAGAAAAGCCTCTGATATAGCTCCGATATATCATGC-
+75e462e101383cca3db0c02fca80b37a;size=2;-
+-GCATATCACAAGAGAAGAAAGCCACTAATTAAGGGGAAAAGAAAAGCCTCTGATATAGCTCCGATATATCATGCA
+//
+//
+0011c57e1e3c03e4a71516bd51c623da;size=1;*
+TGCATGAAATAGATACAACTGAGCACATTTGCTTTGTTTCCAGAGAGTGCAACAAGAGTTTGGAGAATATAAATG
+eef50f7e4849ed4761f1fd38b08d0e12;size=1;+
+TGCATGAAATAGATACTACTGAGCACATTTGCTTTGTTTCCAGAGATTGCATCAAGAGTTTGGAGAATATAAATG
+7f089b34522da8288b0e6ff7db8ffc6c;size=1;+
+TGCATGAAATAGATACAACTGAGCACATTTGCTTTGTTTCCAGAGATTGCAACAAGAGTTTGGAGAATATAAATG
+//
+//
+001236a2310c39a3a16d96c4c6c48df1;size=4;*
+TGCATCTCTTTGGGCTGTTGCTTGGTGGCACACCATGCTGCTTTCTCCTCACTTTTTCTCTCTTTTCCTGAGACT------------------------------
+4644056dca0546a270ba897b018624b4;size=2;-
+------------------------------CACCATGCTGCTTTCTCCTCACTTTTTCTCTCTTTTCCTGAGACTGAGCCAGGGACAGCGGCTGAGGAGGATGCA
+5412b772ec0429af178caf6040d2af30;size=1;+
+TGCATTTCTTTGGGCTGTTGCTTGGTGGCACACCATGCTGCTTTCTCCTCACTTTTTCTCTCTTTTCCTGAGACT------------------------------
+//
+//
+0013684f0db0bd454a0a6fd1b160266f;size=1;*
+TGCATTGTTCATGAATCGTCCCATTGTATACATTTTACCTGATCTATCTCATTGTATTTTACTCCATGGTTTTCA-------------------------
+c26ec07b3e3e77d3167341d100fd2d4e;size=1;-
+-------------------------GTATACATTTTACTTGATCTATCTCATTGTATTTTACTCCATGGTTTTCAGTACCTAACAAGCAGCATGTATGCA
+55510205b75b441a2c3ce6249f1eb47c;size=1;-
+-------------------------GTATACATTTTACCTGATCTATCTTATTGTATTTTACTCCATGGTTTTCAGTACCTAACAAGCAGCATGTATGCA
 ```
 
 Reads that are sufficiently similar (based on the above sequence
 similarity threshold) are grouped together in clusters separated by
-"//". For the first cluster below there is clearly one allele
+"//". For the first cluster above there is clearly one allele
 (homozygote) and one read with a (simulated) sequencing error. For the
 second cluster it seems there are two alleles (heterozygote), and a
 couple reads with sequencing errors. For the third cluster it's a bit
