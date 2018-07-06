@@ -27,12 +27,13 @@ wat
 # Getting set up to continue the assembly
 Just a reminder that all assembly steps in this part of the workshop
 should be run in a terminal on the USP cluster inside an interactive job.
-Here's the quick-setup, but if you need more specific details you can
+Here's the quick-setup (for mac/linux users), but if you need more specific details you can
 [look back to the cluster basics section of ipyrad PartI](https://radcamp.github.io/AF-Biota/02_ipyrad_partI_CLI.html#working-with-the-cluster).
 ```
 $ ssh <username>@lem.ib.usp.br 
 $ qsub -q proto -l nodes=1:ppn=2 -l mem=64gb -I
 ```
+Windows users should use puTTY.
 
 # Step 3: Recap
 
@@ -494,7 +495,7 @@ $ ipyrad -p params-anolis.txt -s 7 -c 2 -f
 Congratulations! You've completed your first RAD-Seq assembly. Now you can
 try applying what you've learned to assemble your own real data. Please
 consult the [ipyrad online documentation](http://ipyrad.readthedocs.io) for 
-details about many of the more powerful features of ipyrad including reference 
+details about many of the more powerful features of ipyrad, including reference 
 sequence mapping, assembly branching, and the extensive `analysis` toolkit, which
 includes extensive downstream analysis tools for such things as clustering and 
 population assignment, phylogenetic tree inference, quartet-based species tree
