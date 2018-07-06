@@ -16,7 +16,9 @@ Overview of process
 * [Set Jupyter notebook password](#set-jupyter-notebook-password)
 * [Start remote notebook server](#run-notebook-server)
 
-## SSH Tunnel Configuration
+## Setup to run on your local computer
+
+### SSH Tunnel Configuration
 This part is run **on your local computer**. An "ssh tunnel" will
 allow your computer to talk to the notebook server on the cluster
 by using the web browser. It's a little confusing at first, but 
@@ -42,7 +44,7 @@ you can find your port number here: [AF-Biota workshop port #s](https://github.c
 
 ### Mac/Linux SSH Tunnel Configuration
 
-## Running the notebook server
+## Setup to run on the USP cluster
 
 Everything else in the setup process takes place **in a terminal on
 the USP cluster.** Begin this part of setup by connecting to the cluster:
@@ -60,21 +62,30 @@ a terminal window on the cluster:
 conda install ipyrad -c ipyrad
 ```
 
-
-```
-$ ssh <username>@lem.ib.usp.br 
-$ qsub -q proto -l nodes=1:ppn=2 -l mem=64gb -I
-```
-## Set Jupyter Notebook Password
+### Set Jupyter Notebook Password
 Jupyter was already installed as a dependency of ipyrad, so we just 
 need to set a password before we can launch it. This command will 
-prompt you for a new password for your notebook (you will only ever 
-have to do this once on the HPC):
+prompt you for a new password for your notebook (you will **only ever 
+have to do this once on the HPC**):
 ```
 jupyter notebook passwd
 ```
 
-## Run Notebook Server
+### Run Notebook Server
+As with the rest of the assembly and analysis workshop we will run our
+notebook servers inside an interactive job on the USP cluster. Begin
+by submitting an interactive job request:
+```
+$ qsub -q proto -l nodes=1:ppn=2 -l mem=64gb -I
+```
+Once the interactive job appears to be ready, you can launch the jupyter
+notebook. The `jupyter notebook` command takes two arguments in this 
+case. The first is `--no-browser`, which tells jupyter to just run in
+the background and wait for connections. The second is `--port`, which
+is **very important for us**. Each user must enter the port number
+they were assigned on the [AF-Biota workshop port #s](https://github.com/radcamp/radcamp.github.io/blob/master/AF-Biota/participants.txt) page, and this should be the same port as entered
+above for the ssh tunnel.
 ```
 jupyter notebook --no-browser --port <my_port_number> &
 ```
+
