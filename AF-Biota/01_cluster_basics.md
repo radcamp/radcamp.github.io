@@ -17,7 +17,7 @@ Unlike laptop or desktop computers, cluster systems typically (almost exclusivel
 ### SSH for windows
 Windows computers need to use a 3rd party app for connecting to remote computers. The best app for this in my experience is [puTTY](https://www.putty.org/), a free SSH client. Right click and "Save link as" on the [64-bit binary executable link](https://the.earth.li/~sgtatham/putty/latest/w64/putty.exe). 
 
-Put more stuff here about how to use puTTY to connect.
+After installing puTTY, open it and you will see a window where you can fill out the name or IP address of the computer or cluster you want to connect to (the 'host'). To connect to the cluster, enter: lem.ib.usp.br. Make sure that the port is set to 22. Click 'Open'. 
 
 ### SSH for mac/linux
 Linux operating systems come preinstalled with an ssh command line client, which we will assume linux users are aware of how to use. Mac computers are built top of a linux-like operating system so they too ship with an SSH client, which can be accessed through the Terminal app. In a Finder window open Applications->Utilities->Terminal, then you can start an ssh session like this:
@@ -217,6 +217,8 @@ The squiggles indicate base composition per base position averaged across the re
 ![png](01_cluster_basics_files/anolis-adapters.png)
 
 Here we can see adapter contamination increases toward the tail of the reads, approaching 40% of total read content at the very end. The concern here is that if adapters represent some significant fraction of the read pool, then they will be treated as "real" data, and potentially bias downstream analysis. In the Anolis data this looks like it might be a real concern so we shall keep this in mind during step 2 of the ipyrad analysis, and incorporate 3' read trimming and aggressive adapter filtering.
+
+Other than this, the data look good and we can proceed with the ipyrad analysis.
 
 # References
 Elshire, R. J., Glaubitz, J. C., Sun, Q., Poland, J. A., Kawamoto, K., Buckler, E. S., & Mitchell, S. E. (2011). A robust, simple genotyping-by-sequencing (GBS) approach for high diversity species. PloS one, 6(5), e19379.
