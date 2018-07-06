@@ -11,7 +11,9 @@ As part of the `ipyrad.analysis` toolkit we've created convenience functions for
 **Maybe a good idea to just split notebook install/setup/config into a whole other .md file so it can be referenced from other tutorials.**
 
 # A note on Jupyter/IPython
-[Jupyter notebooks](http://jupyter.org/) are primarily a way to generate reproducible scientific analysis workflows in python. ipyrad analysis tools are best run inside Jupyter notebooks, as the analysis can be monitored and tweaked and provides a self-documenting workflow. 
+[Jupyter notebooks](http://jupyter.org/) are primarily a way to generate reproducible scientific analysis workflows in python. ipyrad analysis tools are best run inside Jupyter notebooks, as the analysis can be monitored and tweaked and provides a self-documenting workflow.
+
+[Setting up and configuring jupyter notebooks](Jupyter_Notebook_Setup.md)
 
 **Insert a picture and some docs here to help people understand how notebooks and ssh tunnels work.**
 
