@@ -474,12 +474,12 @@ and setting the requested `output_formats` to `*` (again, the wildcard character
 ```
 
 After this you will need to re-run step 7, but this time including the `-f`
-flag, to force overwriting the output files that were previously generated.
+flag, to force overwriting the output files that were previously generated. 
+More information about output formats can be found [here](http://ipyrad.readthedocs.io/output_formats.html#full-output-formats).
 
 ```
 $ ipyrad -p params-anolis.txt -s 7 -c 2 -f
 ```
-More information about output formats can be found [here](http://ipyrad.readthedocs.io/output_formats.html#full-output-formats)
 
 Congratulations! You've completed your first RAD-Seq assembly. Now you can
 try applying what you've learned to assemble your own real data. Please
