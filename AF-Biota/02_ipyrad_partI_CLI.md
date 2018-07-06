@@ -255,7 +255,7 @@ base calls. The [FASTQ wikipedia page](https://en.wikipedia.org/wiki/FASTQ_forma
 behind how quality scores are encoded.
 
 The Anolis data are 96bp single-end reads prepared as GBS. The first five bases (TGCAT) 
-form the the restriction site overhang. All following bases make up the sequence data.
+form the restriction site overhang. All following bases make up the sequence data.
 
 # Step 1: Loading the raw data files
 
@@ -271,7 +271,7 @@ Now lets run step 1! For the Anolis data this will take <1 minute.
 of *always* specifying the number of cores with the `-c` flag. If you
 do not specify the number of cores ipyrad assumes you want **all** of
 them, and this will make your run **very** fast, but it might **aggravate**
-the cluster admins.
+the cluster usage for everyone else.
 
 ``` 
 ## -p    the params file we wish to use
@@ -418,7 +418,7 @@ punc_MUFAL9635        250000                 114492                 182877      
 $ ipyrad -p params-anolis.txt -r
 ```
 
-You might also take a gander at the filtered reads: 
+You might also take a closer look at the filtered reads: 
 
 ```
 $ gunzip -c anolis_edits/punc_IBSPCRIB0361.trimmed_R1_.fastq.gz | head -n 12
@@ -577,7 +577,7 @@ Reads that are sufficiently similar (based on the above sequence
 similarity threshold) are grouped together in clusters separated by
 "//". For the second and fourth clusters above these are *probably* homozygous 
 with some sequencing error, but it's hard to tell. For the first and third
-clusters are there are truly two alleles (heterozygote)? Is it a homozygote 
+clusters, are there truly two alleles (heterozygote)? Is it a homozygote 
 with lots of sequencing errors, or a heterozygote with few reads for one of the alleles?
 
 Thankfully, untangling this mess is what step 4 is all about.
