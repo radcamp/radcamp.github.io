@@ -24,6 +24,16 @@ $ echo "wat"
 wat
 ```
 
+# Getting set up to continue the assembly
+Just a reminder that all assembly steps in this part of the workshop
+should be run in a terminal on the USP cluster inside an interactive job.
+Here's the quick-setup, but if you need more specific details you can
+[look back to the cluster basics section of ipyrad PartI](https://radcamp.github.io/AF-Biota/02_ipyrad_partI_CLI.html#working-with-the-cluster).
+```
+$ ssh <username>@lem.ib.usp.br 
+$ qsub -q proto -l nodes=1:ppn=2 -l mem=64gb -I
+```
+
 # Step 3: Recap
 
 Recall that we clustered reads within samples in Step 3. Reads that are sufficiently 
