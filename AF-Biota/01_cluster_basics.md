@@ -1,7 +1,7 @@
 # Cluster Basics and Housekeeping
 The bulk of the activities this morning involve getting oriented on the cluster and getting programs and resources set up for the actual assembly and analysis. We make no assumptions about prior experience with cluster environments, so we scaffold the entire participant workshop experience from first principles. More advanced users hopefully will find value in some of the finer details we present.
 
-* [Connecting to the cluster](#ssh-intro): [Windows](#ssh-for-windows)/[Mac/linux](#ssh-for-mac)
+* [Connecting to the cluster](#ssh-intro): [Windows](#ssh-for-windows)/[Mac/Linux](#ssh-for-mac)
 * [Basic command line navigation](#command-line-basics)
 * [Setting up the computing environment](#download-and-install-software)
 * [Fetching the data](#fetch-the-raw-data)
