@@ -5,7 +5,7 @@ This is the first part of the full tutorial for the command line interface
 and analysis process. This is meant as a broad introduction to familiarize 
 users with the general workflow, and some of the parameters and terminology. 
 We will  continue with assembly and analysis of the Anolis dataset of 
-Prates *et al* 2016, which we fetched during the previous QC analysis step.
+[Prates *et al.* 2016](http://www.pnas.org/content/pnas/113/29/7978.full.pdf), which we fetched during the previous QC analysis step.
 This data was generated with the GBS protocol and sequenced single-end (SE), 
 but the core concepts will apply to assembly of other data types (ddRAD and
 paired-end (PE)).
@@ -100,7 +100,7 @@ At any time you can ask the cluster for the status of your jobs with the
 is marked `S` (meaning "status"). The most common values for this field
 are:
 * R - Job is running
-* Q - job is Queued (boo!)
+* Q - job is queued (boo!)
 * C - Job is completed (yay!)
 
 ```
@@ -127,7 +127,7 @@ Start by creating a new parameters file with the `-n` flag. This flag
 requires you to pass in a name for your assembly. In the example we use
 `anolis` but the name can be anything at all. Once you start
 analysing your own data you might call your parameters file something
-more informative, like the name of your organism.
+more informative, like the name of your organism and some details on the settings.
 
 ``` 
 $ cd ~/ipyrad-workshop
@@ -193,7 +193,7 @@ these on the bottom of the frame.
 We need to specify that the raw data files are in the `raws` directory, that 
 our data used the `gbs` library prep protocol, and that the overhang left by 
 our restriction enzyme is `TGCAT` (reflecting the use of EcoT22I by Prates 
-et al). Change the following values in the params file to match these:
+*et al.* 2016). Change the following values in the params file to match these:
 ```
 ./raws/*.gz                    ## [4] [sorted_fastq_path]: Location of demultiplexed/sorted fastq files
 gbs                            ## [7] [datatype]: Datatype (see docs): rad, gbs, ddrad, etc.
@@ -228,9 +228,9 @@ first three reads of one of the Anolis files.
 
 ``` 
 ## For your personal edification here is what this is doing:
-##  gunzip -c: Tells gzip to unzip the file and write the contents to the screen
-##  head -n 12: Grabs the first 12 lines of the fastq file. Fastq files
-##  have 4 lines per read, so the value of `-n` should be a multiple of 4
+## gunzip -c: Tells gzip to unzip the file and write the contents to the screen
+## head -n 12: Grabs the first 12 lines of the fastq file. Fastq files
+## have 4 lines per read, so the value of `-n` should be a multiple of 4
 
 $ gunzip -c ./raws/punc_IBSPCRIB0361_R1_.fastq.gz | head -n 12
 
@@ -303,8 +303,7 @@ As a convenience ipyrad internally tracks the state of all your steps in your
 current assembly, so at any time you can ask for results by invoking the `-r` flag.
 
 ```
-## -r fetches informative results from currently 
-##      executed steps
+## -r fetches informative results from currently executed steps  
 $ ipyrad -p params-anolis.txt -r
 
 Summary stats of Assembly anolis
@@ -414,7 +413,7 @@ punc_MUFAL9635        250000                 114492                 182877      
 ```
 
 ```
-## Get current stats including # raw reads and # reads  after filtering.
+## Get current stats including # raw reads and # reads after filtering.
 $ ipyrad -p params-anolis.txt -r
 ```
 
