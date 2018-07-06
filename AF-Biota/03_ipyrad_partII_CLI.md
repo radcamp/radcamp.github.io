@@ -410,7 +410,7 @@ by definition these are being removed.
 10             196          2918
 ```
 
-Whereas the previous block indicated samples per locus, here we 
+Whereas the previous block indicated samples per locus, below we 
 are looking at SNPs per locus. In a similar fashion as above,
 these columns record the counts of loci containing given numbers
 of variable sites and parsimony informative sites (pis). For example,
@@ -479,6 +479,7 @@ flag, to force overwriting the output files that were previously generated.
 ```
 $ ipyrad -p params-anolis.txt -s 7 -c 2 -f
 ```
+More information about output formats can be found [here] (http://ipyrad.readthedocs.io/output_formats.html#full-output-formats)
 
 Congratulations! You've completed your first RAD-Seq assembly. Now you can
 try applying what you've learned to assemble your own real data. Please
