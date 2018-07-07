@@ -39,7 +39,7 @@ import ipyrad.analysis as ipa      ## ipyrad analysis toolkit
 ```
 > **Note:** The call to `%matplotlib inline` here is a jupyter notebook 'magic' command that enables support for plotting directly inside the notebook.
 
-## Quick guide (tldr;)
+## Quick guide (tl;dr)
 The following cell shows the quickest way to results using a small simulated dataset in `/scratch/af-biota`. Complete explanation of all of the features and options of the PCA module is the focus of the rest of this tutorial. Copy this code into a notebook cell and run it.
 
 ```python
@@ -84,7 +84,7 @@ pca.plot()
 
     <matplotlib.axes._subplots.AxesSubplot at 0x7fe0beb3a650>
 
-![png](04_PCA_API_files/04_PCA_API_01-Anolis-PCA.png)
+![png](04_PCA_API_files/04_PCA_API_01-Anolis_PCA.png)
 
 ## Population assignment for sample colors
 In the tl;dr example the assembly of our simulated data had included a `pop_assign_file` so the pca() was smart enough to find this and color samples accordingly. In some cases you might not have used a pops file, so it's also possible to specify population assignments in a dictionary. The format of the dictionary should have populations as keys and lists of samples as values. Sample names need to be identical to the names in the vcf file, which we can verify with the `samples_vcforder` property of the pca object.
