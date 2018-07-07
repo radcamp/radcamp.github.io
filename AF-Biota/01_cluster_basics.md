@@ -1,4 +1,16 @@
-# Tutorial documentation conventions
+
+
+# Cluster Basics and Housekeeping
+The bulk of the activities this morning involve getting oriented on the cluster and getting programs and resources set up for the actual assembly and analysis. We make no assumptions about prior experience with cluster environments, so we scaffold the entire participant workshop experience from first principles. More advanced users hopefully will find value in some of the finer details we present.
+
+* [Connecting to the cluster](#ssh-intro): [Windows](#ssh-for-windows)/[Mac/Linux](#ssh-for-mac)
+* [Basic command line navigation](#command-line-basics)
+* [Setting up the computing environment](#download-and-install-software)
+* [Fetching the data](#fetch-the-raw-data)
+* [Basic quality control (FastQC)](#fastqc-for-quality-control)
+* [Viewing and interpreting FAstQC results](#inspecting-fastqc-utput)
+
+## Tutorial documentation conventions
 Each grey cell in this tutorial indicates a command line interaction. Lines starting with $ indicate a command that should be executed in a terminal, for example by copying and pasting the text into your terminal. All lines in code cells beginning with ## are comments and should not be copied and executed. Elements in code cells surrounded by angle brackets (e.g. `<username>`) are variables that need to be replaced by the user. All other lines should be interpreted as output from the issued commands.
 
 ```
@@ -10,16 +22,6 @@ $ touch ~/watdo.txt
 $ echo "wat"
 wat
 ```
-
-# Cluster Basics and Housekeeping
-The bulk of the activities this morning involve getting oriented on the cluster and getting programs and resources set up for the actual assembly and analysis. We make no assumptions about prior experience with cluster environments, so we scaffold the entire participant workshop experience from first principles. More advanced users hopefully will find value in some of the finer details we present.
-
-* [Connecting to the cluster](#ssh-intro): [Windows](#ssh-for-windows)/[Mac/Linux](#ssh-for-mac)
-* [Basic command line navigation](#command-line-basics)
-* [Setting up the computing environment](#download-and-install-software)
-* [Fetching the data](#fetch-the-raw-data)
-* [Basic quality control (FastQC)](#fastqc-for-quality-control)
-* [Viewing and interpreting FAstQC results](#inspecting-fastqc-utput)
 
 ## USP Zoology HPC Facility Info
 Computational resources for the duration of this workshop have been generously provided by the Zoology HPC facility, with special thanks to Diogo Melo for technical support and Roberta Damasceno for coordinating access. The cluster we will be using is located at `lem.ib.usp.br`. Further details about cluster resources and available queues can be found on the [USP Cluster Info](USP_Cluster_Info.md) page.
