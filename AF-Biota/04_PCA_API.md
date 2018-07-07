@@ -1,5 +1,5 @@
 
-# Cookbook: *PCA* analyses
+# The ipyrad.analysis module: *PCA*
 
 As part of the `ipyrad.analysis` toolkit we've created convenience functions for easily performing exploratory principal component analysis (PCA) on your data. PCA is a very standard dimension-reduction technique that is often used to get a general sense of how samples are related to one another. PCA has the advantage over STRUCTURE type analyases in that it is very fast. Similar to STRUCTURE, PCA can be used to produce simple and intuitive plots that can be used to guide downstream analysis. These are three very nice papers that talk about the application and interpretation of PCA in the context of population genetics:
 
@@ -10,7 +10,7 @@ As part of the `ipyrad.analysis` toolkit we've created convenience functions for
 # A note on Jupyter/IPython
 [Jupyter notebooks](http://jupyter.org/) are primarily a way to generate reproducible scientific analysis workflows in python. ipyrad analysis tools are best run inside Jupyter notebooks, as the analysis can be monitored and tweaked and provides a self-documenting workflow.
 
-First begin by [setting up and configuring jupyter notebooks](Jupyter_Notebook_Setup.md). The rest of the materials in this part of the workshop assume you are running all code in cells of a jupyter notebook that is running on the USP cluster.
+First begin by [setting up and configuring jupyter notebooks](Jupyter_Notebook_Setup.md). **The rest of the materials in this part of the workshop assume you are running all code in cells of a jupyter notebook** that is running on the USP cluster.
 
 
 # *PCA* analyses
@@ -39,34 +39,24 @@ import ipyrad.analysis as ipa      ## ipyrad analysis toolkit
 ```
 > **Note:** The call to `%matplotlib inline` here is a jupyter notebook 'magic' command that enables support for plotting directly inside the notebook.
 
-
 ## Quick guide (tldr;)
 The following cell shows the quickest way to results. Further explanation of all of the features and options is provided further below. 
 
 ```python
 ## Load your assembly
-data = ipyrad.load_json("/tmp/ipyrad-test/rad.json")
+data = ipyrad.load_json("/home/<username>/ipyrad-workshop/anolis.json")
 ## Create they pca object
 pca = ipa.pca(data)
 ## Bam!
 pca.plot()
 ```
-
     loading Assembly: rad
     from saved path: /tmp/ipyrad-test/rad.json
     Using default cmap: Spectral
 
-
-
-
-
     <matplotlib.axes._subplots.AxesSubplot at 0x7fb6fdf82050>
 
-
-
-
 ![png](04_PCA_API_files/04_PCA_API_7_2.png)
-
 
 # Full guide
 In the most common use you'll want to plot the first two PCs, then inspect the output, remove any obvious outliers, and then redo the pca. It's often desirable to import a vcf file directly rather than to use the ipyrad assembly, so here we'll demonstrate this.
