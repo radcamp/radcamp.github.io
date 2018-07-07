@@ -220,7 +220,7 @@ similarity.
 **Note on performance of each step:** Steps 3 and 6 generally take 
 considerably longer than any of the steps, due to the resource 
 intensive clustering and alignment phases. These can take on the order
-of 10-100x as long as the next longest running step.
+of 10-100x as long as the next longest running step. Fortunately, with the data we use during this workshop, step 6 will actually be really fast.
 
 ```
 $ ipyrad -p params-anolis.txt -s 6 -c 2
