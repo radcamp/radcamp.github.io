@@ -78,7 +78,7 @@ $ which python
 The `source` command tells the server to recognize the conda install (you only ever have to do this once, so don't worry too much about remembering it). The `which` command will show you the path to the python binary, which will now be in your personal minconda directory:
 
 ### Install ipyrad and fastqc
-Conda gives us access to an amazing array of all kinds of analysis tools for both analyzing and manipulating all kinds of data. Here we'll just scratch the surface by installing [ipyrad](http://ipyrad.readthedocs.io/), the RAD-Seq assembly and analysis tool that we'll use throughout the workshop, [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/), an application for filtering fasta files based on several quality control metrics, and [toytree](https://toytree.readthedocs.io/en/latest/), which is a plotting library used by the ipyrad analysis toolkit.
+Conda gives us access to an amazing array of all kinds of analysis tools for both analyzing and manipulating all kinds of data. Here we'll just scratch the surface by installing [ipyrad](http://ipyrad.readthedocs.io/), the RAD-Seq assembly and analysis tool that we'll use throughout the workshop, [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/), an application for filtering fasta files based on several quality control metrics. As long as we're installing conda packages we'll include [toytree](https://toytree.readthedocs.io/en/latest/) as well, which is a plotting library used by the ipyrad analysis toolkit.
 
 ```
 $ conda install -c ipyrad -c bioconda -c eaton-lab ipyrad fastqc toytree
