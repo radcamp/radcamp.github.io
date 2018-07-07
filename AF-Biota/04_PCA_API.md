@@ -39,12 +39,9 @@ import ipyrad.analysis as ipa      ## ipyrad analysis toolkit
 ```
 > **Note:** The call to `%matplotlib inline` here is a jupyter notebook 'magic' command that enables support for plotting directly inside the notebook.
 
-> **IPyradError:** If you encounter an error about a `toytree` dependency, you can install by executing this command in a terminal on the cluster: `conda install toytree -c eaton-lab`
-
 
 ## Quick guide (tldr;)
 The following cell shows the quickest way to results. Further explanation of all of the features and options is provided further below. 
-
 
 ```python
 ## Load your assembly
