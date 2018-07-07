@@ -373,6 +373,7 @@ filtering to be quite aggressive.
 
 **Note:** Trimming to 75bp seems a bit aggressive too, and based on the FastQC results you probably would not want to do this with if these were your real data. However, it will speed up the analysis considerably. Here, we are just trimming the reads for the sake of this workshop.
 
+**TODO:** Settle on one format for 'Notes' and standardize on it.
 Edit your params file again with `nano`:
 
 ```
