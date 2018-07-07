@@ -15,6 +15,14 @@ First begin by [setting up and configuring jupyter notebooks](Jupyter_Notebook_S
 
 # *PCA* analyses
 
+* [Simple PCA from a VCF file](#simple-pca-from-vcf-file)
+* [Coloring by population assignment](#population-assignment-for-sample-colors)
+* [Removing "bad" samples and replotting](#removing-bad-samples-and-replotting)
+* [Accessing the raw PC values](#inspecting-pcs-directly)
+* [Specifying which PCs to plot](#looking-at-pcs-other-than-1--2)
+* [Fine grained color control per popluation](#controlling-colors)
+* [Dealing with missing data](#dealing-with-missing-data)
+
 ## Create a new notebook for the PCA
 On your local computer open a new web browser and enter the link to your notebook server in the address bar:
 ```
@@ -58,6 +66,9 @@ pca.plot()
 ![png](04_PCA_API_files/04_PCA_API_00_Simulated_Example.png)
 
 ## Full guide
+
+### Simple pca from vcf file
+
 In the most common use you'll want to plot the first two PCs, then inspect the output, remove any obvious outliers, and then redo the pca. It's often desirable to import a vcf file directly rather than to use the ipyrad assembly, so here we'll demonstrate this with the Anolis data.
 
 ```python
@@ -86,7 +97,7 @@ pca.plot()
 
 ![png](04_PCA_API_files/04_PCA_API_01_Anolis_PCA.png)
 
-## Population assignment for sample colors
+### Population assignment for sample colors
 In the tl;dr example the assembly of our simulated data had included a `pop_assign_file` so the pca() was smart enough to find this and color samples accordingly. In some cases you might not have used a pops file, so it's also possible to specify population assignments in a dictionary. The format of the dictionary should have populations as keys and lists of samples as values. Sample names need to be identical to the names in the vcf file, which we can verify with the `samples_vcforder` property of the pca object.
 
 
