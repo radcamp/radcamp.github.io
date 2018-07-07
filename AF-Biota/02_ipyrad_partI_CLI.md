@@ -366,6 +366,7 @@ prep scenarios. Recalling from our exploration of the data with FastQC
 we have some problem with adapters, and a little noise toward the 3' 
 end. To account for this we will trim reads to 75bp and set adapter 
 filtering to be quite aggressive. 
+
 **Note:** Trimming to 75bp seems a bit aggressive too, and based on the FastQC results you probably would not want to do this with if these were your real data. However, it will speed up the analysis considerably. Here, we are just trimming the reads for the sake of this workshop.
 
 Edit your params file again with `nano`:
