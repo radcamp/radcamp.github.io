@@ -514,8 +514,8 @@ In-depth operations of step 3:
 * concatenating - Gather chunked clusters into one full file of aligned clusters
 
 Again we can examine the results. The stats output tells you how many
-clusters were found, and the number of clusters that pass the mindepth
-thresholds. We'll go into more detail about mindepth settings in some of
+clusters were found (clusters_total), and the number of clusters that pass the mindepth
+thresholds (clusters_hidepth). We'll go into more detail about mindepth settings in some of
 the advanced tutorials but for now all you need to know is that by
 default step 3 will filter out clusters that only have a handful of
 reads on the assumption that these are probably all mostly due to
