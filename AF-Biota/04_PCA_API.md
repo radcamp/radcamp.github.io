@@ -7,7 +7,7 @@ As part of the `ipyrad.analysis` toolkit we've created convenience functions for
 * [Novembre & Stephens (2008) Interpreting principal component analyses of spatial population genetic variation](https://www.nature.com/articles/ng.139)
 * [McVean (2009) A genealogical interpretation of principal components analysis](http://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1000686)
 
-# A note on Jupyter/IPython
+## A note on Jupyter/IPython
 [Jupyter notebooks](http://jupyter.org/) are primarily a way to generate reproducible scientific analysis workflows in python. ipyrad analysis tools are best run inside Jupyter notebooks, as the analysis can be monitored and tweaked and provides a self-documenting workflow.
 
 First begin by [setting up and configuring jupyter notebooks](Jupyter_Notebook_Setup.md). **The rest of the materials in this part of the workshop assume you are running all code in cells of a jupyter notebook** that is running on the USP cluster.
@@ -40,69 +40,51 @@ import ipyrad.analysis as ipa      ## ipyrad analysis toolkit
 > **Note:** The call to `%matplotlib inline` here is a jupyter notebook 'magic' command that enables support for plotting directly inside the notebook.
 
 ## Quick guide (tldr;)
-The following cell shows the quickest way to results. Further explanation of all of the features and options is provided further below. 
+The following cell shows the quickest way to results using a small simulated dataset in `/scratch/af-biota`. Further explanation of all of the features and options is provided further below. 
 
 ```python
 ## Load your assembly
-data = ipyrad.load_json("/home/<username>/ipyrad-workshop/anolis.json")
+data = ipyrad.load_json("/scratch/af-biota/simulated-example/simrad.json")
 ## Create they pca object
 pca = ipa.pca(data)
 ## Bam!
 pca.plot()
 ```
-    loading Assembly: rad
-    from saved path: /tmp/ipyrad-test/rad.json
+    loading Assembly: simrad
+    from saved path: /scratch/af-biota/simulated-example/simrad.json
     Using default cmap: Spectral
-
     <matplotlib.axes._subplots.AxesSubplot at 0x7fb6fdf82050>
 
-![png](04_PCA_API_files/04_PCA_API_7_2.png)
+![png](04_PCA_API_files/04_PCA_API_00_Simulated_Example.png)
 
-# Full guide
+## Full guide
 In the most common use you'll want to plot the first two PCs, then inspect the output, remove any obvious outliers, and then redo the pca. It's often desirable to import a vcf file directly rather than to use the ipyrad assembly, so here we'll demonstrate this.
 
-
 ```python
-## Path to the input vcf, in this case it's just the vcf from our ipyrad pedicularis assembly
-vcffile = "/home/isaac/ipyrad/test-data/pedicularis/ped_outfiles/ped.vcf"
-```
-
-Here we can just load the vcf file directly into the pca analysis module. Then ask for the samples in `samples_vcforder`, which is the order in which they are written in the vcf.
-
-
-```python
+## Path to the input vcf.
+vcffile = "/home/<username>/ipyrad-workshop/anolis_outfiles/anolis.vcf"
 pca = ipa.pca(vcffile)
+```
+> **Note:** Here we use the anolis vcf we generated with ipyrad, but the `ipyrad.analysis.pca` module can read in from *any* vcf file, so it's possible to quickly generate PCA plots for any vcf from any dataset.
+
+We can inspect the samples included in the PCA plot by asking the `pca` object for `samples_vcforder`.
+```python
 print(pca.samples_vcforder)
 ```
-
-    [u'29154_superba_SRR1754715' u'30556_thamno_SRR1754720'
-     u'30686_cyathophylla_SRR1754730' u'32082_przewalskii_SRR1754729'
-     u'33413_thamno_SRR1754728' u'33588_przewalskii_SRR1754727'
-     u'35236_rex_SRR1754731' u'35855_rex_SRR1754726' u'38362_rex_SRR1754725'
-     u'39618_rex_SRR1754723' u'40578_rex_SRR1754724'
-     u'41478_cyathophylloides_SRR1754722' u'41954_cyathophylloides_SRR1754721']
-
+    [u'punc_IBSPCRIB0361' u'punc_ICST764' u'punc_JFT773' u'punc_MTR05978'
+     u'punc_MTR17744' u'punc_MTR21545' u'punc_MTR34414' u'punc_MTRX1468'
+     u'punc_MTRX1478' u'punc_MUFAL9635']
 
 Now construct the default plot, which shows all samples and PCs 1 and 2. By default all samples are assigned to one population, so everything will be the same color.
-
 
 ```python
 pca.plot()
 ```
-
     Using default cmap: Spectral
-
-
-
-
 
     <matplotlib.axes._subplots.AxesSubplot at 0x7fe0beb3a650>
 
-
-
-
-![png](04_PCA_API_files/04_PCA_API_13_2.png)
-
+![png](04_PCA_API_files/01-Anolis-PCA.png)
 
 ## Population assignment for sample colors
 In the tl;dr example the assembly of our simulated data had included a `pop_assign_file` so the pca() was smart enough to find this and color samples accordingly. In some cases you might not have used a pops file, so it's also possible to specify population assignments in a dictionary. The format of the dictionary should have populations as keys and lists of samples as values. Sample names need to be identical to the names in the vcf file, which we can verify with the `samples_vcforder` property of the pca object.
