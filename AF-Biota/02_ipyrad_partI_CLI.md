@@ -66,8 +66,9 @@ If you haven't already installed ipyrad go here first: [installation](https://ip
 We will run all our assembly and analysis on the USP cluster inside
 an "interactive" job. This will allow us to run our proccesses on 
 compute nodes, but still be able to remain at the command line so 
-we can easily monitor progress. First, open an SSH connection to
-the cluster:
+we can easily monitor progress. If you do not still have an active
+ssh window on the cluster, begin by re-establishing the connection 
+through puTTY (Windows) or ssh (Mac/Linux)" :
 ```
 $ ssh <username>@lem.ib.usp.br 
 ```
@@ -181,7 +182,7 @@ We will use the `nano` text editor to modify `params-anolis.txt` and change
 these parameters:
 
 ```
-$ nano params-anlis.txt
+$ nano params-anolis.txt
 ```
 ![png](02_ipyrad_partI_CLI_files/ipyrad_part1_nano.png)
 
