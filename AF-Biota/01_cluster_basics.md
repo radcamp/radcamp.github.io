@@ -1,3 +1,16 @@
+# Tutorial documentation conventions
+Each grey cell in this tutorial indicates a command line interaction. Lines starting with $ indicate a command that should be executed in a terminal, for example by copying and pasting the text into your terminal. All lines in code cells beginning with ## are comments and should not be copied and executed. Elements in code cells surrounded by angle brackets (e.g. `<username>`) are variables that need to be replaced by the user. All other lines should be interpreted as output from the issued commands.
+
+```
+## Example Code Cell.
+## Create an empty file in my home directory called `watdo.txt`
+$ touch ~/watdo.txt
+
+## Print "wat" to the screen
+$ echo "wat"
+wat
+```
+
 # Cluster Basics and Housekeeping
 The bulk of the activities this morning involve getting oriented on the cluster and getting programs and resources set up for the actual assembly and analysis. We make no assumptions about prior experience with cluster environments, so we scaffold the entire participant workshop experience from first principles. More advanced users hopefully will find value in some of the finer details we present.
 
@@ -22,8 +35,8 @@ After installing puTTY, open it and you will see a window where you can fill out
 ### SSH for mac/linux
 Linux operating systems come preinstalled with an ssh command line client, which we will assume linux users are aware of how to use. Mac computers are built top of a linux-like operating system so they too ship with an SSH client, which can be accessed through the Terminal app. In a Finder window open Applications->Utilities->Terminal, then you can start an ssh session like this:
 
-```sh
-ssh <username>@lem.ib.usp.br
+```
+$ ssh <username>@lem.ib.usp.br
 ```
 
 > **Note on usage:** In command line commands we'll use the convention of wrapping variable names in angle-brackets. For example, in the command above you should substitute your own username for `<username>`.
@@ -32,7 +45,7 @@ ssh <username>@lem.ib.usp.br
 Put some stuff here about navigating the home directory, maybe mkdir, pwd, cd.
 
 ```
-mkdir ipyrad-workshop
+$ mkdir ipyrad-workshop
 ```
 > **Special Note:** Notice that the above directory we are making is not called `ipyrad workshop`. This is **very important**, as spaces in directory names are known to cause havoc on HPC systems. All linux based operating systems do not recognize file or directory names that include spaces because spaces act as default delimiters between arguments to commands. There are ways around this (for example Mac OS has half-baked "spaces in file names" support) but it will be so much for the better to get in the habit now of *never including spaces in file or directory names*.
 
@@ -42,34 +55,31 @@ mkdir ipyrad-workshop
 
 64-Bit Python2.7 conda installer for linux is here:[https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh](https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh), so copy and paste this link into the commands as below:
 
-```sh
-cd ~
-wget https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh
+```
+$ cd ~
+$ wget https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh
 ```
 > **Note:** The `~` in the `cd` command is a special character on linux systems that means "My Home Directory" (e.g. `/home/isaac`).
 
 After the download finishes you can execute the conda installer: 
 
 ```
-bash https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh
+$ bash Miniconda2-latest-Linux-x86_64.sh
 ```
 Accept the license terms, and use the default conda directory (mine is `/home/isaac/miniconda2`). After the install completes it will ask about modifying your PATH, and you should say 'yes' for this. Next run the following two commands:
 
-```sh
-source .bashrc
-which python
+```
+$ source .bashrc
+$ which python
+/home/<username>/miniconda2/bin/python
 ```
 The `source` command tells the server to recognize the conda install (you only ever have to do this once, so don't worry too much about remembering it). The `which` command will show you the path to the python binary, which will now be in your personal minconda directory:
-```
-isaac@darwin:~$ which python
-/home/isaac/miniconda2/bin/python
-```
 
 ### Install ipyrad and fastqc
 Conda gives us access to an amazing array of all kinds of analysis tools for both analyzing and manipulating all kinds of data. Here we'll just scratch the surface by installing [ipyrad](http://ipyrad.readthedocs.io/), the RAD-Seq assembly and analysis tool that we'll use throughout the workshop, and [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/), an application for filtering fasta files based on several quality control metrics.
 
-```sh
-conda install -c ipyrad -c bioconda ipyrad fastqc
+```
+$ conda install -c ipyrad -c bioconda ipyrad fastqc
 ```
 > **Note:** The `-c` flag indicates that we're asking conda to fetch apps from the `ipyrad` and `bioconda` channels. Channels are seperate repositories of apps maintained by independent developers.
 
@@ -90,13 +100,11 @@ wcwidth-0.1.7        |   25 KB | ###############################################
 These (and many more) are all the dependencies of ipyrad and fastqc. Dependencies can include libraries, frameworks, and/or other applications that we make use of in the architecture of our software. Conda knows all about which dependencies will be needed and installs them automatically for you. Once the process is complete (may take several minutes), you can verify the install by asking what version of each of these apps is now available for you on the cluster.
 
 ```
-isaac@darwin:~$ ipyrad --version
+$ ipyrad --version
 ipyrad 0.7.28
-isaac@darwin:~$ fastqc --version
+$ fastqc --version
 FastQC v0.11.7
 ```
-> **Note:** The `isaac@darwin:~$` here is my 'prompt', which is the server's indication to me that it is ready to receive commands. You should have a similar prompt, but your name will obviously be different. If you see a prompt in a command you can assume we are just asking you to type the commands at your prompt in a similar fashion.
-
 ## Fetch the raw data
 We will be reanalysing RAD-Seq data from *Anolis punctatus* sampled from across their distribution on the South American continent and published in [Prates *et al.* 2016](http://www.pnas.org/content/pnas/113/29/7978.full.pdf). The original dataset included 43 individuals of *A. punctatus*, utilized the Genotyping-By-Sequencing (GBS) single-enzyme library prep protocol [Ellshire *et al.* 2011](http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0019379), sequenced 100bp single-end reads on an Illumina Hi-Seq and resulted in final raw sequence counts on the order of 1e6 per sample.
 
@@ -104,25 +112,24 @@ We will be using a subset of 10 individuals distributed along the coastal extent
 
 The subset of truncated raw data is located in a special folder on the HPC system. You can *change directory* into your ipyrad working directory, and then copy the raw data with these commands:
 ```
-cd ipyrad-workshop
-cp /scratch/af-biota/raw_data/a_punctatus.tgz .
+$ cd ipyrad-workshop
+$ cp /scratch/af-biota/raw_data/a_punctatus.tgz .
 ```
 > **Note:** The form of the copy command is `copy <source> <destination>`. Here the source file is clear, it's simply the data file you want to copy. The destination is `.`, which is another linux shortcut that means "My current directory", or "Right here in the directory I'm in".
 
 Finally, you'll notice the raw data is in `.tgz` format, which is similar to a zip archive. We can unpack our raw data in the current directory using the `tar` command:
 ```
-tar -xvzf a_punctatus.tgz
+$ tar -xvzf a_punctatus.tgz
 ```
 > **Point of interest:** All linux commands, such as `tar`, can have their behavior modified by passing various arguments. Here the arguments are `-x` to "Extract" the archive file; `-v` to add "verbosity" by printing progress to the screen; `z` to "unzip" the archive during extraction; and `-f` to "force" the extraction which prevents `tar` from pestering you with decisions.
 
 Now use `ls` to list the contents of your current directory, and also to list the contents of the newly created `raws` directory:
 ```
-isaac@darwin:~/ipyrad-workshop$ ls
+$ ls
 a_punctatus.tgz  raws
-isaac@darwin:~/ipyrad-workshop$ ls raws/
+$ ls raws/
 punc_IBSPCRIB0361_R1_.fastq.gz  punc_JFT773_R1_.fastq.gz    punc_MTR17744_R1_.fastq.gz  punc_MTR34414_R1_.fastq.gz  punc_MTRX1478_R1_.fastq.gz
 punc_ICST764_R1_.fastq.gz       punc_MTR05978_R1_.fastq.gz  punc_MTR21545_R1_.fastq.gz  punc_MTRX1468_R1_.fastq.gz  punc_MUFAL9635_R1_.fastq.gz
-isaac@darwin:~/ipyrad-workshop$
 ```
 
 ## FastQC for quality control
@@ -140,12 +147,12 @@ This figure depicts a common artifact of current Illumina chemistry, whereby qua
 In preparation for running FastQC on our raw data we need to make an output directory to keep the FastQC results organized:
 
 ```
-cd ~/ipyrad-workshop
-mkdir fastqc-results
+$ cd ~/ipyrad-workshop
+$ mkdir fastqc-results
 ```
 Now run fastqc on one of the samples:
 ```
-fastqc -o fastqc-results raws/punc_IBSPCRIB0361_R1_.fastq.gz
+$ fastqc -o fastqc-results raws/punc_IBSPCRIB0361_R1_.fastq.gz
 ```
 > **Note:** The `-o` flag tells fastqc where to write output files. **Especially Notice** the *relative path* to the raw file. The difference between *relative* and *absolute* paths is an important one to learn. Relative paths are specified with respect to the current working directory. Since I am in `/home/isaac/ipyrad-workshop`, and this is the directory the `raws` directory is in, I can simply reference it directly. If I was in any other directory I could specify the *absolute path* to the target fastq.gz file which would be `/home/isaac/ipyrad-workshop/raws/punc_IBSPCRIB0361_R1_.fastq.gz`. Absolute paths are always more precise, but also always (often _much_) longer.
 
@@ -176,13 +183,13 @@ Analysis complete for punc_IBSPCRIB0361_R1_.fastq.gz
 ```
 If you feel so inclined you can QC all the raw data using a wildcard substitution:
 ```
-fastqc -o fastqc-results raws/*
+$ fastqc -o fastqc-results raws/*
 ```
 > **Note:** The `*` here is a special command line character that means "Everything that matches this pattern". So here `raws/*` matches _everything_ in the raws directory. Equivalent (though more verbose) statements are: `ls raws/*.gz`, `ls raws/*.fastq.gz`, `ls raws/*_R1_.fastq.gz`. All of these will list all the files in the `raws` directory. **Special Challenge:** Can you construct an `ls` command using wildcards that only lists samples in the `raws` directory that include the digit 5 in their sample name?
 
 Examining the output directory you'll see something like this:
 ```
-isaac@darwin:~/ipyrad-workshop$ ls fastqc-results/
+$ ls fastqc-results/
 punc_IBSPCRIB0361_R1__fastqc.html  punc_JFT773_R1__fastqc.html    punc_MTR17744_R1__fastqc.html  punc_MTR34414_R1__fastqc.html  punc_MTRX1478_R1__fastqc.html
 punc_IBSPCRIB0361_R1__fastqc.zip   punc_JFT773_R1__fastqc.zip     punc_MTR17744_R1__fastqc.zip   punc_MTR34414_R1__fastqc.zip   punc_MTRX1478_R1__fastqc.zip
 punc_ICST764_R1__fastqc.html       punc_MTR05978_R1__fastqc.html  punc_MTR21545_R1__fastqc.html  punc_MTRX1468_R1__fastqc.html  punc_MUFAL9635_R1__fastqc.html
