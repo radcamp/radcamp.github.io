@@ -18,9 +18,11 @@ will be.
 Each grey cell in this tutorial indicates a command line interaction. 
 Lines starting with `$ ` indicate a command that should be executed 
 in a terminal connected to the USP cluster, for example by copying and 
-pasting the text into your terminal. All lines in code cells beginning 
-with \#\# are comments and should not be copied and executed. All
-other lines should be interpreted as output from the issued commands.
+pasting the text into your terminal. Elements in code cells surrounded 
+by angle brackets (e.g. <username>) are variables that need to be 
+replaced by the user. All lines in code cells beginning with \#\# are 
+comments and should not be copied and executed. All other lines should 
+be interpreted as output from the issued commands.
 
 ```
 ## Example Code Cell.
