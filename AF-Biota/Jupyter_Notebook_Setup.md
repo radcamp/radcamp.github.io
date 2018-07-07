@@ -94,4 +94,4 @@ Here are links to a couple useful jupyter tutorials that explore
 much more of the functionality, should you be interested in learning
 more:
 
-* [Notebook tutorial from plotly (includes animated figures)[https://plot.ly/python/ipython-notebook-tutorial/]
+* [Notebook tutorial from plotly (includes animated figures)](https://plot.ly/python/ipython-notebook-tutorial/)
