@@ -40,7 +40,7 @@ import ipyrad.analysis as ipa      ## ipyrad analysis toolkit
 > **Note:** The call to `%matplotlib inline` here is a jupyter notebook 'magic' command that enables support for plotting directly inside the notebook.
 
 ## Quick guide (tldr;)
-The following cell shows the quickest way to results using a small simulated dataset in `/scratch/af-biota`. Further explanation of all of the features and options is provided further below. 
+The following cell shows the quickest way to results using a small simulated dataset in `/scratch/af-biota`. Complete explanation of all of the features and options of the PCA module is the focus of the rest of this tutorial. Copy this code into a notebook cell and run it.
 
 ```python
 ## Load your assembly
@@ -58,14 +58,14 @@ pca.plot()
 ![png](04_PCA_API_files/04_PCA_API_00_Simulated_Example.png)
 
 ## Full guide
-In the most common use you'll want to plot the first two PCs, then inspect the output, remove any obvious outliers, and then redo the pca. It's often desirable to import a vcf file directly rather than to use the ipyrad assembly, so here we'll demonstrate this.
+In the most common use you'll want to plot the first two PCs, then inspect the output, remove any obvious outliers, and then redo the pca. It's often desirable to import a vcf file directly rather than to use the ipyrad assembly, so here we'll demonstrate this with the Anolis data.
 
 ```python
 ## Path to the input vcf.
 vcffile = "/home/<username>/ipyrad-workshop/anolis_outfiles/anolis.vcf"
 pca = ipa.pca(vcffile)
 ```
-> **Note:** Here we use the anolis vcf we generated with ipyrad, but the `ipyrad.analysis.pca` module can read in from *any* vcf file, so it's possible to quickly generate PCA plots for any vcf from any dataset.
+> **Note:** Here we use the anolis vcf generated with ipyrad, but the `ipyrad.analysis.pca` module can read in from *any* vcf file, so it's possible to quickly generate PCA plots for any vcf from any dataset.
 
 We can inspect the samples included in the PCA plot by asking the `pca` object for `samples_vcforder`.
 ```python
@@ -84,7 +84,7 @@ pca.plot()
 
     <matplotlib.axes._subplots.AxesSubplot at 0x7fe0beb3a650>
 
-![png](04_PCA_API_files/01-Anolis-PCA.png)
+![png](04_PCA_API_files/04_PCA_API_01-Anolis-PCA.png)
 
 ## Population assignment for sample colors
 In the tl;dr example the assembly of our simulated data had included a `pop_assign_file` so the pca() was smart enough to find this and color samples accordingly. In some cases you might not have used a pops file, so it's also possible to specify population assignments in a dictionary. The format of the dictionary should have populations as keys and lists of samples as values. Sample names need to be identical to the names in the vcf file, which we can verify with the `samples_vcforder` property of the pca object.
