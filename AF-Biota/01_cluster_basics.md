@@ -81,11 +81,11 @@ The `source` command tells the server to recognize the conda install (you only e
 Conda gives us access to an amazing array of all kinds of analysis tools for both analyzing and manipulating all kinds of data. Here we'll just scratch the surface by installing [ipyrad](http://ipyrad.readthedocs.io/), the RAD-Seq assembly and analysis tool that we'll use throughout the workshop, [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/), an application for filtering fasta files based on several quality control metrics. As long as we're installing conda packages we'll include [toytree](https://toytree.readthedocs.io/en/latest/) as well, which is a plotting library used by the ipyrad analysis toolkit.
 
 ```
-$ conda install -c ipyrad -c bioconda -c eaton-lab ipyrad fastqc toytree
+$ conda install -c ipyrad -c bioconda ipyrad toytree fastqc
 ```
 > **Note:** The `-c` flag indicates that we're asking conda to fetch apps from the `ipyrad`, `bioconda`, and `eaton-lab` channels. Channels are seperate repositories of apps maintained by independent developers.
 
-After you type `y` to proceed with install, this command will produce a lot of output that looks like this:
+After you type `y` to proceed with install, these commands will produce a lot of output that looks like this:
 ```
 libxml2-2.9.8        |  2.0 MB | ################################################################################################################################# | 100%
 expat-2.2.5          |  186 KB | ################################################################################################################################# | 100% 
