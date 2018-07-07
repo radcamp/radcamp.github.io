@@ -65,6 +65,10 @@ If you haven't already installed ipyrad go here first: [installation](https://ip
 
 ## Working with the cluster
 
+**TODO:** Add a paragraph here (and maybe a figure) illustrating the 
+basic idea of how clusters work, and how interactive jobs differ
+from "classic" job submission scripts.
+
 We will run all our assembly and analysis on the USP cluster inside
 an "interactive" job. This will allow us to run our proccesses on 
 compute nodes, but still be able to remain at the command line so 
