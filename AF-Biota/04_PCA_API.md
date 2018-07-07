@@ -15,15 +15,32 @@ First begin by [setting up and configuring jupyter notebooks](Jupyter_Notebook_S
 
 # *PCA* analyses
 
-### Import Python libraries
-The call to `%matplotlib inline` here enables support for plotting directly inside the notebook.
+## Create a new notebook for the PCA
+On your local computer open a new web browser and enter the link to your notebook server in the address bar:
+```
+http://localhost:<your_port_#>
+```
+Now you should see a view of your home directory on the cluster:
+![png](04_PCA_API_files/04_PCA_API_Notebook_Home.png)
 
+Lets create our first new notebook using the 'New' button:
+![png](04_PCA_API_files/04_PCA_API_Notebook_New.png)
+
+First things first, rename your new notebook to give it a meaningful name:
+![png](04_PCA_API_files/04_PCA_API_Notebook_Rename.png)
+
+### Import Python libraries
+The `import` keyword directs python to load a module into the currently running context. This is very similar to the `library()` function in R. We begin by importing ipyrad, as well as the analysis module. 
 
 ```python
 %matplotlib inline
 import ipyrad
 import ipyrad.analysis as ipa      ## ipyrad analysis toolkit
 ```
+> **Note:** The call to `%matplotlib inline` here is a jupyter notebook 'magic' command that enables support for plotting directly inside the notebook.
+
+> **IPyradError:** If you encounter an error about a `toytree` dependency, you can install by executing this command in a terminal on the cluster: `conda install toytree -c eaton-lab`
+
 
 ## Quick guide (tldr;)
 The following cell shows the quickest way to results. Further explanation of all of the features and options is provided further below. 
