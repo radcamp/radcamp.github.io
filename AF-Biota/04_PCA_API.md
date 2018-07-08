@@ -20,8 +20,6 @@ First begin by [setting up and configuring jupyter notebooks](Jupyter_Notebook_S
 * [Accessing the raw PC values](#inspecting-pcs-directly)
 * [Specifying which PCs to plot](#looking-at-pcs-other-than-1--2)
 * [More to explore](#more-to-explore)
-* [Fine grained color control per popluation](#controlling-colors)
-* [Dealing with missing data](#dealing-with-missing-data)
 
 ## Create a new notebook for the PCA
 On your local computer open a new web browser and enter the link to your notebook server in the address bar:
@@ -98,40 +96,26 @@ pca.plot()
 ![png](04_PCA_API_files/04_PCA_API_01_Anolis_PCA.png)
 
 ### Population assignment for sample colors
-In the tl;dr example the assembly of our simulated data had included a `pop_assign_file` so the pca() was smart enough to find this and color samples accordingly. In some cases you might not have used a pops file, so it's also possible to specify population assignments in a dictionary. The format of the dictionary should have populations as keys and lists of samples as values. Sample names need to be identical to the names in the vcf file, which we can verify with the `samples_vcforder` property of the pca object.
+In the tl;dr example the assembly of our simulated data had included a `pop_assign_file` so the pca() was smart enough to find this and color samples accordingly. In some cases you might not have used a population assignment file, so it's also possible to specify population assignments in a dictionary. The format of the dictionary should have populations as keys and lists of samples as values. Sample names need to be identical to the names in the vcf file, which we can verify with the `samples_vcforder` property of the pca object.
 
-
+Here we create a python 'dictionary', which is a key/value pair data structure. The keys are the population names, and the values are the lists of samples that belong to those populations. You can copy and paste this into a new cell in your notebook.
 ```python
 pops_dict = {
-    "superba":["29154_superba_SRR1754715"],
-    "thamno":["30556_thamno_SRR1754720", "33413_thamno_SRR1754728"],
-    "cyathophylla":["30686_cyathophylla_SRR1754730"],
-    "przewalskii":["32082_przewalskii_SRR1754729", "33588_przewalskii_SRR1754727"],
-    "rex":["35236_rex_SRR1754731", "35855_rex_SRR1754726", "38362_rex_SRR1754725",\
-            "39618_rex_SRR1754723", "40578_rex_SRR1754724"],
-    "cyathophylloides":["41478_cyathophylloides_SRR1754722", "41954_cyathophylloides_SRR1754721"]
+     "South":['punc_IBSPCRIB0361', 'punc_MTR05978','punc_MTR21545','punc_JFT773',
+             'punc_MTR17744', 'punc_MTR34414', 'punc_MTRX1478', 'punc_MTRX1468'],
+     "North":['punc_ICST764', 'punc_MUFAL9635']
 }
 ```
-
 
 ```python
 pca = ipa.pca(vcffile, pops_dict)
 pca.plot()
 ```
-
     Using default cmap: Spectral
-
-
-
-
 
     <matplotlib.axes._subplots.AxesSubplot at 0x7fe092fbbe50>
 
-
-
-
-![png](04_PCA_API_files/04_PCA_API_16_2.png)
-
+![png](04_PCA_API_files/04_PCA_API_02_Anolis_PCA_colored.png)
 
 This is just much nicer looking now, and it's also much more straightforward to interpret.
 
@@ -469,7 +453,3 @@ The `ipyrad.analysis.pca` module has many more features that we just don't have 
 * [Dealing with missing data](PCA_Advanced_Features.md#dealing-with-missing-data)
 * [Dealing with unequal sampling](PCA_Advanced_Features.md#dealing-with-unequal-sampling)
 * [Dealing with linked snps](PCA_Advanced_Features.md#dealing-with-linked-snps)
-
-
-### Copying this notebook to your computer/cluster
-You can easily copy this notebook and then just replace my file names with your filenames to run your analysis. Just click on the [Download Notebook] link at the top of this page. Then run `jupyter-notebook` from a terminal and open this notebook from the dashboard.
