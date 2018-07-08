@@ -84,7 +84,9 @@ print(pca.samples_vcforder)
      u'punc_MTR17744' u'punc_MTR21545' u'punc_MTR34414' u'punc_MTRX1468'
      u'punc_MTRX1478' u'punc_MUFAL9635']
 
-Now construct the default plot, which shows all samples and PCs 1 and 2. By default all samples are assigned to one population, so everything will be the same color.
+Now construct the default plot, which shows all samples and PCs 1 and 2.
+By default all samples are assigned to one population, so everything will 
+be the same color.
 
 ```python
 pca.plot()
@@ -106,7 +108,8 @@ pops_dict = {
      "North":['punc_ICST764', 'punc_MUFAL9635']
 }
 ```
-
+Now create the `pca` object with the vcf file again, this time passing 
+in the pops_dict as the second argument, and plot the new figure.
 ```python
 pca = ipa.pca(vcffile, pops_dict)
 pca.plot()
@@ -120,7 +123,7 @@ pca.plot()
 This is just much nicer looking now, and it's also much more straightforward to interpret.
 
 ## Removing "bad" samples and replotting.
-In PC analysis, it's common for "bad" samples to dominate several of the first PCs, and thus "pop out" in a degenerate looking way. Bad samples of this kind can often be attributed to poor sequence quality or sample misidentifcation. Samples with lots of missing data tend to pop way out on their own, causing distortion in the signal in the PCs. Normally it's best to evaluate the quality of the sample, and if it can be seen to be of poor quality, to remove it and replot the PCA. The Pedicularis dataset is actually very nice, and clean, but for the sake of demonstration lets imagine the cyathophylloides samples are "bad samples".
+In PC analysis, it's common for "bad" samples to dominate several of the first PCs, and thus "pop out" in a degenerate looking way. Bad samples of this kind can often be attributed to poor sequence quality or sample misidentifcation. Samples with lots of missing data tend to pop way out on their own, causing distortion in the signal in the PCs. Normally it's best to evaluate the quality of the sample, and if it can be seen to be of poor quality, to remove it and replot the PCA. The Anolis dataset is actually relatively nice, and clean, but for the sake of demonstration lets imagine the "North" samples are "bad samples".
 
 We can see that the cyathophylloides samples have particularly high values of PC2, so we can target them for removal in this way.
 
