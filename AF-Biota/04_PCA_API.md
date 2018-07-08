@@ -465,10 +465,10 @@ pca.plot(ax=ax2, pcs=[3, 4])
 
 ## More to explore
 The `ipyrad.analysis.pca` module has many more features that we just don't have time to go over, but you might be interested in checking them out later:
-* [Fine grained control of colors per populations](PCA_Advanced_Features.html#controlling-colors)
-* [Dealing with missing data](PCA_Advanced_Features.html#dealing-with-missing-data)
-* [Dealing with unequal sampling](PCA_Advanced_Features.html#dealing-with-unequal-sampling)
-* [Dealing with linked snps](PCA_Advanced_Features.html#dealing-with-linked-snps)
+* [Fine grained control of colors per populations](PCA_Advanced_Features.md#controlling-colors)
+* [Dealing with missing data](PCA_Advanced_Features.md#dealing-with-missing-data)
+* [Dealing with unequal sampling](PCA_Advanced_Features.md#dealing-with-unequal-sampling)
+* [Dealing with linked snps](PCA_Advanced_Features.md#dealing-with-linked-snps)
 
 
 ### Copying this notebook to your computer/cluster
