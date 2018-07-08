@@ -1,27 +1,37 @@
 
-## Cookbook: Parallelized *STRUCTURE* analyses on unlinked SNPs
+# The ipyrad.analysis module: Parallelized *STRUCTURE* analyses on unlinked SNPs
 
-As part of the `ipyrad.analysis` toolkit we've created convenience functions for easily distributing *STRUCTURE* analysis jobs on an HPC cluster, and for doing so in a programmatic and reproducible way. Importantly, *our workflow allows you to easily sample different distributions of unlinked SNPs among replicate analyses*, with the final inferred population structure summarized from a distribution of replicates. We also provide some simple examples of interactive plotting functions to make barplots. 
+As part of the `ipyrad.analysis` toolkit we've created convenience functions for easily distributing **STRUCTURE** analysis jobs on an HPC cluster, and for doing so in a programmatic and reproducible way. Importantly, *our workflow allows you to easily sample different distributions of unlinked SNPs among replicate analyses*, with the final inferred population structure summarized from a distribution of replicates. We also provide some simple examples of interactive plotting functions to make barplots. 
 
-### Why structure?
-Although there are many newer and faster implementations of STRUCTURE, such as `faststructure` or `admixture`, the original structure works much better with missing data, which is of course a common feature of RAD-seq data sets. 
+### Why STRUCTURE?
+Although there are many newer and faster implementations of STRUCTURE, such as `faststructure` or `admixture`, the original STRUCTURE works much better with missing data, which is of course a common feature of RAD-seq data sets. 
 
-### A note on Jupyter/IPython
-This is a Jupyter notebook, a reproducible and executable document. The code in this notebook is Python (2.7), and should be executed either in a jupyter-notebook, like this one, or in an IPython terminal. Execute each cell in order to reproduce our entire analysis. We make use of the `ipyparallel` Python library to distribute *STRUCTURE* jobs across processers in parallel ([more can be found about that here](http://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/ipyparallel-tutorial.ipynb)). The example data set used in this analysis is from the [empirical example ipyrad tutorial](http://ipyrad.readthedocs.io/pedicularis_.html).
+## A note on Jupyter/IPython
+[Jupyter notebooks](http://jupyter.org/) are primarily a way to generate reproducible scientific analysis workflows in python. ipyrad analysis tools are best run inside Jupyter notebooks, as the analysis can be monitored and tweaked and provides a self-documenting workflow.
 
-### Required software
-You can easily install the required software for this notebook with a locally installed `conda` environment. Just run the commented code below in a terminal. If you are working on an HPC cluster you **do not need** administrator privileges to install the software in this way, since it is only installed locally.
+First, begin by creating a new notebook inside your `/home/<username>/ipyrad-workshop/` directory called `anolis-structure.ipynb` (refer to the [jupyter notebook configuration page](Jupyter_Notebook_Setup.md) for a refresher on connecting to the notebook server). **The rest of the materials in this part of the workshop assume you are running all code in cells of a jupyter notebook** that is running on the USP cluster.
 
+# **STRUCTURE** Analyses
+
+## Required software
+You can easily install the required software for this notebook using `conda`, as before. This can even be accomplished inside your jupyter notebook. Preceding a command with `!` will tell the notebook to run the line as a terminal command, instead of as python.
 
 ```python
-## conda install ipyrad -c ipyrad
-## conda install structure -c ipyrad
-## conda install clumpp -c ipyrad
-## conda install toytree -c eaton-lab
+## The `-y` here means "Answer yes to all questions". It prevents
+## conda from asking whether the install looks ok.
+!conda install -y -c ipyrad structure clumpp
 ```
+    Solving environment: done
+    ## Package Plan ##
+    ...
+    ...
+    Preparing transaction: done
+    Verifying transaction: done
+    Executing transaction: done
+
+> **Note:** You only have to run this conda install command once on the cluster. It does not need to be run every time you run a notebook or every time you create a new notebook. Once the install finishes STRUCTURE and CLUMPP will be available for all your notebooks.
 
 ### Import Python libraries
-
 
 ```python
 import ipyrad.analysis as ipa      ## ipyrad analysis toolkit
