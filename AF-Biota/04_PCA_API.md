@@ -132,7 +132,7 @@ pca.pcs
 ```
 ![png](04_PCA_API_files/04_PCA_API_03_Anolis_PCA_PCS.png)
 
-You can see that indeed punc_ICST764 and punc_MUFAL9635 have positive values for PC1 and all the rest have negative valuse, so we can target them for removal in this way. We can construct a 'mask' based on the value of PC1, and then remove samples that don't pass this filter. 
+You can see that indeed punc_ICST764 and punc_MUFAL9635 have positive values for PC1 and all the rest have negative values, so we can target them for removal in this way. We can construct a 'mask' based on the value of PC1, and then remove samples that don't pass this filter. 
 
 ```python
 mask = pca.pcs.values[:, 0] > 0
@@ -140,51 +140,34 @@ print(mask)
 ```
     [False  True False False False False False False False  True]
 
-> **Note:** In this call we are "masking" all samples (i.e. rows of the data matrix) which have values greater than 0 for the first column, which here is the '0' in the `[:, 0]` fragment. This is somewhat confusing because python matrices are 0-indexed, whereas it's typical for PCs to be 1-indexed. It's a nomencalture issue, really, but it can bit us if we don't keep it in mind.
+> **Note:** In this call we are "masking" all samples (i.e. rows of the data matrix) which have values greater than 0 for the first column, which here is the '0' in the `[:, 0]` fragment. This is somewhat confusing because python matrices are 0-indexed, whereas it's typical for PCs to be 1-indexed. It's a nomencalture issue, really, but it can bite us if we don't keep it in mind.
 
-You can see here that the mask is a list of booleans that is the same length as the number of samples.
-We can use this list to print out the names of just the samples of interest
-print(pca.samples_vcforder[mask])
-```
-
-    [False False False False False False False False False False False  True
-      True]
-    [u'41478_cyathophylloides_SRR1754722' u'41954_cyathophylloides_SRR1754721']
-
-
+You can see here that the mask is a list of booleans that is the same length as the number of samples. We can use this mask to print out the names of just the samples we would like to remove.
 
 ```python
-## We can then use this list of "bad" samples in a call to pca.remove_samples
-## and then replot the new pca
-pca.remove_samples(pca.samples_vcforder[mask])
+bad_samples = pca.samples_vcforder[mask]
+bad_samples
+```
+    array([u'punc_ICST764', u'punc_MUFAL9635'], dtype=object)
+
+We can then use this list of "bad" samples in a call to `pca.remove_samples` and then replot the new pca:
+
+```python
+pca.remove_samples(bad_samples)
 
 ## Lets prove that they're gone now
 print(pca.samples_vcforder)
 ```
+    [u'punc_IBSPCRIB0361' u'punc_JFT773' u'punc_MTR05978' u'punc_MTR17744'
+     u'punc_MTR21545' u'punc_MTR34414' u'punc_MTRX1468' u'punc_MTRX1478']
 
-    [u'29154_superba_SRR1754715' u'30556_thamno_SRR1754720'
-     u'30686_cyathophylla_SRR1754730' u'32082_przewalskii_SRR1754729'
-     u'33413_thamno_SRR1754728' u'33588_przewalskii_SRR1754727'
-     u'35236_rex_SRR1754731' u'35855_rex_SRR1754726' u'38362_rex_SRR1754725'
-     u'39618_rex_SRR1754723' u'40578_rex_SRR1754724']
-
-
-
+And now plot the new figure with the "bad" samples removed:
 ```python
-## and do the plot
 pca.plot()
 ```
-
     Using default cmap: Spectral
 
-
-
-
-
     <matplotlib.axes._subplots.AxesSubplot at 0x7fe0f8c25410>
-
-
-
 
 ![png](04_PCA_API_files/04_PCA_API_21_2.png)
 
@@ -192,14 +175,9 @@ pca.plot()
 ## Inspecting PCs directly
 At any time after calling plot() you can inspect the PCs for all the samples using the `pca.pcs` property. The PC values are saved internally in a convenient pandas dataframe format.
 
-
 ```python
 pca.pcs
 ```
-
-
-
-
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
