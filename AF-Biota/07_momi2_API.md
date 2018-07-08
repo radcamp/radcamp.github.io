@@ -6,8 +6,31 @@
 * What are some other familiar programs that use the SFS?
 * How is momi2 different? And why are we using it? Most importantly, how do you pronounce it?
 
-## A note on Jupyter/IPython
-[Jupyter notebooks](http://jupyter.org/) are primarily a way to generate reproducible scientific analysis workflows in python. ipyrad analysis tools are best run inside Jupyter notebooks, as the analysis can be monitored and tweaked and provides a self-documenting workflow.
+### momi2 installation
+`momi2` requires python3, which is a different version of python we've been using up to now. Fortunately conda makes it easy to run python2 and python3 side by side. We will install python3 in a separate [conda environment](https://conda.io/docs/user-guide/concepts.html#conda-environments), and then install and run momi2 analyses using this environment. A conda environment is a container for python packages and configurations. More on creating/managing [conda environments](https://conda.io/docs/user-guide/tasks/manage-environments.html).
+
+**TODO:** Would be nice to have a simple figure illustrating conda environments here.
+
+Begin by opening an ssh session on the cluster and creating our new environment:
+```
+## -n          assigns a name to the environment
+## python=3.6  specifies the python version of the new environment
+$ conda create -n momi2-py36 python=3.6
+```
+After the install finishes you can inspect the currently available environments:
+```
+$ conda env list
+# conda environments:
+#
+base                  *  /home/isaac/miniconda2
+momi2-py36               /home/isaac/miniconda2/envs/momi-py36
+```
+And now switch to the new python3 environment:
+```
+$ source activate momi2-py36
+(momi-py36) <username>@darwin:~$ 
+```
+> **Note:** You'll notice that the conda env you are currently using is now displayed as part of your prompt.
 
 First, begin by creating a new notebook inside your `/home/<username>/ipyrad-workshop/` directory called `anolis-momi2.ipynb` (refer to the [jupyter notebook configuration page](Jupyter_Notebook_Setup.md) for a refresher on connecting to the notebook server). **The rest of the materials in this part of the workshop assume you are running all code in cells of a jupyter notebook** that is running on the USP cluster.
 
