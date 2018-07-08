@@ -123,20 +123,27 @@ pca.plot()
 This is just much nicer looking now, and it's also much more straightforward to interpret.
 
 ## Removing "bad" samples and replotting.
-In PC analysis, it's common for "bad" samples to dominate several of the first PCs, and thus "pop out" in a degenerate looking way. Bad samples of this kind can often be attributed to poor sequence quality or sample misidentifcation. Samples with lots of missing data tend to pop way out on their own, causing distortion in the signal in the PCs. Normally it's best to evaluate the quality of the sample, and if it can be seen to be of poor quality, to remove it and replot the PCA. The Anolis dataset is actually relatively nice, and clean, but for the sake of demonstration lets imagine the "North" samples are "bad samples".
+In PC analysis, it's common for "bad" samples to dominate several of the first PCs, and thus "pop out" in a degenerate looking way. Bad samples of this kind can often be attributed to poor sequence quality or sample misidentifcation. Samples with lots of missing data tend to pop way out on their own, causing distortion in the signal in the PCs. Normally it's best to evaluate the quality of the sample, and if it can be seen to be of poor quality, to remove it and replot the PCA. The Anolis dataset is actually relatively nice, but for the sake of demonstration lets imagine the "North" samples are "bad samples".
 
-We can see that the cyathophylloides samples have particularly high values of PC2, so we can target them for removal in this way.
-
+From the figure we can see that we can see that "North" samples are distinguished by positive values on PC1. We can get a more quantitative view on this by accessing `pca.pcs`, which is a property of the `pca` object that is populated after the plot() function is called. It contains the first 10 PCs for each sample. Let's have a look at these values by printing `pca.pcs`:
 
 ```python
-## pca.pcs is a property of the pca object that is populated after the plot() function is called. It contains
-## the first 10 PCs for each sample. We construct a 'mask' based on the value of PC2, which here is the '1' in
-## the first line of code (numpy arrays are 0-indexed and it's typical for PCs to be 1-indexed)
-mask = pca.pcs.values[:, 1] > 500
-print(mask)
+pca.pcs
+```
+![png](04_PCA_API_files/04_PCA_API_03_Anolis_PCA_PCS.png)
 
-## You can see here that the mask is a list of booleans that is the same length as the number of samples.
-## We can use this list to print out the names of just the samples of interest
+You can see that indeed punc_ICST764 and punc_MUFAL9635 have positive values for PC1 and all the rest have negative valuse, so we can target them for removal in this way. We can construct a 'mask' based on the value of PC1, and then remove samples that don't pass this filter. 
+
+```python
+mask = pca.pcs.values[:, 0] > 0
+print(mask)
+```
+    [False  True False False False False False False False  True]
+
+> **Note:** In this call we are "masking" all samples (i.e. rows of the data matrix) which have values greater than 0 for the first column, which here is the '0' in the `[:, 0]` fragment. This is somewhat confusing because python matrices are 0-indexed, whereas it's typical for PCs to be 1-indexed. It's a nomencalture issue, really, but it can bit us if we don't keep it in mind.
+
+You can see here that the mask is a list of booleans that is the same length as the number of samples.
+We can use this list to print out the names of just the samples of interest
 print(pca.samples_vcforder[mask])
 ```
 
