@@ -218,6 +218,8 @@ pca.plot(ax=ax2, pcs=[3, 4])
 
 ![png](04_PCA_API_files/04_PCA_API_07_Anolis_PCA_MultiNoLegend.png)
 
+Much better!
+
 ## More to explore
 The `ipyrad.analysis.pca` module has many more features that we just don't have time to go over, but you might be interested in checking them out later:
 * [Fine grained control of colors per populations](PCA_Advanced_Features.md#controlling-colors)
