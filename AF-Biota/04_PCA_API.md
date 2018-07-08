@@ -1,7 +1,7 @@
 
-# The ipyrad.analysis module: *PCA*
+# The ipyrad.analysis module: **PCA**
 
-As part of the `ipyrad.analysis` toolkit we've created convenience functions for easily performing exploratory principal component analysis (PCA) on your data. PCA is a very standard dimension-reduction technique that is often used to get a general sense of how samples are related to one another. PCA has the advantage over STRUCTURE type analyases in that it is very fast. Similar to STRUCTURE, PCA can be used to produce simple and intuitive plots that can be used to guide downstream analysis. These are three very nice papers that talk about the application and interpretation of PCA in the context of population genetics:
+As part of the `ipyrad.analysis` toolkit we've created convenience functions for easily performing exploratory principal component analysis (PCA) on your data. PCA is a very standard dimension-reduction technique that is often used to get a general sense of how samples are related to one another. PCA has the advantage over STRUCTURE type analyses in that it is very fast. Similar to STRUCTURE, PCA can be used to produce simple and intuitive plots that can be used to guide downstream analysis. These are three very nice papers that talk about the application and interpretation of PCA in the context of population genetics:
 
 * [Reich et al (2008) Principal component analysis of genetic data](https://www.nature.com/articles/ng0508-491)
 * [Novembre & Stephens (2008) Interpreting principal component analyses of spatial population genetic variation](https://www.nature.com/articles/ng.139)
@@ -12,7 +12,7 @@ As part of the `ipyrad.analysis` toolkit we've created convenience functions for
 
 First begin by [setting up and configuring jupyter notebooks](Jupyter_Notebook_Setup.md). **The rest of the materials in this part of the workshop assume you are running all code in cells of a jupyter notebook** that is running on the USP cluster.
 
-# *PCA* analyses
+# **PCA** analyses
 
 * [Simple PCA from a VCF file](#simple-pca-from-vcf-file)
 * [Coloring by population assignment](#population-assignment-for-sample-colors)
@@ -142,7 +142,7 @@ print(mask)
 
 > **Note:** In this call we are "masking" all samples (i.e. rows of the data matrix) which have values greater than 0 for the first column, which here is the '0' in the `[:, 0]` fragment. This is somewhat confusing because python matrices are 0-indexed, whereas it's typical for PCs to be 1-indexed. It's a nomencalture issue, really, but it can bite us if we don't keep it in mind.
 
-You can see here that the mask is a list of booleans that is the same length as the number of samples. We can use this mask to print out the names of just the samples we would like to remove.
+You can see above that the mask is a list of booleans that is the same length as the number of samples. We can use this mask to  print out the names of just the samples we would like to remove.
 
 ```python
 bad_samples = pca.samples_vcforder[mask]
@@ -158,8 +158,11 @@ pca.remove_samples(bad_samples)
 ## Lets prove that they're gone now
 print(pca.samples_vcforder)
 ```
+      Number of PCs may not exceed the number of samples.
+      Setting number of PCs = 8
     [u'punc_IBSPCRIB0361' u'punc_JFT773' u'punc_MTR05978' u'punc_MTR17744'
      u'punc_MTR21545' u'punc_MTR34414' u'punc_MTRX1468' u'punc_MTRX1478']
+> **Note:** The number of PCs may not exceed the number of samples in the dataset. The `pca` module detects this and automatically reduces the number of PCs calculated.
 
 And now plot the new figure with the "bad" samples removed:
 ```python
@@ -169,7 +172,7 @@ pca.plot()
 
     <matplotlib.axes._subplots.AxesSubplot at 0x7fe0f8c25410>
 
-![png](04_PCA_API_files/04_PCA_API_21_2.png)
+![png](04_PCA_API_files/04_PCA_API_04_Anolis_PCA_NoNorth.png)
 
 
 ## Inspecting PCs directly
