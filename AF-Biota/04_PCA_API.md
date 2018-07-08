@@ -18,6 +18,7 @@ First begin by [setting up and configuring jupyter notebooks](Jupyter_Notebook_S
 * [Coloring by population assignment](#population-assignment-for-sample-colors)
 * [Removing "bad" samples and replotting](#removing-bad-samples-and-replotting)
 * [Specifying which PCs to plot](#looking-at-pcs-other-than-1--2)
+* [Multi-panel PCA](#multi-panel-pca)
 * [More to explore](#more-to-explore)
 
 ## Create a new notebook for the PCA
@@ -57,7 +58,6 @@ pca.plot()
 ```
     loading Assembly: simrad
     from saved path: /scratch/af-biota/simulated-example/simrad.json
-    Using default cmap: Spectral
     <matplotlib.axes._subplots.AxesSubplot at 0x7fb6fdf82050>
 
 ![png](04_PCA_API_files/04_PCA_API_00_Simulated_Example.png)
@@ -90,8 +90,6 @@ be the same color.
 ```python
 pca.plot()
 ```
-    Using default cmap: Spectral
-
     <matplotlib.axes._subplots.AxesSubplot at 0x7fe0beb3a650>
 
 ![png](04_PCA_API_files/04_PCA_API_01_Anolis_PCA.png)
@@ -113,8 +111,6 @@ in the pops_dict as the second argument, and plot the new figure.
 pca = ipa.pca(vcffile, pops_dict)
 pca.plot()
 ```
-    Using default cmap: Spectral
-
     <matplotlib.axes._subplots.AxesSubplot at 0x7fe092fbbe50>
 
 ![png](04_PCA_API_files/04_PCA_API_02_Anolis_PCA_colored.png)
@@ -170,8 +166,6 @@ And now plot the new figure with the "bad" samples removed:
 ```python
 pca.plot()
 ```
-    Using default cmap: Spectral
-
     <matplotlib.axes._subplots.AxesSubplot at 0x7fe0f8c25410>
 
 ![png](04_PCA_API_files/04_PCA_API_04_Anolis_PCA_NoNorth.png)
@@ -184,63 +178,45 @@ PCs 1 and 2 by definition explain the most variation in the data, but sometimes 
 pca = ipa.pca(vcffile, pops_dict)
 pca.plot(pcs=[3,4])
 ```
-    Using default cmap: Spectral
-
     <matplotlib.axes._subplots.AxesSubplot at 0x7fa3d05fd190>
 
 ![png](04_PCA_API_files/04_PCA_API_05_Anolis_PCA_PC34.png)
 
+## Multi-panel PCA
+This is a last example of a couple of the nice features of the `pca` module, including the ability to pass in the axis to draw to, and toggling the legend. First, lets say we want to look at PCs 1/2 and 3/4 simultaneously. We can create a multi-panel figure with matplotlib, and pas in the axis for `pca` to plot to. We won't linger on the details of the matplotlib calls, but illustrate this here so you might have some example code to use in the future.
 ```python
 import matplotlib.pyplot as plt
 
+## Create a new figure 12 inches wide by 5 inches high
 fig = plt.figure(figsize=(12, 5))
+
+## These two calls divide the figure evenly into left and right
+## halfs, and assigns the left half to `ax1` and the right half to `ax2`
 ax1 = fig.add_subplot(1, 2, 1)
 ax2 = fig.add_subplot(1, 2, 2)
 
+## Plot PCs 1 & 2 on the left half of the figure, and PCs 3 & 4 on the right
 pca.plot(ax=ax1, pcs=[1, 2])
 pca.plot(ax=ax2, pcs=[3, 4])
 ```
-
-    Using default cmap: Spectral
-    Using default cmap: Spectral
-
-
-
-
-
     <matplotlib.axes._subplots.AxesSubplot at 0x7fa3d0a04290>
 
-
-
-
-![png](04_PCA_API_files/04_PCA_API_26_2.png)
-
+![png](04_PCA_API_files/04_PCA_API_06_Anolis_PCA_Multi.png)
 
 It's nice to see PCs 1-4 here, but it's kind of stupid to plot the legend twice, so we can just turn off the legend on the first plot.
-
 
 ```python
 fig = plt.figure(figsize=(12, 5))
 ax1 = fig.add_subplot(1, 2, 1)
 ax2 = fig.add_subplot(1, 2, 2)
 
+## The only difference here is we switch off the legend on the first PCA
 pca.plot(ax=ax1, pcs=[1, 2], legend=False)
 pca.plot(ax=ax2, pcs=[3, 4])
 ```
-
-    Using default cmap: Spectral
-    Using default cmap: Spectral
-
-
-
-
-
     <matplotlib.axes._subplots.AxesSubplot at 0x7fa3d0a8db10>
 
-
-
-
-![png](04_PCA_API_files/04_PCA_API_28_2.png)
+![png](04_PCA_API_files/04_PCA_API_07_Anolis_PCA_MultiNoLegend.png)
 
 ## More to explore
 The `ipyrad.analysis.pca` module has many more features that we just don't have time to go over, but you might be interested in checking them out later:
