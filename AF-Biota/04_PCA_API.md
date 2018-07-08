@@ -17,7 +17,6 @@ First begin by [setting up and configuring jupyter notebooks](Jupyter_Notebook_S
 * [Simple PCA from a VCF file](#simple-pca-from-vcf-file)
 * [Coloring by population assignment](#population-assignment-for-sample-colors)
 * [Removing "bad" samples and replotting](#removing-bad-samples-and-replotting)
-* [Accessing the raw PC values](#inspecting-pcs-directly)
 * [Specifying which PCs to plot](#looking-at-pcs-other-than-1--2)
 * [More to explore](#more-to-explore)
 
@@ -154,14 +153,17 @@ We can then use this list of "bad" samples in a call to `pca.remove_samples` and
 
 ```python
 pca.remove_samples(bad_samples)
-
-## Lets prove that they're gone now
+```
+> **Note:** The `remove_samples` function is destructive of the samples in the `pca` object. This means that the removed samples are actually deleted from the `pca`, so if you want to get them back you have to reload the original vcf data.
+```
+## Lets prove that the removed smamples are gone now
 print(pca.samples_vcforder)
 ```
       Number of PCs may not exceed the number of samples.
       Setting number of PCs = 8
     [u'punc_IBSPCRIB0361' u'punc_JFT773' u'punc_MTR05978' u'punc_MTR17744'
      u'punc_MTR21545' u'punc_MTR34414' u'punc_MTRX1468' u'punc_MTRX1478']
+     
 > **Note:** The number of PCs may not exceed the number of samples in the dataset. The `pca` module detects this and automatically reduces the number of PCs calculated.
 
 And now plot the new figure with the "bad" samples removed:
@@ -174,217 +176,19 @@ pca.plot()
 
 ![png](04_PCA_API_files/04_PCA_API_04_Anolis_PCA_NoNorth.png)
 
-
-## Inspecting PCs directly
-At any time after calling plot() you can inspect the PCs for all the samples using the `pca.pcs` property. The PC values are saved internally in a convenient pandas dataframe format.
-
-```python
-pca.pcs
-```
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>PC1</th>
-      <th>PC2</th>
-      <th>PC3</th>
-      <th>PC4</th>
-      <th>PC5</th>
-      <th>PC6</th>
-      <th>PC7</th>
-      <th>PC8</th>
-      <th>PC9</th>
-      <th>PC10</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>29154_superba_SRR1754715</th>
-      <td>-143.458</td>
-      <td>344.601</td>
-      <td>-9.146</td>
-      <td>654.063</td>
-      <td>-71.953</td>
-      <td>-7.616</td>
-      <td>-19.466</td>
-      <td>44.390</td>
-      <td>-52.568</td>
-      <td>-8.116</td>
-    </tr>
-    <tr>
-      <th>30556_thamno_SRR1754720</th>
-      <td>-194.318</td>
-      <td>-181.059</td>
-      <td>-348.673</td>
-      <td>-94.304</td>
-      <td>-212.550</td>
-      <td>-492.266</td>
-      <td>-199.647</td>
-      <td>54.872</td>
-      <td>-71.137</td>
-      <td>-5.081</td>
-    </tr>
-    <tr>
-      <th>30686_cyathophylla_SRR1754730</th>
-      <td>-171.720</td>
-      <td>783.009</td>
-      <td>21.897</td>
-      <td>-354.809</td>
-      <td>23.015</td>
-      <td>-0.905</td>
-      <td>4.389</td>
-      <td>15.448</td>
-      <td>-19.187</td>
-      <td>-3.718</td>
-    </tr>
-    <tr>
-      <th>32082_przewalskii_SRR1754729</th>
-      <td>693.254</td>
-      <td>-18.583</td>
-      <td>-4.085</td>
-      <td>35.981</td>
-      <td>527.664</td>
-      <td>-210.055</td>
-      <td>-10.588</td>
-      <td>19.116</td>
-      <td>-22.978</td>
-      <td>-3.683</td>
-    </tr>
-    <tr>
-      <th>33413_thamno_SRR1754728</th>
-      <td>-126.793</td>
-      <td>-59.102</td>
-      <td>-29.833</td>
-      <td>24.647</td>
-      <td>4.006</td>
-      <td>-17.379</td>
-      <td>8.998</td>
-      <td>-339.049</td>
-      <td>438.306</td>
-      <td>-32.892</td>
-    </tr>
-    <tr>
-      <th>33588_przewalskii_SRR1754727</th>
-      <td>881.139</td>
-      <td>-8.878</td>
-      <td>5.835</td>
-      <td>-53.687</td>
-      <td>-434.127</td>
-      <td>170.774</td>
-      <td>6.425</td>
-      <td>3.491</td>
-      <td>-3.660</td>
-      <td>-1.877</td>
-    </tr>
-    <tr>
-      <th>35236_rex_SRR1754731</th>
-      <td>-187.931</td>
-      <td>-165.702</td>
-      <td>-163.637</td>
-      <td>-47.395</td>
-      <td>148.425</td>
-      <td>430.936</td>
-      <td>-459.261</td>
-      <td>35.808</td>
-      <td>-54.179</td>
-      <td>-5.964</td>
-    </tr>
-    <tr>
-      <th>35855_rex_SRR1754726</th>
-      <td>-184.338</td>
-      <td>-161.701</td>
-      <td>-164.247</td>
-      <td>-36.742</td>
-      <td>41.453</td>
-      <td>125.039</td>
-      <td>357.653</td>
-      <td>-286.551</td>
-      <td>-318.039</td>
-      <td>-8.572</td>
-    </tr>
-    <tr>
-      <th>38362_rex_SRR1754725</th>
-      <td>-201.661</td>
-      <td>-205.271</td>
-      <td>502.125</td>
-      <td>-54.539</td>
-      <td>-41.762</td>
-      <td>-76.632</td>
-      <td>-30.824</td>
-      <td>58.575</td>
-      <td>-66.826</td>
-      <td>-260.359</td>
-    </tr>
-    <tr>
-      <th>39618_rex_SRR1754723</th>
-      <td>-175.793</td>
-      <td>-160.807</td>
-      <td>368.111</td>
-      <td>-31.844</td>
-      <td>-28.502</td>
-      <td>-56.008</td>
-      <td>-17.545</td>
-      <td>16.067</td>
-      <td>-16.588</td>
-      <td>337.616</td>
-    </tr>
-    <tr>
-      <th>40578_rex_SRR1754724</th>
-      <td>-188.110</td>
-      <td>-166.450</td>
-      <td>-178.318</td>
-      <td>-41.402</td>
-      <td>44.339</td>
-      <td>134.100</td>
-      <td>359.870</td>
-      <td>377.916</td>
-      <td>186.759</td>
-      <td>-7.397</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
 ## Looking at PCs other than 1 & 2
 PCs 1 and 2 by definition explain the most variation in the data, but sometimes PCs further down the chain can also be useful and informative. The plot function makes it simple to ask for PCs directly.
-
 
 ```python
 ## Lets reload the full dataset so we have all the samples
 pca = ipa.pca(vcffile, pops_dict)
 pca.plot(pcs=[3,4])
 ```
-
     Using default cmap: Spectral
-
-
-
-
 
     <matplotlib.axes._subplots.AxesSubplot at 0x7fa3d05fd190>
 
-
-
-
-![png](04_PCA_API_files/04_PCA_API_25_2.png)
-
-
+![png](04_PCA_API_files/04_PCA_API_05_Anolis_PCA_PC34.png)
 
 ```python
 import matplotlib.pyplot as plt
