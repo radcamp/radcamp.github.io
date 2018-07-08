@@ -1,4 +1,31 @@
+# Demographic inference using the Site Frequency Spectrum (SFS): **momi2**
 
+**TODO:** Put a bunch of explanatory information here.
+* What is demographic inference?
+* What is the SFS?
+* What are some other familiar programs that use the SFS?
+* How is momi2 different? And why are we using it? Most importantly, how do you pronounce it?
+
+## A note on Jupyter/IPython
+[Jupyter notebooks](http://jupyter.org/) are primarily a way to generate reproducible scientific analysis workflows in python. ipyrad analysis tools are best run inside Jupyter notebooks, as the analysis can be monitored and tweaked and provides a self-documenting workflow.
+
+First, begin by creating a new notebook inside your `/home/<username>/ipyrad-workshop/` directory called `anolis-momi2.ipynb` (refer to the [jupyter notebook configuration page](Jupyter_Notebook_Setup.md) for a refresher on connecting to the notebook server). **The rest of the materials in this part of the workshop assume you are running all code in cells of a jupyter notebook** that is running on the USP cluster.
+
+# **momi2** Analyses
+* [Simple PCA from a VCF file](#simple-pca-from-vcf-file)
+* [Coloring by population assignment](#population-assignment-for-sample-colors)
+* [Removing "bad" samples and replotting](#removing-bad-samples-and-replotting)
+* [Specifying which PCs to plot](#looking-at-pcs-other-than-1--2)
+* [Multi-panel PCA](#multi-panel-pca)
+* [More to explore](#more-to-explore)
+
+## Required software
+You can easily install the required software for this notebook using `conda`, as before. This can even be accomplished inside your jupyter notebook. Preceding a command with `!` will tell the notebook to run the line as a terminal command, instead of as python.
+
+```python
+## The `-y` here means "Answer yes to all questions". It prevents
+## conda from asking whether the install looks ok.
+!conda install -y -c ipyrad structure clumpp
 
 ```python
 import momi
