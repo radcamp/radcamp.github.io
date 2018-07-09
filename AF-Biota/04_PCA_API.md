@@ -22,9 +22,9 @@ First begin by [setting up and configuring jupyter notebooks](Jupyter_Notebook_S
 * [More to explore](#more-to-explore)
 
 ## Create a new notebook for the PCA
-On your local computer open a new web browser and enter the link to your notebook server in the address bar:
+On your local computer open a new web browser and enter the link to your notebook server in the address bar (including your assigned port number from the [participants port #s page](participants.txt)):
 ```
-http://localhost:<your_port_#>
+http://localhost:<my_port_#>
 ```
 Now you should see a view of your home directory on the cluster:
 ![png](04_PCA_API_files/04_PCA_API_Notebook_Home.png)
