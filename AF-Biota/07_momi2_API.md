@@ -148,6 +148,32 @@ This is almost the exact same model as above, except now we have introduced anot
 > **Note:** It may seem odd that the arrow in this figure points from "North" to "South", but this is simply because we are operating in a coalescent framework and therefore the `move_lineages` function operates **backwards in time**.
 
 ## Preparing real data for analysis
+We need to gather and construct several input files before we can actually apply momi to our Anolis data.
+* **Population assignment file** - This is a tab or space separated list of sample names and population names to which they are assigned. Sample names need to be exactly the same as they are in the VCF file. Population names can be anything, but it's useful if they're meaningful.
+* **Properly formatted VCF** - We do have the VCF file output from the ipyrad Anolis assembly, but it requires a bit of massaging before it's ready for momi. It must be zipped and indexed in such a way as to make it searchable.
+* **A BED file** - This file specifies genomic regions to include in when calculating the SFS. It is composed of 3 columns which specify 'chrom', 'chromStart', and 'chromEnd'.
+
+### Population assignment file
+Based on the results of the PCA and also our knowledge of the geographic location of the samples we will assign 2 samples to the "North" population, and 8 samples to the "South" population. To save some time we created this pops file, and have stashed a copy in the `/scratch/af-biota` directory. We can simply copy the file from there into our own `ipyrad-workshop` directories. We could do this by finding a terminal on the cluster, but its also possible to run terminal commands from jupyter notebooks using "magic" commands. Including `%%bash` on the first line of a cell tell jupyter to interpret lines inside this cell as terminal commands, so we can do this:
+```
+%%bash
+cp /scratch/af-biota/anolis-pops.txt .
+cat anolis-pops.txt
+```
+    punc_ICST764    North
+    punc_MUFAL9635  North
+    punc_IBSPCRIB0361       South
+    punc_JFT773     South
+    punc_MTR05978   South
+    punc_MTR17744   South
+    punc_MTR21545   South
+    punc_MTR34414   South
+    punc_MTRX1468   South
+    punc_MTRX1478   South
+
+Magic!
+> **Note:** `cat` is a command line utility that prints the contents of a file to the screen.
+
 ## Inference procedure
 ## Bootstrapping confidence intervals
 
