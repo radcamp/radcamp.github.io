@@ -121,6 +121,7 @@ The first two arguments to `momi.DemographyPlot()` are required, namely the mode
 * `figsize` - Specify the output figure size as (width, height) in inches.
 * `major_yticks` - Tells the momi plotting routine to use the time demarcations we specified in thie `yticks` variable.
 * `linthreshy` - The time point at which to switch from linear to log-scale, backwards in time. This is really useful if you have many "interesting" events happening relatively recently, and you don't want them to get "smooshed" together by the depth of the older events. This will become clearer as we add migration events later in the tutorial.
+
 **Experiment:** Try changing the value of `linthreshy` and replotting. Try `1e4` and `1.5e5` and notice how the figure changes. You can also experiment with changing the values in the `yticks` list. 
 
 Let's create a new model and introduce one migration event that only moves some fraction of lineages, and not the totality of them:
