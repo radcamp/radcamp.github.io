@@ -15,7 +15,7 @@ Begin by opening an ssh session on the cluster and creating our new environment:
 ```
 ## -n          assigns a name to the environment
 ## python=3.6  specifies the python version of the new environment
-$ conda create -n momi2-py36 python=3.6
+$ conda create -n momi-py36 python=3.6
 ```
 After the install finishes you can inspect the currently available environments:
 ```
@@ -23,14 +23,27 @@ $ conda env list
 # conda environments:
 #
 base                  *  /home/isaac/miniconda2
-momi2-py36               /home/isaac/miniconda2/envs/momi-py36
+momi-py36                /home/isaac/miniconda2/envs/momi-py36
 ```
 And now switch to the new python3 environment:
 ```
-$ source activate momi2-py36
+$ source activate momi-py36
 (momi-py36) <username>@darwin:~$ 
 ```
-> **Note:** You'll notice that the conda env you are currently using is now displayed as part of your prompt.
+> **Note:** You'll notice that the conda env you are currently using is now displayed as part of your prompt. We will maintain this convention for the rest of this notebook.
+
+```
+(momi-py36)$ conda install momi jupyter -c defaults -c conda-forge -c bioconda -c jackkamm
+```
+This will produce copious output, and should take ~5-10 minutes. 
+Finally, submit an interactive job to the cluster, and start the 
+notebook server in the same way as before.
+```
+(momi-py36)$ qsub -q proto -l nodes=1:ppn=2 -l mem=64gb -I
+qsub: waiting for job 24824.darwin to start
+qsub: job 24824.darwin ready
+(momi-py36)$ jupyter notebook &
+```
 
 First, begin by creating a new notebook inside your `/home/<username>/ipyrad-workshop/` directory called `anolis-momi2.ipynb` (refer to the [jupyter notebook configuration page](Jupyter_Notebook_Setup.md) for a refresher on connecting to the notebook server). **The rest of the materials in this part of the workshop assume you are running all code in cells of a jupyter notebook** that is running on the USP cluster.
 
