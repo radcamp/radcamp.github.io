@@ -367,7 +367,61 @@ migration_model.optimize()
 
 ## Bootstrapping confidence intervals
 
+```
+n_bootstraps = 10
+# make copies of the original model to avoid changing them
+no_migration_copy = no_migration_model.copy()
 
+bootstrap_results = []
+for i in range(n_bootstraps):
+    print(f"Fitting {i+1}-th bootstrap out of {n_bootstraps}")
+
+    # resample the data
+    resampled_sfs = sfs.resample()
+    # tell models to use the new dataset
+    no_migration_copy.set_data(resampled_sfs)
+    #add_pulse_copy.set_data(resampled_sfs)
+
+    # choose new random parameters for submodel, optimize
+    no_migration_copy.set_params(randomize=True)
+    no_migration_copy.optimize()
+    # initialize parameters from submodel, randomizing the new parameters
+    #add_pulse_copy.set_params(pulse_copy.get_params(),
+                              #randomize=True)
+    #add_pulse_copy.optimize()
+
+    bootstrap_results.append(no_migration_copy.get_params())
+```
+    Fitting 1-th bootstrap out of 10
+    Fitting 2-th bootstrap out of 10
+    Fitting 3-th bootstrap out of 10
+    Fitting 4-th bootstrap out of 10
+    Fitting 5-th bootstrap out of 10
+    Fitting 6-th bootstrap out of 10
+    Fitting 7-th bootstrap out of 10
+    Fitting 8-th bootstrap out of 10
+    Fitting 9-th bootstrap out of 10
+    Fitting 10-th bootstrap out of 10
+
+```
+fig = momi.DemographyPlot(
+    no_migration_model, ["North", "South"],
+    linthreshy=1e5, figsize=(6,8),
+    major_yticks=yticks,
+    draw=False)
+
+# plot bootstraps onto the canvas in transparency
+for params in bootstrap_results:
+    fig.add_bootstrap(
+        params,
+        # alpha=0: totally transparent. alpha=1: totally opaque
+        alpha=1/10)
+
+# now draw the inferred demography on top of the bootstraps
+fig.draw()
+fig.draw_N_legend(loc="upper right")
+```
+![png](07_momi2_API_files/07_momi2_API_06_Bootstrap_migration.png)
 
 
 
