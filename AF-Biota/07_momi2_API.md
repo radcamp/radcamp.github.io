@@ -149,9 +149,9 @@ This is almost the exact same model as above, except now we have introduced anot
 
 ## Preparing real data for analysis
 We need to gather and construct several input files before we can actually apply momi to our Anolis data.
-* **Population assignment file** - This is a tab or space separated list of sample names and population names to which they are assigned. Sample names need to be exactly the same as they are in the VCF file. Population names can be anything, but it's useful if they're meaningful.
-* **Properly formatted VCF** - We do have the VCF file output from the ipyrad Anolis assembly, but it requires a bit of massaging before it's ready for momi. It must be zipped and indexed in such a way as to make it searchable.
-* **A BED file** - This file specifies genomic regions to include in when calculating the SFS. It is composed of 3 columns which specify 'chrom', 'chromStart', and 'chromEnd'.
+* [**Population assignment file**](#population-assignment-file) - This is a tab or space separated list of sample names and population names to which they are assigned. Sample names need to be exactly the same as they are in the VCF file. Population names can be anything, but it's useful if they're meaningful.
+* [**Properly formatted VCF**](#properly-formatted-vcf) - We do have the VCF file output from the ipyrad Anolis assembly, but it requires a bit of massaging before it's ready for momi. It must be zipped and indexed in such a way as to make it searchable.
+* [**BED file**](#bed-file) - This file specifies genomic regions to include in when calculating the SFS. It is composed of 3 columns which specify 'chrom', 'chromStart', and 'chromEnd'.
 
 ### Population assignment file
 Based on the results of the PCA and also our knowledge of the geographic location of the samples we will assign 2 samples to the "North" population, and 8 samples to the "South" population. To save some time we created this pops file, and have stashed a copy in the `/scratch/af-biota` directory. We can simply copy the file from there into our own `ipyrad-workshop` directories. We could do this by finding a terminal on the cluster, but its also possible to run terminal commands from jupyter notebooks using "magic" commands. Including `%%bash` on the first line of a cell tell jupyter to interpret lines inside this cell as terminal commands, so we can do this:
@@ -173,6 +173,43 @@ cat anolis-pops.txt
 
 Magic!
 > **Note:** `cat` is a command line utility that prints the contents of a file to the screen.
+
+### Properly formatted VCF
+In this tutorial we are using a very small dataset, so manipulating the VCF is very fast. With real data the VCF file can be **enormous**, which makes processing it very slow. `momi2` expects very large input files, so it insists on having them preprocessed to speed things up. The details of this preprocessing step are not very interesting, but we are basically compressing and indexing the VCF so it's faster to search.
+```
+%%bash
+## bgzip performs a blockwise compression
+bgzip anolis_outfiles/anolis.vcf
+
+## tabix indexes the file for searching
+tabix anolis_outfiles/anolis.vcf.gz
+ls -ltr anolis_outfiles/
+```
+    anolis.alleles.loci  anolis.loci      anolis.snps.phy	anolis.u.snps.phy
+    anolis.geno	     anolis.nex       anolis_stats.txt	anolis.ustr
+    anolis.gphocs	     anolis.phy       anolis.str	anolis.vcf.gz
+    anolis.hdf5	     anolis.snps.map  anolis.u.geno	anolis.vcf.gz.tbi
+
+### BED file
+The last file we need to construct is a BED file specifying which genomic regions to retain for calculation of the SFS. The standard coalescent assumes no recombination and no natural selection, so drift and mutation are the only forces impacting allele frequencies in populations. If we had whole genome data, and a good reference sequence then we would have information about coding regions and other things that are _probably_ under selection, so we could use the BED file to exclude these regions from the analysis. With RAD-Seq type data it's very common to assume RAD loci are neutrally evolving and unlinked, so we just want to create a BED file that specifies to retain all our SNPs. We provide a simple python program to do this conversion, which is located in the `/scratc/af-biota/bin` directory.
+
+```
+%%bash
+/scratch/af-biota/bin/vcf2bed.py anolis_outfiles/anolis.vcf anolis_outfiles/anolis.bed
+
+## Print the first 10 lines of this file
+head anolis_outfiles/anolis.bed
+```
+    locus_1	7	8
+    locus_3	65	66
+    locus_5	13	14
+    locus_5	26	27
+    locus_5	55	56
+    locus_8	34	35
+    locus_21	13	14
+    locus_24	58	59
+    locus_26	2	3
+    locus_26	50	51
 
 ## Inference procedure
 ## Bootstrapping confidence intervals
