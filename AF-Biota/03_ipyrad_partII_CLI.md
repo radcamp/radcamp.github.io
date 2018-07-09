@@ -217,7 +217,7 @@ clustering threshold as step 3 to identify sequences between samples
 that are probably sampled from the same locus, based on sequence
 similarity.
 
-**Note on performance of each step:** Steps 3 and 6 generally take 
+> **Note on performance of each step:** Steps 3 and 6 generally take 
 considerably longer than any of the steps, due to the resource 
 intensive clustering and alignment phases. These can take on the order
 of 10-100x as long as the next longest running step. Fortunately, with the data we use during this workshop, step 6 will actually be really fast.
@@ -402,7 +402,7 @@ in the `1` column would indicate singletons (only one sample at this locus),
 and locus coverage in the `10` column indicates loci with full coverage 
 (all samples have data at these loci).
 
-**Note:** It's important to notice that locus coverage below your 
+> **Note:** It's important to notice that locus coverage below your 
 `min_sample_locus` parameter setting will all naturally equal 0, since 
 by definition these are being removed.
 
@@ -431,7 +431,7 @@ in the `2` row, this indicates the number of loci with 2 variable
 sites (174), and the number of loci with 2 pis (48). The `sum_*`
 columns simply indicate the running total in ascending order.
 
-**Note:** This block can be a little tricky because loci can
+> **Note:** This block can be a little tricky because loci can
 end up getting double-counted. For example, a locus with 1 pis,
 and 2 autapomorphies will be counted once in the 3 row for `var`,
 and once in the 1 row for `pis`. Apply care with these values.
