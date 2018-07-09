@@ -152,6 +152,8 @@ We need to gather and construct several input files before we can actually apply
 * [**Population assignment file**](#population-assignment-file) - This is a tab or space separated list of sample names and population names to which they are assigned. Sample names need to be exactly the same as they are in the VCF file. Population names can be anything, but it's useful if they're meaningful.
 * [**Properly formatted VCF**](#properly-formatted-vcf) - We do have the VCF file output from the ipyrad Anolis assembly, but it requires a bit of massaging before it's ready for momi. It must be zipped and indexed in such a way as to make it searchable.
 * [**BED file**](#bed-file) - This file specifies genomic regions to include in when calculating the SFS. It is composed of 3 columns which specify 'chrom', 'chromStart', and 'chromEnd'.
+* [**The allele counts file**](#the-allele-counts-file) - The allele counts file is an intermediate file that we must generate on the way to constructing the SFS. momi2 provides a function for this.
+* [**Genereate the SFS**](#genereate-the-sfs) - The culmination of all this housekeeping is the SFS file which we will use for demographic inference.
 
 ### Population assignment file
 Based on the results of the PCA and also our knowledge of the geographic location of the samples we will assign 2 samples to the "North" population, and 8 samples to the "South" population. To save some time we created this pops file, and have stashed a copy in the `/scratch/af-biota` directory. We can simply copy the file from there into our own `ipyrad-workshop` directories. We could do this by finding a terminal on the cluster, but its also possible to run terminal commands from jupyter notebooks using "magic" commands. Including `%%bash` on the first line of a cell tell jupyter to interpret lines inside this cell as terminal commands, so we can do this:
@@ -230,12 +232,13 @@ gunzip -c anolis_allele_counts.gz | head
 		    [[0, 0], [3, 1]],
 		    [[0, 0], [2, 2]],
 
-### Genereate the SFS and loading it into python
+### Genereate the SFS
 
 ```
 %%bash
 python -m momi.extract_sfs anolis_sfs.gz 50 anolis_allele_counts.gz
 ```
+##TODO:## I don't exactly understand what this `50` is doing here.
 ```
 sfs = momi.Sfs.load("anolis_sfs.gz")
 print("Avg pairwise heterozygosity", sfs.avg_pairwise_hets[:5])
@@ -269,6 +272,19 @@ no_migration_model.optimize()
              status: 1
             success: True
                   x: array([121612.07225824])
+
+```
+yticks = [1e4, 2.5e4, 5e4, 7.5e4, 1e5, 2.5e5, 5e5, 7.5e5]
+
+fig = momi.DemographyPlot(
+    no_migration_model, ["North", "South"],
+    figsize=(6,8),
+    major_yticks=yticks,
+    linthreshy=1.5e5)
+```
+![png](07_momi2_API_files/07_momi2_API_03_Inference_tdiv.png)
+
+
 
 ## Bootstrapping confidence intervals
 
