@@ -94,25 +94,24 @@ at which all lineages move from the "South" population to the
 "North" population). 
 ```
 model = momi.DemographicModel(N_e=1e5)
-model.add_leaf("NORTH")
-model.add_leaf("SOUTH")
-model.move_lineages("SOUTH", "NORTH", t=2e5)
+model.add_leaf("North")
+model.add_leaf("South")
+model.move_lineages("South", "North", t=2e5)
 ```
 > **Note:** The default migration fraction of the `DemographicModel.move_lineages()` function is 100%, so if we do not specify this value then when we call `move_lineages` momi assumes we want to move **all** lineages from the source to the destination. Later we will see how to manipulate the migration fraction to only move some portion of lineages.
 
-Executing this cell produces no output, but that's okay, we are just specifying the model. Also, be aware that the names assigned to leaf nodes have no specific meaning to momi2, so these names should be selected to have specific meaning to your target system. Here "NORTH" and "SOUTH" are simply stand-ins for some hypothetical populations. Now that we have this simple demographic model parameterized we can plot it, to see how it looks.
+Executing this cell produces no output, but that's okay, we are just specifying the model. Also, be aware that the names assigned to leaf nodes have no specific meaning to momi2, so these names should be selected to have specific meaning to your target system. Here "North" and "South" are simply stand-ins for some hypothetical populations. Now that we have this simple demographic model parameterized we can plot it, to see how it looks.
 
 ```
 yticks = [1e4, 2.5e4, 5e4, 7.5e4, 1e5, 2.5e5, 5e5, 7.5e5]
 
 fig = momi.DemographyPlot(
     model, 
-    ["NORTH", "SOUTH"],
+    ["North", "South"],
     figsize=(6,8),
     major_yticks=yticks,
     linthreshy=1e5)
 ```
-![png](07_momi2_API_files/07_momi2_API_01_ToyModel.png)
 
 There's a little bit going on here, but we'll walk you through it:
 * `yticks` - This is a list of elements specifying the timepoints to highlight on the y-axis of the figure.
@@ -122,29 +121,31 @@ The first two arguments to `momi.DemographyPlot()` are required, namely the mode
 * `major_yticks` - Tells the momi plotting routine to use the time demarcations we specified in thie `yticks` variable.
 * `linthreshy` - The time point at which to switch from linear to log-scale, backwards in time. This is really useful if you have many "interesting" events happening relatively recently, and you don't want them to get "smooshed" together by the depth of the older events. This will become clearer as we add migration events later in the tutorial.
 
+![png](07_momi2_API_files/07_momi2_API_01_ToyModel.png)
+
 **Experiment:** Try changing the value of `linthreshy` and replotting. Try `1e4` and `1.5e5` and notice how the figure changes. You can also experiment with changing the values in the `yticks` list. 
 
 Let's create a new model and introduce one migration event that only moves some fraction of lineages, and not the totality of them:
 ```
 model = momi.DemographicModel(N_e=1e5)
 
-model.add_leaf("NORTH")
-model.add_leaf("SOUTH")
-model.move_lineages("SOUTH", "NORTH", p=0.1, t=5e4)
-model.move_lineages("SOUTH", "NORTH", t=2e5)
+model.add_leaf("North")
+model.add_leaf("South")
+model.move_lineages("South", "North", p=0.1, t=5e4)
+model.move_lineages("South", "North", t=2e5)
 
 yticks = [1e4, 2.5e4, 5e4, 7.5e4, 1e5, 2.5e5, 5e5, 7.5e5]
 
 fig = momi.DemographyPlot(
-    model, ["NORTH", "SOUTH"],
+    model, ["North", "South"],
     figsize=(6,8),
     major_yticks=yticks,
     linthreshy=1.5e5)
 ```
 ![png](07_momi2_API_files/07_momi2_API_02_ToyModel_Migration.png)
 
-This is almost the exact same model as above, except now we have introduced the `move_lineages` call which includes the `p=0.1` argument. This indicates that we wish to move 10% of lineages from  the "SOUTH" population to the "NORTH" population at the specified timepoint.
-> **Note:** It may seem odd that the arrow in this figure points from "NORTH" to "SOUTH", but this is simply because we are operating in a coalescent framework and therefore the `move_lineages` function operates **backwards in time**.
+This is almost the exact same model as above, except now we have introduced another `move_lineages` call which includes the `p=0.1` argument. This indicates that we wish to move 10% of lineages from  the "South" population to the "North" population at the specified timepoint.
+> **Note:** It may seem odd that the arrow in this figure points from "North" to "South", but this is simply because we are operating in a coalescent framework and therefore the `move_lineages` function operates **backwards in time**.
 
 ## Preparing real data for analysis
 ## Inference procedure
@@ -236,17 +237,17 @@ for chrom in range(1, n_loci+1):
 !ls tutorial_datasets/
 ```
 
-    10.bed	       14.bed	      18.bed	     2.bed	   6.bed
-    10.vcf.gz      14.vcf.gz      18.vcf.gz      2.vcf.gz	   6.vcf.gz
+    10.bed         14.bed         18.bed         2.bed     6.bed
+    10.vcf.gz      14.vcf.gz      18.vcf.gz      2.vcf.gz      6.vcf.gz
     10.vcf.gz.tbi  14.vcf.gz.tbi  18.vcf.gz.tbi  2.vcf.gz.tbi  6.vcf.gz.tbi
-    11.bed	       15.bed	      19.bed	     3.bed	   7.bed
-    11.vcf.gz      15.vcf.gz      19.vcf.gz      3.vcf.gz	   7.vcf.gz
+    11.bed         15.bed         19.bed         3.bed     7.bed
+    11.vcf.gz      15.vcf.gz      19.vcf.gz      3.vcf.gz      7.vcf.gz
     11.vcf.gz.tbi  15.vcf.gz.tbi  19.vcf.gz.tbi  3.vcf.gz.tbi  7.vcf.gz.tbi
-    12.bed	       16.bed	      1.bed	     4.bed	   8.bed
-    12.vcf.gz      16.vcf.gz      1.vcf.gz	     4.vcf.gz	   8.vcf.gz
+    12.bed         16.bed         1.bed      4.bed     8.bed
+    12.vcf.gz      16.vcf.gz      1.vcf.gz       4.vcf.gz      8.vcf.gz
     12.vcf.gz.tbi  16.vcf.gz.tbi  1.vcf.gz.tbi   4.vcf.gz.tbi  8.vcf.gz.tbi
-    13.bed	       17.bed	      20.bed	     5.bed	   9.bed
-    13.vcf.gz      17.vcf.gz      20.vcf.gz      5.vcf.gz	   9.vcf.gz
+    13.bed         17.bed         20.bed         5.bed     9.bed
+    13.vcf.gz      17.vcf.gz      20.vcf.gz      5.vcf.gz      9.vcf.gz
     13.vcf.gz.tbi  17.vcf.gz.tbi  20.vcf.gz.tbi  5.vcf.gz.tbi  9.vcf.gz.tbi
 
 
@@ -270,11 +271,11 @@ with open("tutorial_datasets/ind2pop.txt", "w") as f:
 !cat tutorial_datasets/ind2pop.txt
 ```
 
-    NEA_0	NEA
-    YRI_0	YRI
-    YRI_1	YRI
-    CHB_0	CHB
-    CHB_1	CHB
+    NEA_0   NEA
+    YRI_0   YRI
+    YRI_1   YRI
+    CHB_0   CHB
+    CHB_1   CHB
 
 
 
@@ -612,3 +613,4 @@ no_pulse_fit_stats.all_f2()
 
 # Acknowledgements
 We relied heavily on the excellent [momi2 documentation](http://momi2.readthedocs.io/en/latest/tutorial.html) during the creation of this tutorial.
+
