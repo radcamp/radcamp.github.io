@@ -1,10 +1,12 @@
 # Demographic inference using the Site Frequency Spectrum (SFS) with **momi2**
 
 **TODO:** Put a bunch of explanatory information here.
-* What is demographic inference?
-* What is the SFS?
-* What are some other familiar programs that use the SFS?
-* How is momi2 different? And why are we using it? Most importantly, how do you pronounce it?
+### What is demographic inference?
+### What is the SFS?
+### What are some other familiar programs that use the SFS?
+### How is momi2 different? And why are we using it? Most importantly, how do you pronounce it?
+
+**Pronunciation:** Care of Jonathan Terhorst (somewhat cryptically), from a [github issue I created to resolve this conundrum](https://github.com/popgenmethods/momi2/issues/6): "How do you pronounce ∂a∂i? ;-)"
 
 ## momi2 installation
 `momi2` requires python3, which is a different version of python we've been using up to now. Fortunately conda makes it easy to run python2 and python3 side by side. We will install python3 in a separate [conda environment](https://conda.io/docs/user-guide/concepts.html#conda-environments), and then install and run momi2 analyses using this environment. A conda environment is a container for python packages and configurations. More on creating/managing [conda environments](https://conda.io/docs/user-guide/tasks/manage-environments.html).
@@ -82,6 +84,39 @@ import logging
 logging.basicConfig(level=logging.INFO,
                     filename="momi_log.txt")
 ```
+
+A demographic model is composed of leaf nodes, migration events, 
+and size change events. We start with the simplest possible 2 
+population model, with no migration, and no size changes. For the 
+sake of demonstrating model construction we choose arbitrary 
+values for `N_e` (the diploid effective size), and `t` (the time
+at which all lineages move from the "South" population to the
+"North" population). 
+```
+model = momi.DemographicModel(N_e=1e5)
+model.add_leaf("NORTH")
+model.add_leaf("SOUTH")
+model.move_lineages("SOUTH", "NORTH", t=2e5)
+```
+Executing this cell produces no output, but that's okay, we are just specifying the model. Also, be aware that the names assigned to leaf nodes have no specific meaning to momi2, so these names should be selected to have specific meaning to your target system. Here "North" and "South" are simply stand-ins for some hypothetical populations. Now that we have this simple demographic model parameterized we can plot it, to see how it looks.
+
+```
+yticks = [1e4, 2.5e4, 5e4, 7.5e4, 1e5, 2.5e5, 5e5, 7.5e5]
+
+fig = momi.DemographyPlot(
+    model, 
+    ["NORTH", "SOUTH"],
+    figsize=(6,8),
+    major_yticks=yticks,
+    linthreshy=1e5)
+```
+![png](07_momi2_API_files/07_momi2_API_01_ToyModel.png)
+There's a little bit going on here, but we'll walk you through it:
+* `yticks` - This is a list of elements specifying the timepoints to highlight on the y-axis of the figure.
+The first two arguments to `momi.DemographyPlot()` are required, namely the model to plot, and the populations of the model to include. The next three arguments are optional, but useful:
+* `figsize` - Specify the output figure size as (width, height) in inches.
+* `major_yticks` - Tells the momi plotting routine to use the time demarcations we specified in thie `yticks` variable.
+* `linthreshy` - The time point at which to switch from linear to log-scale, backwards in time. This is really useful if you have many "interesting" events happening relatively recently, and you don't want them to get "smooshed" together by the depth of the older events. This will become clearer as we add migration events later in the tutorial.
 
 
 ## Preparing real data for analysis
