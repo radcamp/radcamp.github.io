@@ -108,6 +108,7 @@ probably junk. This step is pretty straightforward, and pretty fast. Run
 it thusly:
 
 ```
+$ cd ipyrad-workshop
 $ ipyrad -p params-anolis.txt -s 4 -c 2
 
  -------------------------------------------------------------
