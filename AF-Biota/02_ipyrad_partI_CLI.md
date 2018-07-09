@@ -131,6 +131,71 @@ Job ID                  Username    Queue    Jobname          SessID  NDS   TSK 
 24817.darwin            isaac       proto    STDIN             38014     1      2      64gb  04:00:00 R  00:00:07
 ```                                                                       
 
+## ipyrad help
+To better understand how to use ipyrad, let's take a look at the help argument. We will use some of the ipyrad arguments in this tutorial (for example: -n, -p, -s, -c, -r). But, the complete list of optional arguments and their explanation goes below.
+
+```
+$ ipyrad --help
+usage: ipyrad [-h] [-v] [-r] [-f] [-q] [-d] [-n new] [-p params]
+              [-b [branch [branch ...]]] [-m [merge [merge ...]]] [-s steps]
+              [-c cores] [-t threading] [--MPI] [--preview]
+              [--ipcluster [ipcluster]] [--download [download [download ...]]]
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -v, --version         show program's version number and exit
+  -r, --results         show results summary for Assembly in params.txt and
+                        exit
+  -f, --force           force overwrite of existing data
+  -q, --quiet           do not print to stderror or stdout.
+  -d, --debug           print lots more info to ipyrad_log.txt.
+  -n new                create new file 'params-{new}.txt' in current
+                        directory
+  -p params             path to params file for Assembly:
+                        params-{assembly_name}.txt
+  -b [branch [branch ...]]
+                        create a new branch of the Assembly as
+                        params-{branch}.txt
+  -m [merge [merge ...]]
+                        merge all assemblies provided into a new assembly
+  -s steps              Set of assembly steps to perform, e.g., -s 123
+                        (Default=None)
+  -c cores              number of CPU cores to use (Default=0=All)
+  -t threading          tune threading of binaries (Default=2)
+  --MPI                 connect to parallel CPUs across multiple nodes
+  --preview             run ipyrad in preview mode. Subset the input file so
+                        it'll runquickly so you can verify everything is
+                        working
+  --ipcluster [ipcluster]
+                        connect to ipcluster profile (default: 'default')
+  --download [download [download ...]]
+                        download fastq files by accession (e.g., SRP or SRR)
+
+  * Example command-line usage: 
+    ipyrad -n data                       ## create new file called params-data.txt 
+    ipyrad -p params-data.txt            ## run ipyrad with settings in params file
+    ipyrad -p params-data.txt -s 123     ## run only steps 1-3 of assembly.
+    ipyrad -p params-data.txt -s 3 -f    ## run step 3, overwrite existing data.
+
+  * HPC parallelization across 32 cores
+    ipyrad -p params-data.txt -s 3 -c 32 --MPI
+
+  * Print results summary 
+    ipyrad -p params-data.txt -r 
+
+  * Branch/Merging Assemblies
+    ipyrad -p params-data.txt -b newdata  
+    ipyrad -m newdata params-1.txt params-2.txt [params-3.txt, ...]
+
+  * Subsample taxa during branching
+    ipyrad -p params-data.txt -b newdata taxaKeepList.txt
+
+  * Download sequence data from SRA into directory 'sra-fastqs/' 
+    ipyrad --download SRP021469 sra-fastqs/ 
+
+  * Documentation: http://ipyrad.readthedocs.io
+```
+
 ## Create a new parameters file
 
 ipyrad uses a text file to hold all the parameters for a given assembly.
@@ -362,7 +427,7 @@ punc_MTR21545         250000
 punc_MTR34414         250000
 punc_MTRX1468         250000
 punc_MTRX1478         250000
-punc_MUFAL9635        250000```
+punc_MUFAL9635        250000
 ```
 
 # Step 2: Filter reads
@@ -404,7 +469,7 @@ $ ipyrad -p params-anolis.txt -s 2 -c 2
   host compute node: [2 cores] on darwin
 
   Step 2: Filtering reads 
-  [####################] 100%  processing reads      | 0:01:02  ```
+  [####################] 100%  processing reads      | 0:01:02
 ```
 
 The filtered files are written to a new directory called `anolis_edits`. Again, 
