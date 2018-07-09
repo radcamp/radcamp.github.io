@@ -160,6 +160,18 @@ $ jupyter notebook &
 in the config file, not because of an inherent limitation of jupyter. It's
 common and easy to run several notebook servers on one computer.
 
+### How to tell if the ssh tunnel is running (Mac/Linux)
+On your local computer open a new terminal and type:
+```
+ps -ef | grep ssh | grep usp
+```
+
+If you **don't** see a line that includes this `ssh -N -f -L` then it's 
+not running, so you can restart it.
+
+### How to tell if the ssh tunnel is running (Windows)
+I have no fuckin idea.
+
 ### Killing a running jupyter notebook server
 If you ever find that you have a notebook server running that you
 need to kill, the easiest way is to use the `pkill` command. If you
