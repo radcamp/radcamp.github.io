@@ -236,7 +236,7 @@ gunzip -c anolis_allele_counts.gz | head
 
 ```
 %%bash
-python -m momi.extract_sfs anolis_sfs.gz 50 anolis_allele_counts.gz
+python -m momi.extract_sfs anolis_sfs.gz 20 anolis_allele_counts.gz
 ```
 ##TODO:## I don't exactly understand what this `50` is doing here.
 ```
