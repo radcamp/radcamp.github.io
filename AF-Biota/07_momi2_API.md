@@ -143,7 +143,7 @@ fig = momi.DemographyPlot(
 ```
 ![png](07_momi2_API_files/07_momi2_API_02_ToyModel_Migration.png)
 
-This is almost the exact same model as above, except now we have introduce the `move_lineages` call which includes the `p=0.1` argument. This indicates that we wish to move 10% of lineages from  the "SOUTH" population to the "NORTH" population at the specified timepoint.
+This is almost the exact same model as above, except now we have introduced the `move_lineages` call which includes the `p=0.1` argument. This indicates that we wish to move 10% of lineages from  the "SOUTH" population to the "NORTH" population at the specified timepoint.
 > **Note:** It may seem odd that the arrow in this figure points from "NORTH" to "SOUTH", but this is simply because we are operating in a coalescent framework and therefore the `move_lineages` function operates **backwards in time**.
 
 ## Preparing real data for analysis
