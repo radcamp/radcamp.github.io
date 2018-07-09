@@ -282,79 +282,14 @@ no_pulse_fit_stats = momi.SfsModelFitStats(no_pulse_model)
 print(no_pulse_fit_stats)
 no_pulse_fit_stats.expected.pattersons_d(A="pop1", B="pop2", C="pop3")
 ```
-
     ParamsDict({'n_pop1': 22376.432068547412, 'n_pop2': 22825.979849271956, 't_pop1_pop2': 44449.31415990158, 'n_anc': 13292.879644178945, 't_anc': 49342.12743617457})
     <momi.sfs_stats.SfsModelFitStats object at 0x7f27983e3390>
 
-
-
-
-
     -1.2238981294109822e-15
-
-
-
 
 ```python
 no_pulse_fit_stats.all_f2()
 ```
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Pop1</th>
-      <th>Pop2</th>
-      <th>Expected</th>
-      <th>Observed</th>
-      <th>Z</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>pop1</td>
-      <td>pop2</td>
-      <td>0.138569</td>
-      <td>0.076026</td>
-      <td>-12.189897</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>pop1</td>
-      <td>pop3</td>
-      <td>0.184409</td>
-      <td>0.108118</td>
-      <td>-11.697210</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>pop2</td>
-      <td>pop3</td>
-      <td>0.183527</td>
-      <td>0.115069</td>
-      <td>-9.647095</td>
-    </tr>
-  </tbody>
-</table>
-</div>
 
 
 
