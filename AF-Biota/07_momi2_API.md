@@ -421,7 +421,7 @@ for params in bootstrap_results:
 fig.draw()
 fig.draw_N_legend(loc="upper right")
 ```
-![png](07_momi2_API_files/07_momi2_API_06_Bootstrap_migration.png)
+![png](07_momi2_API_files/07_momi2_API_06_Bootstrap_tdiv.png)
 
 
 
