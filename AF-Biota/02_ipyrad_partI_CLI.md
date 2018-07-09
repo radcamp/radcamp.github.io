@@ -47,7 +47,7 @@ analysis. The basic steps of this process are as follows:
 * Step 6 - Cluster across Samples
 * Step 7 - Apply filters and write output formats
 
-**Note on files in the project directory:** Assembling rad-seq type 
+> **Note on files in the project directory:** Assembling rad-seq type 
 sequence data requires a lot of different steps, and these steps 
 generate a **lot** of intermediary files. ipyrad organizes these files 
 into directories, and it prepends the name of your assembly to each 
@@ -274,7 +274,7 @@ doesn't create any new directories or modify the raw files in any way.
 
 Now lets run step 1! For the Anolis data this will take <1 minute.
 
-**Special Note:** In interactive mode on the USP cluster please be aware
+> **Special Note:** In interactive mode on the USP cluster please be aware
 of *always* specifying the number of cores with the `-c` flag. If you
 do not specify the number of cores ipyrad assumes you want **all** of
 them, and this will make your run **very** fast, but it might **aggravate**
@@ -371,9 +371,8 @@ we have some problem with adapters, and a little noise toward the 3'
 end. To account for this we will trim reads to 75bp and set adapter 
 filtering to be quite aggressive. 
 
-**Note:** Trimming to 75bp seems a bit aggressive too, and based on the FastQC results you probably would not want to do this with if these were your real data. However, it will speed up the analysis considerably. Here, we are just trimming the reads for the sake of this workshop.
+> **Note:** Trimming to 75bp seems a bit aggressive too, and based on the FastQC results you probably would not want to do this with if these were your real data. However, it will speed up the analysis considerably. Here, we are just trimming the reads for the sake of this workshop.
 
-**TODO:** Settle on one format for 'Notes' and standardize on it.
 Edit your params file again with `nano`:
 
 ```
@@ -386,7 +385,7 @@ and change the following two parameter settings:
 2                               ## [16] [filter_adapters]: Filter for adapters/primers (1 or 2=stricter)
 0, 75, 0, 0                     ## [25] [trim_reads]: Trim raw read edges (R1>, <R1, R2>, <R2) (see docs)
 ```
-**Note:** Saving and quitting from `nano`: `CTRL+o` then `CTRL+w`
+> **Note:** Saving and quitting from `nano`: `CTRL+o` then `CTRL+w`
 
 ```
 $ ipyrad -p params-anolis.txt -s 2 -c 2
@@ -483,7 +482,7 @@ available for your organism (or one that is relatively closely related).
 We will not cover reference based assemblies in this workshop, but you 
 can refer to the [ipyrad documentation](https://ipyrad.readthedocs.io/tutorial_advanced_cli.html) for more information.
 
-**Note on performance:** Steps 3 and 6 generally take considerably 
+> **Note on performance:** Steps 3 and 6 generally take considerably 
 longer than any of the steps, due to the resource intensive clustering 
 and alignment phases. These can take on the order of 10-100x as long 
 as the next longest running step.
