@@ -1,4 +1,4 @@
-# Demographic inference using the Site Frequency Spectrum (SFS): **momi2**
+# Demographic inference using the Site Frequency Spectrum (SFS) with **momi2**
 
 **TODO:** Put a bunch of explanatory information here.
 * What is demographic inference?
@@ -6,7 +6,7 @@
 * What are some other familiar programs that use the SFS?
 * How is momi2 different? And why are we using it? Most importantly, how do you pronounce it?
 
-### momi2 installation
+## momi2 installation
 `momi2` requires python3, which is a different version of python we've been using up to now. Fortunately conda makes it easy to run python2 and python3 side by side. We will install python3 in a separate [conda environment](https://conda.io/docs/user-guide/concepts.html#conda-environments), and then install and run momi2 analyses using this environment. A conda environment is a container for python packages and configurations. More on creating/managing [conda environments](https://conda.io/docs/user-guide/tasks/manage-environments.html).
 
 **TODO:** Would be nice to have a simple figure illustrating conda environments here.
@@ -45,43 +45,46 @@ qsub: job 24824.darwin ready
 (momi-py36)$ jupyter notebook &
 ```
 
-First, begin by creating a new notebook inside your `/home/<username>/ipyrad-workshop/` directory called `anolis-momi2.ipynb` (refer to the [jupyter notebook configuration page](Jupyter_Notebook_Setup.md) for a refresher on connecting to the notebook server). **The rest of the materials in this part of the workshop assume you are running all code in cells of a jupyter notebook** that is running on the USP cluster.
+Now when you open a browser on your local machine and connect to 
+`localhost:<my_port_#>` the familiar notebook server file browser 
+interface will show up, but this time when you choose "New" you'll 
+see an option to create a python3 notebook!
+![png](07_momi2_API_files/07_momi2_API_00_Notebook23.png)
 
 # **momi2** Analyses
-* [Simple PCA from a VCF file](#simple-pca-from-vcf-file)
-* [Coloring by population assignment](#population-assignment-for-sample-colors)
-* [Removing "bad" samples and replotting](#removing-bad-samples-and-replotting)
-* [Specifying which PCs to plot](#looking-at-pcs-other-than-1--2)
-* [Multi-panel PCA](#multi-panel-pca)
-* [More to explore](#more-to-explore)
+Create a new notebook inside your `/home/<username>/ipyrad-workshop/` 
+directory called `anolis-momi2.ipynb` (refer to the [jupyter notebook configuration page](Jupyter_Notebook_Setup.md) for a refresher on connecting to the notebook server). **The rest of the 
+materials in this part of the workshop assume you are running all code 
+in cells of a jupyter notebook** that is running on the USP cluster.
 
-## Required software
-You can easily install the required software for this notebook using `conda`, as before. This can even be accomplished inside your jupyter notebook. Preceding a command with `!` will tell the notebook to run the line as a terminal command, instead of as python.
+* [Constructing and plotting a simple model](#constructing-and-plotting-a-simple-model)
+* [Preparing real data for analysis](#preparing-real-data-for-analysis)
+* [Inference procedure](#inference-procedure)
+* [Bootstrapping confidence intervals](#bootstrapping-confidence-intervals)
+
+## Constructing and plotting a simple model
+One of the real strengths of momi2 is the ability not only to construct a
+demographic history for a set of populations, but also to plot the model
+to verify that it corresponds to what you expect!
+
+Begin with the usual import statements, except this time we also add `logging`,
+which allows momi to write progress to a log file. This can be useful for
+debugging, so we encourage this practice.
 
 ```python
-## The `-y` here means "Answer yes to all questions". It prevents
-## conda from asking whether the install looks ok.
-!conda install -y -c ipyrad structure clumpp
-
-```python
+%matplotlib inline
 import momi
 import logging
-import os
 
 logging.basicConfig(level=logging.INFO,
-                    filename="tutorial.log")
-
-
-## You put your name here
-name = "isaac"
-
-
-#### Directory housekeeping, ignore
-os.chdir("/home/isaac/momi-test")
-if not os.path.exists(name):
-    os.mkdir(name)
-os.chdir(name)
+                    filename="momi_log.txt")
 ```
+
+
+## Preparing real data for analysis
+## Inference procedure
+## Bootstrapping confidence intervals
+
 
 # Constructing a (complex) model
 
@@ -542,3 +545,5 @@ no_pulse_fit_stats.all_f2()
 
 ![png](07_momi2_API_files/07_momi2_API_25_1.png)
 
+# Acknowledgements
+We relied heavily on the excellent [momi2 documentation](http://momi2.readthedocs.io/en/latest/tutorial.html) during the creation of this tutorial.
