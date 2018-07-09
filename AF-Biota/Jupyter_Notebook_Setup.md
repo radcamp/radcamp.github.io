@@ -125,11 +125,30 @@ is **very important for us**. Each user must enter the port number
 they were assigned on the [AF-Biota workshop port #s](https://github.com/radcamp/radcamp.github.io/blob/master/AF-Biota/participants.txt) page, and this should be the same port as entered
 above for the ssh tunnel.
 ```
-jupyter notebook --no-browser --port <my_port_number> &
+$ jupyter notebook &
 ```
+Now ask jupyter to show you the list of running notebooks that belong to you, 
+and you should see this:
+```
+$ jupyter notebook list
+Currently running servers:
+http://localhost:<my_port_#>/ :: /home/<username>
+```
+
 ## Useful jupyter tricks/ideas
 
-### How to determine if the notebook server is running
+### Jupyter Notebook setup tl;dr
+* On your local computer:
+```
+ssh -N -f -L localhost:<my_port_#>:localhost:<my_port_#> <username>@lem.ib.usp.br
+```
+* On the cluster: 
+```
+$ qsub -q proto -l nodes=1:ppn=2 -l mem=64gb -I
+$ jupyter notebook &
+```
+
+### What happens if I try to run two notebook servers at the same time
 If you try to run a notebook server when one is already running you'll
 get a message that looks like this:
 ```
@@ -137,6 +156,9 @@ $ jupyter notebook &
 <username>@darwin:~$ [I 21:06:08.325 NotebookApp] The port <my_port_#> is already in use, trying another port.
 [C 21:06:08.326 NotebookApp] ERROR: the notebook server could not be started because no available port could be found.
 ```
+**Note:** This is because of the configuration settings we have imposed
+in the config file, not because of an inherent limitation of jupyter. It's
+common and easy to run several notebook servers on one computer.
 
 ### Killing a running jupyter notebook server
 If you ever find that you have a notebook server running that you
@@ -160,7 +182,7 @@ The second is `--port`, which is **very important for us**. Each user must
 enter the port number they were assigned on the [AF-Biota workshop port #s](https://github.com/radcamp/radcamp.github.io/blob/master/AF-Biota/participants.txt) page, and this should be the same port as entered above for the ssh tunnel. The third is `--port-retries=0`, which tells 
 jupyter to error out if our port is already occupied.
 ```
-jupyter notebook --no-browser --port <my_port_number> --port-retries=0 &
+$ jupyter notebook --no-browser --port <my_port_number> --port-retries=0 &
 ```
 
 ## Further exploration with jupyter notebooks
