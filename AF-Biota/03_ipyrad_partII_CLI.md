@@ -361,6 +361,7 @@ that most loci are being filterd by `min_sample_locus` (a very common
 result), in which case you might reduce this threshold in your params file
 and re-run step 7 in order to retain more loci.
 ```
+$ cat anolis_outfiles/anolis_stats.txt
 ## The number of loci caught by each filter.
 ## ipyrad API location: [assembly].stats_dfs.s7_filters
 
