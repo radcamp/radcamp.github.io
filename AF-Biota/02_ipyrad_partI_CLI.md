@@ -37,7 +37,11 @@ wat
 # Overview of Assembly Steps
 Very roughly speaking, ipyrad exists to transform raw data coming off the 
 sequencing instrument into output files that you can use for downstream 
-analysis. The basic steps of this process are as follows:
+analysis. 
+
+![png](02_ipyrad_partI_CLI_files/02_ipyrad_partI_CLI_ipyrad_workflow.png)
+
+The basic steps of this process are as follows:
 
 * Step 1 - Demultiplex/Load Raw Data
 * Step 2 - Trim and Quality Control
