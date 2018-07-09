@@ -24,7 +24,7 @@ Overview of process
 This part is run **on your local computer**. An "ssh tunnel" will
 allow your computer to talk to the notebook server on the cluster
 by using the web browser. It's a little confusing at first, but 
-once you see it up and run, it will make more sense and we hope you 
+once you see it up and running, it will make more sense and we hope you 
 will find it very clever and useful.
 
 > **Note on terms:** A "port" is just a number, like the address of
