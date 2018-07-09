@@ -261,7 +261,7 @@ It might be more enlightening to consider the output of step 6 by
 examining the file that contains the reads clustered across samples:
 
 ```
-$ gunzip -c anolis_consens/anolis_catclust.gz | head -n 28
+$ gunzip -c anolis_across/anolis_catclust.gz | head -n 28
 
 punc_IBSPCRIB0361_10
 TGCATGCAACTGGAGTGAGGTGGTTTGCATTGATTGCTGTATATTCAATGCAAGCAACAGGAATGAAGTGGATTTCTTTGGTCACTATATACTCAATGCA
