@@ -32,6 +32,9 @@ $ source activate momi-py36
 ```
 > **Note:** You'll notice that the conda env you are currently using is now displayed as part of your prompt. We will maintain this convention for the rest of this notebook.
 
+Now use `conda` to install momi and jupyter. All the `-c` arguments again are specifying
+channels that momi pulls dependencies from. Order matters here, so copy and paste this
+command to your terminal.
 ```
 (momi-py36)$ conda install momi jupyter -c defaults -c conda-forge -c bioconda -c jackkamm
 ```
