@@ -248,6 +248,8 @@ print("percent missing data per population", sfs.p_missing)
 
 ## Inference procedure
 
+
+### Estimating divergence time
 ```
 no_migration_model = momi.DemographicModel(N_e=1e5)
 
@@ -284,7 +286,84 @@ fig = momi.DemographyPlot(
 ```
 ![png](07_momi2_API_files/07_momi2_API_03_Inference_tdiv.png)
 
+### Including population size parameters
+```
+popsizes_model = momi.DemographicModel(N_e=1e5)
 
+popsizes_model.set_data(sfs)
+
+popsizes_model.add_size_param("n_north")
+popsizes_model.add_size_param("n_south")
+popsizes_model.add_time_param("tdiv")
+
+popsizes_model.add_leaf("North", N="n_north")
+popsizes_model.add_leaf("South", N="n_south")
+popsizes_model.move_lineages("South", "North", t="tdiv")
+
+popsizes_model.optimize()
+```
+               fun: 0.6080302639574219
+               jac: array([-7.11116810e-06,  1.25870299e-06,  5.18524040e-11])
+     kl_divergence: 0.6080302639574219
+    log_likelihood: -248.84794184255227
+           message: 'Converged (|f_n-f_(n-1)| ~= 0)'
+              nfev: 13
+               nit: 6
+        parameters: ParamsDict({'n_north': 58437.32067443618, 'n_south': 132874.21082953943, 'tdiv': 112867.76818828644})
+            status: 1
+           success: True
+                 x: array([1.09757100e+01, 1.17971582e+01, 1.12867768e+05])
+```
+yticks = [1e4, 2.5e4, 5e4, 7.5e4, 1e5, 2.5e5, 5e5, 7.5e5]
+
+fig = momi.DemographyPlot(
+    popsizes_model, ["North", "South"],
+    figsize=(6,8),
+    major_yticks=yticks,
+    linthreshy=1.5e5)
+```
+![png](07_momi2_API_files/07_momi2_API_04_Inference_sizes.png)
+
+## Adding migration events
+```
+migration_model = momi.DemographicModel(N_e=1e5)
+
+migration_model.set_data(sfs)
+
+migration_model.add_time_param("tmig_north_south")
+migration_model.add_time_param("tmig_south_north")
+migration_model.add_pulse_param("mfrac_north_south", upper=.2)
+migration_model.add_pulse_param("mfrac_south_north", upper=.2)
+
+migration_model.add_size_param("n_north")
+migration_model.add_size_param("n_south")
+migration_model.add_time_param("tdiv", lower_constraints=["tmig_north_south", "tmig_south_north"])
+
+migration_model.add_leaf("North", N="n_north")
+migration_model.add_leaf("South", N="n_south")
+migration_model.move_lineages("North", "South", t="tmig_north_south", p="mfrac_north_south")
+migration_model.move_lineages("South", "North", t="tmig_south_north", p="mfrac_south_north")
+
+
+migration_model.move_lineages("South", "North", t="tdiv")
+
+migration_model.optimize()
+```
+                fun: 0.6072433390803555
+                jac: array([-4.44751606e-11,  1.40562352e-11, -2.46501280e-04,  1.24640859e-08,
+           -2.14858289e-08,  2.17343690e-12,  1.43063167e-11])
+      kl_divergence: 0.6072433390803555
+     log_likelihood: -248.73147696074645
+            message: 'Converged (|f_n-f_(n-1)| ~= 0)'
+               nfev: 31
+                nit: 8
+         parameters: ParamsDict({'tmig_north_south': 95596.04975739817, 'tmig_south_north': 128584.2961865477, 'mfrac_north_south': 0.2, 'mfrac_south_north': 5.497639676362986e-07, 'n_north': 101409.03648320214, 'n_south': 274995.4822711156, 'tdiv': 300936.29078211787})
+             status: 1
+            success: True
+                  x: array([ 9.55960498e+04,  1.28584296e+05, -1.38629436e+00, -1.44137763e+01,
+            1.15269175e+01,  1.25245099e+01,  1.72351995e+05])
+
+![png](07_momi2_API_files/07_momi2_API_05_Inference_migration.png)
 
 ## Bootstrapping confidence intervals
 
