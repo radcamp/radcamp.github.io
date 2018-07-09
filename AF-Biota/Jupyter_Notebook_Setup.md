@@ -13,8 +13,10 @@ attention until you're very comfortable with the process.
 
 Overview of process
 * Establish jupyter notebook ssh tunnel: [Windows](#windows-ssh-tunnel-configuration) - [Mac/Linux](#mac-ssh-tunnel-configuration)
+* [Create the config file](#set-default-configuration-behavior)
 * [Set Jupyter notebook password](#set-jupyter-notebook-password)
 * [Start remote notebook server](#run-notebook-server)
+* [More information about jupyter](#useful-jupyter-tricks/ideas)
 
 ## Setup to run on your local computer
 
@@ -53,13 +55,50 @@ the USP cluster.** Begin this part of setup by connecting to the cluster:
 $ ssh <username>@lem.ib.usp.br 
 ```
 
-### Installing Dependencies
+### Installing Jupyter
 
-ipyrad and all dependencies (including jupyter) should have been installed 
-in a previous workshop session. If not, you can always run this command in 
-a terminal window on the cluster:
+**If you already installed `ipyrad` then you can skip this step.** 
+`jupyter` is installed as a dependency of `ipyrad`. If you 
+need to install juypter/ipyrad still run this command in a terminal 
+window on the cluster:
 ```
-conda install ipyrad -c ipyrad
+$ conda install ipyrad -c ipyrad
+```
+
+### Set default configuration behavior
+There are a couple arguments that we always want to start the jupyter
+notebook with, so it is often convenient to just add these to the
+configuration file, rather than type them out over and over.
+
+The first parameter (`open-browser = False`) directs jupyter to run in
+the background and wait for connections. The second parameter (`port = <my_port_#>`) 
+is **very important for us**. Each user must enter the port number
+they were assigned on the [AF-Biota workshop port #s](https://github.com/radcamp/radcamp.github.io/blob/master/AF-Biota/participants.txt) page, and this should be the same port as entered
+above for the ssh tunnel. The final parameter (`port_retries = 0`) 
+prevents jupyter from assigning us a random port if our assigned port
+is not available. This is useful because if we're already running
+a notebook server and we try to start another one we don't want the new
+one to start, rather just to be informed that we're already running one.
+
+We are going to use the `printf` command to write the 3 parameter settings
+to the jupyter config file. First, just run this command and you'll see
+that printf simply prints the properly formatted parameters to the screen. 
+The **\n** character is a special character that means "put a new line here".
+```
+$ printf "c.NotebookApp.open_browser = False\nc.NotebookApp.port = 9000\nc.NotebookApp.port_retries = 0\n"
+```
+    c.NotebookApp.open_browser = False
+    c.NotebookApp.port = <my_port_#>
+    c.NotebookApp.port_retries = 0
+
+Now we can spice it up a bit by using "output redirection", which is a 
+feature of the linux command line. The `>` special character can 
+redirect output that would normally get printed to the screen and
+write it to a file instead. So running the following command will
+create the `.jupyter/jupyter_notebook_config.py` file with the 
+exact parameter settings we want.
+```
+$ printf "c.NotebookApp.open_browser = False\nc.NotebookApp.port = 9000\nc.NotebookApp.port_retries = 0\n" > ~/.jupyter/jupyter_notebook_config.py
 ```
 
 ### Set Jupyter Notebook Password
@@ -68,7 +107,7 @@ need to set a password before we can launch it. This command will
 prompt you for a new password for your notebook (you will **only ever 
 have to do this once on the HPC**):
 ```
-jupyter notebook passwd
+$ jupyter notebook passwd
 ```
 
 ### Run Notebook Server
@@ -87,6 +126,41 @@ they were assigned on the [AF-Biota workshop port #s](https://github.com/radcamp
 above for the ssh tunnel.
 ```
 jupyter notebook --no-browser --port <my_port_number> &
+```
+## Useful jupyter tricks/ideas
+
+### How to determine if the notebook server is running
+If you try to run a notebook server when one is already running you'll
+get a message that looks like this:
+```
+$ jupyter notebook &
+<username>@darwin:~$ [I 21:06:08.325 NotebookApp] The port <my_port_#> is already in use, trying another port.
+[C 21:06:08.326 NotebookApp] ERROR: the notebook server could not be started because no available port could be found.
+```
+
+### Killing a running jupyter notebook server
+If you ever find that you have a notebook server running that you
+need to kill, the easiest way is to use the `pkill` command. If you
+do have a running notebook server then the results of the `pkill`
+command will look something like this:
+```
+$ pkill -f jupyter
+<username>@darwin:~$ [C 21:01:58.180 NotebookApp] received signal 15, stopping
+[I 21:01:58.181 NotebookApp] Shutting down 0 kernels
+```
+
+### Starting a jupyter notebook server with command line arguments instead of a config file
+You might find in the future that you want to run a jupyter notebook server
+on some other computer, and that you only want to start it using command
+line arguments, rather than setting up the config file. The we illustrate 
+usage of the three `jupyter notebook` arguments that correspond to the 
+three config file parameters we set. The first is `--no-browser`, which 
+tells jupyter to just run in the background and wait for connections. 
+The second is `--port`, which is **very important for us**. Each user must 
+enter the port number they were assigned on the [AF-Biota workshop port #s](https://github.com/radcamp/radcamp.github.io/blob/master/AF-Biota/participants.txt) page, and this should be the same port as entered above for the ssh tunnel. The third is `--port-retries=0`, which tells 
+jupyter to error out if our port is already occupied.
+```
+jupyter notebook --no-browser --port <my_port_number> --port-retries=0 &
 ```
 
 ## Further exploration with jupyter notebooks
