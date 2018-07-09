@@ -51,7 +51,7 @@ The following cell shows the quickest way to results using a small simulated dat
 ```python
 ## Load your assembly
 data = ipyrad.load_json("/scratch/af-biota/simulated-example/simrad.json")
-## Create they pca object
+## Create the pca object
 pca = ipa.pca(data)
 ## Bam!
 pca.plot()
@@ -66,7 +66,7 @@ pca.plot()
 
 ### Simple pca from vcf file
 
-In the most common use you'll want to plot the first two PCs, then inspect the output, remove any obvious outliers, and then redo the pca. It's often desirable to import a vcf file directly rather than to use the ipyrad assembly, so here we'll demonstrate this with the Anolis data.
+In the most common use, you'll want to plot the first two PCs, then inspect the output, remove any obvious outliers, and then redo the pca. It's often desirable to import a vcf file directly rather than to use the ipyrad assembly, so here we'll demonstrate this with the Anolis data.
 
 ```python
 ## Path to the input vcf.
@@ -135,7 +135,7 @@ print(mask)
 ```
     [False  True False False False False False False False  True]
 
-> **Note:** In this call we are "masking" all samples (i.e. rows of the data matrix) which have values greater than 0 for the first column, which here is the '0' in the `[:, 0]` fragment. This is somewhat confusing because python matrices are 0-indexed, whereas it's typical for PCs to be 1-indexed. It's a nomencalture issue, really, but it can bite us if we don't keep it in mind.
+> **Note:** In this call we are "masking" all samples (i.e. rows of the data matrix) which have values greater than 0 for the first column, which here is the '0' in the `[:, 0]` fragment. This is somewhat confusing because python matrices are 0-indexed, whereas it's typical for PCs to be 1-indexed. It's a nomencalture issue, really, but it can bite us if we don't keep it in mind. 
 
 You can see above that the mask is a list of booleans that is the same length as the number of samples. We can use this mask to  print out the names of just the samples we would like to remove.
 
