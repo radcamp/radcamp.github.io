@@ -91,6 +91,20 @@ tre.draw(
 
 ![png](06_RAxML_API_files/06_RAxML_API_00_unrooted.png)
 
+### Rooting the tree
+Now lets say we want to root the tree and replot. This is accomplished by adding the `root` parameter to the `tree.draw()` function. We'll just choose a random sample to root the tree here:
+```
+tre = toytree.tree(rax.trees.bipartitions)
+tre.draw(
+    tre.root(["punc_ICST764"]),
+    width=600,
+    node_labels=tre.get_node_values("support"),
+);
+```
+![png](06_RAxML_API_files/06_RAxML_API_01_rooted.png)
+
+> **Note:** The `root()` function accepts a list of samples, so if you have multiple samples from the root taxon, you can include them like this: `tre.root(["punc_ICST764", "punc_MUFAL9635", "punc_MTR05978"])
+
 ## [optional] Submit raxml jobs to run on a cluster
 Using the ipyparallel library you can submit raxml jobs to run in parallel on cluster in a load-balanced fashion. You can then tell the notebook to wait until all jobs are finished before progressing in the notebook to draw trees, etc. 
 
