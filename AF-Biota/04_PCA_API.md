@@ -51,16 +51,25 @@ The following cell shows the quickest way to results using a small simulated dat
 ```python
 ## Load your assembly
 data = ipyrad.load_json("/scratch/af-biota/simulated-example/simrad.json")
+
 ## Create the pca object
 pca = ipa.pca(data)
+
 ## Bam!
 pca.plot()
+
+## Some aestethic tweaking & saving the plot as a .png file
+plt.title("My Title")
+plt.grid(True)
+plt.savefig("My_PCA_plot.png", bbox_inches="tight")
 ```
     loading Assembly: simrad
     from saved path: /scratch/af-biota/simulated-example/simrad.json
     <matplotlib.axes._subplots.AxesSubplot at 0x7fb6fdf82050>
 
 ![png](04_PCA_API_files/04_PCA_API_00_Simulated_Example.png)
+
+> **Note** Obviously you want to replace "My Title" and "My_PCA_plot.png" with something more meaningful.
 
 ## Full guide
 
@@ -89,6 +98,11 @@ be the same color.
 
 ```python
 pca.plot()
+
+## Some aestethic tweaking & saving the plot as a .png file
+plt.title("My Title")
+plt.grid(True)
+plt.savefig("My_PCA_plot.png", bbox_inches="tight")
 ```
     <matplotlib.axes._subplots.AxesSubplot at 0x7fe0beb3a650>
 
@@ -110,6 +124,11 @@ in the pops_dict as the second argument, and plot the new figure.
 ```python
 pca = ipa.pca(vcffile, pops_dict)
 pca.plot()
+
+## Some aestethic tweaking & saving the plot as a .png file
+plt.title("My Title")
+plt.grid(True)
+plt.savefig("My_PCA_plot_pops.png", bbox_inches="tight")
 ```
     <matplotlib.axes._subplots.AxesSubplot at 0x7fe092fbbe50>
 
@@ -124,7 +143,12 @@ From the figure we can see that we can see that "North" samples are distinguishe
 
 ```python
 pca.pcs
+
+## Saving the PCs table to a .csv file
+pca.pcs.to_csv("My_PCs.csv")
 ```
+> **Note** Again, you probably want to change the file name to something more informative, f.e. the name of the dataset.
+
 ![png](04_PCA_API_files/04_PCA_API_03_Anolis_PCA_PCS.png)
 
 You can see that indeed punc_ICST764 and punc_MUFAL9635 have positive values for PC1 and all the rest have negative values, so we can target them for removal in this way. We can construct a 'mask' based on the value of PC1, and then remove samples that don't pass this filter. 
@@ -165,6 +189,11 @@ print(pca.samples_vcforder)
 And now plot the new figure with the "bad" samples removed:
 ```python
 pca.plot()
+
+## Some aestethic tweaking & saving the plot as a .png file
+plt.title("My Title")
+plt.grid(True)
+plt.savefig("My_PCA_plot_masked.png", bbox_inches="tight")
 ```
     <matplotlib.axes._subplots.AxesSubplot at 0x7fe0f8c25410>
 
@@ -177,6 +206,8 @@ PCs 1 and 2 by definition explain the most variation in the data, but sometimes 
 ## Lets reload the full dataset so we have all the samples
 pca = ipa.pca(vcffile, pops_dict)
 pca.plot(pcs=[3,4])
+plt.title("My Title")
+plt.grid(True)
 ```
     <matplotlib.axes._subplots.AxesSubplot at 0x7fa3d05fd190>
 
@@ -198,6 +229,11 @@ ax2 = fig.add_subplot(1, 2, 2)
 ## Plot PCs 1 & 2 on the left half of the figure, and PCs 3 & 4 on the right
 pca.plot(ax=ax1, pcs=[1, 2])
 pca.plot(ax=ax2, pcs=[3, 4])
+
+## Some aestethic tweaking & saving the plot as a .png file
+plt.title("My Title")
+plt.grid(True)
+plt.savefig("My_PCA_plot.png", bbox_inches="tight")
 ```
     <matplotlib.axes._subplots.AxesSubplot at 0x7fa3d0a04290>
 
@@ -213,6 +249,9 @@ ax2 = fig.add_subplot(1, 2, 2)
 ## The only difference here is we switch off the legend on the first PCA
 pca.plot(ax=ax1, pcs=[1, 2], legend=False)
 pca.plot(ax=ax2, pcs=[3, 4])
+plt.title("My Title")
+plt.grid(True)
+plt.savefig("My_PCA_plot_axis1-4.png", bbox_inches="tight")
 ```
     <matplotlib.axes._subplots.AxesSubplot at 0x7fa3d0a8db10>
 
