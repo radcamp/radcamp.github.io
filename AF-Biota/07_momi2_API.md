@@ -1,6 +1,7 @@
 # Demographic inference using the Site Frequency Spectrum (SFS) with **momi2**
 
 **TODO:** Put a bunch of explanatory information here.
+**TODO:** Verify the paths are all good.
 ### What is demographic inference?
 ### What is the SFS?
 ### What are some other familiar programs that use the SFS?
