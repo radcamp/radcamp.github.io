@@ -1,70 +1,69 @@
 
-## Cookbook: *RAxML* analyses in a notebook
+## The ipyrad.analysis module: RAxML
 
-As part of the `ipyrad.analysis` toolkit we've created convenience functions for easily running common *RAxML* commands. This can be useful when you want to run all of your analyes in a clean stream-lined way in a jupyter-notebook to create a completely reproducible study. 
+As part of the `ipyrad.analysis` toolkit we've created convenience functions for easily running common [**RAxML**](https://sco.h-its.org/exelixis/web/software/raxml/index.html) commands. This can be useful when you want to run all of your analyes in a clean stream-lined way in a jupyter notebook to create a completely reproducible study. 
 
 ### Install software
-There are many ways to install raxml, the simplest of which is to use conda. This will install several raxml binaries into your conda path. If you want to call a different version of *raxml* that can easily be done by changing the parameter 'binary'. 
+There are many ways to install raxml, the simplest of which is to use conda. This will install several raxml binaries into your conda path. Open an ssh session on the cluster and run the following command:
 
-
-```python
-## conda install ipyrad -c ipyrad
-## conda install toytree -c eaton-lab
-## conda install raxml -c bioconda
 ```
+$ conda install raxml -c bioconda
+```
+# **RAxML** Phylogenetic Inference
 
-### Create a raxml Class object
-Create a raxml object which has a bunch of default parameters associated with it. The only required argument to initialize the object is a phylip formatted sequence file. In this example I provide a name and working directory as well. 
+Create a new notebook inside your `/home/<username>/ipyrad-workshop/` directory called `anolis-raxml.ipynb` (refer to the [jupyter notebook configuration page](Jupyter_Notebook_Setup.md) for a refresher on connecting to the notebook server). The rest of the materials in this part of the workshop assume you are running all code in cells of a jupyter notebook that is running on the USP cluster.
 
-
+## Create a raxml Class object
+First, copy and paste the usual imports into a new cell and run it:
 ```python
 import ipyrad.analysis as ipa
 import toyplot
 import toytree
 ```
 
+Now create a raxml object. The only required argument to initialize the object is a phylip formatted sequence file. In this example we provide a name and working directory as well:
 
 ```python
 rax = ipa.raxml(
-    data="./analysis-ipyrad/aligntest_outfiles/aligntest.phy",
+    data="./ipyrad-workshop/anolis_outfiles/anolis.phy",
     name="aligntest", 
-    workdir="analysis-raxml",
+    workdir="./ipyrad-workshop/analysis-raxml",
     );
 ```
 
 ### Additional options
-You can also modify many of the other command line arguments to raxml by changing values in the params dictionary of your raxml object. These values could also have been set when you initialized the object. 
-
+RAxML has a **ton** of parameters for modifying how it behaves, and we will only explore just a fraction of these. You can also specify many of these parameters by setting values in the params dictionary of your raxml object. In the following cell we modify the number of runs on distinct starting trees (`params.N`), the number of threads to use (`params.T`), and the outgroup samples (`params.o`). 
 
 ```python
-## set some other params
+## Number of runs
 rax.params.N = 10
+
+## Number of threads
 rax.params.T = 2
+
+## Set the outgroup. Because we don't have an outgroup for Anolis we use None.
 rax.params.o = None 
-#rax.params.o = ["32082_przewalskii", "33588_przewalskii"]
+
+## Alternatively, if we had an outgroup we could specify this with sample names
+## Here we could specify the Northern samples as the outgroup, this is just for illustration
+## rax.params.o = ['punc_ICST764', 'punc_MUFAL9635']
 ```
 
 ### Print the command string 
 It is good practice to always print the command string so that you know exactly what was called for you analysis and it is documented. 
 
-
 ```python
-print rax.command
+print(rax.command)
 ```
-
-    raxmlHPC-PTHREADS-SSE3 -f a -T 2 -m GTRGAMMA -N 10 -x 12345 -p 54321 -n aligntest -w /home/deren/Documents/ipyrad/tests/analysis-raxml -s /home/deren/Documents/ipyrad/tests/analysis-ipyrad/aligntest_outfiles/aligntest.phy
-
+    raxmlHPC-PTHREADS-SSE3 -f a -T 2 -m GTRGAMMA -N 10 -x 12345 -p 54321 -n aligntest -w /home/isaac/ipyrad-workshop/ipyrad-workshop/analysis-raxml -s /home/isaac/ipyrad-workshop/ipyrad-workshop/anolis_outfiles/anolis.phy
 
 ### Run the job
-This will start the job running. We haven't made a progress bar yet but we will add one soon. 
-
+This will start the job running.
 
 ```python
 rax.run(force=True)
 ```
-
     job aligntest finished successfully
-
 
 ### Access results
 One of the reasons it is so convenient to run your raxml jobs this way is that the results files are easily accessible from your raxml objects. 
