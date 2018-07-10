@@ -94,11 +94,11 @@ tre.draw(
 ![png](06_RAxML_API_files/06_RAxML_API_00_unrooted.png)
 
 ### Rooting the tree
-Now lets say we want to root the tree and replot. This is accomplished by adding the `root` parameter to the `tree.draw()` function. We'll just choose a random sample to root the tree here:
+In the above figure the two Norther samples are nested deep within the Southern clade, but this tree is unrooted. Lets say we want to root the tree on the Northern samples and replot. This is accomplished by adding the `root` parameter to the `tree.draw()` function and specifying the samples to root the tree to:
 ```
 tre = toytree.tree(rax.trees.bipartitions)
 tre.draw(
-    tre.root(["punc_ICST764"]),
+    tre.root(["punc_ICST764", "punc_MUFAL9635"]),
     width=600,
     node_labels=tre.get_node_values("support"),
 );
