@@ -6,19 +6,20 @@ As part of the `ipyrad.analysis` toolkit we've created convenience functions for
 ### Why STRUCTURE?
 Although there are many newer and faster implementations of STRUCTURE, such as `faststructure` or `admixture`, the original STRUCTURE works much better with missing data, which is of course a common feature of RAD-seq data sets. 
 
-## A note on Jupyter/IPython
-[Jupyter notebooks](http://jupyter.org/) are primarily a way to generate reproducible scientific analysis workflows in python. ipyrad analysis tools are best run inside Jupyter notebooks, as the analysis can be monitored and tweaked and provides a self-documenting workflow.
+# **STRUCTURE** Analyses
 
 First, begin by creating a new notebook inside your `/home/<username>/ipyrad-workshop/` directory called `anolis-structure.ipynb` (refer to the [jupyter notebook configuration page](Jupyter_Notebook_Setup.md) for a refresher on connecting to the notebook server). **The rest of the materials in this part of the workshop assume you are running all code in cells of a jupyter notebook** that is running on the USP cluster.
 
-# **STRUCTURE** Analyses
+* [Parallel cluster setup](#parallel-cluster-setup)
+
 
 ## Required software
-You can easily install the required software for this notebook using `conda`, as before. This can even be accomplished inside your jupyter notebook. Preceding a command with `!` will tell the notebook to run the line as a terminal command, instead of as python.
+You can easily install the required software for this notebook using `conda`. This can even be accomplished inside your jupyter notebook. Preceding a command with `!` will tell the notebook to run the line as a terminal command, instead of as python.
 
 ```python
 ## The `-y` here means "Answer yes to all questions". It prevents
 ## conda from asking whether the install looks ok.
+
 !conda install -y -c ipyrad structure clumpp
 ```
     Solving environment: done
@@ -39,151 +40,69 @@ import ipyparallel as ipp          ## parallel processing
 import toyplot                     ## plotting library
 ```
 
-### Parallel cluster setup
-Start an `ipcluster` instance in a separate terminal. An easy way to do this in a jupyter-notebook running on an HPC cluster is to go to your Jupyter dashboard, and click [new], and then [terminal], and run '`ipcluster start`' in that terminal. This will start a local cluster on the compute node you are connected to. See our [ipyparallel tutorial] (coming soon) for further details. 
+## Parallel cluster setup
+Normally, Jupyter notebook processes run on just one core. If we want to run multiple iterations of an algorithm then we would have to run them one at a time, and this is tedious and time consuming. Fortunately, Jupyter notebook servers have a built in parallelization engine (`ipcluster`), which is really easy to use.
 
+A very easy way to start the `ipcluster` parallelization backend is to go to your Jupyter dashboard, choose the `IPython Clusters` tab, choose the number of "engines" (the number of independent processes), and click `Start`. 
 
-```python
-##
-## ipcluster start --n=4
-##
-```
+![png](05_STRUCTURE_API_files/05_STRUCTURE_API_00_ipcluster.png)
 
+Now you have 4 mighty cores to process your jobs instead of just 1!
 
+![png](05_STRUCTURE_API_files/05_STRUCTURE_API_01_ipcluster.png)
+
+How do we interact with or `ipcluster`? Lets just get some information from it first:
 ```python
 ## get parallel client
 ipyclient = ipp.Client()
-print "Connected to {} cores".format(len(ipyclient))
+print("Connected to {} cores".format(len(ipyclient)))
 ```
-
     Connected to 4 cores
+> **Note:** The `format()` function takes arguments and "formats" them properly for insertion into a string. In this case it takes the Integer value of `len(ipyclient)` (the count of the number of engines) and substitutes this in place of `{}` in the output.
 
-
-## Quick guide (tldr;)
-The following cell shows the quickest way to results. Further explanation of all of the features and options is provided further below. 
-
+## Quick guide (tl;dr)
+The following cell shows the quickest way to results. Detailed explanations of all of the features and options are provided further below. 
 
 ```python
 ## set N values of K to test across
 kvalues = [2, 3, 4, 5, 6]
-```
 
-
-```python
 ## init an analysis object
-s = ipa.structure(
+str = ipa.structure(
     name="quick",
-    workdir="./analysis-structure",
-    data="./analysis-ipyrad/pedic-full_outfiles/pedic-full.ustr",
+    workdir="./anolis-structure",
+    data="./anolis_outfiles/anolis.ustr",
     )
 
 ## set main params (use much larger values in a real analysis)
-s.mainparams.burnin = 1000
-s.mainparams.numreps = 5000
+str.mainparams.burnin = 1000
+str.mainparams.numreps = 5000
 
 ## submit N replicates of each test to run on parallel client
 for kpop in kvalues:
-    s.run(kpop=kpop, nreps=4, ipyclient=ipyclient)
+    str.run(kpop=kpop, nreps=4, ipyclient=ipyclient)
 
 ## wait for parallel jobs to finish
 ipyclient.wait()
 ```
-
     submitted 4 structure jobs [quick-K-2]
     submitted 4 structure jobs [quick-K-3]
     submitted 4 structure jobs [quick-K-4]
     submitted 4 structure jobs [quick-K-5]
     submitted 4 structure jobs [quick-K-6]
 
-
-
-
-
     True
-
-
-
 
 ```python
 ## return the evanno table (deltaK) for best K 
-etable = s.get_evanno_table(kvalues)
+etable = str.get_evanno_table(kvalues)
 etable
 ```
-
-
-
-
-<div>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Nreps</th>
-      <th>deltaK</th>
-      <th>estLnProbMean</th>
-      <th>estLnProbStdev</th>
-      <th>lnPK</th>
-      <th>lnPPK</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>2</th>
-      <td>4</td>
-      <td>0.000</td>
-      <td>-337925.500</td>
-      <td>374729.242</td>
-      <td>0.000</td>
-      <td>0.00</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>4</td>
-      <td>67.961</td>
-      <td>-16777.575</td>
-      <td>4697.207</td>
-      <td>321147.925</td>
-      <td>319225.45</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>4</td>
-      <td>12.556</td>
-      <td>-14855.100</td>
-      <td>1505.766</td>
-      <td>1922.475</td>
-      <td>18906.25</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>4</td>
-      <td>9.997</td>
-      <td>-31838.875</td>
-      <td>35252.979</td>
-      <td>-16983.775</td>
-      <td>352432.15</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>4</td>
-      <td>0.000</td>
-      <td>-401254.800</td>
-      <td>307272.233</td>
-      <td>-369415.925</td>
-      <td>0.00</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
 
 ```python
 ## get admixture proportion tables avg'd across reps
 tables = s.get_clumpp_table(kvalues, quiet=True)
 ```
-
 
 ```python
 ## plot bars for a k-test in tables w/ hover labels
@@ -197,333 +116,6 @@ toyplot.bars(
     xshow=False,
 );
 ```
-
-
-<div class="toyplot" id="tbc4206b3e5564d2e8be0117e9fa28646" style="text-align:center"><svg class="toyplot-canvas-Canvas" height="200.0px" id="t2688b699cf864346bf750edb7ed263ef" preserveAspectRatio="xMidYMid meet" style="background-color:transparent;fill:rgb(16.1%,15.3%,14.1%);fill-opacity:1.0;font-family:Helvetica;font-size:12px;opacity:1.0;stroke:rgb(16.1%,15.3%,14.1%);stroke-opacity:1.0;stroke-width:1.0" viewBox="0 0 500.0 200.0" width="500.0px" xmlns="http://www.w3.org/2000/svg" xmlns:toyplot="http://www.sandia.gov/toyplot" xmlns:xlink="http://www.w3.org/1999/xlink"><g class="toyplot-coordinates-Cartesian" id="t73d2faa1f034478b8a421ff97b0ed5e4"><clipPath id="t42c9d04d8c544943a15f74c96d586066"><rect height="120.0" width="420.0" x="40.0" y="40.0"></rect></clipPath><g clip-path="url(#t42c9d04d8c544943a15f74c96d586066)"><g class="toyplot-mark-BarMagnitudes" id="t6d14ff0f81a8403b852f20565c258692" style="stroke:rgb(100%,100%,100%);stroke-opacity:1.0;stroke-width:1.0"><g class="toyplot-Series"><rect class="toyplot-Datum" height="0.0" style="fill:rgb(40%,76.1%,64.7%);fill-opacity:1.0;opacity:1.0;stroke:rgb(100%,100%,100%);stroke-opacity:1.0;stroke-width:1.0" width="30.769230769230774" x="50.0" y="150.0"><title>32082_przewalskii</title></rect><rect class="toyplot-Datum" height="0.0" style="fill:rgb(40%,76.1%,64.7%);fill-opacity:1.0;opacity:1.0;stroke:rgb(100%,100%,100%);stroke-opacity:1.0;stroke-width:1.0" width="30.769230769230774" x="80.769230769230774" y="150.0"><title>33588_przewalskii</title></rect><rect class="toyplot-Datum" height="37.146285371462852" style="fill:rgb(40%,76.1%,64.7%);fill-opacity:1.0;opacity:1.0;stroke:rgb(100%,100%,100%);stroke-opacity:1.0;stroke-width:1.0" width="30.769230769230774" x="111.53846153846155" y="112.85371462853715"><title>29154_superba</title></rect><rect class="toyplot-Datum" height="39.396060393960596" style="fill:rgb(40%,76.1%,64.7%);fill-opacity:1.0;opacity:1.0;stroke:rgb(100%,100%,100%);stroke-opacity:1.0;stroke-width:1.0" width="30.769230769230774" x="142.30769230769232" y="110.6039396060394"><title>30686_cyathophylla</title></rect><rect class="toyplot-Datum" height="49.995000499949995" style="fill:rgb(40%,76.1%,64.7%);fill-opacity:1.0;opacity:1.0;stroke:rgb(100%,100%,100%);stroke-opacity:1.0;stroke-width:1.0" width="30.769230769230774" x="173.07692307692309" y="100.00499950005"><title>41478_cyathophylloides</title></rect><rect class="toyplot-Datum" height="49.995000499949995" style="fill:rgb(40%,76.1%,64.7%);fill-opacity:1.0;opacity:1.0;stroke:rgb(100%,100%,100%);stroke-opacity:1.0;stroke-width:1.0" width="30.769230769230774" x="203.84615384615387" y="100.00499950005"><title>41954_cyathophylloides</title></rect><rect class="toyplot-Datum" height="92.190780921907816" style="fill:rgb(40%,76.1%,64.7%);fill-opacity:1.0;opacity:1.0;stroke:rgb(100%,100%,100%);stroke-opacity:1.0;stroke-width:1.0" width="30.769230769230717" x="234.61538461538464" y="57.809219078092191"><title>33413_thamno</title></rect><rect class="toyplot-Datum" height="93.720627937206274" style="fill:rgb(40%,76.1%,64.7%);fill-opacity:1.0;opacity:1.0;stroke:rgb(100%,100%,100%);stroke-opacity:1.0;stroke-width:1.0" width="30.76923076923083" x="265.38461538461536" y="56.279372062793719"><title>30556_thamno</title></rect><rect class="toyplot-Datum" height="94.740525947405274" style="fill:rgb(40%,76.1%,64.7%);fill-opacity:1.0;opacity:1.0;stroke:rgb(100%,100%,100%);stroke-opacity:1.0;stroke-width:1.0" width="30.769230769230717" x="296.15384615384619" y="55.259474052594733"><title>35236_rex</title></rect><rect class="toyplot-Datum" height="97.340265973402666" style="fill:rgb(40%,76.1%,64.7%);fill-opacity:1.0;opacity:1.0;stroke:rgb(100%,100%,100%);stroke-opacity:1.0;stroke-width:1.0" width="30.76923076923083" x="326.92307692307691" y="52.659734026597341"><title>35855_rex</title></rect><rect class="toyplot-Datum" height="97.690230976902313" style="fill:rgb(40%,76.1%,64.7%);fill-opacity:1.0;opacity:1.0;stroke:rgb(100%,100%,100%);stroke-opacity:1.0;stroke-width:1.0" width="30.769230769230717" x="357.69230769230774" y="52.309769023097694"><title>40578_rex</title></rect><rect class="toyplot-Datum" height="99.970002999700029" style="fill:rgb(40%,76.1%,64.7%);fill-opacity:1.0;opacity:1.0;stroke:rgb(100%,100%,100%);stroke-opacity:1.0;stroke-width:1.0" width="30.76923076923083" x="388.46153846153845" y="50.029997000299964"><title>39618_rex</title></rect><rect class="toyplot-Datum" height="99.990000999900019" style="fill:rgb(40%,76.1%,64.7%);fill-opacity:1.0;opacity:1.0;stroke:rgb(100%,100%,100%);stroke-opacity:1.0;stroke-width:1.0" width="30.769230769230717" x="419.23076923076928" y="50.009999000099988"><title>38362_rex</title></rect></g><g class="toyplot-Series"><rect class="toyplot-Datum" height="99.990000999900019" style="fill:rgb(98.8%,55.3%,38.4%);fill-opacity:1.0;opacity:1.0;stroke:rgb(100%,100%,100%);stroke-opacity:1.0;stroke-width:1.0" width="30.769230769230774" x="50.0" y="50.009999000099988"><title>32082_przewalskii</title></rect><rect class="toyplot-Datum" height="99.990000999900019" style="fill:rgb(98.8%,55.3%,38.4%);fill-opacity:1.0;opacity:1.0;stroke:rgb(100%,100%,100%);stroke-opacity:1.0;stroke-width:1.0" width="30.769230769230774" x="80.769230769230774" y="50.009999000099988"><title>33588_przewalskii</title></rect><rect class="toyplot-Datum" height="0.0" style="fill:rgb(98.8%,55.3%,38.4%);fill-opacity:1.0;opacity:1.0;stroke:rgb(100%,100%,100%);stroke-opacity:1.0;stroke-width:1.0" width="30.769230769230774" x="111.53846153846155" y="112.85371462853715"><title>29154_superba</title></rect><rect class="toyplot-Datum" height="0.0" style="fill:rgb(98.8%,55.3%,38.4%);fill-opacity:1.0;opacity:1.0;stroke:rgb(100%,100%,100%);stroke-opacity:1.0;stroke-width:1.0" width="30.769230769230774" x="142.30769230769232" y="110.6039396060394"><title>30686_cyathophylla</title></rect><rect class="toyplot-Datum" height="0.0" style="fill:rgb(98.8%,55.3%,38.4%);fill-opacity:1.0;opacity:1.0;stroke:rgb(100%,100%,100%);stroke-opacity:1.0;stroke-width:1.0" width="30.769230769230774" x="173.07692307692309" y="100.00499950005"><title>41478_cyathophylloides</title></rect><rect class="toyplot-Datum" height="0.0" style="fill:rgb(98.8%,55.3%,38.4%);fill-opacity:1.0;opacity:1.0;stroke:rgb(100%,100%,100%);stroke-opacity:1.0;stroke-width:1.0" width="30.769230769230774" x="203.84615384615387" y="100.00499950005"><title>41954_cyathophylloides</title></rect><rect class="toyplot-Datum" height="0.0" style="fill:rgb(98.8%,55.3%,38.4%);fill-opacity:1.0;opacity:1.0;stroke:rgb(100%,100%,100%);stroke-opacity:1.0;stroke-width:1.0" width="30.769230769230717" x="234.61538461538464" y="57.809219078092191"><title>33413_thamno</title></rect><rect class="toyplot-Datum" height="0.0" style="fill:rgb(98.8%,55.3%,38.4%);fill-opacity:1.0;opacity:1.0;stroke:rgb(100%,100%,100%);stroke-opacity:1.0;stroke-width:1.0" width="30.76923076923083" x="265.38461538461536" y="56.279372062793719"><title>30556_thamno</title></rect><rect class="toyplot-Datum" height="0.0" style="fill:rgb(98.8%,55.3%,38.4%);fill-opacity:1.0;opacity:1.0;stroke:rgb(100%,100%,100%);stroke-opacity:1.0;stroke-width:1.0" width="30.769230769230717" x="296.15384615384619" y="55.259474052594733"><title>35236_rex</title></rect><rect class="toyplot-Datum" height="0.0" style="fill:rgb(98.8%,55.3%,38.4%);fill-opacity:1.0;opacity:1.0;stroke:rgb(100%,100%,100%);stroke-opacity:1.0;stroke-width:1.0" width="30.76923076923083" x="326.92307692307691" y="52.659734026597341"><title>35855_rex</title></rect><rect class="toyplot-Datum" height="0.0" style="fill:rgb(98.8%,55.3%,38.4%);fill-opacity:1.0;opacity:1.0;stroke:rgb(100%,100%,100%);stroke-opacity:1.0;stroke-width:1.0" width="30.769230769230717" x="357.69230769230774" y="52.309769023097694"><title>40578_rex</title></rect><rect class="toyplot-Datum" height="0.0" style="fill:rgb(98.8%,55.3%,38.4%);fill-opacity:1.0;opacity:1.0;stroke:rgb(100%,100%,100%);stroke-opacity:1.0;stroke-width:1.0" width="30.76923076923083" x="388.46153846153845" y="50.029997000299964"><title>39618_rex</title></rect><rect class="toyplot-Datum" height="0.0" style="fill:rgb(98.8%,55.3%,38.4%);fill-opacity:1.0;opacity:1.0;stroke:rgb(100%,100%,100%);stroke-opacity:1.0;stroke-width:1.0" width="30.769230769230717" x="419.23076923076928" y="50.009999000099988"><title>38362_rex</title></rect></g><g class="toyplot-Series"><rect class="toyplot-Datum" height="0.0" style="fill:rgb(55.3%,62.7%,79.6%);fill-opacity:1.0;opacity:1.0;stroke:rgb(100%,100%,100%);stroke-opacity:1.0;stroke-width:1.0" width="30.769230769230774" x="50.0" y="50.009999000099988"><title>32082_przewalskii</title></rect><rect class="toyplot-Datum" height="0.0" style="fill:rgb(55.3%,62.7%,79.6%);fill-opacity:1.0;opacity:1.0;stroke:rgb(100%,100%,100%);stroke-opacity:1.0;stroke-width:1.0" width="30.769230769230774" x="80.769230769230774" y="50.009999000099988"><title>33588_przewalskii</title></rect><rect class="toyplot-Datum" height="62.84371562843716" style="fill:rgb(55.3%,62.7%,79.6%);fill-opacity:1.0;opacity:1.0;stroke:rgb(100%,100%,100%);stroke-opacity:1.0;stroke-width:1.0" width="30.769230769230774" x="111.53846153846155" y="50.009999000099988"><title>29154_superba</title></rect><rect class="toyplot-Datum" height="60.593940605939416" style="fill:rgb(55.3%,62.7%,79.6%);fill-opacity:1.0;opacity:1.0;stroke:rgb(100%,100%,100%);stroke-opacity:1.0;stroke-width:1.0" width="30.769230769230774" x="142.30769230769232" y="50.009999000099988"><title>30686_cyathophylla</title></rect><rect class="toyplot-Datum" height="49.995000499950017" style="fill:rgb(55.3%,62.7%,79.6%);fill-opacity:1.0;opacity:1.0;stroke:rgb(100%,100%,100%);stroke-opacity:1.0;stroke-width:1.0" width="30.769230769230774" x="173.07692307692309" y="50.009999000099988"><title>41478_cyathophylloides</title></rect><rect class="toyplot-Datum" height="49.995000499950017" style="fill:rgb(55.3%,62.7%,79.6%);fill-opacity:1.0;opacity:1.0;stroke:rgb(100%,100%,100%);stroke-opacity:1.0;stroke-width:1.0" width="30.769230769230774" x="203.84615384615387" y="50.009999000099988"><title>41954_cyathophylloides</title></rect><rect class="toyplot-Datum" height="7.799220077992203" style="fill:rgb(55.3%,62.7%,79.6%);fill-opacity:1.0;opacity:1.0;stroke:rgb(100%,100%,100%);stroke-opacity:1.0;stroke-width:1.0" width="30.769230769230717" x="234.61538461538464" y="50.009999000099988"><title>33413_thamno</title></rect><rect class="toyplot-Datum" height="6.2793720627937191" style="fill:rgb(55.3%,62.7%,79.6%);fill-opacity:1.0;opacity:1.0;stroke:rgb(100%,100%,100%);stroke-opacity:1.0;stroke-width:1.0" width="30.76923076923083" x="265.38461538461536" y="50.0"><title>30556_thamno</title></rect><rect class="toyplot-Datum" height="5.2494750524947449" style="fill:rgb(55.3%,62.7%,79.6%);fill-opacity:1.0;opacity:1.0;stroke:rgb(100%,100%,100%);stroke-opacity:1.0;stroke-width:1.0" width="30.769230769230717" x="296.15384615384619" y="50.009999000099988"><title>35236_rex</title></rect><rect class="toyplot-Datum" height="2.6497350264973534" style="fill:rgb(55.3%,62.7%,79.6%);fill-opacity:1.0;opacity:1.0;stroke:rgb(100%,100%,100%);stroke-opacity:1.0;stroke-width:1.0" width="30.76923076923083" x="326.92307692307691" y="50.009999000099988"><title>35855_rex</title></rect><rect class="toyplot-Datum" height="2.2997700229977056" style="fill:rgb(55.3%,62.7%,79.6%);fill-opacity:1.0;opacity:1.0;stroke:rgb(100%,100%,100%);stroke-opacity:1.0;stroke-width:1.0" width="30.769230769230717" x="357.69230769230774" y="50.009999000099988"><title>40578_rex</title></rect><rect class="toyplot-Datum" height="0.029997000299964327" style="fill:rgb(55.3%,62.7%,79.6%);fill-opacity:1.0;opacity:1.0;stroke:rgb(100%,100%,100%);stroke-opacity:1.0;stroke-width:1.0" width="30.76923076923083" x="388.46153846153845" y="50.0"><title>39618_rex</title></rect><rect class="toyplot-Datum" height="0.0" style="fill:rgb(55.3%,62.7%,79.6%);fill-opacity:1.0;opacity:1.0;stroke:rgb(100%,100%,100%);stroke-opacity:1.0;stroke-width:1.0" width="30.769230769230717" x="419.23076923076928" y="50.009999000099988"><title>38362_rex</title></rect></g></g></g><g class="toyplot-coordinates-Axis" id="ta9f512a8be89458ea939107e20ec7bd3" transform="translate(50.0,150.0)rotate(-90.0)translate(0,-10.0)"><line style="" x1="0" x2="100.0" y1="0" y2="0"></line><g><g transform="translate(0.0,-6)"><text style="fill:rgb(16.1%,15.3%,14.1%);fill-opacity:1.0;font-family:helvetica;font-size:10.0px;font-weight:normal;stroke:none;vertical-align:baseline;white-space:pre" x="-6.95" y="-4.4408920985e-16">0.0</text></g><g transform="translate(49.99500049995,-6)"><text style="fill:rgb(16.1%,15.3%,14.1%);fill-opacity:1.0;font-family:helvetica;font-size:10.0px;font-weight:normal;stroke:none;vertical-align:baseline;white-space:pre" x="-6.95" y="-4.4408920985e-16">0.5</text></g><g transform="translate(99.9900009999,-6)"><text style="fill:rgb(16.1%,15.3%,14.1%);fill-opacity:1.0;font-family:helvetica;font-size:10.0px;font-weight:normal;stroke:none;vertical-align:baseline;white-space:pre" x="-6.95" y="-4.4408920985e-16">1.0</text></g></g><g class="toyplot-coordinates-Axis-coordinates" style="visibility:hidden" transform=""><line style="stroke:rgb(43.9%,50.2%,56.5%);stroke-opacity:1.0;stroke-width:1.0" x1="0" x2="0" y1="3.0" y2="-4.5"></line><text style="alignment-baseline:hanging;fill:rgb(43.9%,50.2%,56.5%);fill-opacity:1.0;font-size:10px;font-weight:normal;stroke:none;text-anchor:middle" x="0" y="6"></text></g></g></g></svg><div class="toyplot-behavior"><script>(function()
-{
-var modules={};
-modules["toyplot/tables"] = (function()
-    {
-        var tables = [];
-
-        var module = {};
-
-        module.set = function(owner, key, names, columns)
-        {
-            tables.push({owner: owner, key: key, names: names, columns: columns});
-        }
-
-        module.get = function(owner, key)
-        {
-            for(var i = 0; i != tables.length; ++i)
-            {
-                var table = tables[i];
-                if(table.owner != owner)
-                    continue;
-                if(table.key != key)
-                    continue;
-                return {names: table.names, columns: table.columns};
-            }
-        }
-
-        module.get_csv = function(owner, key)
-        {
-            var table = module.get(owner, key);
-            if(table != undefined)
-            {
-                var csv = "";
-                csv += table.names.join(",") + "\n";
-                for(var i = 0; i != table.columns[0].length; ++i)
-                {
-                  for(var j = 0; j != table.columns.length; ++j)
-                  {
-                    if(j)
-                      csv += ",";
-                    csv += table.columns[j][i];
-                  }
-                  csv += "\n";
-                }
-                return csv;
-            }
-        }
-
-        return module;
-    })();
-modules["toyplot/root/id"] = "tbc4206b3e5564d2e8be0117e9fa28646";
-modules["toyplot/root"] = (function(root_id)
-    {
-        return document.querySelector("#" + root_id);
-    })(modules["toyplot/root/id"]);
-modules["toyplot/canvas/id"] = "t2688b699cf864346bf750edb7ed263ef";
-modules["toyplot/canvas"] = (function(canvas_id)
-    {
-        return document.querySelector("#" + canvas_id);
-    })(modules["toyplot/canvas/id"]);
-modules["toyplot/menus/context"] = (function(root, canvas)
-    {
-        var wrapper = document.createElement("div");
-        wrapper.innerHTML = "<ul class='toyplot-context-menu' style='background:#eee; border:1px solid #b8b8b8; border-radius:5px; box-shadow: 0px 0px 8px rgba(0%,0%,0%,0.25); margin:0; padding:3px 0; position:fixed; visibility:hidden;'></ul>"
-        var menu = wrapper.firstChild;
-
-        root.appendChild(menu);
-
-        var items = [];
-
-        var ignore_mouseup = null;
-        function open_menu(e)
-        {
-            var show_menu = false;
-            for(var index=0; index != items.length; ++index)
-            {
-                var item = items[index];
-                if(item.show(e))
-                {
-                    item.item.style.display = "block";
-                    show_menu = true;
-                }
-                else
-                {
-                    item.item.style.display = "none";
-                }
-            }
-
-            if(show_menu)
-            {
-                ignore_mouseup = true;
-                menu.style.left = (e.clientX + 1) + "px";
-                menu.style.top = (e.clientY - 5) + "px";
-                menu.style.visibility = "visible";
-                e.stopPropagation();
-                e.preventDefault();
-            }
-        }
-
-        function close_menu()
-        {
-            menu.style.visibility = "hidden";
-        }
-
-        function contextmenu(e)
-        {
-            open_menu(e);
-        }
-
-        function mousemove(e)
-        {
-            ignore_mouseup = false;
-        }
-
-        function mouseup(e)
-        {
-            if(ignore_mouseup)
-            {
-                ignore_mouseup = false;
-                return;
-            }
-            close_menu();
-        }
-
-        function keydown(e)
-        {
-            if(e.key == "Escape" || e.key == "Esc" || e.keyCode == 27)
-            {
-                close_menu();
-            }
-        }
-
-        canvas.addEventListener("contextmenu", contextmenu);
-        canvas.addEventListener("mousemove", mousemove);
-        document.addEventListener("mouseup", mouseup);
-        document.addEventListener("keydown", keydown);
-
-        var module = {};
-        module.add_item = function(label, show, activate)
-        {
-            var wrapper = document.createElement("div");
-            wrapper.innerHTML = "<li class='toyplot-context-menu-item' style='background:#eee; color:#333; padding:2px 20px; list-style:none; margin:0; text-align:left;'>" + label + "</li>"
-            var item = wrapper.firstChild;
-
-            items.push({item: item, show: show});
-
-            function mouseover()
-            {
-                this.style.background = "steelblue";
-                this.style.color = "white";
-            }
-
-            function mouseout()
-            {
-                this.style.background = "#eee";
-                this.style.color = "#333";
-            }
-
-            function choose_item(e)
-            {
-                close_menu();
-                activate();
-
-                e.stopPropagation();
-                e.preventDefault();
-            }
-
-            item.addEventListener("mouseover", mouseover);
-            item.addEventListener("mouseout", mouseout);
-            item.addEventListener("mouseup", choose_item);
-            item.addEventListener("contextmenu", choose_item);
-
-            menu.appendChild(item);
-        };
-        return module;
-    })(modules["toyplot/root"],modules["toyplot/canvas"]);
-modules["toyplot/io"] = (function()
-    {
-        var module = {};
-        module.save_file = function(mime_type, charset, data, filename)
-        {
-            var uri = "data:" + mime_type + ";charset=" + charset + "," + data;
-            uri = encodeURI(uri);
-
-            var link = document.createElement("a");
-            if(typeof link.download != "undefined")
-            {
-              link.href = uri;
-              link.style = "visibility:hidden";
-              link.download = filename;
-
-              document.body.appendChild(link);
-              link.click();
-              document.body.removeChild(link);
-            }
-            else
-            {
-              window.open(uri);
-            }
-        };
-        return module;
-    })();
-modules["toyplot.coordinates.Axis"] = (
-        function(canvas)
-        {
-            function sign(x)
-            {
-                return x < 0 ? -1 : x > 0 ? 1 : 0;
-            }
-
-            function mix(a, b, amount)
-            {
-                return ((1.0 - amount) * a) + (amount * b);
-            }
-
-            function log(x, base)
-            {
-                return Math.log(Math.abs(x)) / Math.log(base);
-            }
-
-            function in_range(a, x, b)
-            {
-                var left = Math.min(a, b);
-                var right = Math.max(a, b);
-                return left <= x && x <= right;
-            }
-
-            function inside(range, projection)
-            {
-                for(var i = 0; i != projection.length; ++i)
-                {
-                    var segment = projection[i];
-                    if(in_range(segment.range.min, range, segment.range.max))
-                        return true;
-                }
-                return false;
-            }
-
-            function to_domain(range, projection)
-            {
-                for(var i = 0; i != projection.length; ++i)
-                {
-                    var segment = projection[i];
-                    if(in_range(segment.range.bounds.min, range, segment.range.bounds.max))
-                    {
-                        if(segment.scale == "linear")
-                        {
-                            var amount = (range - segment.range.min) / (segment.range.max - segment.range.min);
-                            return mix(segment.domain.min, segment.domain.max, amount)
-                        }
-                        else if(segment.scale[0] == "log")
-                        {
-                            var amount = (range - segment.range.min) / (segment.range.max - segment.range.min);
-                            var base = segment.scale[1];
-                            return sign(segment.domain.min) * Math.pow(base, mix(log(segment.domain.min, base), log(segment.domain.max, base), amount));
-                        }
-                    }
-                }
-            }
-
-            var axes = {};
-
-            function display_coordinates(e)
-            {
-                var current = canvas.createSVGPoint();
-                current.x = e.clientX;
-                current.y = e.clientY;
-
-                for(var axis_id in axes)
-                {
-                    var axis = document.querySelector("#" + axis_id);
-                    var coordinates = axis.querySelector(".toyplot-coordinates-Axis-coordinates");
-                    if(coordinates)
-                    {
-                        var projection = axes[axis_id];
-                        var local = current.matrixTransform(axis.getScreenCTM().inverse());
-                        if(inside(local.x, projection))
-                        {
-                            var domain = to_domain(local.x, projection);
-                            coordinates.style.visibility = "visible";
-                            coordinates.setAttribute("transform", "translate(" + local.x + ")");
-                            var text = coordinates.querySelector("text");
-                            text.textContent = domain.toFixed(2);
-                        }
-                        else
-                        {
-                            coordinates.style.visibility= "hidden";
-                        }
-                    }
-                }
-            }
-
-            canvas.addEventListener("click", display_coordinates);
-
-            var module = {};
-            module.show_coordinates = function(axis_id, projection)
-            {
-                axes[axis_id] = projection;
-            }
-
-            return module;
-        })(modules["toyplot/canvas"]);
-(function(tables, context_menu, io, owner_id, key, label, names, columns, filename)
-        {
-            tables.set(owner_id, key, names, columns);
-
-            var owner = document.querySelector("#" + owner_id);
-            function show_item(e)
-            {
-                return owner.contains(e.target);
-            }
-
-            function choose_item()
-            {
-                io.save_file("text/csv", "utf-8", tables.get_csv(owner_id, key), filename + ".csv");
-            }
-
-            context_menu.add_item("Save " + label + " as CSV", show_item, choose_item);
-        })(modules["toyplot/tables"],modules["toyplot/menus/context"],modules["toyplot/io"],"t6d14ff0f81a8403b852f20565c258692","data","bar data",["left", "right", "baseline", "magnitude0", "magnitude1", "magnitude2"],[[-0.5, 0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5, 7.5, 8.5, 9.5, 10.5, 11.5], [0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5, 7.5, 8.5, 9.5, 10.5, 11.5, 12.5], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.3715, 0.394, 0.5, 0.5, 0.922, 0.9373, 0.9475, 0.9735, 0.977, 0.9998, 1.0], [1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.6285, 0.606, 0.5, 0.5, 0.078, 0.0628, 0.0525, 0.0265, 0.023, 0.0003, 0.0]],"toyplot");
-(function(axis, axis_id, projection)
-        {
-            axis.show_coordinates(axis_id, projection);
-        })(modules["toyplot.coordinates.Axis"],"ta9f512a8be89458ea939107e20ec7bd3",[{"domain": {"bounds": {"max": Infinity, "min": -Infinity}, "max": 1.0001, "min": 0.0}, "range": {"bounds": {"max": Infinity, "min": -Infinity}, "max": 100.0, "min": 0.0}, "scale": "linear"}]);
-})();</script></div></div>
-
 
 ## Full guide
 
