@@ -58,7 +58,7 @@ pca = ipa.pca(data)
 ## Bam!
 pca.plot()
 
-## Some aestethic tweaking & saving the plot as a .png file
+## Some aesthetic tweaking & saving the plot as a .png file
 plt.title("My Title")
 plt.grid(True)
 plt.savefig("My_PCA_plot.png", bbox_inches="tight")
@@ -99,7 +99,7 @@ be the same color.
 ```python
 pca.plot()
 
-## Some aestethic tweaking & saving the plot as a .png file
+## Some aesthetic tweaking & saving the plot as a .png file
 plt.title("My Title")
 plt.grid(True)
 plt.savefig("My_PCA_plot.png", bbox_inches="tight")
@@ -125,7 +125,7 @@ in the pops_dict as the second argument, and plot the new figure.
 pca = ipa.pca(vcffile, pops_dict)
 pca.plot()
 
-## Some aestethic tweaking & saving the plot as a .png file
+## Some aesthetic tweaking & saving the plot as a .png file
 plt.title("My Title")
 plt.grid(True)
 plt.savefig("My_PCA_plot_pops.png", bbox_inches="tight")
@@ -190,7 +190,7 @@ And now plot the new figure with the "bad" samples removed:
 ```python
 pca.plot()
 
-## Some aestethic tweaking & saving the plot as a .png file
+## Some aesthetic tweaking & saving the plot as a .png file
 plt.title("My Title")
 plt.grid(True)
 plt.savefig("My_PCA_plot_masked.png", bbox_inches="tight")
