@@ -34,6 +34,8 @@ Windows computers need to use a 3rd party app for connecting to remote computers
 
 After installing puTTY, open it and you will see a window where you can fill out the name or IP address of the computer or cluster you want to connect to (the 'host'). To connect to the cluster, enter: lem.ib.usp.br. Make sure that the port is set to 22. Click 'Open'. 
 
+![png](01_cluster_basics_files/01_puTTY.png)
+
 ### SSH for mac/linux
 Linux operating systems come preinstalled with an ssh command line client, which we will assume linux users are aware of how to use. Mac computers are built top of a linux-like operating system so they too ship with an SSH client, which can be accessed through the Terminal app. In a Finder window open Applications->Utilities->Terminal, then you can start an ssh session like this:
 
