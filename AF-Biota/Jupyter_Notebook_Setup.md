@@ -30,7 +30,7 @@ will find it very clever and useful.
 > **Note on terms:** A "port" is just a number, like the address of
 a house, or a telephone number. Every computer has 32,000 ports, most
 of which are unused. You might not know this, but when you use a web
-browser to look at a web page your computer is talking to the remote
+browser to look at a web page, your computer is talking to the remote
 server on **port 80**. This is standardized. When you `ssh` to the USP
 cluster you are making a connection on **port 22**, and this is standard
 too. 
