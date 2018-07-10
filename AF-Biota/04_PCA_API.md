@@ -51,17 +51,10 @@ The following cell shows the quickest way to results using a small simulated dat
 ```python
 ## Load your assembly
 data = ipyrad.load_json("/scratch/af-biota/simulated-example/simrad.json")
-
 ## Create the pca object
 pca = ipa.pca(data)
-
 ## Bam!
 pca.plot()
-
-## Some aesthetic tweaking & saving the plot as a .png file
-plt.title("My Title")
-plt.grid(True)
-plt.savefig("My_PCA_plot.png", bbox_inches="tight")
 ```
     loading Assembly: simrad
     from saved path: /scratch/af-biota/simulated-example/simrad.json
