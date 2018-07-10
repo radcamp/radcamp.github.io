@@ -26,8 +26,8 @@ Now create a raxml object. The only required argument to initialize the object i
 ```python
 rax = ipa.raxml(
     data="./anolis_outfiles/anolis.phy",
-    name="aligntest", 
-    workdir="./analysis-raxml",
+    name="anolis-tree", 
+    workdir="./anolis-raxml",
     );
 ```
 
@@ -55,7 +55,7 @@ It is good practice to always print the command string so that you know exactly 
 ```python
 print(rax.command)
 ```
-    raxmlHPC-PTHREADS-SSE3 -f a -T 2 -m GTRGAMMA -N 10 -x 12345 -p 54321 -n aligntest -w /home/isaac/ipyrad-workshop/ipyrad-workshop/analysis-raxml -s /home/isaac/ipyrad-workshop/ipyrad-workshop/anolis_outfiles/anolis.phy
+    raxmlHPC-PTHREADS-SSE3 -f a -T 2 -m GTRGAMMA -N 10 -x 12345 -p 54321 -n anolis-tree -w /home/<username>/ipyrad-workshop/anolis-raxml -s /home/<username>/ipyrad-workshop/anolis_outfiles/anolis.phy
 
 ### Run the job
 This will start the job running. The subsampled dataset we are using should run very quickly (~1-2 minutes).
@@ -71,13 +71,16 @@ One of the reasons it is so convenient to run your raxml jobs this way is that t
 ```python
 rax.trees
 ```
-    bestTree                   ~/ipyrad-workshop/analysis-raxml/RAxML_bestTree.aligntest
-    bipartitions               ~/ipyrad-workshop/analysis-raxml/RAxML_bipartitions.aligntest
-    bipartitionsBranchLabels   ~/ipyrad-workshop/analysis-raxml/RAxML_bipartitionsBranchLabels.aligntest
-    bootstrap                  ~/ipyrad-workshop/analysis-raxml/RAxML_bootstrap.aligntest
-    info                       ~/ipyrad-workshop/analysis-raxml/RAxML_info.aligntest
-
-**TODO:** Could use more info on what all these different results files mean.
+    bestTree                   ~/ipyrad-workshop/anolis-raxml/RAxML_bestTree.anolis-tree
+    bipartitions               ~/ipyrad-workshop/anolis-raxml/RAxML_bipartitions.anolis-tree
+    bipartitionsBranchLabels   ~/ipyrad-workshop/anolis-raxml/RAxML_bipartitionsBranchLabels.anolis-tree
+    bootstrap                  ~/ipyrad-workshop/anolis-raxml/RAxML_bootstrap.anolis-tree
+    info                       ~/ipyrad-workshop/anolis-raxml/RAxML_info.anolis-tree
+* bestTree - Exactly what it says, the single best ML tree.
+* bipartions - The ML tree with bootstrap support on nodes.
+* bipartionsBranchLabels - The ML tree with support values on branches rather than nodes.
+* bootstrap - All bootstraped trees.
+* info - RAxML command line parameters and run info
 
 ### Plot the results
 Here we use toytree to plot the bootstrap results. 
