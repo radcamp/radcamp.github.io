@@ -214,10 +214,10 @@ Two windows file browsers will appear: your laptop on the left, and the cluster 
 
 **Mac/Linux:**
 After downloading, installing and opening Cyberduck, you will see the following screen:
-![png](01_cluster_basics_files/01_Cyberduck1.png)
+![png](01_cluster_basics_files/01_Fugu1.png)
 
 Click on "Open Connection" (top left), and a new screen will open. First, make sure you select "SFTP (SSH File Transfer Protocol)" in the dropdown menu at the top of the box. **The connection will fail if "SFTP" is not selected here.** If "SFTP" is properly selected the "Port:" will automatically be set to 22. Next, fill out the host name (`lem.ib.usp.br`), your username and password, and click "Connect".
-![png](01_cluster_basics_files/01_Cyberduck2.png)
+![png](01_cluster_basics_files/01_Fugu2.png)
 Now, you should see a screen with your home directory on the cluster. You can navigate through your files here, and download them to your laptop.
 ![png](01_cluster_basics_files/01_Cyberduck3.png)
 
