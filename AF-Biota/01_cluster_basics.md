@@ -215,13 +215,10 @@ Two windows will appear: your laptop on the left, and the cluster on the right. 
 **Mac/Linux**
 After downloading, installing and opening Cyberduck, you will see the following screen:
 ![png](01_cluster_basics_files/01_Cyberduck1.png)
-
 Click on "Open Connection" (top left), and a new screen will open. Follow out your details (host name, username, password) and make sure that it says "SFTP (SSH File Transfer Protocol)" in the dropdown menue (top). The post should automatically be set to 22. 
 ![png](01_cluster_basics_files/01_Cyberduck2.png)
-
 Now, you should see a screen with your home directory on the cluster. You can navigate through your files here, and download them to your laptop.
 ![png](01_cluster_basics_files/01_Cyberduck3.png)
-
 ### Instpecting and Interpreting FastQC Output
 
 Just taking a random one, lets spend a moment looking at the results from `punc_JFT773_R1__fastqc.html`. Opening up this html file, on the left you'll see a summary of all the results, which highlights areas FastQC indicates may be worth further examination. We will only look at a few of these.
