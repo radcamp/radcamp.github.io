@@ -91,11 +91,6 @@ be the same color.
 
 ```python
 pca.plot()
-
-## Some aesthetic tweaking & saving the plot as a .png file
-plt.title("My Title")
-plt.grid(True)
-plt.savefig("My_PCA_plot.png", bbox_inches="tight")
 ```
     <matplotlib.axes._subplots.AxesSubplot at 0x7fe0beb3a650>
 
@@ -113,15 +108,11 @@ pops_dict = {
 }
 ```
 Now create the `pca` object with the vcf file again, this time passing 
-in the pops_dict as the second argument, and plot the new figure.
+in the pops_dict as the second argument, and plot the new figure. We can 
+also easily add a title to our pca plots with the `title=` argument.
 ```python
 pca = ipa.pca(vcffile, pops_dict)
-pca.plot()
-
-## Some aesthetic tweaking & saving the plot as a .png file
-plt.title("My Title")
-plt.grid(True)
-plt.savefig("My_PCA_plot_pops.png", bbox_inches="tight")
+pca.plot(title="Anolis Colored By Population")
 ```
     <matplotlib.axes._subplots.AxesSubplot at 0x7fe092fbbe50>
 
@@ -132,19 +123,22 @@ This is just much nicer looking now, and it's also much more straightforward to 
 ## Removing "bad" samples and replotting.
 In PC analysis, it's common for "bad" samples to dominate several of the first PCs, and thus "pop out" in a degenerate looking way. Bad samples of this kind can often be attributed to poor sequence quality or sample misidentifcation. Samples with lots of missing data tend to pop way out on their own, causing distortion in the signal in the PCs. Normally it's best to evaluate the quality of the sample, and if it can be seen to be of poor quality, to remove it and replot the PCA. The Anolis dataset is actually relatively nice, but for the sake of demonstration lets imagine the "North" samples are "bad samples".
 
-From the figure we can see that we can see that "North" samples are distinguished by positive values on PC1. We can get a more quantitative view on this by accessing `pca.pcs`, which is a property of the `pca` object that is populated after the plot() function is called. It contains the first 10 PCs for each sample. Let's have a look at these values by printing `pca.pcs`:
+From the figure we can see that we can see that "North" samples are distinguished by positive values on PC1. 
+
+We can get a more quantitative view on this by accessing `pca.pcs`, which is a property of the `pca` object that is populated after the plot() function is called. It contains the first 10 PCs for each sample. Let's have a look at these values by printing `pca.pcs`:
 
 ```python
-pca.pcs
-
 ## Saving the PCs table to a .csv file
-pca.pcs.to_csv("My_PCs.csv")
+pca.pcs.to_csv("Anolis_10PCs.csv")
+
+## Printing PCs to the screen
+pca.pcs
 ```
-> **Note** Again, you probably want to change the file name to something more informative, f.e. the name of the dataset.
+> **Note** It's always good practice to use informative file names, f.e. here we use the name of the dataset and the number of PCs retained.
 
 ![png](04_PCA_API_files/04_PCA_API_03_Anolis_PCA_PCS.png)
 
-You can see that indeed punc_ICST764 and punc_MUFAL9635 have positive values for PC1 and all the rest have negative values, so we can target them for removal in this way. We can construct a 'mask' based on the value of PC1, and then remove samples that don't pass this filter. 
+You can see that indeed punc_ICST764 and punc_MUFAL9635 have positive values for PC1 and all the rest have negative values, so we can target them for removal in this way. We can construct a 'mask' based on the value of PC1, and then remove samples that don't pass this filter.
 
 ```python
 mask = pca.pcs.values[:, 0] > 0
@@ -181,12 +175,7 @@ print(pca.samples_vcforder)
 
 And now plot the new figure with the "bad" samples removed:
 ```python
-pca.plot()
-
-## Some aesthetic tweaking & saving the plot as a .png file
-plt.title("My Title")
-plt.grid(True)
-plt.savefig("My_PCA_plot_masked.png", bbox_inches="tight")
+pca.plot(title="Anolis w/o Northern Samples", outfile="Anolis_no_north.png")
 ```
     <matplotlib.axes._subplots.AxesSubplot at 0x7fe0f8c25410>
 
@@ -199,8 +188,6 @@ PCs 1 and 2 by definition explain the most variation in the data, but sometimes 
 ## Lets reload the full dataset so we have all the samples
 pca = ipa.pca(vcffile, pops_dict)
 pca.plot(pcs=[3,4])
-plt.title("My Title")
-plt.grid(True)
 ```
     <matplotlib.axes._subplots.AxesSubplot at 0x7fa3d05fd190>
 
@@ -217,22 +204,22 @@ fig = plt.figure(figsize=(12, 5))
 ## These two calls divide the figure evenly into left and right
 ## halfs, and assigns the left half to `ax1` and the right half to `ax2`
 ax1 = fig.add_subplot(1, 2, 1)
-plt.title("My Title1")
-plt.grid(True)
 ax2 = fig.add_subplot(1, 2, 2)
-plt.title("My Title2")
-plt.grid(True)
 
 ## Plot PCs 1 & 2 on the left half of the figure, and PCs 3 & 4 on the right
-pca.plot(ax=ax1, pcs=[1, 2])
-pca.plot(ax=ax2, pcs=[3, 4])
+pca.plot(ax=ax1, pcs=[1, 2], title="PCs 1 & 2")
+pca.plot(ax=ax2, pcs=[3, 4], title="PCs 3 & 4")
 
 ## Saving the plot as a .png file
-plt.savefig("My_PCA_plot.png", bbox_inches="tight")
+plt.savefig("Anolis_2panel_PCs1-4.png", bbox_inches="tight")
 ```
     <matplotlib.axes._subplots.AxesSubplot at 0x7fa3d0a04290>
 
-> **Note** Don't forget to change the titles and filename for the figure.
+> **Note** Saving the two panel figure is a little different, because we're making
+a composite of two different PCA plots. We need to use the native matplotlib
+`savefig()` function, to save the entire figure, not just one panel. `bbox_inches`
+is an argument that makes the output figure look nicer, it crops the bounding box
+more accurately.
 
 ![png](04_PCA_API_files/04_PCA_API_06_Anolis_PCA_Multi.png)
 
@@ -241,15 +228,11 @@ It's nice to see PCs 1-4 here, but it's kind of stupid to plot the legend twice,
 ```python
 fig = plt.figure(figsize=(12, 5))
 ax1 = fig.add_subplot(1, 2, 1)
-plt.title("My Title1")
-plt.grid(True)
 ax2 = fig.add_subplot(1, 2, 2)
-plt.title("My Title2")
-plt.grid(True)
 
 ## The difference here is we switch off the legend on the first PCA
-pca.plot(ax=ax1, pcs=[1, 2], legend=False)
-pca.plot(ax=ax2, pcs=[3, 4])
+pca.plot(ax=ax1, pcs=[1, 2], title="PCs 1 & 2", legend=False)
+pca.plot(ax=ax2, pcs=[3, 4], title="PCs 3 & 4")
 
 ## And save the plot as .png
 plt.savefig("My_PCA_plot_axis1-4.png", bbox_inches="tight")
