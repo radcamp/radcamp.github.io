@@ -174,7 +174,7 @@ need to kill, the easiest way is to use the `pkill` command. If you
 do have a running notebook server then the results of the `pkill`
 command will look something like this:
 ```
-$ pkill -f jupyter
+$ pkill -f jupyter -U <username>
 <username>@darwin:~$ [C 21:01:58.180 NotebookApp] received signal 15, stopping
 [I 21:01:58.181 NotebookApp] Shutting down 0 kernels
 ```
