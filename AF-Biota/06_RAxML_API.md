@@ -107,3 +107,28 @@ tre.draw(
 
 > **Note:** The `root()` function accepts a list of samples, so if you have multiple samples from the root taxon, you can include them like this: `tre.root(["punc_ICST764", "punc_MUFAL9635", "punc_MTR05978"])
 
+### Experimenting with the simulated data
+
+```
+rax = ipa.raxml(
+    data="/scratch/af-biota/simulated-example/simrad_outfiles/simrad.phy",
+    name="aligntest", 
+    workdir="./analysis-raxml",
+    );
+
+rax.params.N = 10
+rax.params.T = 2
+rax.params.o = None 
+
+rax.run(force=True)
+```
+
+```
+tre = toytree.tree(rax.trees.bipartitions)
+tre.draw(
+    tre.root(wildcard="3"),
+    width=600,
+    node_labels=tre.get_node_values("support"),
+);
+```
+![png](06_RAxML_API_files/06_RAxML_API_02_sim_rooted.png)
