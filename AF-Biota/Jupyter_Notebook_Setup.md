@@ -152,7 +152,7 @@ $ jupyter notebook &
 <username>@darwin:~$ [I 21:06:08.325 NotebookApp] The port <my_port_#> is already in use, trying another port.
 [C 21:06:08.326 NotebookApp] ERROR: the notebook server could not be started because no available port could be found.
 ```
-**Note:** This is because of the configuration settings we have imposed
+> **Note:** This is because of the configuration settings we have imposed
 in the config file, not because of an inherent limitation of jupyter. It's
 common and easy to run several notebook servers on one computer.
 
