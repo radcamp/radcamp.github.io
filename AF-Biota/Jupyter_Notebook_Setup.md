@@ -71,7 +71,7 @@ need to set a password before we can launch it. This command will
 prompt you for a new password for your notebook (you will **only ever 
 have to do this once on the HPC**):
 ```
-$ jupyter notebook passwd
+$ jupyter notebook password
 ```
 
 ### Set default configuration behavior
