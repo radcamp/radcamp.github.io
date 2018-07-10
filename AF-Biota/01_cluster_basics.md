@@ -207,18 +207,20 @@ Now we have output files that include html and images depicting lots of informat
 Moving files between the cluster and your local computer is a very common task, and this will typically be accomplished with a secure file transfer protocol (**sftp**) client. Various Free/Open Source GUI tools exist but we recommend [WinSCP](https://winscp.net/eng/download.php) for Windows and [Cyberduck](https://cyberduck.io/) for MacOS. 
 
 **Windows:**
-After downloading, installing and opening WinSCP, you will see the following screen. Fill out the host name (lem.ib.usp.br), your username and passwork, and connect. 
+After downloading, installing, and opening WinSCP, you will see the following screen. First, ensure that the "File Protocol is set to "SFTP". **The connection will fail if "SFTP" is not chosen her.** Next, fill out the host name (`lem.ib.usp.br`), your username and password, and click "Login". 
 ![png](01_cluster_basics_files/01_WinSCP1.png)
-Two windows will appear: your laptop on the left, and the cluster on the right. You can navigate through the folders and transfer files from the cluster to your laptop by dragging and dropping them. 
+Two windows file browsers will appear: your laptop on the left, and the cluster on the right. You can navigate through the folders and transfer files from the cluster to your laptop by dragging and dropping them. 
 ![png](01_cluster_basics_files/01_WinSCP2.png)
 
 **Mac/Linux:**
 After downloading, installing and opening Cyberduck, you will see the following screen:
 ![png](01_cluster_basics_files/01_Cyberduck1.png)
-Click on "Open Connection" (top left), and a new screen will open. Follow out your details (host name, username, password) and make sure that it says "SFTP (SSH File Transfer Protocol)" in the dropdown menue (top). The post should automatically be set to 22. 
+
+Click on "Open Connection" (top left), and a new screen will open. First, make sure you select "SFTP (SSH File Transfer Protocol)" in the dropdown menu at the top of the box. **The connection will fail if "SFTP" is not selected here.** If "SFTP" is properly selected the "Port:" will automatically be set to 22. Next, fill out the host name (`lem.ib.usp.br`), your username and password, and click "Connect".
 ![png](01_cluster_basics_files/01_Cyberduck2.png)
 Now, you should see a screen with your home directory on the cluster. You can navigate through your files here, and download them to your laptop.
 ![png](01_cluster_basics_files/01_Cyberduck3.png)
+
 ### Instpecting and Interpreting FastQC Output
 
 Just taking a random one, lets spend a moment looking at the results from `punc_JFT773_R1__fastqc.html`. Opening up this html file, on the left you'll see a summary of all the results, which highlights areas FastQC indicates may be worth further examination. We will only look at a few of these.
