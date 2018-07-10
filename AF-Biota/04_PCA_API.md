@@ -173,11 +173,12 @@ print(pca.samples_vcforder)
      
 > **Note:** The number of PCs may not exceed the number of samples in the dataset. The `pca` module detects this and automatically reduces the number of PCs calculated.
 
-And now plot the new figure with the "bad" samples removed:
+And now plot the new figure with the "bad" samples removed. We also introduce another nice feature of the `pca.plot()` function, which is the `outfile` argument. This argument will cause the plot function to not only draw to the screen, but also to save a `png` formatted file to the filesystem.
 ```python
 pca.plot(title="Anolis w/o Northern Samples", outfile="Anolis_no_north.png")
 ```
     <matplotlib.axes._subplots.AxesSubplot at 0x7fe0f8c25410>
+> **Note:** Spaces in filenames are ***BAD***. It's good practice, as we demonstrate here, to always substitute underscores (`_`) for spaces in filenames.
 
 ![png](04_PCA_API_files/04_PCA_API_04_Anolis_PCA_NoNorth.png)
 
