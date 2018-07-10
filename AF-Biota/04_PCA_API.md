@@ -224,18 +224,22 @@ fig = plt.figure(figsize=(12, 5))
 ## These two calls divide the figure evenly into left and right
 ## halfs, and assigns the left half to `ax1` and the right half to `ax2`
 ax1 = fig.add_subplot(1, 2, 1)
+plt.title("My Title1")
+plt.grid(True)
 ax2 = fig.add_subplot(1, 2, 2)
+plt.title("My Title2")
+plt.grid(True)
 
 ## Plot PCs 1 & 2 on the left half of the figure, and PCs 3 & 4 on the right
 pca.plot(ax=ax1, pcs=[1, 2])
 pca.plot(ax=ax2, pcs=[3, 4])
 
-## Some aestethic tweaking & saving the plot as a .png file
-plt.title("My Title")
-plt.grid(True)
+## Saving the plot as a .png file
 plt.savefig("My_PCA_plot.png", bbox_inches="tight")
 ```
     <matplotlib.axes._subplots.AxesSubplot at 0x7fa3d0a04290>
+
+> **Note** Don't forget to change the titles and filename for the figure.
 
 ![png](04_PCA_API_files/04_PCA_API_06_Anolis_PCA_Multi.png)
 
@@ -244,13 +248,17 @@ It's nice to see PCs 1-4 here, but it's kind of stupid to plot the legend twice,
 ```python
 fig = plt.figure(figsize=(12, 5))
 ax1 = fig.add_subplot(1, 2, 1)
+plt.title("My Title1")
+plt.grid(True)
 ax2 = fig.add_subplot(1, 2, 2)
+plt.title("My Title2")
+plt.grid(True)
 
-## The only difference here is we switch off the legend on the first PCA
+## The difference here is we switch off the legend on the first PCA
 pca.plot(ax=ax1, pcs=[1, 2], legend=False)
 pca.plot(ax=ax2, pcs=[3, 4])
-plt.title("My Title")
-plt.grid(True)
+
+## And save the plot as .png
 plt.savefig("My_PCA_plot_axis1-4.png", bbox_inches="tight")
 ```
     <matplotlib.axes._subplots.AxesSubplot at 0x7fa3d0a8db10>
