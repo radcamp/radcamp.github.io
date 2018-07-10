@@ -13,8 +13,8 @@ attention until you're very comfortable with the process.
 
 Overview of process
 * Establish jupyter notebook ssh tunnel: [Windows](#windows-ssh-tunnel-configuration) - [Mac/Linux](#mac-ssh-tunnel-configuration)
-* [Create the config file](#set-default-configuration-behavior)
 * [Set Jupyter notebook password](#set-jupyter-notebook-password)
+* [Create the config file](#set-default-configuration-behavior)
 * [Start remote notebook server](#run-notebook-server)
 * [More information about jupyter](#useful-jupyter-tricks/ideas)
 
