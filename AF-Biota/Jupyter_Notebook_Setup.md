@@ -44,6 +44,14 @@ you can find your port number here: [AF-Biota workshop port #s](https://github.c
 
 ### Windows SSH Tunnel Configuration
 
+To set up a SSH Tunnel on a Windows machine, we use puTTY again. Open puTTY and fill out the host address in the first screen, like you do when connecting to the cluster.
+
+![png](Jupyter_Notebook_Setup_files/08_puTTY1.png)
+
+Now, click on SSH on the left panel, and click on Tunnels. Fill out your personal port # at "Source port", and "localhost:your_port_#" at "Destination". Click "Add" and "L_your_port_#       localhost:your_port_#" should appear in the empty window. Click "Open" and log in.
+
+![png](Jupyter_Notebook_Setup_files/08_puTTY2.png)
+
 ### Mac/Linux SSH Tunnel Configuration
 
 ## Setup to run on the USP cluster
