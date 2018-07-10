@@ -93,11 +93,12 @@ tre.draw(
     node_labels=tre.get_node_values("support"),
 );
 ```
+> **Note:** Toytree is a simple yet flexible and powerful tree drawing program, which we will only briefly introduce. Extensive docs and a tutorial are available on the [toytree documentation site](https://toytree.readthedocs.io/en/latest/).
 
 ![png](06_RAxML_API_files/06_RAxML_API_00_unrooted.png)
 
 ### Rooting the tree
-In the above figure the two Norther samples are nested deep within the Southern clade, but this tree is unrooted. Lets say we want to root the tree on the Northern samples and replot. This is accomplished by adding the `root` parameter to the `tree.draw()` function and specifying the samples to root the tree to:
+In the above figure the two Northern samples are nested deep within the Southern clade, but this tree is unrooted. Lets say we want to root the tree on the Northern samples and replot. This is accomplished by adding the `root` parameter to the `tree.draw()` function and specifying the samples to root the tree to:
 ```
 tre = toytree.tree(rax.trees.bipartitions)
 tre.draw(
