@@ -77,6 +77,8 @@ rax.trees
     bootstrap                  ~/ipyrad-workshop/analysis-raxml/RAxML_bootstrap.aligntest
     info                       ~/ipyrad-workshop/analysis-raxml/RAxML_info.aligntest
 
+**TODO:** Could use more info on what all these different results files mean.
+
 ### Plot the results
 Here we use toytree to plot the bootstrap results. 
 
