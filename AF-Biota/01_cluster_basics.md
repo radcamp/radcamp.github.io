@@ -206,13 +206,13 @@ Now we have output files that include html and images depicting lots of informat
 
 Moving files between the cluster and your local computer is a very common task, and this will typically be accomplished with a secure file transfer protocol (**sftp**) client. Various Free/Open Source GUI tools exist but we recommend [WinSCP](https://winscp.net/eng/download.php) for Windows and [Cyberduck](https://cyberduck.io/) for MacOS. 
 
-**Windows**
+**Windows:**
 After downloading, installing and opening WinSCP, you will see the following screen. Fill out the host name (lem.ib.usp.br), your username and passwork, and connect. 
 ![png](01_cluster_basics_files/01_WinSCP1.png)
 Two windows will appear: your laptop on the left, and the cluster on the right. You can navigate through the folders and transfer files from the cluster to your laptop by dragging and dropping them. 
 ![png](01_cluster_basics_files/01_WinSCP2.png)
 
-**Mac/Linux**
+**Mac/Linux:**
 After downloading, installing and opening Cyberduck, you will see the following screen:
 ![png](01_cluster_basics_files/01_Cyberduck1.png)
 Click on "Open Connection" (top left), and a new screen will open. Follow out your details (host name, username, password) and make sure that it says "SFTP (SSH File Transfer Protocol)" in the dropdown menue (top). The post should automatically be set to 22. 
