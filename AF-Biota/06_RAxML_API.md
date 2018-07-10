@@ -105,10 +105,10 @@ tre.draw(
 ```
 ![png](06_RAxML_API_files/06_RAxML_API_01_rooted.png)
 
-> **Note:** The `root()` function accepts a list of samples, so if you have multiple samples from the root taxon, you can include them like this: `tre.root(["punc_ICST764", "punc_MUFAL9635", "punc_MTR05978"])
+> **Note:** The `root()` function accepts a list of samples, so if you have multiple samples from the root taxon, you can include them like this: `tre.root(["punc_ICST764", "punc_MUFAL9635", "punc_MTR05978"])`
 
 ### Experimenting with the simulated data
-
+Tree rooting can also be accomplished with the `wildcard` parameter of the `tree.root()` function. This is somewhat more straightforward to demonstrate with the simulated data, so we can create a new `raxml` object with the simulated phylip file, rerun the RAxML tree inference, and then do some plotting:
 ```
 rax = ipa.raxml(
     data="/scratch/af-biota/simulated-example/simrad_outfiles/simrad.phy",
@@ -122,7 +122,7 @@ rax.params.o = None
 
 rax.run(force=True)
 ```
-
+Here the `wildcard="3"` argument specifies to root the tree using all the samples that include "3" in their names.
 ```
 tre = toytree.tree(rax.trees.bipartitions)
 tre.draw(
@@ -132,3 +132,7 @@ tre.draw(
 );
 ```
 ![png](06_RAxML_API_files/06_RAxML_API_02_sim_rooted.png)
+
+### Further exploration
+
+We provide a more thorough exploration of the `ipyrad.analysis.raxml` module in a notebook on the [ipyrad github site](https://github.com/dereneaton/ipyrad/blob/master/tests/cookbook-raxml-pedicularis.ipynb), including more details about how to take full advantage of running parallel RAxML processes on a cluster.
