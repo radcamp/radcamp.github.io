@@ -64,9 +64,9 @@ Explanation of RAxML arguments:
 * -N: specifies the number of alternative runs on distinct starting parsimony trees (bootstrapping).
 * -x: random seed number for the analysis.
 * -p: random seed number for the parsimony inference of starting trees.
-* -n: specifies the root name of the output files.
+* -n: specifies the root name for the output files.
 * -w: specifies the name of the output directory where RAxML will write the output files. Note that you need to specify the full path.
-* -s: Name of input file in PHYLIP format.
+* -s: specifies the name of the input alignment file in PHYLIP format.
 
 ### Run the job
 This will start the job running. The subsampled dataset we are using should run very quickly (~1-2 minutes).
