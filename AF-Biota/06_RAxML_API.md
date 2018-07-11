@@ -4,7 +4,7 @@
 As part of the `ipyrad.analysis` toolkit we've created convenience functions for easily running common [**RAxML**](https://sco.h-its.org/exelixis/web/software/raxml/index.html) commands, a maximum likelihood inference of phylogenetic trees. This can be useful when you want to run all of your analyses in a clean stream-lined way in a jupyter notebook to create a completely reproducible study. 
 
 ### Install software
-There are many ways to install raxml, the simplest of which is to use conda. This will install several raxml binaries into your conda path. Open an ssh session on the cluster and run the following command:
+There are many ways to install RAxML, the simplest of which is to use conda. This will install several RAxML binaries into your conda path. Open an ssh session on the cluster and run the following command:
 
 ```
 $ conda install raxml -c bioconda
@@ -13,7 +13,7 @@ $ conda install raxml -c bioconda
 
 Create a new notebook inside your `/home/<username>/ipyrad-workshop/` directory called `anolis-raxml.ipynb` (refer to the [jupyter notebook configuration page](Jupyter_Notebook_Setup.md) for a refresher on connecting to the notebook server). The rest of the materials in this part of the workshop assume you are running all code in cells of a jupyter notebook that is running on the USP cluster.
 
-## Create a raxml Class object
+## Create a RAxML Class object
 First, copy and paste the usual imports into a notebook cell and run it:
 ```python
 import ipyrad.analysis as ipa    ## ipyrad analysis toolkit
@@ -21,7 +21,7 @@ import toyplot                   ## plotting library
 import toytree                   ## tree plotting
 ```
 
-Now create a raxml object. The only required argument to initialize the object is a phylip formatted sequence file. In this example we provide a name and working directory as well:
+Now create a RAxML object. The only required argument to initialize the object is a phylip formatted sequence file. In this example we provide a name and working directory as well:
 
 ```python
 rax = ipa.raxml(
@@ -32,7 +32,7 @@ rax = ipa.raxml(
 ```
 
 ### Additional options
-RAxML has a **ton** of parameters for modifying how it behaves, and we will only explore just a fraction of these. For more info on RAxML parameters, look [here](https://sco.h-its.org/exelixis/resource/download/NewManual.pdf). You can also specify many of these parameters by setting values in the params dictionary of your raxml object. In the following cell we modify the number of bootstrapping runs on distinct starting trees (`params.N`), the number of threads to use (`params.T`), and the outgroup samples (`params.o`). 
+RAxML has a **ton** of parameters for modifying how it behaves, and we will only explore just a fraction of these. For more info on RAxML parameters, look [here](https://sco.h-its.org/exelixis/resource/download/NewManual.pdf). You can also specify many of these parameters by setting values in the params dictionary of your RAxML object. In the following cell we modify the number of bootstrapping runs on distinct starting trees (`params.N`), the number of threads to use (`params.T`), and the outgroup samples (`params.o`). 
 
 ```python
 ## Number of runs
@@ -78,7 +78,7 @@ rax.run(force=True)
 > Note: We are running only 10 bootstraps, which takes very little time. In fact, when running a real analysis, we should run at least 500 or 1000 bootstraps. For real large datasets, running an alignment of the entire loci can be very time consumming. Because of that, you can explore RAxML using only SNPs in a PHYLIP format (e.g. anolis.snps.phy) and excluding the invariant sites. Using only variable sites should reduce considerably the running time. However, branch lenghts can be biased when using only variable sites, especially with high levels of missing data. See [Leaché et al 2015](https://www.ncbi.nlm.nih.gov/pubmed/26227865) for methods correcting for aquisition bias in RAxML when using SNP's only.
 
 ### Access results
-One of the reasons it is so convenient to run your raxml jobs this way is that the results files are easily accessible from your raxml objects. 
+One of the reasons it is so convenient to run your RAxML jobs this way is that the results files are easily accessible from your RAxML objects. 
 
 ```python
 rax.trees
