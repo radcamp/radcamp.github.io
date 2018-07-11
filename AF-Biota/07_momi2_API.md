@@ -485,11 +485,6 @@ no_pulse_fit_stats.expected.pattersons_d(A="pop1", B="pop2", C="pop3")
 no_pulse_fit_stats.all_f2()
 ```
 
-
-
-
-![png](07_momi2_API_files/07_momi2_API_25_1.png)
-
 # Acknowledgements
 We relied heavily on the excellent [momi2 documentation](http://momi2.readthedocs.io/en/latest/tutorial.html) during the creation of this tutorial.
 
