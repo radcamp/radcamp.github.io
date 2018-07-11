@@ -36,7 +36,7 @@ First things first, rename your new notebook to give it a meaningful name:
 ![png](04_PCA_API_files/04_PCA_API_Notebook_Rename.png)
 
 ### Import Python libraries
-The `import` keyword directs python to load a module into the currently running context. This is very similar to the `library()` function in R. We begin by importing ipyrad, as well as the analysis module. 
+The `import` keyword directs python to load a module into the currently running context. This is very similar to the `library()` function in R. We begin by importing ipyrad, as well as the analysis module. Copy the code below into a notebook cell and click run. 
 
 ```python
 %matplotlib inline
