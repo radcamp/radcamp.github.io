@@ -75,7 +75,7 @@ This will start the job running. The subsampled dataset we are using should run 
 rax.run(force=True)
 ```
     job aligntest finished successfully
-> *Note: We are running only 10 bootstraps, which takes very little time. In fact, when running a real analysis, we should run at least 500 or 1000 bootstraps. For real large datasets, running an alignment of the entire loci can be very time consumming. Because of that, you can explore RAxML using only SNPs in a PHYLIP format (e.g. anolis.snps.phy) and excluding the invariant sites. Using only variable sites should reduce considerably the running time. However, branch lenghts can be biased when using only variable sites, especially with high levels of missing data. See [Leaché et al 2015](https://www.ncbi.nlm.nih.gov/pubmed/26227865) for methods correcting for aquisition bias in RAxML when using SNP's only.
+> Note: We are running only 10 bootstraps, which takes very little time. In fact, when running a real analysis, we should run at least 500 or 1000 bootstraps. For real large datasets, running an alignment of the entire loci can be very time consumming. Because of that, you can explore RAxML using only SNPs in a PHYLIP format (e.g. anolis.snps.phy) and excluding the invariant sites. Using only variable sites should reduce considerably the running time. However, branch lenghts can be biased when using only variable sites, especially with high levels of missing data. See [Leaché et al 2015](https://www.ncbi.nlm.nih.gov/pubmed/26227865) for methods correcting for aquisition bias in RAxML when using SNP's only.
 
 ### Access results
 One of the reasons it is so convenient to run your raxml jobs this way is that the results files are easily accessible from your raxml objects. 
