@@ -101,7 +101,7 @@ etable
 
 ```python
 ## get admixture proportion tables avg'd across reps
-tables = s.get_clumpp_table(kvalues, quiet=True)
+tables = str.get_clumpp_table(kvalues, quiet=True)
 ```
 
 ```python
