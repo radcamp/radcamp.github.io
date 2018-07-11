@@ -35,8 +35,8 @@ $ source activate momi-py36
 ```
 > **Note:** You'll notice that the conda env you are currently using is now displayed as part of your prompt. We will maintain this convention for the rest of this notebook.
 
-Now use `conda` to install momi and jupyter. All the `-c` arguments again are specifying
-channels that momi pulls dependencies from. Order matters here, so copy and paste this
+Now use `conda` to install momi2 and jupyter. All the `-c` arguments again are specifying
+channels that momi2 pulls dependencies from. Order matters here, so copy and paste this
 command to your terminal.
 ```
 (momi-py36)$ conda install momi jupyter -c defaults -c conda-forge -c bioconda -c jackkamm
@@ -82,12 +82,12 @@ demographic history for a set of populations, but also to plot the model
 to verify that it corresponds to what you expect!
 
 Begin with the usual import statements, except this time we also add `logging`,
-which allows momi to write progress to a log file. This can be useful for
+which allows momi2 to write progress to a log file. This can be useful for
 debugging, so we encourage this practice.
 
 ```python
 %matplotlib inline
-import momi		## momi analysis
+import momi		## momi2 analysis
 import logging		## create log file
 
 logging.basicConfig(level=logging.INFO,
@@ -107,7 +107,7 @@ model.add_leaf("North")
 model.add_leaf("South")
 model.move_lineages("South", "North", t=2e5)
 ```
-> **Note:** The default migration fraction of the `DemographicModel.move_lineages()` function is 100%, so if we do not specify this value then when we call `move_lineages` momi assumes we want to move **all** lineages from the source to the destination. Later we will see how to manipulate the migration fraction to only move some portion of lineages.
+> **Note:** The default migration fraction of the `DemographicModel.move_lineages()` function is 100%, so if we do not specify this value then when we call `move_lineages` momi2 assumes we want to move **all** lineages from the source to the destination. Later we will see how to manipulate the migration fraction to only move some portion of lineages.
 
 Executing this cell produces no output, but that's okay, we are just specifying the model. Also, be aware that the names assigned to leaf nodes have no specific meaning to momi2, so these names should be selected to have specific meaning to your target system. Here "North" and "South" are simply stand-ins for some hypothetical populations. Now that we have this simple demographic model parameterized we can plot it, to see how it looks.
 
@@ -127,7 +127,7 @@ There's a little bit going on here, but we'll walk you through it:
 
 The first two arguments to `momi.DemographyPlot()` are required, namely the model to plot, and the populations of the model to include. The next three arguments are optional, but useful:
 * `figsize` - Specify the output figure size as (width, height) in inches.
-* `major_yticks` - Tells the momi plotting routine to use the time demarcations we specified in thie `yticks` variable.
+* `major_yticks` - Tells the momi2 plotting routine to use the time demarcations we specified in thie `yticks` variable.
 * `linthreshy` - The time point at which to switch from linear to log-scale, backwards in time. This is really useful if you have many "interesting" events happening relatively recently, and you don't want them to get "smooshed" together by the depth of the older events. This will become clearer as we add migration events later in the tutorial.
 
 ![png](07_momi2_API_files/07_momi2_API_01_ToyModel.png)
@@ -157,9 +157,9 @@ This is almost the exact same model as above, except now we have introduced anot
 > **Note:** It may seem odd that the arrow in this figure points from "North" to "South", but this is simply because we are operating in a coalescent framework and therefore the `move_lineages` function operates **backwards in time**.
 
 ## Preparing real data for analysis
-We need to gather and construct several input files before we can actually apply momi to our Anolis data.
+We need to gather and construct several input files before we can actually apply momi2 to our Anolis data.
 * [**Population assignment file**](#population-assignment-file) - This is a tab or space separated list of sample names and population names to which they are assigned. Sample names need to be exactly the same as they are in the VCF file. Population names can be anything, but it's useful if they're meaningful.
-* [**Properly formatted VCF**](#properly-formatted-vcf) - We do have the VCF file output from the ipyrad Anolis assembly, but it requires a bit of massaging before it's ready for momi. It must be zipped and indexed in such a way as to make it searchable.
+* [**Properly formatted VCF**](#properly-formatted-vcf) - We do have the VCF file output from the ipyrad Anolis assembly, but it requires a bit of massaging before it's ready for momi2. It must be zipped and indexed in such a way as to make it searchable.
 * [**BED file**](#bed-file) - This file specifies genomic regions to include in when calculating the SFS. It is composed of 3 columns which specify 'chrom', 'chromStart', and 'chromEnd'.
 * [**The allele counts file**](#the-allele-counts-file) - The allele counts file is an intermediate file that we must generate on the way to constructing the SFS. momi2 provides a function for this.
 * [**Genereate the SFS**](#genereate-the-sfs) - The culmination of all this housekeeping is the SFS file which we will use for demographic inference.
