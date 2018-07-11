@@ -87,8 +87,8 @@ debugging, so we encourage this practice.
 
 ```python
 %matplotlib inline
-import momi
-import logging
+import momi		## momi analysis
+import logging		## create log file
 
 logging.basicConfig(level=logging.INFO,
                     filename="momi_log.txt")
