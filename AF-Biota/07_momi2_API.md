@@ -48,6 +48,14 @@ notebook server in the same way as before.
 (momi-py36)$ qsub -q proto -l nodes=1:ppn=2 -l mem=64gb -I
 qsub: waiting for job 24824.darwin to start
 qsub: job 24824.darwin ready
+```
+When starting an interactive job on the cluster, it automatically directs you back to your default environment, which is python 2.7 in our case. We need to make sure that we are in the right conda environment to run momi2.
+
+```
+## switch back to the python3 environment
+$ source activate momi-py36
+
+## Start the notebook server
 (momi-py36)$ jupyter notebook &
 ```
 
