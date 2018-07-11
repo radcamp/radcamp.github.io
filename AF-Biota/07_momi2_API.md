@@ -190,11 +190,13 @@ In this tutorial we are using a very small dataset, so manipulating the VCF is v
 ```
 %%bash
 ## bgzip performs a blockwise compression
-bgzip anolis_outfiles/anolis.vcf
+## The -c flag directs bgzip to leave the original vcf file 
+##   untouched and create a new file for the vcf.gz
+bgzip -c anolis_outfiles/anolis.vcf > anolis_outfiles/anolis.vcf.gz
 
 ## tabix indexes the file for searching
 tabix anolis_outfiles/anolis.vcf.gz
-ls -ltr anolis_outfiles/
+ls anolis_outfiles/
 ```
     anolis.alleles.loci  anolis.loci      anolis.snps.phy	anolis.u.snps.phy
     anolis.geno	     anolis.nex       anolis_stats.txt	anolis.ustr
@@ -226,7 +228,7 @@ head anolis_outfiles/anolis.bed
 
 ```
 %%bash
-python -m momi.read_vcf --no_aa --verbose anolis_outfiles/anolis.vcf.gz anolis-pops.txt anolis_allele_counts.gz --bed anolis.bed
+python -m momi.read_vcf --no_aa --verbose anolis_outfiles/anolis.vcf.gz anolis-pops.txt anolis_allele_counts.gz --bed anolis_outfiles/anolis.bed
 gunzip -c anolis_allele_counts.gz | head
 ```
     /home/isaac/miniconda2/envs/momi-py36/bin/python
@@ -373,6 +375,15 @@ migration_model.optimize()
                   x: array([ 9.55960498e+04,  1.28584296e+05, -1.38629436e+00, -1.44137763e+01,
             1.15269175e+01,  1.25245099e+01,  1.72351995e+05])
 
+```
+yticks = [1e4, 2.5e4, 5e4, 7.5e4, 1e5, 2.5e5, 5e5, 7.5e5]
+
+fig = momi.DemographyPlot(
+    migration_model, ["North", "South"],
+    figsize=(6,8),
+    major_yticks=yticks,
+    linthreshy=1.5e5)
+```
 ![png](07_momi2_API_files/07_momi2_API_05_Inference_migration.png)
 
 ## Bootstrapping confidence intervals
