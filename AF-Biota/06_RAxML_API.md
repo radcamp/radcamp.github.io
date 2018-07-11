@@ -32,7 +32,7 @@ rax = ipa.raxml(
 ```
 
 ### Additional options
-RAxML has a **ton** of parameters for modifying how it behaves, and we will only explore just a fraction of these. You can also specify many of these parameters by setting values in the params dictionary of your raxml object. In the following cell we modify the number of runs on distinct starting trees (`params.N`), the number of threads to use (`params.T`), and the outgroup samples (`params.o`). 
+RAxML has a **ton** of parameters for modifying how it behaves, and we will only explore just a fraction of these. For more info on RAxML parameters, look [here](https://sco.h-its.org/exelixis/resource/download/NewManual.pdf). You can also specify many of these parameters by setting values in the params dictionary of your raxml object. In the following cell we modify the number of runs on distinct starting trees (`params.N`), the number of threads to use (`params.T`), and the outgroup samples (`params.o`). 
 
 ```python
 ## Number of runs
@@ -50,7 +50,7 @@ rax.params.o = None
 ```
 
 ### Print the command string 
-It is good practice to always print the command string so that you know exactly what was called for you analysis and it is documented. 
+It is good practice to always print the command string so that you know exactly what was called for your analysis and it is documented. 
 
 ```python
 print(rax.command)
