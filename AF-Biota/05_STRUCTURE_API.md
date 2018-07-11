@@ -164,8 +164,8 @@ The STRUCTURE object will be used to submit jobs to the ipyparallel cluster. It 
 
 ```python
 ## set mainparams for object
-struct.mainparams.burnin = 10000
-struct.mainparams.numreps = 100000
+struct.mainparams.burnin = 1000
+struct.mainparams.numreps = 5000
 
 ## see all mainparams
 print struct.mainparams
