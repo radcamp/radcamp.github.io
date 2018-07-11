@@ -79,19 +79,19 @@ The following cell shows the quickest way to results. Detailed explanations of a
 kvalues = [2, 3, 4]
 
 ## init an analysis object
-str = ipa.structure(
+struct = ipa.structure(
     name="anolis-quick",
     workdir="./anolis-structure",
     data="./anolis_outfiles/anolis.ustr",
     )
 
 ## set main params (use much larger values in a real analysis)
-str.mainparams.burnin = 1000
-str.mainparams.numreps = 5000
+struct.mainparams.burnin = 1000
+struct.mainparams.numreps = 5000
 
 ## submit 5 replicates of each K value to run on parallel client
 for kpop in kvalues:
-    str.run(kpop=kpop, nreps=5, ipyclient=ipyclient)
+    struct.run(kpop=kpop, nreps=5, ipyclient=ipyclient)
 
 ## wait for parallel jobs to finish
 ipyclient.wait()
@@ -104,14 +104,14 @@ ipyclient.wait()
 
 ```python
 ## return the evanno table (deltaK) for best K 
-etable = str.get_evanno_table(kvalues)
+etable = struct.get_evanno_table(kvalues)
 etable
 ```
-![png](05_STRUCTURE_API_files/05_STRUCTURE_API_03_tldr_evanno_table.png)
+![png](05_STRUCTURE_API_files/05_STRUCTURE_API_02_tldr_evanno_table.png)
 
 ```python
 ## get admixture proportion tables avgeraged across reps
-tables = str.get_clumpp_table(kvalues, quiet=True)
+tables = struct.get_clumpp_table(kvalues, quiet=True)
 ```
 
 ```python
@@ -150,7 +150,7 @@ Structure is kind of an old fashioned program that requires creating quite a few
 
 ```python
 ## create a Structure object
-str = ipa.structure(name="anolis-test",
+struct = ipa.structure(name="anolis-test",
                        data=strfile, 
                        mapfile=mapfile,
                        workdir=workdir)
@@ -161,14 +161,14 @@ The Structure object will be used to submit jobs to the ipyparallel cluster. It 
 
 ```python
 ## set mainparams for object
-str.mainparams.burnin = 10000
-str.mainparams.numreps = 100000
+struct.mainparams.burnin = 10000
+struct.mainparams.numreps = 100000
 
 ## see all mainparams
-print str.mainparams
+print struct.mainparams
 
 ## see or set extraparams
-print str.extraparams
+print struct.extraparams
 ```
 
     burnin             10000               
@@ -245,13 +245,13 @@ The function `run()` distributes jobs to run on the cluster via the `ipyparallel
 
 ```python
 ## a range of K-values to test
-tests = [2, 3, 4]
+kvalues = [2, 3, 4]
 
 ## submit batches of 10 replicate jobs for each value of K 
-for kpop in tests:
+for kpop in kvalues:
     struct.run(
         kpop=kpop, 
-        nreps=20, 
+        nreps=10, 
         seed=12345,
         ipyclient=ipyclient,
         )
@@ -261,49 +261,39 @@ for kpop in tests:
     submitted 10 structure jobs [structure-test-K-4]
 
 ### Track progress until finished
-You can check for finished results by using the `get_clumpp_table()` function, which tries to summarize the finished results files. If no results are ready it will simply print a warning message telling you to wait. If you want the notebook to block/wait until all jobs are finished then execute the `wait()` function of the ipyclient object, like below. 
-
+You can check for finished results by using the `get_clumpp_table()` function, which tries to summarize the finished results files. If no results are ready it will simply print a warning message telling you to wait. A more straightforward way to monitor progress is to just ask the jobs whether they are finished yet. The list of jobs for a structure analysis are retained in the `asysncs` list, which can be examined like so:
 
 ```python
-## see submitted jobs (we query first 10 here)
-struct.asyncs[:10]
+## see submitted jobs (we query first 5 here)
+struct.asyncs[:5]
 ```
     [<AsyncResult: _call_structure>,
      <AsyncResult: _call_structure>,
      <AsyncResult: _call_structure>,
      <AsyncResult: _call_structure>,
-     <AsyncResult: _call_structure>,
-     <AsyncResult: _call_structure>,
-     <AsyncResult: _call_structure>,
-     <AsyncResult: _call_structure>,
-     <AsyncResult: _call_structure>,
      <AsyncResult: _call_structure>]
 
+Now we can ask one of the jobs whether it's done yet:
 ```python
-## query a specific job result by index
-if struct.asyncs[0].ready():
-    print struct.asyncs[0].result()
+## check if a specific job is done
+struct.asyncs[0].ready()
 ```
+    False
 
+You can run this over and over again until this job returns `True`, but this is tedious. Simpler is to block/wait until all jobs are finished by using the `wait()` function of the ipyclient object:
 ```python
 ## block/wait until all jobs finished
 ipyclient.wait() 
 ```
-### Summarize replicates with CLUMPP
-We ran 20 replicates per K-value hypothesis. We now need to concatenate and purmute those results so they can be summarized. For this we use the software clumpp. The default arguments to clumpp are generally good, but you can modify them the same as structure params, by accessing the `.clumppparams` attribute of your structure object. See the [clumpp documentation](https://web.stanford.edu/group/rosenberglab/software/CLUMPP_Manual.pdf) for more details. If you have a large number of samples (>50) you may wish to use the `largeKgreedy` algorithm (m=3) for faster runtimes. Below we run clumpp for each value of K that we ran structure on. You only need to tell the `get_clumpp_table()` function the value of K and it will find all of the result files given the Structure object's `name` and `workdir`.
 
+### Summarize replicates with CLUMPP
+We ran 10 replicates per K-value hypothesis. We now need to concatenate and purmute those results so they can be summarized. For this we use the software clumpp. The default arguments to clumpp are generally good, but you can modify them in the same as the structure params, by accessing the `.clumppparams` attribute of your structure object. See the [clumpp documentation](https://web.stanford.edu/group/rosenberglab/software/CLUMPP_Manual.pdf) for more details. Below we run clumpp for each value of K that we ran structure on. You only need to tell the `get_clumpp_table()` function the value of K and it will find all of the result files given the Structure object's `name` and `workdir`.
 
 ```python
-## set some clumpp params
-struct.clumppparams.m = 3               ## use largegreedy algorithm
-struct.clumppparams.greedy_option = 2   ## test nrepeat possible orders
-struct.clumppparams.repeats = 10000     ## number of repeats
+## set some clumpp params and print params to the screen
+struct.clumppparams.repeats = 10000
 struct.clumppparams
 ```
-
-
-
-
     datatype                  0                   
     every_permfile            0                   
     greedy_option             2                   
@@ -325,124 +315,83 @@ struct.clumppparams
     s                         2                   
     w                         1                   
 
-
-
-
 ```python
 ## run clumpp for each value of K
-tables = struct.get_clumpp_table(tests)
+tables = struct.get_clumpp_table(kvalues)
 ```
-
-    [K3] 20/20 results permuted across replicates (max_var=0).
-    [K4] 20/20 results permuted across replicates (max_var=0).
-    [K5] 20/20 results permuted across replicates (max_var=0).
-    [K6] 20/20 results permuted across replicates (max_var=0).
-
-
+    [K3] 10/10 results permuted across replicates (max_var=0).
+    [K4] 10/10 results permuted across replicates (max_var=0).
+    [K5] 10/10 results permuted across replicates (max_var=0).
 
 ```python
 ## return the evanno table w/ deltaK
-struct.get_evanno_table(tests)
+struct.get_evanno_table(kvalues)
 ```
-
 
 ### Sort the table order how you like it
 This can be useful if, for example, you want to order the names to be in the same order as tips on your phylogeny. 
 
-
 ```python
 ## custom sorting order
 myorder = [
-    "32082_przewalskii", 
-    "33588_przewalskii",
-    "41478_cyathophylloides", 
-    "41954_cyathophylloides", 
-    "29154_superba",
-    "30686_cyathophylla", 
-    "33413_thamno", 
-    "30556_thamno", 
-    "35236_rex", 
-    "40578_rex", 
-    "35855_rex",
-    "39618_rex", 
-    "38362_rex",
+    "punc_ICST764",
+    "punc_MUFAL9635",
+    "punc_IBSPCRIB0361",
+    "punc_JFT773",
+    "punc_MTR05978",
+    "punc_MTR17744",
+    "punc_MTR21545",
+    "punc_MTR34414",
+    "punc_MTRX1468",
+    "punc_MTRX1478"
 ]
-
-print "custom ordering"
-print tables[4].ix[myorder]
 ```
-
+We can then extract the results for any give K value with the samples in the order that we want them. Here we inspect the ancestry components for K=3.
+```
+print("custom ordering")
+print(tables[3].loc[myorder])
+```
     custom ordering
-                              0      1          2      3
-    32082_przewalskii       1.0  0.000  0.000e+00  0.000
-    33588_przewalskii       1.0  0.000  0.000e+00  0.000
-    41478_cyathophylloides  0.0  0.005  9.948e-01  0.000
-    41954_cyathophylloides  0.0  0.005  9.948e-01  0.000
-    29154_superba           0.0  0.019  6.731e-01  0.308
-    30686_cyathophylla      0.0  0.020  6.820e-01  0.298
-    33413_thamno            0.0  0.845  0.000e+00  0.155
-    30556_thamno            0.0  0.892  7.000e-04  0.107
-    35236_rex               0.0  0.908  1.000e-04  0.092
-    40578_rex               0.0  0.989  2.000e-04  0.010
-    35855_rex               0.0  0.990  0.000e+00  0.010
-    39618_rex               0.0  1.000  0.000e+00  0.000
-    38362_rex               0.0  1.000  0.000e+00  0.000
-
-
-### A function for adding an interactive hover to our plots
-The function automatically parses the table above for you. It can reorder the individuals based on their membership in each group, or based on an input list of ordered names. It returns the table of data as well as a list with information for making interactive hover boxes, which you can see below by hovering over the plots.  
-
-
-```python
-def hover(table):
-    hover = []
-    for row in range(table.shape[0]):
-        stack = []
-        for col in range(table.shape[1]):
-            label = "Name: {}\nGroup: {}\nProp: {}"\
-                .format(table.index[row], 
-                        table.columns[col],
-                        table.ix[row, col])
-            stack.append(label)
-        hover.append(stack)
-    return list(hover)
-```
+                           0          1      2
+    punc_ICST764       0.102  8.000e-04  0.897
+    punc_MUFAL9635     0.139  1.000e-03  0.860
+    punc_IBSPCRIB0361  0.021  9.774e-01  0.001
+    punc_JFT773        0.132  8.340e-01  0.034
+    punc_MTR05978      0.844  5.980e-02  0.097
+    punc_MTR17744      0.115  8.566e-01  0.029
+    punc_MTR21545      0.267  5.963e-01  0.137
+    punc_MTR34414      0.394  4.582e-01  0.148
+    punc_MTRX1468      0.028  9.590e-01  0.013
+    punc_MTRX1478      0.044  9.532e-01  0.002
+> **Note:** The `.loc[]` notation specifies to fetch from the table by row.
 
 ### Visualize population structure in barplots 
-Hover over the plot to see sample names and info in the hover box. 
-
 
 ```python
-for kpop in tests:
+for kpop in kvalues:
     ## parse outfile to a table and re-order it
     table = tables[kpop]
     table = table.ix[myorder]
     
     ## plot barplot w/ hover
     canvas, axes, mark = toyplot.bars(
-                            table, 
-                            title=hover(table),
-                            width=400, 
-                            height=200, 
-                            xshow=False,                            
+                            table,
+                            width=400,
+                            height=200,
                             style={"stroke": toyplot.color.near_black},
                             )
 ```
 
-
+![png](05_STRUCTURE_API_files/05_STRUCTURE_API_05_all_k_plots.png)
 
 ### Make a slightly fancier plot and save to file
 
-
 ```python
 ## save plots for your favorite value of K
-table = struct.get_clumpp_table(kpop=3)
-table = table.ix[myorder]
+table = struct.get_clumpp_table(kpop=2)
+table = table.loc[myorder]
 ```
-
     mean scores across 20 replicates.
-
-
 
 ```python
 ## further styling of plot with css 
@@ -450,9 +399,9 @@ style = {"stroke":toyplot.color.near_black,
          "stroke-width": 2}
 
 ## build barplot
-canvas = toyplot.Canvas(width=600, height=250)
+canvas = toyplot.Canvas(width=800, height=400)
 axes = canvas.cartesian(bounds=("5%", "95%", "5%", "45%"))
-axes.bars(table, title=hover(table), style=style)
+axes.bars(table, style=style)
 
 ## add names to x-axis
 ticklabels = [i for i in table.index.tolist()]
@@ -467,27 +416,16 @@ axes.y.show = False
 ## options: uncomment to save plots. Only html retains hover.
 import toyplot.svg
 import toyplot.pdf
-import toyplot.html
-toyplot.svg.render(canvas, "struct.svg")
-toyplot.pdf.render(canvas, "struct.pdf")
-toyplot.html.render(canvas, "struct.html")
+toyplot.svg.render(canvas, "anolis-struct.svg")
+toyplot.pdf.render(canvas, "anolis-struct.pdf")
 
 ## show in notebook
 canvas
 ```
-
-### Calculating the best K 
-Use the `.get_evanno_table()` function. 
-
-
-```python
-struct.get_evanno_table([3, 4, 5, 6])
-```
-
+![png](05_STRUCTURE_API_files/05_STRUCTURE_API_06_k_2_fancy.png)
 
 ### Testing for convergence
 The `.get_evanno_table()` and `.get_clumpp_table()` functions each take an optional argument called `max_var_multiple`, which is the max multiple by which you'll allow the variance in a 'replicate' run to exceed the minimum variance among replicates for a specific test. In the example below you can see that many reps were excluded for the higher values of K, such that fewer reps were analyzed for the final results. By excluding the reps that had much higher variance than other (one criterion for asking if they converged) this can increase the support for higher K values. If you apply this method take care to think about what it is doing and how to interpret the K values. Also take care to consider whether your replicates are using the same input SNP data but just different random seeds, or if you used a `map` file, in which case your replicates represent different sampled SNPs and different random seeds. I'm of the mind that there is no true K value, and sampling across a distribution of SNPs across many replicates gives you a better idea of the variance in population structure in your data. 
-
 
 ```python
 struct.get_evanno_table([3, 4, 5, 6], max_var_multiple=50.)
@@ -497,8 +435,3 @@ struct.get_evanno_table([3, 4, 5, 6], max_var_multiple=50.)
     [K4] 11 reps excluded (not converged) see 'max_var_multiple'.
     [K5] 1 reps excluded (not converged) see 'max_var_multiple'.
     [K6] 17 reps excluded (not converged) see 'max_var_multiple'.
-
-
-
-### Copying this notebook to your computer/cluster
-You can easily copy this notebook and then just replace my file names with your filenames to run your analysis. Just click on the [Download Notebook] link at the top of this page. Then run `jupyter-notebook` from a terminal and open this notebook from the dashboard.
