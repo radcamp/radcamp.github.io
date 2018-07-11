@@ -322,6 +322,7 @@ popsizes_model.optimize()
             status: 1
            success: True
                  x: array([1.09757100e+01, 1.17971582e+01, 1.12867768e+05])
+		 
 ```
 yticks = [1e4, 2.5e4, 5e4, 7.5e4, 1e5, 2.5e5, 5e5, 7.5e5]
 
