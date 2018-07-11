@@ -58,10 +58,15 @@ print(rax.command)
     raxmlHPC-PTHREADS-SSE3 -f a -T 2 -m GTRGAMMA -N 10 -x 12345 -p 54321 -n anolis-tree -w /home/<username>/ipyrad-workshop/anolis-raxml -s /home/<username>/ipyrad-workshop/anolis_outfiles/anolis.phy
     
 Explanation of RAxML arguments:
-* -f option selects the algorithm RAxML will execute. In this case, `-f a` will perform a rapid Bootstrap analysis and search for best-scoring ML tree in a single run.
-* -T option designates the number of threads you want to run. This should reflect the number of cores available in your machine, only 2 in our case.
-* -m option selects the model of nucleotide substitution. In this case, GTRGAMMA is the GTR (generalised time-reversible) + GAMMA model of rate heterogeneity. A complex, but standard model used in RAxML.
-* -N option selects 
+* -f: selects the algorithm RAxML will execute. In this case, `-f a` will perform a rapid bootstrap analysis and search for best-scoring ML tree in a single run.
+* -T: specifies the number of threads you want to run. This should reflect the number of cores available in your machine, only 2 in our case.
+* -m: selects the model of nucleotide substitution. In this case, GTRGAMMA is the GTR (generalised time-reversible) + GAMMA model of rate heterogeneity. A complex, but standard model used in RAxML.
+* -N: specifies the number of alternative runs on distinct starting parsimony trees (bootstrapping).
+* -x: random seed number for the analysis.
+* -p: random seed number for the parsimony inference of starting trees.
+* -n: specifies the root name of the output files.
+* -w: specifies the name of the output directory where RAxML will write the output files. Note that you need to specify the full path.
+* -s: Name of input file in PHYLIP format.
 
 ### Run the job
 This will start the job running. The subsampled dataset we are using should run very quickly (~1-2 minutes).
