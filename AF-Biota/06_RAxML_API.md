@@ -16,9 +16,9 @@ Create a new notebook inside your `/home/<username>/ipyrad-workshop/` directory 
 ## Create a raxml Class object
 First, copy and paste the usual imports into a notebook cell and run it:
 ```python
-import ipyrad.analysis as ipa
-import toyplot
-import toytree
+import ipyrad.analysis as ipa    ## ipyrad analysis toolkit
+import toyplot                   ## plotting library
+import toytree                   ## tree plotting
 ```
 
 Now create a raxml object. The only required argument to initialize the object is a phylip formatted sequence file. In this example we provide a name and working directory as well:
