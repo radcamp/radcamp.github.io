@@ -388,6 +388,7 @@ fig = momi.DemographyPlot(
 
 ## Bootstrapping confidence intervals
 
+We will use a bootstrap procedure to construct confidence intervals on parameters from our best model. Here we will run 10 bootstraps, for the sake of time, but on real data you would normally perform 50-100 bootstraps. 
 ```
 n_bootstraps = 10
 # make copies of the original model to avoid changing them
@@ -444,7 +445,7 @@ fig.draw_N_legend(loc="upper right")
 ```
 ![png](07_momi2_API_files/07_momi2_API_06_Bootstrap_tdiv.png)
 
-
+In this figure the thick blue lines indicate the maximum likelihood values estimated under the best model, and the faint lines illustrate results of eacho of the ten bootstraps.
 
 ```python
 print(no_pulse_model.get_params())
