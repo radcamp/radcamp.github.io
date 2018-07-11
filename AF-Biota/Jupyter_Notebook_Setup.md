@@ -81,6 +81,9 @@ have to do this once on the HPC**):
 ```
 $ jupyter notebook password
 ```
+This will set a password on your notebook server so that other people 
+won't have access to your files and notebooks. The notebook server 
+will prompt you for your password when you initially connect to it.
 
 ### Set default configuration behavior
 There are a couple arguments that we always want to start the jupyter
@@ -138,6 +141,11 @@ $ jupyter notebook list
 Currently running servers:
 http://localhost:<my_port_#>/ :: /home/<username>
 ```
+You shoud see that your notebook server prompts you for your password
+before it gives you access. This is the password that you entered above
+durint the `jupyter notebook password` call. The server normally will
+cache your login, so you shouldn't have to keep logging in every time
+you connect, so long as you are logging in from the same computer.
 
 ## Useful jupyter tricks/ideas
 
