@@ -16,6 +16,7 @@ $ echo "export QT_QPA_PLATFORM=offscreen" >> ~/.bashrc
 $ source ~/.bashrc
 $ env | grep QT
 ```
+```
     QT_QPA_PLATFORM=offscreen
 ```    
 
