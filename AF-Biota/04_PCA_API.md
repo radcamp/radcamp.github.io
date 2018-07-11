@@ -62,7 +62,7 @@ pca.plot()
 
 ![png](04_PCA_API_files/04_PCA_API_00_Simulated_Example.png)
 
-> **Note** Obviously you want to replace "My Title" and "My_PCA_plot.png" with something more meaningful.
+> **Note** The `#` at the beginning of a line indicates to python that this is a comment, so it doesn't try to run this line. This is a very handy thing if you want to add or remove lines of code from an analysis without deleting them. Simply comment them out with the `#`!
 
 ## Full guide
 
