@@ -8,15 +8,26 @@ Although there are many newer and faster implementations of STRUCTURE, such as `
 
 # **STRUCTURE** Analyses
 
+## Configure HPC environment for ipyparallel ***(THIS IS VERY IMPORTANT)***
+In this tutorial we will be using a python package for parallel computation called `ipyparallel`. The USP cluster does not have a GUI, as is typical of cluster systems. Unfortunately ipyparallel and this particular GUI-less environment have a hard time interacting (for complicated reasons). We have derived a workaround that allows the parallelization to function. You should execute the following commands **in a terminal on the USP cluster before doing anything else**.
+```
+$ echo "# Prevent ipyparallel engines from dying in a headless environment" >> ~/.bashrc
+$ echo "export QT_QPA_PLATFORM=offscreen" >> ~/.bashrc
+$ source ~/.bashrc
+$ env | grep QT
+```
+    QT_QPA_PLATFORM=offscreen
+> **Note:** Don't worry if this seems like black magic, because ***IT IS!*** ;p
+
 First, begin by creating a new notebook inside your `/home/<username>/ipyrad-workshop/` directory called `anolis-structure.ipynb` (refer to the [jupyter notebook configuration page](Jupyter_Notebook_Setup.md) for a refresher on connecting to the notebook server). **The rest of the materials in this part of the workshop assume you are running all code in cells of a jupyter notebook** that is running on the USP cluster.
 
 * [Parallel cluster setup](#parallel-cluster-setup)
-
+* [Quick guide (tl;dr)](#quick-guide-(tl;dr))
 
 ## Required software
 You can easily install the required software for this notebook using `conda`. This can even be accomplished inside your jupyter notebook. Preceding a command with `!` will tell the notebook to run the line as a terminal command, instead of as python.
 
-```python
+```
 ## The `-y` here means "Answer yes to all questions". It prevents
 ## conda from asking whether the install looks ok.
 
@@ -78,16 +89,16 @@ str = ipa.structure(
 str.mainparams.burnin = 1000
 str.mainparams.numreps = 5000
 
-## submit N replicates of each test to run on parallel client
+## submit 5 replicates of each K value to run on parallel client
 for kpop in kvalues:
-    str.run(kpop=kpop, nreps=4, ipyclient=ipyclient)
+    str.run(kpop=kpop, nreps=5, ipyclient=ipyclient)
 
 ## wait for parallel jobs to finish
 ipyclient.wait()
 ```
-    submitted 4 structure jobs [quick-K-2]
-    submitted 4 structure jobs [quick-K-3]
-    submitted 4 structure jobs [quick-K-4]
+    submitted 5 structure jobs [quick-K-2]
+    submitted 5 structure jobs [quick-K-3]
+    submitted 5 structure jobs [quick-K-4]
 
     True
 
@@ -96,9 +107,10 @@ ipyclient.wait()
 etable = str.get_evanno_table(kvalues)
 etable
 ```
+![png](05_STRUCTURE_API_files/05_STRUCTURE_API_03_tldr_evanno_table.png)
 
 ```python
-## get admixture proportion tables avg'd across reps
+## get admixture proportion tables avgeraged across reps
 tables = str.get_clumpp_table(kvalues, quiet=True)
 ```
 
@@ -114,50 +126,49 @@ toyplot.bars(
     xshow=False,
 );
 ```
+![png](05_STRUCTURE_API_files/05_STRUCTURE_API_03_tldr_barplot.png)
 
 ## Full guide
 
 ### Enter input and output file locations
-The `.str` file is a structure formatted file output by ipyrad. It includes all SNPs present in the data set. The `.snps.map` file is an optional file that maps which loci each SNP is from. If this file is used then each replicate analysis will *randomly* sample a single SNP from each locus in reach rep. The results from many reps therefore will represent variation across unlinked SNP data sets, as well as variation caused by uncertainty. The `workdir` is the location where you want output files to be written and will be created if it does not already exist. 
-
+The `.str` file is a structure formatted file output by ipyrad. It includes all SNPs present in the data set. The `.snps.map` file is an optional file that maps which loci each SNP is from. If this file is used then each replicate analysis will *randomly* sample a single SNP from each locus in reach rep. The results from many reps therefore will represent variation across unlinked SNP data sets, as well as variation caused by uncertainty. The `.ustr` file that was used in the tl;dr analysis represents just one sample of unlinked snps, so it's good for quick and dirty analysis, but it doesn't fully capture uncertainty in the data. The `workdir` is the location where you want output files to be written and will be created if it does not already exist. 
 
 ```python
 ## the structure formatted file
-strfile = "./analysis-ipyrad/pedic-full_outfiles/pedic-full.str"
+strfile = "./anolis_outfiles/anolis.str"
 
 ## an optional mapfile, to sample unlinked SNPs
-mapfile = "./analysis-ipyrad/pedic-full_outfiles/pedic-full.snps.map"
+mapfile = "./anolis_outfiles/anolis.snps.map"
 
 ## the directory where outfiles should be written
-workdir = "./analysis-structure/"
+workdir = "./anolis-structure/"
 ```
+> **Note:** The .str/.map file combination is more robust and more fully captures the variation in the data. The .ustr file is one sample of unlinked snps that's useful for basic exploratory analysis.
 
 ### Create a *Structure* Class object
-Structure is kind of an old fashioned program that requires creating quite a few input files to run, which makes it not very convenient to use in a programmatic and reproducible way. To work around this we've created a convenience wrapper object to make it easy to submit Structure jobs and to summarize their results. 
-
+Structure is kind of an old fashioned program that requires creating quite a few input files to run, which makes it not very convenient to use in a programmatic and reproducible way. To work around this the `ipyrad.analysis.structure` module introduces a convenience wrapper object to make it easy to submit Structure jobs and to summarize their results. 
 
 ```python
 ## create a Structure object
-struct = ipa.structure(name="structure-test",
+str = ipa.structure(name="anolis-test",
                        data=strfile, 
                        mapfile=mapfile,
                        workdir=workdir)
 ```
 
 ### Set parameter options for this object
-Our Structure object will be used to submit jobs to the cluster. It has associated with it a name, a set of input files, and a large number of parameter settings. You can modify the parameters by setting them like below. You can also use tab-completion to see all of the available options, or print them like below. See the [full structure docs here](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=3&ved=0ahUKEwjt9tjpkszYAhWineAKHZ4-BxAQFgg4MAI&url=https%3A%2F%2Fwww.researchgate.net%2Ffile.PostFileLoader.html%3Fid%3D591c636cdc332d78a46a1948%26assetKey%3DAS%253A495017111953409%25401495032684846&usg=AOvVaw0WjG0uD0MXrs5ResMIHnik) for further details on the function of each parameter. In support of reproducibility, it is good practice to print both the mainparams and extraparams so it is clear which options you used. 
-
+The Structure object will be used to submit jobs to the ipyparallel cluster. It has associated with it a name, a set of input files, and a large number of parameter settings. You can modify the parameters by setting them like below. You can also use tab-completion to see all of the available options, or print them like below. See the [full structure docs here](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=3&ved=0ahUKEwjt9tjpkszYAhWineAKHZ4-BxAQFgg4MAI&url=https%3A%2F%2Fwww.researchgate.net%2Ffile.PostFileLoader.html%3Fid%3D591c636cdc332d78a46a1948%26assetKey%3DAS%253A495017111953409%25401495032684846&usg=AOvVaw0WjG0uD0MXrs5ResMIHnik) for further details on the function of each parameter. In support of *reproducibility*, it's good practice to print both the mainparams and extraparams so it's clear which options you used.
 
 ```python
 ## set mainparams for object
-struct.mainparams.burnin = 10000
-struct.mainparams.numreps = 100000
+str.mainparams.burnin = 10000
+str.mainparams.numreps = 100000
 
 ## see all mainparams
-print struct.mainparams
+print str.mainparams
 
 ## see or set extraparams
-print struct.extraparams
+print str.extraparams
 ```
 
     burnin             10000               
@@ -227,21 +238,16 @@ print struct.extraparams
     unifprioralpha      1                   
     updatefreq          10000               
     usepopinfo          0                   
-    
+> **Note:** Don't worry about trying to understand all of these parameters at this time. The defaults are sensible. But do notice that the `burnin` and `numreps` here are still well below the values you'd use in real analysis.
 
-
-### Submit jobs to run on the cluster
-The function `run()` distributes jobs to run on the cluster and load-balances the parallel workload. It takes a number of arguments. The first, `kpop`, is the number of populations. The second, `nreps`, is the number of replicated runs to perform. Each rep has a different random seed, and if you entered a mapfile for your Structure object then it will subsample unlinked snps independently in each replicate. The `seed` argument can be used to make the replicate analyses reproducible. The `extraparams.seed` parameter will be generated from this for each replicate. And finally, provide it the `ipyclient` object that we created above. The structure object will store an *asynchronous results object* for each job that is submitted so that we can query whether the jobs are finished yet or not. Using a simple for-loop we'll submit 20 replicate jobs to run at four different values of K. 
-
+### Submit many jobs to run in parallel
+The function `run()` distributes jobs to run on the cluster via the `ipyparallel` backend. It takes a number of arguments. The first, `kpop`, is the number of populations. The second, `nreps`, is the number of replicated runs to perform. Each rep has a different random seed, and if you entered a mapfile for your Structure object then it will subsample unlinked snps independently in each replicate. The `seed` argument can be used to make the replicate analyses reproducible (i.e. a structure run using the same SNPs and started with the same seed will always produce the same results). The `extraparams.seed` parameter will be generated from this for each replicate. And finally, provide it the `ipyclient` object that we created above. The structure object will store an *asynchronous results object* for each job that is submitted so that we can query whether the jobs are finished. Using a simple for-loop we'll submit 20 replicate jobs to run at three different values of K. 
 
 ```python
 ## a range of K-values to test
-tests = [3, 4, 5, 6]
-```
+tests = [2, 3, 4]
 
-
-```python
-## submit batches of 20 replicate jobs for each value of K 
+## submit batches of 10 replicate jobs for each value of K 
 for kpop in tests:
     struct.run(
         kpop=kpop, 
@@ -250,12 +256,9 @@ for kpop in tests:
         ipyclient=ipyclient,
         )
 ```
-
-    submitted 20 structure jobs [structure-test-K-3]
-    submitted 20 structure jobs [structure-test-K-4]
-    submitted 20 structure jobs [structure-test-K-5]
-    submitted 20 structure jobs [structure-test-K-6]
-
+    submitted 10 structure jobs [structure-test-K-2]
+    submitted 10 structure jobs [structure-test-K-3]
+    submitted 10 structure jobs [structure-test-K-4]
 
 ### Track progress until finished
 You can check for finished results by using the `get_clumpp_table()` function, which tries to summarize the finished results files. If no results are ready it will simply print a warning message telling you to wait. If you want the notebook to block/wait until all jobs are finished then execute the `wait()` function of the ipyclient object, like below. 
