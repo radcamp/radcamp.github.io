@@ -134,7 +134,7 @@ toyplot.bars(
 ## Full guide
 
 ### Enter input and output file locations
-The `.str` file is a structure formatted file output by ipyrad. It includes all SNPs present in the data set. The `.snps.map` file is an optional file that maps which loci each SNP is from. If this file is used then each replicate analysis will *randomly* sample a single SNP from each locus in reach rep. The results from many reps therefore will represent variation across unlinked SNP data sets, as well as variation caused by uncertainty. The `.ustr` file that was used in the tl;dr analysis represents just one sample of unlinked snps, so it's good for quick and dirty analysis, but it doesn't fully capture uncertainty in the data. The `workdir` is the location where you want output files to be written and will be created if it does not already exist. 
+The `.str` file is a STRUCTURE formatted file output by ipyrad. It includes all SNPs present in the data set. The `.snps.map` file is an optional file that maps which locus each SNP is from. If this file is used then each replicate analysis will *randomly* sample a single SNP from each locus in reach rep. The results from many reps therefore will represent variation across unlinked SNP data sets, as well as variation caused by uncertainty. The `.ustr` file that was used in the tl;dr analysis represents just one sample of unlinked snps, so it's good for quick and dirty analysis, but it doesn't fully capture uncertainty in the data. The `workdir` is the location where you want output files to be written and will be created if it does not already exist. 
 
 ```python
 ## the structure formatted file
@@ -148,8 +148,8 @@ workdir = "./anolis-structure/"
 ```
 > **Note:** The .str/.map file combination is more robust and more fully captures the variation in the data. The .ustr file is one sample of unlinked snps that's useful for basic exploratory analysis.
 
-### Create a *Structure* Class object
-Structure is kind of an old fashioned program that requires creating quite a few input files to run, which makes it not very convenient to use in a programmatic and reproducible way. To work around this the `ipyrad.analysis.structure` module introduces a convenience wrapper object to make it easy to submit Structure jobs and to summarize their results. 
+### Create a *STRUCTURE* Class object
+STRUCTURE is kind of an old fashioned program that requires creating quite a few input files to run, which makes it not very convenient to use in a programmatic and reproducible way. To work around this the `ipyrad.analysis.structure` module introduces a convenience wrapper object to make it easy to submit STRUCTURE jobs and to summarize their results. 
 
 ```python
 ## create a Structure object
@@ -160,7 +160,7 @@ struct = ipa.structure(name="anolis-test",
 ```
 
 ### Set parameter options for this object
-The Structure object will be used to submit jobs to the ipyparallel cluster. It has associated with it a name, a set of input files, and a large number of parameter settings. You can modify the parameters by setting them like below. You can also use tab-completion to see all of the available options, or print them like below. See the [full structure docs here](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=3&ved=0ahUKEwjt9tjpkszYAhWineAKHZ4-BxAQFgg4MAI&url=https%3A%2F%2Fwww.researchgate.net%2Ffile.PostFileLoader.html%3Fid%3D591c636cdc332d78a46a1948%26assetKey%3DAS%253A495017111953409%25401495032684846&usg=AOvVaw0WjG0uD0MXrs5ResMIHnik) for further details on the function of each parameter. In support of *reproducibility*, it's good practice to print both the mainparams and extraparams so it's clear which options you used.
+The STRUCTURE object will be used to submit jobs to the ipyparallel cluster. It has associated with it a name, a set of input files, and a large number of parameter settings. You can modify the parameters by setting them like below. You can also use tab-completion to see all of the available options, or print them like below. See the [full STRUCTURE docs here](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=3&ved=0ahUKEwjt9tjpkszYAhWineAKHZ4-BxAQFgg4MAI&url=https%3A%2F%2Fwww.researchgate.net%2Ffile.PostFileLoader.html%3Fid%3D591c636cdc332d78a46a1948%26assetKey%3DAS%253A495017111953409%25401495032684846&usg=AOvVaw0WjG0uD0MXrs5ResMIHnik) for further details on the function of each parameter. In support of *reproducibility*, it's good practice to print both the mainparams and extraparams so it's clear which options you used.
 
 ```python
 ## set mainparams for object
@@ -244,7 +244,7 @@ print struct.extraparams
 > **Note:** Don't worry about trying to understand all of these parameters at this time. The defaults are sensible. But do notice that the `burnin` and `numreps` here are still well below the values you'd use in real analysis.
 
 ### Submit many jobs to run in parallel
-The function `run()` distributes jobs to run on the cluster via the `ipyparallel` backend. It takes a number of arguments. The first, `kpop`, is the number of populations. The second, `nreps`, is the number of replicated runs to perform. Each rep has a different random seed, and if you entered a mapfile for your Structure object then it will subsample unlinked snps independently in each replicate. The `seed` argument can be used to make the replicate analyses reproducible (i.e. a structure run using the same SNPs and started with the same seed will always produce the same results). The `extraparams.seed` parameter will be generated from this for each replicate. And finally, provide it the `ipyclient` object that we created above. The structure object will store an *asynchronous results object* for each job that is submitted so that we can query whether the jobs are finished. Using a simple for-loop we'll submit 20 replicate jobs to run at three different values of K. 
+The function `run()` distributes jobs to run on the cluster via the `ipyparallel` backend. It takes a number of arguments. The first, `kpop`, is the number of populations. The second, `nreps`, is the number of replicated runs to perform. Each rep has a different random seed, and if you entered a mapfile for your STRUCTURE object then it will subsample unlinked SNPs independently in each replicate. The `seed` argument can be used to make the replicate analyses reproducible (i.e. a STRUCTURE run using the same SNPs and started with the same seed will always produce the same results). The `extraparams.seed` parameter will be generated from this for each replicate. And finally, provide it the `ipyclient` object that we created above. The STRUCTURE object will store an *asynchronous results object* for each job that is submitted so that we can query whether the jobs are finished. Using a simple for-loop we'll submit 20 replicate jobs to run at three different values of K. 
 
 ```python
 ## a range of K-values to test
@@ -263,8 +263,10 @@ for kpop in kvalues:
     submitted 10 structure jobs [structure-test-K-3]
     submitted 10 structure jobs [structure-test-K-4]
 
+> **Note** This step may take some time...
+
 ### Track progress until finished
-You can check for finished results by using the `get_clumpp_table()` function, which tries to summarize the finished results files. If no results are ready it will simply print a warning message telling you to wait. A more straightforward way to monitor progress is to just ask the jobs whether they are finished yet. The list of jobs for a structure analysis are retained in the `asysncs` list, which can be examined like so:
+You can check for finished results by using the `get_clumpp_table()` function, which tries to summarize the finished results files. If no results are ready it will simply print a warning message telling you to wait. A more straightforward way to monitor progress is to just ask the jobs whether they are finished yet. The list of jobs for a STRUCTURE analysis are retained in the `asysncs` list, which can be examined like so:
 
 ```python
 ## see submitted jobs (we query first 5 here)
@@ -290,7 +292,7 @@ ipyclient.wait()
 ```
 
 ### Summarize replicates with CLUMPP
-We ran 10 replicates per K-value hypothesis. We now need to concatenate and purmute those results so they can be summarized. For this we use the software clumpp. The default arguments to clumpp are generally good, but you can modify them in the same as the structure params, by accessing the `.clumppparams` attribute of your structure object. See the [clumpp documentation](https://web.stanford.edu/group/rosenberglab/software/CLUMPP_Manual.pdf) for more details. Below we run clumpp for each value of K that we ran structure on. You only need to tell the `get_clumpp_table()` function the value of K and it will find all of the result files given the Structure object's `name` and `workdir`.
+We ran 10 replicates per K-value hypothesis. We now need to concatenate and purmute those results so they can be summarized. For this we use the software CLUMPP. The default arguments to CLUMPP are generally good, but if you're running a dataset with high numbers of K, you may want to modify the 'greedy_option', for example. However, we don't need to do this with the dataset for this workshop. You can modify the parameters in the same as the STRUCTURE params, by accessing the `.clumppparams` attribute of your STRUCTURE object. See the [CLUMPP documentation](https://web.stanford.edu/group/rosenberglab/software/CLUMPP_Manual.pdf) for more details. Below we run CLUMPP for each value of K that we ran STRUCTURE on. You only need to tell the `get_clumpp_table()` function the value of K and it will find all of the result files given the STRUCTURE object's `name` and `workdir`.
 
 ```python
 ## set some clumpp params and print params to the screen
@@ -369,7 +371,7 @@ print(tables[3].loc[myorder])
     punc_MTRX1478      0.044  9.532e-01  0.002
 > **Note:** The `.loc[]` notation specifies to fetch from the table by row.
 
-### Visualize population structure in barplots 
+### Visualize population STRUCTURE in barplots 
 
 ```python
 for kpop in kvalues:
