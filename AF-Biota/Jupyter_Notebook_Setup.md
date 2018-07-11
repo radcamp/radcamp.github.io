@@ -16,6 +16,7 @@ Overview of process
 * [Set Jupyter notebook password](#set-jupyter-notebook-password)
 * [Create the config file](#set-default-configuration-behavior)
 * [Start remote notebook server](#run-notebook-server)
+* [What do do if your notebook isn't working](#what-to-do-if-the-notebook-is-not-working)
 * [More information about jupyter](#useful-jupyter-tricks/ideas)
 
 ## Setup to run on your local computer
@@ -147,6 +148,13 @@ durint the `jupyter notebook password` call. The server normally will
 cache your login, so you shouldn't have to keep logging in every time
 you connect, so long as you are logging in from the same computer.
 
+## What to do if the notebook is not working
+This **WILL** happen to everyone at least once, probably many times. You 
+attempt to open your web browser to `http://localhost/<my_port_#>` and 
+you see the dreaded : 
+
+![png](Jupyter_Notebook_Setup_files/Jupyter_notebook_This_page_isnt_working.png)
+
 ## Useful jupyter tricks/ideas
 
 ### Jupyter Notebook setup tl;dr
@@ -180,6 +188,10 @@ ps -ef | grep ssh | grep usp
 
 If you **don't** see a line that includes this `ssh -N -f -L` then it's 
 not running, so you can restart it.
+
+### What does this error mean: "open failed: connect failed: Connection refused"?
+This error indicates that your ssh tunnel is running, but your notebook server is
+not running. SSH to the cluster and restart your notebook server.
 
 ### How to tell if the ssh tunnel is running (Windows)
 I have no fuckin idea.
