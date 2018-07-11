@@ -58,8 +58,10 @@ print(rax.command)
     raxmlHPC-PTHREADS-SSE3 -f a -T 2 -m GTRGAMMA -N 10 -x 12345 -p 54321 -n anolis-tree -w /home/<username>/ipyrad-workshop/anolis-raxml -s /home/<username>/ipyrad-workshop/anolis_outfiles/anolis.phy
     
 Explanation of RAxML arguments:
-
-
+* -f option selects the algorithm RAxML will execute. In this case, `-f a` will perform a rapid Bootstrap analysis and search for best-scoring ML tree in a single run.
+* -T option designates the number of threads you want to run. This should reflect the number of cores available in your machine, only 2 in our case.
+* -m option selects the model of nucleotide substitution. In this case, GTRGAMMA is the GTR (generalised time-reversible) + GAMMA model of rate heterogeneity. A complex, but standard model used in RAxML.
+* -N option selects 
 
 ### Run the job
 This will start the job running. The subsampled dataset we are using should run very quickly (~1-2 minutes).
