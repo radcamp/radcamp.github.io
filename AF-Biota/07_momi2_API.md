@@ -386,6 +386,29 @@ fig = momi.DemographyPlot(
 ```
 ![png](07_momi2_API_files/07_momi2_API_05_Inference_migration.png)
 
+## Model selection with AIC
+**TODO:** Write this up a bit more.
+```
+AICs = []
+for model in [no_migration_model, popsizes_model, migration_model]:
+    lik = model.log_likelihood()
+    nparams = len(model.get_params())
+    aic = 2*nparams - 2*lik
+    print("AIC {}".format(aic))
+    AICs.append(aic)
+
+minv = np.min(AICs)
+delta_aic = np.array(AICs) - minv
+print("Delta AIC per model: ", delta_aic)
+print("AIC weight per model: ", np.exp(-0.5 * delta_aic))
+
+```
+	AIC 3857.113601374685
+	AIC 3859.6581687120392
+	AIC 3852.411537337999
+	[4.70206404 7.24663137 0.        ]
+	[0.09527079 0.02669402 1.        ]
+
 ## Bootstrapping confidence intervals
 
 We will use a bootstrap procedure to construct confidence intervals on parameters from our best model. Here we will run 10 bootstraps, for the sake of time, but on real data you would normally perform 50-100 bootstraps. 
