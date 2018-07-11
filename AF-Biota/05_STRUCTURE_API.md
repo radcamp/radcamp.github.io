@@ -17,6 +17,8 @@ $ source ~/.bashrc
 $ env | grep QT
 ```
     QT_QPA_PLATFORM=offscreen
+```    
+
 > **Note:** Don't worry if this seems like black magic, because ***IT IS!*** ;p
 
 First, begin by creating a new notebook inside your `/home/<username>/ipyrad-workshop/` directory called `anolis-structure.ipynb` (refer to the [jupyter notebook configuration page](Jupyter_Notebook_Setup.md) for a refresher on connecting to the notebook server). **The rest of the materials in this part of the workshop assume you are running all code in cells of a jupyter notebook** that is running on the USP cluster.
