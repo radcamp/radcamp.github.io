@@ -327,6 +327,7 @@ tables = struct.get_clumpp_table(kvalues)
 ## return the evanno table w/ deltaK
 struct.get_evanno_table(kvalues)
 ```
+![png](05_STRUCTURE_API_files/05_STRUCTURE_API_04_evanno_table.png)
 
 ### Sort the table order how you like it
 This can be useful if, for example, you want to order the names to be in the same order as tips on your phylogeny. 
