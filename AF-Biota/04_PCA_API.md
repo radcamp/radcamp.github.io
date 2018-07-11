@@ -29,7 +29,7 @@ http://localhost:<my_port_#>
 Now you should see a view of your home directory on the cluster:
 ![png](04_PCA_API_files/04_PCA_API_Notebook_Home.png)
 
-Lets go inside the ipyrad-worshop folder and create our first new notebook using the 'New' button, then 'Python 2' button.
+Lets go inside the ipyrad-workshop folder and create our first new notebook using the 'New' button, then 'Python 2' button.
 ![png](04_PCA_API_files/04_PCA_API_Notebook_New.png)
 
 First things first, rename your new notebook to give it a meaningful name:
