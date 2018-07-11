@@ -49,14 +49,9 @@ You can easily install the required software for this notebook using `conda`. Th
 ### Import Python libraries
 
 ```python
-## ipyrad analysis toolkit
-import ipyrad.analysis as ipa
-
-## parallel processing
-import ipyparallel as ipp
-
-## plotting library
-import toyplot                     
+import ipyrad.analysis as ipa   ## ipyrad analysis toolkit
+import ipyparallel as ipp       ## parallel processing
+import toyplot                  ## plotting library   
 ```
 
 ## Parallel cluster setup
