@@ -201,6 +201,9 @@ jupyter to error out if our port is already occupied.
 $ jupyter notebook --no-browser --port <my_port_number> --port-retries=0 &
 ```
 
+### IPython ipyparallel engines are dying? How can I solve this?
+[Here's a solution](https://github.com/ipython/ipyparallel/issues/213). This is an esoteric problem.
+
 ## Further exploration with jupyter notebooks
 Here are links to a couple useful jupyter tutorials that explore
 much more of the functionality, should you be interested in learning
