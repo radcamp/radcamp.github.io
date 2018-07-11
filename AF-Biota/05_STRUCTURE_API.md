@@ -387,43 +387,57 @@ for kpop in kvalues:
 
 ### Make a slightly fancier plot and save to file
 
+Lets define a function to make the fancy plot, so we can call the function multiple times easily. The `def` keyword indicates that we are "defining" a python function.
 ```python
-## save plots for your favorite value of K
-table = struct.get_clumpp_table(kpop=2)
-table = table.loc[myorder]
-```
-    mean scores across 20 replicates.
-
-```python
-## further styling of plot with css 
-style = {"stroke":toyplot.color.near_black, 
+def fancy_plot(table):
+    ## further styling of plot with css 
+    style = {"stroke":toyplot.color.near_black, 
          "stroke-width": 2}
 
-## build barplot
-canvas = toyplot.Canvas(width=800, height=400)
-axes = canvas.cartesian(bounds=("5%", "95%", "5%", "45%"))
-axes.bars(table, style=style)
+    ## build barplot
+    canvas = toyplot.Canvas(width=800, height=400)
+    axes = canvas.cartesian(bounds=("5%", "95%", "5%", "45%"))
+    axes.bars(table, style=style)
 
-## add names to x-axis
-ticklabels = [i for i in table.index.tolist()]
-axes.x.ticks.locator = toyplot.locator.Explicit(labels=ticklabels)
-axes.x.ticks.labels.angle = -60
-axes.x.ticks.show = True
-axes.x.ticks.labels.offset = 10
-axes.x.ticks.labels.style = {"font-size": "12px"}
-axes.x.spine.style = style
-axes.y.show = False
+    ## add names to x-axis
+    ticklabels = [i for i in table.index.tolist()]
+    axes.x.ticks.locator = toyplot.locator.Explicit(labels=ticklabels)
+    axes.x.ticks.labels.angle = -60
+    axes.x.ticks.show = True
+    axes.x.ticks.labels.offset = 10
+    axes.x.ticks.labels.style = {"font-size": "12px"}
+    axes.x.spine.style = style
+    axes.y.show = False
     
-## options: uncomment to save plots. Only html retains hover.
-import toyplot.svg
-import toyplot.pdf
-toyplot.svg.render(canvas, "anolis-struct.svg")
-toyplot.pdf.render(canvas, "anolis-struct.pdf")
+    import toyplot.svg
+    import toyplot.pdf
+    toyplot.svg.render(canvas, "anolis-struct.svg")
+    toyplot.pdf.render(canvas, "anolis-struct.pdf")
 
-## show in notebook
-canvas
+    ## show in notebook
+    return canvas
 ```
+
+Now we can call our `fancy_plot()` function using the sample order we defined earlier and K=2.
+
+```python
+## save plots for your favorite value of K
+table = struct.get_clumpp_table(kvalues=2)
+table = table.loc[myorder]
+fancy_plot(table)
+```
+    [K2] 10/10 results permuted across replicates (max_var=0).
+
 ![png](05_STRUCTURE_API_files/05_STRUCTURE_API_06_k_2_fancy.png)
+
+Alternatively if we want to just sort by increasing values of ancestry components we can use the `sort_values()` function, which is illustrated below:
+
+```
+table = struct.get_clumpp_table(kpop=2)
+table = table.sort_values(by=[0, 1])
+fancy_plot(table)
+```
+![png](05_STRUCTURE_API_files/05_STRUCTURE_API_07_k_2_sorted_fancy.png)
 
 ### Testing for convergence
 The `.get_evanno_table()` and `.get_clumpp_table()` functions each take an optional argument called `max_var_multiple`, which is the max multiple by which you'll allow the variance in a 'replicate' run to exceed the minimum variance among replicates for a specific test. In the example below you can see that many reps were excluded for the higher values of K, such that fewer reps were analyzed for the final results. By excluding the reps that had much higher variance than other (one criterion for asking if they converged) this can increase the support for higher K values. If you apply this method take care to think about what it is doing and how to interpret the K values. Also take care to consider whether your replicates are using the same input SNP data but just different random seeds, or if you used a `map` file, in which case your replicates represent different sampled SNPs and different random seeds. I'm of the mind that there is no true K value, and sampling across a distribution of SNPs across many replicates gives you a better idea of the variance in population structure in your data. 
