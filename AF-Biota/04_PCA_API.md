@@ -66,9 +66,9 @@ pca.plot()
 
 ## Full guide
 
-### Simple pca from vcf file
+### Simple PCA from vcf file
 
-In the most common use, you'll want to plot the first two PCs, then inspect the output, remove any obvious outliers, and then redo the pca. It's often desirable to import a vcf file directly rather than to use the ipyrad assembly, so here we'll demonstrate this with the Anolis data.
+In the most common use, you'll want to plot the first two PCs, then inspect the output, remove any obvious outliers, and then redo the PCA. It's often desirable to import a vcf file directly rather than to use the ipyrad assembly, so here we'll demonstrate this with the Anolis data.
 
 ```python
 ## Path to the input vcf.
@@ -97,7 +97,7 @@ pca.plot()
 ![png](04_PCA_API_files/04_PCA_API_01_Anolis_PCA.png)
 
 ### Population assignment for sample colors
-In the tl;dr example the assembly of our simulated data had included a `pop_assign_file` so the pca() was smart enough to find this and color samples accordingly. In some cases you might not have used a population assignment file, so it's also possible to specify population assignments in a dictionary. The format of the dictionary should have populations as keys and lists of samples as values. Sample names need to be identical to the names in the vcf file, which we can verify with the `samples_vcforder` property of the pca object.
+In the tl;dr example the assembly of our simulated data had included a `pop_assign_file`, so the 'pca()' was smart enough to find this and color samples accordingly. In some cases you might not have used a population assignment file, so it's also possible to specify population assignments in a dictionary. The format of the dictionary should have populations as keys and lists of samples as values. Sample names need to be identical to the names in the vcf file, which we can verify with the `samples_vcforder` property of the PCA object.
 
 Here we create a python 'dictionary', which is a key/value pair data structure. The keys are the population names, and the values are the lists of samples that belong to those populations. You can copy and paste this into a new cell in your notebook.
 ```python
@@ -109,7 +109,7 @@ pops_dict = {
 ```
 Now create the `pca` object with the vcf file again, this time passing 
 in the pops_dict as the second argument, and plot the new figure. We can 
-also easily add a title to our pca plots with the `title=` argument.
+also easily add a title to our PCA plots with the `title=` argument.
 ```python
 pca = ipa.pca(vcffile, pops_dict)
 pca.plot(title="Anolis Colored By Population")
@@ -156,7 +156,7 @@ bad_samples
 ```
     array([u'punc_ICST764', u'punc_MUFAL9635'], dtype=object)
 
-We can then use this list of "bad" samples in a call to `pca.remove_samples` and then replot the new pca:
+We can then use this list of "bad" samples in a call to `pca.remove_samples` and then replot the new PCA:
 
 ```python
 pca.remove_samples(bad_samples)
