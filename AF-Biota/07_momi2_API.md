@@ -243,7 +243,7 @@ gunzip -c anolis_allele_counts.gz | head
 		    [[0, 0], [3, 1]],
 		    [[0, 0], [2, 2]],
 
-### Genereate the SFS
+### Generate the SFS
 
 ```
 %%bash
