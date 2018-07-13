@@ -55,6 +55,8 @@ Now, click on SSH on the left panel, and click on Tunnels. Fill out your persona
 
 ### Mac/Linux SSH Tunnel Configuration
 
+SSH Tunnel on Mac/Linux can be established through the command line interface. Open a Terminal using either spotlight search
+
 ## Setup to run on the USP cluster
 
 Everything else in the setup process takes place **in a terminal on
