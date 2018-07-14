@@ -113,13 +113,13 @@ etable
 ![png](05_STRUCTURE_API_files/05_STRUCTURE_API_02_tldr_evanno_table.png)
 
 ```python
-## get admixture proportion tables avgeraged across reps
+## get admixture proportion tables averaged across reps
 tables = struct.get_clumpp_table(kvalues, quiet=True)
 ```
 
 ```python
-## plot bars for a k-test in tables w/ hover labels
-table = tables[3].sort_values(by=[0, 1, 2])
+## bar plot for k=2, sorted by columns of the Q-matrix
+table = tables[2].sort_values(by=[0, 1])
 
 toyplot.bars(
     table,
@@ -134,7 +134,9 @@ toyplot.bars(
 ## Full guide
 
 ### Enter input and output file locations
-The `.str` file is a STRUCTURE formatted file output by ipyrad. It includes all SNPs present in the data set. The `.snps.map` file is an optional file that maps which locus each SNP is from. If this file is used then each replicate analysis will *randomly* sample a single SNP from each locus in reach rep. The results from many reps therefore will represent variation across unlinked SNP data sets, as well as variation caused by uncertainty. The `.ustr` file that was used in the tl;dr analysis represents just one sample of unlinked snps, so it's good for quick and dirty analysis, but it doesn't fully capture uncertainty in the data. The `workdir` is the location where you want output files to be written and will be created if it does not already exist. 
+The `.str` file is a STRUCTURE formatted file output by ipyrad. It includes all SNPs present in the data set. The `.snps.map` file is an optional file that maps which locus each SNP is from. If this file is used then each replicate analysis will *randomly* sample a single SNP from each locus in reach rep. The results from many reps therefore will represent variation across unlinked SNP data sets, as well as variation caused by uncertainty. The `.ustr` file that was used in the tl;dr analysis represents just one sample of unlinked snps (i.e. one random snp per locus), so it's good for quick and dirty analysis, but it doesn't fully capture uncertainty in the data. The `workdir` is the location where you want output files to be written and will be created if it does not already exist. 
+
+**NB:** If you have the full `.str.` and the `snps.map` file it is generally better to use these to run multiple replictes, and then average over these replicates with CLUMPP. Here, we only use the `.ustr` file in the tl;dr example to illustrate the general workflow.
 
 ```python
 ## the structure formatted file
@@ -241,7 +243,7 @@ print struct.extraparams
     unifprioralpha      1                   
     updatefreq          10000               
     usepopinfo          0                   
-> **Note:** Don't worry about trying to understand all of these parameters at this time. The defaults are sensible. But do notice that the `burnin` and `numreps` here are still well below the values you'd use in real analysis.
+> **Note:** Don't worry about trying to understand all of these parameters at this time. The defaults are sensible. But do notice that the `burnin` and `numreps` here are still well below the values you'd use in real analysis, typically more on the order of 1 million for `numreps`.
 
 ### Submit many jobs to run in parallel
 The function `run()` distributes jobs to run on the cluster via the `ipyparallel` backend. It takes a number of arguments. The first, `kpop`, is the number of populations. The second, `nreps`, is the number of replicated runs to perform. Each rep has a different random seed, and if you entered a mapfile for your STRUCTURE object then it will subsample unlinked SNPs independently in each replicate. The `seed` argument can be used to make the replicate analyses reproducible (i.e. a STRUCTURE run using the same SNPs and started with the same seed will always produce the same results). The `extraparams.seed` parameter will be generated from this for each replicate. And finally, provide it the `ipyclient` object that we created above. The STRUCTURE object will store an *asynchronous results object* for each job that is submitted so that we can query whether the jobs are finished. Using a simple for-loop we'll submit 10 replicate jobs to run at three different values of K. 
@@ -266,33 +268,23 @@ for kpop in kvalues:
 > **Note** This step may take some time...
 
 ### Track progress until finished
-You can check for finished results by using the `get_clumpp_table()` function, which tries to summarize the finished results files. If no results are ready it will simply print a warning message telling you to wait. A more straightforward way to monitor progress is to just ask the jobs whether they are finished yet. The list of jobs for a STRUCTURE analysis are retained in the `asysncs` list, which can be examined like so:
+A straightforward way to monitor the progress of structure replicates is to just ask the jobs whether they are finished yet. The list of jobs for a STRUCTURE analysis are retained in the `asysncs` list, which is a list of the "asynchronous" responses we are awaiting from the structure tasks we created. They are "asynchronous" because they are independent and the runtimes are somewhat unknown. We can ask all of the jobs whether any of them are finished:
 
-```python
-## see submitted jobs (we query first 5 here)
-struct.asyncs[:5]
-```
-    [<AsyncResult: _call_structure>,
-     <AsyncResult: _call_structure>,
-     <AsyncResult: _call_structure>,
-     <AsyncResult: _call_structure>,
-     <AsyncResult: _call_structure>]
-
-Now we can ask one of the jobs whether it's done yet:
 ```python
 ## check if a specific job is done
-struct.asyncs[0].ready()
+for async in struct.asyncs:
+    print(async.ready()),
 ```
-    False
+    True True True True True True True True True True False False False False False False False False False False False False False False False False False False False False
 
-You can run this over and over again until this job returns `True`, but this is tedious. Simpler is to block/wait until all jobs are finished by using the `wait()` function of the ipyclient object:
+The number of `True` values you see here indicates the number of replicates that are finished. You can keep running this last command this over and over again until all job returns `True`, but this is tedious. Simpler is to block/wait until all jobs are finished by using the `wait()` function of the ipyclient object:
 ```python
 ## block/wait until all jobs finished
 ipyclient.wait() 
 ```
 
 ### Summarize replicates with CLUMPP
-We ran 10 replicates per K-value hypothesis. We now need to concatenate and purmute those results so they can be summarized. For this we use the software CLUMPP. The default arguments to CLUMPP are generally good, but if you're running a dataset with high numbers of K, you may want to modify the `greedy_option`, for example. However, we don't need to do this with the dataset for this workshop. You can modify the parameters in the same as the STRUCTURE params, by accessing the `.clumppparams` attribute of your STRUCTURE object. See the [CLUMPP documentation](https://web.stanford.edu/group/rosenberglab/software/CLUMPP_Manual.pdf) for more details. Below we run CLUMPP for each value of K that we ran STRUCTURE on. You only need to tell the `get_clumpp_table()` function the value of K and it will find all of the result files given the STRUCTURE object's `name` and `workdir`.
+We ran 10 replicates per K-value hypothesis. In order to summarize results across these replicates we use the software CLUMPP. The default arguments to CLUMPP are generally good, but if you're running a dataset with high numbers of K, you may want to modify the `greedy_option`, for example. However, we don't need to do this with the dataset for this workshop. You can modify the parameters in the same as the STRUCTURE params, by accessing the `.clumppparams` attribute of your STRUCTURE object. See the [CLUMPP documentation](https://web.stanford.edu/group/rosenberglab/software/CLUMPP_Manual.pdf) for more details. Below we run CLUMPP for each value of K that we ran STRUCTURE on. You only need to tell the `get_clumpp_table()` function the value of K and it will find all of the result files given the STRUCTURE object's `name` and `workdir`.
 
 ```python
 ## set some clumpp params and print params to the screen
@@ -395,6 +387,7 @@ for kpop in kvalues:
 Lets define a function to make the fancy plot, so we can call the function multiple times easily. The `def` keyword indicates that we are "defining" a python function.
 ```python
 def fancy_plot(table):
+    import topyplot
     ## further styling of plot with css 
     style = {"stroke":toyplot.color.near_black, 
          "stroke-width": 2}
@@ -445,13 +438,12 @@ fancy_plot(table)
 ![png](05_STRUCTURE_API_files/05_STRUCTURE_API_07_k_2_sorted_fancy.png)
 
 ### Testing for convergence
-The `.get_evanno_table()` and `.get_clumpp_table()` functions each take an optional argument called `max_var_multiple`, which is the max multiple by which you'll allow the variance in a 'replicate' run to exceed the minimum variance among replicates for a specific test. In the example below you can see that many reps were excluded for the higher values of K, such that fewer reps were analyzed for the final results. By excluding the reps that had much higher variance than other (one criterion for asking if they converged) this can increase the support for higher K values. If you apply this method take care to think about what it is doing and how to interpret the K values. Also take care to consider whether your replicates are using the same input SNP data but just different random seeds, or if you used a `map` file, in which case your replicates represent different sampled SNPs and different random seeds. I'm of the mind that there is no true K value, and sampling across a distribution of SNPs across many replicates gives you a better idea of the variance in population structure in your data. 
+The `.get_evanno_table()` and `.get_clumpp_table()` functions each take an optional argument called `max_var_multiple`, which is the max multiple by which you'll allow the variance in a 'replicate' run to exceed the minimum variance among replicates for a specific test. In the example below you can see that many reps were excluded for the higher values of K, such that fewer reps were analyzed for the final results. By excluding the reps that had much higher variance than other (one criterion for asking if they converged) this can increase the support for higher K values. If you apply this, method take care to think about what it is doing and how to interpret the K values. Also take care to consider whether your replicates are using the same input SNP data but just different random seeds, or if you used a `map` file, in which case your replicates represent different sampled SNPs and different random seeds. I'm of the mind that there is no true K value, and sampling across a distribution of SNPs across many replicates gives you a better idea of the variance in population structure in your data. 
 
 ```python
-struct.get_evanno_table([3, 4, 5, 6], max_var_multiple=50.)
+struct.get_evanno_table([2, 3, 4], max_var_multiple=10.)
 ```
 
-    [K3] 4 reps excluded (not converged) see 'max_var_multiple'.
-    [K4] 11 reps excluded (not converged) see 'max_var_multiple'.
-    [K5] 1 reps excluded (not converged) see 'max_var_multiple'.
-    [K6] 17 reps excluded (not converged) see 'max_var_multiple'.
+    [K2] 2 reps excluded (not converged) see 'max_var_multiple'.
+    [K3] 7 reps excluded (not converged) see 'max_var_multiple'.
+    [K4] 5 reps excluded (not converged) see 'max_var_multiple'.
