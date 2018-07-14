@@ -6,6 +6,9 @@ As part of the `ipyrad.analysis` toolkit we've created convenience functions for
 ### Why STRUCTURE?
 Although there are many newer and faster implementations of STRUCTURE, such as `faststructure` or `admixture`, the original STRUCTURE works much better with missing data, which is of course a common feature of RAD-seq data sets. 
 
+### What is the "true" value of K?
+Identifying the true number of genetic clusters in a sample is a long standing, and difficult problem (see for example [Evanno et al 2005](https://onlinelibrary.wiley.com/doi/full/10.1111/j.1365-294X.2005.02553.x), [Verity & Nichols 2016](http://www.genetics.org/content/early/2016/06/10/genetics.115.180992), and partiulcarly [Janes et al 2017 (titled "The K = 2 conundrum"](https://onlinelibrary.wiley.com/doi/abs/10.1111/mec.14187)). Famously, the method of identifying the best K presented in [Pritchard et al (2000)](http://www.genetics.org/content/155/2/945) is described as "dubious at best". Even Evanno et al (2005) (cited over 12,000 times) "... insist that this (deltaK) criterion is another ad hoc criterion...." Because of this we stress that population structure analysis is as an exploratory method, and should be approached in a heirarchical fashion.
+
 # **STRUCTURE** Analyses
 
 ## Configure HPC environment for ipyparallel ***(THIS IS VERY IMPORTANT)***
