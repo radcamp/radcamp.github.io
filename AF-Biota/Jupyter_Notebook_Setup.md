@@ -16,7 +16,7 @@ Overview of process
 * [Set Jupyter notebook password](#set-jupyter-notebook-password)
 * [Create the config file](#set-default-configuration-behavior)
 * [Start remote notebook server](#run-notebook-server)
-* [What do do if your notebook isn't working](#what-to-do-if-the-notebook-is-not-working)
+* **[What do do if your notebook isn't working](#what-to-do-if-the-notebook-is-not-working)**
 * [More information about jupyter](#useful-jupyter-tricks/ideas)
 
 ## Setup to run on your local computer
@@ -144,13 +144,13 @@ $ jupyter notebook list
 Currently running servers:
 http://localhost:<my_port_#>/ :: /home/<username>
 ```
-You shoud see that your notebook server prompts you for your password
+You should see that your notebook server prompts you for your password
 before it gives you access. This is the password that you entered above
 durint the `jupyter notebook password` call. The server normally will
 cache your login, so you shouldn't have to keep logging in every time
 you connect, so long as you are logging in from the same computer.
 
-## What to do if the notebook is not working
+## **What to do if the notebook is not working**
 This **WILL** happen to everyone at least once, probably many times. You 
 attempt to open your web browser to `http://localhost/<my_port_#>` and 
 you see the dreaded: 
