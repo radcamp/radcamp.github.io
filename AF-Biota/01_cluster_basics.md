@@ -45,13 +45,49 @@ $ ssh <username>@lem.ib.usp.br
 
 > **Note on usage:** In command line commands we'll use the convention of wrapping variable names in angle-brackets. For example, in the command above you should substitute your own username for `<username>`.
 
+### **Change your password**
+The USP cluster admin assigned passwords which you should all have received. Now that you are logged in for the first time on ssh you can change this password to something easier to remember. The command to change your login password on linux is `passwd` and it looks like this:
+
+```
+$ passwd
+Changing password for isaac.
+(current) UNIX password: 
+Enter new UNIX password: 
+Retype new UNIX password: 
+passwd: password updated successfully
+```
+> **Note:** During the password changing process when you type your old and new passwords the characters will not appear on the screen. This is a security "feature", that can sometimes be confusing. Just type your password and believe that the characters are entering correctly. If you type your current password correctly and the new password the same way twice then you'll see the success message as above.
+
 ## Command line interface (CLI) basics
-Put some stuff here about navigating the home directory, maybe mkdir, pwd, cd.
+The cLI provides a way to navigate a file system, move files around, and run commands all inside a little black window. The down side of CLI is that you have to learn many at first seemingly esoteric commands for doing all the things you would normally do with a mouse. However, there are several advantages of CLI: 1) you can use it on servers that don't have a GUI interface (such as HPC clusters); 2) it's scriptable, so you can write programs to execute common tasks or run analyses; 3) it's often faster and more efficient that click-and-drag GUI interfaces. For now we will start with 4 of the most common and useful commands:
+
+```
+$ pwd
+/home/<username>
+```
+`pwd` stands for **"print working directory"**, which literally means "where am I now in this filesystem". Just like with windows or mac, when you open a new terminal the command line will start you out in your "home" directory. Ok, now we know where we are, lets take a look at what's in this directory:
+
+```
+$ ls
+
+```
+
+`ls` stands for **"list"** and in our home directory there is **not much it appears!** This is okay, because you just got a brand new account, so you won't expect to have anything there. Throughout the workshop we will be adding files and directories and by the time we're done, not only will you have a bunch of experience with RAD-Seq analysis, but you'll also have a ***ton*** of stuff in your home directory. We can start out by adding the first directory for this workshop:
 
 ```
 $ mkdir ipyrad-workshop
 ```
-> **Special Note:** Notice that the above directory we are making is not called `ipyrad workshop`. This is **very important**, as spaces in directory names are known to cause havoc on HPC systems. All linux based operating systems do not recognize file or directory names that include spaces because spaces act as default delimiters between arguments to commands. There are ways around this (for example Mac OS has half-baked "spaces in file names" support) but it will be so much for the better to get in the habit now of *never including spaces in file or directory names*.
+
+`mkdir` stands for **"make directory"**, and unlike the other two commands this command takes one "argument". This argument is the name of the directory you wish to create, so here we direct mkdir to create a new directory called "ipyrad-workshop". Now you can use `ls` again, to look at the contents of your home directory and you should see this new directory now:
+
+```
+$ ls
+ipyrad-workshop
+```
+
+Throughout the workshop we will be introducing new commands as the need for them arises. We will pay special attention to highlighting and explaining new commands and giving examples to practice with. 
+
+> **Special Note:** Notice that the above directory we are making is not called `ipyrad workshop`. This is **very important**, as spaces in directory names are known to cause havoc on HPC systems. All linux based operating systems do not recognize file or directory names that include spaces because spaces act as default delimiters between arguments to commands. There are ways around this (for example Mac OS has half-baked "spaces in file names" support) but it will be so much for the better to get in the habit now of ***never including spaces in file or directory names***.
 
 ## Download and Install Software
 ### Install conda
