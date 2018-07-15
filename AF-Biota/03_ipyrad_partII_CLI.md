@@ -34,6 +34,7 @@ Here's the quick-setup (for mac/linux users), but if you need more specific deta
 ```
 $ ssh <username>@lem.ib.usp.br 
 $ qsub -q proto -l nodes=1:ppn=2 -l mem=64gb -I
+$ cd ipyrad-workshop
 ```
 Windows users should use puTTY.
 
