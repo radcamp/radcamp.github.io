@@ -1,8 +1,29 @@
-**Insert a picture and some docs here to help people understand how notebooks and ssh tunnels work.**
+# What are Jupyter Notebooks and why would I want to use one?
 
 Jupyter notebooks are primarily a way to generate reproducible 
-scientific analysis workflows in python. ipyrad analysis tools 
-are best run inside Jupyter notebooks, as the analysis can be 
+scientific analysis workflows in python. You can mix documentation,
+code, tables, and figures in one executable document which can easily
+be shared and published to the web. Here is a good examle of a notebook
+demonstrating the [ipyrad.analysis.pca module](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-PCA-pedicularis.ipynb). In this notebook you can see the benefit
+of intermingling expanatory text, with executable code, and results:
+
+![png](Jupyter_Notebook_Setup_files/Jupyter_notebook_example_page.png)
+
+And this is not a static document! I can open this notebook and
+recreate my entire analysis, or even tweak things and rerun it
+without having to wrangle a ton of different scripts, or try to 
+remember the parameters for a bunch of esoteric analyses I ran, or
+even remember **which** analyses I ran, because they're all here
+in one document.
+
+<Insert live notebook demo>
+
+If you are familiar with RStudio, the workflow is somewhat similar,
+the main difference being that with jupyter notebooks you can export
+your entire session with figures, tables, and results, all embedded
+between consecutive "tasks" specified by blocks of code.
+
+ipyrad analysis tools are best run inside Jupyter notebooks, as the analysis can be 
 monitored and tweaked and provides a self-documenting workflow.
 
 # Getting Set up with Jupyter Notebooks
@@ -93,8 +114,7 @@ will prompt you for your password when you initially connect to it.
 ### Set default configuration behavior
 There are a couple arguments that we always want to start the jupyter
 notebook with, so it is often convenient to just add these to the
-configuration file, rather than type them out over and over. You will 
-have to do this only once.
+configuration file, rather than type them out over and over.
 
 The first parameter (`open-browser = False`) directs jupyter to run in
 the background and wait for connections. The second parameter (`port = <my_port_#>`) 
