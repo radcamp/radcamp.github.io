@@ -78,7 +78,8 @@ an "interactive" job. This will allow us to run our proccesses on
 compute nodes, but still be able to remain at the command line so 
 we can easily monitor progress. If you do not still have an active
 ssh window on the cluster, begin by re-establishing the connection 
-through puTTY (Windows) or ssh (Mac/Linux)" :
+through [puTTY (Windows)](01_cluster_basics.md#ssh-for-windows) or 
+[`ssh` (Mac/Linux)](01_cluster_basics.md#ssh-for-maclinux):
 ```
 $ ssh <username>@lem.ib.usp.br 
 ```
