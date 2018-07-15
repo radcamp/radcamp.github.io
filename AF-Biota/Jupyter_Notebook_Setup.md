@@ -93,7 +93,8 @@ will prompt you for your password when you initially connect to it.
 ### Set default configuration behavior
 There are a couple arguments that we always want to start the jupyter
 notebook with, so it is often convenient to just add these to the
-configuration file, rather than type them out over and over.
+configuration file, rather than type them out over and over. You will 
+have to do this only once.
 
 The first parameter (`open-browser = False`) directs jupyter to run in
 the background and wait for connections. The second parameter (`port = <my_port_#>`) 
