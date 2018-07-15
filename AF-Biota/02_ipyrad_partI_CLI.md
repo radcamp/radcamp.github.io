@@ -69,12 +69,32 @@ If you haven't already installed ipyrad go here first: [installation](https://ip
 
 ## Working with the cluster
 
-**TODO:** Add a paragraph here (and maybe a figure) illustrating the 
-basic idea of how clusters work, and how interactive jobs differ
-from "classic" job submission scripts.
+![png](02_ipyrad_partI_CLI_files/02_ipyrad_partI_CLI_simple_cluster_architecture.png)
 
-We will run all our assembly and analysis on the USP cluster inside
-an "interactive" job. This will allow us to run our proccesses on 
+A typical high performance computing (HPC) cluster architecture looks somewhat
+like this, just with many many more "compute nodes". The "head node" (or 
+login node) is normally the only system that you will interact with. If 
+you want to run a big job on the cluster, you will connect to the head node
+(with ssh), and will submit a job to the 'work queue'. In this job you
+specify how many cores you want to run on, how much RAM you want, and how
+much time you think it'll take. Then the work queue looks at your job 
+and at all the other jobs in the queue and figures out when is the fairest
+time to start your job running. This can be almost immediately, or your 
+job might sit in the queue for hours or days, if the system is very busy. 
+Either way, you will rarely actually "see" your job run because you 
+normally aren't given access to the compute nodes directly. 
+
+This is usually okay, because usually if you want to run a "big" job, this 
+means you want to run ***tons*** of small, quick tasks, or one or a few 
+really really huges and slow tasks, and you kind of don't care what's 
+happening, so long as they finish at some point. For us, for the benefit 
+of exposing and monitoring the processes for the tutorial, having jobs 
+locked away in the work queue is inconvenient. Fortunately, many HPC 
+systems provide an "interactive" mode, which allows you to run certain 
+limited tasks inside a terminal directly on one of the compute nodes.
+
+Therefore, we will run all our assembly and analysis on the USP cluster 
+inside an "interactive" job. This will allow us to run our proccesses on 
 compute nodes, but still be able to remain at the command line so 
 we can easily monitor progress. If you do not still have an active
 ssh window on the cluster, begin by re-establishing the connection 
