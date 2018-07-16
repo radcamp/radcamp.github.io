@@ -12,7 +12,7 @@ queue   |   proto   | short | long | bigmem
 type    |   interactive | batch | batch | batch
 priority    |   1000    | 100   | 100   | 25
 max queuable per user   |   10  | 10000 | 100   | 10
-memory  | 4 (64)    | 4 (64)    | 4 (64)    | 32 (1280)
-n procs | 1 (2) | 1 (16)    | 1 (32)    | 1 (16)
-walltime (hrs)  | 4 (24)    | 4 (24)    | 24 (720) |    24 (720)
+memory (max)  | 4 (64)    | 4 (64)    | 4 (64)    | 32 (1280)
+n procs (max) | 1 (2) | 1 (16)    | 1 (32)    | 1 (16)
+walltime hrs (max)  | 4 (24)    | 4 (24)    | 24 (720) |    24 (720)
 
