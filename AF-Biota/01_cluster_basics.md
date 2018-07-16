@@ -59,7 +59,7 @@ passwd: password updated successfully
 > **Note:** During the password changing process when you type your old and new passwords the characters will not appear on the screen. This is a security "feature", that can sometimes be confusing. Just type your password and believe that the characters are entering correctly. If you type your current password correctly and the new password the same way twice then you'll see the success message as above.
 
 ## Command line interface (CLI) basics
-The cLI provides a way to navigate a file system, move files around, and run commands all inside a little black window. The down side of CLI is that you have to learn many at first seemingly esoteric commands for doing all the things you would normally do with a mouse. However, there are several advantages of CLI: 1) you can use it on servers that don't have a GUI interface (such as HPC clusters); 2) it's scriptable, so you can write programs to execute common tasks or run analyses; 3) it's often faster and more efficient that click-and-drag GUI interfaces. For now we will start with 4 of the most common and useful commands:
+The CLI provides a way to navigate a file system, move files around, and run commands all inside a little black window. The down side of CLI is that you have to learn many at first seemingly esoteric commands for doing all the things you would normally do with a mouse. However, there are several advantages of CLI: 1) you can use it on servers that don't have a GUI interface (such as HPC clusters); 2) it's scriptable, so you can write programs to execute common tasks or run analyses; 3) it's often faster and more efficient that click-and-drag GUI interfaces. For now we will start with 4 of the most common and useful commands:
 
 ```
 $ pwd
