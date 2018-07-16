@@ -239,7 +239,7 @@ Now we have output files that include html and images depicting lots of informat
 
 ### Obtaining FastQC Output (sftp)
 
-Moving files between the cluster and your local computer is a very common task, and this will typically be accomplished with a secure file transfer protocol (**sftp**) client. Various Free/Open Source GUI tools exist but we recommend [WinSCP](https://winscp.net/eng/download.php) for Windows and [Fugu](https://files.downloadnow.com/s/software/12/07/02/25/Fugu-1.2.1pre1.zip?token=1531382566_07031c15712c824bdf118864a42b3939&fileName=Fugu-1.2.1pre1.zip) for MacOS. 
+Moving files between the cluster and your local computer is a very common task, and this will typically be accomplished with a secure file transfer protocol (**sftp**) client. Various Free/Open Source GUI tools exist but we recommend [WinSCP](https://winscp.net/eng/download.php) for Windows and [Fugu](https://sourceforge.net/projects/fugussh) for MacOS. 
 
 **Windows:**
 After downloading, installing, and opening WinSCP, you will see the following screen. First, ensure that the "File Protocol is set to "SFTP". **The connection will fail if "SFTP" is not chosen her.** Next, fill out the host name (`lem.ib.usp.br`), your username and password, and click "Login". 
