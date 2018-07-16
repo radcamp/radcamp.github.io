@@ -38,7 +38,7 @@ date >> runtime.txt
 Submit this job to the cluster with `qsub`:
 
 ```
-qsub ipyrad-anolis.job
+qsub -V ipyrad-anolis.job
 ```
 
 And now monitor the progress of the job with qstat:
