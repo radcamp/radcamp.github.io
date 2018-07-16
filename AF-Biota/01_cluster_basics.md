@@ -248,7 +248,7 @@ Two windows file browsers will appear: your laptop on the left, and the cluster 
 ![png](01_cluster_basics_files/01_WinSCP2.png)
 
 **Mac/Linux:**
-After [downloading](https://files.downloadnow.com/s/software/12/07/02/25/Fugu-1.2.1pre1.zip?token=1531382566_07031c15712c824bdf118864a42b3939&fileName=Fugu-1.2.1pre1.zip), installing and opening Fugu, you will see the following screen:
+After [downloading](https://sourceforge.net/projects/fugussh/), installing and opening Fugu, you will see the following screen:
 ![png](01_cluster_basics_files/01_Fugu1.png)
 
 Fill out the host name (`lem.ib.usp.br`) in the window "Connect to", and your username below. Click "Connect".
