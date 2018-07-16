@@ -24,7 +24,9 @@ your entire session with figures, tables, and results, all embedded
 between consecutive "tasks" specified by blocks of code.
 
 ipyrad analysis tools are best run inside Jupyter notebooks, as the analysis can be 
-monitored and tweaked and provides a self-documenting workflow.
+monitored and tweaked and provides a self-documenting workflow, so we will
+focus the rest of the workshop on exploring the anaylsis tools in the
+jupyter notebook environment.
 
 # Getting Set up with Jupyter Notebooks
 Setting up a jupyter notebook session involves running one command
@@ -41,6 +43,17 @@ Overview of process
 * [More information about jupyter](#useful-jupyter-tricks/ideas)
 
 ## Setup to run on your local computer
+
+Jupyter notebooks running on a cluster require a special kind of connection
+called an SSH Tunnel. We need to do this because we really only can "see"
+the head node from the outside world. In other words, we can only ssh directly
+to the head node, we can not ssh directly from our laptops to the compute nodes. 
+Yet, the compute nodes are where we want to run the notebooks, so what are we
+to do?
+![png](Jupyter_Notebook_Setup_files/Jupyter_Notebook_tunnel_diagram1.png)
+
+![png](Jupyter_Notebook_Setup_files/Jupyter_Notebook_tunnel_diagram2.png)
+
 
 ### SSH Tunnel Configuration
 This part is run **on your local computer**. An "ssh tunnel" will
