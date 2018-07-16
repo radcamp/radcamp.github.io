@@ -51,13 +51,17 @@ to the head node, we can not ssh directly from our laptops to the compute nodes.
 Yet, the compute nodes are where we want to run the notebooks, so what are we
 to do? Since we can ssh to the head node, and since we can do basically whatever
 we want once we are there, we can set up a "tunnel" to route messages from
-our laptop to the compute nodes, kind of like this:
+our laptop to the compute nodes. Here's a diagram of the process, where the
+green arrow indicates the SSH tunnel, and the red arrows indicate the
+messages being passed between your laptop and the cluster, essentially
+using ssh to *"tunnel"* traffic between these two computers:
 
 ![png](Jupyter_Notebook_Setup_files/Jupyter_Notebook_tunnel_diagram1.png)
 
 The end result is that we'll be able to sit on our laptops and run
-complicated analyses on the compute node, taking advantage of both the
-resources of the cluster, and the convenience of the notebook environment
+complicated analyses on the compute node **as if we were actually running
+directly on the cluster**, in this way taking advantage of both the
+resources of the cluster, and the convenience of the notebook environment:
 
 ![png](Jupyter_Notebook_Setup_files/Jupyter_Notebook_tunnel_diagram2.png)
 
