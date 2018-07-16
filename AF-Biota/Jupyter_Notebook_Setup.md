@@ -16,7 +16,7 @@ remember the parameters for a bunch of esoteric analyses I ran, or
 even remember **which** analyses I ran, because they're all here
 in one document.
 
-<Insert live notebook demo>
+**Insert live notebook demo**
 
 If you are familiar with RStudio, the workflow is somewhat similar,
 the main difference being that with jupyter notebooks you can export
