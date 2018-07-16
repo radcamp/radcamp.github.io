@@ -127,7 +127,7 @@ tre.draw(
 Tree rooting can also be accomplished with the `wildcard` parameter of the `tree.root()` function. This is somewhat more straightforward to demonstrate with the simulated data, so we can create a new `raxml` object with the simulated phylip file, rerun the RAxML tree inference, and then do some plotting:
 ```
 rax = ipa.raxml(
-    data="/scratch/af-biota/simulated-example/simrad_outfiles/simrad.phy",
+    data="/scratch/af-biota/simrad-example/simrad_outfiles/simrad.phy",
     name="aligntest", 
     workdir="./analysis-raxml",
     );
