@@ -87,7 +87,7 @@ each notebook must have a unique port number to run on, we have
 assigned unique port numbers for each workshop attendee. You can 
 you can find your port number here: [AF-Biota workshop port #s](https://github.com/radcamp/radcamp.github.io/blob/master/AF-Biota/participants.txt). 
 
-**Special Note:** An "SSH Tunnel" and an "SSH client connection" are two different things. The SSH client connection gives you access to the command line on a remote machine. The SSH tunnel will allow your web browser to talk to your jupyter notebook **using** ssh, but on a unique port. For a jupyter notebook to function properly you will normally always need **both** an ssh tunnel (for making the web interface work) and an ssh client connection (for running the jupyter notebook server).
+> **Special Note:** An "SSH Tunnel" and an "SSH client connection" are two different things. The SSH client connection gives you access to the command line on a remote machine. The SSH tunnel will allow your web browser to talk to your jupyter notebook **using** ssh, but on a unique port. For a jupyter notebook to function properly you will normally always need **both** an ssh tunnel (for making the web interface work) and an ssh client connection (for running the jupyter notebook server).
 
 ### Windows SSH Tunnel Configuration
 
