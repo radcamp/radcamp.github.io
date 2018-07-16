@@ -32,7 +32,7 @@ Unlike laptop or desktop computers, cluster systems typically (almost exclusivel
 ### SSH for windows
 Windows computers need to use a 3rd party app for connecting to remote computers. The best app for this in my experience is [puTTY](https://www.putty.org/), a free SSH client. Right click and "Save link as" on the [64-bit binary executable link](https://the.earth.li/~sgtatham/putty/latest/w64/putty.exe). 
 
-After installing puTTY, open it and you will see a window where you can fill out the name or IP address of the computer or cluster you want to connect to (the 'host'). To connect to the cluster, enter: lem.ib.usp.br. Make sure that the port is set to 22. Click 'Open'. 
+After installing puTTY, open it and you will see a box where you can enter the "Host Name (or IP Address)" of the computer you want to connect to (the 'host'). To connect to the USP cluster, enter: `lem.ib.usp.br`. The default "Connection Type" should be "SSH", and the default "Port" should be "22". It's good to verify these values. Leave everything else as defualt and click "Open".
 
 ![png](01_cluster_basics_files/01_puTTY.png)
 
