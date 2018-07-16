@@ -57,7 +57,7 @@ pca = ipa.pca(data)
 pca.plot()
 ```
     loading Assembly: simrad
-    from saved path: /scratch/af-biota/simulated-example/simrad.json
+    from saved path: /scratch/af-biota/simrad-example/simrad.json
     <matplotlib.axes._subplots.AxesSubplot at 0x7fb6fdf82050>
 
 ![png](04_PCA_API_files/04_PCA_API_00_Simulated_Example.png)
