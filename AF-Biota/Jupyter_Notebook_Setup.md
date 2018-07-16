@@ -49,11 +49,17 @@ called an SSH Tunnel. We need to do this because we really only can "see"
 the head node from the outside world. In other words, we can only ssh directly
 to the head node, we can not ssh directly from our laptops to the compute nodes. 
 Yet, the compute nodes are where we want to run the notebooks, so what are we
-to do?
+to do? Since we can ssh to the head node, and since we can do basically whatever
+we want once we are there, we can set up a "tunnel" to route messages from
+our laptop to the compute nodes, kind of like this:
+
 ![png](Jupyter_Notebook_Setup_files/Jupyter_Notebook_tunnel_diagram1.png)
 
-![png](Jupyter_Notebook_Setup_files/Jupyter_Notebook_tunnel_diagram2.png)
+The end result is that we'll be able to sit on our laptops and run
+complicated analyses on the compute node, taking advantage of both the
+resources of the cluster, and the convenience of the notebook environment
 
+![png](Jupyter_Notebook_Setup_files/Jupyter_Notebook_tunnel_diagram2.png)
 
 ### SSH Tunnel Configuration
 This part is run **on your local computer**. An "ssh tunnel" will
