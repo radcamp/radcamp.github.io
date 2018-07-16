@@ -16,3 +16,20 @@ memory (max)  | 4 (64)    | 4 (64)    | 4 (64)    | 32 (1280)
 n procs (max) | 1 (2) | 1 (16)    | 1 (32)    | 1 (16)
 walltime hrs (max)  | 4 (24)    | 4 (24)    | 24 (720) |    24 (720)
 
+## Example Job Submission Script
+
+```
+#!/bin/bash
+#PBS -N ipyrad-anolis
+#PBS -l nodes=1:ppn=16
+#PBS -l mem=64gb
+#PBS -l walltime=2:00:00
+#PBS -q short
+#PBS -j oe
+#PBS -o /home/isaac/ipyrad-workshop/anolis-qsub-job.out
+
+cd /home/<username>/ipyrad-workshop
+date > runtime.txt
+ipyrad -p params-anolis.txt -s 1234567 -c 16 -f
+date >> runtime.txt
+```
