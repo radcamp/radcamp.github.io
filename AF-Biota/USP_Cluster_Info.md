@@ -18,6 +18,7 @@ walltime hrs (max)  | 4 (24)    | 4 (24)    | 24 (720) |    24 (720)
 
 ## Example Job Submission Script
 
+Open a new file called `ipyrad-anolis.job` and add the following text:
 ```
 #!/bin/bash
 #PBS -N ipyrad-anolis
@@ -26,10 +27,22 @@ walltime hrs (max)  | 4 (24)    | 4 (24)    | 24 (720) |    24 (720)
 #PBS -l walltime=2:00:00
 #PBS -q short
 #PBS -j oe
-#PBS -o /home/isaac/ipyrad-workshop/anolis-qsub-job.out
+#PBS -o /home/<username>/ipyrad-workshop/anolis-qsub-job.out
 
 cd /home/<username>/ipyrad-workshop
 date > runtime.txt
 ipyrad -p params-anolis.txt -s 1234567 -c 16 -f
 date >> runtime.txt
+```
+
+Submit this job to the cluster with `qsub`:
+
+```
+qsub ipyrad-anolis.job
+```
+
+And now monitor the progress of the job with qstat:
+
+```
+qstat
 ```
