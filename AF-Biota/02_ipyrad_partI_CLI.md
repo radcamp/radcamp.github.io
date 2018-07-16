@@ -475,7 +475,7 @@ and change the following two parameter settings:
 2                               ## [16] [filter_adapters]: Filter for adapters/primers (1 or 2=stricter)
 0, 75, 0, 0                     ## [25] [trim_reads]: Trim raw read edges (R1>, <R1, R2>, <R2) (see docs)
 ```
-> **Note:** Saving and quitting from `nano`: `CTRL+o` then `CTRL+w`
+> **Note:** Saving and quitting from `nano`: `CTRL+o` then `CTRL+x`
 
 ```
 $ ipyrad -p params-anolis.txt -s 2 -c 2
