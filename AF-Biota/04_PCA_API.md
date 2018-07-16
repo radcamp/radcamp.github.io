@@ -50,7 +50,7 @@ The following cell shows the quickest way to results using a small simulated dat
 
 ```python
 ## Load your assembly
-data = ipyrad.load_json("/scratch/af-biota/simulated-example/simrad.json")
+data = ipyrad.load_json("/scratch/af-biota/simrad-example/simrad.json")
 ## Create the pca object
 pca = ipa.pca(data)
 ## Bam!
