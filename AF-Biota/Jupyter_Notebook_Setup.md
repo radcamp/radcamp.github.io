@@ -13,8 +13,8 @@ And this is not a static document! I can open this notebook and
 recreate my entire analysis, or even tweak things and rerun it
 without having to wrangle a ton of different scripts, or try to 
 remember the parameters for a bunch of esoteric analyses I ran, or
-even remember **which** analyses I ran, because they're all here
-in one document.
+even remember **which** analyses I ran, because ***they're all here
+in one document***.
 
 **Insert live notebook demo**
 
