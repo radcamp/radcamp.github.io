@@ -307,7 +307,11 @@ struct = ipa.structure(name="anolis-structure",
 
 
 ### Summarize replicates with CLUMPP
-We ran 10 replicates per K-value hypothesis. In order to summarize results across these replicates we use the software CLUMPP. The default arguments to CLUMPP are generally good, but if you're running a dataset with high numbers of K, you may want to modify the `greedy_option`, for example. However, we don't need to do this with the dataset for this workshop. You can modify the parameters in the same as the STRUCTURE params, by accessing the `.clumppparams` attribute of your STRUCTURE object. See the [CLUMPP documentation](https://web.stanford.edu/group/rosenberglab/software/CLUMPP_Manual.pdf) for more details. Below we run CLUMPP for each value of K that we ran STRUCTURE on. You only need to tell the `get_clumpp_table()` function the value of K and it will find all of the result files given the STRUCTURE object's `name` and `workdir`.
+We ran 10 replicates per K-value hypothesis. In order to summarize results across these replicates we use the software CLUMPP.
+
+![jpg](05_STRUCTURE_API_files/05_STRUCTURE_API_03.5_clumpp.jpg)
+
+The default arguments to CLUMPP are generally good, but if you're running a dataset with high numbers of K, you may want to modify the `greedy_option`, for example. However, we don't need to do this with the dataset for this workshop. You can modify the parameters in the same as the STRUCTURE params, by accessing the `.clumppparams` attribute of your STRUCTURE object. See the [CLUMPP documentation](https://web.stanford.edu/group/rosenberglab/software/CLUMPP_Manual.pdf) for more details. Below we run CLUMPP for each value of K that we ran STRUCTURE on. You only need to tell the `get_clumpp_table()` function the value of K and it will find all of the result files given the STRUCTURE object's `name` and `workdir`.
 
 ```python
 ## set some clumpp params and print params to the screen
@@ -411,7 +415,7 @@ for kpop in kvalues:
 Lets define a function to make the fancy plot, so we can call the function multiple times easily. The `def` keyword indicates that we are "defining" a python function.
 ```python
 def fancy_plot(table):
-    import topyplot
+    import toyplot
     ## further styling of plot with css 
     style = {"stroke":toyplot.color.near_black, 
          "stroke-width": 2}
