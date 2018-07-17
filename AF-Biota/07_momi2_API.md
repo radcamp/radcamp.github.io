@@ -8,6 +8,8 @@ The goal of demographic analyses is to understand the history of lineages (somet
 ### What is the SFS?
 Site frequency spectrum (SFS), sometimes also called allele frequency spectrum, is the distribution of allele frequencies of a given set of SNPs in a population or sample. It can be frequently represented as a histogram with size depending on the number of sequenced individual chromossomes or number of sequenced individuals.
 
+![jpg](07_momi2_API_files/07_momi2_API_000_SFS.jpg)
+
 ### What are some other familiar programs that use the SFS?
 
 ### How is momi2 different? And why are we using it? Most importantly, how do you pronounce it?
