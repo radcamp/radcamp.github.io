@@ -165,21 +165,22 @@ pca.remove_samples(bad_samples)
     Setting number of PCs = 8
 
 > **Note:** The `remove_samples` function is destructive of the samples in the `pca` object. This means that the removed samples are actually deleted from the `pca`, so if you want to get them back you have to reload the original vcf data.
+> **Note:** The number of PCs may not exceed the number of samples in the dataset. The `pca` module detects this and automatically reduces the number of PCs calculated.
 
 ```
-## Lets prove that the removed smamples are gone now
+## Lets prove that the removed samples are gone now
 print(pca.samples_vcforder)
 ```
     [u'punc_IBSPCRIB0361' u'punc_JFT773' u'punc_MTR05978' u'punc_MTR17744'
      u'punc_MTR21545' u'punc_MTR34414' u'punc_MTRX1468' u'punc_MTRX1478']
 
-> **Note:** The number of PCs may not exceed the number of samples in the dataset. The `pca` module detects this and automatically reduces the number of PCs calculated.
-
 And now plot the new figure with the "bad" samples removed. We also introduce another nice feature of the `pca.plot()` function, which is the `outfile` argument. This argument will cause the plot function to not only draw to the screen, but also to save a `png` formatted file to the filesystem.
+
 ```python
 pca.plot(title="Anolis w/o Northern Samples", outfile="Anolis_no_north.png")
 ```
     <matplotlib.axes._subplots.AxesSubplot at 0x7fe0f8c25410>
+    
 > **Note:** Spaces in filenames are ***BAD***. It's good practice, as we demonstrate here, to always substitute underscores (`_`) for spaces in filenames.
 
 ![png](04_PCA_API_files/04_PCA_API_04_Anolis_PCA_NoNorth.png)
