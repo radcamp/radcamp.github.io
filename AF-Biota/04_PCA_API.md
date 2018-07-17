@@ -161,17 +161,18 @@ We can then use this list of "bad" samples in a call to `pca.remove_samples` and
 ```python
 pca.remove_samples(bad_samples)
 ```
-> **Note:** The `remove_samples` function is destructive of the samples in the `pca` object. This means that the removed samples are actually deleted from the `pca`, so if you want to get them back you have to reload the original vcf data.
-```
+    INFO: Number of PCs may not exceed the number of samples.
+    Setting number of PCs = 8
 
+> **Note:** The `remove_samples` function is destructive of the samples in the `pca` object. This means that the removed samples are actually deleted from the `pca`, so if you want to get them back you have to reload the original vcf data.
+
+```
 ## Lets prove that the removed smamples are gone now
 print(pca.samples_vcforder)
 ```
-      Number of PCs may not exceed the number of samples.
-      Setting number of PCs = 8
     [u'punc_IBSPCRIB0361' u'punc_JFT773' u'punc_MTR05978' u'punc_MTR17744'
      u'punc_MTR21545' u'punc_MTR34414' u'punc_MTRX1468' u'punc_MTRX1478']
-     
+
 > **Note:** The number of PCs may not exceed the number of samples in the dataset. The `pca` module detects this and automatically reduces the number of PCs calculated.
 
 And now plot the new figure with the "bad" samples removed. We also introduce another nice feature of the `pca.plot()` function, which is the `outfile` argument. This argument will cause the plot function to not only draw to the screen, but also to save a `png` formatted file to the filesystem.
