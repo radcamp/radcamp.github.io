@@ -106,7 +106,7 @@ SSH Tunnel on Mac/Linux can be established through the command line interface. O
 ```
 ssh -N -f -L localhost:<my_port_#>:localhost:<my_port_#> <username>@lem.ib.usp.br
 ```
-This will prompt you for your password (the password on the USP cluster). If you type the password correctly **it will look like nothing happened**, but this means it worked! If you think nothing happens you should not attempt to run it again because of panic, because if you run it twice you might see this error message:
+This will prompt you for your password (the password on the USP cluster). If you type the password correctly **it will look like nothing happened**, but this means it worked! If you think nothing happened you should not attempt to run it again because of panic, because if you run it twice you might see this error message:
 
 ```
 bind: Address already in use
@@ -144,6 +144,11 @@ $ jupyter notebook password
 This will set a password on your notebook server so that other people 
 won't have access to your files and notebooks. The notebook server 
 will prompt you for your password when you initially connect to it.
+
+> **Note:** The password tho access your jupyter notebook and the 
+password for your cluster login ***are two different passwords.*** It
+will probably reduce confusion, though, if you make them the same, at
+least for now.
 
 ### Set default configuration behavior
 There are a couple arguments that we always want to start the jupyter
@@ -202,11 +207,21 @@ $ jupyter notebook list
 Currently running servers:
 http://localhost:<my_port_#>/ :: /home/<username>
 ```
-You should see that your notebook server prompts you for your password
+
+## Test your notebook connection (Run on your laptop)
+To test your jupyter notebook configuration you can open a new
+browser tab and go to:
+```
+http://localhost:<my_port_#>
+```
+You should see that your notebook server prompt you for your password
 before it gives you access. This is the password that you entered above
-durint the `jupyter notebook password` call. The server normally will
-cache your login, so you shouldn't have to keep logging in every time
-you connect, so long as you are logging in from the same computer.
+during when we used the `jupyter notebook password` command. If
+everything is working, and you type the password correctly, then you'll
+be presented with the jupyter dashboard running on the HPC! **Magic!!!**
+
+If it does not work, proceed to [the section about troubleshooting jupyter
+notebook connections](#what-to-do-if-the-notebook-is-not-working).
 
 ## **What to do if the notebook is not working**
 This **WILL** happen to everyone at least once, probably many times. You 
@@ -215,10 +230,14 @@ you see the dreaded:
 
 ![png](Jupyter_Notebook_Setup_files/Jupyter_notebook_This_page_isnt_working.png)
 
-1) First, ***DO NOT PANIC!***, randomly clicking stuff is not going to fix the problem.
+1) First, ***DO NOT PANIC!***. Randomly clicking stuff is not going to fix the problem.
+
 2) **On your laptop** start a new ssh tunnel using the [Windows](https://github.com/radcamp/radcamp.github.io/blob/master/AF-Biota/Jupyter_Notebook_Setup.md#windows-ssh-tunnel-configuration) or [mac/linux](https://github.com/radcamp/radcamp.github.io/blob/master/AF-Biota/Jupyter_Notebook_Setup.md#maclinux-ssh-tunnel-configuration) directions.
-3) Open a terminal connection to the USP cluster and start a new notebook server `jupyter notebook`&
+
+3) Open a terminal connection to the USP cluster and start a new notebook server `jupyter notebook &`
+
 4) In a browser open a new tab and navigate to `http://localhost:<my_port_#>`
+
 5) If it still doesn't work, ask for help.
 
 ## Useful jupyter tricks/ideas
