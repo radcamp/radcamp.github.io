@@ -163,6 +163,7 @@ pca.remove_samples(bad_samples)
 ```
 > **Note:** The `remove_samples` function is destructive of the samples in the `pca` object. This means that the removed samples are actually deleted from the `pca`, so if you want to get them back you have to reload the original vcf data.
 ```
+
 ## Lets prove that the removed smamples are gone now
 print(pca.samples_vcforder)
 ```
