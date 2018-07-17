@@ -366,8 +366,7 @@ print(tables[3].loc[myorder])
     punc_MTRX1478      0.044  9.532e-01  0.002
  ```   
     
-> **Note:** The `.loc[]` notation specifies to fetch from the table by row.
-
+>**Note:** The `.loc[]` notation specifies to fetch from the table by row.
 
 ### Visualize population STRUCTURE in barplots 
 
