@@ -1,18 +1,18 @@
 # Demographic inference using the Site Frequency Spectrum (SFS) with **momi2**
 
 **TODO:** Put a bunch of explanatory information here.
+
 **TODO:** Verify the paths are all good.
-### What is demographic inference?
-The goal of demographic inference analysis is to understand the history of lineages (sometimes referred as 'populations') in a given species, estimating their neutral population dynamics such as time of divergence, population expansion, population contraction, bottlenecks, admixture, etc.
 
 ### What is the SFS?
 Site frequency spectrum (SFS), sometimes also called allele frequency spectrum, is the distribution of allele frequencies of a given set of SNPs in a population or sample. It can be frequently represented as a histogram with size depending on the number of sequenced individual chromossomes or number of sequenced individuals.
 
 ![jpg](07_momi2_API_files/07_momi2_API_000_SFS.jpg)
 
-### What are some other familiar programs that use the SFS?
+### What is demographic inference?
+The goal of demographic analyses is to understand the history of lineages (sometimes referred as 'populations') in a given species, estimating the neutral population dynamics such as time of divergence, population expansion, population contraction, bottlenecks, admixture, etc.
 
-### How is momi2 different? And why are we using it? Most importantly, how do you pronounce it?
+### Most importantly, how do you pronounce `momi`?
 
 **Pronunciation:** Care of Jonathan Terhorst (somewhat cryptically), from a [github issue I created to resolve this conundrum](https://github.com/popgenmethods/momi2/issues/6): "How do you pronounce ∂a∂i? ;-)".... And another perspective from Jack Kamm: "Both pronunciations are valid, but I personally say 'mommy'".
 
