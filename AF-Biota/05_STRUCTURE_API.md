@@ -368,6 +368,7 @@ print(tables[3].loc[myorder])
     
 > **Note:** The `.loc[]` notation specifies to fetch from the table by row.
 
+
 ### Visualize population STRUCTURE in barplots 
 
 ```python
