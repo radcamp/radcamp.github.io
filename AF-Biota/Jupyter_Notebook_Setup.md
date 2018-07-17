@@ -42,7 +42,7 @@ Overview of process
 * **[What do do if your notebook isn't working](#what-to-do-if-the-notebook-is-not-working)**
 * [More information about jupyter](#useful-jupyter-tricks/ideas)
 
-## Setup to run on your local computer
+## Jupyter notebook setup to be run on your local computer
 
 Jupyter notebooks running on a cluster require a special kind of connection
 called an SSH Tunnel. We need to do this because we really only can "see"
@@ -101,9 +101,20 @@ Now, click on SSH on the left panel, and click on Tunnels. Fill out your persona
 
 ### Mac/Linux SSH Tunnel Configuration
 
-SSH Tunnel on Mac/Linux can be established through the command line interface. Open a Terminal using either spotlight search
+SSH Tunnel on Mac/Linux can be established through the command line interface. Open a Terminal and run this command:
 
-## Setup to run on the USP cluster
+```
+ssh -N -f -L localhost:<my_port_#>:localhost:<my_port_#> <username>@lem.ib.usp.br
+```
+This will prompt you for your password (the password on the USP cluster). If you type the password correctly **it will look like nothing happened**, but this means it worked! If you think nothing happens you should not attempt to run it again because of panic, because if you run it twice you might see this error message:
+
+```
+bind: Address already in use
+channel_setup_fwd_listener: cannot listen to port: 9000
+```
+> **Note:** If you see this message ***it means your ssh tunnel is already running!!*** So you should celebrate! And not panic more because you got a (seeming) error message.
+
+## Jupyter Notebook Setup which will be run on the USP cluster
 
 Everything else in the setup process takes place **in a terminal on
 the USP cluster.** Begin this part of setup by connecting to the cluster:
