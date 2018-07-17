@@ -46,7 +46,7 @@ Now use `conda` to install momi2 and jupyter. All the `-c` arguments again are s
 channels that momi2 pulls dependencies from. Order matters here, so copy and paste this
 command to your terminal.
 ```
-(momi-py36)$ conda install momi jupyter -c defaults -c conda-forge -c bioconda -c jackkamm
+(momi-py36)$ conda install momi ipyparallel jupyter -c defaults -c conda-forge -c bioconda -c jackkamm
 ```
 This will produce copious output, and should take ~5-10 minutes. 
 Finally, submit an interactive job to the cluster, and start the 
