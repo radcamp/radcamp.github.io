@@ -319,9 +319,9 @@ struct.clumppparams
 ## run clumpp for each value of K
 tables = struct.get_clumpp_table(kvalues)
 ```
+    [K2] 10/10 results permuted across replicates (max_var=0).
     [K3] 10/10 results permuted across replicates (max_var=0).
     [K4] 10/10 results permuted across replicates (max_var=0).
-    [K5] 10/10 results permuted across replicates (max_var=0).
 
 ```python
 ## return the evanno table w/ deltaK
@@ -364,6 +364,8 @@ print(tables[3].loc[myorder])
     punc_MTR34414      0.394  4.582e-01  0.148
     punc_MTRX1468      0.028  9.590e-01  0.013
     punc_MTRX1478      0.044  9.532e-01  0.002
+ ```   
+    
 > **Note:** The `.loc[]` notation specifies to fetch from the table by row.
 
 ### Visualize population STRUCTURE in barplots 
