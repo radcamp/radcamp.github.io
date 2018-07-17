@@ -364,7 +364,7 @@ print(tables[3].loc[myorder])
     punc_MTR34414      0.394  4.582e-01  0.148
     punc_MTRX1468      0.028  9.590e-01  0.013
     punc_MTRX1478      0.044  9.532e-01  0.002
- ```   
+ ```
     
 >**Note:** The `.loc[]` notation specifies to fetch from the table by row.
 
