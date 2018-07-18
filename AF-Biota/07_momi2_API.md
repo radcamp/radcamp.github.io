@@ -399,6 +399,8 @@ fig = momi.DemographyPlot(
 ## Model selection with AIC
 Model selection is typically performed with AIC, so here we extract the log likelihood of each model, calculate the AIC, and then calculate delta AIC values, and AIC weights. The best model will have the lowest AIC score. Delta AIC, and the AIC weight are indications of how confident we can be that the best fitting model is the correct model. 
 ```
+import numpy as np
+
 AICs = []
 for model in [no_migration_model, popsizes_model, migration_model]:
     lik = model.log_likelihood()
