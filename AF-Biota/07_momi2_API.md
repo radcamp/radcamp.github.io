@@ -482,21 +482,6 @@ fig.draw_N_legend(loc="upper right")
 
 In this figure the thick blue lines indicate the maximum likelihood values estimated under the best model, and the faint lines illustrate results of each of the ten bootstraps.
 
-```python
-print(no_pulse_model.get_params())
-no_pulse_fit_stats = momi.SfsModelFitStats(no_pulse_model)
-print(no_pulse_fit_stats)
-no_pulse_fit_stats.expected.pattersons_d(A="pop1", B="pop2", C="pop3")
-```
-    ParamsDict({'n_pop1': 22376.432068547412, 'n_pop2': 22825.979849271956, 't_pop1_pop2': 44449.31415990158, 'n_anc': 13292.879644178945, 't_anc': 49342.12743617457})
-    <momi.sfs_stats.SfsModelFitStats object at 0x7f27983e3390>
-
-    -1.2238981294109822e-15
-
-```python
-no_pulse_fit_stats.all_f2()
-```
-
 # radcamp 2018 AF-Biota Feedback link
 Please help us improve future radcamp workshops by completing this anonymous survey:
 
