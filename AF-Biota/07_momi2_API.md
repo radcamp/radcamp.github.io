@@ -478,7 +478,7 @@ fig.draw_N_legend(loc="upper right")
 ```
 ![png](07_momi2_API_files/07_momi2_API_06_Bootstrap_tdiv.png)
 
-In this figure the thick blue lines indicate the maximum likelihood values estimated under the best model, and the faint lines illustrate results of eacho of the ten bootstraps.
+In this figure the thick blue lines indicate the maximum likelihood values estimated under the best model, and the faint lines illustrate results of each of the ten bootstraps.
 
 ```python
 print(no_pulse_model.get_params())
