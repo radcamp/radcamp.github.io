@@ -495,6 +495,11 @@ no_pulse_fit_stats.expected.pattersons_d(A="pop1", B="pop2", C="pop3")
 no_pulse_fit_stats.all_f2()
 ```
 
+# radcamp 2018 AF-Biota Feedback link
+Please help us improve future radcamp workshops by completing this anonymous survey:
+
+https://goo.gl/forms/DqzihjtTMxYdPiKt1
+
 # References
 Portik, D. M., Leaché, A. D., Rivera, D., Barej, M. F., Burger, M., Hirschfeld, M., ... & Fujita, M. K. (2017). Evaluating mechanisms of diversification in a Guineo‐Congolian tropical forest frog using demographic model selection. Molecular ecology, 26(19), 5245-5263.
 
