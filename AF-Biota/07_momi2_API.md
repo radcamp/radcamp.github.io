@@ -247,7 +247,7 @@ gunzip -c anolis_allele_counts.gz | head
 		    [[0, 0], [2, 2]],
 
 ### Generate the SFS
-The `momi` site frequency spectrum is represented somewhat differently than you might be used to if you have used dadi or fastsimcoal2. Here we load the sfs generated above into the `sfs` object and print a few properties.
+The `momi` site frequency spectrum is represented somewhat differently than you might be used to if you have used dadi or fastsimcoal2. Here we load the SFS generated above into the `sfs` object and print a few properties.
 
 ```
 %%bash
