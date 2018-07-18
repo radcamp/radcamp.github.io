@@ -7,7 +7,7 @@ A good example of how the SFS is calculated can be found on [wikipedia](https://
 ![jpg](07_momi2_API_files/07_momi2_API_000_SFS.jpg)
 
 ### What is demographic inference?
-The goal of demographic analyses is to understand the history of lineages (sometimes referred as 'populations') in a given species, estimating the neutral population dynamics such as time of divergence, population expansion, population contraction, bottlenecks, admixture, etc. A nice example of a paper that performs model selection and parameter estimation [Portik et al 2017](https://onlinelibrary.wiley.com/doi/abs/10.1111/mec.14266)
+The goal of demographic analyses is to understand the history of lineages (sometimes referred as 'populations') in a given species, estimating the neutral population dynamics such as time of divergence, population expansion, population contraction, bottlenecks, admixture, etc. A nice example of a paper that performs model selection and parameter estimation [Portik et al 2017](https://onlinelibrary.wiley.com/doi/abs/10.1111/mec.14266).
 
 ### Most importantly, how do you pronounce `momi`?
 
