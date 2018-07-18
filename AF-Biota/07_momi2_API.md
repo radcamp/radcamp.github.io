@@ -7,7 +7,7 @@ A good example of how the SFS is calculated can be found on [wikipedia](https://
 ![jpg](07_momi2_API_files/07_momi2_API_000_SFS.jpg)
 
 ### What is demographic inference?
-The goal of demographic analyses is to understand the history of lineages (sometimes referred as 'populations') in a given species, estimating the neutral population dynamics such as time of divergence, population expansion, population contraction, bottlenecks, admixture, etc.
+The goal of demographic analyses is to understand the history of lineages (sometimes referred as 'populations') in a given species, estimating the neutral population dynamics such as time of divergence, population expansion, population contraction, bottlenecks, admixture, etc. A nice example of a paper that performs model selection and parameter estimation [Portik et al 2017](https://onlinelibrary.wiley.com/doi/abs/10.1111/mec.14266)
 
 ### Most importantly, how do you pronounce `momi`?
 
@@ -494,6 +494,9 @@ no_pulse_fit_stats.expected.pattersons_d(A="pop1", B="pop2", C="pop3")
 ```python
 no_pulse_fit_stats.all_f2()
 ```
+
+# References
+Portik, D. M., Leaché, A. D., Rivera, D., Barej, M. F., Burger, M., Hirschfeld, M., ... & Fujita, M. K. (2017). Evaluating mechanisms of diversification in a Guineo‐Congolian tropical forest frog using demographic model selection. Molecular ecology, 26(19), 5245-5263.
 
 # Acknowledgements
 We relied heavily on the excellent [momi2 documentation](http://momi2.readthedocs.io/en/latest/tutorial.html) during the creation of this tutorial.
