@@ -2,6 +2,7 @@
 
 ### What is the SFS?
 The site frequency spectrum (SFS) is a histogram of the frequencies of SNPs in a sample of individuals from a population. Different population histories leave characteristic signatures on the SFS. For example, a population that has undergone a recent bottleneck will have a reduced number of rare variants as compared to a neutrally evolving population. Rare variants will be lost much more rapidly than common variants under a bottleneck model. On the other hand, population expansion models will display an excess of rare variants with respect to a neutral model. In a similar fashion, selection and gene flow can leave characteristic imprints on the SFS of a population.
+A good example of how the SFS is calculated can be found on [wikipedia](https://en.wikipedia.org/wiki/Allele_frequency_spectrum).
 
 ![jpg](07_momi2_API_files/07_momi2_API_000_SFS.jpg)
 
@@ -13,9 +14,7 @@ The goal of demographic analyses is to understand the history of lineages (somet
 **Pronunciation:** Care of Jonathan Terhorst (somewhat cryptically), from a [github issue I created to resolve this conundrum](https://github.com/popgenmethods/momi2/issues/6): "How do you pronounce ∂a∂i? ;-)".... And another perspective from Jack Kamm: "Both pronunciations are valid, but I personally say 'mommy'".
 
 ## momi2 installation
-`momi2` requires python3, which is a different version of python we've been using up to now. Fortunately conda makes it easy to run python2 and python3 side by side. We will install python3 in a separate [conda environment](https://conda.io/docs/user-guide/concepts.html#conda-environments), and then install and run momi2 analyses using this environment. A conda environment is a container for python packages and configurations. More on creating/managing [conda environments](https://conda.io/docs/user-guide/tasks/manage-environments.html).
-
-**TODO:** Would be nice to have a simple figure illustrating conda environments here.
+`momi2` requires python3, which is a different version of python we've been using up to now. Fortunately conda makes it easy to run python2 and python3 side by side. We will install python3 in a separate [conda environment](https://conda.io/docs/user-guide/concepts.html#conda-environments), and then install and run momi2 analyses using this environment. A conda environment is a container for python packages and configurations. More on creating/managing conda environments can be found [here](https://conda.io/docs/user-guide/tasks/manage-environments.html).
 
 Begin by opening an ssh session on the cluster and creating our new environment:
 ```
