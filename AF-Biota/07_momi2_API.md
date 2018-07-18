@@ -1,11 +1,7 @@
 # Demographic inference using the Site Frequency Spectrum (SFS) with **momi2**
 
-**TODO:** Put a bunch of explanatory information here.
-
-**TODO:** Verify the paths are all good.
-
 ### What is the SFS?
-Site frequency spectrum (SFS), sometimes also called allele frequency spectrum, is the distribution of allele frequencies of a given set of SNPs in a population or sample. It can be frequently represented as a histogram with size depending on the number of sequenced individual chromossomes or number of sequenced individuals.
+The site frequency spectrum (SFS) is a histogram of the frequencies of SNPs in a sample of individuals from a population. Different population histories leave characteristic signatures on the SFS. For example, a population that has undergone a recent bottleneck will have a reduced number of rare variants as compared to a neutrally evolving population. Rare variants will be lost much more rapidly than common variants under a bottleneck model. On the other hand, population expansion models will display an excess of rare variants with respect to a neutral model. In a similar fashion, selection and gene flow can leave characteristic imprints on the SFS of a population.
 
 ![jpg](07_momi2_API_files/07_momi2_API_000_SFS.jpg)
 
@@ -59,7 +55,7 @@ qsub: job 24824.darwin ready
 When starting an interactive job on the cluster, it automatically directs you back to your default environment, which is python 2.7 in our case. We need to make sure that we are in the right conda environment to run momi2.
 
 ```
-## switch to the python3 environment
+## switch back to the python3 environment
 $ source activate momi-py36
 
 ## Start the notebook server
