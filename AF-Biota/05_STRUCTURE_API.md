@@ -13,15 +13,18 @@ Identifying the true number of genetic clusters in a sample is a long standing, 
 
 ## Configure HPC environment for ipyparallel ***(THIS IS VERY IMPORTANT)***
 In this tutorial we will be using a python package for parallel computation called `ipyparallel`. The USP cluster does not have a GUI, as is typical of cluster systems. Unfortunately ipyparallel and this particular GUI-less environment have a hard time interacting (for complicated reasons). We have derived a workaround that allows the parallelization to function. You should execute the following commands **in a terminal on the USP cluster before doing anything else**.
+
+***VERY IMPORTANT:*** This environment variable needs to be set in both `.bashrc` and `.profile` so that it is picked up when you run ipyparallel in either the head node of the cluster or on compute nodes.
+
 ```
 $ echo "# Prevent ipyparallel engines from dying in a headless environment" >> ~/.bashrc
 $ echo "export QT_QPA_PLATFORM=offscreen" >> ~/.bashrc
+$ echo "export QT_QPA_PLATFORM=offscreen" >> ~/.profile
 $ source ~/.bashrc
+$ source ~/.profile
 $ env | grep QT
 ```
-```
     QT_QPA_PLATFORM=offscreen
-```    
 
 > **Note:** Don't worry if this seems like black magic, because ***IT IS!*** ;p
 
