@@ -228,6 +228,7 @@ head anolis_outfiles/anolis.bed
     locus_26	50	51
 
 ### The allele counts file
+The allele counts file is an intermediate step necessary for generating the SFS. It's a format internal to `momi2`, so we won't spend a lot of time describing it, except to say that it is exactly what it says it is: A count of alleles in each population. Since each diploid individual has 2 alleles per snp, the total count of alleles per population will be 2n at maximum, and 0 at minimum.
 
 ```
 %%bash
@@ -247,12 +248,12 @@ gunzip -c anolis_allele_counts.gz | head
 		    [[0, 0], [2, 2]],
 
 ### Generate the SFS
+The `momi` site frequency spectrum is represented somewhat differently than you might be used to if you have used dadi or fastsimcoal2. Here we load the sfs generated above into the `sfs` object and print a few properties.
 
 ```
 %%bash
 python -m momi.extract_sfs anolis_sfs.gz 20 anolis_allele_counts.gz
 ```
-##TODO:## I don't exactly understand what this `50` is doing here.
 ```
 sfs = momi.Sfs.load("anolis_sfs.gz")
 print("Avg pairwise heterozygosity", sfs.avg_pairwise_hets[:5])
@@ -261,9 +262,15 @@ print("percent missing data per population", sfs.p_missing)
 ```
 
 ## Inference procedure
+In the previous examples where we constructed and plotted DemographicModels, we had specified all the values for population sizes, divergence times, and migration fractions. This is useful when we are developing the models we want to test, because we can construct the model with toy parameter values, plot it and then visually inspect whether the model meets our expectations. Once we have settled on one or a handful of models to test, we can incorporate the observed SFS in an inference procedure in order to test which model is the best fit to the data. The best fitting model will then provide a set of maximum likelihood parameter values for the parameters we are interested in (like divergence time). We can then perform a bootstrap analysis, by randomly resampling the observed SFS, re-estimating parameters under the most likely model, and constructing bootstrap confidence intervals on these values (typically 50-100 replicates, but here 10 for speed).
 
+Here we will invesigate three different 2 population models:
+* `no_migration_model` - All parameters fixed, except divergence time.
+* `pop_sizes_model` - North and South populations are allowed to have different, variable sizes. Here we also estimate divergence time.
+* `migration_model` - Allow one pulse of migration in both directions, at possibly different times, and with different migration fractions. Also, include all other parameters above (population sizes and divergence time).
 
 ### Estimating divergence time
+Here we construct the `no_migration_model`, where we are estimating only divergence time. We perform the optimization, and plot the model with the resulting most likely parameter value.
 ```
 no_migration_model = momi.DemographicModel(N_e=1e5)
 
@@ -301,6 +308,7 @@ fig = momi.DemographyPlot(
 ![png](07_momi2_API_files/07_momi2_API_03_Inference_tdiv.png)
 
 ### Including population size parameters
+Here we construct the `popsizes_model`, where we are estimating variable population sizes as well as divergence time. We perform the optimization, and plot the model with the resulting most likely parameter values.
 ```
 popsizes_model = momi.DemographicModel(N_e=1e5)
 
@@ -390,7 +398,7 @@ fig = momi.DemographyPlot(
 ![png](07_momi2_API_files/07_momi2_API_05_Inference_migration.png)
 
 ## Model selection with AIC
-**TODO:** Write this up a bit more.
+Model selection is typically performed with AIC, so here we extract the log likelihood of each model, calculate the AIC, and then calculate delta AIC values, and AIC weights. The best model will have the lowest AIC score. Delta AIC, and the AIC weight are indications of how confident we can be that the best fitting model is the correct model. 
 ```
 AICs = []
 for model in [no_migration_model, popsizes_model, migration_model]:
