@@ -12,6 +12,7 @@
 ## Upcoming events:
 
 * [RADCamp2018-AF-Biota (Brazil)](AF-Biota/index.md)
+* [RADCamp2018-NYC](NYC2018/index.md)
 
 # Admission Criteria
 
