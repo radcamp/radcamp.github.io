@@ -2,7 +2,7 @@
 
 August 28-30, 2018  
 Columbia University  
-New York City
+New York City  
 
 # Organisers, Instructors, and Facilitators
 
