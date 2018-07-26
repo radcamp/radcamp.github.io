@@ -11,9 +11,6 @@ São Paulo, Brasil
   - Isaac Overcast (CCNY)
   - Laura Bertola (CCNY)
   - Mariana Vasconcellos (CCNY)
-  - Roberta Damasceno (USP)
-  - Marcelo Reginato (Unicamp)
-  - Greg Thom
 
 # Schedule
 
