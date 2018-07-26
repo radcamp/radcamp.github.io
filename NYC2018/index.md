@@ -1,7 +1,7 @@
-# Welcome to RadCamp 2018 - The AF-BIOTA Addition
+# Welcome to RadCamp 2018 - The New York City Edition
 
 August 28-30, 2018  
-Columbia University
+Columbia University  
 New York City
 
 # Organisers, Instructors, and Facilitators
