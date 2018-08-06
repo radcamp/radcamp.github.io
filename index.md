@@ -25,9 +25,6 @@ computational experience.
 
 Workshop attendees will need to bring a laptop computer.
 
-# Course structure and programme
-
-
 ## Upcoming events:
 
 * [RADCamp2018-NYC](NYC2018/index.md)
