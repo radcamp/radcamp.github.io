@@ -14,7 +14,7 @@ New York City
 
 Participation will be limited to 30 individuals. Registration for this edition of RADCamp is $15, which will cover coffee and light snacks for the 3 day workshop. The registration fee is more of an inducement to prevent people from signing up and then flaking, so __nobody will be turned away for lack of funding.__ If you want to request a fee waiver please contact the organizers.
 
-[Register for RADCamp 2018 NYC](https://www.eventbrite.com/e/radcamp-2018-new-york-city-edition-tickets-48820396119).
+[Register for RADCamp 2018 NYC](https://www.eventbrite.com/e/radcamp-2018-new-york-city-edition-tickets-48820396119)
 
 # Schedule
 
