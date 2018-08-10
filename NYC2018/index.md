@@ -10,17 +10,28 @@ New York City
   - Isaac Overcast (CCNY)
   - Sandra Hoffberg (Columbia)
 
+# Registration
+
+Participation will be limited to 30 individuals. Registration for this edition of RADCamp is $15, which will cover coffee and light snacks for the 3 day workshop. The registration fee is more of an inducement to prevent people from signing up and then flaking, so __nobody will be turned away for lack of funding.__ If you want to request a fee waiver please contact the organizers.
+
+[Register for RADCamp 2018 NYC](https://www.eventbrite.com/e/radcamp-2018-new-york-city-edition-tickets-48820396119)
+
 # Schedule
 
-Times            | Tuesday | Wednesday | Thursday
+Times            | Tuesday | Wednesday (Phylogenetics) | Thursday (Population genetics)
 -----            | ------ | ------- | ---------
-9:00-12:30     | [Cluster basics](01_cluster_basics.md) and [ipyrad part I](02_ipyrad_partI_CLI.md) | [Jupyter notebook setup](Jupyter_Notebook_Setup.md), [Clustering analysis: PCA](04_PCA_API.md) | Demographic anaylsis ([momi2](07_momi2_API.md))
+9:00-12:30      | Intro to RAD-Seq data types | (Instruction) [Jupyter notebook setup](Jupyter_Notebook_Setup.md), [Tetrad - A Quartet-based species tree method](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-tetrad.ipynb), & [Phylogenetic inference: RAxML](06_RAxML_API.md) | (Instruction) [Clustering analysis: PCA](04_PCA_API.md), Demographic analysis ([momi2](07_momi2_API.md))
 12:30-14:00 | Lunch | Lunch | Lunch
-14:00-17:00 |[ipyrad part II](03_ipyrad_partII_CLI.md) | [Clustering analysis: Structure](05_STRUCTURE_API.md) & [Phylogenetic inference: RAxML](06_RAxML_API.md) | Assisted work session (hack your own data)
+14:00-17:00 |[Cluster basics](01_cluster_basics.md) and [ipyrad parts I](02_ipyrad_partI_CLI.md) & [II](03_ipyrad_partII_CLI.md) | (Small Group work) [Targeted phylogenetics exercises](tba.md) | (Small Group work) [Targeted population genetics exercises](tba.md)
 
 ## Additional ipyrad analysis cookbooks
 
-* [Tetrad - A Quartet-based species tree method](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-tetrad.ipynb)
+* [Clustering analysis: STRUCTURE](05_STRUCTURE_API.md)
 * [BPP - Bayesian inference under a multi-species coalescent model](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-bpp-species-delimitation.ipynb)
 * [Bucky - Phylogenetic concordance analysis](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-bucky.ipynb)
 * [ABBA-BABA - Admixture analysis](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-abba-baba.ipynb)
+
+# RADCamp NYC 2018 co-sponsored by:
+
+![CUNY Graduate Center](images/GC-logo.svg)
+![Columbia E3B](images/E3B-logo.jpg)
