@@ -33,5 +33,5 @@ Times            | Tuesday | Wednesday (Phylogenetics) | Thursday (Population ge
 
 ## RADCamp NYC 2018 co-sponsored by:
 
-![CUNY Graduate Center](images/GC-logo.svg)
+![CUNY Graduate Center](images/GC-logo.png)
 ![Columbia E3B](images/E3B-logo.jpg)
