@@ -30,3 +30,8 @@ Times            | Tuesday | Wednesday (Phylogenetics) | Thursday (Population ge
 * [BPP - Bayesian inference under a multi-species coalescent model](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-bpp-species-delimitation.ipynb)
 * [Bucky - Phylogenetic concordance analysis](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-bucky.ipynb)
 * [ABBA-BABA - Admixture analysis](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-abba-baba.ipynb)
+
+# RADCamp NYC 2018 co-sponsored by:
+
+![CUNY Graduate Center](images/GC-logo.svg)
+![Columbia E3B](images/E3B-logo.jpg)
