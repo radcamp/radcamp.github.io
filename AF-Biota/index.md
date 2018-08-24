@@ -7,8 +7,8 @@ São Paulo, Brasil
 # Instructors
 
   - Isaac Overcast (CCNY)
-  - Laura Bertola (CCNY)
   - Mariana Vasconcellos (CCNY)
+  - Laura Bertola (CCNY)
 
 # Schedule
 
