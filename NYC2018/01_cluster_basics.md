@@ -13,7 +13,7 @@ The bulk of the activities this morning involve getting oriented on the cluster 
 ## Tutorial documentation conventions
 Each grey cell in this tutorial indicates a command line interaction. Lines starting with $ indicate a command that should be executed in a terminal, for example by copying and pasting the text into your terminal. All lines in code cells beginning with ## are comments and should not be copied and executed. Elements in code cells surrounded by angle brackets (e.g. `<username>`) are variables that need to be replaced by the user. All other lines should be interpreted as output from the issued commands.
 
-```
+```bash
 ## Example Code Cell.
 ## Create an empty file in my home directory called `watdo.txt`
 $ touch ~/watdo.txt
@@ -23,64 +23,54 @@ $ echo "wat"
 wat
 ```
 
-## USP Zoology HPC Facility Info
-Computational resources for the duration of this workshop have been generously provided by the Zoology HPC facility, with special thanks to Diogo Melo for technical support and Roberta Damasceno for coordinating access. The cluster we will be using is located at `lem.ib.usp.br`. Further details about cluster resources and available queues can be found on the [USP Cluster Info](USP_Cluster_Info.md) page.
+## Columbia Habanero cluster information
+Computational resources for the duration of this workshop have been generously provided by the Columbia University HPC facility, with special thanks to George Garrett for technical support. The cluster we will be using is located at `habanero.rcs.columbia.edu`. We have a reserved partition of the cluster for use in this workshop composed of five 24-core nodes. We will walk through instrutions for executing short or long running jobs on a cluster.
 
-## SSH Intro
-Unlike laptop or desktop computers, cluster systems typically (almost exclusively) do not have graphical user input interfaces. Interacting with an HPC system therefore requires use of the command line to establish a connection, and for running programs and submitting jobs remotely on the cluster.
+## SSH and the command line
+Unlike laptop or desktop computers, cluster systems typically (almost exclusively) do not have graphical user input interfaces. Interacting with an HPC system therefore requires use of the command line to establish a connection, and for running programs and submitting jobs remotely on the cluster. To interact with the cluster through a terminal we use a program called SSH (secure shell) to create a fast and secure connection. 
 
 ### SSH for windows
-Windows computers need to use a 3rd party app for connecting to remote computers. The best app for this in my experience is [puTTY](https://www.putty.org/), a free SSH client. Right click and "Save link as" on the [64-bit binary executable link](https://the.earth.li/~sgtatham/putty/latest/w64/putty.exe). 
+Windows computers need to use a 3rd party app for connecting to remote computers. The best app for this in my experience is [puTTY](https://www.putty.org/), a free SSH client. Right click and "Save link as" on the [64-bit binary executable link](https://the.earth.li/~sgtatham/putty/latest/w64/putty.exe) if you are using a PC.
 
-After installing puTTY, open it and you will see a box where you can enter the "Host Name (or IP Address)" of the computer you want to connect to (the 'host'). To connect to the USP cluster, enter: `lem.ib.usp.br`. The default "Connection Type" should be "SSH", and the default "Port" should be "22". It's good to verify these values. Leave everything else as defualt and click "Open".
+After installing puTTY, open it and you will see a box where you can enter the "Host Name (or IP Address)" of the computer you want to connect to (the 'host'). To connect to the Habanero cluster, enter: `habanero.rcs.columbia.edu`. The default "Connection Type" should be "SSH", and the default "Port" should be "22". It's good to verify these values. Leave everything else as defualt and click "Open".
 
 ![png](01_cluster_basics_files/01_puTTY.png)
 
 ### SSH for mac/linux
-Linux operating systems come preinstalled with an ssh command line client, which we will assume linux users are aware of how to use. Mac computers are built top of a linux-like operating system so they too ship with an SSH client, which can be accessed through the Terminal app. In a Finder window open Applications->Utilities->Terminal, then you can start an ssh session like this:
+Linux operating systems come preinstalled with an ssh command line client, which we will assume linux users are aware of how to use. Mac computers are built on top of a linux-like operating system so they too ship with an SSH client, which can be accessed through the Terminal app. In a Finder window open Applications->Utilities->Terminal, then you can start an ssh session like this:
 
-```
-$ ssh <username>@lem.ib.usp.br
+```bash
+# enter your username here
+$ ssh <username>@habanero.rcs.columbia.edu
+
+# this is an example for the username "work2"
+$ ssh work2@habanero.rcs.columbia.edu
 ```
 
-> **Note on usage:** In command line commands we'll use the convention of wrapping variable names in angle-brackets. For example, in the command above you should substitute your own username for `<username>`.
-
-### **Change your password**
-The USP cluster admin assigned passwords which you should all have received. Now that you are logged in for the first time on ssh you can change this password to something easier to remember. The command to change your login password on linux is `passwd` and it looks like this:
-
-```
-$ passwd
-Changing password for isaac.
-(current) UNIX password: 
-Enter new UNIX password: 
-Retype new UNIX password: 
-passwd: password updated successfully
-```
-> **Note:** During the password changing process when you type your old and new passwords the characters will not appear on the screen. This is a security "feature", that can sometimes be confusing. Just type your password and believe that the characters are entering correctly. If you type your current password correctly and the new password the same way twice then you'll see the success message as above.
+> **Note on usage:** In command line commands we'll use the convention of wrapping variable names in angle-brackets. For example, in the command above you should substitute your own username for `<username>`. We will provide usernames and passwords on the day of the workshop. 
 
 ## Command line interface (CLI) basics
-The CLI provides a way to navigate a file system, move files around, and run commands all inside a little black window. The down side of CLI is that you have to learn many at first seemingly esoteric commands for doing all the things you would normally do with a mouse. However, there are several advantages of CLI: 1) you can use it on servers that don't have a GUI interface (such as HPC clusters); 2) it's scriptable, so you can write programs to execute common tasks or run analyses; 3) it's often faster and more efficient that click-and-drag GUI interfaces. For now we will start with 4 of the most common and useful commands:
+The CLI provides a way to navigate a file system, move files around, and run commands all inside a little black window. The down side of CLI is that you have to learn many at first seemingly esoteric commands for doing all the things you would normally do with a mouse. However, there are several advantages of CLI: 1) you can use it on servers that don't have a GUI interface (such as HPC clusters); 2) it's scriptable, so you can write programs to execute common tasks or run analyses and others can easily reproduce these tasks exactly; 3) it's often faster and more efficient that click-and-drag GUI interfaces. For now we will start with 4 of the most common and useful commands:
 
-```
+```bash
 $ pwd
 /home/<username>
 ```
-`pwd` stands for **"print working directory"**, which literally means "where am I now in this filesystem". Just like when you open a file browser with windows or mac, when you open a new terminal the command line will start you out in your "home" directory. Ok, now we know where we are, lets take a look at what's in this directory:
+`pwd` stands for **"print working directory"**, which literally means "where am I now in this filesystem?". This is a question you should always be aware of when working in a terminal. Just like when you open a file browser window, when you open a new terminal you are located somewhere; the terminal will usually start you out in your "home" directory. Ok, now we know where we are, lets take a look at what's in this directory:
 
-```
+```bash
 $ ls
-
 ```
 
 `ls` stands for **"list"** and in our home directory there is **not much, it appears!** In fact right now there is nothing. This is okay, because you just got a brand new account, so you won't expect to have anything there. Throughout the workshop we will be adding files and directories and by the time we're done, not only will you have a bunch of experience with RAD-Seq analysis, but you'll also have a ***ton*** of stuff in your home directory. We can start out by adding the first directory for this workshop:
 
-```
+```bash
 $ mkdir ipyrad-workshop
 ```
 
 `mkdir` stands for **"make directory"**, and unlike the other two commands, this command takes one "argument". This argument is the name of the directory you wish to create, so here we direct mkdir to create a new directory called "ipyrad-workshop". Now you can use `ls` again, to look at the contents of your home directory and you should see this new directory now:
 
-```
+```bash
 $ ls
 ipyrad-workshop
 ```
@@ -95,24 +85,27 @@ Throughout the workshop we will be introducing new commands as the need for them
 
 64-Bit Python2.7 conda installer for linux is here: [https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh](https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh), so copy and paste this link into the commands as below:
 
-```
+```bash
 $ wget https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh
 ```
 > **Note:** `wget` is a command line utility for fetching content from the internet. You use it when you want to **get** stuff from the **w**eb, so that's why it's called `wget`.
 
-After the download finishes you can execute the conda installer using `bash`. `bash` is the name of the terminal program that runs on the cluster, and `.sh` files are scripts that bash knows how to run: 
+After the download finishes you can execute the conda installer using `bash`. `bash` is the name of the terminal program that runs on the cluster, and `.sh` files are scripts that bash knows how to run. The extra argument `-b` at the end is specific to this `.sh` script, and tells it to automatically run the entire script (in **b**atch mode) instead of stopping to ask us questions as it goes. 
 
+```bash
+$ bash Miniconda2-latest-Linux-x86_64.sh -b
 ```
-$ bash Miniconda2-latest-Linux-x86_64.sh
-```
-Accept the license terms, and use the default conda directory (mine is `/home/isaac/miniconda2`). After the install completes it will ask about modifying your PATH, and you should say 'yes' for this. Next run the following two commands:
 
-```
+This will create a new directory where the `conda` program will be located, and also where all of the software that we will eventually install with conda will be stored. By default the new directory will be placed in your home directory and will be called `miniconda2`. After the install completes we will add this new directory to our `PATH` variable, which is what the terminal uses to recognize where software is located on your system. After running the command below our terminal will always find our conda software.
+
+```bash
+$ echo "PATH=$HOME/miniconda2/bin:$PATH" >> ~/.bashrc
 $ source .bashrc
 $ which python
 /home/<username>/miniconda2/bin/python
 ```
-The `source` command tells the server to recognize the conda install (you only ever have to do this once, so don't worry too much about remembering it). The `which` command will show you the path to the python binary, which will now be in your personal minconda directory:
+
+The `echo` command prints the text that is in quotes and writes in to the file `.bashrc`. This is a file that is automatically run when the terminal starts. If we had not run the miniconda installer in batch mode it would have done this for us automatically, but it takes longer that way so we are doing it by hand. The `source` command simply tells the terminal to reload the `.bashrc` file so that it is like we started a new terminal, but this time it will find all of our new conda software. Finally, the `which` command will show you the path to (location of) the program printed after it. In this case we ask which python binary it finds, and you can see that it returns that it finds python in our personal miniconda directory.
 
 ### Install ipyrad and fastqc
 Conda gives us access to an amazing array of all kinds of analysis tools for both analyzing and manipulating all kinds of data. Here we'll just scratch the surface by installing [ipyrad](http://ipyrad.readthedocs.io/), the RAD-Seq assembly and analysis tool that we'll use throughout the workshop, [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/), an application for filtering fasta files based on several quality control metrics. As long as we're installing conda packages we'll include [toytree](https://toytree.readthedocs.io/en/latest/) as well, which is a plotting library used by the ipyrad analysis toolkit.
