@@ -100,7 +100,7 @@ This will create a new directory where the `conda` program will be located, and 
 
 ```bash
 $ echo "PATH=$HOME/miniconda2/bin:$PATH" >> ~/.bashrc
-$ source .bashrc
+$ source ~/.bashrc
 $ which python
 /home/<username>/miniconda2/bin/python
 ```
@@ -149,20 +149,18 @@ $ fastqc --version
 FastQC v0.11.7
 ```
 ## Fetch the raw data
-We will be reanalysing RAD-Seq data from *Anolis punctatus* sampled from across their distribution on the South American continent and published in [Prates *et al.* 2016](http://www.pnas.org/content/pnas/113/29/7978.full.pdf). The original dataset included 43 individuals of *A. punctatus*, utilized the Genotyping-By-Sequencing (GBS) single-enzyme library prep protocol [Elshire *et al.* 2011](http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0019379), sequenced 100bp single-end reads on an Illumina Hi-Seq and resulted in final raw sequence counts on the order of 1e6 per sample.
+We will be reanalysing RAD-Seq data from several closely related species in the plant genus *Pedicularis* sampled from across their distribution on the Tibetan plateau and published in [Eaton *et al.* 2013](sysbio.oxfordjournals.org/content/62/5/689). This dataset includes 13 individuals with libraries prepared according to the original RAD method with a single enzyme and sonication, and sequencing 100bp single-end reads on an Illumina GAIIx. The final raw sequence counts are on the order of 1e6-4e6 per sample.
 
-We will be using a subset of 10 individuals distributed along the coastal extent of the central and northern Atlantic forest. Additionally, raw reads have been randomly downsampled to 2.5e5 per sample, in order to create a dataset that will be computationally tractable for 20 people to run simultaneously with the expectation of finishing in a reasonable time.
-
-The subset of truncated raw data is located in a special folder on the HPC system. You can *change directory* into your ipyrad working directory, and then copy the raw data with these commands:
+The raw data are located in a special folder on the HPC system. You can *change directory* into your ipyrad working directory, and then copy the raw data with these commands:
 ```bash
 $ cd ipyrad-workshop
-$ cp /rigel/edu/radcamp/files/a_punctatus.tgz ./ipyrad-workshop
+$ cp /rigel/edu/radcamp/files/SRP021469.tgz ./ipyrad-workshop
 ```
 > **Note:** The form of the copy command is `copy <source> <destination>`. Here the source file is clear, it's simply the data file you want to copy. The destination is `.`, which is another linux shortcut that means "My current directory", or "Right here in the directory I'm in".
 
 Finally, you'll notice the raw data is in `.tgz` format, which is similar to a zip archive. We can unpack our raw data in the current directory using the `tar` command:
 ```bash
-$ tar -xvzf ./ipyrad-workshop/a_punctatus.tgz
+$ tar -xvzf ./ipyrad-workshop/SRP021469.tgz
 ```
 > **Point of interest:** All linux commands, such as `tar`, can have their behavior modified by passing various arguments. Here the arguments are `-x` to "Extract" the archive file; `-v` to add "verbosity" by printing progress to the screen; `z` to "unzip" the archive during extraction; and `-f` to "force" the extraction which prevents `tar` from pestering you with decisions.
 
