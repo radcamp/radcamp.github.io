@@ -1,7 +1,7 @@
 # Welcome to RadCamp 2018 - The New York City Edition
 
 August 28-30, 2018
-Schermerhorn Extension Building Room 1010
+Schermerhorn Extension Building Room 1010  
 Columbia University  
 New York City  
 
