@@ -96,7 +96,7 @@ After the download finishes you can execute the conda installer using `bash`. `b
 $ bash Miniconda2-latest-Linux-x86_64.sh -b
 ```
 
-This will create a new directory where the `conda` program will be located, and also where all of the software that we will eventually install with conda will be stored. By default the new directory will be placed in your home directory and will be called `miniconda2`. After the install completes we will add this new directory to our `PATH` variable, which is what the terminal uses to recognize where software is located on your system. After running the command below our terminal will always find our conda software.
+This will create a new directory where the `conda` program will be located, and also where all of the software that we will eventually install with conda will be stored. By default the new directory will be placed in your home directory and will be called `miniconda2`. After the install completes we will add this new directory to our `PATH` variable, which is what the terminal uses to recognize where software is located on your system. After running the commands below our terminal will always be able to find our conda software.
 
 ```bash
 $ echo "PATH=$HOME/miniconda2/bin:$PATH" >> ~/.bashrc
@@ -105,18 +105,29 @@ $ which python
 /home/<username>/miniconda2/bin/python
 ```
 
-The `echo` command prints the text that is in quotes and writes in to the file `.bashrc`. This is a file that is automatically run when the terminal starts. If we had not run the miniconda installer in batch mode it would have done this for us automatically, but it takes longer that way so we are doing it by hand. The `source` command simply tells the terminal to reload the `.bashrc` file so that it is like we started a new terminal, but this time it will find all of our new conda software. Finally, the `which` command will show you the path to (location of) the program printed after it. In this case we ask which python binary it finds, and you can see that it returns that it finds python in our personal miniconda directory.
+The `echo` command prints the text that is in quotes and the ">" character designates to write the result to the file `.bashrc`. This is a file that is automatically run when the terminal starts. If we had not run the miniconda installer in batch mode it would have done this for us automatically, but it takes longer that way so we are doing it by hand. The `source` command simply tells the terminal to reload the `.bashrc` file so that it is like we started a new terminal, but this time it will find all of our new conda software. Finally, the `which` command will show you the path to (location of) the program printed after it. In this case we ask which python binary it finds, and you can see that it returns that it finds python in our personal miniconda directory.
 
 ### Install ipyrad and fastqc
-Conda gives us access to an amazing array of all kinds of analysis tools for both analyzing and manipulating all kinds of data. Here we'll just scratch the surface by installing [ipyrad](http://ipyrad.readthedocs.io/), the RAD-Seq assembly and analysis tool that we'll use throughout the workshop, [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/), an application for filtering fasta files based on several quality control metrics. As long as we're installing conda packages we'll include [toytree](https://toytree.readthedocs.io/en/latest/) as well, which is a plotting library used by the ipyrad analysis toolkit.
+Conda gives us access to an amazing array of analysis tools for both analyzing and manipulating all kinds of data. Here we'll just scratch the surface by installing [ipyrad](http://ipyrad.readthedocs.io/), the RAD-Seq assembly and analysis tool that we'll use throughout the workshop, [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/), an application for filtering fasta files based on several quality control metrics. As long as we're installing conda packages we'll include [toytree](https://toytree.readthedocs.io/en/latest/) as well, which is a plotting library used by the ipyrad analysis toolkit.
 
+We'll explain this part in more detail further below, but for now run the command
+below to connect to an interactive session on a compute node. This way we will 
+not be using the head node of the cluster (shared resource) when we are all 
+installing software simultaneously.
+```bash
+srun --pty -t 30:00 --account=edu --reservation=edu_23 /bin/bash
 ```
-$ conda install -c ipyrad -c bioconda ipyrad toytree fastqc
+Now that you are connected to a compute node run the commands below:
+```bash
+$ conda install -c ipyrad ipyrad 
+$ conda install -c bioconda fastqc
+$ conda install -c eaton-lab toytree
 ```
 > **Note:** The `-c` flag indicates that we're asking conda to fetch apps from the `ipyrad`, `bioconda`, and `eaton-lab` channels. Channels are seperate repositories of apps maintained by independent developers.
 
 After you type `y` to proceed with install, these commands will produce a lot of output that looks like this:
-```
+
+```bash
 libxml2-2.9.8        |  2.0 MB | ################################################################################################################################# | 100%
 expat-2.2.5          |  186 KB | ################################################################################################################################# | 100% 
 singledispatch-3.4.0 |   15 KB | ################################################################################################################################# | 100%
@@ -131,35 +142,35 @@ wcwidth-0.1.7        |   25 KB | ###############################################
 ```
 These (and many more) are all the dependencies of ipyrad and fastqc. Dependencies can include libraries, frameworks, and/or other applications that we make use of in the architecture of our software. Conda knows all about which dependencies will be needed and installs them automatically for you. Once the process is complete (may take several minutes), you can verify the install by asking what version of each of these apps is now available for you on the cluster.
 
-```
+```bash
 $ ipyrad --version
 ipyrad 0.7.28
 $ fastqc --version
 FastQC v0.11.7
 ```
 ## Fetch the raw data
-We will be reanalysing RAD-Seq data from *Anolis punctatus* sampled from across their distribution on the South American continent and published in [Prates *et al.* 2016](http://www.pnas.org/content/pnas/113/29/7978.full.pdf). The original dataset included 43 individuals of *A. punctatus*, utilized the Genotyping-By-Sequencing (GBS) single-enzyme library prep protocol [Ellshire *et al.* 2011](http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0019379), sequenced 100bp single-end reads on an Illumina Hi-Seq and resulted in final raw sequence counts on the order of 1e6 per sample.
+We will be reanalysing RAD-Seq data from *Anolis punctatus* sampled from across their distribution on the South American continent and published in [Prates *et al.* 2016](http://www.pnas.org/content/pnas/113/29/7978.full.pdf). The original dataset included 43 individuals of *A. punctatus*, utilized the Genotyping-By-Sequencing (GBS) single-enzyme library prep protocol [Elshire *et al.* 2011](http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0019379), sequenced 100bp single-end reads on an Illumina Hi-Seq and resulted in final raw sequence counts on the order of 1e6 per sample.
 
 We will be using a subset of 10 individuals distributed along the coastal extent of the central and northern Atlantic forest. Additionally, raw reads have been randomly downsampled to 2.5e5 per sample, in order to create a dataset that will be computationally tractable for 20 people to run simultaneously with the expectation of finishing in a reasonable time.
 
 The subset of truncated raw data is located in a special folder on the HPC system. You can *change directory* into your ipyrad working directory, and then copy the raw data with these commands:
-```
+```bash
 $ cd ipyrad-workshop
-$ cp /scratch/af-biota/raw_data/a_punctatus.tgz .
+$ cp /rigel/edu/radcamp/files/a_punctatus.tgz ./ipyrad-workshop
 ```
 > **Note:** The form of the copy command is `copy <source> <destination>`. Here the source file is clear, it's simply the data file you want to copy. The destination is `.`, which is another linux shortcut that means "My current directory", or "Right here in the directory I'm in".
 
 Finally, you'll notice the raw data is in `.tgz` format, which is similar to a zip archive. We can unpack our raw data in the current directory using the `tar` command:
-```
-$ tar -xvzf a_punctatus.tgz
+```bash
+$ tar -xvzf ./ipyrad-workshop/a_punctatus.tgz
 ```
 > **Point of interest:** All linux commands, such as `tar`, can have their behavior modified by passing various arguments. Here the arguments are `-x` to "Extract" the archive file; `-v` to add "verbosity" by printing progress to the screen; `z` to "unzip" the archive during extraction; and `-f` to "force" the extraction which prevents `tar` from pestering you with decisions.
 
 Now use `ls` to list the contents of your current directory, and also to list the contents of the newly created `raws` directory:
-```
-$ ls
-a_punctatus.tgz  raws
-$ ls raws/
+```bash
+$ ls ipyrad-workshop
+a_punctatus.tgz  raws/
+$ ls ipyrad-workshop/raws/
 punc_IBSPCRIB0361_R1_.fastq.gz  punc_JFT773_R1_.fastq.gz    punc_MTR17744_R1_.fastq.gz  punc_MTR34414_R1_.fastq.gz  punc_MTRX1478_R1_.fastq.gz
 punc_ICST764_R1_.fastq.gz       punc_MTR05978_R1_.fastq.gz  punc_MTR21545_R1_.fastq.gz  punc_MTRX1468_R1_.fastq.gz  punc_MUFAL9635_R1_.fastq.gz
 ```
@@ -178,15 +189,15 @@ This figure depicts a common artifact of current Illumina chemistry, whereby qua
 ### Running FastQC on the Anolis data
 In preparation for running FastQC on our raw data we need to make an output directory to keep the FastQC results organized:
 
-```
+```bash
 $ cd ~/ipyrad-workshop
 $ mkdir fastqc-results
 ```
 Now run fastqc on one of the samples:
-```
+```bash
 $ fastqc -o fastqc-results raws/punc_IBSPCRIB0361_R1_.fastq.gz
 ```
-> **Note:** The `-o` flag tells fastqc where to write output files. **Especially Notice** the *relative path* to the raw file. The difference between *relative* and *absolute* paths is an important one to learn. Relative paths are specified with respect to the current working directory. Since I am in `/home/isaac/ipyrad-workshop`, and this is the directory the `raws` directory is in, I can simply reference it directly. If I was in any other directory I could specify the *absolute path* to the target fastq.gz file which would be `/home/isaac/ipyrad-workshop/raws/punc_IBSPCRIB0361_R1_.fastq.gz`. Absolute paths are always more precise, but also always (often _much_) longer.
+> **Note:** The `-o` flag tells fastqc where to write output files. **Especially Notice** the *relative path* to the raw file. The difference between *relative* and *absolute* paths is an important one to learn. Relative paths are specified with respect to the current working directory. Since I am in `/rigel/edu/radcamp/users/work1/ipyrad-workshop`, and this is the directory the `raws` directory is in, I can simply reference it directly. If I was in any other directory I could specify the *absolute path* to the target fastq.gz file which would be `/rigel/edu/radcamp/users/work1/ipyrad-workshop/raws/punc_IBSPCRIB0361_R1_.fastq.gz`. Absolute paths are always more precise, but also always (often _much_) longer.
 
 FastQC will indicate its progress in the terminal. This toy data will run quite quickly, but real data can take somewhat longer to analyse (10s of minutes).
 ```
@@ -214,13 +225,13 @@ Approx 100% complete for punc_IBSPCRIB0361_R1_.fastq.gz
 Analysis complete for punc_IBSPCRIB0361_R1_.fastq.gz
 ```
 If you feel so inclined you can QC all the raw data using a wildcard substitution:
-```
+```bash
 $ fastqc -o fastqc-results raws/*
 ```
 > **Note:** The `*` here is a special command line character that means "Everything that matches this pattern". So here `raws/*` matches _everything_ in the raws directory. Equivalent (though more verbose) statements are: `ls raws/*.gz`, `ls raws/*.fastq.gz`, `ls raws/*_R1_.fastq.gz`. All of these will list all the files in the `raws` directory. **Special Challenge:** Can you construct an `ls` command using wildcards that only lists samples in the `raws` directory that include the digit 5 in their sample name?
 
 Examining the output directory you'll see something like this:
-```
+```bash
 $ ls fastqc-results/
 punc_IBSPCRIB0361_R1__fastqc.html  punc_JFT773_R1__fastqc.html    punc_MTR17744_R1__fastqc.html  punc_MTR34414_R1__fastqc.html  punc_MTRX1478_R1__fastqc.html
 punc_IBSPCRIB0361_R1__fastqc.zip   punc_JFT773_R1__fastqc.zip     punc_MTR17744_R1__fastqc.zip   punc_MTR34414_R1__fastqc.zip   punc_MTRX1478_R1__fastqc.zip
