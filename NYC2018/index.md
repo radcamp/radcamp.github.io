@@ -1,6 +1,7 @@
 # Welcome to RadCamp 2018 - The New York City Edition
 
-August 28-30, 2018  
+August 28-30, 2018
+Schermerhorn Extension Building Room 1010
 Columbia University  
 New York City  
 
@@ -20,6 +21,7 @@ Participation will be limited to 30 individuals. Registration for this edition o
 
 Times            | Tuesday | Wednesday (Phylogenetics) | Thursday (Population genetics)
 -----            | ------ | ------- | ---------
+8:30-9:00       | Check-in and refreshments | Check-in and refreshments | Check-in and refreshments
 9:00-12:30      | Intro to RAD-Seq data types | (Instruction) [Jupyter notebook setup](Jupyter_Notebook_Setup.md), [Tetrad - A Quartet-based species tree method](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-tetrad.ipynb), & [Phylogenetic inference: RAxML](06_RAxML_API.md) | (Instruction) [Clustering analysis: PCA](04_PCA_API.md), Demographic analysis ([momi2](07_momi2_API.md))
 12:30-14:00 | Lunch | Lunch | Lunch
 14:00-17:00 |[Cluster basics](01_cluster_basics.md) and [ipyrad parts I](02_ipyrad_partI_CLI.md) & [II](03_ipyrad_partII_CLI.md) | (Small Group work) [Targeted phylogenetics exercises](tba.md) | (Small Group work) [Targeted population genetics exercises](tba.md)
