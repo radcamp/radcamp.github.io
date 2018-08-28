@@ -296,16 +296,24 @@ $ ls -l fastqc-results/
 
 Now we have output files that include html and images depicting lots of information about the quality of our reads, but we can't inspect these because we only have a CLI interface on the cluster. How do we get access to the output of FastQC?
 
-### Obtaining FastQC Output (scp)
+### Obtaining FastQC Output (scp) (linux/MacOSX)
 You can use the `scp` tool to copy files from the cluster to your local computer so that you can visualize the results on your graphical user interface on your computer. Take note of the `.` at the end of the command and the need to substitute your username (e.g., work3) into the command.
 ```bash
 # run this from a terminal on your local computer (not connected to the cluster)
-scp -r habanero.rcs.columbia.edu:/rigel/edu/radcamp/users/<username>/ipyrad-workshop/fastq-results .
+scp -r <username>@habanero.rcs.columbia.edu:/rigel/edu/radcamp/users/<username>/ipyrad-workshop/fastq-results .
 ```
 
-Once the files are downloaded you can now open them on your local computer like normal by double clicking on the `.html` files which will open in a browser. 
+###  Obtainig FastQC output (Windows)
+Moving files between the cluster and your local computer is a very common task, and this will typically be accomplished with a secure file transfer protocol (**sftp**) client. Various Free/Open Source GUI tools exist but we recommend [WinSCP](https://winscp.net/eng/download.php) for Windows.
+
+After downloading, installing, and opening WinSCP, you will see the following screen. First, ensure that the "File Protocol is set to "SFTP". **The connection will fail if "SFTP" is not chosen her.** Next, fill out the host name (`lem.ib.usp.br`), your username and password, and click "Login". 
+![png](01_cluster_basics_files/01_WinSCP1.png)
+Two windows file browsers will appear: your laptop on the left, and the cluster on the right. You can navigate through the folders and transfer files from the cluster to your laptop by dragging and dropping them. 
+![png](01_cluster_basics_files/01_WinSCP2.png)
 
 ### Inspecting and Interpreting FastQC Output
+
+Once the files are downloaded you can now open them on your local computer like normal by double clicking on the `.html` files which will open in a browser. 
 
 Just taking a random one, lets spend a moment looking at the results from `punc_JFT773_R1__fastqc.html`. Opening up this html file, on the left you'll see a summary of all the results, which highlights areas FastQC indicates may be worth further examination. We will only look at a few of these.
 

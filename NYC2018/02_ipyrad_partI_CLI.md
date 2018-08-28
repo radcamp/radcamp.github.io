@@ -4,27 +4,26 @@ This is the first part of the full tutorial for the command line interface
 (**CLI**) for ipyrad. In this tutorial we'll walk through the entire assembly 
 and analysis process. This is meant as a broad introduction to familiarize 
 users with the general workflow, and some of the parameters and terminology. 
-We will  continue with assembly and analysis of the Anolis dataset of 
-[Prates *et al.* 2016](http://www.pnas.org/content/pnas/113/29/7978.full.pdf), which we fetched during the previous QC analysis step.
-This data was generated with the GBS protocol and sequenced single-end (SE), 
-but the core concepts will apply to assembly of other data types (ddRAD and
-paired-end (PE)).
+We will use as an example in this tutorial the Anolis data set from the first
+part of class. However, you can follow along with one of the other example
+data sets if you like and although your results will vary the procedure will 
+be identical. 
 
 If you are new to RADseq analyses, this tutorial will provide a simple
 overview of how to execute ipyrad, what the data files look like, how to
 check that your analysis is working, and what the final output formats
-will be.
+will be. We will also cover how to run ipyrad on a cluster and to do so efficiently.
 
 Each grey cell in this tutorial indicates a command line interaction. 
 Lines starting with `$ ` indicate a command that should be executed 
-in a terminal connected to the USP cluster, for example by copying and 
+in a terminal connected to the Habanero cluster, for example by copying and 
 pasting the text into your terminal. Elements in code cells surrounded 
 by angle brackets (e.g. <username>) are variables that need to be 
 replaced by the user. All lines in code cells beginning with \#\# are 
 comments and should not be copied and executed. All other lines should 
 be interpreted as output from the issued commands.
 
-```
+```bash
 ## Example Code Cell.
 ## Create an empty file in my home directory called `watdo.txt`
 $ touch ~/watdo.txt
@@ -45,9 +44,9 @@ The basic steps of this process are as follows:
 
 * Step 1 - Demultiplex/Load Raw Data
 * Step 2 - Trim and Quality Control
-* Step 3 - Cluster within Samples
+* Step 3 - Cluster or reference-map within Samples
 * Step 4 - Calculate Error Rate and Heterozygosity
-* Step 5 - Call consensus sequences
+* Step 5 - Call consensus sequences/alleles
 * Step 6 - Cluster across Samples
 * Step 7 - Apply filters and write output formats
 
@@ -93,69 +92,57 @@ locked away in the work queue is inconvenient. Fortunately, many HPC
 systems provide an "interactive" mode, which allows you to run certain 
 limited tasks inside a terminal directly on one of the compute nodes.
 
-Therefore, we will run all our assembly and analysis on the USP cluster 
+Therefore, we will run most of this tutorial on assembly and analysis on the Habanero cluster 
 inside an "interactive" job. This will allow us to run our proccesses on 
 compute nodes, but still be able to remain at the command line so 
-we can easily monitor progress. If you do not still have an active
+we can easily monitor the progress. If you do not still have an active
 ssh window on the cluster, begin by re-establishing the connection 
 through [puTTY (Windows)](01_cluster_basics.md#ssh-for-windows) or 
 [`ssh` (Mac/Linux)](01_cluster_basics.md#ssh-for-maclinux):
-```
-$ ssh <username>@lem.ib.usp.br 
+```bash
+$ ssh <username>@habanero.rcs.columbia.edu
 ```
 
 ### Submitting an interactive job to the cluster
-
 Now we will submit an interactive job with relatively modest resource
-requests. Remember, you can see default and maximum resource allocations 
-for all cluster queues [here](USP_Cluster_Info.md).
-```
-## -q proto         - Submit a job to the 'prototyping' queue
-## -l nodes=1:ppn=2 - Request 2 processes on the target compute node
-## -l mem=64        - Request 64Gb of main memory
-## -I               - Use 'interactive' mode (get a terminal on the compute node)
+requests. Every cluster has different limits on its resources in terms of what
+is available to you and for how long. We could find these limits for the Columbia
+Habanero cluster by googling it. In this case we will each request that 4 cores
+be made available to us for 1 hour. Because each node has 24 cores this means 
+that multiple people will actually be sharing the same node, which is not a 
+problem. 
 
-$ qsub -q proto -l nodes=1:ppn=2 -l mem=64gb -I
-qsub: waiting for job 24816.darwin to start
-qsub: job 24816.darwin ready
+```bash
+# --pty tells it to connect us to compute nodes interactively
+# --account tells it which account's resources to use
+# --reservation tells it to use the resources on edu reserved for us
+# -t tells it how much time to connect for
+# /bin/bash tells it to open a bash terminal when we connect.
+$ srun --pty --account=edu --reservation=edu_23 -t 1:00:00 -c 4 /bin/bash
 ```
 Depending on cluster usage the job submission script can take more
-or less time to, but the USP cluster is normally quite fast, so it this
-request shouldn't take more than a few moments. Once you see the 
-`qsub: job XXXX.darwin ready` message this indicates that your 
-interactive job request was successful and your terminal is now 
-running on a compute node. 
+or less time to start. Because we have these resources reserved for us there 
+should be very little wait time. Once your job starts your terminal will show
+that you are now connected to a compute node.
 
 ### Inspecting running cluster processes
 At any time you can ask the cluster for the status of your jobs with the 
-`qstat` command. For a simple `qstat` call, the most interesting column
-is marked `S` (meaning "status"). The most common values for this field
-are:
-* R - Job is running
-* Q - job is queued (boo!)
-* C - Job is completed (yay!)
+`squeue` command. This will list every running job on the cluster which can be
+a pain to sort through. So for efficiency you can add the argument 
+`-u <username>` to limit it to showing just your jobs. 
 
-```
+```bash
 ## Check the status of my running job on the 'proto' Queue
-$ qstat
-Job ID                    Name             User            Time Use S Queue
-------------------------- ---------------- --------------- -------- - -----
-24817.darwin              STDIN            isaac           00:00:00 R proto
-
-## Ask more detailed information about job status with the `-r` flag
-$ qstat -r
-
-darwin:
-                                                                                  Req'd       Req'd       Elap
-Job ID                  Username    Queue    Jobname          SessID  NDS   TSK   Memory      Time    S   Time
------------------------ ----------- -------- ---------------- ------ ----- ------ --------- --------- - ---------
-24817.darwin            isaac       proto    STDIN             38014     1      2      64gb  04:00:00 R  00:00:07
+$ squeue -u work1
+   JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+ 8367625      edu2     bash    work1  R       0:09      1 node215
 ```                                                                       
+This confirms that the job we submitted started, that it's running on node215, etc.
 
 ## ipyrad help
-To better understand how to use ipyrad, let's take a look at the help argument. We will use some of the ipyrad arguments in this tutorial (for example: -n, -p, -s, -c, -r). But, the complete list of optional arguments and their explanation goes below.
+To better understand how to use ipyrad, let's take a look at the help argument. We will use some of the ipyrad arguments in this tutorial (for example: -n, -p, -s, -c, -r). But, the complete list of optional arguments and their explanation is below.
 
-```
+```bash
 $ ipyrad --help
 usage: ipyrad [-h] [-v] [-r] [-f] [-q] [-d] [-n new] [-p params]
               [-b [branch [branch ...]]] [-m [merge [merge ...]]] [-s steps]
@@ -218,7 +205,6 @@ optional arguments:
 ```
 
 ## Create a new parameters file
-
 ipyrad uses a text file to hold all the parameters for a given assembly.
 Start by creating a new parameters file with the `-n` flag. This flag
 requires you to pass in a name for your assembly. In the example we use
@@ -226,14 +212,15 @@ requires you to pass in a name for your assembly. In the example we use
 analysing your own data you might call your parameters file something
 more informative, like the name of your organism and some details on the settings.
 
-``` 
+```bash 
+# go to our working directory
 $ cd ~/ipyrad-workshop
+
+# create a new params file named 'anolis' (Or the name of an alternative library)
 $ ipyrad -n anolis
 ```
 
-This will create a file in the current directory called
-`params-anolis.txt`. The params file lists on each line one
-parameter followed by a \#\# mark, then the name of the parameter, and
+This will create a file in the current directory called `params-anolis.txt`. The params file lists on each line one parameter followed by a \#\# mark, then the name of the parameter, and
 then a short description of its purpose. Lets take a look at it.
 
 ``` 
@@ -277,7 +264,7 @@ the dataype, and the restriction overhang sequence.
 We will use the `nano` text editor to modify `params-anolis.txt` and change
 these parameters:
 
-```
+```bash
 $ nano params-anolis.txt
 ```
 ![png](02_ipyrad_partI_CLI_files/ipyrad_part1_nano.png)
@@ -287,14 +274,27 @@ on the keyboard for navigating around the file. Nano accepts a few special
 keyboard commands for doing things other than modifying text, and it lists 
 these on the bottom of the frame. 
 
-We need to specify that the raw data files are in the `raws` directory, that 
-our data used the `gbs` library prep protocol, and that the overhang left by 
-our restriction enzyme is `TGCAT` (reflecting the use of EcoT22I by Prates 
-*et al.* 2016). Change the following values in the params file to match these:
-```
-./raws/*.gz                    ## [4] [sorted_fastq_path]: Location of demultiplexed/sorted fastq files
+We need to specify where the raw data files are located, the type of data we are using (.e.g., 'gbs', 'rad', 'ddrad', 'pairddrad), and which enzyme cut site overhangs are expected to be present on the reads. We list the parameter settings for three different empirical libraries below. Choose just one for your example analysis.
+
+```bash
+# Anolis data set
+/rigel/edu/radcamp/files/anoles/*.gz                    ## [4] [sorted_fastq_path]: Location of demultiplexed/sorted fastq files
 gbs                            ## [7] [datatype]: Datatype (see docs): rad, gbs, ddrad, etc.
 TGCAT,                         ## [8] [restriction_overhang]: Restriction overhang (cut1,) or (cut1, cut2)
+```
+
+```bash
+# Pedicularis data set
+/rigel/edu/radcamp/files/SRP021469/*.gz                    ## [4] [sorted_fastq_path]: Location of demultiplexed/sorted fastq files
+rad                            ## [7] [datatype]: Datatype (see docs): rad, gbs, ddrad, etc.
+TGCAG,                         ## [8] [restriction_overhang]: Restriction overhang (cut1,) or (cut1, cut2)
+```
+
+```bash
+# Finch data set
+/rigel/edu/radcamp/files/SRP059199/*.gz                    ## [4] [sorted_fastq_path]: Location of demultiplexed/sorted fastq files
+ddrad                          ## [7] [datatype]: Datatype (see docs): rad, gbs, ddrad, etc.
+CCTGCAGG,AATTC                 ## [8] [restriction_overhang]: Restriction overhang (cut1,) or (cut1, cut2)
 ```
 
 After you change these parameters you may save and exit nano by typing CTRL+o 
@@ -308,7 +308,8 @@ directories to hold the output of each step for this assembly. By
 default the new directories are created in the `project_dir`
 directory and use the prefix specified by the `assembly_name` parameter.
 Because we use `./` for the `project_dir` for this tutorial, all these 
-intermediate directories will be of the form: `/home/<username/ipyrad-workshop/anolis_*`.
+intermediate directories will be of the form: `~/ipyrad-workshop/anolis_*`, 
+or the analagous name that you used for your assembly name.
 
 > **Note:** Again, the `./` notation indicates the current working directory. You can always view the current working directory with the `pwd` command (**p**rint **w**orking **d**irectory).
 
@@ -323,14 +324,16 @@ pre-demultiplexed data (as we are with the Anolis data) the location
 of raw sample files should be entered on line 3 of the params file. Below are the 
 first three reads of one of the Anolis files.
 
-``` 
+```bash
 ## For your personal edification here is what this is doing:
 ## gunzip -c: Tells gzip to unzip the file and write the contents to the screen
 ## head -n 12: Grabs the first 12 lines of the fastq file. Fastq files
 ## have 4 lines per read, so the value of `-n` should be a multiple of 4
 
-$ gunzip -c ./raws/punc_IBSPCRIB0361_R1_.fastq.gz | head -n 12
+$ zcat /rigel/edu/radcamp/files/SRP021469/29154_superba_SRR1754715.fastq.gz | head -n 20
+```
 
+```
 @D00656:123:C6P86ANXX:8:2201:3857:34366 1:Y:0:8
 TGCATGTTTATTGTCTATGTAAAAGGAAAAGCCATGCTATCAGAGATTGGCCTGGGGGGGGGGGGCAAATACATGAAAAAGGGAAAGGCAAAATG
 +
@@ -348,8 +351,7 @@ GGGGGGGCGGGGGGGGGGGGGEGGGFGGGGGGEGGGGGGGGGGGGGFGGGEGGGGGGGGGGGGGGGGGGGGGGGGGGGEG
 Each read is composed of four lines. The first is the name of the read (its
 location on the plate). The second line contains the sequence data. The
 third line is unused. And the fourth line is the quality scores for the
-base calls. The [FASTQ wikipedia page](https://en.wikipedia.org/wiki/FASTQ_format) has a good figure depicting the logic
-behind how quality scores are encoded.
+base calls. The [FASTQ wikipedia page](https://en.wikipedia.org/wiki/FASTQ_format) has a good figure depicting the logic behind how quality scores are encoded.
 
 The Anolis data are 96bp single-end reads prepared as GBS. The first five bases (TGCAT) 
 form the restriction site overhang. All following bases make up the sequence data.
@@ -364,17 +366,18 @@ doesn't create any new directories or modify the raw files in any way.
 
 Now lets run step 1! For the Anolis data this will take <1 minute.
 
-> **Special Note:** In interactive mode on the USP cluster please be aware
-of *always* specifying the number of cores with the `-c` flag. If you
-do not specify the number of cores ipyrad assumes you want **all** of
-them, and this will make your run **very** fast, but it might **aggravate**
-the cluster usage for everyone else.
+> **Special Note:** In interactive mode please be aware to *always* specify
+the number of cores with the `-c` flag. If you do not specify the number of 
+cores ipyrad assumes you want **all** of them, but in this case you only have 
+as many cores available as we requested when we started the interactive session.
+This can cause some confusion that will slow things down a bit. So specify the 
+number of cores that you know are available in this case when using interactive mode.
 
-``` 
+```bash
 ## -p    the params file we wish to use
 ## -s    the step to run
 ## -c    the number of cores to allocate   <-- Important!
-$ ipyrad -p params-anolis.txt -s 1 -c 2
+$ ipyrad -p params-anolis.txt -s 1 -c 4
 
  -------------------------------------------------------------
   ipyrad [v.0.7.28]
@@ -398,11 +401,14 @@ Any time ipyrad is invoked it performs a few housekeeping operations:
 
 As a convenience ipyrad internally tracks the state of all your steps in your 
 current assembly, so at any time you can ask for results by invoking the `-r` flag.
+We also use the `-p` arg to tell is which params file (i.e., which assembly) we 
+want it to print stats for.
 
-```
+```bash
 ## -r fetches informative results from currently executed steps  
 $ ipyrad -p params-anolis.txt -r
-
+```
+```
 Summary stats of Assembly anolis
 ------------------------------------------------
                    state  reads_raw
@@ -435,9 +441,10 @@ each step. For instance to see full stats for step 1 (the wackyness
 of the step 1 stats at this point isn't very interesting, but we'll
 see stats for later steps are more verbose):
 
-``` 
+```bash 
 $ cat anolis_s1_demultiplex_stats.txt 
-
+```
+```
                    reads_raw
 punc_IBSPCRIB0361     250000
 punc_ICST764          250000
@@ -465,7 +472,7 @@ filtering to be quite aggressive.
 
 Edit your params file again with `nano`:
 
-```
+```bash
 nano params-anolis.txt
 ```
 
@@ -477,9 +484,10 @@ and change the following two parameter settings:
 ```
 > **Note:** Saving and quitting from `nano`: `CTRL+o` then `CTRL+x`
 
-```
+```bash
 $ ipyrad -p params-anolis.txt -s 2 -c 2
-
+```
+```
  -------------------------------------------------------------
   ipyrad [v.0.7.28]
   Interactive assembly and analysis of RAD-seq data
@@ -497,9 +505,11 @@ The filtered files are written to a new directory called `anolis_edits`. Again,
 you can look at the results output by this step and also some handy stats tracked 
 for this assembly.
 
-```
+```bash
 ## View the output of step 2
 $ cat anolis_edits/s2_rawedit_stats.txt 
+```
+```
                    reads_raw  trim_adapter_bp_read1  trim_quality_bp_read1  reads_filtered_by_Ns  reads_filtered_by_minlen  reads_passed_filter
 punc_IBSPCRIB0361     250000                 108761                 160210                    66                     12415               237519
 punc_ICST764          250000                 107320                 178463                    68                     13117               236815
@@ -513,16 +523,17 @@ punc_MTRX1478         250000                 116009                 184189      
 punc_MUFAL9635        250000                 114492                 182877                    61                     18071               231868
 ```
 
-```
+```bash
 ## Get current stats including # raw reads and # reads after filtering.
 $ ipyrad -p params-anolis.txt -r
 ```
 
 You might also take a closer look at the filtered reads: 
 
+```bash
+$ zcat anolis_edits/punc_IBSPCRIB0361.trimmed_R1_.fastq.gz | head -n 12
 ```
-$ gunzip -c anolis_edits/punc_IBSPCRIB0361.trimmed_R1_.fastq.gz | head -n 12
-
+```
 @D00656:123:C6P86ANXX:8:2201:3857:34366 1:Y:0:8
 TGCATGTTTATTGTCTATGTAAAAGGAAAAGCCATGCTATCAGAGATTGGCCTGGGGGGGGGGGGCAAATACATG
 +
@@ -542,7 +553,8 @@ both of our applied parameters. All reads have been trimmed to 75bp,
 and the third read had adapter contamination removed (you can tell because
 it's shorter than 75bp). As an exercise you can go back up to the 
 section where we looked at the raw data initially and see if you can 
-identify the adapter sequence in this read.
+identify the adapter sequence in this read. We will see more about the consequences
+of filtering adapters soon as well when we look at the clustered reads next. 
 
 # Step 3: clustering within-samples
 
