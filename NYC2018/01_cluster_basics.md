@@ -220,7 +220,7 @@ In contrast, here is a somewhat typical base sequence quality report for R1 of a
 This figure depicts a common artifact of current Illumina chemistry, whereby quality scores per base drop off precipitously toward the ends of reads, with the effect being magnified for read lengths > 150bp. The purpose of using FastQC to examine reads is to determine whether and how much to trim our reads to reduce sequencing error interfering with basecalling. In the above figure, as in most real dataset, we can see there is a tradeoff between throwing out data to increase overall quality by trimming for shorter length, and retaining data to increase value obtained from sequencing with the result of increasing noise toward the ends of reads.
 
 ### Running FastQC on the Anolis data
-In preparation for running FastQC on our raw data we need to make an output directory to keep the FastQC results organized:
+In preparation for running FastQC it is a good idea to keep yourself organized by creating an output directory to keep the FastQC results organized:
 
 ```bash
 $ cd ~/ipyrad-workshop
@@ -257,25 +257,53 @@ Approx 95% complete for punc_IBSPCRIB0361_R1_.fastq.gz
 Approx 100% complete for punc_IBSPCRIB0361_R1_.fastq.gz
 Analysis complete for punc_IBSPCRIB0361_R1_.fastq.gz
 ```
-If you feel so inclined you can QC all the raw data using a wildcard substitution:
+If you feel so inclined you can QC on all the raw data files in a folder by using a wildcard substitution:
 ```bash
-$ fastqc -o fastqc-results raws/*
+$ fastqc -o fastqc-results /rigel/edu/radcamp/files/SRP021469/*.gz
 ```
-> **Note:** The `*` here is a special command line character that means "Everything that matches this pattern". So here `raws/*` matches _everything_ in the raws directory. Equivalent (though more verbose) statements are: `ls raws/*.gz`, `ls raws/*.fastq.gz`, `ls raws/*_R1_.fastq.gz`. All of these will list all the files in the `raws` directory. **Special Challenge:** Can you construct an `ls` command using wildcards that only lists samples in the `raws` directory that include the digit 5 in their sample name?
+> **Note:** The `*` here is a special command line character that means "Everything that matches this pattern". So here `SRP021469/*` matches _everything_ in the raws directory. Equivalent (though more verbose) statements are: `ls SRP021469/*.gz`, `ls SRP021469/*.fastq.gz`. All of these will list all the files in the `SRP021469` directory. **Special Challenge:** Can you construct an `ls` command using wildcards that only lists samples in the `SRP021469` directory that include the digit 5 in their sample name?
 
-Examining the output directory you'll see something like this:
+Examining the output directory you'll see something like this (here we use `ls -l` to list the results in a more easily readable list form:
 ```bash
-$ ls fastqc-results/
-punc_IBSPCRIB0361_R1__fastqc.html  punc_JFT773_R1__fastqc.html    punc_MTR17744_R1__fastqc.html  punc_MTR34414_R1__fastqc.html  punc_MTRX1478_R1__fastqc.html
-punc_IBSPCRIB0361_R1__fastqc.zip   punc_JFT773_R1__fastqc.zip     punc_MTR17744_R1__fastqc.zip   punc_MTR34414_R1__fastqc.zip   punc_MTRX1478_R1__fastqc.zip
-punc_ICST764_R1__fastqc.html       punc_MTR05978_R1__fastqc.html  punc_MTR21545_R1__fastqc.html  punc_MTRX1468_R1__fastqc.html  punc_MUFAL9635_R1__fastqc.html
-punc_ICST764_R1__fastqc.zip        punc_MTR05978_R1__fastqc.zip   punc_MTR21545_R1__fastqc.zip   punc_MTRX1468_R1__fastqc.zip   punc_MUFAL9635_R1__fastqc.zip
+$ ls -l fastqc-results/
+-rw-r--r-- 1 work1 habaedu 337122 Aug 28 08:21 29154_superba_SRR1754715_fastqc.html
+-rw-r--r-- 1 work1 habaedu 494465 Aug 28 08:21 29154_superba_SRR1754715_fastqc.zip
+-rw-r--r-- 1 work1 habaedu 336908 Aug 28 08:21 30556_thamno_SRR1754720_fastqc.html
+-rw-r--r-- 1 work1 habaedu 494957 Aug 28 08:21 30556_thamno_SRR1754720_fastqc.zip
+-rw-r--r-- 1 work1 habaedu 346060 Aug 28 08:22 30686_cyathophylla_SRR1754730_fastqc.html
+-rw-r--r-- 1 work1 habaedu 508578 Aug 28 08:22 30686_cyathophylla_SRR1754730_fastqc.zip
+-rw-r--r-- 1 work1 habaedu 345129 Aug 28 08:22 32082_przewalskii_SRR1754729_fastqc.html
+-rw-r--r-- 1 work1 habaedu 506727 Aug 28 08:22 32082_przewalskii_SRR1754729_fastqc.zip
+-rw-r--r-- 1 work1 habaedu 337555 Aug 28 08:22 33413_thamno_SRR1754728_fastqc.html
+-rw-r--r-- 1 work1 habaedu 496787 Aug 28 08:22 33413_thamno_SRR1754728_fastqc.zip
+-rw-r--r-- 1 work1 habaedu 336544 Aug 28 08:23 33588_przewalskii_SRR1754727_fastqc.html
+-rw-r--r-- 1 work1 habaedu 494611 Aug 28 08:23 33588_przewalskii_SRR1754727_fastqc.zip
+-rw-r--r-- 1 work1 habaedu 329055 Aug 28 08:23 35236_rex_SRR1754731_fastqc.html
+-rw-r--r-- 1 work1 habaedu 483019 Aug 28 08:23 35236_rex_SRR1754731_fastqc.zip
+-rw-r--r-- 1 work1 habaedu 333034 Aug 28 08:23 35855_rex_SRR1754726_fastqc.html
+-rw-r--r-- 1 work1 habaedu 489218 Aug 28 08:23 35855_rex_SRR1754726_fastqc.zip
+-rw-r--r-- 1 work1 habaedu 341427 Aug 28 08:23 38362_rex_SRR1754725_fastqc.html
+-rw-r--r-- 1 work1 habaedu 500975 Aug 28 08:23 38362_rex_SRR1754725_fastqc.zip
+-rw-r--r-- 1 work1 habaedu 334602 Aug 28 08:24 39618_rex_SRR1754723_fastqc.html
+-rw-r--r-- 1 work1 habaedu 489714 Aug 28 08:24 39618_rex_SRR1754723_fastqc.zip
+-rw-r--r-- 1 work1 habaedu 342964 Aug 28 08:24 40578_rex_SRR1754724_fastqc.html
+-rw-r--r-- 1 work1 habaedu 503731 Aug 28 08:24 40578_rex_SRR1754724_fastqc.zip
+-rw-r--r-- 1 work1 habaedu 342211 Aug 28 08:25 41478_cyathophylloides_SRR1754722_fastqc.html
+-rw-r--r-- 1 work1 habaedu 503054 Aug 28 08:25 41478_cyathophylloides_SRR1754722_fastqc.zip
+-rw-r--r-- 1 work1 habaedu 336088 Aug 28 08:26 41954_cyathophylloides_SRR1754721_fastqc.html
+-rw-r--r-- 1 work1 habaedu 494066 Aug 28 08:26 41954_cyathophylloides_SRR1754721_fastqc.zip
 ```
 
 Now we have output files that include html and images depicting lots of information about the quality of our reads, but we can't inspect these because we only have a CLI interface on the cluster. How do we get access to the output of FastQC?
 
-### Obtaining FastQC Output (sftp)
+### Obtaining FastQC Output (scp)
+You can use the `scp` tool to copy files from the cluster to your local computer so that you can visualize the results on your graphical user interface on your computer.
+```bash
+# run this from a terminal on your local computer (not connected to the cluster)
+scp -r habanero.rcs.columbia.edu:/rigel/edu/radcamp/users/<username>/ipyrad-workshop/fastq-results .
+```
 
+### Obtaining FastQC Output (sftp)
 Moving files between the cluster and your local computer is a very common task, and this will typically be accomplished with a secure file transfer protocol (**sftp**) client. Various Free/Open Source GUI tools exist but we recommend [WinSCP](https://winscp.net/eng/download.php) for Windows and [Fugu](https://faq.oit.gatech.edu/content/how-do-i-install-fugu-mac) for MacOS. 
 
 **Windows:**
@@ -288,11 +316,11 @@ Two windows file browsers will appear: your laptop on the left, and the cluster 
 After downloading, installing and opening Fugu, you will see the following screen:
 ![png](01_cluster_basics_files/01_Fugu1.png)
 
-Fill out the host name (`lem.ib.usp.br`) in the window "Connect to", and your username below. Click "Connect".
+Fill out the host name (`habanero.rcs.columbia.edu`) in the window "Connect to", and your username below. Click "Connect".
 ![png](01_cluster_basics_files/01_Fugu2.png)
 Two windows file browsers will appear: your laptop on the left, and the cluster on the right. You can navigate through the folders and transfer files from the cluster to your laptop by dragging and dropping them. 
 
-### Instpecting and Interpreting FastQC Output
+### Inspecting and Interpreting FastQC Output
 
 Just taking a random one, lets spend a moment looking at the results from `punc_JFT773_R1__fastqc.html`. Opening up this html file, on the left you'll see a summary of all the results, which highlights areas FastQC indicates may be worth further examination. We will only look at a few of these.
 
