@@ -16,7 +16,7 @@ in code cells surrounded by angle brackets (e.g. <username>) are variables
 that need to be replaced by the user. All other lines should be 
 interpreted as output from the issued commands.
 
-```
+```bash
 ## Example Code Cell.
 ## Create an empty file in my home directory called `watdo.txt`
 $ touch ~/watdo.txt
@@ -28,14 +28,19 @@ wat
 
 # Getting set up to continue the assembly
 Just a reminder that all assembly steps in this part of the workshop
-should be run in a terminal on the USP cluster inside an interactive job.
+will be run on the Habanero cluster inside an interactive job.
 Here's the quick-setup (for mac/linux users), but if you need more specific details you can
 [look back to the cluster basics section of ipyrad PartI](https://radcamp.github.io/AF-Biota/02_ipyrad_partI_CLI.html#working-with-the-cluster).
+
+```bash
+# --pty tells it to connect us to compute nodes interactively
+# --account tells it which account's resources to use
+# --reservation tells it to use the resources on edu reserved for us
+# -t tells it how much time to connect for
+# /bin/bash tells it to open a bash terminal when we connect.
+$ srun --pty --account=edu --reservation=edu_23 -t 1:00:00 -c 4 /bin/bash
 ```
-$ ssh <username>@lem.ib.usp.br 
-$ qsub -q proto -l nodes=1:ppn=2 -l mem=64gb -I
-$ cd ipyrad-workshop
-```
+
 Windows users should use puTTY.
 
 # Step 3: Recap
@@ -54,7 +59,7 @@ a2c441646bb25089cd933119f13fb687;size=1;+
 TGCATGTAGTGAAGTCCGCTGTGTACTTGCGAGAGAATGAGCAGTCCTTCATGCA
 ```
 
-Here's a probable heterozygote, a little bit messier (note the indels):
+Here's a probable heterozygote, or perhaps repetitive element -- a little bit messier (note the indels):
 ```
 0091f3b72bfc97c4705b4485c2208bdb;size=3;*
 TGCATACAC----GCACACA----GTAGTAGTACTACTTTTTGTTAACTGCAGCATGCA
@@ -108,10 +113,11 @@ that the 2 high frequency alleles are good reads and the rest are
 probably junk. This step is pretty straightforward, and pretty fast. Run
 it thusly:
 
-```
+```bash
 $ cd ipyrad-workshop
 $ ipyrad -p params-anolis.txt -s 4 -c 2
-
+```
+```
  -------------------------------------------------------------
   ipyrad [v.0.7.28]
   Interactive assembly and analysis of RAD-seq data
@@ -129,9 +135,10 @@ In terms of results, there isn't as much to look at as in previous
 steps, though you can invoke the `-r` flag to see the estimated
 heterozygosity and error rate per sample.
 
-```
+```bash
 $ ipyrad -p params-anolis.txt -r
-
+```
+```
 Summary stats of Assembly anolis
 ------------------------------------------------
                    state  reads_raw  reads_passed_filter  clusters_total  clusters_hidepth  hetero_est  error_est
@@ -160,9 +167,10 @@ Step 5 uses the inferred error rate and heterozygosity per sample to call
 the consensus of sequences within each cluster. Here we are identifying what
 we believe to be the real haplotypes at each locus within each sample.
 
-```
+```bash
 $ ipyrad -p params-anolis.txt -s 5 -c 2
-
+```
+```
  -------------------------------------------------------------
   ipyrad [v.0.7.28]
   Interactive assembly and analysis of RAD-seq data
@@ -192,9 +200,10 @@ bases (`max_Ns_consens`) and maximum number of heterozygous sites
 (`max_Hs_consens`) per consensus sequence. This number will almost always
 be lower than `clusters_hidepth`.
 
-```
+```bash
 $ ipyrad -p params-anolis.txt -r
-
+```
+```
 Summary stats of Assembly anolis
 ------------------------------------------------
                    state  reads_raw  reads_passed_filter  clusters_total  clusters_hidepth  hetero_est  error_est  reads_consens
@@ -224,9 +233,10 @@ considerably longer than any of the steps, due to the resource
 intensive clustering and alignment phases. These can take on the order
 of 10-100x as long as the next longest running step. Fortunately, with the data we use during this workshop, step 6 will actually be really fast.
 
-```
+```bash
 $ ipyrad -p params-anolis.txt -s 6 -c 2
-
+```
+```
  -------------------------------------------------------------
   ipyrad [v.0.7.28]
   Interactive assembly and analysis of RAD-seq data
@@ -261,9 +271,10 @@ so this is not that informative.
 It might be more enlightening to consider the output of step 6 by
 examining the file that contains the reads clustered across samples:
 
+```bash
+$ zcat anolis/anolis_across/anolis_catclust.gz | head -n 28
 ```
-$ gunzip -c anolis_across/anolis_catclust.gz | head -n 28
-
+```
 punc_IBSPCRIB0361_10
 TGCATGCAACTGGAGTGAGGTGGTTTGCATTGATTGCTGTATATTCAATGCAAGCAACAGGAATGAAGTGGATTTCTTTGGTCACTATATACTCAATGCA
 punc_IBSPCRIB0361_1647
@@ -315,9 +326,10 @@ conservative.
 
 To run step 7:
 
-```
+```bash
 $ ipyrad -p params-anolis.txt -s 7 -c 2
-                                                                                                                                                                          
+```
+```
  -------------------------------------------------------------
   ipyrad [v.0.7.28]
   Interactive assembly and analysis of RAD-seq data
@@ -339,10 +351,13 @@ $ ipyrad -p params-anolis.txt -s 7 -c 2
 
 A new directory is created called `anolis_outfiles`, and you may inspect
 the contents:
-```
+```bash
 $ ls anolis_outfiles/
+```
+```
 anolis.hdf5  anolis.loci  anolis.phy  anolis.snps.map  anolis.snps.phy  anolis_stats.txt  anolis.vcf
 ```
+
 This directory contains all the output files specified by the 
 `output_formats` parameter in the params file. The default is set to 
 create two different version of phylip output, one including the full 
@@ -361,9 +376,11 @@ thresholds are impacting your final dataset. For example, you might see
 that most loci are being filterd by `min_sample_locus` (a very common
 result), in which case you might reduce this threshold in your params file
 and re-run step 7 in order to retain more loci.
-```
-$ cat anolis_outfiles/anolis_stats.txt
 
+```bash
+$ cat anolis_outfiles/anolis_stats.txt
+```
+```
 ## The number of loci caught by each filter.
 ## ipyrad API location: [assembly].stats_dfs.s7_filters
 
@@ -496,7 +513,7 @@ After this we must now re-run step 7, but this time including the `-f`
 flag, to force overwriting the output files that were previously generated. 
 More information about output formats can be found [here](http://ipyrad.readthedocs.io/output_formats.html#full-output-formats).
 
-```
+```bash
 $ ipyrad -p params-anolis.txt -s 7 -c 2 -f
 ```
 

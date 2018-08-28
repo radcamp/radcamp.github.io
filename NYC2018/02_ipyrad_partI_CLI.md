@@ -142,7 +142,7 @@ This confirms that the job we submitted started, that it's running on node215, e
 ## ipyrad help
 To better understand how to use ipyrad, let's take a look at the help argument. We will use some of the ipyrad arguments in this tutorial (for example: -n, -p, -s, -c, -r). But, the complete list of optional arguments and their explanation is below.
 
-```bash
+```
 $ ipyrad --help
 usage: ipyrad [-h] [-v] [-r] [-f] [-q] [-d] [-n new] [-p params]
               [-b [branch [branch ...]]] [-m [merge [merge ...]]] [-s steps]

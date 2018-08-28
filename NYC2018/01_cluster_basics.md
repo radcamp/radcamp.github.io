@@ -119,9 +119,9 @@ $ srun --pty -t 1:00:00 --account=edu --reservation=edu_23 /bin/bash
 ```
 Now that you are connected to a compute node run the commands below:
 ```bash
-$ conda install -c ipyrad ipyrad 
-$ conda install -c bioconda fastqc
-$ conda install -c eaton-lab toytree
+$ conda install -c ipyrad ipyrad -y
+$ conda install -c bioconda fastqc -y
+$ conda install -c eaton-lab toytree -y
 ```
 > **Note:** The `-c` flag indicates that we're asking conda to fetch apps from the `ipyrad`, `bioconda`, and `eaton-lab` channels. Channels are seperate repositories of apps maintained by independent developers.
 
