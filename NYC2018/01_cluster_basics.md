@@ -303,7 +303,7 @@ You can use the `scp` tool to copy files from the cluster to your local computer
 scp -r <username>@habanero.rcs.columbia.edu:/rigel/edu/radcamp/users/<username>/ipyrad-workshop/fastq-results .
 ```
 
-###  Obtainig FastQC output (Windows)
+### Or, obtaining FastQC output (Windows)
 Moving files between the cluster and your local computer is a very common task, and this will typically be accomplished with a secure file transfer protocol (**sftp**) client. Various Free/Open Source GUI tools exist but we recommend [WinSCP](https://winscp.net/eng/download.php) for Windows.
 
 After downloading, installing, and opening WinSCP, you will see the following screen. First, ensure that the "File Protocol is set to "SFTP". **The connection will fail if "SFTP" is not chosen her.** Next, fill out the host name (`lem.ib.usp.br`), your username and password, and click "Login". 
