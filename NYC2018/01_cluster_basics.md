@@ -297,28 +297,13 @@ $ ls -l fastqc-results/
 Now we have output files that include html and images depicting lots of information about the quality of our reads, but we can't inspect these because we only have a CLI interface on the cluster. How do we get access to the output of FastQC?
 
 ### Obtaining FastQC Output (scp)
-You can use the `scp` tool to copy files from the cluster to your local computer so that you can visualize the results on your graphical user interface on your computer.
+You can use the `scp` tool to copy files from the cluster to your local computer so that you can visualize the results on your graphical user interface on your computer. Take note of the `.` at the end of the command and the need to substitute your username (e.g., work3) into the command.
 ```bash
 # run this from a terminal on your local computer (not connected to the cluster)
 scp -r habanero.rcs.columbia.edu:/rigel/edu/radcamp/users/<username>/ipyrad-workshop/fastq-results .
 ```
 
-### Obtaining FastQC Output (sftp)
-Moving files between the cluster and your local computer is a very common task, and this will typically be accomplished with a secure file transfer protocol (**sftp**) client. Various Free/Open Source GUI tools exist but we recommend [WinSCP](https://winscp.net/eng/download.php) for Windows and [Fugu](https://faq.oit.gatech.edu/content/how-do-i-install-fugu-mac) for MacOS. 
-
-**Windows:**
-After downloading, installing, and opening WinSCP, you will see the following screen. First, ensure that the "File Protocol is set to "SFTP". **The connection will fail if "SFTP" is not chosen her.** Next, fill out the host name (`lem.ib.usp.br`), your username and password, and click "Login". 
-![png](01_cluster_basics_files/01_WinSCP1.png)
-Two windows file browsers will appear: your laptop on the left, and the cluster on the right. You can navigate through the folders and transfer files from the cluster to your laptop by dragging and dropping them. 
-![png](01_cluster_basics_files/01_WinSCP2.png)
-
-**Mac/Linux:**
-After downloading, installing and opening Fugu, you will see the following screen:
-![png](01_cluster_basics_files/01_Fugu1.png)
-
-Fill out the host name (`habanero.rcs.columbia.edu`) in the window "Connect to", and your username below. Click "Connect".
-![png](01_cluster_basics_files/01_Fugu2.png)
-Two windows file browsers will appear: your laptop on the left, and the cluster on the right. You can navigate through the folders and transfer files from the cluster to your laptop by dragging and dropping them. 
+Once the files are downloaded you can now open them on your local computer like normal by double clicking on the `.html` files which will open in a browser. 
 
 ### Inspecting and Interpreting FastQC Output
 
