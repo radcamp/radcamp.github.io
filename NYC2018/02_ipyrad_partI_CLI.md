@@ -278,6 +278,7 @@ We need to specify where the raw data files are located, the type of data we are
 
 ```bash
 # Anolis data set
+anoles                         ## [2] project_dir
 /rigel/edu/radcamp/files/anoles/*.gz                    ## [4] [sorted_fastq_path]: Location of demultiplexed/sorted fastq files
 gbs                            ## [7] [datatype]: Datatype (see docs): rad, gbs, ddrad, etc.
 TGCAT,                         ## [8] [restriction_overhang]: Restriction overhang (cut1,) or (cut1, cut2)
@@ -285,6 +286,7 @@ TGCAT,                         ## [8] [restriction_overhang]: Restriction overha
 
 ```bash
 # Pedicularis data set
+pedicularis                    ## [2] project_dir
 /rigel/edu/radcamp/files/SRP021469/*.gz                    ## [4] [sorted_fastq_path]: Location of demultiplexed/sorted fastq files
 rad                            ## [7] [datatype]: Datatype (see docs): rad, gbs, ddrad, etc.
 TGCAG,                         ## [8] [restriction_overhang]: Restriction overhang (cut1,) or (cut1, cut2)
@@ -292,6 +294,7 @@ TGCAG,                         ## [8] [restriction_overhang]: Restriction overha
 
 ```bash
 # Finch data set
+finch                          ## [2] project_dir
 /rigel/edu/radcamp/files/SRP059199/*.gz                    ## [4] [sorted_fastq_path]: Location of demultiplexed/sorted fastq files
 ddrad                          ## [7] [datatype]: Datatype (see docs): rad, gbs, ddrad, etc.
 CCTGCAGG,AATTC                 ## [8] [restriction_overhang]: Restriction overhang (cut1,) or (cut1, cut2)
@@ -385,7 +388,7 @@ $ ipyrad -p params-anolis.txt -s 1 -c 4
  -------------------------------------------------------------
   New Assembly: anolis
   establishing parallel connection:
-  host compute node: [2 cores] on darwin
+  host compute node: [4 cores] on darwin
 
   Step 1: Loading sorted fastq data to Samples
   [####################] 100%  loading reads         | 0:00:04  
@@ -485,7 +488,7 @@ and change the following two parameter settings:
 > **Note:** Saving and quitting from `nano`: `CTRL+o` then `CTRL+x`
 
 ```bash
-$ ipyrad -p params-anolis.txt -s 2 -c 2
+$ ipyrad -p params-anolis.txt -s 2 -c 4
 ```
 ```
  -------------------------------------------------------------
@@ -495,7 +498,7 @@ $ ipyrad -p params-anolis.txt -s 2 -c 2
   loading Assembly: anolis
   from saved path: ~/ipyrad-workshop/anolis.json
   establishing parallel connection:
-  host compute node: [2 cores] on darwin
+  host compute node: [4 cores] on darwin
 
   Step 2: Filtering reads 
   [####################] 100%  processing reads      | 0:01:02
@@ -578,8 +581,13 @@ Don't mess with this until you feel comfortable with the overall
 workflow, and also until you've learned about
 [Branching assemblies](https://ipyrad.readthedocs.io/tutorial_advanced_cli.html).
 
+There have been many papers written comparing how results of assemblies vary 
+depending on the clustering threshold. In general, my advice is to use a value
+between about .82 and .95. Within this region results typically do not vary too
+significantly, whereas above .95 you will oversplit loci and recover fewer SNPs.
+
 It's also possible to incorporate information from a reference
-genome to improve clustering at this this step, if such a resources is
+genome to improve clustering at this step, if such a resources is
 available for your organism (or one that is relatively closely related).
 We will not cover reference based assemblies in this workshop, but you 
 can refer to the [ipyrad documentation](https://ipyrad.readthedocs.io/tutorial_advanced_cli.html) for more information.
@@ -587,13 +595,17 @@ can refer to the [ipyrad documentation](https://ipyrad.readthedocs.io/tutorial_a
 > **Note on performance:** Steps 3 and 6 generally take considerably 
 longer than any of the steps, due to the resource intensive clustering 
 and alignment phases. These can take on the order of 10-100x as long 
-as the next longest running step.
+as the next longest running step. This depends heavily on the number of samples
+in your dataset, the number of cores, the length(s) of your reads, and the 
+"messiness" of your data in terms of the number of unique loci present (this can
+vary from a few thousand to many millions).
 
 Now lets run step 3:
 
-```
+```bash
 $ ipyrad -p params-anolis.txt -s 3 -c 2
-
+```
+```
  -------------------------------------------------------------
   ipyrad [v.0.7.28]
   Interactive assembly and analysis of RAD-seq data
@@ -628,9 +640,10 @@ default step 3 will filter out clusters that only have a handful of
 reads on the assumption that these are probably all mostly due to
 sequencing error.
 
-```
+```bash
 $ ipyrad -p params-anolis.txt -r
-
+```
+```
 Summary stats of Assembly anolis
 ------------------------------------------------
                    state  reads_raw  reads_passed_filter  clusters_total  clusters_hidepth
@@ -648,13 +661,16 @@ punc_MUFAL9635         3     250000               231868           59249        
 
 Again, the final output of step 3 is dereplicated, clustered files for
 each sample in `./anolis_clust_0.85/`. You can get a feel for what
-this looks like by examining a portion of one of the files.
+this looks like by examining a portion of one of the files. 
 
-```
-## Same as above, `gunzip -c` unzips and prints to the screen and 
+**We'll take a moment now to compare the outputs of the different empirical libraries.**
+
+```bash
+## Same as above, `zcat` unzips and prints to the screen and 
 ## `head -n 28` means just show me the first 28 lines. 
-$ gunzip -c anolis_clust_0.85/punc_IBSPCRIB0361.clustS.gz | head -n 28
-
+$ zcat anolis_clust_0.85/punc_IBSPCRIB0361.clustS.gz | head -n 28
+```
+```
 000e3bb624e3bd7e91b47238b7314dc6;size=4;*
 TGCATATCACAAGAGAAGAAAGCCACTAATTAAGGGGAAAAGAAAAGCCTCTGATATAGCTCCGATATATCATGC-
 75e462e101383cca3db0c02fca80b37a;size=2;-
