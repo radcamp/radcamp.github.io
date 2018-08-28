@@ -228,7 +228,7 @@ $ mkdir fastqc-results
 ```
 Now run fastqc on one of the samples:
 ```bash
-$ fastqc -o fastqc-results raws/punc_IBSPCRIB0361_R1_.fastq.gz
+$ fastqc -o fastqc-results /rigel/edu/radcamp/files/punc_IBSPCRIB0361_R1_.fastq.gz
 ```
 > **Note:** The `-o` flag tells fastqc where to write output files. **Especially Notice** the *relative path* to the raw file. The difference between *relative* and *absolute* paths is an important one to learn. Relative paths are specified with respect to the current working directory. Since I am in `/rigel/edu/radcamp/users/work1/ipyrad-workshop`, and this is the directory the `raws` directory is in, I can simply reference it directly. If I was in any other directory I could specify the *absolute path* to the target fastq.gz file which would be `/rigel/edu/radcamp/users/work1/ipyrad-workshop/raws/punc_IBSPCRIB0361_R1_.fastq.gz`. Absolute paths are always more precise, but also always (often _much_) longer.
 
