@@ -26,6 +26,8 @@ wat
 ## Columbia Habanero cluster information
 Computational resources for the duration of this workshop have been generously provided by the Columbia University HPC facility, with special thanks to George Garrett for technical support. The cluster we will be using is located at `habanero.rcs.columbia.edu`. We have a reserved partition of the cluster for use in this workshop composed of five 24-core nodes. We will walk through instrutions for executing short or long running jobs on a cluster.
 
+**[RADCamp NYC 2018 Participant Username/Port# List](https://github.com/radcamp/radcamp.github.io/blob/master/NYC2018/participants.txt)**
+
 ## SSH and the command line
 Unlike laptop or desktop computers, cluster systems typically (almost exclusively) do not have graphical user input interfaces. Interacting with an HPC system therefore requires use of the command line to establish a connection, and for running programs and submitting jobs remotely on the cluster. To interact with the cluster through a terminal we use a program called SSH (secure shell) to create a fast and secure connection. 
 
