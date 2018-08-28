@@ -156,32 +156,60 @@ empirical data sets to choose from, and throughout the workshop we will often co
 + [Prates *et al.* 2016](http://www.pnas.org/content/pnas/113/29/7978.full.pdf) (Anolis, single-end GBS).
 + [Eaton et al. 2013](sysbio.oxfordjournals.org/content/62/5/689) (Pedicularis, single-end RAD).
 + [DaCosta and Sorenson 2016](https://www.ncbi.nlm.nih.gov/pubmed/26279345) (Finches, single-end ddRAD). 
++ Simulated datasets
 
-The raw data are located in a special folder on the HPC system. You can *change directory* into your ipyrad working directory, and then copy the raw data with these commands:
+The raw data are located in a special shared folder on the HPC system where we can all access them. Any analyses we run will only read from these files (i.e., they are read-only), not modify them. This is typical of any bioinformatic analysis. We want to develop a set of scripts that start from the unprocessed data and end in new results or statistics. You can use `ls` to examine the data sets in the shared directory space. 
+
 ```bash
-$ cd ipyrad-workshop
-$ cp /rigel/edu/radcamp/files/SRP021469.tgz .
+$ ls /rigel/edu/radcamp/files/SRP021469
+29154_superba_SRR1754715.fastq.gz       35855_rex_SRR1754726.fastq.gz
+30556_thamno_SRR1754720.fastq.gz        38362_rex_SRR1754725.fastq.gz
+30686_cyathophylla_SRR1754730.fastq.gz  39618_rex_SRR1754723.fastq.gz
+32082_przewalskii_SRR1754729.fastq.gz   40578_rex_SRR1754724.fastq.gz
+33413_thamno_SRR1754728.fastq.gz        41478_cyathophylloides_SRR1754722.fastq.gz
+33588_przewalskii_SRR1754727.fastq.gz   41954_cyathophylloides_SRR1754721.fastq.gz
+35236_rex_SRR1754731.fastq.gz
 ```
-> **Note:** The form of the copy command is `copy <source> <destination>`. Here the source file is clear, it's simply the data file you want to copy. The destination is `.`, which is another linux shortcut that means "My current directory", or "Right here in the directory I'm in".
 
-Finally, you'll notice the raw data is in `.tgz` format, which is similar to a zip archive. We can unpack our raw data in the current directory using the `tar` command:
+
+## Inspect the data
+Then we will use the `zcat` command to read lines of data from one of the files and we will trim this to print only the first 20 lines by piping the output to the `head` command. Using a pipe like this passes the output from one command to another and is a common trick in the command line. 
+
+Here we have our first look at a **fastq formatted file**. Each sequenced read is spread over four lines, one of which contains sequence and another the quality scores stored as ASCII characters. The other two lines are used as headers to store information about the read. 
+
+
 ```bash
-$ tar -xvzf ./ipyrad-workshop/SRP021469.tgz
-```
-> **Point of interest:** All linux commands, such as `tar`, can have their behavior modified by passing various arguments. Here the arguments are `-x` to "Extract" the archive file; `-v` to add "verbosity" by printing progress to the screen; `z` to "unzip" the archive during extraction; and `-f` to "force" the extraction which prevents `tar` from pestering you with decisions.
-
-Now use `ls` to list the contents of your current directory, and also to list the contents of the newly created `raws` directory. Here we use the extra flag `-l` which tells `ls` to list the contents on separate lines which makes it a bit easier to read.
-```bash
-$ ls -l ipyrad-workshop
-a_punctatus.tgz  raws/
-
-$ ls -l ipyrad-workshop/raws/
-punc_IBSPCRIB0361_R1_.fastq.gz  punc_JFT773_R1_.fastq.gz    punc_MTR17744_R1_.fastq.gz  punc_MTR34414_R1_.fastq.gz  punc_MTRX1478_R1_.fastq.gz
-punc_ICST764_R1_.fastq.gz       punc_MTR05978_R1_.fastq.gz  punc_MTR21545_R1_.fastq.gz  punc_MTRX1468_R1_.fastq.gz  punc_MUFAL9635_R1_.fastq.gz
+$ zcat /rigel/edu/radcamp/files/SRP021469/29154_superba_SRR1754715.fastq.gz | head -n 20
+@29154_superba_SRR1754715.1 GRC13_0027_FC:4:1:12560:1179 length=74
+TGCAGGAAGGAGATTTTCGNACGTAGTGNNNNNNNNNNNNNNGCCNTGGATNNANNNGTGTGCGTGAAGAANAN
++29154_superba_SRR1754715.1 GRC13_0027_FC:4:1:12560:1179 length=74
+IIIIIIIGIIIIIIFFFFF#EEFE<?################################################
+@29154_superba_SRR1754715.2 GRC13_0027_FC:4:1:15976:1183 length=74
+TGCAGTTGTAAATACAAATATCCCAAAANNNNGNNNNNNNTNTAATATTTTGNAANNTTGAGGGGTGTGATNTN
++29154_superba_SRR1754715.2 GRC13_0027_FC:4:1:15976:1183 length=74
+GGGGHHHHHHHHHHHHHDHGHHHHCAAA##############################################
+@29154_superba_SRR1754715.3 GRC13_0027_FC:4:1:19092:1179 length=74
+TGCAGGCTCTGACAAAGAANTCGACTGANNNNNNNNNNNNNNCACNGGTTCNNGNNNATGTCAATGTGGTANAN
++29154_superba_SRR1754715.3 GRC13_0027_FC:4:1:19092:1179 length=74
+GGGGHHHHBHHBHEB?B@########################################################
+@29154_superba_SRR1754715.4 GRC13_0027_FC:4:1:1248:1210 length=74
+TGCAGAACTGCTCCCAGAATCTCCAGAAATTGCGAGATTACCCCCAAAATCTCCAGAAATTTCTAGATTACCTC
++29154_superba_SRR1754715.4 GRC13_0027_FC:4:1:1248:1210 length=74
+HHHHHDHHHFHHHDHBGHGHHHHHHHGDHE<GGE<D>DGHGGHHHDHHHHHHGHHHHFHHHHHHEHGHHEDEF>
+@29154_superba_SRR1754715.5 GRC13_0027_FC:4:1:5242:1226 length=74
+TGCAGCAGTCACCAGTCTGGCCCCTACCTCACAAAGTAGCTTGATGGCCGAACCACTCCCAAGGTGAATAGTGC
++29154_superba_SRR1754715.5 GRC13_0027_FC:4:1:5242:1226 length=74
+HHHHHHHHHGGGGGHHHGHHHGHGGGGGBHHHBHEE>BGADDDDFHEHFDBGBDCFHBHBB8DD4???::?::?
+@29154_superba_SRR1754715.6 GRC13_0027_FC:4:1:12660:1232 length=74
+TGCAGGCCCAAAATCAACAATTATGCATAATACAACAAAGTTAATTAATTAATTATATTAAAAAAAGAAAAAGA
++29154_superba_SRR1754715.6 GRC13_0027_FC:4:1:12660:1232 length=74
+HHHHHHHHHHHHHHHHHHHHHHHHHHHHGGHHHHFHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
 ```
 
 ## FastQC for quality control
-The first step of any RAD-Seq assembly is to inspect your raw data to estimate overall quality. At this stage you can then attempt to improve your dataset by identifying and removing samples with failed sequencing. Another key QC procedure involves inspecting average quality scores per base position and trimming read edges, which is where low quality base-calls tend to accumulate. In this figure, the X-axis shows the position on the read in base-pairs and the Y-axis depicts information about [Phred quality score](https://en.wikipedia.org/wiki/Phred_quality_score) per base for all reads, including median (center red line), IQR (yellow box), and 10%-90% (whiskers). As an example, here is a very clean base sequence quality report for a 75bp RAD-Seq library. These reads have generally high quality across their entire length, with only a slight (barely worth mentioning) dip toward the end of the reads:
+The first step of any RAD-Seq assembly is to inspect your raw data to estimate overall quality. We began first with a visual inspection above, but of course we can only visually inspect a very tiny proportion of the total data. So instead we use automated approaches to check the quality of our data. 
+
+At this stage you can then attempt to improve your dataset by identifying and removing samples with failed sequencing. Another key QC procedure involves inspecting average quality scores per base position and trimming read edges, which is where low quality base-calls tend to accumulate. In this figure, the X-axis shows the position on the read in base-pairs and the Y-axis depicts information about [Phred quality score](https://en.wikipedia.org/wiki/Phred_quality_score) per base for all reads, including median (center red line), IQR (yellow box), and 10%-90% (whiskers). As an example, here is a very clean base sequence quality report for a 75bp RAD-Seq library. These reads have generally high quality across their entire length, with only a slight (barely worth mentioning) dip toward the end of the reads:
 
 ![png](01_cluster_basics_files/fastqc-high-quality-example.png)
 
