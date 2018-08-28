@@ -85,7 +85,7 @@ this is what we'll do here, since we have 25 people who all want to
 talk to the cluster, we need to specify 25 different ports. Because 
 each notebook must have a unique port number to run on, we have 
 assigned unique port numbers for each workshop attendee. You can 
-you can find your port number here: [AF-Biota workshop port #s](https://github.com/radcamp/radcamp.github.io/blob/master/AF-Biota/participants.txt). 
+you can find your port number here: [AF-Biota workshop port #s](https://github.com/radcamp/radcamp.github.io/blob/master/NYC2018/participants.txt). 
 
 > **Special Note:** An "SSH Tunnel" and an "SSH client connection" are two different things. The SSH client connection gives you access to the command line on a remote machine. The SSH tunnel will allow your web browser to talk to your jupyter notebook **using** ssh, but on a unique port. For a jupyter notebook to function properly you will normally always need **both** an ssh tunnel (for making the web interface work) and an ssh client connection (for running the jupyter notebook server).
 
@@ -159,7 +159,7 @@ only have to do this **one time on the USP cluster.**
 The first parameter (`open-browser = False`) directs jupyter to run in
 the background and wait for connections. The second parameter (`port = <my_port_#>`) 
 is **very important for us**. Each user must enter the port number
-they were assigned on the [AF-Biota workshop port #s](https://github.com/radcamp/radcamp.github.io/blob/master/AF-Biota/participants.txt) page, and this should be the same port as entered
+they were assigned on the [AF-Biota workshop port #s](https://github.com/radcamp/radcamp.github.io/blob/master/NYC2018/participants.txt) page, and this should be the same port as entered
 above for the ssh tunnel. The final parameter (`port_retries = 0`) 
 prevents jupyter from assigning us a random port if our assigned port
 is not available. This is useful because if we're already running
