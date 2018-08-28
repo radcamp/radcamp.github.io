@@ -50,7 +50,7 @@ $ ssh work2@habanero.rcs.columbia.edu
 > **Note on usage:** In command line commands we'll use the convention of wrapping variable names in angle-brackets. For example, in the command above you should substitute your own username for `<username>`. We will provide usernames and passwords on the day of the workshop. 
 
 ## Command line interface (CLI) basics
-The CLI provides a way to navigate a file system, move files around, and run commands all inside a little black window. The down side of CLI is that you have to learn many at first seemingly esoteric commands for doing all the things you would normally do with a mouse. However, there are several advantages of CLI: 1) you can use it on servers that don't have a GUI interface (such as HPC clusters); 2) it's scriptable, so you can write programs to execute common tasks or run analyses and others can easily reproduce these tasks exactly; 3) it's often faster and more efficient that click-and-drag GUI interfaces. For now we will start with 4 of the most common and useful commands:
+The CLI provides a way to navigate a file system, move files around, and run commands all inside a little black window. The down side of CLI is that you have to learn many at first seemingly esoteric commands for doing all the things you would normally do with a mouse. However, there are several advantages of CLI: 1) you can use it on servers that don't have a GUI interface (such as HPC clusters); 2) it's scriptable, so you can write programs to execute common tasks or run analyses and others can easily reproduce these tasks exactly; 3) it's often faster and more efficient than click-and-drag GUI interfaces. For now we will start with 4 of the most common and useful commands:
 
 ```bash
 $ pwd
@@ -99,23 +99,23 @@ $ bash Miniconda2-latest-Linux-x86_64.sh -b
 This will create a new directory where the `conda` program will be located, and also where all of the software that we will eventually install with conda will be stored. By default the new directory will be placed in your home directory and will be called `miniconda2`. After the install completes we will add this new directory to our `PATH` variable, which is what the terminal uses to recognize where software is located on your system. After running the commands below our terminal will always be able to find our conda software.
 
 ```bash
-$ echo "PATH=$HOME/miniconda2/bin:$PATH" >> ~/.bashrc
+$ echo PATH='$HOME'/miniconda2/bin:'$PATH' >> ~/.bashrc
 $ source ~/.bashrc
 $ which python
 /home/<username>/miniconda2/bin/python
 ```
 
-The `echo` command prints the text that is in quotes and the ">" character designates to write the result to the file `.bashrc`. This is a file that is automatically run when the terminal starts. If we had not run the miniconda installer in batch mode it would have done this for us automatically, but it takes longer that way so we are doing it by hand. The `source` command simply tells the terminal to reload the `.bashrc` file so that it is like we started a new terminal, but this time it will find all of our new conda software. Finally, the `which` command will show you the path to (location of) the program printed after it. In this case we ask which python binary it finds, and you can see that it returns that it finds python in our personal miniconda directory.
+The `echo` command prints the text that comes after to it and the ">>" character designates to write the result to the file `.bashrc`. This is a file that is automatically run when the terminal starts. If we had not run the miniconda installer in batch mode it would have appended this command to the .bashrc file for us automatically, but it takes longer that way so we are doing it by hand instead. The `source` command simply tells the terminal to reload the `.bashrc` file so that it is like we started a new terminal, but this time it will find all of our new conda software. Finally, the `which` command will show you the path (location) of the program printed after it. In this case we ask which python binary it finds, and you can see that it returns that the new version of python in our personal miniconda directory.
 
 ### Install ipyrad and fastqc
-Conda gives us access to an amazing array of analysis tools for both analyzing and manipulating all kinds of data. Here we'll just scratch the surface by installing [ipyrad](http://ipyrad.readthedocs.io/), the RAD-Seq assembly and analysis tool that we'll use throughout the workshop, [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/), an application for filtering fasta files based on several quality control metrics. As long as we're installing conda packages we'll include [toytree](https://toytree.readthedocs.io/en/latest/) as well, which is a plotting library used by the ipyrad analysis toolkit.
+Conda gives us access to an amazing array of analysis tools for both analyzing and manipulating all kinds of data. Here we'll just scratch the surface by installing [ipyrad](http://ipyrad.readthedocs.io/), the RAD-Seq assembly and analysis tool that we'll use throughout the workshop, and [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/), an application for filtering fasta files based on several quality control metrics. As long as we're installing conda packages we'll include [toytree](https://toytree.readthedocs.io/en/latest/) as well, which is a plotting library used by the ipyrad analysis toolkit.
 
 We'll explain this part in more detail further below, but for now run the command
 below to connect to an interactive session on a compute node. This way we will 
 not be using the head node of the cluster (shared resource) when we are all 
 installing software simultaneously.
 ```bash
-srun --pty -t 30:00 --account=edu --reservation=edu_23 /bin/bash
+$ srun --pty -t 30:00 --account=edu --reservation=edu_23 /bin/bash
 ```
 Now that you are connected to a compute node run the commands below:
 ```bash
@@ -145,11 +145,15 @@ These (and many more) are all the dependencies of ipyrad and fastqc. Dependencie
 ```bash
 $ ipyrad --version
 ipyrad 0.7.28
+
 $ fastqc --version
 FastQC v0.11.7
 ```
 ## Fetch the raw data
-We will be reanalysing RAD-Seq data from several closely related species in the plant genus *Pedicularis* sampled from across their distribution on the Tibetan plateau and published in [Eaton *et al.* 2013](sysbio.oxfordjournals.org/content/62/5/689). This dataset includes 13 individuals with libraries prepared according to the original RAD method with a single enzyme and sonication, and sequencing 100bp single-end reads on an Illumina GAIIx. The final raw sequence counts are on the order of 1e6-4e6 per sample.
+Each example data set is composed of a dozen or more closely related species or population 
+samples.
+
+ in the plant genus *Pedicularis* sampled from across their distribution on the Tibetan plateau and published in [Eaton *et al.* 2013](sysbio.oxfordjournals.org/content/62/5/689). This dataset includes 13 individuals with libraries prepared according to the original RAD method with a single enzyme and sonication, and sequencing 100bp single-end reads on an Illumina GAIIx. The final raw sequence counts are on the order of 1e6-4e6 per sample.
 
 The raw data are located in a special folder on the HPC system. You can *change directory* into your ipyrad working directory, and then copy the raw data with these commands:
 ```bash
@@ -164,11 +168,12 @@ $ tar -xvzf ./ipyrad-workshop/SRP021469.tgz
 ```
 > **Point of interest:** All linux commands, such as `tar`, can have their behavior modified by passing various arguments. Here the arguments are `-x` to "Extract" the archive file; `-v` to add "verbosity" by printing progress to the screen; `z` to "unzip" the archive during extraction; and `-f` to "force" the extraction which prevents `tar` from pestering you with decisions.
 
-Now use `ls` to list the contents of your current directory, and also to list the contents of the newly created `raws` directory:
+Now use `ls` to list the contents of your current directory, and also to list the contents of the newly created `raws` directory. Here we use the extra flag `-l` which tells `ls` to list the contents on separate lines which makes it a bit easier to read.
 ```bash
-$ ls ipyrad-workshop
+$ ls -l ipyrad-workshop
 a_punctatus.tgz  raws/
-$ ls ipyrad-workshop/raws/
+
+$ ls -l ipyrad-workshop/raws/
 punc_IBSPCRIB0361_R1_.fastq.gz  punc_JFT773_R1_.fastq.gz    punc_MTR17744_R1_.fastq.gz  punc_MTR34414_R1_.fastq.gz  punc_MTRX1478_R1_.fastq.gz
 punc_ICST764_R1_.fastq.gz       punc_MTR05978_R1_.fastq.gz  punc_MTR21545_R1_.fastq.gz  punc_MTRX1468_R1_.fastq.gz  punc_MUFAL9635_R1_.fastq.gz
 ```
