@@ -54,7 +54,7 @@ The CLI provides a way to navigate a file system, move files around, and run com
 
 ```bash
 $ pwd
-/home/<username>
+/home/work1
 ```
 `pwd` stands for **"print working directory"**, which literally means "where am I now in this filesystem?". This is a question you should always be aware of when working in a terminal. Just like when you open a file browser window, when you open a new terminal you are located somewhere; the terminal will usually start you out in your "home" directory. Ok, now we know where we are, lets take a look at what's in this directory:
 
@@ -102,7 +102,7 @@ This will create a new directory where the `conda` program will be located, and 
 $ echo PATH='$HOME'/miniconda2/bin:'$PATH' >> ~/.bashrc
 $ source ~/.bashrc
 $ which python
-/home/<username>/miniconda2/bin/python
+/home/work1/miniconda2/bin/python
 ```
 
 The `echo` command prints the text that comes after to it and the ">>" character designates to write the result to the file `.bashrc`. This is a file that is automatically run when the terminal starts. If we had not run the miniconda installer in batch mode it would have appended this command to the .bashrc file for us automatically, but it takes longer that way so we are doing it by hand instead. The `source` command simply tells the terminal to reload the `.bashrc` file so that it is like we started a new terminal, but this time it will find all of our new conda software. Finally, the `which` command will show you the path (location) of the program printed after it. In this case we ask which python binary it finds, and you can see that it returns that the new version of python in our personal miniconda directory.
@@ -115,7 +115,7 @@ below to connect to an interactive session on a compute node. This way we will
 not be using the head node of the cluster (shared resource) when we are all 
 installing software simultaneously.
 ```bash
-$ srun --pty -t 30:00 --account=edu --reservation=edu_23 /bin/bash
+$ srun --pty -t 1:00:00 --account=edu --reservation=edu_23 /bin/bash
 ```
 Now that you are connected to a compute node run the commands below:
 ```bash
@@ -149,16 +149,18 @@ ipyrad 0.7.28
 $ fastqc --version
 FastQC v0.11.7
 ```
-## Fetch the raw data
-Each example data set is composed of a dozen or more closely related species or population 
-samples.
+## Examine the raw data
+Here we will get hands-on with real data for the first time. We provide three
+empirical data sets to choose from, and throughout the workshop we will often compare our results among the three. Each example data set is composed of a dozen or more closely related species or population samples. They are ordered in order of the average divergence among samples. The Anolis data set is a "population-level" data set; the Pedicularis data set is composed of several closely related species and subspecies; and the Finch data set includes several species of finches from two relatively distant clades. 
 
- in the plant genus *Pedicularis* sampled from across their distribution on the Tibetan plateau and published in [Eaton *et al.* 2013](sysbio.oxfordjournals.org/content/62/5/689). This dataset includes 13 individuals with libraries prepared according to the original RAD method with a single enzyme and sonication, and sequencing 100bp single-end reads on an Illumina GAIIx. The final raw sequence counts are on the order of 1e6-4e6 per sample.
++ [Prates *et al.* 2016](http://www.pnas.org/content/pnas/113/29/7978.full.pdf) (Anolis, single-end GBS).
++ [Eaton et al. 2013](sysbio.oxfordjournals.org/content/62/5/689) (Pedicularis, single-end RAD).
++ [DaCosta and Sorenson 2016](https://www.ncbi.nlm.nih.gov/pubmed/26279345) (Finches, single-end ddRAD). 
 
 The raw data are located in a special folder on the HPC system. You can *change directory* into your ipyrad working directory, and then copy the raw data with these commands:
 ```bash
 $ cd ipyrad-workshop
-$ cp /rigel/edu/radcamp/files/SRP021469.tgz ./ipyrad-workshop
+$ cp /rigel/edu/radcamp/files/SRP021469.tgz .
 ```
 > **Note:** The form of the copy command is `copy <source> <destination>`. Here the source file is clear, it's simply the data file you want to copy. The destination is `.`, which is another linux shortcut that means "My current directory", or "Right here in the directory I'm in".
 
