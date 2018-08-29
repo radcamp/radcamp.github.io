@@ -125,7 +125,7 @@ $ printf "c.NotebookApp.open_browser = False\nc.NotebookApp.port = 9000\nc.Noteb
 Finally, use `cat` to convince yourself that the `printf` command actually
 wrote the data to the config file:
 ```
-cat ~/.jupyter/jupyter_notebook_config.sh
+cat ~/.jupyter/jupyter_notebook_config.py
 ```
 
 ### Run Notebook Server on the cluster
