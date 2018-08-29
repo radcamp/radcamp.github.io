@@ -35,12 +35,121 @@ of these commands are picky so it's important to be careful and pay special
 attention until you're very comfortable with the process.
 
 Overview of process
-* Establish jupyter notebook ssh tunnel: [Windows](#windows-ssh-tunnel-configuration) - [Mac/Linux](#mac-ssh-tunnel-configuration)
 * [Set Jupyter notebook password](#set-jupyter-notebook-password)
 * [Create the config file](#set-default-configuration-behavior)
 * [Start remote notebook server](#run-notebook-server)
+* Establish jupyter notebook ssh tunnel: [Windows](#windows-ssh-tunnel-configuration) - [Mac/Linux](#mac-ssh-tunnel-configuration)
 * **[What do do if your notebook isn't working](#what-to-do-if-the-notebook-is-not-working)**
 * [More information about jupyter](#useful-jupyter-tricks/ideas)
+
+### Set Jupyter Notebook Password
+Jupyter was already installed as a dependency of ipyrad, so we just 
+need to set a password before we can launch it. This command will 
+prompt you for a new password for your notebook (you will **only ever 
+have to do this once on the HPC**). Run this command in a terminal on
+the head node:
+```
+$ jupyter notebook password
+```
+This will set a password on your notebook server so that other people 
+won't have access to your files and notebooks. The notebook server 
+will prompt you for your password when you initially connect to it.
+
+> **Note:** The password tho access your jupyter notebook and the 
+password for your cluster login ***are two different passwords.*** It
+will probably reduce confusion, though, if you make them the same, at
+least for now.
+
+### Set default configuration behavior
+There are a couple arguments that we always want to start the jupyter
+notebook with, so it is often convenient to just add these to the
+configuration file, rather than type them out over and over. You will
+only have to do this **one time on the cluster.**
+
+The first parameter (`open-browser = False`) directs jupyter to run in
+the background and wait for connections. The second parameter (`port = <my_port_#>`) 
+is **very important for us**. Each user must enter the port number
+they were assigned on the [RADCamp NYC workshop port #s](https://github.com/radcamp/radcamp.github.io/blob/master/NYC2018/participants.txt) page. 
+The final parameter (`port_retries = 0`) 
+prevents jupyter from assigning us a random port if our assigned port
+is not available. This is useful because if we're already running
+a notebook server and we try to start another one we don't want the new
+one to start, rather just to be informed that we're already running one.
+
+We are going to use the `printf` command to write the 3 parameter settings
+to the jupyter config file. First, just run this command and you'll see
+that printf simply prints the properly formatted parameters to the screen. 
+The **\n** character is a special character that means "put a new line here".
+```
+$ printf "c.NotebookApp.open_browser = False\nc.NotebookApp.port = 9000\nc.NotebookApp.port_retries = 0\n"
+```
+    c.NotebookApp.open_browser = False
+    c.NotebookApp.port = <my_port_#>
+    c.NotebookApp.port_retries = 0
+
+Now we can spice it up a bit by using "output redirection", which is a 
+feature of the linux command line. The `>` special character can 
+redirect output that would normally get printed to the screen and
+write it to a file instead. So running the following command will
+create the `.jupyter/jupyter_notebook_config.py` file with the 
+exact parameter settings we want.
+```
+$ printf "c.NotebookApp.open_browser = False\nc.NotebookApp.port = 9000\nc.NotebookApp.port_retries = 0\n" > ~/.jupyter/jupyter_notebook_config.py
+```
+
+Finally, use `cat` to convince yourself that the `printf` command actually
+wrote the data to the config file:
+```
+cat ~/.jupyter/jupyter_notebook_config.sh
+```
+
+### Run Notebook Server
+For convenience we will run our instance of the jupyter notebook server
+using a new job submission script. Begin by creating a new file in your
+`job-scripts` directory:
+```
+$ cd job-scripts
+$ nano jupyter.sh
+```
+Now enter the following text in this script. Be sure to replace your
+actual port number inside the angle brackets below. All these `SBATCH`
+flags should be familiar from yesterday:
+```
+#!/bin/sh
+#SBATCH --account=edu
+#SBATCH --reservation=edu_23
+#SBATCH --cores=4
+#SBATCH --time=8:00:00
+
+unset XDG_RUNTIME_DIR
+cd $HOME
+jupyter-notebook --ip=$(hostname -i) --port=<your_port_number>
+```
+
+Now you can submit your jupyter server job as follows:
+```
+$ sbatch jupyter.sh
+Submitted batch job 8384428
+```
+
+Once the job appears to be running, you must now take note of the 
+compute node your notebook server is running on. This can be done
+using `squeue`:
+```
+$ jsqueue -u <your_username>
+```
+    JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+    8384428      edu1 jupyter.    work2  R       0:14      1 node162
+
+
+Now ask jupyter to show you the list of running notebooks that belong to you, 
+and you should see this:
+```
+$ jupyter notebook list
+Currently running servers:
+http://localhost:<my_port_#>/ :: /home/<username>
+```
+
 
 ## Jupyter notebook setup to be run on your local computer
 
@@ -123,90 +232,7 @@ the USP cluster.** Begin this part of setup by connecting to the cluster:
 $ ssh <username>@lem.ib.usp.br 
 ```
 
-### Installing Jupyter
 
-**If you already installed `ipyrad` then you can skip this step.** 
-`jupyter` is installed as a dependency of `ipyrad`. If you 
-need to install juypter/ipyrad still run this command in a terminal 
-window on the cluster:
-```
-$ conda install ipyrad -c ipyrad
-```
-
-### Set Jupyter Notebook Password
-Jupyter was already installed as a dependency of ipyrad, so we just 
-need to set a password before we can launch it. This command will 
-prompt you for a new password for your notebook (you will **only ever 
-have to do this once on the HPC**):
-```
-$ jupyter notebook password
-```
-This will set a password on your notebook server so that other people 
-won't have access to your files and notebooks. The notebook server 
-will prompt you for your password when you initially connect to it.
-
-> **Note:** The password tho access your jupyter notebook and the 
-password for your cluster login ***are two different passwords.*** It
-will probably reduce confusion, though, if you make them the same, at
-least for now.
-
-### Set default configuration behavior
-There are a couple arguments that we always want to start the jupyter
-notebook with, so it is often convenient to just add these to the
-configuration file, rather than type them out over and over. You will
-only have to do this **one time on the USP cluster.**
-
-The first parameter (`open-browser = False`) directs jupyter to run in
-the background and wait for connections. The second parameter (`port = <my_port_#>`) 
-is **very important for us**. Each user must enter the port number
-they were assigned on the [RADCamp NYC workshop port #s](https://github.com/radcamp/radcamp.github.io/blob/master/NYC2018/participants.txt) page, and this should be the same port as entered
-above for the ssh tunnel. The final parameter (`port_retries = 0`) 
-prevents jupyter from assigning us a random port if our assigned port
-is not available. This is useful because if we're already running
-a notebook server and we try to start another one we don't want the new
-one to start, rather just to be informed that we're already running one.
-
-We are going to use the `printf` command to write the 3 parameter settings
-to the jupyter config file. First, just run this command and you'll see
-that printf simply prints the properly formatted parameters to the screen. 
-The **\n** character is a special character that means "put a new line here".
-```
-$ printf "c.NotebookApp.open_browser = False\nc.NotebookApp.port = 9000\nc.NotebookApp.port_retries = 0\n"
-```
-    c.NotebookApp.open_browser = False
-    c.NotebookApp.port = <my_port_#>
-    c.NotebookApp.port_retries = 0
-
-Now we can spice it up a bit by using "output redirection", which is a 
-feature of the linux command line. The `>` special character can 
-redirect output that would normally get printed to the screen and
-write it to a file instead. So running the following command will
-create the `.jupyter/jupyter_notebook_config.py` file with the 
-exact parameter settings we want.
-```
-$ printf "c.NotebookApp.open_browser = False\nc.NotebookApp.port = 9000\nc.NotebookApp.port_retries = 0\n" > ~/.jupyter/jupyter_notebook_config.py
-```
-
-### Run Notebook Server
-As with the rest of the assembly and analysis workshop we will run our
-notebook servers inside an interactive job on the USP cluster. Begin
-by submitting an interactive job request:
-```
-$ qsub -q proto -l nodes=1:ppn=2 -l mem=64gb -I
-```
-Once the interactive job appears to be ready, you can launch the jupyter
-notebook. The `jupyter notebook` command should start your notebook. 
-`&` means that it will run it in the background.
-```
-$ jupyter notebook &
-```
-Now ask jupyter to show you the list of running notebooks that belong to you, 
-and you should see this:
-```
-$ jupyter notebook list
-Currently running servers:
-http://localhost:<my_port_#>/ :: /home/<username>
-```
 
 ## Test your notebook connection (Run on your laptop)
 To test your jupyter notebook configuration you can open a new
