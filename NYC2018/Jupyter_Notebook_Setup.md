@@ -187,7 +187,7 @@ will find it very clever and useful.
 a house, or a telephone number. Every computer has 32,000 ports, most
 of which are unused. You might not know this, but when you use a web
 browser to look at a web page, your computer is talking to the remote
-server on **port 80**. This is standardized. When you `ssh` to the USP
+server on **port 80**. This is standardized. When you `ssh` to the
 cluster you are making a connection on **port 22**, and this is standard
 too. 
 
@@ -217,7 +217,7 @@ SSH Tunnel on Mac/Linux can be established through the command line interface. O
 ```
 ssh -N -f -L <my_port_#>:<compute_node>:<my_port_#> <username>@habanero.rcs.columbia.edu
 ```
-This will prompt you for your password (the password on the USP cluster). If you type the password correctly **it will look like nothing happened**, but this means it worked! If you think nothing happened you should not attempt to run it again because of panic, because if you run it twice you might see this error message:
+This will prompt you for your password (the password on the cluster). If you type the password correctly **it will look like nothing happened**, but this means it worked! If you think nothing happened you should not attempt to run it again because of panic, because if you run it twice you might see this error message:
 
 ```
 bind: Address already in use
