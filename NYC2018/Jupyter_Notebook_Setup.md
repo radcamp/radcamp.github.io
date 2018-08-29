@@ -1,4 +1,4 @@
-#[How to get your notebook server running (Quickstart)](Jupyter_Notebook_TLDR.md)
+## [How to get your notebook server running (Quickstart)](Jupyter_Notebook_TLDR.md)
 
 # What are Jupyter Notebooks and why would I want to use one?
 
