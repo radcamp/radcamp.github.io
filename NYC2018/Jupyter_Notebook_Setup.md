@@ -28,6 +28,29 @@ monitored and tweaked and provides a self-documenting workflow, so we will
 focus the rest of the workshop on exploring the anaylsis tools in the
 jupyter notebook environment.
 
+## A word on Jupyter notebook setup in an HPC environment
+
+Jupyter notebooks running on a cluster require a special kind of connection
+called an SSH Tunnel. We need to do this because we really only can "see"
+the head node from the outside world. In other words, we can only ssh directly
+to the head node, we can not ssh directly from our laptops to the compute nodes. 
+Yet, the compute nodes are where we want to run the notebooks, so what are we
+to do? Since we can ssh to the head node, and since we can do basically whatever
+we want once we are there, we can set up a "tunnel" to route messages from
+our laptop to the compute nodes. Here's a diagram of the process, where the
+green arrow indicates the SSH tunnel, and the red arrows indicate the
+messages being passed between your laptop and the cluster, essentially
+using ssh to *"tunnel"* traffic between these two computers:
+
+![png](Jupyter_Notebook_Setup_files/Jupyter_Notebook_tunnel_diagram1.png)
+
+The end result is that we'll be able to sit on our laptops and run
+complicated analyses on the compute node **as if we were actually running
+directly on the cluster**, in this way taking advantage of both the
+resources of the cluster, and the convenience of the notebook environment:
+
+![png](Jupyter_Notebook_Setup_files/Jupyter_Notebook_tunnel_diagram2.png)
+
 # Getting Set up with Jupyter Notebooks
 Setting up a jupyter notebook session involves running one command
 on your local machine, and a couple of commands on the cluster. Some 
@@ -103,7 +126,7 @@ wrote the data to the config file:
 cat ~/.jupyter/jupyter_notebook_config.sh
 ```
 
-### Run Notebook Server
+### Run Notebook Server on the cluster
 For convenience we will run our instance of the jupyter notebook server
 using a new job submission script. Begin by creating a new file in your
 `job-scripts` directory:
@@ -129,52 +152,31 @@ jupyter-notebook --ip=$(hostname -i) --port=<your_port_number>
 Now you can submit your jupyter server job as follows:
 ```
 $ sbatch jupyter.sh
-Submitted batch job 8384428
-```
+````
+    Submitted batch job 8384428
 
 Once the job appears to be running, you must now take note of the 
 compute node your notebook server is running on. This can be done
-using `squeue`:
+using `squeue`. In the example results below you can see the compute
+node is `node162`:
 ```
-$ jsqueue -u <your_username>
+$ squeue -u <your_username>
 ```
     JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
     8384428      edu1 jupyter.    work2  R       0:14      1 node162
 
-
-Now ask jupyter to show you the list of running notebooks that belong to you, 
-and you should see this:
+**Backup command:** Yesterday we had some problems with the `squeue` command
+so if you find that this isn't running you can also try the following:
 ```
-$ jupyter notebook list
-Currently running servers:
-http://localhost:<my_port_#>/ :: /home/<username>
+$ squeue | grep <your_username>
 ```
 
+### SSH Tunnel Configuration on your local computer
 
-## Jupyter notebook setup to be run on your local computer
+> **NB:** In order to properly run an SSH tunnel to a notebook server on the
+cluster you must have **both your personal port number and the name
+of the compute node** on which the server is running.**
 
-Jupyter notebooks running on a cluster require a special kind of connection
-called an SSH Tunnel. We need to do this because we really only can "see"
-the head node from the outside world. In other words, we can only ssh directly
-to the head node, we can not ssh directly from our laptops to the compute nodes. 
-Yet, the compute nodes are where we want to run the notebooks, so what are we
-to do? Since we can ssh to the head node, and since we can do basically whatever
-we want once we are there, we can set up a "tunnel" to route messages from
-our laptop to the compute nodes. Here's a diagram of the process, where the
-green arrow indicates the SSH tunnel, and the red arrows indicate the
-messages being passed between your laptop and the cluster, essentially
-using ssh to *"tunnel"* traffic between these two computers:
-
-![png](Jupyter_Notebook_Setup_files/Jupyter_Notebook_tunnel_diagram1.png)
-
-The end result is that we'll be able to sit on our laptops and run
-complicated analyses on the compute node **as if we were actually running
-directly on the cluster**, in this way taking advantage of both the
-resources of the cluster, and the convenience of the notebook environment:
-
-![png](Jupyter_Notebook_Setup_files/Jupyter_Notebook_tunnel_diagram2.png)
-
-### SSH Tunnel Configuration
 This part is run **on your local computer**. An "ssh tunnel" will
 allow your computer to talk to the notebook server on the cluster
 by using the web browser. It's a little confusing at first, but 
@@ -204,7 +206,7 @@ To set up a SSH Tunnel on a Windows machine, we use puTTY again. Open puTTY and 
 
 ![png](Jupyter_Notebook_Setup_files/08_puTTY1.png)
 
-Now, click on SSH on the left panel, and click on Tunnels. Fill out your personal port # at "Source port", and "localhost:your_port_#" at "Destination". Click "Add" and "L_your_port_#       localhost:your_port_#" should appear in the empty window. Click "Open" and log in.
+Now, click on SSH on the left panel, and click on Tunnels. There are two boxes of interest here: `Source Port` and `Destination`. In `Source Port` you will put **your personal port #**. In `Destination` you should put `<compute_node>:<your_port_#>`. Now click "Add" and your tunnel info will appear in the empty window. Click "Open" and log in.
 
 ![png](Jupyter_Notebook_Setup_files/08_puTTY2.png)
 
@@ -213,7 +215,7 @@ Now, click on SSH on the left panel, and click on Tunnels. Fill out your persona
 SSH Tunnel on Mac/Linux can be established through the command line interface. Open a Terminal and run this command:
 
 ```
-ssh -N -f -L localhost:<my_port_#>:localhost:<my_port_#> <username>@lem.ib.usp.br
+ssh -N -f -L <my_port_#>:<compute_node>:<my_port_#> <username>@habanero.rcs.columbia.edu
 ```
 This will prompt you for your password (the password on the USP cluster). If you type the password correctly **it will look like nothing happened**, but this means it worked! If you think nothing happened you should not attempt to run it again because of panic, because if you run it twice you might see this error message:
 
@@ -222,17 +224,6 @@ bind: Address already in use
 channel_setup_fwd_listener: cannot listen to port: 9000
 ```
 > **Note:** If you see this message ***it means your ssh tunnel is already running!!*** So you should celebrate! And not panic more because you got a (seeming) error message.
-
-## Jupyter Notebook Setup which will be run on the USP cluster
-
-Everything else in the setup process takes place **in a terminal on
-the USP cluster.** Begin this part of setup by connecting to the cluster:
-
-```
-$ ssh <username>@lem.ib.usp.br 
-```
-
-
 
 ## Test your notebook connection (Run on your laptop)
 To test your jupyter notebook configuration you can open a new
@@ -258,26 +249,15 @@ you see the dreaded:
 
 1) First, ***DO NOT PANIC!***. Randomly clicking stuff is not going to fix the problem.
 
-2) **On your laptop** start a new ssh tunnel using the [Windows](https://github.com/radcamp/radcamp.github.io/blob/master/AF-Biota/Jupyter_Notebook_Setup.md#windows-ssh-tunnel-configuration) or [mac/linux](https://github.com/radcamp/radcamp.github.io/blob/master/AF-Biota/Jupyter_Notebook_Setup.md#maclinux-ssh-tunnel-configuration) directions.
+2) Open a terminal connection to the cluster and **make sure your notebook server is actually running**.
 
-3) Open a terminal connection to the USP cluster and start a new notebook server `jupyter notebook &`
+3) **On your laptop** start a new ssh tunnel using the [Windows](https://github.com/radcamp/radcamp.github.io/blob/master/NYC2018/Jupyter_Notebook_Setup.md#windows-ssh-tunnel-configuration) or [mac/linux](https://github.com/radcamp/radcamp.github.io/blob/master/NYC2018/Jupyter_Notebook_Setup.md#maclinux-ssh-tunnel-configuration) directions.
 
 4) In a browser open a new tab and navigate to `http://localhost:<my_port_#>`
 
 5) If it still doesn't work, ask for help.
 
 ## Useful jupyter tricks/ideas
-
-### Jupyter Notebook setup tl;dr
-* On your local computer:
-```
-ssh -N -f -L localhost:<my_port_#>:localhost:<my_port_#> <username>@lem.ib.usp.br
-```
-* On the cluster: 
-```
-$ qsub -q proto -l nodes=1:ppn=2 -l mem=64gb -I
-$ jupyter notebook &
-```
 
 ### What happens if I try to run two notebook servers at the same time
 If you try to run a notebook server when one is already running you'll
@@ -294,7 +274,7 @@ common and easy to run several notebook servers on one computer.
 ### How to tell if the ssh tunnel is running (Mac/Linux)
 On your local computer open a new terminal and type:
 ```
-ps -ef | grep ssh | grep usp
+ps -ef | grep ssh | grep habanero
 ```
 
 If you **don't** see a line that includes this `ssh -N -f -L` then it's 
@@ -308,15 +288,9 @@ not running. SSH to the cluster and restart your notebook server.
 I have no fuckin idea.
 
 ### Killing a running jupyter notebook server
-If you ever find that you have a notebook server running that you
-need to kill, the easiest way is to use the `pkill` command. If you
-do have a running notebook server then the results of the `pkill`
-command will look something like this:
-```
-$ pkill -f jupyter -U <username>
-<username>@darwin:~$ [C 21:01:58.180 NotebookApp] received signal 15, stopping
-[I 21:01:58.181 NotebookApp] Shutting down 0 kernels
-```
+If you ever find that you have a notebook server running on the cluster and you
+need to kill it, the easiest way is to use the `scancel` command. First you
+must find the job number of the **finish me**.
 
 ### Starting a jupyter notebook server with command line arguments instead of a config file
 You might find in the future that you want to run a jupyter notebook server
