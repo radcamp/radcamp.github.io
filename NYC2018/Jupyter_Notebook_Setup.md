@@ -290,7 +290,17 @@ I have no fuckin idea.
 ### Killing a running jupyter notebook server
 If you ever find that you have a notebook server running on the cluster and you
 need to kill it, the easiest way is to use the `scancel` command. First you
-must find the job number of the **finish me**.
+must find the job number of the running process with the `squeue` command:
+```
+squeue -u work2
+```
+    JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+    8384428      edu1 jupyter.    work2  R    1:48:09      1 node162
+
+Here the `JOBID` is the value of interest. Now we can kill this process like so:
+```
+scancel 83484428
+```
 
 ### Starting a jupyter notebook server with command line arguments instead of a config file
 You might find in the future that you want to run a jupyter notebook server
