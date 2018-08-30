@@ -13,10 +13,29 @@ The goal of demographic analyses is to understand the history of lineages (somet
 
 **Pronunciation:** Care of Jonathan Terhorst (somewhat cryptically), from a [github issue I created to resolve this conundrum](https://github.com/popgenmethods/momi2/issues/6): "How do you pronounce ∂a∂i? ;-)".... And another perspective from Jack Kamm: "Both pronunciations are valid, but I personally say 'mommy'".
 
+## Cleaning up any current running python2 notebook server
+**On the compute node**
+Look to see if any jupyter notebook servers are running:
+```
+squeue -u work2
+```
+             JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+           8397809      edu1 jupyter.    work2  R       0:07      1 node162
+If you see something like this you'll need to `scancel` this job:
+```
+scancel 8397809
+```
+**On your laptop**
+Make sure no ssh tunnels are active:
+```
+ps -ef | grep ssh
+```
+Use the `kill` command to remove any process that look like this: `ssh -N -f -L ...`. On windows just close all putty sessions and start from scratch.
+
 ## momi2 installation
 `momi2` requires python3, which is a different version of python we've been using up to now. Fortunately conda makes it easy to run python2 and python3 side by side. We will install python3 in a separate [conda environment](https://conda.io/docs/user-guide/concepts.html#conda-environments), and then install and run momi2 analyses using this environment. A conda environment is a container for python packages and configurations. More on creating/managing conda environments can be found [here](https://conda.io/docs/user-guide/tasks/manage-environments.html).
 
-Begin by opening an ssh session on the cluster and creating our new environment:
+Begin by **opening an ssh session on the cluster** and creating our new environment:
 ```
 ## -n          assigns a name to the environment
 ## python=3.6  specifies the python version of the new environment
@@ -33,7 +52,7 @@ momi-py36                /home/isaac/miniconda2/envs/momi-py36
 And now switch to the new python3 environment:
 ```
 $ source activate momi-py36
-(momi-py36) <username>@darwin:~$ 
+(momi-py36) [work2@watson:~]$
 ```
 > **Note:** You'll notice that the conda env you are currently using is now displayed as part of your prompt. We will maintain this convention for the rest of this notebook.
 
@@ -41,24 +60,43 @@ Now use `conda` to install momi2 and jupyter. All the `-c` arguments again are s
 channels that momi2 pulls dependencies from. Order matters here, so copy and paste this
 command to your terminal.
 ```
-(momi-py36)$ conda install momi ipyparallel jupyter -c defaults -c conda-forge -c bioconda -c jackkamm
+(momi-py36)$ conda install momi ipyparallel openblas jupyter -c defaults -c conda-forge -c bioconda -c jackkamm -y
 ```
 This will produce copious output, and should take ~5-10 minutes. 
-Finally, submit an interactive job to the cluster, and start the 
-notebook server in the same way as before.
-```
-(momi-py36)$ qsub -q proto -l nodes=1:ppn=2 -l mem=64gb -I
-qsub: waiting for job 24824.darwin to start
-qsub: job 24824.darwin ready
-```
-When starting an interactive job on the cluster, it automatically directs you back to your default environment, which is python 2.7 in our case. We need to make sure that we are in the right conda environment to run momi2.
+
+When starting an new job on the cluster, it automatically directs you back 
+to your default environment, which is python 2.7 in our case. We need to 
+make sure that we are in the right conda environment to run momi2, so we shall
+create a new jupyter notebook cluster submit script to specify this. First,
+we'll create a copy of the current `jupyter.sh` job submit script:
 
 ```
-## switch to the python3 environment
-$ source activate momi-py36
+(momi-py36)$ cd ~/job-scripts
+(momi-py36)$ cp jupyter.sh jupyter3.sh
+```
+Now edit the `jupyter3.sh` script and add a line to specify that we want
+to start the notebook server in the python3 environment:
+```
+nano jupyter3.sh
+```
 
-## Start the notebook server
-(momi-py36)$ jupyter notebook &
+```
+#!/bin/sh
+#SBATCH --account=edu
+#SBATCH --reservation=edu_23
+#SBATCH --cores=4
+#SBATCH --time=8:00:00
+
+unset XDG_RUNTIME_DIR
+cd $HOME
+source activate momi-py36
+jupyter-notebook --ip=$(hostname -i) --port=<your_port_number>
+```
+
+Finally, submit the python3 notebook server job to the cluster in the same way as before, and find the compute node the job is running on:
+```
+(momi-py36)$ sbatch jupyter3.sh
+(momi-py36)$ squeue -u work2
 ```
 
 Now when you open a browser on your local machine and connect to 
@@ -68,10 +106,10 @@ see an option to create a python3 notebook!
 ![png](07_momi2_API_files/07_momi2_API_00_Notebook23.png)
 
 # **momi2** Analyses
-Create a new notebook inside your `/home/<username>/ipyrad-workshop/` 
-directory called `anolis-momi2.ipynb` (refer to the [jupyter notebook configuration page](Jupyter_Notebook_Setup.md) for a refresher on connecting to the notebook server). **The rest of the 
+Create a new notebook inside your `~/ipyrad-workshop/` directory 
+called `anolis-momi2.ipynb` (refer to the [jupyter notebook configuration page](Jupyter_Notebook_Setup.md) for a refresher on connecting to the notebook server). **The rest of the 
 materials in this part of the workshop assume you are running all code 
-in cells of a jupyter notebook** that is running on the USP cluster.
+in cells of a jupyter notebook** that is running on the cluster.
 
 * [Constructing and plotting a simple model](#constructing-and-plotting-a-simple-model)
 * [Preparing real data for analysis](#preparing-real-data-for-analysis)
@@ -170,8 +208,8 @@ We need to gather and construct several input files before we can actually apply
 Based on the results of the PCA and also our knowledge of the geographic location of the samples we will assign 2 samples to the "North" population, and 8 samples to the "South" population. To save some time we created this pops file, and have stashed a copy in the `/scratch/af-biota` directory. We can simply copy the file from there into our own `ipyrad-workshop` directories. We could do this by finding a terminal on the cluster, but its also possible to run terminal commands from jupyter notebooks using "magic" commands. Including `%%bash` on the first line of a cell tell jupyter to interpret lines inside this cell as terminal commands, so we can do this:
 ```
 %%bash
-cp /scratch/af-biota/anolis-pops.txt .
-cat anolis-pops.txt
+cp /rigel/edu/radcamp/users/work1/ipyrad-workshop/anolis_pops.txt .
+cat anolis_pops.txt
 ```
     punc_ICST764    North
     punc_MUFAL9635  North
@@ -194,11 +232,12 @@ In this tutorial we are using a very small dataset, so manipulating the VCF is v
 ## bgzip performs a blockwise compression
 ## The -c flag directs bgzip to leave the original vcf file 
 ##   untouched and create a new file for the vcf.gz
-bgzip -c anolis_outfiles/anolis.vcf > anolis_outfiles/anolis.vcf.gz
+cp /rigel/edu/radcamp/users/work1/ipyrad-workshop/anoles_outfiles/anoles.vcf anolis.vcf
+bgzip -c anolis.vcf > anolis.vcf.gz
 
 ## tabix indexes the file for searching
-tabix anolis_outfiles/anolis.vcf.gz
-ls anolis_outfiles/
+tabix anolis.vcf.gz
+ls
 ```
     anolis.alleles.loci  anolis.loci      anolis.snps.phy	anolis.u.snps.phy
     anolis.geno	     anolis.nex       anolis_stats.txt	anolis.ustr
@@ -210,10 +249,10 @@ The last file we need to construct is a BED file specifying which genomic region
 
 ```
 %%bash
-/scratch/af-biota/bin/vcf2bed.py anolis_outfiles/anolis.vcf anolis_outfiles/anolis.bed
+/rigel/edu/radcamp/users/work1/bin/vcf2bed.py anolis.vcf anolis.bed
 
 ## Print the first 10 lines of this file
-head anolis_outfiles/anolis.bed
+head anoles.bed
 ```
     locus_1	7	8
     locus_3	65	66
@@ -231,7 +270,7 @@ The allele counts file is an intermediate step necessary for generating the SFS.
 
 ```
 %%bash
-python -m momi.read_vcf --no_aa --verbose anolis_outfiles/anolis.vcf.gz anolis-pops.txt anolis_allele_counts.gz --bed anolis_outfiles/anolis.bed
+python -m momi.read_vcf --no_aa --verbose anolis.vcf.gz anolis_pops.txt anolis_allele_counts.gz --bed anolis.bed
 gunzip -c anolis_allele_counts.gz | head
 ```
     /home/isaac/miniconda2/envs/momi-py36/bin/python
