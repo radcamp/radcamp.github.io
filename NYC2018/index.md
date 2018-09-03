@@ -37,3 +37,6 @@ Times            | Tuesday | Wednesday (Phylogenetics) | Thursday (Population ge
 
 ![CUNY Graduate Center](images/GC-logo.png)
 ![Columbia E3B](images/E3B-logo.jpg)
+
+# RADCamp NYC 2018 Group Photo
+![jpg](RADCamp-NYC2018-group-photo.jpg)
