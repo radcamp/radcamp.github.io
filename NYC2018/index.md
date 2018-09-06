@@ -40,3 +40,6 @@ Times            | Tuesday | Wednesday (Phylogenetics) | Thursday (Population ge
 
 # RADCamp NYC 2018 Group Photo
 ![jpg](RADCamp-NYC2018-group-photo.jpg)
+
+## Acknowledgements
+RADCamp NYC 2018 materials are largely based on materials from the [RADCamp AF-Biota workshop](https://radcamp.github.io/AF-Biota/) which were created by Isaac Overcast, Mariana Vasconcellos, and Laura Bertola.
