@@ -26,13 +26,12 @@ computational experience.
 Workshop attendees will need to bring a laptop computer.
 
 ## Upcoming events:
-
-* [RADCamp2018-NYC](NYC2018/index.md)
+* [RADCamp2019-IBS](IBS2019/index.md)
 
 ## Past events:
 
+* [RADCamp2018-NYC](NYC2018/index.md)
 * [RADCamp2018-AF-Biota (Brazil)](AF-Biota/index.md)
-
 
 # References
 Andrews, K. R., Good, J. M., Miller, M. R., Luikart, G., & Hohenlohe, P. A. (2016). Harnessing the power of RADseq for ecological and evolutionary genomics. Nature Reviews Genetics, 17(2), 81.
