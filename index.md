@@ -17,7 +17,8 @@ population structure, and admixture.
 
 # What is RAD-Seq?
 
-[Andrews et al 2016](https://www.nature.com/articles/nrg.2015.28)
+* A canonical introduction: [Andrews et al 2016](https://www.nature.com/articles/nrg.2015.28)
+* A thorough review of reduced representation protocols: [Campbell et al 2018](https://besjournals.onlinelibrary.wiley.com/doi/abs/10.1111/2041-210X.13038)
 
 # Who should attend?
 RADCamp workshops are normally geared toward practicing field biologists with little or no 
