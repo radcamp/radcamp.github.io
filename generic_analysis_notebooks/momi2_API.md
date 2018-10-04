@@ -13,26 +13,10 @@ The goal of demographic analyses is to understand the history of lineages (somet
 
 **Pronunciation:** Care of Jonathan Terhorst (somewhat cryptically), from a [github issue I created to resolve this conundrum](https://github.com/popgenmethods/momi2/issues/6): "How do you pronounce ∂a∂i? ;-)".... And another perspective from Jack Kamm: "Both pronunciations are valid, but I personally say 'mommy'".
 
-## Cleaning up any current running python2 notebook server
-**On the compute node**
-Look to see if any jupyter notebook servers are running:
-```
-squeue -u work2
-```
-             JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
-           8397809      edu1 jupyter.    work2  R       0:07      1 node162
-If you see something like this you'll need to `scancel` this job:
-```
-scancel 8397809
-```
-**On your laptop**
-Make sure no ssh tunnels are active:
-```
-ps -ef | grep ssh
-```
-Use the `kill` command to remove any process that look like this: `ssh -N -f -L ...`. On windows just close all putty sessions and start from scratch.
+## Prerequisites
+This notebook code assumes you already have a jupyter notebook running in python3.
 
-## momi2 installation
+### momi2 installation
 `momi2` requires python3, which is a different version of python we've been using up to now. Fortunately conda makes it easy to run python2 and python3 side by side. We will install python3 in a separate [conda environment](https://conda.io/docs/user-guide/concepts.html#conda-environments), and then install and run momi2 analyses using this environment. A conda environment is a container for python packages and configurations. More on creating/managing conda environments can be found [here](https://conda.io/docs/user-guide/tasks/manage-environments.html).
 
 Begin by **opening an ssh session on the cluster** and creating our new environment:
@@ -64,47 +48,6 @@ command to your terminal.
 ```
 This will produce copious output, and should take ~5-10 minutes. 
 
-When starting an new job on the cluster, it automatically directs you back 
-to your default environment, which is python 2.7 in our case. We need to 
-make sure that we are in the right conda environment to run momi2, so we shall
-create a new jupyter notebook cluster submit script to specify this. First,
-we'll create a copy of the current `jupyter.sh` job submit script:
-
-```
-(momi-py36)$ cd ~/job-scripts
-(momi-py36)$ cp jupyter.sh jupyter3.sh
-```
-Now edit the `jupyter3.sh` script and add a line to specify that we want
-to start the notebook server in the python3 environment:
-```
-nano jupyter3.sh
-```
-
-```
-#!/bin/sh
-#SBATCH --account=edu
-#SBATCH --reservation=edu_23
-#SBATCH --cores=4
-#SBATCH --time=8:00:00
-
-unset XDG_RUNTIME_DIR
-cd $HOME
-source activate momi-py36
-jupyter-notebook --ip=$(hostname -i) --port=<your_port_number>
-```
-
-Finally, submit the python3 notebook server job to the cluster in the same way as before, and find the compute node the job is running on:
-```
-(momi-py36)$ sbatch jupyter3.sh
-(momi-py36)$ squeue -u work2
-```
-
-Now when you open a browser on your local machine and connect to 
-`localhost:<my_port_#>` the familiar notebook server file browser 
-interface will show up, but this time when you choose "New" you'll 
-see an option to create a python3 notebook!
-![png](momi2_API_files/momi2_API_00_Notebook23.png)
-
 # **momi2** Analyses
 Create a new notebook inside your `~/ipyrad-workshop/` directory 
 called `anolis-momi2.ipynb` (refer to the [jupyter notebook configuration page](Jupyter_Notebook_Setup.md) for a refresher on connecting to the notebook server). **The rest of the 
@@ -113,6 +56,7 @@ in cells of a jupyter notebook** that is running on the cluster.
 
 * [Constructing and plotting a simple model](#constructing-and-plotting-a-simple-model)
 * [Preparing real data for analysis](#preparing-real-data-for-analysis)
+* [Specific considerations when using RAD-like data with momi2](#using-rad-data-with-momi)
 * [Inference procedure](#inference-procedure)
 * [Bootstrapping confidence intervals](#bootstrapping-confidence-intervals)
 
@@ -298,6 +242,18 @@ print("Avg pairwise heterozygosity", sfs.avg_pairwise_hets[:5])
 print("populations", sfs.populations)
 print("percent missing data per population", sfs.p_missing)
 ```
+## Using RAD data with momi
+Thanks to a fruitful tele-visit by Jack Kamm to the AMNH ECEM meeting on 10/3/18, here are some momi tips for the non-model RAD-seq crowd:
+* **Missing data:** Momi correctly handles missing data, but the parameter estimates it produces are scaled by the average number of pairwise differences between samples, rather than by the total tree length, so care should be taken when interpreting them. If you don't know the mutation rate or the generation time there's a scaling invariance. Relative times are all equivalent given a constant scaling factor.
+* **"Real" time:** If you want parameter estimates in "real" time you must set `muts_per_gen` and `gen_time` on your Demographic Model, and make sure you accurately set the `length` parameter and set `use_pairwise_diffs=False` when you call DemographicModel.set_data(). If you have missing data you _must_ remove this by using the `SnpAlleleCounts.down_sample()` function, which is analogous to the projection method in dadi.
+* **Ensure correct 'length':** The length of the SFS is calculated from the bed file during the SnpAlleleCounts.read_vcf() call. If your bed file only records snps, then the true sequence length is not reflected and you should be sure to set the `length` argument when you call model.set_data(). This value should equal the total number of basepairs of your concatenated RAD-seq dataset, i.e. _nloci_ * _locus_length_ if all loci are equal length.
+* **Sample sizes:** There is some doubt in the manuscript about the max number of samples per population. It seems that on the order of tens of samples per population is fine. Around 50 seems fine, but more than 100 and it starts to get dicey.
+* **Continuous migration:** Adding multiple migration pulses improves the fit of momi models to data generated under a continuous migration scenario.
+* **Divergence depth:** Works okay for human/neandertal scale divergence but not so much for human/chimp. 
+* **Time:** Inferring timing of events is generally a difficult thing. Migration pulse times are the least most difficult of all the parameters to estimate.
+* **More populations:** Adding additional populations can add a lot of additional power. You can see things that happened more distantly in the past when those populations merged together.
+* **Migration event penalty:** Computation time scales linearly with number of migration events, which is good, but does have a memory cost.
+* **Optimization strategy:** In general L-BFGS-B is preferred over the default TNC. TNC will always work tenaciously to get the best result, but L-BFGS-B will get you a good enough result much faster. 
 
 ## Inference procedure
 In the previous examples where we constructed and plotted DemographicModels, we had specified all the values for population sizes, divergence times, and migration fractions. This is useful when we are developing the models we want to test, because we can construct the model with toy parameter values, plot it and then visually inspect whether the model meets our expectations. Once we have settled on one or a handful of models to test, we can incorporate the observed SFS in an inference procedure in order to test which model is the best fit to the data. The best fitting model will then provide a set of maximum likelihood parameter values for the parameters we are interested in (like divergence time). We can then perform a bootstrap analysis, by randomly resampling the observed SFS, re-estimating parameters under the most likely model, and constructing bootstrap confidence intervals on these values (typically 50-100 replicates, but here 10 for speed).
