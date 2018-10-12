@@ -253,7 +253,10 @@ Thanks to a fruitful tele-visit by Jack Kamm to the AMNH ECEM meeting on 10/3/18
 * **Time:** Inferring timing of events is generally a difficult thing. Migration pulse times are the least most difficult of all the parameters to estimate.
 * **More populations:** Adding additional populations can add a lot of additional power. You can see things that happened more distantly in the past when those populations merged together.
 * **Migration event penalty:** Computation time scales linearly with number of migration events, which is good, but does have a memory cost.
-* **Optimization strategy:** In general L-BFGS-B is preferred over the default TNC. TNC will always work tenaciously to get the best result, but L-BFGS-B will get you a good enough result much faster. 
+* **Optimization strategy:** In general L-BFGS-B is preferred over the default TNC. TNC will always work tenaciously to get the best result, but L-BFGS-B will get you a good enough result much faster.
+
+* **Validation:** Because the SFS is a summary of the data, conditions exist where the SFS may non-identifiable, or you may find degenerate/runaway behavior. It is always important to validate your inference with simulations and bootstrapping.
+
 
 ## Inference procedure
 In the previous examples where we constructed and plotted DemographicModels, we had specified all the values for population sizes, divergence times, and migration fractions. This is useful when we are developing the models we want to test, because we can construct the model with toy parameter values, plot it and then visually inspect whether the model meets our expectations. Once we have settled on one or a handful of models to test, we can incorporate the observed SFS in an inference procedure in order to test which model is the best fit to the data. The best fitting model will then provide a set of maximum likelihood parameter values for the parameters we are interested in (like divergence time). We can then perform a bootstrap analysis, by randomly resampling the observed SFS, re-estimating parameters under the most likely model, and constructing bootstrap confidence intervals on these values (typically 50-100 replicates, but here 10 for speed).
