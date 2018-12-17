@@ -1,7 +1,7 @@
 # Welcome to RadCamp 2018 - The New York City Edition
 
 January 8 2019  
-Exact location TBD
+Exact location TBD  
 Malaga, Spain
 
 # Organisers, Instructors, and Facilitators
