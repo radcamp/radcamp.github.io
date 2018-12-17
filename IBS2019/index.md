@@ -1,4 +1,4 @@
-# Welcome to RadCamp 2018 - The New York City Edition
+# Welcome to RadCamp 2019 - The IBS Malaga Edition
 
 January 8 2019  
 Exact location TBD  
