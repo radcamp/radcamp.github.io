@@ -1,45 +1,48 @@
 # Welcome to RadCamp 2018 - The New York City Edition
 
-August 28-30, 2018  
-Schermerhorn Extension Building Room 1010  
-Columbia University  
-New York City  
+January 8 2019  
+Exact location TBD
+Malaga, Spain
 
 # Organisers, Instructors, and Facilitators
 
   - Deren Eaton (Columbia)
   - Isaac Overcast (CCNY)
-  - Sandra Hoffberg (Columbia)
 
 # Registration
 
-Participation will be limited to 30 individuals. Registration for this edition of RADCamp is $15, which will cover coffee and light snacks for the 3 day workshop. The registration fee is more of an inducement to prevent people from signing up and then flaking, so __nobody will be turned away for lack of funding.__ If you want to request a fee waiver please contact the organizers.
+Participation will be limited to 30 individuals. Registration for this edition of RADCamp is $85 and can be accomplished on the [IBS Malaga Registation page](https://www.biogeography.org/meetings/ibsmalaga2019/registration/). __There are still a few slots available.__
 
-[Register for RADCamp 2018 NYC](https://www.eventbrite.com/e/radcamp-2018-new-york-city-edition-tickets-48820396119)
 
 # Schedule
 
-Times            | Tuesday | Wednesday (Phylogenetics) | Thursday (Population genetics)
------            | ------ | ------- | ---------
-8:30-9:00       | Check-in and refreshments | Check-in and refreshments | Check-in and refreshments
-9:00-12:30      | Intro to RAD-Seq data types | (Instruction) [Jupyter notebook setup](Jupyter_Notebook_Setup.md), [Tetrad - A Quartet-based species tree method](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-tetrad.ipynb), & [Phylogenetic inference: RAxML](06_RAxML_API.md) | (Instruction) [Clustering analysis: PCA](04_PCA_API.md), Demographic analysis ([momi2](07_momi2_API.md))
-12:30-14:00 | Lunch | Lunch | Lunch
-14:00-17:00 |[Cluster basics](01_cluster_basics.md) and [ipyrad parts I](02_ipyrad_partI_CLI.md) & [II](03_ipyrad_partII_CLI.md) | (Small Group work) [Targeted phylogenetics exercises](tba.md) | (Small Group work) [Targeted population genetics exercises](tba.md)
+__NB:__ This is a very preliminary schedule, so it is subject to change.
+
+Times           | Tuesday Jan 8 |
+-----           | ------ |
+8:30-9:00       | Check-in and refreshments |
+9:00-10:30      | Intro to RAD-Seq data types
+10:30-12:00     | [Cluster basics](01_cluster_basics.md) and [ipyrad parts I](02_ipyrad_partI_CLI.md) |
+12:00-13:00     | Lunch |
+13:00-14:30     | [ipyrad part II](03_ipyrad_partII_CLI.md) |
+14:30-17:00     | [Jupyter notebook setup](Jupyter_Notebook_Setup.md) and ipyrad analysis modules |
 
 ## Additional ipyrad analysis cookbooks
-
+* [Tetrad - A Quartet-based species tree method](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-tetrad.ipynb)
+* [Phylogenetic inference: RAxML](06_RAxML_API.md)
+* [Clustering analysis: PCA](04_PCA_API.md)
+* [Demographic analysis: momi2](07_momi2_API.md)
 * [Clustering analysis: STRUCTURE](05_STRUCTURE_API.md)
 * [BPP - Bayesian inference under a multi-species coalescent model](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-bpp-species-delimitation.ipynb)
 * [Bucky - Phylogenetic concordance analysis](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-bucky.ipynb)
 * [ABBA-BABA - Admixture analysis](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-abba-baba.ipynb)
 
-## RADCamp NYC 2018 co-sponsored by:
 
-![CUNY Graduate Center](images/GC-logo.png)
-![Columbia E3B](images/E3B-logo.jpg)
-
-# RADCamp NYC 2018 Group Photo
-![jpg](RADCamp-NYC2018-group-photo.jpg)
+# RADCamp IBS 2019 Group Photo
+__Don't forget to get a group photo!__
 
 ## Acknowledgements
-RADCamp NYC 2018 materials are largely based on materials from the [RADCamp AF-Biota workshop](https://radcamp.github.io/AF-Biota/) which were created by Isaac Overcast, Mariana Vasconcellos, and Laura Bertola.
+RADCamp IBS 2019 materials are largely based on materials from previous realizations of the workshop which included important contributions from:
+* Mariana Vasconcellos
+* Laura Bertola
+* Sandra Hoffberg
