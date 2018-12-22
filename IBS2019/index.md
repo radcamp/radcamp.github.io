@@ -1,10 +1,10 @@
 # Welcome to RadCamp 2019 - The IBS Malaga Edition
 
-January 8 2019  
+January, 8 2019  
 Faculty of Education Science and Psychology  
 Campus de Teatinos  
 University of Malaga  
-Bulevar Louis Pasteur 25, MÃ¡lag  
+Bulevar Louis Pasteur 25
 Malaga, Spain
 
 # Organisers, Instructors, and Facilitators
@@ -45,14 +45,14 @@ Times           | Tuesday Jan 8 |
 
 # Post-Workshop Welcome Reception
 At the end of the workshop, volunteers will guide organizers and attendees to the welcome reception of the Conference:  
-    FYCMA - Palacio de Ferias y Congresos de MÃ¡lag  
-    Av. de JosÃ© Ortega y Gasset 21  
-    MÃ¡lg  
+    FYCMA - Palacio de Ferias y Congresos de Malaga
+    Av. de Jose Ortega y Gasset 21  
+    Malaga
 
 through three different means:  
 * By bus (bus-stop is located in front of the main entrance of the building)
 * A 30-minute (2 km) walk
-* By taxi (volunteers will provide taxi-service phone numbers; approx. cost 8â¬)
+* By taxi (volunteers will provide taxi-service phone numbers; approx. cost 8 Euro)
 
 # RADCamp IBS 2019 Group Photo
 __Don't forget to get a group photo!__
