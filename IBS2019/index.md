@@ -1,7 +1,10 @@
 # Welcome to RadCamp 2019 - The IBS Malaga Edition
 
 January 8 2019  
-Exact location TBD  
+Faculty of Education Science and Psychology  
+Campus de Teatinos  
+University of Malaga  
+Bulevar Louis Pasteur 25, MÃ¡lag  
 Malaga, Spain
 
 # Organisers, Instructors, and Facilitators
@@ -21,11 +24,13 @@ __NB:__ This is a very preliminary schedule, so it is subject to change.
 Times           | Tuesday Jan 8 |
 -----           | ------ |
 8:30-9:00       | Check-in and refreshments |
-9:00-10:30      | Intro to RAD-Seq data types
-10:30-12:00     | [Cluster basics](01_cluster_basics.md) and [ipyrad parts I](02_ipyrad_partI_CLI.md) |
-12:00-13:00     | Lunch |
+9:00-9:30      | Intro to RAD-Seq data types |
+9:30-12:00     | [Cluster basics](01_cluster_basics.md) and [ipyrad parts I](02_ipyrad_partI_CLI.md) |
+12:00-13:00     | Lunch\* |
 13:00-14:30     | [ipyrad part II](03_ipyrad_partII_CLI.md) |
 14:30-17:00     | [Jupyter notebook setup](Jupyter_Notebook_Setup.md) and ipyrad analysis modules |
+
+\* Lunch is not covered by the registration fee, but will be offered at affordable price for workshop attendees. 
 
 ## Additional ipyrad analysis cookbooks
 * [Tetrad - A Quartet-based species tree method](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-tetrad.ipynb)
@@ -37,6 +42,17 @@ Times           | Tuesday Jan 8 |
 * [Bucky - Phylogenetic concordance analysis](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-bucky.ipynb)
 * [ABBA-BABA - Admixture analysis](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-abba-baba.ipynb)
 
+
+# Post-Workshop Welcome Reception
+At the end of the workshop, volunteers will guide organizers and attendees to the welcome reception of the Conference:  
+    FYCMA - Palacio de Ferias y Congresos de MÃ¡lag  
+    Av. de JosÃ© Ortega y Gasset 21  
+    MÃ¡lg  
+
+through three different means:  
+* By bus (bus-stop is located in front of the main entrance of the building)
+* A 30-minute (2 km) walk
+* By taxi (volunteers will provide taxi-service phone numbers; approx. cost 8â¬)
 
 # RADCamp IBS 2019 Group Photo
 __Don't forget to get a group photo!__
