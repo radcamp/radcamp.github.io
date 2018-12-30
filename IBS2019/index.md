@@ -1,6 +1,6 @@
 # Welcome to RadCamp 2019 - The IBS Malaga Edition
 
-January, 8 2019  
+January 8 2019  
 Faculty of Education Science and Psychology  
 Campus de Teatinos  
 University of Malaga  
@@ -24,11 +24,11 @@ __NB:__ This is a very preliminary schedule, so it is subject to change.
 Times           | Tuesday Jan 8 |
 -----           | ------ |
 8:30-9:00       | Check-in and refreshments |
-9:00-9:30      | Intro to RAD-Seq data types |
-9:30-12:00     | [Cluster basics](01_cluster_basics.md) and [ipyrad parts I](02_ipyrad_partI_CLI.md) |
+9:00-9:30      | [Intro to RAD-Seq data types](00_Intro_RAD.md) |
+9:30-12:00     | [Setting up and QC](01_setup_qc.md), [ipyrad parts I](02_ipyrad_partI_CLI.md) & [ipyrad part II](03_ipyrad_partII_CLI.md)|
 12:00-13:00     | Lunch\* |
-13:00-14:30     | [ipyrad part II](03_ipyrad_partII_CLI.md) |
-14:30-17:00     | [Jupyter notebook setup](Jupyter_Notebook_Setup.md) and ipyrad analysis modules |
+13:00-14:30     | [Intro to Jupyter notebooks](Jupyter_Notebook_Setup.md) and ipyrad analysis modules|
+14:30-17:00     | [RAxML analysis walkthrough](06_RAxML_API.md), [momi2 analysis walkthrough](07_momi2_API.md), & small group work analysing real data |
 
 \* Lunch is not covered by the registration fee, but will be offered at affordable price for workshop attendees. 
 
