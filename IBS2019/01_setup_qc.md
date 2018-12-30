@@ -1,12 +1,9 @@
 
 
-# Cluster Basics and Housekeeping
-The bulk of the activities this morning involve getting oriented on the cluster and getting programs and resources set up for the actual assembly and analysis. We make no assumptions about prior experience with cluster environments, so we scaffold the entire participant workshop experience from first principles. More advanced users hopefully will find value in some of the finer details we present.
+# Setting up the environment and basic quality control
+Before we get going with our first RAD-seq assembly, we need to get set up and oriented to our working environment. We make no assumptions about prior experience with cluster environments, so we scaffold the entire participant workshop experience from first principles. More advanced users hopefully will find value in some of the finer details we present.
 
-* [Connecting to the cluster](#ssh-intro): [Windows](#ssh-for-windows)/[Mac/Linux](#ssh-for-mac)
-* [Basic command line navigation](#command-line-basics)
-* [Setting up the computing environment](#download-and-install-software)
-* [Fetching the data](#fetch-the-raw-data)
+* [Connecting to the Jupyter Hub](#connect-to-jupyter-hub)
 * [Basic quality control (FastQC)](#fastqc-for-quality-control)
 * [Viewing and interpreting FAstQC results](#inspecting-fastqc-utput)
 
@@ -23,48 +20,32 @@ $ echo "wat"
 wat
 ```
 
-## Columbia Habanero cluster information
-Computational resources for the duration of this workshop have been generously provided by the Columbia University HPC facility, with special thanks to George Garrett for technical support. The cluster we will be using is located at `habanero.rcs.columbia.edu`. We have a reserved partition of the cluster for use in this workshop composed of five 24-core nodes. We will walk through instrutions for executing short or long running jobs on a cluster.
+## Jupyter hub information
+Computational resources for the duration of this workshop are being provided by the Eaton lab at Columbia University. We will be using a Jupyter Hub instance running on a 40 core workstation in Deren's office on the Upper West Side of Manhattan. Using Jupyter Hub allows us to provide pre-configured, isolated computational environments for each participant, skipping over lots of tedious details related to downloading, installing, and configuring software and getting things set up. Jupyter hub allows us to skip straight to the fun stuff! We do provide [detailed installation and configuration instructions on the RADCamp site](https://radcamp.github.io/NYC2018/01_cluster_basics.html), so that you have some support in getting set up when you return to your home campus.
 
-**[RADCamp NYC 2018 Participant Username/Port# List](https://github.com/radcamp/radcamp.github.io/blob/master/NYC2018/participants.txt)**
+### Connecting to Jupyter Hub
 
-## SSH and the command line
-Unlike laptop or desktop computers, cluster systems typically (almost exclusively) do not have graphical user input interfaces. Interacting with an HPC system therefore requires use of the command line to establish a connection, and for running programs and submitting jobs remotely on the cluster. To interact with the cluster through a terminal we use a program called SSH (secure shell) to create a fast and secure connection. 
+![png](01_setup_qc_files/01_jupyter_hub_dashboard.png)
 
-### SSH for windows
-Windows computers need to use a 3rd party app for connecting to remote computers. The best app for this in my experience is [puTTY](https://www.putty.org/), a free SSH client. Right click and "Save link as" on the [64-bit binary executable link](https://the.earth.li/~sgtatham/putty/latest/w64/putty.exe) if you are using a PC.
+FIXME Explain what each of these directories is for
 
-After installing puTTY, open it and you will see a box where you can enter the "Host Name (or IP Address)" of the computer you want to connect to (the 'host'). To connect to the Habanero cluster, enter: `habanero.rcs.columbia.edu`. The default "Connection Type" should be "SSH", and the default "Port" should be "22". It's good to verify these values. Leave everything else as defualt and click "Open".
-
-![png](01_cluster_basics_files/01_puTTY.png)
-
-### SSH for mac/linux
-Linux operating systems come preinstalled with an ssh command line client, which we will assume linux users are aware of how to use. Mac computers are built on top of a linux-like operating system so they too ship with an SSH client, which can be accessed through the Terminal app. In a Finder window open Applications->Utilities->Terminal, then you can start an ssh session like this:
-
-```bash
-# enter your username here
-$ ssh <username>@habanero.rcs.columbia.edu
-
-# this is an example for the username "work2"
-$ ssh work2@habanero.rcs.columbia.edu
-```
-
-> **Note on usage:** In command line commands we'll use the convention of wrapping variable names in angle-brackets. For example, in the command above you should substitute your own username for `<username>`. We will provide usernames and passwords on the day of the workshop. 
+From the dashboard 'Files' tab choose New->Terminal and you'll see a new tab pop open with a little black window and a command prompt.
 
 ## Command line interface (CLI) basics
 The CLI provides a way to navigate a file system, move files around, and run commands all inside a little black window. The down side of CLI is that you have to learn many at first seemingly esoteric commands for doing all the things you would normally do with a mouse. However, there are several advantages of CLI: 1) you can use it on servers that don't have a GUI interface (such as HPC clusters); 2) it's scriptable, so you can write programs to execute common tasks or run analyses and others can easily reproduce these tasks exactly; 3) it's often faster and more efficient than click-and-drag GUI interfaces. For now we will start with 4 of the most common and useful commands:
 
 ```bash
 $ pwd
-/home/work1
+/home/jovyan
 ```
 `pwd` stands for **"print working directory"**, which literally means "where am I now in this filesystem?". This is a question you should always be aware of when working in a terminal. Just like when you open a file browser window, when you open a new terminal you are located somewhere; the terminal will usually start you out in your "home" directory. Ok, now we know where we are, lets take a look at what's in this directory:
 
 ```bash
 $ ls
+home  ro-data  ro-notebooks  work
 ```
 
-`ls` stands for **"list"** and in our home directory there is **not much, it appears!** In fact right now there is nothing. This is okay, because you just got a brand new account, so you won't expect to have anything there. Throughout the workshop we will be adding files and directories and by the time we're done, not only will you have a bunch of experience with RAD-Seq analysis, but you'll also have a ***ton*** of stuff in your home directory. We can start out by adding the first directory for this workshop:
+`ls` stands for **"list"** and you should notice a strong correlation between the results of `ls` and the contents of the directories presented by the Jupyter Hub dashboard. Try to use `ls` to look inside your `home` and `work` directories. **Not Much There.** That's okay, because throughout the workshop we will be adding files and directories and by the time we're done, not only will you have a bunch of experience with RAD-Seq analysis, but you'll also have a ***ton*** of stuff in your home directory. We can start out by adding the first directory for this workshop:
 
 ```bash
 $ mkdir ipyrad-workshop
@@ -81,33 +62,6 @@ Throughout the workshop we will be introducing new commands as the need for them
 
 > **Special Note:** Notice that the above directory we are making is not called `ipyrad workshop`. This is **very important**, as spaces in directory names are known to cause havoc on HPC systems. All linux based operating systems do not recognize file or directory names that include spaces because spaces act as default delimiters between arguments to commands. There are ways around this (for example Mac OS has half-baked "spaces in file names" support) but it will be so much for the better to get in the habit now of ***never including spaces in file or directory names***.
 
-## Download and Install Software
-### Install conda
-[Conda](https://conda.io/docs/) is a command line software installation tool based on python. It will allow us to install and run various useful applications inside our home directory that we would otherwise have to hassle the HPC admins to install for us. Conda provides an isolated environment for each user, allowing us all to manage our own independent suites of applications, based on our own computing needs.
-
-64-Bit Python2.7 conda installer for linux is here: [https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh](https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh), so copy and paste this link into the commands as below:
-
-```bash
-$ wget https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh
-```
-> **Note:** `wget` is a command line utility for fetching content from the internet. You use it when you want to **get** stuff from the **w**eb, so that's why it's called `wget`.
-
-After the download finishes you can execute the conda installer using `bash`. `bash` is the name of the terminal program that runs on the cluster, and `.sh` files are scripts that bash knows how to run. The extra argument `-b` at the end is specific to this `.sh` script, and tells it to automatically run the entire script (in **b**atch mode) instead of stopping to ask us questions as it goes. 
-
-```bash
-$ bash Miniconda2-latest-Linux-x86_64.sh -b
-```
-
-This will create a new directory where the `conda` program will be located, and also where all of the software that we will eventually install with conda will be stored. By default the new directory will be placed in your home directory and will be called `miniconda2`. After the install completes we will add this new directory to our `PATH` variable, which is what the terminal uses to recognize where software is located on your system. After running the commands below our terminal will always be able to find our conda software.
-
-```bash
-$ echo PATH='$HOME'/miniconda2/bin:'$PATH' >> ~/.bashrc
-$ source ~/.bashrc
-$ which python
-/home/work1/miniconda2/bin/python
-```
-
-The `echo` command prints the text that comes after to it and the ">>" character designates to write the result to the file `.bashrc`. This is a file that is automatically run when the terminal starts. If we had not run the miniconda installer in batch mode it would have appended this command to the .bashrc file for us automatically, but it takes longer that way so we are doing it by hand instead. The `source` command simply tells the terminal to reload the `.bashrc` file so that it is like we started a new terminal, but this time it will find all of our new conda software. Finally, the `which` command will show you the path (location) of the program printed after it. In this case we ask which python binary it finds, and you can see that it returns that the new version of python in our personal miniconda directory.
 
 ### Install ipyrad and fastqc
 Conda gives us access to an amazing array of analysis tools for both analyzing and manipulating all kinds of data. Here we'll just scratch the surface by installing [ipyrad](http://ipyrad.readthedocs.io/), the RAD-Seq assembly and analysis tool that we'll use throughout the workshop, and [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/), an application for filtering fasta files based on several quality control metrics. As long as we're installing conda packages we'll include [toytree](https://toytree.readthedocs.io/en/latest/) as well, which is a plotting library used by the ipyrad analysis toolkit.
