@@ -45,7 +45,7 @@ Times           | Tuesday Jan 8 |
 
 # Post-Workshop Welcome Reception
 At the end of the workshop, volunteers will guide organizers and attendees to the welcome reception of the Conference:  
-    FYCMA - Palacio de Ferias y Congresos de Malaga
+    FYCMA - Palacio de Ferias y Congresos de Malaga  
     Av. de Jose Ortega y Gasset 21  
     Malaga
 
