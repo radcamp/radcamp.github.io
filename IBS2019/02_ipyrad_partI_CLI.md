@@ -422,53 +422,68 @@ with the simulated data we have no unmatched barcodes, because, well, it's simul
 
 This step filters reads based on quality scores and maximum number of
 uncalled bases, and can be used to detect Illumina adapters in your 
-reads, which is sometimes a problem under couple different library 
-prep scenarios. Recalling from our exploration of the data with FastQC 
-we have some problem with adapters, and a little noise toward the 3' 
-end. To account for this we will trim reads to 75bp and set adapter 
-filtering to be quite aggressive. 
-
-> **Note:** Trimming to 75bp seems a bit aggressive too, and based on the FastQC results you probably would not want to do this with if these were your real data. However, it will speed up the analysis considerably. Here, we are just trimming the reads for the sake of this workshop.
+reads, which is sometimes a problem under a couple different library 
+prep scenarios. Since it's not atypical to have adapter contamination
+issues and to have a little noise toward the distal end of the reads
+lets imagine this is true of the simulated data, and we'll try to account
+for this by trimming reads to 90bp and using aggressive adapter filtering. 
 
 Edit your params file again with `nano`:
 
 ```bash
-nano params-anolis.txt
+nano params-simdata.txt
 ```
 
 and change the following two parameter settings:
 
 ```
 2                               ## [16] [filter_adapters]: Filter for adapters/primers (1 or 2=stricter)
-0, 75, 0, 0                     ## [25] [trim_reads]: Trim raw read edges (R1>, <R1, R2>, <R2) (see docs)
+0, 90, 0, 0                     ## [25] [trim_reads]: Trim raw read edges (R1>, <R1, R2>, <R2) (see docs)
 ```
 > **Note:** Saving and quitting from `nano`: `CTRL+o` then `CTRL+x`
 
 ```bash
-$ ipyrad -p params-anolis.txt -s 2 -c 4
+$ ipyrad -p params-simdata.txt -s 2 -c 4
 ```
 ```
  -------------------------------------------------------------
   ipyrad [v.0.7.28]
   Interactive assembly and analysis of RAD-seq data
  -------------------------------------------------------------
-  loading Assembly: anolis
-  from saved path: ~/ipyrad-workshop/anolis.json
+  loading Assembly: simdata
+  from saved path: ~/work/simdata.json
   establishing parallel connection:
   host compute node: [4 cores] on darwin
 
   Step 2: Filtering reads 
-  [####################] 100%  processing reads      | 0:01:02
+  [####################] 100%  processing reads      | 0:00:12
 ```
 
-The filtered files are written to a new directory called `anolis_edits`. Again, 
+The filtered files are written to a new directory called `simdata_edits`. Again, 
 you can look at the results output by this step and also some handy stats tracked 
 for this assembly.
 
 ```bash
 ## View the output of step 2
-$ cat anolis_edits/s2_rawedit_stats.txt 
+$ cat simdata_edits/s2_rawedit_stats.txt 
+      reads_raw  trim_adapter_bp_read1  trim_quality_bp_read1  reads_filtered_by_Ns  reads_filtered_by_minlen  reads_passed_filter
+1A_0      19862                    360                      0                     0                         0  19862
+1B_0      20043                    362                      0                     0                         0  20043
+1C_0      20136                    349                      0                     0                         0  20136
+1D_0      19966                    404                      0                     0                         0  19966
+2E_0      20017                    394                      0                     0                         0  20017
+2F_0      19933                    376                      0                     0                         0  19933
+2G_0      20030                    381                      0                     0                         0  20030
+2H_0      20199                    386                      0                     0                         1  20198
+3I_0      19885                    372                      0                     0                         0  19885
+3J_0      19822                    381                      0                     0                         0  19822
+3K_0      19965                    382                      0                     0                         0  19965
+3L_0      20008                    424                      0                     0                         0  20008
 ```
+It's a little boring, the reads are **too clean**. Here is an example of something 
+like you'd see from real data (this is the Anolis dataset). Notice the `reads_passed_filter`
+value. This dataset is decent, as you can see we're losing < 10% of the reads per sample,
+mostly due to the minimum length cutoff.
 ```
                    reads_raw  trim_adapter_bp_read1  trim_quality_bp_read1  reads_filtered_by_Ns  reads_filtered_by_minlen  reads_passed_filter
 punc_IBSPCRIB0361     250000                 108761                 160210                    66                     12415               237519
@@ -485,49 +500,48 @@ punc_MUFAL9635        250000                 114492                 182877      
 
 ```bash
 ## Get current stats including # raw reads and # reads after filtering.
-$ ipyrad -p params-anolis.txt -r
+$ ipyrad -p params-simdata.txt -r
 ```
 
 You might also take a closer look at the filtered reads: 
 
 ```bash
-$ zcat anolis_edits/punc_IBSPCRIB0361.trimmed_R1_.fastq.gz | head -n 12
+$ zcat simdata_edits/1A_0.trimmed_R1_.fastq.gz | head -n 12
 ```
 ```
-@D00656:123:C6P86ANXX:8:2201:3857:34366 1:Y:0:8
-TGCATGTTTATTGTCTATGTAAAAGGAAAAGCCATGCTATCAGAGATTGGCCTGGGGGGGGGGGGCAAATACATG
+@lane1_locus0_1A_0_0 1:N:0:
+TGCAGTTTAACTGTTCAAGTTGGCAAGATCAAGTCGTCCCTAGCCCCCGCGTCCGTTTTTACCTGGTCGCGGTCCCGACCCAGCTGCCCC
 +
-;=11>111>1;EDGB1;=DG1=>1:EGG1>:>11?CE1<>1<1<E1>ED1111:00CC..86DG>....//8CDD
-@D00656:123:C6P86ANXX:8:2201:5076:34300 1:N:0:8
-TGCATATGAACCCCAACCTCCCCATCACATTCCACCATAGCAATCAGTTTCCTCTCTTCCTTCTTCTTGACCTCT
+BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
+@lane1_locus0_1A_0_1 1:N:0:
+TGCAGTTTAACTGTTCAAGTTGGCAAGATCAAGTCGTCCCTAGCCCCCGCGTCCGTTTTTACCTGGTCGCGGTCCCGACCCAGCTGCCCC
 +
-@;BFGEBCC11=/;/E/CFGGGG1ECCE:EFDFCGGGGGGG11EFGGGGGCGG:B0=F0=FF0=F:FG:FDG00:
-@D00656:123:C6P86ANXX:8:2201:5042:34398 1:N:0:8
-TGCATTCAAAGGGAGAAGAGTACAGAAACCAAGCACATATTTGAAAAATGCA
+BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
+@lane1_locus0_1A_0_2 1:N:0:
+TGCAGTTTAACTGTTCAAGTTGGCAAGATCAAGTCGTCCCTAGCCCCCGCGTCCGTTTTTACCTGGTCGCGGTCCCGACCCAGCTGCCCC
 +
-GGGGGGGCGGGGGGGGGGGGGEGGGFGGGGGGEGGGGGGGGGGGGGFGGGEG
+BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
 ```
 
-This is actually really cool, because we can already see the results of 
-both of our applied parameters. All reads have been trimmed to 75bp, 
-and the third read had adapter contamination removed (you can tell because
-it's shorter than 75bp). As an exercise you can go back up to the 
-section where we looked at the raw data initially and see if you can 
-identify the adapter sequence in this read. We will see more about the consequences
-of filtering adapters soon as well when we look at the clustered reads next. 
+Since the adapter content of the simulated data is effectively 0, the net effect
+of step 2 is that the reads have been trimmed to 90bp. This isn't necessary here,
+but it provides a good example since real data typically will need trimming. 
 
 # Step 3: clustering within-samples
 
 Step 3 de-replicates and then clusters reads within each sample by the
 set clustering threshold and then writes the clusters to new files in a
-directory called `anolis_clust_0.85`. Intuitively we are trying to
+directory called `simdata_clust_0.85`. Intuitively we are trying to
 identify all the reads that map to the same locus within each sample.
 The clustering threshold specifies the minimum percentage of sequence
 similarity below which we will consider two reads to have come from
 different loci.
 
 The true name of this output directory will be dictated by the value you
-set for the `clust_threshold` parameter in the params file.
+set for the `clust_threshold` parameter in the params file. This makes it
+very easy to test different clustering thresholds, and keep the different
+runs organized (since you will have for example `simdata_clust_0.85` and
+`simdata_clust_0.9`).
 
 You can see the default value is 0.85, so our default directory is named
 accordingly. This value dictates the percentage of sequence similarity
@@ -536,7 +550,8 @@ You'll more than likely want to experiment with this value, but 0.85 is
 a reliable default, balancing over-splitting of loci vs over-lumping.
 Don't mess with this until you feel comfortable with the overall
 workflow, and also until you've learned about
-[Branching assemblies](https://ipyrad.readthedocs.io/tutorial_advanced_cli.html).
+[Branching assemblies](https://ipyrad.readthedocs.io/tutorial_advanced_cli.html)
+(which we will get to later this afternoon).
 
 There have been many papers written comparing how results of assemblies vary 
 depending on the clustering threshold. In general, my advice is to use a value
@@ -547,38 +562,39 @@ It's also possible to incorporate information from a reference
 genome to improve clustering at this step, if such a resources is
 available for your organism (or one that is relatively closely related).
 We will not cover reference based assemblies in this workshop, but you 
-can refer to the [ipyrad documentation](https://ipyrad.readthedocs.io/tutorial_advanced_cli.html) for more information.
+can refer to the [ipyrad documentation](https://ipyrad.readthedocs.io/tutorial_advanced_cli.html)
+for more information.
 
 > **Note on performance:** Steps 3 and 6 generally take considerably 
-longer than any of the steps, due to the resource intensive clustering 
+longer than any of the other steps, due to the resource intensive clustering 
 and alignment phases. These can take on the order of 10-100x as long 
 as the next longest running step. This depends heavily on the number of samples
-in your dataset, the number of cores, the length(s) of your reads, and the 
+in your dataset, the number of cores on your computer, the length(s) of your reads, and the 
 "messiness" of your data in terms of the number of unique loci present (this can
 vary from a few thousand to many millions).
 
 Now lets run step 3:
 
 ```bash
-$ ipyrad -p params-anolis.txt -s 3 -c 2
+$ ipyrad -p params-simdata.txt -s 3 -c 4
 ```
 ```
  -------------------------------------------------------------
   ipyrad [v.0.7.28]
   Interactive assembly and analysis of RAD-seq data
  -------------------------------------------------------------
-  loading Assembly: anolis
-  from saved path: ~/ipyrad-workshop/anolis.json
+  loading Assembly: simdata
+  from saved path: ~/work/simdata.json
   establishing parallel connection:
-  host compute node: [2 cores] on darwin
+  host compute node: [4 cores] on e305ff77a529
 
   Step 3: Clustering/Mapping reads
-  [####################] 100%  dereplicating         | 0:00:11  
-  [####################] 100%  clustering            | 0:19:35
-  [####################] 100%  building clusters     | 0:00:06
-  [####################] 100%  chunking              | 0:00:01
-  [####################] 100%  aligning              | 0:14:27
-  [####################] 100%  concatenating         | 0:00:04```
+  [####################] 100%  dereplicating         | 0:00:01
+  [####################] 100%  clustering            | 0:00:01
+  [####################] 100%  building clusters     | 0:00:00
+  [####################] 100%  chunking              | 0:00:00
+  [####################] 100%  aligning              | 0:00:07
+  [####################] 100%  concatenating         | 0:00:00
 ```
 
 In-depth operations of step 3:
@@ -591,55 +607,89 @@ In-depth operations of step 3:
 
 Again we can examine the results. The stats output tells you how many
 clusters were found ('clusters_total'), and the number of clusters that pass the mindepth
-thresholds ('clusters_hidepth'). We'll go into more detail about mindepth settings in some of
-the advanced tutorials but for now all you need to know is that by
-default step 3 will filter out clusters that only have a handful of
-reads on the assumption that these are probably all mostly due to
-sequencing error.
+thresholds ('clusters_hidepth'). We go into more detail about mindepth settings in some of
+the [advanced tutorials](https://ipyrad.readthedocs.io/userguide.html#tutorials-running-ipyrad)
+but for now all you need to know is that by default step 3 will filter out clusters that 
+only have a handful of reads on the assumption that it will be difficult to accurately call
+bases at such low depth.
 
 ```bash
-$ ipyrad -p params-anolis.txt -r
+$ ipyrad -p params-simdata.txt -r
 ```
 ```
-Summary stats of Assembly anolis
+Summary stats of Assembly simdata
 ------------------------------------------------
-                   state  reads_raw  reads_passed_filter  clusters_total  clusters_hidepth
-punc_IBSPCRIB0361      3     250000               237519           56312              4223
-punc_ICST764           3     250000               236815           60626              4302
-punc_JFT773            3     250000               240102           61304              5214
-punc_MTR05978          3     250000               237704           61615              4709
-punc_MTR17744          3     250000               240396           62422              5170
-punc_MTR21545          3     250000               227965           55845              3614
-punc_MTR34414          3     250000               233574           61242              4278
-punc_MTRX1468          3     250000               230903           54411              3988
-punc_MTRX1478          3     250000               233398           57299              4155
-punc_MUFAL9635         3     250000               231868           59249              3866
+      state  reads_raw  reads_passed_filter  clusters_total  clusters_hidepth
+1A_0      3      19862                19862            1000              1000
+1B_0      3      20043                20043            1000              1000
+1C_0      3      20136                20136            1000              1000
+1D_0      3      19966                19966            1000              1000
+2E_0      3      20017                20017            1000              1000
+2F_0      3      19933                19933            1000              1000
+2G_0      3      20030                20030            1000              1000
+2H_0      3      20199                20198            1000              1000
+3I_0      3      19885                19885            1000              1000
+3J_0      3      19822                19822            1000              1000
+3K_0      3      19965                19965            1000              1000
+3L_0      3      20008                20008            1000              1000
+
+
+Full stats files
+------------------------------------------------
+step 1: ./simdata_fastqs/s1_demultiplex_stats.txt
+step 2: ./simdata_edits/s2_rawedit_stats.txt
+step 3: ./simdata_clust_0.85/s3_cluster_stats.txt
 ```
 
 Again, the final output of step 3 is dereplicated, clustered files for
-each sample in `./anolis_clust_0.85/`. You can get a feel for what
+each sample in `./simdata_0.85/`. You can get a feel for what
 this looks like by examining a portion of one of the files. 
-
-**We'll take a moment now to compare the outputs of the different empirical libraries.**
 
 ```bash
 ## Same as above, `zcat` unzips and prints to the screen and 
-## `head -n 28` means just show me the first 28 lines. 
-$ zcat anolis_clust_0.85/punc_IBSPCRIB0361.clustS.gz | head -n 28
+## `head -n 24` means just show me the first 28 lines. 
+$ zcat anolis_clust_0.85/punc_IBSPCRIB0361.clustS.gz | head -n 24
 ```
+```
+zcat simdata_clust_0.85/1A_0.clustS.gz | head -n 24
+009149cc23d2367f21b67ac0060d9f2f;size=18;*
+TGCAGATAAATCAAACTGCAGCTTGATATGGGCTTCGACCCAGTGGTGGTAGCCTCTCTCTCCCAGTATAACCTCGACCCCAAAATCGCA
+d498af3d4575b871de6d5a7f239279ea;size=1;+
+TGCAGATAAATCAAACTGCAGCTTGATATGGGCTTCGACCCAGTGGTGGTAGCCTCTCTCTCCCAGTATAACCTCGACCCCAAAATCGCT
+b71555537ed7f88329fda094cc6cef8a;size=1;+
+TGCAGATAAATCAAACTGCAGCTTGATATGGGCTTCGACCCAGTGGTGGTAGCGTCTCTCTCCCAGTATAACCTCGACCCCAAAATCGCA
+//
+//
+00f1daaa8dd241bd72db91aa62b31bb4;size=8;*
+TGCAGGGGTTAGGCGTATCTGCCAAAGATTCTTCGATCGTGATGATTCTAGACGACAATACACCTGATGCTTCTCGCATGCATAGCAATG
+6780649efadfc8c182cfd2af7071316b;size=8;+
+TGCAGGGGTTAGGCGTATCTGCCAAAGATTCTTCGATCGTGATGATTCTAGAGGACAATACACCTGATGCTTCTCGCATGCATAGCAATG
+23a7b43b7f5008017574400c460982dc;size=1;+
+TGCAGGGGTTAGGCGTATCTTCCAAAGATTCTTCGATCGTGATGATTCTAGACGACAATACACCTGATGCTTCTCGCATGCATAGCAATG
+e6830f9099df558397f0fd28bf9568b6;size=1;+
+TGCAGGGGTTAGGCGTATCTGCCAAAGATTCTTCGATCGTGATGATTCTAGACGATAATACACCTGATGCTTCTCGCATGCATAGCAATG
+//
+//
+013b4e939c785d94369ea933f7f98f0c;size=18;*
+TGCAGATACTTCGCCCGGTTCTCCATACCCCATTCTTTGCTGCTTCTTCTGAGCGCACTCGACCTATGCCTAGTCGCACCTCGCATATTT
+a7e612c565f1d70f054864759b58205f;size=1;+
+TGCAGATACTTCGCCCGGTTCTCCATACCCCATTCTTTGCTGCTTCTTCTGAGCGCACTCGACCTATGCCTAGTCCCACCTCGCATATTT
+//
+//
+```
+
+Reads that are sufficiently similar (based on the above sequence
+similarity threshold) are grouped together in clusters separated by
+"//". For the second cluster above this is *probably* heterozygous 
+with some sequencing error, and the first and third clusters are 
+probably homozygous. Again, the simulated data is too clean to get a
+real picture of how tricky real data can be. Looking again at the Anolis
+data:
 ```
 000e3bb624e3bd7e91b47238b7314dc6;size=4;*
 TGCATATCACAAGAGAAGAAAGCCACTAATTAAGGGGAAAAGAAAAGCCTCTGATATAGCTCCGATATATCATGC-
 75e462e101383cca3db0c02fca80b37a;size=2;-
 -GCATATCACAAGAGAAGAAAGCCACTAATTAAGGGGAAAAGAAAAGCCTCTGATATAGCTCCGATATATCATGCA
-//
-//
-0011c57e1e3c03e4a71516bd51c623da;size=1;*
-TGCATGAAATAGATACAACTGAGCACATTTGCTTTGTTTCCAGAGAGTGCAACAAGAGTTTGGAGAATATAAATG
-eef50f7e4849ed4761f1fd38b08d0e12;size=1;+
-TGCATGAAATAGATACTACTGAGCACATTTGCTTTGTTTCCAGAGATTGCATCAAGAGTTTGGAGAATATAAATG
-7f089b34522da8288b0e6ff7db8ffc6c;size=1;+
-TGCATGAAATAGATACAACTGAGCACATTTGCTTTGTTTCCAGAGATTGCAACAAGAGTTTGGAGAATATAAATG
 //
 //
 001236a2310c39a3a16d96c4c6c48df1;size=4;*
@@ -650,19 +700,9 @@ TGCATCTCTTTGGGCTGTTGCTTGGTGGCACACCATGCTGCTTTCTCCTCACTTTTTCTCTCTTTTCCTGAGACT-----
 TGCATTTCTTTGGGCTGTTGCTTGGTGGCACACCATGCTGCTTTCTCCTCACTTTTTCTCTCTTTTCCTGAGACT------------------------------
 //
 //
-0013684f0db0bd454a0a6fd1b160266f;size=1;*
-TGCATTGTTCATGAATCGTCCCATTGTATACATTTTACCTGATCTATCTCATTGTATTTTACTCCATGGTTTTCA-------------------------
-c26ec07b3e3e77d3167341d100fd2d4e;size=1;-
--------------------------GTATACATTTTACTTGATCTATCTCATTGTATTTTACTCCATGGTTTTCAGTACCTAACAAGCAGCATGTATGCA
-55510205b75b441a2c3ce6249f1eb47c;size=1;-
--------------------------GTATACATTTTACCTGATCTATCTTATTGTATTTTACTCCATGGTTTTCAGTACCTAACAAGCAGCATGTATGCA
 ```
 
-Reads that are sufficiently similar (based on the above sequence
-similarity threshold) are grouped together in clusters separated by
-"//". For the second and fourth clusters above these are *probably* homozygous 
-with some sequencing error, but it's hard to tell. For the first and third
-clusters, are there truly two alleles (heterozygote)? Is it a homozygote 
+Are there truly two alleles (heterozygote) for each of these loci? Are they homozygous 
 with lots of sequencing errors, or a heterozygote with few reads for one of the alleles?
 
 Thankfully, untangling this mess is what step 4 is all about.
