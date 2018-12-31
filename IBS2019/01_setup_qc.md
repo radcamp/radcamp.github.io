@@ -25,15 +25,23 @@ Computational resources for the duration of this workshop are being provided by 
 
 ### Connecting to Jupyter Hub
 
+FIXME: Connecting to the jupyter hub w/ github account
+
 ![png](01_setup_qc_files/01_jupyter_hub_dashboard.png)
 
-FIXME Explain what each of these directories is for
+By default everyone will have 4 directories listed in their Jupyter home: `home`, `ro-data`, `ro-notebooks`, and `work`. Here's what each of these directories contains:
+* home: An empty directory for keeping random stuff. We won't use this during the workshop.
+* ro-data: A `read only` directory that houses datasets we'll use during the workshop. You can read these datasets, but you can't write to this directory.
+* ro-notebooks: Example analysis notebooks that you can copy to your working directory to run, modify, and save on your own.
+* work: A working directory for creating ipyrad assemblies and analysis output files.
+
+## Opening a terminal on the server
 
 From the dashboard 'Files' tab choose New->Terminal and you'll see a new tab pop open with a little black window and a command prompt, like this:
 
 ![png](01_setup_qc_files/01_jupyter_hub_terminal.png)
 
-## Command line interface (CLI) basics
+### Command line interface (CLI) basics
 The CLI provides a way to navigate a file system, move files around, and run commands all inside a little black window. The down side of CLI is that you have to learn many at first seemingly esoteric commands for doing all the things you would normally do with a mouse. However, there are several advantages of CLI: 1) you can use it on servers that don't have a GUI interface (such as HPC clusters); 2) it's scriptable, so you can write programs to execute common tasks or run analyses and others can easily reproduce these tasks exactly; 3) it's often faster and more efficient than click-and-drag GUI interfaces. For now we will start with 4 of the most common and useful commands:
 
 ```bash
@@ -64,10 +72,10 @@ Throughout the workshop we will be introducing new commands as the need for them
 
 > **Special Note:** Notice that the above directory we are making is not called `ipyrad workshop`. This is **very important**, as spaces in directory names are known to cause havoc on HPC systems. All linux based operating systems do not recognize file or directory names that include spaces because spaces act as default delimiters between arguments to commands. There are ways around this (for example Mac OS has half-baked "spaces in file names" support) but it will be so much for the better to get in the habit now of ***never including spaces in file or directory names***.
 
+### Install ipyrad and various analysis tools
+Surprise! We already did this for you. This is one of the strengths of working in a Jupyter Hub environment, that we can curate the [Docker image](https://www.docker.com/) we provide for this workshop (to save time with nitpicky things like installation and configuration). In truth, we rely heavily on the [Conda](https://conda.io/docs/) ecosystem for installation of ipyrad and all dependencies. Conda gives us access to an amazing array of analysis tools for both analyzing and manipulating all kinds of data. We provide [detailed and explicit ipyrad install instructions on the RADCamp site](https://radcamp.github.io/NYC2018/01_cluster_basics.html#download-and-install-software), which you can explore at your leasure outside this workshop.
 
-### Install ipyrad and fastqc
-Conda gives us access to an amazing array of analysis tools for both analyzing and manipulating all kinds of data. Here we'll just scratch the surface by installing [ipyrad](http://ipyrad.readthedocs.io/), the RAD-Seq assembly and analysis tool that we'll use throughout the workshop, and [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/), an application for filtering fasta files based on several quality control metrics. As long as we're installing conda packages we'll include [toytree](https://toytree.readthedocs.io/en/latest/) as well, which is a plotting library used by the ipyrad analysis toolkit.
-
+Test the version of ipyrad installed inside your compute environment:
 ```bash
 $ ipyrad --version
 ipyrad 0.7.28
