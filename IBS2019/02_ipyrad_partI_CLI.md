@@ -207,8 +207,8 @@ these on the bottom of the frame.
 We need to specify where the raw data files are located, the type of data we are using (.e.g., 'gbs', 'rad', 'ddrad', 'pairddrad), and which enzyme cut site overhangs are expected to be present on the reads. Below are the parameter setings you'll need to change for the simulated single-end RAD example data:
 
 ```bash
+/home/jovyan/ro-data/ipsimdata/rad_example_R1_.fastq.gz        ## [2] [raw_fastq_path]: Location ofraw non-demultiplexed fastq files
 /home/jovyan/ro-data/ipsimdata/rad_example_barcodes.txt        ## [3] [barcodes_path]: Location of barcodes file
-/home/jovyan/ro-data/ipsimdata/rad_example_R1_.fastq.gz        ## [4] [sorted_fastq_path]: Location of demultiplexed/sorted fastq files
 rad                            ## [7] [datatype]: Datatype (see docs): rad, gbs, ddrad, etc.
 TGCAG,                         ## [8] [restriction_overhang]: Restriction overhang (cut1,) or (cut1, cut2)
 ```
@@ -270,15 +270,8 @@ real data are much more all over the place:
 TGCATGTTTATTGTCTATGTAAAAGGAAAAGCCATGCTATCAGAGATTGGCCTGGGGGGGGGGGGCAAATACATGAAAAAGGGAAAGGCAAAATG
 +
 ;=11>111>1;EDGB1;=DG1=>1:EGG1>:>11?CE1<>1<1<E1>ED1111:00CC..86DG>....//8CDD/8C/....68..6.:8....
-@D00656:123:C6P86ANXX:8:2201:5076:34300 1:N:0:8
-TGCATATGAACCCCAACCTCCCCATCACATTCCACCATAGCAATCAGTTTCCTCTCTTCCTTCTTCTTGACCTCTCCACCTCAAAGGCAACTGCA
-+
-@;BFGEBCC11=/;/E/CFGGGG1ECCE:EFDFCGGGGGGG11EFGGGGGCGG:B0=F0=FF0=F:FG:FDG00:;@DGGDG@0:E0=C>DGCF0
-@D00656:123:C6P86ANXX:8:2201:5042:34398 1:N:0:8
-TGCATTCAAAGGGAGAAGAGTACAGAAACCAAGCACATATTTGAAAAATGCAAGATCGGAAGAGCGGTTCAGCAGGAATGCCGAGACCGATCTCG
-+
-GGGGGGGCGGGGGGGGGGGGGEGGGFGGGGGGEGGGGGGGGGGGGGFGGGEGGGGGGGGGGGGGGGGGGGGGGGGGGGEGGGGGGGGG@@DGGGG
 ```
+
 > **Exercise for the reader:** Can you find and verify the overhang sequence in the simulated data? 
 Hint: It's not right at the beginning of the sequence, which is where you might expect it to be.... 
 
@@ -287,13 +280,11 @@ messy dataset is lots of *off target reads*, basically stuff that got sequenced 
 
 # Step 1: Loading the raw data files
 
-With reads already demultiplexed to samples, step 1 simply scans through 
-the raw data, verifies the input format, and counts reads per sample. It 
-doesn't create any new directories or modify the raw files in any way.
+Commonly sequencing facilities will give you one giant .gz file that contains all the reads from all the samples all mixed up together. 
 
-> **Note on step 1:** More commonly, rather than returning demultiplexed samples as we have here, sequencing facilities will give you one giant .gz file that contains all the sequences from your run. This situation only slightly modifies step 1, and does not modify further steps, so we will refer you to the [full ipyrad tutorial](http://ipyrad.readthedocs.io/tutorial_intro_cli.html) for guidance in this case.
+> **Note on step 1:** Occasionally sequencing facilities will send back data already demultiplexed to samples. This is totally fine, and is handled natively by ipyrad. In this case you would use the `sorted_fastq_path` in the params file to indiciate the sample fastq.gz files. ipyrad will then scan the samples and load in the raw data.
 
-Now lets run step 1! For the Anolis data this will take <1 minute.
+Now lets run step 1! For the simulated data. This will take <1 minute.
 
 > **Special Note:** In interactive mode please be aware to *always* specify
 the number of cores with the `-c` flag. If you do not specify the number of 
