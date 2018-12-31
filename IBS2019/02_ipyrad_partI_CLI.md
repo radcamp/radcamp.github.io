@@ -156,7 +156,7 @@ parameter, and then a short description of its purpose. Lets take a look at it.
 ``` 
 $ cat params-simdata.txt
 ------- ipyrad params file (v.0.7.28)-------------------------------------------
-anolis                         ## [0] [assembly_name]: Assembly name. Used to name output directories for assembly steps
+simdata                         ## [0] [assembly_name]: Assembly name. Used to name output directories for assembly steps
 ./                             ## [1] [project_dir]: Project dir (made in curdir if not present)
                                ## [2] [raw_fastq_path]: Location of raw non-demultiplexed fastq files
                                ## [3] [barcodes_path]: Location of barcodes file
@@ -189,13 +189,13 @@ p, s, v                        ## [27] [output_formats]: Output formats (see doc
 
 In general the defaults are sensible, and we won't mess with them for now, 
 but there are a few parameters we *must* change: the path to the raw data, 
-the dataype, and the restriction overhang sequence.
+the dataype, the restriction overhang sequence, and the barcodes file.
 
-We will use the `nano` text editor to modify `params-anolis.txt` and change
+We will use the `nano` text editor to modify `params-simdata.txt` and change
 these parameters:
 
 ```bash
-$ nano params-anolis.txt
+$ nano params-simdata.txt
 ```
 ![png](02_ipyrad_partI_CLI_files/ipyrad_part1_nano.png)
 
@@ -204,30 +204,13 @@ on the keyboard for navigating around the file. Nano accepts a few special
 keyboard commands for doing things other than modifying text, and it lists 
 these on the bottom of the frame. 
 
-We need to specify where the raw data files are located, the type of data we are using (.e.g., 'gbs', 'rad', 'ddrad', 'pairddrad), and which enzyme cut site overhangs are expected to be present on the reads. We list the parameter settings for three different empirical libraries below. Choose just one for your example analysis.
+We need to specify where the raw data files are located, the type of data we are using (.e.g., 'gbs', 'rad', 'ddrad', 'pairddrad), and which enzyme cut site overhangs are expected to be present on the reads. Below are the parameter setings you'll need to change for the simulated single-end RAD example data:
 
 ```bash
-# Anolis data set
-anoles                         ## [2] project_dir
-/rigel/edu/radcamp/files/anoles/*.gz                    ## [4] [sorted_fastq_path]: Location of demultiplexed/sorted fastq files
-gbs                            ## [7] [datatype]: Datatype (see docs): rad, gbs, ddrad, etc.
-TGCAT,                         ## [8] [restriction_overhang]: Restriction overhang (cut1,) or (cut1, cut2)
-```
-
-```bash
-# Pedicularis data set
-pedicularis                    ## [2] project_dir
-/rigel/edu/radcamp/files/SRP021469/*.gz                    ## [4] [sorted_fastq_path]: Location of demultiplexed/sorted fastq files
+/home/jovyan/ro-data/ipsimdata/rad_example_barcodes.txt        ## [3] [barcodes_path]: Location of barcodes file
+/home/jovyan/ro-data/ipsimdata/rad_example_R1_.fastq.gz        ## [4] [sorted_fastq_path]: Location of demultiplexed/sorted fastq files
 rad                            ## [7] [datatype]: Datatype (see docs): rad, gbs, ddrad, etc.
 TGCAG,                         ## [8] [restriction_overhang]: Restriction overhang (cut1,) or (cut1, cut2)
-```
-
-```bash
-# Finch data set
-finch                          ## [2] project_dir
-/rigel/edu/radcamp/files/SRP059199/*.gz                    ## [4] [sorted_fastq_path]: Location of demultiplexed/sorted fastq files
-ddrad                          ## [7] [datatype]: Datatype (see docs): rad, gbs, ddrad, etc.
-CCTGCAGG,AATTC                 ## [8] [restriction_overhang]: Restriction overhang (cut1,) or (cut1, cut2)
 ```
 
 After you change these parameters you may save and exit nano by typing CTRL+o 
@@ -240,8 +223,8 @@ Once we start running the analysis ipyrad will create several new
 directories to hold the output of each step for this assembly. By 
 default the new directories are created in the `project_dir`
 directory and use the prefix specified by the `assembly_name` parameter.
-Because we use `./` for the `project_dir` for this tutorial, all these 
-intermediate directories will be of the form: `~/ipyrad-workshop/anolis_*`, 
+Because we use the default (`./`) for the `project_dir` for this tutorial, all these 
+intermediate directories will be of the form: `~/work/simdata_*`, 
 or the analagous name that you used for your assembly name.
 
 > **Note:** Again, the `./` notation indicates the current working directory. You can always view the current working directory with the `pwd` command (**p**rint **w**orking **d**irectory).
@@ -252,19 +235,35 @@ Before we get started let's take a look at what the raw data looks like.
 
 Your input data will be in fastQ format, usually ending in `.fq`,
 `.fastq`, `.fq.gz`, or `.fastq.gz`. The file/s may be compressed with 
-gzip so that they have a .gz ending, but they do not need to be. When loading
-pre-demultiplexed data (as we are with the Anolis data) the location 
-of raw sample files should be entered on line 3 of the params file. Below are the 
-first three reads of one of the Anolis files.
+gzip so that they have a .gz ending, but they do not need to be. Lets take
+a look at first three reads of one of the simulated data.
 
 ```bash
-## For your personal edification here is what this is doing:
-## gunzip -c: Tells gzip to unzip the file and write the contents to the screen
-## head -n 12: Grabs the first 12 lines of the fastq file. Fastq files
-## have 4 lines per read, so the value of `-n` should be a multiple of 4
-
-$ zcat /rigel/edu/radcamp/files/SRP021469/29154_superba_SRR1754715.fastq.gz | head -n 20
+$ zcat /home/jovyan/ro-data/ipsimdata/rad_example_R1_.fastq.gz | head -n 12
 ```
+
+```
+@lane1_locus0_2G_0_0 1:N:0:
+CTCCAATCCTGCAGTTTAACTGTTCAAGTTGGCAAGATCAAGTCGTCCCTAGCCCCCGCGTCCGTTTTTACCTGGTCGCGGTCCCGACCCAGCTGCCCCC
++
+BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
+@lane1_locus0_2G_0_1 1:N:0:
+CTCCAATCCTGCAGTTTAACTGTTCAAGTTGGCAAGATCAAGTCGTCCCTAGCCCCCGCGTCCGTTTTTACCTGGTCGCGGTCCCCACCCAGCTGCCCCC
++
+BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
+@lane1_locus0_2G_0_2 1:N:0:
+CTCCAATCCTGCAGTTTAACTGTTCAAGTTGGCAAGATCAAGTCGTCCCTAGCCCCCGCGTCCGTTTTTACCTGGTCGCGGTCCCGACCCAGCTGCCCCC
++
+BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
+```
+
+Each read is composed of four lines. The first is the name of the read (its
+location on the plate). The second line contains the sequence data. The
+third line is unused. And the fourth line is the quality scores for the
+base calls. The [FASTQ wikipedia page](https://en.wikipedia.org/wiki/FASTQ_format) has a good
+figure depicting the logic behind how quality scores are encoded. Here you can see that
+the simulated data are generated with uniformly high quality scores. Quality scores in
+real data are much more all over the place:
 
 ```
 @D00656:123:C6P86ANXX:8:2201:3857:34366 1:Y:0:8
@@ -280,14 +279,11 @@ TGCATTCAAAGGGAGAAGAGTACAGAAACCAAGCACATATTTGAAAAATGCAAGATCGGAAGAGCGGTTCAGCAGGAATG
 +
 GGGGGGGCGGGGGGGGGGGGGEGGGFGGGGGGEGGGGGGGGGGGGGFGGGEGGGGGGGGGGGGGGGGGGGGGGGGGGGEGGGGGGGGG@@DGGGG
 ```
+> **Exercise for the reader:** Can you find and verify the overhang sequence in the simulated data? 
+Hint: It's not right at the beginning of the sequence, which is where you might expect it to be.... 
 
-Each read is composed of four lines. The first is the name of the read (its
-location on the plate). The second line contains the sequence data. The
-third line is unused. And the fourth line is the quality scores for the
-base calls. The [FASTQ wikipedia page](https://en.wikipedia.org/wiki/FASTQ_format) has a good figure depicting the logic behind how quality scores are encoded.
-
-The Anolis data are 96bp single-end reads prepared as GBS. The first five bases (TGCAT) 
-form the restriction site overhang. All following bases make up the sequence data.
+It's always a good idea to look at your data to check for the cut site. Your first sign of a 
+messy dataset is lots of *off target reads*, basically stuff that got sequenced that you weren't targetting.
 
 # Step 1: Loading the raw data files
 
