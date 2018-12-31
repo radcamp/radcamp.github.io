@@ -151,7 +151,7 @@ $ fastqc -o fastqc-results /home/jovyan/ro-data/SRP021469/*.gz
 
 ### Inspecting and Interpreting FastQC Output
 
-Now lets spend a moment looking at the results from `punc_JFT773_R1__fastqc.html` from the Anolis data. Opening up this html file, on the left you'll see a summary of all the results, which highlights areas FastQC indicates may be worth further examination. We will only look at a few of these.
+Now lets spend a moment looking at the results from `punc_JFT773_R1__fastqc.html`, one of the Anolis samples. Opening up this html file, on the left you'll see a summary of all the results, which highlights areas FastQC indicates may be worth further examination. We will only look at a few of these.
 
 ![png](01_setup_qc_files/anolis-fastq-main.png)
 
