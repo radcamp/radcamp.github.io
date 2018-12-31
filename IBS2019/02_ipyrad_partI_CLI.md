@@ -69,7 +69,7 @@ system at your home campus. In this case we provide [extensive documentation abo
 on HPC systems elsewhere on the RADCamp site](https://radcamp.github.io/NYC2018/02_ipyrad_partI_CLI.html#working-with-the-cluster).
 
 ## ipyrad help
-To better understand how to use ipyrad, let's take a look at the help argument. We will use some of the ipyrad arguments in this tutorial (for example: -n, -p, -s, -c, -r). But, the complete list of optional arguments and their explanation is below.
+To better understand how to use ipyrad, let's take a look at the help argument. We will use some of the ipyrad arguments in this tutorial (for example: -n, -p, -s, -c, -r). The complete list of optional arguments and their explanation can be accessed with the `--help` flag:
 
 ```
 $ ipyrad --help
@@ -137,23 +137,24 @@ optional arguments:
 ipyrad uses a text file to hold all the parameters for a given assembly.
 Start by creating a new parameters file with the `-n` flag. This flag
 requires you to pass in a name for your assembly. In the example we use
-`anolis` but the name can be anything at all. Once you start
+`simdata` but the name can be anything at all. Once you start
 analysing your own data you might call your parameters file something
 more informative, like the name of your organism and some details on the settings.
 
 ```bash 
 # go to our working directory
-$ cd ~/ipyrad-workshop
+$ cd ~/work
 
-# create a new params file named 'anolis' (Or the name of an alternative library)
-$ ipyrad -n anolis
+# create a new params file named 'simdata'
+$ ipyrad -n simdata
 ```
 
-This will create a file in the current directory called `params-anolis.txt`. The params file lists on each line one parameter followed by a \#\# mark, then the name of the parameter, and
-then a short description of its purpose. Lets take a look at it.
+This will create a file in the current directory called `params-simdata.txt`. The 
+params file lists on each line one parameter followed by a \#\# mark, then the name of the 
+parameter, and then a short description of its purpose. Lets take a look at it.
 
 ``` 
-$ cat params-anolis.txt
+$ cat params-simdata.txt
 ------- ipyrad params file (v.0.7.28)-------------------------------------------
 anolis                         ## [0] [assembly_name]: Assembly name. Used to name output directories for assembly steps
 ./                             ## [1] [project_dir]: Project dir (made in curdir if not present)
