@@ -159,7 +159,7 @@ Lets start with Per base sequence quality, because it's very easy to interpret, 
 
 ![png](01_setup_qc_files/anolis-per-base-qual.png)
 
-For the Anolis data the sequence quality per base is uniformly quite high, with dips only in the first and last 5 bases (again, this is typical for Illumina reads). Based on information from this plot we can see that the Anolis data doesn't need a whole lot of trimming, which is good.
+For the Anolis data the sequence quality per base is uniformly quite high, with dips only in the first and last 5 bases (again this is typical for Illumina reads). Based on information from this plot we can see that the Anolis data doesn't need a whole lot of trimming, which is good.
 
 Now lets look at the `Per base sequece content`, which FastQC highlights with a scary red **X**.
 ![png](01_setup_qc_files/anolis-base-content.png)
@@ -168,7 +168,7 @@ The squiggles indicate base composition per base position averaged across the re
 
 ![png](01_setup_qc_files/anolis-adapters.png)
 
-Here we can see adapter contamination increases toward the tail of the reads, approaching 40% of total read content at the very end. The concern here is that if adapters represent some significant fraction of the read pool, then they will be treated as "real" data, and potentially bias downstream analysis. In the Anolis data this looks like it might be a real concern so we shall keep this in mind during step 2 of the ipyrad analysis, and incorporate 3' read trimming and aggressive adapter filtering.
+Here we can see adapter contamination increases toward the tail of the reads, approaching 40% of total read content at the very end. The concern here is that if adapters represent some significant fraction of the read pool, then they will be treated as "real" data, and potentially bias downstream analysis. In the Anolis data this looks like it might be a real concern so if we were assembling this dataset we'd want to keep this in mind during step 2 of the ipyrad analysis, and incorporate 3' read trimming and aggressive adapter filtering.
 
 Other than this, the data look good and we can proceed with the ipyrad analysis.
 
