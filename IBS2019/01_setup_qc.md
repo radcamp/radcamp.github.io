@@ -66,76 +66,41 @@ Throughout the workshop we will be introducing new commands as the need for them
 ### Install ipyrad and fastqc
 Conda gives us access to an amazing array of analysis tools for both analyzing and manipulating all kinds of data. Here we'll just scratch the surface by installing [ipyrad](http://ipyrad.readthedocs.io/), the RAD-Seq assembly and analysis tool that we'll use throughout the workshop, and [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/), an application for filtering fasta files based on several quality control metrics. As long as we're installing conda packages we'll include [toytree](https://toytree.readthedocs.io/en/latest/) as well, which is a plotting library used by the ipyrad analysis toolkit.
 
-We'll explain this part in more detail further below, but for now run the command
-below to connect to an interactive session on a compute node. This way we will 
-not be using the head node of the cluster (shared resource) when we are all 
-installing software simultaneously.
-```bash
-$ srun --pty -t 1:00:00 --account=edu --reservation=edu_23 /bin/bash
-```
-Now that you are connected to a compute node run the commands below:
-```bash
-$ conda install -c ipyrad ipyrad -y
-$ conda install -c bioconda fastqc -y
-$ conda install -c eaton-lab toytree -y
-```
-> **Note:** The `-c` flag indicates that we're asking conda to fetch apps from the `ipyrad`, `bioconda`, and `eaton-lab` channels. Channels are seperate repositories of apps maintained by independent developers.
-
-After you type `y` to proceed with install, these commands will produce a lot of output that looks like this:
-
-```bash
-libxml2-2.9.8        |  2.0 MB | ################################################################################################################################# | 100%
-expat-2.2.5          |  186 KB | ################################################################################################################################# | 100% 
-singledispatch-3.4.0 |   15 KB | ################################################################################################################################# | 100%
-pandocfilters-1.4.2  |   12 KB | ################################################################################################################################# | 100% 
-pandoc-2.2.1         | 21.0 MB | ################################################################################################################################# | 100%
-mistune-0.8.3        |  266 KB | ################################################################################################################################# | 100% 
-send2trash-1.5.0     |   16 KB | ################################################################################################################################# | 100%
-gstreamer-1.14.0     |  3.8 MB | ################################################################################################################################# | 100% 
-qt-5.9.6             | 86.7 MB | ################################################################################################################################# | 100%
-freetype-2.9.1       |  821 KB | ################################################################################################################################# | 100% 
-wcwidth-0.1.7        |   25 KB | ################################################################################################################################# | 100%
-```
-These (and many more) are all the dependencies of ipyrad and fastqc. Dependencies can include libraries, frameworks, and/or other applications that we make use of in the architecture of our software. Conda knows all about which dependencies will be needed and installs them automatically for you. Once the process is complete (may take several minutes), you can verify the install by asking what version of each of these apps is now available for you on the cluster.
-
 ```bash
 $ ipyrad --version
 ipyrad 0.7.28
 
-$ fastqc --version
-FastQC v0.11.7
-```
 ## Examine the raw data
-Here we will get hands-on with real data for the first time. We provide three
-empirical data sets to choose from, and throughout the workshop we will often compare our results among the three. Each example data set is composed of a dozen or more closely related species or population samples. They are ordered in order of the average divergence among samples. The Anolis data set is a "population-level" data set; the Pedicularis data set is composed of several closely related species and subspecies; and the Finch data set includes several species of finches from two relatively distant clades. 
+Here we will get hands-on with real data for the first time. We provide three empirical data sets to choose from, and at the workshop we will leave time for exploring this data using some of the ipyrad analysis tools. Each example data set is composed of a dozen or more closely related species or population samples. They are ordered in order of the average divergence among samples. The Anolis data set is a "population-level" data set; the Pedicularis data set is composed of several closely related species and subspecies; and the Finch data set includes several species of finches from two relatively distant clades. 
 
 + [Prates *et al.* 2016](http://www.pnas.org/content/pnas/113/29/7978.full.pdf) (Anolis, single-end GBS).
 + [Eaton et al. 2013](sysbio.oxfordjournals.org/content/62/5/689) (Pedicularis, single-end RAD).
 + [DaCosta and Sorenson 2016](https://www.ncbi.nlm.nih.gov/pubmed/26279345) (Finches, single-end ddRAD). 
 + Simulated datasets
 
-The raw data are located in a special shared folder on the HPC system where we can all access them. Any analyses we run will only read from these files (i.e., they are read-only), not modify them. This is typical of any bioinformatic analysis. We want to develop a set of scripts that start from the unprocessed data and end in new results or statistics. You can use `ls` to examine the data sets in the shared directory space. 
+The raw data are located in a special shared folder where we can all access them. Any analyses we run will only read from these files (i.e., they are read-only), not modify them. This is typical of any bioinformatic analysis. We want to develop a set of scripts that start from the unprocessed data and end in new results or statistics. You can use `ls` to examine the data sets in the shared directory space. 
 
 ```bash
-$ ls /rigel/edu/radcamp/files/SRP021469
-29154_superba_SRR1754715.fastq.gz       35855_rex_SRR1754726.fastq.gz
-30556_thamno_SRR1754720.fastq.gz        38362_rex_SRR1754725.fastq.gz
-30686_cyathophylla_SRR1754730.fastq.gz  39618_rex_SRR1754723.fastq.gz
-32082_przewalskii_SRR1754729.fastq.gz   40578_rex_SRR1754724.fastq.gz
-33413_thamno_SRR1754728.fastq.gz        41478_cyathophylloides_SRR1754722.fastq.gz
-33588_przewalskii_SRR1754727.fastq.gz   41954_cyathophylloides_SRR1754721.fastq.gz
-35236_rex_SRR1754731.fastq.gz
+$ ls /home/jovyan/ro-data
+ipsimdata  SRP021469  test_outfiles
+
+$ ls /home/joyvan/ro-data/SRP021469
+29154_superba_SRR1754715.fastq.gz       33588_przewalskii_SRR1754727.fastq.gz  40578_rex_SRR1754724.fastq.gz
+30556_thamno_SRR1754720.fastq.gz        35236_rex_SRR1754731.fastq.gz          41478_cyathophylloides_SRR1754722.fastq.gz
+30686_cyathophylla_SRR1754730.fastq.gz  35855_rex_SRR1754726.fastq.gz          41954_cyathophylloides_SRR1754721.fastq.gz
+32082_przewalskii_SRR1754729.fastq.gz   38362_rex_SRR1754725.fastq.gz
+33413_thamno_SRR1754728.fastq.gz        39618_rex_SRR1754723.fastq.gz
+
 ```
 
-
 ## Inspect the data
-Then we will use the `zcat` command to read lines of data from one of the files and we will trim this to print only the first 20 lines by piping the output to the `head` command. Using a pipe like this passes the output from one command to another and is a common trick in the command line. 
+Then we will use the `zcat` command to read lines of data from one of the files and we will trim this to print only the first 20 lines by piping the output to the `head` command. Using a pipe (`|`) like this passes the output from one command to another and is a common trick in the command line. 
 
 Here we have our first look at a **fastq formatted file**. Each sequenced read is spread over four lines, one of which contains sequence and another the quality scores stored as ASCII characters. The other two lines are used as headers to store information about the read. 
 
 
 ```bash
-$ zcat /rigel/edu/radcamp/files/SRP021469/29154_superba_SRR1754715.fastq.gz | head -n 20
+$ zcat /home/jovyan/ro-data/SRP021469/29154_superba_SRR1754715.fastq.gz | head -n 20
 @29154_superba_SRR1754715.1 GRC13_0027_FC:4:1:12560:1179 length=74
 TGCAGGAAGGAGATTTTCGNACGTAGTGNNNNNNNNNNNNNNGCCNTGGATNNANNNGTGTGCGTGAAGAANAN
 +29154_superba_SRR1754715.1 GRC13_0027_FC:4:1:12560:1179 length=74
@@ -175,103 +140,19 @@ In contrast, here is a somewhat typical base sequence quality report for R1 of a
 
 This figure depicts a common artifact of current Illumina chemistry, whereby quality scores per base drop off precipitously toward the ends of reads, with the effect being magnified for read lengths > 150bp. The purpose of using FastQC to examine reads is to determine whether and how much to trim our reads to reduce sequencing error interfering with basecalling. In the above figure, as in most real dataset, we can see there is a tradeoff between throwing out data to increase overall quality by trimming for shorter length, and retaining data to increase value obtained from sequencing with the result of increasing noise toward the ends of reads.
 
-### Running FastQC on the Anolis data
-In preparation for running FastQC it is a good idea to keep yourself organized by creating an output directory to keep the FastQC results organized:
+### Running FastQC
+In the interest of saving time during this short workshop we will only indicate how fastqc is run, and will then focus on interpretation of typical output.
 
+To run fastqc on all the pedicularis samples you would execute this command:
 ```bash
-$ cd ~/ipyrad-workshop
-$ mkdir fastqc-results
+$ fastqc -o fastqc-results /home/jovyan/ro-data/SRP021469/*.gz
 ```
-Now run fastqc on one of the samples:
-```bash
-$ fastqc -o fastqc-results /rigel/edu/radcamp/files/punc_IBSPCRIB0361_R1_.fastq.gz
-```
-> **Note:** The `-o` flag tells fastqc where to write output files. **Especially Notice** the *relative path* to the raw file. The difference between *relative* and *absolute* paths is an important one to learn. Relative paths are specified with respect to the current working directory. Since I am in `/rigel/edu/radcamp/users/work1/ipyrad-workshop`, and this is the directory the `raws` directory is in, I can simply reference it directly. If I was in any other directory I could specify the *absolute path* to the target fastq.gz file which would be `/rigel/edu/radcamp/users/work1/ipyrad-workshop/raws/punc_IBSPCRIB0361_R1_.fastq.gz`. Absolute paths are always more precise, but also always (often _much_) longer.
-
-FastQC will indicate its progress in the terminal. This toy data will run quite quickly, but real data can take somewhat longer to analyse (10s of minutes).
-```
-Started analysis of punc_IBSPCRIB0361_R1_.fastq.gz
-Approx 5% complete for punc_IBSPCRIB0361_R1_.fastq.gz
-Approx 10% complete for punc_IBSPCRIB0361_R1_.fastq.gz
-Approx 15% complete for punc_IBSPCRIB0361_R1_.fastq.gz
-Approx 20% complete for punc_IBSPCRIB0361_R1_.fastq.gz
-Approx 25% complete for punc_IBSPCRIB0361_R1_.fastq.gz
-Approx 30% complete for punc_IBSPCRIB0361_R1_.fastq.gz
-Approx 35% complete for punc_IBSPCRIB0361_R1_.fastq.gz
-Approx 40% complete for punc_IBSPCRIB0361_R1_.fastq.gz
-Approx 45% complete for punc_IBSPCRIB0361_R1_.fastq.gz
-Approx 50% complete for punc_IBSPCRIB0361_R1_.fastq.gz
-Approx 55% complete for punc_IBSPCRIB0361_R1_.fastq.gz
-Approx 60% complete for punc_IBSPCRIB0361_R1_.fastq.gz
-Approx 65% complete for punc_IBSPCRIB0361_R1_.fastq.gz
-Approx 70% complete for punc_IBSPCRIB0361_R1_.fastq.gz
-Approx 75% complete for punc_IBSPCRIB0361_R1_.fastq.gz
-Approx 80% complete for punc_IBSPCRIB0361_R1_.fastq.gz
-Approx 85% complete for punc_IBSPCRIB0361_R1_.fastq.gz
-Approx 90% complete for punc_IBSPCRIB0361_R1_.fastq.gz
-Approx 95% complete for punc_IBSPCRIB0361_R1_.fastq.gz
-Approx 100% complete for punc_IBSPCRIB0361_R1_.fastq.gz
-Analysis complete for punc_IBSPCRIB0361_R1_.fastq.gz
-```
-If you feel so inclined you can QC on all the raw data files in a folder by using a wildcard substitution:
-```bash
-$ fastqc -o fastqc-results /rigel/edu/radcamp/files/SRP021469/*.gz
-```
+> **Note:** The -o flag tells fastqc where to write output files. Running this command will create a directory called `fastqc-results` in your current working directory.
 > **Note:** The `*` here is a special command line character that means "Everything that matches this pattern". So here `SRP021469/*` matches _everything_ in the raws directory. Equivalent (though more verbose) statements are: `ls SRP021469/*.gz`, `ls SRP021469/*.fastq.gz`. All of these will list all the files in the `SRP021469` directory. **Special Challenge:** Can you construct an `ls` command using wildcards that only lists samples in the `SRP021469` directory that include the digit 5 in their sample name?
-
-Examining the output directory you'll see something like this (here we use `ls -l` to list the results in a more easily readable list form:
-```bash
-$ ls -l fastqc-results/
--rw-r--r-- 1 work1 habaedu 337122 Aug 28 08:21 29154_superba_SRR1754715_fastqc.html
--rw-r--r-- 1 work1 habaedu 494465 Aug 28 08:21 29154_superba_SRR1754715_fastqc.zip
--rw-r--r-- 1 work1 habaedu 336908 Aug 28 08:21 30556_thamno_SRR1754720_fastqc.html
--rw-r--r-- 1 work1 habaedu 494957 Aug 28 08:21 30556_thamno_SRR1754720_fastqc.zip
--rw-r--r-- 1 work1 habaedu 346060 Aug 28 08:22 30686_cyathophylla_SRR1754730_fastqc.html
--rw-r--r-- 1 work1 habaedu 508578 Aug 28 08:22 30686_cyathophylla_SRR1754730_fastqc.zip
--rw-r--r-- 1 work1 habaedu 345129 Aug 28 08:22 32082_przewalskii_SRR1754729_fastqc.html
--rw-r--r-- 1 work1 habaedu 506727 Aug 28 08:22 32082_przewalskii_SRR1754729_fastqc.zip
--rw-r--r-- 1 work1 habaedu 337555 Aug 28 08:22 33413_thamno_SRR1754728_fastqc.html
--rw-r--r-- 1 work1 habaedu 496787 Aug 28 08:22 33413_thamno_SRR1754728_fastqc.zip
--rw-r--r-- 1 work1 habaedu 336544 Aug 28 08:23 33588_przewalskii_SRR1754727_fastqc.html
--rw-r--r-- 1 work1 habaedu 494611 Aug 28 08:23 33588_przewalskii_SRR1754727_fastqc.zip
--rw-r--r-- 1 work1 habaedu 329055 Aug 28 08:23 35236_rex_SRR1754731_fastqc.html
--rw-r--r-- 1 work1 habaedu 483019 Aug 28 08:23 35236_rex_SRR1754731_fastqc.zip
--rw-r--r-- 1 work1 habaedu 333034 Aug 28 08:23 35855_rex_SRR1754726_fastqc.html
--rw-r--r-- 1 work1 habaedu 489218 Aug 28 08:23 35855_rex_SRR1754726_fastqc.zip
--rw-r--r-- 1 work1 habaedu 341427 Aug 28 08:23 38362_rex_SRR1754725_fastqc.html
--rw-r--r-- 1 work1 habaedu 500975 Aug 28 08:23 38362_rex_SRR1754725_fastqc.zip
--rw-r--r-- 1 work1 habaedu 334602 Aug 28 08:24 39618_rex_SRR1754723_fastqc.html
--rw-r--r-- 1 work1 habaedu 489714 Aug 28 08:24 39618_rex_SRR1754723_fastqc.zip
--rw-r--r-- 1 work1 habaedu 342964 Aug 28 08:24 40578_rex_SRR1754724_fastqc.html
--rw-r--r-- 1 work1 habaedu 503731 Aug 28 08:24 40578_rex_SRR1754724_fastqc.zip
--rw-r--r-- 1 work1 habaedu 342211 Aug 28 08:25 41478_cyathophylloides_SRR1754722_fastqc.html
--rw-r--r-- 1 work1 habaedu 503054 Aug 28 08:25 41478_cyathophylloides_SRR1754722_fastqc.zip
--rw-r--r-- 1 work1 habaedu 336088 Aug 28 08:26 41954_cyathophylloides_SRR1754721_fastqc.html
--rw-r--r-- 1 work1 habaedu 494066 Aug 28 08:26 41954_cyathophylloides_SRR1754721_fastqc.zip
-```
-
-Now we have output files that include html and images depicting lots of information about the quality of our reads, but we can't inspect these because we only have a CLI interface on the cluster. How do we get access to the output of FastQC?
-
-### Obtaining FastQC Output (scp) (linux/MacOSX)
-You can use the `scp` tool to copy files from the cluster to your local computer so that you can visualize the results on your graphical user interface on your computer. Take note of the `.` at the end of the command and the need to substitute your username (e.g., work3) into the command.
-```bash
-# run this from a terminal on your local computer (not connected to the cluster)
-scp -r <username>@habanero.rcs.columbia.edu:/rigel/edu/radcamp/users/<username>/ipyrad-workshop/fastq-results .
-```
-
-### Or, obtaining FastQC output (Windows)
-Moving files between the cluster and your local computer is a very common task, and this will typically be accomplished with a secure file transfer protocol (**sftp**) client. Various Free/Open Source GUI tools exist but we recommend [WinSCP](https://winscp.net/eng/download.php) for Windows.
-
-After downloading, installing, and opening WinSCP, you will see the following screen. First, ensure that the "File Protocol is set to "SFTP". **The connection will fail if "SFTP" is not chosen her.** Next, fill out the host name (`habanero.rcs.columbia.edu`), your username and password, and click "Login". 
-![png](01_cluster_basics_files/01_WinSCP1.png)
-Two windows file browsers will appear: your laptop on the left, and the cluster on the right. You can navigate through the folders and transfer files from the cluster to your laptop by dragging and dropping them. 
-![png](01_cluster_basics_files/01_WinSCP2.png)
 
 ### Inspecting and Interpreting FastQC Output
 
-Once the files are downloaded you can now open them on your local computer like normal by double clicking on the `.html` files which will open in a browser. 
-
-Just taking a random one, lets spend a moment looking at the results from `punc_JFT773_R1__fastqc.html`. Opening up this html file, on the left you'll see a summary of all the results, which highlights areas FastQC indicates may be worth further examination. We will only look at a few of these.
+Now lets spend a moment looking at the results from `punc_JFT773_R1__fastqc.html` from the Anolis data. Opening up this html file, on the left you'll see a summary of all the results, which highlights areas FastQC indicates may be worth further examination. We will only look at a few of these.
 
 ![png](01_cluster_basics_files/anolis-fastq-main.png)
 
@@ -293,6 +174,4 @@ Here we can see adapter contamination increases toward the tail of the reads, ap
 Other than this, the data look good and we can proceed with the ipyrad analysis.
 
 # References
-Elshire, R. J., Glaubitz, J. C., Sun, Q., Poland, J. A., Kawamoto, K., Buckler, E. S., & Mitchell, S. E. (2011). A robust, simple genotyping-by-sequencing (GBS) approach for high diversity species. PloS one, 6(5), e19379.
-
 Prates, I., Xue, A. T., Brown, J. L., Alvarado-Serrano, D. F., Rodrigues, M. T., Hickerson, M. J., & Carnaval, A. C. (2016). Inferring responses to climate dynamics from historical demography in neotropical forest lizards. Proceedings of the National Academy of Sciences, 113(29), 7978-7985.
