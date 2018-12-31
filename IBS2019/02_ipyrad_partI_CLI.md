@@ -50,7 +50,7 @@ The basic steps of this process are as follows:
 * Step 6 - Cluster across Samples
 * Step 7 - Apply filters and write output formats
 
-> **Note on files in the project directory:** Assembling rad-seq type 
+> **Note on files in the project directory:** Assembling RAD-seq type 
 sequence data requires a lot of different steps, and these steps 
 generate a **lot** of intermediary files. ipyrad organizes these files 
 into directories, and it prepends the name of your assembly to each 
@@ -62,82 +62,11 @@ result is that **you should not rename or move any of the directories
 inside your project directory**, unless you know what you're doing or
 you don't mind if your assembly breaks.
 
-# Getting Started
-
-If you haven't already installed ipyrad go here first: [installation](https://ipyrad.readthedocs.io/installation.html#installation)
-
-## Working with the cluster
-
-![png](02_ipyrad_partI_CLI_files/02_ipyrad_partI_CLI_simple_cluster_architecture.png)
-
-A typical high performance computing (HPC) cluster architecture looks somewhat
-like this, just with many many more "compute nodes". The "head node" (or 
-login node) is normally the only system that you will interact with. If 
-you want to run a big job on the cluster, you will connect to the head node
-(with ssh), and will submit a job to the 'work queue'. In this job you
-specify how many cores you want to run on, how much RAM you want, and how
-much time you think it'll take. Then the work queue looks at your job 
-and at all the other jobs in the queue and figures out when is the fairest
-time to start your job running. This can be almost immediately, or your 
-job might sit in the queue for hours or days, if the system is very busy. 
-Either way, you will rarely actually "see" your job run because you 
-normally aren't given access to the compute nodes directly. 
-
-This is usually okay, because usually if you want to run a "big" job, this 
-means you want to run ***tons*** of small, quick tasks, or one or a few 
-really really huges and slow tasks, and you kind of don't care what's 
-happening, so long as they finish at some point. For us, for the benefit 
-of exposing and monitoring the processes for the tutorial, having jobs 
-locked away in the work queue is inconvenient. Fortunately, many HPC 
-systems provide an "interactive" mode, which allows you to run certain 
-limited tasks inside a terminal directly on one of the compute nodes.
-
-Therefore, we will run most of this tutorial on assembly and analysis on the Habanero cluster 
-inside an "interactive" job. This will allow us to run our proccesses on 
-compute nodes, but still be able to remain at the command line so 
-we can easily monitor the progress. If you do not still have an active
-ssh window on the cluster, begin by re-establishing the connection 
-through [puTTY (Windows)](01_cluster_basics.md#ssh-for-windows) or 
-[`ssh` (Mac/Linux)](01_cluster_basics.md#ssh-for-maclinux):
-```bash
-$ ssh <username>@habanero.rcs.columbia.edu
-```
-
-### Submitting an interactive job to the cluster
-Now we will submit an interactive job with relatively modest resource
-requests. Every cluster has different limits on its resources in terms of what
-is available to you and for how long. We could find these limits for the Columbia
-Habanero cluster by googling it. In this case we will each request that 4 cores
-be made available to us for 1 hour. Because each node has 24 cores this means 
-that multiple people will actually be sharing the same node, which is not a 
-problem. 
-
-```bash
-# --pty tells it to connect us to compute nodes interactively
-# --account tells it which account's resources to use
-# --reservation tells it to use the resources on edu reserved for us
-# -t tells it how much time to connect for
-# /bin/bash tells it to open a bash terminal when we connect.
-$ srun --pty --account=edu --reservation=edu_23 -t 1:00:00 -c 4 /bin/bash
-```
-Depending on cluster usage the job submission script can take more
-or less time to start. Because we have these resources reserved for us there 
-should be very little wait time. Once your job starts your terminal will show
-that you are now connected to a compute node.
-
-### Inspecting running cluster processes
-At any time you can ask the cluster for the status of your jobs with the 
-`squeue` command. This will list every running job on the cluster which can be
-a pain to sort through. So for efficiency you can add the argument 
-`-u <username>` to limit it to showing just your jobs. 
-
-```bash
-## Check the status of my running job on the 'proto' Queue
-$ squeue -u work1
-   JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
- 8367625      edu2     bash    work1  R       0:09      1 node215
-```                                                                       
-This confirms that the job we submitted started, that it's running on node215, etc.
+## Getting started
+The magic of the Jupyter Hub we're using for this workshop conceals some of the
+complexity of working in a real production environment, such as with an HPC
+system at your home campus. In this case we provide [extensive documentation about using ipyrad
+on HPC systems elsewhere on the RADCamp site](https://radcamp.github.io/NYC2018/02_ipyrad_partI_CLI.html#working-with-the-cluster).
 
 ## ipyrad help
 To better understand how to use ipyrad, let's take a look at the help argument. We will use some of the ipyrad arguments in this tutorial (for example: -n, -p, -s, -c, -r). But, the complete list of optional arguments and their explanation is below.
