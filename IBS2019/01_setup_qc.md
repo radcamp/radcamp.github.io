@@ -91,14 +91,12 @@ $ ls /home/joyvan/ro-data/SRP021469
 30686_cyathophylla_SRR1754730.fastq.gz  35855_rex_SRR1754726.fastq.gz          41954_cyathophylloides_SRR1754721.fastq.gz
 32082_przewalskii_SRR1754729.fastq.gz   38362_rex_SRR1754725.fastq.gz
 33413_thamno_SRR1754728.fastq.gz        39618_rex_SRR1754723.fastq.gz
-
 ```
 
 ## Inspect the data
 Then we will use the `zcat` command to read lines of data from one of the files and we will trim this to print only the first 20 lines by piping the output to the `head` command. Using a pipe (`|`) like this passes the output from one command to another and is a common trick in the command line. 
 
 Here we have our first look at a **fastq formatted file**. Each sequenced read is spread over four lines, one of which contains sequence and another the quality scores stored as ASCII characters. The other two lines are used as headers to store information about the read. 
-
 
 ```bash
 $ zcat /home/jovyan/ro-data/SRP021469/29154_superba_SRR1754715.fastq.gz | head -n 20
@@ -142,7 +140,7 @@ In contrast, here is a somewhat typical base sequence quality report for R1 of a
 This figure depicts a common artifact of current Illumina chemistry, whereby quality scores per base drop off precipitously toward the ends of reads, with the effect being magnified for read lengths > 150bp. The purpose of using FastQC to examine reads is to determine whether and how much to trim our reads to reduce sequencing error interfering with basecalling. In the above figure, as in most real dataset, we can see there is a tradeoff between throwing out data to increase overall quality by trimming for shorter length, and retaining data to increase value obtained from sequencing with the result of increasing noise toward the ends of reads.
 
 ### Running FastQC
-In the interest of saving time during this short workshop we will only indicate how fastqc is run, and will then focus on interpretation of typical output.
+In the interest of saving time during this short workshop we will only indicate how fastqc is run, and will then focus on interpretation of typical output. More detailed information about actually running fastqc are available [elsewhere on the RADCamp site](https://radcamp.github.io/NYC2018/01_cluster_basics.html#fastqc-for-quality-control).
 
 To run fastqc on all the pedicularis samples you would execute this command:
 ```bash
