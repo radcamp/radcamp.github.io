@@ -647,11 +647,10 @@ this looks like by examining a portion of one of the files.
 
 ```bash
 ## Same as above, `zcat` unzips and prints to the screen and 
-## `head -n 24` means just show me the first 28 lines. 
-$ zcat anolis_clust_0.85/punc_IBSPCRIB0361.clustS.gz | head -n 24
+## `head -n 24` means just show me the first 24 lines. 
+$  zcat simdata_clust_0.85/1A_0.clustS.gz | head -n 24
 ```
 ```
-zcat simdata_clust_0.85/1A_0.clustS.gz | head -n 24
 009149cc23d2367f21b67ac0060d9f2f;size=18;*
 TGCAGATAAATCAAACTGCAGCTTGATATGGGCTTCGACCCAGTGGTGGTAGCCTCTCTCTCCCAGTATAACCTCGACCCCAAAATCGCA
 d498af3d4575b871de6d5a7f239279ea;size=1;+
