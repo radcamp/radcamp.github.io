@@ -259,7 +259,8 @@ BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
 > **Exercise for the reader:** Can you find and verify the overhang sequence in the simulated data? 
 Hint: It's not right at the beginning of the sequence, which is where you might expect it to be.... 
 It's always a good idea to look at your data to check for the cut site. Your first sign of a 
-messy dataset is lots of *off target reads*, basically stuff that got sequenced that you weren't targetting.
+messy dataset is lots of *off target reads*, basically stuff that got sequenced that isn't associated
+with a restriction enzyme cutsite.
 
 Each read is composed of four lines. The first is the name of the read (its
 location on the plate). The second line contains the sequence data. The
@@ -276,20 +277,36 @@ TGCATGTTTATTGTCTATGTAAAAGGAAAAGCCATGCTATCAGAGATTGGCCTGGGGGGGGGGGGCAAATACATGAAAAA
 ;=11>111>1;EDGB1;=DG1=>1:EGG1>:>11?CE1<>1<1<E1>ED1111:00CC..86DG>....//8CDD/8C/....68..6.:8....
 ```
 
-# Step 1: Loading the raw data files
+# Step 1: Demultiplexing the raw data
 
-Commonly sequencing facilities will give you one giant .gz file that contains all the reads from all the samples all mixed up together. 
+Commonly, sequencing facilities will give you one giant .gz file that contains all the reads from all the samples all mixed up together. Step 1 is all about sorting out which reads belong to which samples, so this is where the barcodes file comes in handy. The barcodes file is a simple text file mapping sample names to barcode sequences. Lets look at the simulated barcodes:
+
+```bash
+$ cat /home/jovyan/ro-data/ipsimdata/rad_example_barcodes.txt
+1A_0    CATCATCAT
+1B_0    CCAGTGATA
+1C_0    TGGCCTAGT
+1D_0    GGGAAAAAC
+2E_0    GTGGATATC
+2F_0    AGAGCCGAG
+2G_0    CTCCAATCC
+2H_0    CTCACTGCA
+3I_0    GGCGCATAC
+3J_0    CCTTATGTC
+3K_0    ACGTGTGTG
+3L_0    TTACTAACA
+```
+
+Here the barcodes are all the same length, but ipyrad can also handle variable length barcodes, and in some cases multiplexed barcodes (3RAD and variants). We can also allow for varying amounts of sequencing error in the barcode in the barcode sequences (parameter 15, `max_barcode_mismatch`).
 
 > **Note on step 1:** Occasionally sequencing facilities will send back data already demultiplexed to samples. This is totally fine, and is handled natively by ipyrad. In this case you would use the `sorted_fastq_path` in the params file to indiciate the sample fastq.gz files. ipyrad will then scan the samples and load in the raw data.
 
-Now lets run step 1! For the simulated data. This will take <1 minute.
+Now lets run step 1! For the simulated data this will take <10 seconds.
 
-> **Special Note:** In interactive mode please be aware to *always* specify
+> **Special Note:** In command line mode please be aware to *always* specify
 the number of cores with the `-c` flag. If you do not specify the number of 
-cores ipyrad assumes you want **all** of them, but in this case you only have 
-as many cores available as we requested when we started the interactive session.
-This can cause some confusion that will slow things down a bit. So specify the 
-number of cores that you know are available in this case when using interactive mode.
+cores ipyrad assumes you want **all** of them, which will result in you
+hogging up all the CPU. We only have 40 cores so everybody has to share! 
 
 ```bash
 ## -p    the params file we wish to use
@@ -314,38 +331,39 @@ $ ipyrad -p params-simdata.txt -s 1 -c 4
 ## In-depth operations of running an ipyrad step
 Any time ipyrad is invoked it performs a few housekeeping operations: 
 1. Load the assembly object - Since this is our first time running any steps we need to initialize our assembly.
-2. Start the parallel cluster - ipyrad uses a parallelization library called ipyparallel. Every time we start a step we fire up the parallel clients. This makes your assemblies go **smokin'** fast.
-3. Do the work - Actually perform the work of the requested step(s) (in this case loading in sample reads).
-4. Save, clean up, and exit -  Save the state of the assembly, and spin down the ipyparallel cluster.
+2. Start the parallel cluster - ipyrad uses a parallelization library called `ipyparallel`. Every time we start a step we fire up the parallel clients. This makes your assemblies go **smokin'** fast.
+3. Do the work - Actually perform the work of the requested step(s) (in this case demux'ing in sample reads).
+4. Save, clean up, and exit - Save the state of the assembly and spin down the ipyparallel cluster.
 
 As a convenience ipyrad internally tracks the state of all your steps in your 
 current assembly, so at any time you can ask for results by invoking the `-r` flag.
-We also use the `-p` arg to tell is which params file (i.e., which assembly) we 
-want it to print stats for.
+We also use the `-p` flag to tell it which params file (i.e., which assembly) we 
+want to print stats for.
 
 ```bash
 ## -r fetches informative results from currently executed steps  
-$ ipyrad -p params-anolis.txt -r
+$ ipyrad -p params-simdata.txt -r
 ```
 ```
-Summary stats of Assembly anolis
+Summary stats of Assembly simdata
 ------------------------------------------------
-                   state  reads_raw
-punc_IBSPCRIB0361      1     250000
-punc_ICST764           1     250000
-punc_JFT773            1     250000
-punc_MTR05978          1     250000
-punc_MTR17744          1     250000
-punc_MTR21545          1     250000
-punc_MTR34414          1     250000
-punc_MTRX1468          1     250000
-punc_MTRX1478          1     250000
-punc_MUFAL9635         1     250000
-
+      state  reads_raw
+1A_0      1      19862
+1B_0      1      20043
+1C_0      1      20136
+1D_0      1      19966
+2E_0      1      20017
+2F_0      1      19933
+2G_0      1      20030
+2H_0      1      20199
+3I_0      1      19885
+3J_0      1      19822
+3K_0      1      19965
+3L_0      1      20008
 
 Full stats files
 ------------------------------------------------
-step 1: ./anolis_s1_demultiplex_stats.txt
+step 1: ./simdata_fastqs/s1_demultiplex_stats.txt
 step 2: None
 step 3: None
 step 4: None
@@ -355,27 +373,50 @@ step 7: None
 ```
 
 If you want to get even **more** info ipyrad tracks all kinds of wacky
-stats and saves them to a file inside the directories it creates for
+stats and saves them to files inside the directories it creates for
 each step. For instance to see full stats for step 1 (the wackyness
 of the step 1 stats at this point isn't very interesting, but we'll
 see stats for later steps are more verbose):
 
 ```bash 
-$ cat anolis_s1_demultiplex_stats.txt 
+$  cat simdata_fastqs/s1_demultiplex_stats.txt
 ```
 ```
-                   reads_raw
-punc_IBSPCRIB0361     250000
-punc_ICST764          250000
-punc_JFT773           250000
-punc_MTR05978         250000
-punc_MTR17744         250000
-punc_MTR21545         250000
-punc_MTR34414         250000
-punc_MTRX1468         250000
-punc_MTRX1478         250000
-punc_MUFAL9635        250000
+raw_file                               total_reads    cut_found  bar_matched
+rad_example_R1_.fastq                       239866       239866       239866
+
+sample_name                            total_reads
+1A_0                                         19862
+1B_0                                         20043
+1C_0                                         20136
+1D_0                                         19966
+2E_0                                         20017
+2F_0                                         19933
+2G_0                                         20030
+2H_0                                         20199
+3I_0                                         19885
+3J_0                                         19822
+3K_0                                         19965
+3L_0                                         20008
+
+sample_name                               true_bar       obs_bar     N_records
+1A_0                                     CATCATCAT     CATCATCAT         19862
+1B_0                                     CCAGTGATA     CCAGTGATA         20043
+1C_0                                     TGGCCTAGT     TGGCCTAGT         20136
+1D_0                                     GGGAAAAAC     GGGAAAAAC         19966
+2E_0                                     GTGGATATC     GTGGATATC         20017
+2F_0                                     AGAGCCGAG     AGAGCCGAG         19933
+2G_0                                     CTCCAATCC     CTCCAATCC         20030
+2H_0                                     CTCACTGCA     CTCACTGCA         20199
+3I_0                                     GGCGCATAC     GGCGCATAC         19885
+3J_0                                     CCTTATGTC     CCTTATGTC         19822
+3K_0                                     ACGTGTGTG     ACGTGTGTG         19965
+3L_0                                     TTACTAACA     TTACTAACA         20008
+no_match                                         _            _            0
 ```
+Another early indicator of trouble is if you have a **ton** of reads that are `no_match`. 
+This means maybe your barcodes file is wrong, or maybe your library prep went poorly. Here,
+with the simulated data we have no unmatched barcodes, because, well, it's simulated.
 
 # Step 2: Filter reads
 
