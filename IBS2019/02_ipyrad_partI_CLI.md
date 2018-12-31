@@ -256,6 +256,10 @@ CTCCAATCCTGCAGTTTAACTGTTCAAGTTGGCAAGATCAAGTCGTCCCTAGCCCCCGCGTCCGTTTTTACCTGGTCGCG
 +
 BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
 ```
+> **Exercise for the reader:** Can you find and verify the overhang sequence in the simulated data? 
+Hint: It's not right at the beginning of the sequence, which is where you might expect it to be.... 
+It's always a good idea to look at your data to check for the cut site. Your first sign of a 
+messy dataset is lots of *off target reads*, basically stuff that got sequenced that you weren't targetting.
 
 Each read is composed of four lines. The first is the name of the read (its
 location on the plate). The second line contains the sequence data. The
@@ -271,12 +275,6 @@ TGCATGTTTATTGTCTATGTAAAAGGAAAAGCCATGCTATCAGAGATTGGCCTGGGGGGGGGGGGCAAATACATGAAAAA
 +
 ;=11>111>1;EDGB1;=DG1=>1:EGG1>:>11?CE1<>1<1<E1>ED1111:00CC..86DG>....//8CDD/8C/....68..6.:8....
 ```
-
-> **Exercise for the reader:** Can you find and verify the overhang sequence in the simulated data? 
-Hint: It's not right at the beginning of the sequence, which is where you might expect it to be.... 
-
-It's always a good idea to look at your data to check for the cut site. Your first sign of a 
-messy dataset is lots of *off target reads*, basically stuff that got sequenced that you weren't targetting.
 
 # Step 1: Loading the raw data files
 
@@ -297,19 +295,20 @@ number of cores that you know are available in this case when using interactive 
 ## -p    the params file we wish to use
 ## -s    the step to run
 ## -c    the number of cores to allocate   <-- Important!
-$ ipyrad -p params-anolis.txt -s 1 -c 4
+$ ipyrad -p params-simdata.txt -s 1 -c 4
 
  -------------------------------------------------------------
   ipyrad [v.0.7.28]
   Interactive assembly and analysis of RAD-seq data
  -------------------------------------------------------------
-  New Assembly: anolis
+  New Assembly: simdata
   establishing parallel connection:
-  host compute node: [4 cores] on darwin
+  host compute node: [4 cores] on e305ff77a529
 
   Step 1: Loading sorted fastq data to Samples
-  [####################] 100%  loading reads         | 0:00:04  
-  10 fastq files loaded to 10 Samples.
+  Step 1: Demultiplexing fastq data to Samples
+  [####################] 100%  sorting reads         | 0:00:04
+  [####################] 100%  writing/compressing   | 0:00:01
 ```
 
 ## In-depth operations of running an ipyrad step
