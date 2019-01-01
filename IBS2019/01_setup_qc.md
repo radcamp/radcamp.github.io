@@ -24,8 +24,13 @@ wat
 Computational resources for the duration of this workshop are being provided by the Eaton lab at Columbia University. We will be using a Jupyter Hub instance running on a 40 core workstation in Deren's office on the Upper West Side of Manhattan. Using Jupyter Hub allows us to provide pre-configured, isolated computational environments for each participant, skipping over lots of tedious details related to downloading, installing, and configuring software and getting things set up. Jupyter hub allows us to skip straight to the fun stuff! We do provide [detailed installation and configuration instructions on the RADCamp site](https://radcamp.github.io/NYC2018/01_cluster_basics.html), so that you have some support in getting set up when you return to your home campus.
 
 ### Connecting to Jupyter Hub
+The rest of this tutorial assumes that you have already created a GitHub
+account. You will need this to gain access to compute resources, so if
+you haven't done it yet [sign up now](https://github.com/join?source=experiment-header-dropdowns-home).
 
-FIXME: Connecting to the jupyter hub w/ github account
+Once that's done you can surf your browser to [https://jhub.eaton-lab.org/hub/login](https://github.com/join?source=experiment-header-dropdowns-home),
+and click the big fat orange "Sign in with GitHub" button. This will do a bunch of magic
+on the backend, and eventually drop you into the browser view of your Jupyter Hub instance.
 
 ![png](01_setup_qc_files/01_jupyter_hub_dashboard.png)
 

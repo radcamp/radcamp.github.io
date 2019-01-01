@@ -118,7 +118,7 @@ steps, though you can invoke the `-r` flag to see the estimated
 heterozygosity and error rate per sample.
 
 ```bash
-$ ipyrad -p params-anolis.txt -r
+$ ipyrad -p params-simdata.txt -r
 ```
 ```
 Summary stats of Assembly simdata
@@ -555,7 +555,7 @@ After this we must now re-run step 7, but this time including the `-f`
 flag, to force overwriting the output files that were previously generated. 
 
 ```bash
-$ ipyrad -p params-anolis.txt -s 7 -c 4 -f
+$ ipyrad -p params-simdata.txt -s 7 -c 4 -f
 ```
 
 Congratulations! You've completed your first RAD-Seq assembly. Now you can
