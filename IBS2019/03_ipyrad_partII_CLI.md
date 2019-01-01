@@ -410,7 +410,6 @@ final dataset. Pretty straightforward. If you have some samples that have
 very low sample_coverage here it might be good to remove them and re-run
 step 7.
 ```
-
 ## The number of loci recovered for each Sample.
 ## ipyrad API location: [assembly].stats_dfs.s7_samples
 
@@ -542,6 +541,7 @@ The final block displays statistics for each sample in the final dataset. Many o
 3K_0      7      19965                19965            1000              1000    0.001980   0.000761           1000      1000
 3L_0      7      20008                20008            1000              1000    0.002071   0.000751           1000      1000
 ```
+## Rerunning step 7 to include all output formats
 
 For our downstream analysis we'll need more than just the default output
 formats, so lets rerun step 7 and generate all supported output formats.
