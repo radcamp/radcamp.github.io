@@ -9,7 +9,7 @@ writing output in various useful formats.
 
 Each grey cell in this tutorial indicates a command line interaction. 
 Lines starting with `$ ` indicate a command that should be executed 
-in a terminal connected to the USP cluster, for example by copying and 
+in a terminal on the Jupyter Hub instance, for example by copying and 
 pasting the text into your terminal. All lines in code cells beginning 
 with \#\# are comments and should not be copied and executed. Elements 
 in code cells surrounded by angle brackets (e.g. <username>) are variables 
@@ -25,31 +25,13 @@ $ touch ~/watdo.txt
 $ echo "wat"
 wat
 ```
-
-# Getting set up to continue the assembly
-Just a reminder that all assembly steps in this part of the workshop
-will be run on the Habanero cluster inside an interactive job.
-Here's the quick-setup (for mac/linux users), but if you need more specific details you can
-[look back to the cluster basics section of ipyrad PartI](https://radcamp.github.io/AF-Biota/02_ipyrad_partI_CLI.html#working-with-the-cluster).
-
-```bash
-# --pty tells it to connect us to compute nodes interactively
-# --account tells it which account's resources to use
-# --reservation tells it to use the resources on edu reserved for us
-# -t tells it how much time to connect for
-# /bin/bash tells it to open a bash terminal when we connect.
-$ srun --pty --account=edu --reservation=edu_23 -t 1:00:00 -c 4 /bin/bash
-```
-
-Windows users should use puTTY.
-
 # Step 3: Recap
 
 Recall that we clustered reads within samples in Step 3. Reads that are sufficiently 
 similar (based on the specified sequence similarity threshold) are grouped together 
 in clusters separated by "//". We examined the `head` of one of the sample cluster 
-files at the end of the last exercise, but here we've cherry picked a couple 
-clusters with more pronounced features.
+files at the end of the last exercise, but here we've cherry picked a couple additional
+Anolis elusters with more pronounced features.
 
 Here's a nice homozygous cluster, with probably one read with sequencing error:
 ```
@@ -114,21 +96,21 @@ probably junk. This step is pretty straightforward, and pretty fast. Run
 it thusly:
 
 ```bash
-$ cd ipyrad-workshop
-$ ipyrad -p params-anolis.txt -s 4 -c 2
+$ cd ~/work
+$ ipyrad -p params-simdata.txt -s 4 -c 4
 ```
 ```
  -------------------------------------------------------------
   ipyrad [v.0.7.28]
   Interactive assembly and analysis of RAD-seq data
  -------------------------------------------------------------
-  loading Assembly: anolis
-  from saved path: ~/ipyrad-workshop/anolis.json
+  loading Assembly: simdata
+  from saved path: ~/work/simdata.json
   establishing parallel connection:
-  host compute node: [2 cores] on darwin
+  host compute node: [4 cores] on e305ff77a529
   
   Step 4: Joint estimation of error rate and heterozygosity
-  [####################] 100%  inferring [H, E]      | 0:00:54
+  [####################] 100%  inferring [H, E]      | 0:00:04
 ```
 
 In terms of results, there isn't as much to look at as in previous
@@ -139,27 +121,26 @@ heterozygosity and error rate per sample.
 $ ipyrad -p params-anolis.txt -r
 ```
 ```
-Summary stats of Assembly anolis
+Summary stats of Assembly simdata
 ------------------------------------------------
-                   state  reads_raw  reads_passed_filter  clusters_total  clusters_hidepth  hetero_est  error_est
-punc_IBSPCRIB0361      4     250000               237519           56312              4223    0.021430   0.013049
-punc_ICST764           4     250000               236815           60626              4302    0.024175   0.013043
-punc_JFT773            4     250000               240102           61304              5214    0.019624   0.012015
-punc_MTR05978          4     250000               237704           61615              4709    0.021119   0.011083
-punc_MTR17744          4     250000               240396           62422              5170    0.021159   0.011778
-punc_MTR21545          4     250000               227965           55845              3614    0.024977   0.013339
-punc_MTR34414          4     250000               233574           61242              4278    0.024175   0.013043
-punc_MTRX1468          4     250000               230903           54411              3988    0.023192   0.012638
-punc_MTRX1478          4     250000               233398           57299              4155    0.022146   0.012881
-punc_MUFAL9635         4     250000               231868           59249              3866    0.025000   0.013622
+      state  reads_raw  reads_passed_filter  clusters_total  clusters_hidepth  hetero_est  error_est
+1A_0      4      19862                19862            1000              1000    0.001819   0.000761
+1B_0      4      20043                20043            1000              1000    0.001975   0.000751
+1C_0      4      20136                20136            1000              1000    0.002084   0.000745
+1D_0      4      19966                19966            1000              1000    0.001761   0.000758
+2E_0      4      20017                20017            1000              1000    0.001855   0.000764
+2F_0      4      19933                19933            1000              1000    0.001940   0.000759
+2G_0      4      20030                20030            1000              1000    0.001940   0.000763
+2H_0      4      20199                20198            1000              1000    0.001786   0.000756
+3I_0      4      19885                19885            1000              1000    0.001858   0.000758
+3J_0      4      19822                19822            1000              1000    0.001980   0.000783
+3K_0      4      19965                19965            1000              1000    0.001980   0.000761
+3L_0      4      20008                20008            1000              1000    0.002071   0.000751
 ```
-These are pretty typical error rates and heterozygosity estimates. Under
-normal conditions error rate will be much lower than heterozygosity (on 
-the order of 10x lower). Here these are both somewhat high, so this might 
-indicate our clustering threshold value is too low. We'll just proceed 
-with the assembly as is, for now, but if this were real data I would 
-recommend branching here and trying several different clustering threshold 
-values.
+These are pretty typical error rate/heterozygosity ratios (error rate on
+the order of 10x lower). If these rates are on the same order this might 
+be an indication that the clustering threshold is too permissive (i.e. reads 
+from different loci are being clustered and error rate is inflated).
 
 # Step 5: Consensus base calls
 
@@ -168,24 +149,24 @@ the consensus of sequences within each cluster. Here we are identifying what
 we believe to be the real haplotypes at each locus within each sample.
 
 ```bash
-$ ipyrad -p params-anolis.txt -s 5 -c 2
+$ ipyrad -p params-simdata.txt -s 5 -c 4
 ```
 ```
  -------------------------------------------------------------
   ipyrad [v.0.7.28]
   Interactive assembly and analysis of RAD-seq data
  -------------------------------------------------------------
-  loading Assembly: anolis
-  from saved path: ~/ipyrad-workshop/anolis.json
+  loading Assembly: simdata
+  from saved path: ~/work/simdata.json
   establishing parallel connection:
-  host compute node: [2 cores] on darwin
+  host compute node: [4 cores] on e305ff77a529
 
-  Step 5: Consensus base calling 
-  Mean error  [0.01265 sd=0.00079]
-  Mean hetero [0.02270 sd=0.00187]
-  [####################] 100%  calculating depths    | 0:00:08
-  [####################] 100%  chunking clusters     | 0:00:07
-  [####################] 100%  consens calling       | 0:02:23
+  Step 5: Consensus base calling
+  Mean error  [0.00076 sd=0.00001]
+  Mean hetero [0.00192 sd=0.00011]
+  [####################] 100%  calculating depths    | 0:00:01
+  [####################] 100%  chunking clusters     | 0:00:00
+  [####################] 100%  consens calling       | 0:00:09
 ```
 In-depth operations of step 5:
 * calculating depths - A simple refinement of the H/E estimates.
@@ -201,22 +182,22 @@ bases (`max_Ns_consens`) and maximum number of heterozygous sites
 be lower than `clusters_hidepth`.
 
 ```bash
-$ ipyrad -p params-anolis.txt -r
+$ cat simdata_consens/s5_consens_stats.txt
 ```
 ```
-Summary stats of Assembly anolis
-------------------------------------------------
-                   state  reads_raw  reads_passed_filter  clusters_total  clusters_hidepth  hetero_est  error_est  reads_consens
-punc_IBSPCRIB0361      5     250000               237519           56312              4223    0.021430   0.013049           3753
-punc_ICST764           5     250000               236815           60626              4302    0.024175   0.013043           3759
-punc_JFT773            5     250000               240102           61304              5214    0.019624   0.012015           4698
-punc_MTR05978          5     250000               237704           61615              4709    0.021119   0.011083           4223
-punc_MTR17744          5     250000               240396           62422              5170    0.021159   0.011778           4558
-punc_MTR21545          5     250000               227965           55845              3614    0.024977   0.013339           3145
-punc_MTR34414          5     250000               233574           61242              4278    0.024175   0.013043           3751
-punc_MTRX1468          5     250000               230903           54411              3988    0.023192   0.012638           3586
-punc_MTRX1478          5     250000               233398           57299              4155    0.022146   0.012881           3668
-punc_MUFAL9635         5     250000               231868           59249              3866    0.025000   0.013622           3369
+     clusters_total filtered_by_depth filtered_by_maxH filtered_by_maxN reads_consens nsites nhetero heterozygosity
+1A_0           1000                 0                0                0          1000  89949     155        0.00172
+1B_0           1000                 0                0                0          1000  89937     165        0.00183
+1C_0           1000                 0                0                0          1000  89944     177        0.00197
+1D_0           1000                 0                0                0          1000  89929     151        0.00168
+2E_0           1000                 0                0                0          1000  89945     157        0.00175
+2F_0           1000                 0                0                0          1000  89933     167        0.00186
+2G_0           1000                 0                0                0          1000  89924     164        0.00182
+2H_0           1000                 0                0                0          1000  89946     150        0.00167
+3I_0           1000                 0                0                0          1000  89932     158        0.00176
+3J_0           1000                 0                0                0          1000  89944     168        0.00187
+3K_0           1000                 0                0                0          1000  89938     172        0.00191
+3L_0           1000                 0                0                0          1000  89924     173        0.00192
 ```
 
 # Step 6: Cluster across samples
@@ -225,39 +206,39 @@ Step 6 clusters consensus sequences across samples. Now that we have
 good estimates for haplotypes within samples we can try to identify
 similar sequences at each locus between samples. We use the same
 clustering threshold as step 3 to identify sequences between samples
-that are probably sampled from the same locus, based on sequence
-similarity.
+that are probably homologous, based on sequence similarity.
 
 > **Note on performance of each step:** Steps 3 and 6 generally take 
 considerably longer than any of the steps, due to the resource 
 intensive clustering and alignment phases. These can take on the order
-of 10-100x as long as the next longest running step. Fortunately, with the data we use during this workshop, step 6 will actually be really fast.
+of 10-100x as long as the next longest running step. Fortunately, with 
+the data we use during this workshop, step 6 will actually be really fast.
 
 ```bash
-$ ipyrad -p params-anolis.txt -s 6 -c 2
+$ ipyrad -p params-simdata.txt -s 6 -c 4
 ```
 ```
  -------------------------------------------------------------
   ipyrad [v.0.7.28]
   Interactive assembly and analysis of RAD-seq data
  -------------------------------------------------------------
-  loading Assembly: anolis
-  from saved path: ~/ipyrad-workshop/anolis.json
+  loading Assembly: simdata
+  from saved path: ~/work/simdata.json
   establishing parallel connection:
-  host compute node: [2 cores] on darwin
+  host compute node: [4 cores] on e305ff77a529
 
-  Step 6: Clustering at 0.85 similarity across 10 samples
+  Step 6: Clustering at 0.85 similarity across 12 samples
   [####################] 100%  concat/shuffle input  | 0:00:01
-  [####################] 100%  clustering across     | 0:00:10
-  [####################] 100%  building clusters     | 0:00:02
-  [####################] 100%  aligning clusters     | 0:00:22
-  [####################] 100%  database indels       | 0:00:01
-  [####################] 100%  indexing clusters     | 0:00:09
-  [####################] 100%  building database     | 0:00:00
+  [####################] 100%  clustering across     | 0:00:01
+  [####################] 100%  building clusters     | 0:00:03
+  [####################] 100%  aligning clusters     | 0:00:04
+  [####################] 100%  database indels       | 0:00:00
+  [####################] 100%  indexing clusters     | 0:00:01
+  [####################] 100%  building database     | 0:00:01
 ```
 In-depth operations of step 6:
-* concat/shuffle input - Gathering all consensus files and preprocessing to improve performance.
-* clustering across - Cluster by similarity threshold across samples.
+* concat/shuffle input - Gathering all consensus files and preprocessing to improve performance
+* clustering across - Cluster by similarity threshold across samples
 * building clusters - Group similar reads into clusters
 * aligning clusters - Align within each cluster
 * database indels - Post-processing indels
@@ -272,47 +253,49 @@ It might be more enlightening to consider the output of step 6 by
 examining the file that contains the reads clustered across samples:
 
 ```bash
-$ zcat anolis/anolis_across/anolis_catclust.gz | head -n 28
+zcat simdata_across/simdata_catclust.gz | head -n 26
 ```
 ```
-punc_IBSPCRIB0361_10
-TGCATGCAACTGGAGTGAGGTGGTTTGCATTGATTGCTGTATATTCAATGCAAGCAACAGGAATGAAGTGGATTTCTTTGGTCACTATATACTCAATGCA
-punc_IBSPCRIB0361_1647
-TGCATGCAACAGGAGTGANGTGrATTTCTTTGRTCACTGTAyANTCAATGYA
-//
-//
-punc_IBSPCRIB0361_100
-TGCATCTCAACGTGGTCTCGTCACATTTCAAGGCGCACATCAGAATGCAGTACAATAATCCCTCCCCAAATGCA
-punc_MUFAL9635_687
-TGCATCTCAACATGGTCTCGTCACATTTCAAGGCGCACATCAGAATGCAGTACAATAATCCCTCCCCAAATGCA
-punc_ICST764_3619
-TGCATCTCAACGTGGTCTCGTCACATTTCAAGGCGCACATCAGAATGCAGTACAATAATCCCTCCCCAAATGCA
-punc_JFT773_4219
-TGCATCTCAACGTGGTCTCGTCACATTTCAAGGCGCACATCAGAATGCAGTACAATAATCCCTCCCCAAATGCA
-punc_MTR05978_111
-TGCATCTCAACGTGGTCTCGTCACATTTCAAGGCGCACATCAGAATGCAGTACAATAATCCCTCCCCAAATGCA
-punc_MTR17744_1884
-TGCATCTCAACGTGGTCTCGTCACATTTCAAGGCGCACATCAGAATGCA-------------------------
-punc_MTR34414_3503
-TGCATCTCAACGTGGTCTCGTCACATTTCAAGGCGCACATCAGAATGCAGTACAATAATCCCTCCCCAAATGCA
-//
-//
-punc_IBSPCRIB0361_1003
-TGCATAATGGACTTTATGGACTCCATGCCGTCGTTGCACGTACCGTAATTGTGAAATGCAAGATCGGGAGCGGTT
-punc_MTRX1478_1014
-TGCATAATGGACTTTATGGACTCCATGCCGTCGTTGCACGTACCGTAATTGTGAAATGCA---------------
+1A_0_102
+TGCAGAAACAGTAGCGGCCCATCTTTTTAAACTTTTACCAAGTCTGTGCAGCCGACCGATCTGAAGAGGTTTACACCGATATGAGGATGGGA
+1B_0_90
+TGCAGAAACAGTAGCGGCCCATCTTTTTAAACTTTTACCAAGTCTGTGCAGCCGACCGATCTGAAGAGGTTTACACCGATATGAGGATGG--
+1C_0_98
+TGCAGAAACAGTAGCGGCCCATCTTTTTAAACTTTTACCAAGTCTGTGCAGCCGACCGATCTGAAGAGGTTTACACCGATATGAGGATGG--
+1D_0_102
+TGCAGAAACAGTAGCGGCCCATCTTTTTAAACTTTTACCAAGTCTGTGCAGCCGACCGATCTGAAGAGGTTTACACCGATATGAGGATGG--
+2E_0_97
+TGCAGAAACAGTAGCGGCCCATCTTTTTAAACTTTTACCAAGTCTGTGCAGCCGACCGATCTGAAGAGGTTTACACCGATATGAGGATGG--
+2F_0_93
+TGCAGAAACAGTAGCGGCCCATCTTTTTAAACTTTTACYAAGTCTGTGCAGCCGACCGATCTGAAGAGGTTTACACCGATATGAGGATGG--
+2G_0_998
+TGCAGAAACAGTAGCGGCCCATCTTTTTAAACTTTTACTAAGTCTGTGCAGCCGACCGATCTGAAGAGGTTTACACCGATATGAGGATGG--
+2H_0_107
+TGCAGAAACAGTAGCGGCCCATCTTTTTAAACTTTTACCAAGTCTGTGCAGCCGACCGATCTGAAGAGGTTTACACCGATATGAGGATGG--
+3I_0_106
+TGCAGAAACAGTAGCGGCCCATCTTTTTAAACTTTTACCAAGTCTGTGCAGCCGACCGATCTGAAGAGGTTTACACCGATATGAGGATGG--
+3J_0_934
+TGCAGAAACAGTAGCGGCCCATCTTTTTAAACTTTTACCAAGTCTGTGCAGCCGACCGATCTGAAGAGGTTTACACCGATATGAGGATGG--
+3K_0_337
+TGCAGAAACAGTAGCGGCCCATCTTTTTAAACTTTTACCAAGTCTGTGCAGCCGACCGATCTGAAGAGGTTTACACCGATATGAGGATAG--
+3L_0_94
+TGCAGAAACAGTAGCGGCCCATCTTTTTAAACTTTTACCAAGTCTGTGCAGCCGACCGATCTGAAGAGGTTTACACCGATATGAGGATGG--
 //
 //
 ```
 
-The final output of step 6 is a file in `anolis_across` called
-`anolis_catclust.gz`. This file contains all aligned reads across
+The final output of step 6 is a file in `simdata_across` called
+`simdata_catclust.gz`. This file contains all aligned reads across
 all samples. Executing the above command you'll see the output below
 which shows all the reads that align at one particular locus. You'll see
 the sample name of each read followed by the sequence of the read at
 that locus for that sample. If you wish to examine more loci you can
 increase the number of lines you want to view by increasing the value
 you pass to `head` in the above command (e.g. `... | head -n 300`).
+
+> **Pro tip:** You can also use `less` to look at **all** the loci. Also,
+`less` is smart enough to recognize and unpack the gzipped (.gz) file. Exit
+`less` by pushing the `q` key to *quit*.
 
 # Step 7: Filter and write output files
 
@@ -327,45 +310,66 @@ conservative.
 To run step 7:
 
 ```bash
-$ ipyrad -p params-anolis.txt -s 7 -c 2
+$ ipyrad -p params-simdata.txt -s 7 -c 2
 ```
 ```
+
  -------------------------------------------------------------
   ipyrad [v.0.7.28]
   Interactive assembly and analysis of RAD-seq data
  -------------------------------------------------------------
-  loading Assembly: anolis
-  from saved path: ~/ipyrad-workshop/anolis.json
+  loading Assembly: simdata
+  from saved path: ~/work/simdata.json
   establishing parallel connection:
-  host compute node: [2 cores] on darwin
-  
-  Step 7: Filter and write output files for 10 Samples
-  [####################] 100%  filtering loci        | 0:00:10
-  [####################] 100%  building loci/stats   | 0:00:01
-  [####################] 100%  building vcf file     | 0:00:05
+  host compute node: [4 cores] on e305ff77a529
+
+  Step 7: Filter and write output files for 12 Samples
+  [####################] 100%  filtering loci        | 0:00:06
+  [####################] 100%  building loci/stats   | 0:00:00
+  [####################] 100%  building vcf file     | 0:00:02
   [####################] 100%  writing vcf file      | 0:00:00
-  [####################] 100%  building arrays       | 0:00:01
+  [####################] 100%  building arrays       | 0:00:00
   [####################] 100%  writing outfiles      | 0:00:00
-  Outfiles written to: ~/ipyrad-workshop/anolis_outfiles
+  Outfiles written to: ~/work/simdata_outfiles
 ```
 
-A new directory is created called `anolis_outfiles`, and you may inspect
+A new directory is created called `simdata_outfiles`, and you may inspect
 the contents:
 ```bash
-$ ls anolis_outfiles/
+$ ls simdata_outfiles/
 ```
 ```
-anolis.hdf5  anolis.loci  anolis.phy  anolis.snps.map  anolis.snps.phy  anolis_stats.txt  anolis.vcf
+simdata.hdf5  simdata.loci  simdata.phy  simdata.snps.map  simdata.snps.phy  simdata_stats.txt  simdata.vcf
 ```
 
 This directory contains all the output files specified by the 
 `output_formats` parameter in the params file. The default is set to 
 create two different version of phylip output, one including the full 
-sequence `anolis.phy` and one including only variable sites `anolis.snps.phy`, 
-as well as `anolis.vcf`, and the `anolis.loci` (which is ipyrad's internal 
-format). The other important file here is the `anolis_stats.txt` which gives
+sequence `simdata.phy` and one including only variable sites `simdata.snps.phy`, 
+as well as `simdata.vcf`, and the `simdata.loci` (which is ipyrad's internal 
+format). The full list of available output formats and detailed explanations
+of each of these is available in the [ipyrad output formats documentation](https://ipyrad.readthedocs.io/output_formats.html#full-output-formats).
+The other important file here is the `simdata.txt` which gives
 extensive and detailed stats about the final assembly. A quick overview of the
 blocks in this file:
+
+```bash
+$ less simdata_outfiles/simdata_stats.txt
+```
+```
+## The number of loci caught by each filter.
+## ipyrad API location: [assembly].stats_dfs.s7_filters
+
+                            total_filters  applied_order  retained_loci
+total_prefiltered_loci               1000              0           1000
+filtered_by_rm_duplicates               0              0           1000
+filtered_by_max_indels                  0              0           1000
+filtered_by_max_snps                    0              0           1000
+filtered_by_max_shared_het              0              0           1000
+filtered_by_min_sample                  0              0           1000
+filtered_by_max_alleles                 0              0           1000
+total_filtered_loci                  1000              0           1000
+```
 
 This block indicates how filtering is impacting your final dataset. Each
 filter is applied in order from top to bottom, and the number of loci
@@ -377,9 +381,12 @@ that most loci are being filterd by `min_sample_locus` (a very common
 result), in which case you might reduce this threshold in your params file
 and re-run step 7 in order to retain more loci.
 
-```bash
-$ cat anolis_outfiles/anolis_stats.txt
-```
+We can look at the Anolis data again to get a feel for what real data 
+might look more like. Here you can see that more than **half** of the loci
+are getting filtered by min_sample, and this is very typical of RAD-like
+datasets, especially if the expectation is that RAD-data should look
+kind of like really big multi-locus data. This expecation has the tendency
+of inflating the `min_samples_locus` value, leading to drastic losses of data.
 ```
 ## The number of loci caught by each filter.
 ## ipyrad API location: [assembly].stats_dfs.s7_filters
