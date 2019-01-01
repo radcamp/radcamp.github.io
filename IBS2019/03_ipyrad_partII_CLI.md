@@ -356,6 +356,8 @@ blocks in this file:
 ```bash
 $ less simdata_outfiles/simdata_stats.txt
 ```
+
+## Step 7 stats: applied filters
 ```
 ## The number of loci caught by each filter.
 ## ipyrad API location: [assembly].stats_dfs.s7_filters
@@ -402,38 +404,60 @@ filtered_by_max_alleles               872             68           2918
 total_filtered_loci                  2918              0           2918
 ```
 
-A simple summary of the number of loci retained for each sample in the
+## Step 7 stats: number of loci per sample
+Next ipyrad provides a simple summary of the number of loci retained for each sample in the
 final dataset. Pretty straightforward. If you have some samples that have
 very low sample_coverage here it might be good to remove them and re-run
 step 7.
 ```
+
 ## The number of loci recovered for each Sample.
 ## ipyrad API location: [assembly].stats_dfs.s7_samples
 
-                   sample_coverage
-punc_IBSPCRIB0361             1673
-punc_ICST764                  1717
-punc_JFT773                   2073
-punc_MTR05978                 1897
-punc_MTR17744                 2021
-punc_MTR21545                 1597
-punc_MTR34414                 1758
-punc_MTRX1468                 1653
-punc_MTRX1478                 1807
-punc_MUFAL9635                1628
+      sample_coverage
+1A_0             1000
+1B_0             1000
+1C_0             1000
+1D_0             1000
+2E_0             1000
+2F_0             1000
+2G_0             1000
+2H_0             1000
+3I_0             1000
+3J_0             1000
+3K_0             1000
+3L_0             1000
 ```
 
+## Step 7 stats: locus coverage
 `locus_coverage` indicates the number of loci that contain exactly a given
 number of samples, and `sum_coverage` is just the running total of these
 in ascending order. So here, if it weren't being filtered, locus coverage 
 in the `1` column would indicate singletons (only one sample at this locus), 
-and locus coverage in the `10` column indicates loci with full coverage 
+and locus coverage in the `12` column indicates loci with full coverage 
 (all samples have data at these loci).
 
-> **Note:** It's important to notice that locus coverage below your 
-`min_sample_locus` parameter setting will all naturally equal 0, since 
-by definition these are being removed.
+```
+## The number of loci for which N taxa have data.
+## ipyrad API location: [assembly].stats_dfs.s7_loci
 
+    locus_coverage  sum_coverage
+1                0             0
+2                0             0
+3                0             0
+4                0             0
+5                0             0
+6                0             0
+7                0             0
+8                0             0
+9                0             0
+10               0             0
+11               0             0
+12            1000          1000
+```
+Zzzzz. Actually, it's good that this stat is boring because it means
+ipyrad is working correctly ;p. However, let's return to the Anolis 
+data to see a more realistic locus coverage result.
 ```
 ## The number of loci for which N taxa have data.
 ## ipyrad API location: [assembly].stats_dfs.s7_loci
@@ -450,6 +474,16 @@ by definition these are being removed.
 9              237          2722
 10             196          2918
 ```
+That's more like it, but also remember this is a very small, cherry
+picked dataset already, with relatively shallow divergence. For much
+larger datasets (in the 100s of samples) it's not uncommon to recover
+no loci shared across all samples.
+
+> **Note:** It's important to notice that locus coverage below your 
+`min_sample_locus` parameter setting will all naturally equal 0, since 
+by definition these are being removed.
+
+## Step 7 stats: snps per locus
 
 Whereas the previous block indicated samples per locus, below we 
 are looking at SNPs per locus. In a similar fashion as above,
@@ -462,7 +496,8 @@ columns simply indicate the running total in ascending order.
 > **Note:** This block can be a little tricky because loci can
 end up getting double-counted. For example, a locus with 1 pis,
 and 2 autapomorphies will be counted once in the 3 row for `var`,
-and once in the 1 row for `pis`. Apply care with these values.
+and once in the 1 row for `pis`. Apply care when interpreting these 
+values.
 
 ```
 ## The distribution of SNPs (var and pis) per locus.
@@ -470,47 +505,47 @@ and once in the 1 row for `pis`. Apply care with these values.
 ## pis = Number of loci with n parsimony informative site (minor allele in >1 sample)
 ## ipyrad API location: [assembly].stats_dfs.s7_snps
 
-     var  sum_var   pis  sum_pis
-0   1977        0  2577        0
-1    557      557   214      214
-2    174      905    48      310
-3     77     1136    45      445
-4     51     1340    17      513
-5     26     1470     5      538
-6     18     1578     5      568
-7     15     1683     4      596
-8     12     1779     2      612
-9      3     1806     1      621
-10     3     1836     0      621
-11     2     1858     0      621
-12     0     1858     0      621
-13     1     1871     0      621
-14     0     1871     0      621
-15     0     1871     0      621
-16     1     1887     0      621
-17     1     1904     0      621
+    var  sum_var  pis  sum_pis
+0    15        0  337        0
+1    56       56  379      379
+2   114      284  201      781
+3   208      908   51      934
+4   198     1700   23     1026
+5   147     2435    6     1056
+6   123     3173    3     1074
+7    67     3642    0     1074
+8    44     3994    0     1074
+9    13     4111    0     1074
+10    8     4191    0     1074
+11    3     4224    0     1074
+12    3     4260    0     1074
+13    1     4273    0     1074
 ```
+
+## Step 7 stats: aggregated sample stats
 
 The final block displays statistics for each sample in the final dataset. Many of these stats will already be familiar, but this provides a nice compact view on how each sample is represented in the output. The one new stat here is `loci_in_assembly`, which indicates how many loci each sample has data for.
 ```
 ## Final Sample stats summary
 
-                   state  reads_raw  reads_passed_filter  clusters_total  clusters_hidepth  hetero_est  error_est  reads_consens  loci_in_assembly
-punc_IBSPCRIB0361      7     250000               237519           56312              4223    0.021430   0.013049           3753              1673
-punc_ICST764           7     250000               236815           60626              4302    0.024175   0.013043           3759              1717
-punc_JFT773            7     250000               240102           61304              5214    0.019624   0.012015           4698              2073
-punc_MTR05978          7     250000               237704           61615              4709    0.021119   0.011083           4223              1897
-punc_MTR17744          7     250000               240396           62422              5170    0.021159   0.011778           4558              2021
-punc_MTR21545          7     250000               227965           55845              3614    0.024977   0.013339           3145              1597
-punc_MTR34414          7     250000               233574           61242              4278    0.024175   0.013043           3751              1758
-punc_MTRX1468          7     250000               230903           54411              3988    0.023192   0.012638           3586              1653
-punc_MTRX1478          7     250000               233398           57299              4155    0.022146   0.012881           3668              1807
-punc_MUFAL9635         7     250000               231868           59249              3866    0.025000   0.013622           3369              1628
+      state  reads_raw  reads_passed_filter  clusters_total  clusters_hidepth  hetero_est  error_est  reads_consens  loci_in_assembly
+1A_0      7      19862                19862            1000              1000    0.001819   0.000761           1000      1000
+1B_0      7      20043                20043            1000              1000    0.001975   0.000751           1000      1000
+1C_0      7      20136                20136            1000              1000    0.002084   0.000745           1000      1000
+1D_0      7      19966                19966            1000              1000    0.001761   0.000758           1000      1000
+2E_0      7      20017                20017            1000              1000    0.001855   0.000764           1000      1000
+2F_0      7      19933                19933            1000              1000    0.001940   0.000759           1000      1000
+2G_0      7      20030                20030            1000              1000    0.001940   0.000763           1000      1000
+2H_0      7      20199                20198            1000              1000    0.001786   0.000756           1000      1000
+3I_0      7      19885                19885            1000              1000    0.001858   0.000758           1000      1000
+3J_0      7      19822                19822            1000              1000    0.001980   0.000783           1000      1000
+3K_0      7      19965                19965            1000              1000    0.001980   0.000761           1000      1000
+3L_0      7      20008                20008            1000              1000    0.002071   0.000751           1000      1000
 ```
 
 For our downstream analysis we'll need more than just the default output
 formats, so lets rerun step 7 and generate all supported output formats.
-This can be accomplished by editing the `params-anolis.txt` and setting 
+This can be accomplished by editing the `params-simdata.txt` and setting 
 the requested `output_formats` to `*` (again, the wildcard character):
 ```
 *                        ## [27] [output_formats]: Output formats (see docs)
@@ -518,17 +553,16 @@ the requested `output_formats` to `*` (again, the wildcard character):
 
 After this we must now re-run step 7, but this time including the `-f`
 flag, to force overwriting the output files that were previously generated. 
-More information about output formats can be found [here](http://ipyrad.readthedocs.io/output_formats.html#full-output-formats).
 
 ```bash
-$ ipyrad -p params-anolis.txt -s 7 -c 2 -f
+$ ipyrad -p params-anolis.txt -s 7 -c 4 -f
 ```
 
 Congratulations! You've completed your first RAD-Seq assembly. Now you can
 try applying what you've learned to assemble your own real data. Please
 consult the [ipyrad online documentation](http://ipyrad.readthedocs.io) for 
 details about many of the more powerful features of ipyrad, including reference 
-sequence mapping, assembly branching, and the extensive `analysis` toolkit, which
+sequence mapping, assembly branching, and the analysis` toolkit, which
 includes extensive downstream analysis tools for such things as clustering and 
 population assignment, phylogenetic tree inference, quartet-based species tree
 inference, and much more.
