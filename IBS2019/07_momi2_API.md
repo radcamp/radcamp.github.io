@@ -7,30 +7,13 @@ A good example of how the SFS is calculated can be found on [wikipedia](https://
 ![jpg](07_momi2_API_files/07_momi2_API_000_SFS.jpg)
 
 ### What is demographic inference?
-The goal of demographic analyses is to understand the history of lineages (sometimes referred as 'populations') in a given species, estimating the neutral population dynamics such as time of divergence, population expansion, population contraction, bottlenecks, admixture, etc. A nice example of a paper that performs model selection and parameter estimation [Portik et al 2017](https://onlinelibrary.wiley.com/doi/abs/10.1111/mec.14266).
+The goal of demographic analyses is to understand the history of lineages (sometimes referred as 'populations') in a given species, estimating the neutral population dynamics such as time of divergence, population expansion, population contraction, bottlenecks, admixture, etc. A nice example of a paper that performs model selection and parameter estimation is [Portik et al 2017](https://onlinelibrary.wiley.com/doi/abs/10.1111/mec.14266).
 
 ### Most importantly, how do you pronounce `momi`?
 
 **Pronunciation:** Care of Jonathan Terhorst (somewhat cryptically), from a [github issue I created to resolve this conundrum](https://github.com/popgenmethods/momi2/issues/6): "How do you pronounce ∂a∂i? ;-)".... And another perspective from Jack Kamm: "Both pronunciations are valid, but I personally say 'mommy'".
 
 ## Cleaning up any current running python2 notebook server
-**On the compute node**
-Look to see if any jupyter notebook servers are running:
-```
-squeue -u work2
-```
-             JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
-           8397809      edu1 jupyter.    work2  R       0:07      1 node162
-If you see something like this you'll need to `scancel` this job:
-```
-scancel 8397809
-```
-**On your laptop**
-Make sure no ssh tunnels are active:
-```
-ps -ef | grep ssh
-```
-Use the `kill` command to remove any process that look like this: `ssh -N -f -L ...`. On windows just close all putty sessions and start from scratch.
 
 ## momi2 installation
 `momi2` requires python3, which is a different version of python we've been using up to now. Fortunately conda makes it easy to run python2 and python3 side by side. We will install python3 in a separate [conda environment](https://conda.io/docs/user-guide/concepts.html#conda-environments), and then install and run momi2 analyses using this environment. A conda environment is a container for python packages and configurations. More on creating/managing conda environments can be found [here](https://conda.io/docs/user-guide/tasks/manage-environments.html).
@@ -64,52 +47,11 @@ command to your terminal.
 ```
 This will produce copious output, and should take ~5-10 minutes. 
 
-When starting an new job on the cluster, it automatically directs you back 
-to your default environment, which is python 2.7 in our case. We need to 
-make sure that we are in the right conda environment to run momi2, so we shall
-create a new jupyter notebook cluster submit script to specify this. First,
-we'll create a copy of the current `jupyter.sh` job submit script:
-
-```
-(momi-py36)$ cd ~/job-scripts
-(momi-py36)$ cp jupyter.sh jupyter3.sh
-```
-Now edit the `jupyter3.sh` script and add a line to specify that we want
-to start the notebook server in the python3 environment:
-```
-nano jupyter3.sh
-```
-
-```
-#!/bin/sh
-#SBATCH --account=edu
-#SBATCH --reservation=edu_23
-#SBATCH --cores=4
-#SBATCH --time=8:00:00
-
-unset XDG_RUNTIME_DIR
-cd $HOME
-source activate momi-py36
-jupyter-notebook --ip=$(hostname -i) --port=<your_port_number>
-```
-
-Finally, submit the python3 notebook server job to the cluster in the same way as before, and find the compute node the job is running on:
-```
-(momi-py36)$ sbatch jupyter3.sh
-(momi-py36)$ squeue -u work2
-```
-
-Now when you open a browser on your local machine and connect to 
-`localhost:<my_port_#>` the familiar notebook server file browser 
-interface will show up, but this time when you choose "New" you'll 
-see an option to create a python3 notebook!
-![png](07_momi2_API_files/07_momi2_API_00_Notebook23.png)
-
 # **momi2** Analyses
-Create a new notebook inside your `~/ipyrad-workshop/` directory 
-called `anolis-momi2.ipynb` (refer to the [jupyter notebook configuration page](Jupyter_Notebook_Setup.md) for a refresher on connecting to the notebook server). **The rest of the 
+Create a new notebook inside your `~/work/` directory 
+called `simdata-momi2.ipynb`. **The rest of the 
 materials in this part of the workshop assume you are running all code 
-in cells of a jupyter notebook** that is running on the cluster.
+in cells of a jupyter notebook** that is running on the Jupyter Hub.
 
 * [Constructing and plotting a simple model](#constructing-and-plotting-a-simple-model)
 * [Preparing real data for analysis](#preparing-real-data-for-analysis)
@@ -147,9 +89,18 @@ model.add_leaf("North")
 model.add_leaf("South")
 model.move_lineages("South", "North", t=2e5)
 ```
-> **Note:** The default migration fraction of the `DemographicModel.move_lineages()` function is 100%, so if we do not specify this value then when we call `move_lineages` momi2 assumes we want to move **all** lineages from the source to the destination. Later we will see how to manipulate the migration fraction to only move some portion of lineages.
+> **Note:** The default migration fraction of the `DemographicModel.move_lineages()`
+function is 100%, so if we do not specify this value then when we call `move_lineages` 
+momi2 assumes we want to move **all** lineages from the source to the destination. 
+Later we will see how to manipulate the migration fraction to only move some portion 
+of lineages.
 
-Executing this cell produces no output, but that's okay, we are just specifying the model. Also, be aware that the names assigned to leaf nodes have no specific meaning to momi2, so these names should be selected to have specific meaning to your target system. Here "North" and "South" are simply stand-ins for some hypothetical populations. Now that we have this simple demographic model parameterized we can plot it, to see how it looks.
+Executing this cell produces no output, but that's okay, we are just specifying the 
+model. Also, be aware that the names assigned to leaf nodes have no specific meaning 
+to momi2, so these names should be selected to have specific meaning to your target 
+system. Here "North" and "South" are simply stand-ins for some hypothetical 
+populations. Now that we have this simple demographic model parameterized we can 
+plot it, to see how it looks.
 
 ```
 yticks = [1e4, 2.5e4, 5e4, 7.5e4, 1e5, 2.5e5, 5e5, 7.5e5]
@@ -163,18 +114,29 @@ fig = momi.DemographyPlot(
 ```
 
 There's a little bit going on here, but we'll walk you through it:
-* `yticks` - This is a list of elements specifying the timepoints to highlight on the y-axis of the figure.
+* `yticks` - This is a list of elements specifying the timepoints to highlight on 
+the y-axis of the figure.
 
-The first two arguments to `momi.DemographyPlot()` are required, namely the model to plot, and the populations of the model to include. The next three arguments are optional, but useful:
+The first two arguments to `momi.DemographyPlot()` are required, namely the model 
+to plot, and the populations of the model to include. The next three arguments are 
+optional, but useful:
 * `figsize` - Specify the output figure size as (width, height) in inches.
-* `major_yticks` - Tells the momi2 plotting routine to use the time demarcations we specified in thie `yticks` variable.
-* `linthreshy` - The time point at which to switch from linear to log-scale, backwards in time. This is really useful if you have many "interesting" events happening relatively recently, and you don't want them to get "smooshed" together by the depth of the older events. This will become clearer as we add migration events later in the tutorial.
+* `major_yticks` - Tells the momi2 plotting routine to use the time demarcations 
+we specified in thie `yticks` variable.
+* `linthreshy` - The time point at which to switch from linear to log-scale, 
+backwards in time. This is really useful if you have many "interesting" events 
+happening relatively recently, and you don't want them to get "smooshed" together 
+by the depth of the older events. This will become clearer as we add migration 
+events later in the tutorial.
 
 ![png](07_momi2_API_files/07_momi2_API_01_ToyModel.png)
 
-**Experiment:** Try changing the value of `linthreshy` and replotting. Try `1e4` and `1.5e5` and notice how the figure changes. You can also experiment with changing the values in the `yticks` list. 
+**Experiment:** Try changing the value of `linthreshy` and replotting. Try `1e4` 
+and `1.5e5` and notice how the figure changes. You can also experiment with 
+changing the values in the `yticks` list. 
 
-Let's create a new model and introduce one migration event that only moves some fraction of lineages, and not the totality of them:
+Let's create a new model and introduce one migration event that only moves some 
+fraction of lineages, and not the totality of them:
 ```
 model = momi.DemographicModel(N_e=1e5)
 
@@ -193,8 +155,13 @@ fig = momi.DemographyPlot(
 ```
 ![png](07_momi2_API_files/07_momi2_API_02_ToyModel_Migration.png)
 
-This is almost the exact same model as above, except now we have introduced another `move_lineages` call which includes the `p=0.1` argument. This indicates that we wish to move 10% of lineages from  the "South" population to the "North" population at the specified timepoint.
-> **Note:** It may seem odd that the arrow in this figure points from "North" to "South", but this is simply because we are operating in a coalescent framework and therefore the `move_lineages` function operates **backwards in time**.
+This is almost the exact same model as above, except now we have introduced 
+another `move_lineages` call which includes the `p=0.1` argument. This 
+indicates that we wish to move 10% of lineages from  the "South" population 
+to the "North" population at the specified timepoint.
+> **Note:** It may seem odd that the arrow in this figure points from "North" 
+to "South", but this is simply because we are operating in a coalescent 
+framework and therefore the `move_lineages` function operates **backwards in time**.
 
 ## Preparing real data for analysis
 We need to gather and construct several input files before we can actually apply momi2 to our Anolis data.
