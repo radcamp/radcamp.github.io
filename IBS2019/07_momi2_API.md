@@ -210,10 +210,14 @@ our Anolis data.
 * [**Genereate the SFS**](#genereate-the-sfs) - The culmination of all this housekeeping is the SFS file which we will use for demographic inference.
 
 ### Population assignment file
-Based on the results of the PCA and also our knowledge of the geographic location of the samples we will assign 2 samples to the "North" population, and 8 samples to the "South" population. To save some time we created this pops file, and have stashed a copy in the `/scratch/af-biota` directory. We can simply copy the file from there into our own `ipyrad-workshop` directories. We could do this by finding a terminal on the cluster, but its also possible to run terminal commands from jupyter notebooks using "magic" commands. Including `%%bash` on the first line of a cell tell jupyter to interpret lines inside this cell as terminal commands, so we can do this:
+Based on the results of a PCA and also our knowledge of the geographic location 
+of the samples we will assign 2 samples to the "North" population, and 8 samples
+to the "South" population. To save some time we created this pops file, and have 
+stashed a copy in the IBS RADCamp site. We can simply copy the file 
+from there into our own `work` directories. 
 ```
 %%bash
-cp /rigel/edu/radcamp/users/work1/ipyrad-workshop/anolis_pops.txt .
+wget https://radcamp.github.io/IBS2019/Prates_et_al_2016_example_data/anolis_pops.txt
 cat anolis_pops.txt
 ```
     punc_ICST764    North
@@ -227,78 +231,87 @@ cat anolis_pops.txt
     punc_MTRX1468   South
     punc_MTRX1478   South
 
-Magic!
-> **Note:** `cat` is a command line utility that prints the contents of a file to the screen.
+> **Note:** the `%%bash` header inside a notebook cell is a `magic` command that 
+indicates to interpret everything in that shell as linux commands rather than python.
 
 ### Properly formatted VCF
-In this tutorial we are using a very small dataset, so manipulating the VCF is very fast. With real data the VCF file can be **enormous**, which makes processing it very slow. `momi2` expects very large input files, so it insists on having them preprocessed to speed things up. The details of this preprocessing step are not very interesting, but we are basically compressing and indexing the VCF so it's faster to search.
+In this tutorial we are using a very small dataset, so manipulating the VCF is very 
+fast. With real data the VCF file can be **enormous**, which makes processing it 
+very slow. `momi2` expects very large input files, so it insists on having them 
+preprocessed to speed things up. The details of this preprocessing step are not 
+very interesting, but we are basically compressing and indexing the VCF so it's 
+faster to search.
 ```
 %%bash
+## fetch the vcf from the radcamp site
+wget wget https://radcamp.github.io/IBS2019/Prates_et_al_2016_example_data/anolis.vcf
+
 ## bgzip performs a blockwise compression
 ## The -c flag directs bgzip to leave the original vcf file 
 ##   untouched and create a new file for the vcf.gz
-cp /rigel/edu/radcamp/users/work1/ipyrad-workshop/anoles_outfiles/anoles.vcf anolis.vcf
 bgzip -c anolis.vcf > anolis.vcf.gz
 
 ## tabix indexes the file for searching
 tabix anolis.vcf.gz
-ls
+ls anolis\*
 ```
-    anolis.alleles.loci  anolis.loci      anolis.snps.phy	anolis.u.snps.phy
-    anolis.geno	     anolis.nex       anolis_stats.txt	anolis.ustr
-    anolis.gphocs	     anolis.phy       anolis.str	anolis.vcf.gz
-    anolis.hdf5	     anolis.snps.map  anolis.u.geno	anolis.vcf.gz.tbi
+    anolis_pops.txt  anolis.vcf  anolis.vcf.gz  anolis.vcf.gz.tbi
 
 ### BED file
-The last file we need to construct is a BED file specifying which genomic regions to retain for calculation of the SFS. The standard coalescent assumes no recombination and no natural selection, so drift and mutation are the only forces impacting allele frequencies in populations. If we had whole genome data, and a good reference sequence then we would have information about coding regions and other things that are _probably_ under selection, so we could use the BED file to exclude these regions from the analysis. With RAD-Seq type data it's very common to assume RAD loci are neutrally evolving and unlinked, so we just want to create a BED file that specifies to retain all our SNPs. We provide a simple python program to do this conversion, which is located in the `/scratc/af-biota/bin` directory.
+The last file we need to construct is a BED file specifying which genomic 
+regions to retain for calculation of the SFS. The standard coalescent assumes 
+no recombination and no natural selection, so drift and mutation are the only 
+forces impacting allele frequencies in populations. If we had whole genome 
+data, and a good reference sequence then we would have information about coding 
+regions and other things that are _probably_ under selection, so we could use the 
+BED file to exclude these regions from the analysis. With RAD-Seq type data it's 
+very common to assume RAD loci are neutrally evolving and unlinked, so we just 
+want to create a BED file that specifies to retain all our SNPs. We provide a 
+simple python program to do this conversion, which is located on github:
 
 ```
 %%bash
-/rigel/edu/radcamp/users/work1/bin/vcf2bed.py anolis.vcf anolis.bed
+wget wget https://raw.githubusercontent.com/isaacovercast/lab-notebooks/master/vcf2bed/vcf2bed.py
+
+python vcf2bed.py anolis.vcf
 
 ## Print the first 10 lines of this file
-head anoles.bed
+head anolis.bed
 ```
-    locus_1	7	8
-    locus_3	65	66
-    locus_5	13	14
-    locus_5	26	27
-    locus_5	55	56
-    locus_8	34	35
-    locus_21	13	14
-    locus_24	58	59
-    locus_26	2	3
-    locus_26	50	51
+    locus_6 2       3
+    locus_6 40      41
+    locus_6 67      68
+    locus_6 68      69
+    locus_6 69      70
+    locus_6 70      71
+    locus_7 8       9
+    locus_7 33      34
+    locus_7 48      49
+    locus_7 51      52
 
-### The allele counts file
-The allele counts file is an intermediate step necessary for generating the SFS. It's a format internal to `momi2`, so we won't spend a lot of time describing it, except to say that it is exactly what it says it is: A count of alleles in each population. Since each diploid individual has 2 alleles per snp, the total count of alleles per population will be 2n at maximum, and 0 at minimum.
+### The allele counts object
+The allele counts object is an intermediate step necessary for generating the SFS. 
+It's a format internal to `momi2`, so we won't spend a lot of time describing it, 
+except to say that it is exactly what it says it is: A count of alleles in each 
+population. Since each diploid individual has 2 alleles per snp, the total count 
+of alleles per population will be 2n at maximum, and 0 at minimum.
 
 ```
-%%bash
-python -m momi.read_vcf --no_aa --verbose anolis.vcf.gz anolis_pops.txt anolis_allele_counts.gz --bed anolis.bed
-gunzip -c anolis_allele_counts.gz | head
-```
-    /home/isaac/miniconda2/envs/momi-py36/bin/python
-    {
-	    "populations": ["North", "South"],
-	    "use_folded_sfs": true,
-	    "length": 1911,
-	    "n_read_snps": 148,
-	    "n_excluded_snps": 0,
-	    "configs": [
-		    [[0, 0], [1, 1]],
-		    [[0, 0], [3, 1]],
-		    [[0, 0], [2, 2]],
+## The population assignments transformed into a sample-to-population dictionary
+{'punc_IBSPCRIB0361': 'South', 'punc_MTR05978': 'South', 'punc_MTR21545': 'South', 'punc_JFT773': 'South', 'punc_MTR17744': 'South', 'punc_MTR34414': 'South', 'punc_MTRX1478': 'South', 'punc_MTRX1468': 'South', 'punc_ICST764': 'North', 'punc_MUFAL9635': 'North'}
+
+## Create the snp allele counts array
+anolis_ac = momi.SnpAlleleCounts.read_vcf("anolis.vcf.gz", ancestral_alleles=False, bed_file="anolis.bed", ind2pop=ind2pop)
+
 
 ### Generate the SFS
-The `momi` site frequency spectrum is represented somewhat differently than you might be used to if you have used dadi or fastsimcoal2. Here we load the SFS generated above into the `sfs` object and print a few properties.
+The `momi` site frequency spectrum is represented somewhat differently than you 
+might be used to if you have used dadi or fastsimcoal2. Here we load the SFS 
+generated above into the `sfs` object and print a few properties.
 
-```
-%%bash
-python -m momi.extract_sfs anolis_sfs.gz 20 anolis_allele_counts.gz
-```
-```
-sfs = momi.Sfs.load("anolis_sfs.gz")
+```python
+sfs = anolis_ac.extract_sfs(n_blocks=50)
+print(sfs.n_snps())
 print("Avg pairwise heterozygosity", sfs.avg_pairwise_hets[:5])
 print("populations", sfs.populations)
 print("percent missing data per population", sfs.p_missing)
