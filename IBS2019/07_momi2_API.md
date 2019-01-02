@@ -318,15 +318,32 @@ print("percent missing data per population", sfs.p_missing)
 ```
 
 ## Inference procedure
-In the previous examples where we constructed and plotted DemographicModels, we had specified all the values for population sizes, divergence times, and migration fractions. This is useful when we are developing the models we want to test, because we can construct the model with toy parameter values, plot it and then visually inspect whether the model meets our expectations. Once we have settled on one or a handful of models to test, we can incorporate the observed SFS in an inference procedure in order to test which model is the best fit to the data. The best fitting model will then provide a set of maximum likelihood parameter values for the parameters we are interested in (like divergence time). We can then perform a bootstrap analysis, by randomly resampling the observed SFS, re-estimating parameters under the most likely model, and constructing bootstrap confidence intervals on these values (typically 50-100 replicates, but here 10 for speed).
+In the previous examples where we constructed and plotted DemographicModels, 
+we had specified all the values for population sizes, divergence times, and 
+migration fractions. This is useful when we are developing the models we want 
+to test, because we can construct the model with toy parameter values, plot 
+it and then visually inspect whether the model meets our expectations. Once 
+we have settled on one or a handful of models to test, we can incorporate 
+the observed SFS in an inference procedure in order to test which model is 
+the best fit to the data. The best fitting model will then provide a set of 
+maximum likelihood parameter values for the parameters we are interested in 
+(like divergence time). We can then perform a bootstrap analysis, by randomly 
+resampling the observed SFS, re-estimating parameters under the most likely 
+model, and constructing bootstrap confidence intervals on these values 
+(typically 50-100 replicates, but here 10 for speed).
 
 Here we will invesigate three different 2 population models:
 * `no_migration_model` - All parameters fixed, except divergence time.
-* `pop_sizes_model` - North and South populations are allowed to have different, variable sizes. Here we also estimate divergence time.
-* `migration_model` - Allow one pulse of migration in both directions, at possibly different times, and with different migration fractions. Also, include all other parameters above (population sizes and divergence time).
+* `pop_sizes_model` - North and South populations are allowed to have 
+different, variable sizes. Here we also estimate divergence time.
+* `migration_model` - Allow one pulse of migration in both directions, at 
+possibly different times, and with different migration fractions. Also, 
+include all other parameters above (population sizes and divergence time).
 
 ### Estimating divergence time
-Here we construct the `no_migration_model`, where we are estimating only divergence time. We perform the optimization, and plot the model with the resulting most likely parameter value.
+Here we construct the `no_migration_model`, where we are estimating only 
+divergence time. We perform the optimization, and plot the model with the 
+resulting most likely parameter value.
 ```
 no_migration_model = momi.DemographicModel(N_e=1e5)
 
@@ -364,7 +381,9 @@ fig = momi.DemographyPlot(
 ![png](07_momi2_API_files/07_momi2_API_03_Inference_tdiv.png)
 
 ### Including population size parameters
-Here we construct the `popsizes_model`, where we are estimating variable population sizes as well as divergence time. We perform the optimization, and plot the model with the resulting most likely parameter values.
+Here we construct the `popsizes_model`, where we are estimating variable 
+population sizes as well as divergence time. We perform the optimization, 
+and plot the model with the resulting most likely parameter values.
 ```
 popsizes_model = momi.DemographicModel(N_e=1e5)
 
@@ -454,7 +473,11 @@ fig = momi.DemographyPlot(
 ![png](07_momi2_API_files/07_momi2_API_05_Inference_migration.png)
 
 ## Model selection with AIC
-Model selection is typically performed with AIC, so here we extract the log likelihood of each model, calculate the AIC, and then calculate delta AIC values, and AIC weights. The best model will have the lowest AIC score. Delta AIC, and the AIC weight are indications of how confident we can be that the best fitting model is the correct model. 
+Model selection is typically performed with AIC, so here we extract the log 
+likelihood of each model, calculate the AIC, and then calculate delta AIC 
+values, and AIC weights. The best model will have the lowest AIC score. Delta 
+AIC, and the AIC weight are indications of how confident we can be that the 
+best fitting model is the correct model. 
 ```
 import numpy as np
 
@@ -480,7 +503,9 @@ print("AIC weight per model: ", np.exp(-0.5 * delta_aic))
 
 ## Bootstrapping confidence intervals
 
-We will use a bootstrap procedure to construct confidence intervals on parameters from our best model. Here we will run 10 bootstraps, for the sake of time, but on real data you would normally perform 50-100 bootstraps. 
+We will use a bootstrap procedure to construct confidence intervals on parameters 
+from our best model. Here we will run 10 bootstraps, for the sake of time, but 
+on real data you would normally perform 50-100 bootstraps. 
 ```
 n_bootstraps = 10
 # make copies of the original model to avoid changing them
@@ -537,12 +562,9 @@ fig.draw_N_legend(loc="upper right")
 ```
 ![png](07_momi2_API_files/07_momi2_API_06_Bootstrap_tdiv.png)
 
-In this figure the thick blue lines indicate the maximum likelihood values estimated under the best model, and the faint lines illustrate results of each of the ten bootstraps.
-
-# radcamp 2018 AF-Biota Feedback link
-Please help us improve future radcamp workshops by completing this anonymous survey:
-
-[radcamp survey](https://goo.gl/forms/DqzihjtTMxYdPiKt1)
+In this figure the thick blue lines indicate the maximum likelihood values 
+estimated under the best model, and the faint lines illustrate results of 
+each of the ten bootstraps.
 
 # References
 Portik, D. M., Leaché, A. D., Rivera, D., Barej, M. F., Burger, M., Hirschfeld, M., ... & Fujita, M. K. (2017). Evaluating mechanisms of diversification in a Guineo‐Congolian tropical forest frog using demographic model selection. Molecular ecology, 26(19), 5245-5263.
