@@ -1,0 +1,10 @@
+punc_ICST764    North
+punc_MUFAL9635  North
+punc_IBSPCRIB0361       South
+punc_JFT773     South
+punc_MTR05978   South
+punc_MTR17744   South
+punc_MTR21545   South
+punc_MTR34414   South
+punc_MTRX1468   South
+punc_MTRX1478   South
