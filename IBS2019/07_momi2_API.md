@@ -140,6 +140,8 @@ to the "North" population at the specified timepoint.
 to "South", but this is simply because we are operating in a coalescent 
 framework and therefore the `move_lineages` function operates **backwards in time**.
 
+**Experiment:** Try adding a third leaf node, and replotting. Call the new leaf "Central".
+
 ## Simulating data under your desired model.
 Momi2 provides a really convenient function for generating data under a model,
 once you're happy with the model you've specified.
@@ -298,11 +300,12 @@ of alleles per population will be 2n at maximum, and 0 at minimum.
 
 ```
 ## The population assignments transformed into a sample-to-population dictionary
+```python
 {'punc_IBSPCRIB0361': 'South', 'punc_MTR05978': 'South', 'punc_MTR21545': 'South', 'punc_JFT773': 'South', 'punc_MTR17744': 'South', 'punc_MTR34414': 'South', 'punc_MTRX1478': 'South', 'punc_MTRX1468': 'South', 'punc_ICST764': 'North', 'punc_MUFAL9635': 'North'}
 
 ## Create the snp allele counts array
 anolis_ac = momi.SnpAlleleCounts.read_vcf("anolis.vcf.gz", ancestral_alleles=False, bed_file="anolis.bed", ind2pop=ind2pop)
-
+```
 
 ### Generate the SFS
 The `momi` site frequency spectrum is represented somewhat differently than you 
