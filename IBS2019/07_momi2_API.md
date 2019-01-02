@@ -13,45 +13,22 @@ The goal of demographic analyses is to understand the history of lineages (somet
 
 **Pronunciation:** Care of Jonathan Terhorst (somewhat cryptically), from a [github issue I created to resolve this conundrum](https://github.com/popgenmethods/momi2/issues/6): "How do you pronounce ∂a∂i? ;-)".... And another perspective from Jack Kamm: "Both pronunciations are valid, but I personally say 'mommy'".
 
-## Cleaning up any current running python2 notebook server
-
-## momi2 installation
-`momi2` requires python3, which is a different version of python we've been using up to now. Fortunately conda makes it easy to run python2 and python3 side by side. We will install python3 in a separate [conda environment](https://conda.io/docs/user-guide/concepts.html#conda-environments), and then install and run momi2 analyses using this environment. A conda environment is a container for python packages and configurations. More on creating/managing conda environments can be found [here](https://conda.io/docs/user-guide/tasks/manage-environments.html).
-
-Begin by **opening an ssh session on the cluster** and creating our new environment:
-```
-## -n          assigns a name to the environment
-## python=3.6  specifies the python version of the new environment
-$ conda create -n momi-py36 python=3.6
-```
-After the install finishes you can inspect the currently available environments:
-```
-$ conda env list
-# conda environments:
-#
-base                  *  /home/isaac/miniconda2
-momi-py36                /home/isaac/miniconda2/envs/momi-py36
-```
-And now switch to the new python3 environment:
-```
-$ source activate momi-py36
-(momi-py36) [work2@watson:~]$
-```
-> **Note:** You'll notice that the conda env you are currently using is now displayed as part of your prompt. We will maintain this convention for the rest of this notebook.
-
-Now use `conda` to install momi2 and jupyter. All the `-c` arguments again are specifying
+## Setting up the momi environment
+The Jupyter Hub instance we are using is python3, and already has conda installed, so
+will use`this to install momi2. Once again, open a termninal on the Jupyter Hub and run
+the following command (**NB:** All the `-c` arguments again are specifying
 channels that momi2 pulls dependencies from. Order matters here, so copy and paste this
-command to your terminal.
+command to your terminal).
 ```
-(momi-py36)$ conda install momi ipyparallel openblas jupyter -c defaults -c conda-forge -c bioconda -c jackkamm -y
+$ conda install momi ipyparallel openblas jupyter -c defaults -c conda-forge -c bioconda -c jackkamm -y
 ```
-This will produce copious output, and should take ~5-10 minutes. 
+This will produce copious output, and should take <5 minutes.
 
 # **momi2** Analyses
-Create a new notebook inside your `~/work/` directory 
-called `simdata-momi2.ipynb`. **The rest of the 
-materials in this part of the workshop assume you are running all code 
-in cells of a jupyter notebook** that is running on the Jupyter Hub.
+Create a new notebook inside your `~/work/` directory called `
+simdata-momi2.ipynb`. **The rest of the materials in this part of the 
+workshop assume you are running all code in cells of a jupyter notebook** that 
+is running on the Jupyter Hub.
 
 * [Constructing and plotting a simple model](#constructing-and-plotting-a-simple-model)
 * [Preparing real data for analysis](#preparing-real-data-for-analysis)
@@ -163,8 +140,69 @@ to the "North" population at the specified timepoint.
 to "South", but this is simply because we are operating in a coalescent 
 framework and therefore the `move_lineages` function operates **backwards in time**.
 
+## Simulating data under your desired model.
+Momi2 provides a really convenient function for generating data under a model,
+once you're happy with the model you've specified.
+
+```
+## Specify how many haploid samples per population you want to simulate
+sampled_n_dict={"North":4, "South":4}
+
+model.simulate_vcf(out_prefix="momi_simdata",
+                    length=1e5,
+                    recoms_per_gen=1e-8,
+                    muts_per_gen=1e-8,
+                    chrom_name="chr1",
+                    ploidy=2,
+                    sampled_n_dict=sampled_n_dict)
+```
+Now in your `work` directory you'll see three new files:
+```bash
+ls -1 ~/work
+```
+```
+momi_simdata.bed
+momi_simdata.vcf.gz
+momi_simdata.vcf.gz.tbi
+```
+Taking a quick peek at the vcf file you can verify the typical structure of
+a vcf file, and that we have 2 diploid samples each from North and South
+(you can also see that momi2 vcf is phased):
+```bash
+zcat momi_simdata.vcf.gz | head -n 24
+```
+```
+##fileformat=VCFv4.2
+##source="VCF simulated by momi2 using msprime backend"
+##contig=<ID=chr1,length=100000.0>
+##FORMAT=<ID=GT,Number=1,Type=String,Description="Genotype">
+##INFO=<ID=AA,Number=1,Type=String,Description="Ancestral Allele">
+#CHROM  POS     ID      REF     ALT     QUAL    FILTER  INFO    FORMAT  North_0 North_1 South_0 South_1
+chr1    32      .       A       T       .       .       AA=A    GT      0|0     1|1     0|0     1|0
+chr1    47      .       A       T       .       .       AA=A    GT      0|1     0|0     0|0     0|0
+chr1    60      .       A       T       .       .       AA=A    GT      0|0     1|1     0|0     1|0
+chr1    146     .       A       T       .       .       AA=A    GT      1|1     0|0     0|0     0|0
+chr1    154     .       A       T       .       .       AA=A    GT      0|0     0|0     0|0     1|0
+chr1    167     .       A       T       .       .       AA=A    GT      0|0     1|1     0|0     0|0
+chr1    168     .       A       T       .       .       AA=A    GT      0|0     1|1     0|0     0|0
+chr1    175     .       A       T       .       .       AA=A    GT      0|0     0|0     1|1     0|0
+chr1    212     .       A       T       .       .       AA=A    GT      0|0     1|1     0|0     0|0
+chr1    222     .       A       T       .       .       AA=A    GT      0|0     1|1     0|0     1|0
+chr1    227     .       A       T       .       .       AA=A    GT      0|0     1|1     0|0     1|0
+chr1    233     .       A       T       .       .       AA=A    GT      0|0     0|0     1|0     0|0
+chr1    243     .       A       T       .       .       AA=A    GT      0|0     0|0     1|1     0|1
+chr1    309     .       A       T       .       .       AA=A    GT      1|1     1|1     0|0     1|1
+chr1    322     .       A       T       .       .       AA=A    GT      0|0     0|0     1|1     0|0
+chr1    393     .       A       T       .       .       AA=A    GT      0|1     0|0     0|0     0|1
+chr1    419     .       A       T       .       .       AA=A    GT      1|0     1|1     1|1     1|0
+chr1    439     .       A       T       .       .       AA=A    GT      0|1     0|0     0|0     0|0
+```
+
 ## Preparing real data for analysis
-We need to gather and construct several input files before we can actually apply momi2 to our Anolis data.
+In order to simplify this tutorial analysis we'll use a subset of the Prates et al. 
+2016 dataset (which will enable a nice 2 population model). First, we need to 
+gather and construct several input files before we can actually apply momi2 to 
+our Anolis data.
 * [**Population assignment file**](#population-assignment-file) - This is a tab or space separated list of sample names and population names to which they are assigned. Sample names need to be exactly the same as they are in the VCF file. Population names can be anything, but it's useful if they're meaningful.
 * [**Properly formatted VCF**](#properly-formatted-vcf) - We do have the VCF file output from the ipyrad Anolis assembly, but it requires a bit of massaging before it's ready for momi2. It must be zipped and indexed in such a way as to make it searchable.
 * [**BED file**](#bed-file) - This file specifies genomic regions to include in when calculating the SFS. It is composed of 3 columns which specify 'chrom', 'chromStart', and 'chromEnd'.
