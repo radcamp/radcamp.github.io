@@ -28,7 +28,7 @@ The rest of this tutorial assumes that you have already created a GitHub
 account. You will need this to gain access to compute resources, so if
 you haven't done it yet [sign up now](https://github.com/join?source=experiment-header-dropdowns-home).
 
-Once that's done you can surf your browser to [https://jhub.eaton-lab.org/hub/login](https://github.com/join?source=experiment-header-dropdowns-home),
+Once that's done you can surf your browser to [https://jhub.eaton-lab.org/hub/login](https://jhub.eaton-lab.org/hub/login),
 and click the big fat orange "Sign in with GitHub" button. This will do a bunch of magic
 on the backend, and eventually drop you into the browser view of your Jupyter Hub instance.
 
@@ -60,25 +60,36 @@ $ ls
 home  ro-data  ro-notebooks  work
 ```
 
-`ls` stands for **"list"** and you should notice a strong correlation between the results of `ls` and the contents of the directories presented by the Jupyter Hub dashboard. Try to use `ls` to look inside your `home` and `work` directories. **Not Much There.** That's okay, because throughout the workshop we will be adding files and directories and by the time we're done, not only will you have a bunch of experience with RAD-Seq analysis, but you'll also have a ***ton*** of stuff in your home directory. We can start out by adding the first directory for this workshop:
+`ls` stands for **"list"** and you should notice a strong correlation between 
+the results of `ls` and the contents of the directories presented by the Jupyter 
+Hub dashboard. Try to use `ls` to look inside your `home` and `work` directories. 
+**Not Much There.** That's okay, because throughout the workshop we will be 
+adding files and directories and by the time we're done, not only will you have 
+a bunch of experience with RAD-Seq analysis, but you'll also have a ***ton*** of 
+stuff in your home directory.
 
-```bash
-$ mkdir ipyrad-workshop
-```
+Throughout the workshop we will be introducing new commands as the need for them 
+arises. We will pay special attention to highlighting and explaining new commands 
+and giving examples to practice with. 
 
-`mkdir` stands for **"make directory"**, and unlike the other two commands, this command takes one "argument". This argument is the name of the directory you wish to create, so here we direct mkdir to create a new directory called "ipyrad-workshop". Now you can use `ls` again, to look at the contents of your home directory and you should see this new directory now:
-
-```bash
-$ ls
-ipyrad-workshop
-```
-
-Throughout the workshop we will be introducing new commands as the need for them arises. We will pay special attention to highlighting and explaining new commands and giving examples to practice with. 
-
-> **Special Note:** Notice that the above directory we are making is not called `ipyrad workshop`. This is **very important**, as spaces in directory names are known to cause havoc on HPC systems. All linux based operating systems do not recognize file or directory names that include spaces because spaces act as default delimiters between arguments to commands. There are ways around this (for example Mac OS has half-baked "spaces in file names" support) but it will be so much for the better to get in the habit now of ***never including spaces in file or directory names***.
+> **Special Note:** Notice that neither of the 'read-only' directories are called 
+`ro data`, for example. This is **very important**, as spaces in directory names 
+are known to cause havoc on HPC systems. All linux based operating systems do not 
+recognize file or directory names that include spaces because spaces act as default 
+delimiters between arguments to commands. There are ways around this (for example 
+Mac OS has half-baked "spaces in file names" support) but it will be so much for 
+the better to get in the habit now of ***never including spaces in file or 
+directory names***.
 
 ### Install ipyrad and various analysis tools
-Surprise! We already did this for you. This is one of the strengths of working in a Jupyter Hub environment, that we can curate the [Docker image](https://www.docker.com/) we provide for this workshop (to save time with nitpicky things like installation and configuration). In truth, we rely heavily on the [Conda](https://conda.io/docs/) ecosystem for installation of ipyrad and all dependencies. Conda gives us access to an amazing array of analysis tools for both analyzing and manipulating all kinds of data. We provide [detailed and explicit ipyrad install instructions on the RADCamp site](https://radcamp.github.io/NYC2018/01_cluster_basics.html#download-and-install-software), which you can explore at your leasure outside this workshop.
+Surprise! We already did this for you. This is one of the strengths of working 
+in a Jupyter Hub environment, that we can curate the [Docker image](https://www.docker.com/) 
+we provide for this workshop (to save time with nitpicky things like 
+installation and configuration). In truth, we rely heavily on the [Conda](https://conda.io/docs/) 
+ecosystem for installation of ipyrad and all dependencies. Conda gives us 
+access to an amazing array of analysis tools for both analyzing and manipulating 
+all kinds of data. We provide [detailed and explicit ipyrad install instructions on the RADCamp site](https://radcamp.github.io/NYC2018/01_cluster_basics.html#download-and-install-software), 
+which you can explore at your leasure outside this workshop.
 
 Test the version of ipyrad installed inside your compute environment:
 ```bash
