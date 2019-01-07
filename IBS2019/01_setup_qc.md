@@ -5,7 +5,7 @@ Before we get going with our first RAD-seq assembly, we need to get set up and o
 
 * [Connecting to the Jupyter Hub](#connect-to-jupyter-hub)
 * [Basic quality control (FastQC)](#fastqc-for-quality-control)
-* [Viewing and interpreting FAstQC results](#inspecting-fastqc-utput)
+* [Viewing and interpreting FastQC results](#inspecting-fastqc-utput)
 
 ## Tutorial documentation conventions
 Each grey cell in this tutorial indicates a command line interaction. Lines starting with $ indicate a command that should be executed in a terminal, for example by copying and pasting the text into your terminal. All lines in code cells beginning with ## are comments and should not be copied and executed. Elements in code cells surrounded by angle brackets (e.g. `<username>`) are variables that need to be replaced by the user. All other lines should be interpreted as output from the issued commands.
@@ -94,7 +94,7 @@ which you can explore at your leasure outside this workshop.
 Test the version of ipyrad installed inside your compute environment:
 ```bash
 $ ipyrad --version
-ipyrad 0.7.28
+ipyrad 0.8.0.dev0
 ```
 
 ## Examine the raw data

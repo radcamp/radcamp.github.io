@@ -167,11 +167,13 @@ $ ipyrad -p params-simdata.txt -s 5 -c 4
   [####################] 100%  calculating depths    | 0:00:01
   [####################] 100%  chunking clusters     | 0:00:00
   [####################] 100%  consens calling       | 0:00:09
+  [####################] 100%  indexing alleles      | 0:00:01
 ```
 In-depth operations of step 5:
 * calculating depths - A simple refinement of the H/E estimates.
 * chunking clusters - Again, breaking big files into smaller chunks to aid parallelization.
 * consensus calling - Actually perform the consensus sequence calling
+* indexing alleles - Keeping track of phase information
 
 And here the important information is the number of `reads_consens`.
 This is the number of retained reads within each sample that we'll send on
@@ -228,22 +230,16 @@ $ ipyrad -p params-simdata.txt -s 6 -c 4
   host compute node: [4 cores] on e305ff77a529
 
   Step 6: Clustering at 0.85 similarity across 12 samples
-  [####################] 100%  concat/shuffle input  | 0:00:01
+  [####################] 100%  concatenating inputs  | 0:00:01
   [####################] 100%  clustering across     | 0:00:01
   [####################] 100%  building clusters     | 0:00:03
   [####################] 100%  aligning clusters     | 0:00:04
-  [####################] 100%  database indels       | 0:00:00
-  [####################] 100%  indexing clusters     | 0:00:01
-  [####################] 100%  building database     | 0:00:01
 ```
 In-depth operations of step 6:
-* concat/shuffle input - Gathering all consensus files and preprocessing to improve performance
+* concatenating inputs - Gathering all consensus files and preprocessing to improve performance
 * clustering across - Cluster by similarity threshold across samples
 * building clusters - Group similar reads into clusters
 * aligning clusters - Align within each cluster
-* database indels - Post-processing indels
-* indexing clusters - Post-processing clusters
-* building database - Gathering all data into a unified format
 
 Since in general the stats for results of each step are sample based, 
 the output of `-r` will only display what we had seen after step 5, 
@@ -324,12 +320,11 @@ $ ipyrad -p params-simdata.txt -s 7 -c 2
   host compute node: [4 cores] on e305ff77a529
 
   Step 7: Filter and write output files for 12 Samples
-  [####################] 100%  filtering loci        | 0:00:06
-  [####################] 100%  building loci/stats   | 0:00:00
-  [####################] 100%  building vcf file     | 0:00:02
-  [####################] 100%  writing vcf file      | 0:00:00
-  [####################] 100%  building arrays       | 0:00:00
-  [####################] 100%  writing outfiles      | 0:00:00
+  [####################] 100% 0:00:02 | applying filters
+  [####################] 100% 0:00:01 | building arrays
+  [####################] 100% 0:00:00 | writing conversions
+  [####################] 100% 0:00:00 | indexing vcf depths
+  [####################] 100% 0:00:01 | writing vcf output
   Outfiles written to: ~/work/simdata_outfiles
 ```
 

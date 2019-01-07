@@ -588,22 +588,26 @@ $ ipyrad -p params-simdata.txt -s 3 -c 4
   establishing parallel connection:
   host compute node: [4 cores] on e305ff77a529
 
-  Step 3: Clustering/Mapping reads
-  [####################] 100%  dereplicating         | 0:00:01
-  [####################] 100%  clustering            | 0:00:01
-  [####################] 100%  building clusters     | 0:00:00
-  [####################] 100%  chunking              | 0:00:00
-  [####################] 100%  aligning              | 0:00:07
-  [####################] 100%  concatenating         | 0:00:00
+  Step 3: Clustering/Mapping reads within samples
+  [####################] 100% 0:00:01 | concatenating
+  [####################] 100% 0:00:01 | dereplicating
+  [####################] 100% 0:00:00 | clustering/mapping
+  [####################] 100% 0:00:00 | building clusters
+  [####################] 100% 0:00:00 | chunking clusters
+  [####################] 100% 0:00:03 | aligning clusters
+  [####################] 100% 0:00:00 | concat clusters
+  [####################] 100% 0:00:00 | calc cluster stats
 ```
 
 In-depth operations of step 3:
+* concatenating - Concatenate files from merged assemblies
 * dereplicating - Merge all identical reads
 * clustering - Find reads matching by sequence similarity threshold
 * building clusters - Group similar reads into clusters
 * chunking - Subsample cluster files to improve performance of alignment step
 * aligning - Align all clusters
 * concatenating - Gather chunked clusters into one full file of aligned clusters
+* calc cluster stats - Just as it says!
 
 Again we can examine the results. The stats output tells you how many
 clusters were found ('clusters_total'), and the number of clusters that pass the mindepth
