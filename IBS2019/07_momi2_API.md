@@ -246,7 +246,7 @@ faster to search.
 ```
 %%bash
 ## fetch the vcf from the radcamp site
-wget wget https://radcamp.github.io/IBS2019/Prates_et_al_2016_example_data/anolis.vcf
+wget https://radcamp.github.io/IBS2019/Prates_et_al_2016_example_data/anolis.vcf
 
 ## bgzip performs a blockwise compression
 ## The -c flag directs bgzip to leave the original vcf file 
@@ -273,7 +273,7 @@ simple python program to do this conversion, which is located on github:
 
 ```
 %%bash
-wget wget https://raw.githubusercontent.com/isaacovercast/lab-notebooks/master/vcf2bed/vcf2bed.py
+wget https://raw.githubusercontent.com/isaacovercast/lab-notebooks/master/vcf2bed/vcf2bed.py
 
 python vcf2bed.py anolis.vcf
 
@@ -298,10 +298,9 @@ except to say that it is exactly what it says it is: A count of alleles in each
 population. Since each diploid individual has 2 alleles per snp, the total count 
 of alleles per population will be 2n at maximum, and 0 at minimum.
 
-```
-## The population assignments transformed into a sample-to-population dictionary
 ```python
-{'punc_IBSPCRIB0361': 'South', 'punc_MTR05978': 'South', 'punc_MTR21545': 'South', 'punc_JFT773': 'South', 'punc_MTR17744': 'South', 'punc_MTR34414': 'South', 'punc_MTRX1478': 'South', 'punc_MTRX1468': 'South', 'punc_ICST764': 'North', 'punc_MUFAL9635': 'North'}
+## The population assignments transformed into a sample-to-population dictionary
+ind2pop = {'punc_IBSPCRIB0361': 'South', 'punc_MTR05978': 'South', 'punc_MTR21545': 'South', 'punc_JFT773': 'South', 'punc_MTR17744': 'South', 'punc_MTR34414': 'South', 'punc_MTRX1478': 'South', 'punc_MTRX1468': 'South', 'punc_ICST764': 'North', 'punc_MUFAL9635': 'North'}
 
 ## Create the snp allele counts array
 anolis_ac = momi.SnpAlleleCounts.read_vcf("anolis.vcf.gz", ancestral_alleles=False, bed_file="anolis.bed", ind2pop=ind2pop)
