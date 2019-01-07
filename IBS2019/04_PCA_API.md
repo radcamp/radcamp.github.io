@@ -10,7 +10,9 @@ As part of the `ipyrad.analysis` toolkit we've created convenience functions for
 ## A note on Jupyter/IPython
 [Jupyter notebooks](http://jupyter.org/) are primarily a way to generate reproducible scientific analysis workflows in python. ipyrad analysis tools are best run inside Jupyter notebooks, as the analysis can be monitored and tweaked and provides a self-documenting workflow.
 
-First begin by [setting up and configuring jupyter notebooks](Jupyter_Notebook_Setup.md). **The rest of the materials in this part of the workshop assume you are running all code in cells of a jupyter notebook** that is running on the cluster.
+First begin by creating a new Jupyter notebook for your PCA analysis. **The 
+rest of the materials in this part of the workshop assume you are running 
+all code in cells of a jupyter notebook** that is running on the cluster.
 
 # **PCA** analyses
 
@@ -23,29 +25,9 @@ First begin by [setting up and configuring jupyter notebooks](Jupyter_Notebook_S
 
 ## Create a new notebook for the PCA
 
-**Start the notebook server**
-* First ssh to the cluster head node: `ssh work2@habanero.rcs.columbia.edu`
-* Launch the jupyter server:
-```
-cd job-scripts
-sbatch jupyter.sh
-```
-* Find the compute node you're running on:
-```
-squeue -u work2
-```
-**In a new terminal on your laptop**
-* Start the ssh tunnel:
-```
-ssh -N -f -L 9002:node162:9002 work2@habanero.rcs.columbia.edu
-```
+Start by launching the [Jupyter Hub](https://jhub.eaton-lab.org)
 
-On your local computer open a new web browser and enter the link to your notebook server in the address bar (including your assigned port number from the [participants port #s page](participants.txt)):
-```
-http://localhost:9002
-```
-
-Now you should see a view of your home directory on the cluster:
+Now you should see a view of your home directory (somewhat like this):
 ![png](04_PCA_API_files/04_PCA_API_Notebook_Home.png)
 
 Lets go inside the ipyrad-workshop folder and create a new notebook using the 'New' button, then 'Python 2' button.
@@ -68,7 +50,7 @@ import ipyrad.analysis as ipa      ## ipyrad analysis toolkit
 The following cell shows the quickest way to results using a small simulated dataset in `/scratch/af-biota`. Complete explanation of all of the features and options of the PCA module is the focus of the rest of this tutorial. Copy this code into a notebook cell and run it.
 
 ```python
-vcffile = "/rigel/edu/radcamp/users/work1/simulated_outfiles/simulated.vcf"
+vcffile = "/home/jovyan/work/simdata_outfiles/simdata.vcf"
 ## Create the pca object
 pca = ipa.pca(vcffile)
 ## Bam!
@@ -88,7 +70,7 @@ In the most common use, you'll want to plot the first two PCs, then inspect the 
 
 ```python
 ## Path to the input vcf.
-vcffile = "/rigel/edu/radcamp/users/work1/ipyrad-workshop/anoles_outfiles/anoles.vcf"
+vcffile = "/home/jovyan/ro-data/anoles_outfiles/anoles.vcf"
 pca = ipa.pca(vcffile)
 ```
 > **Note:** Here we use the anolis vcf generated with ipyrad, but the `ipyrad.analysis.pca` module can read in from *any* vcf file, so it's possible to quickly generate PCA plots for any vcf from any dataset.
