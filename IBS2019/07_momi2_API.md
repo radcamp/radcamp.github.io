@@ -255,7 +255,7 @@ bgzip -c anolis.vcf > anolis.vcf.gz
 
 ## tabix indexes the file for searching
 tabix anolis.vcf.gz
-ls anolis\*
+ls anolis/*
 ```
     anolis_pops.txt  anolis.vcf  anolis.vcf.gz  anolis.vcf.gz.tbi
 

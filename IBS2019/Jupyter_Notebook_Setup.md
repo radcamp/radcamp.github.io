@@ -1,11 +1,3 @@
-## [How to get your notebook server running (Quickstart)](Jupyter_Notebook_TLDR.md)
-
-**CUT BACK and work in this stuff**
-* Branching example
-* intro to analysis tools (maybe talk about diff analysis methods and things like gene trees vs snps vs sfs)
-* Anything else you want to talk about/show
-* Probably getting a small ipcluster instance spun up would be useful here before proceeding to the analysis.
-
 # What are Jupyter Notebooks and why would I want to use one?
 
 Jupyter notebooks are primarily a way to generate reproducible 
