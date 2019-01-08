@@ -29,7 +29,7 @@ Times           | Tuesday Jan 8 |
 9:00-9:30      | [Intro to RAD-Seq data types](http://eaton-lab.org/slides/workshop/part1/index.html#/) |
 9:30-12:00     | [Setting up and QC](01_setup_qc.md), [ipyrad part I](02_ipyrad_partI_CLI.md) & [part II](03_ipyrad_partII_CLI.md)|
 12:00-13:00     | Lunch\* |
-13:00-14:30     | [Intro to Jupyter notebooks](Jupyter_Notebook_Setup.md) and ipyrad analysis modules|
+13:00-14:30     | [Intro to Jupyter notebooks](https://eaton-lab.org/slides/workshop/part2/index.html#/) and ipyrad analysis modules|
 14:30-17:00     | [RAxML](06_RAxML_API.md) and [momi2](07_momi2_API.md) analysis walkthroughs & small group work analysing real data |
 
 \* Lunch is not covered by the registration fee, but will be offered at affordable price for workshop attendees. 
