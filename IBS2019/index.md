@@ -16,6 +16,8 @@ Malaga, Spain
 
 Participation will be limited to 30 individuals. Registration for this edition of RADCamp is $85 and can be accomplished on the [IBS Malaga Registation page](https://www.biogeography.org/meetings/ibsmalaga2019/registration/). __There are still a few slots available.__
 
+## Github username spreadsheet
+[Please type in your full name and github username on this google sheet](https://docs.google.com/spreadsheets/d/1As9Zl8yQeuikexei3--UqlvW6tAWXHYffO615m4a6aQ/edit?usp=sharing)
 
 # Schedule
 
@@ -24,7 +26,7 @@ __NB:__ This is a very preliminary schedule, so it is subject to change.
 Times           | Tuesday Jan 8 |
 -----           | ------ |
 8:30-9:00       | Check-in and refreshments |
-9:00-9:30      | [Intro to RAD-Seq data types](00_Intro_RAD.md) |
+9:00-9:30      | [Intro to RAD-Seq data types](http://eaton-lab.org/slides/workshop/part1/index.html#/) |
 9:30-12:00     | [Setting up and QC](01_setup_qc.md), [ipyrad part I](02_ipyrad_partI_CLI.md) & [part II](03_ipyrad_partII_CLI.md)|
 12:00-13:00     | Lunch\* |
 13:00-14:30     | [Intro to Jupyter notebooks](Jupyter_Notebook_Setup.md) and ipyrad analysis modules|
