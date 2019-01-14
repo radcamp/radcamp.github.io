@@ -56,8 +56,8 @@ through three different means:
 * A 30-minute (2 km) walk
 * By taxi (volunteers will provide taxi-service phone numbers; approx. cost 8 Euro)
 
-# RADCamp IBS 2019 Group Photo
-__Don't forget to get a group photo!__
+# RADCamp NYC 2018 Group Photo
+![jpg](RADCamp-IBS2019.jpg)
 
 ## Acknowledgements
 RADCamp IBS 2019 materials are largely based on materials from previous realizations of the workshop which included important contributions from:
