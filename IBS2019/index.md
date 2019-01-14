@@ -56,7 +56,7 @@ through three different means:
 * A 30-minute (2 km) walk
 * By taxi (volunteers will provide taxi-service phone numbers; approx. cost 8 Euro)
 
-# RADCamp NYC 2018 Group Photo
+# RADCamp IBS Malaga 2019 Group Photo
 ![jpg](RADCamp-IBS2019.jpg)
 
 ## Acknowledgements
