@@ -36,8 +36,6 @@ Times           | March 1 |
 * [Bucky - Phylogenetic concordance analysis](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-bucky.ipynb)
 * [ABBA-BABA - Admixture analysis](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-abba-baba.ipynb)
 
-# RADCamp IBS Malaga 2019 Group Photo
-![jpg](RADCamp-IBS2019.jpg)
 
 ## Acknowledgements
 RADCamp Yale 2019 materials are largely based on materials from previous realizations of the workshop which included important contributions from:
