@@ -1,7 +1,7 @@
 # Welcome to RadCamp 2019 - The Yale Edition
 
 March 1, 2019  
-Yale Institute for Biosphereic Studies  
+Yale Institute for Biospheric Studies  
 Center for Genetic Analyses of Biodiversity  
 21 Sachem Street  
 ESC 110  
