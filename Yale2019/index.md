@@ -18,10 +18,10 @@ __NB:__ This is a very preliminary schedule, so it is subject to change.
 Times           | March 1 |
 -----           | ------ |
 1:00-1:15       | Check-in and refreshments |
-1:15-2:00      | [Intro to RAD-Seq data types](http://eaton-lab.org/slides/workshop/part1/index.html#/) |
-2:00-2:30     | [Setting up and QC](01_setup_qc.md), [ipyrad part I](02_ipyrad_partI_CLI.md) & [part II](03_ipyrad_partII_CLI.md)|
+1:15-2:00      | [Quickstart setup](ipyrad_Install_Quickstart.md) & [QC (if desired)](01_setup_qc.md) |
+2:00-2:30     | [ipyrad part I](02_ipyrad_partI_CLI.md) & [part II](03_ipyrad_partII_CLI.md)|
 2:30-3:00     | Coffee Break\* |
-3:00-4:00     | [Intro to Jupyter notebooks](https://eaton-lab.org/slides/workshop/part2/index.html#/) and ipyrad analysis modules|
+3:00-4:00     | [Intro/SetupJupyter notebooks](Jupyter_Notebook_Setup.md) and ipyrad analysis modules|
 4:30-5:00     | [RAxML](06_RAxML_API.md) and [momi2](07_momi2_API.md) analysis walkthroughs & small group work analysing real data |
 
 * Refreshments provided and workshop sponsored by YIBS Center for Genetic Analyses of Biodiversity Laboratory & Director Adalgisa Caccone
