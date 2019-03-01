@@ -86,17 +86,15 @@ For this final cluster it's really hard to call by eye, that's why we make the c
 # Step 4: Joint estimation of heterozygosity and error rate
 
 In this step we jointly estimate sequencing error rate and heterozygosity to 
-help us figure out which reads are "real" and which include sequencing error. 
+distinguish reads that are 'good' from those that contain sequencing error. 
 We need to know which reads are "real" because in diploid organisms there
 are a maximum of 2 alleles at any given locus. If we look at the raw
 data and there are 5 or ten different "alleles", and 2 of them are very
 high frequency, and the rest are singletons then this gives us evidence
 that the 2 high frequency alleles are good reads and the rest are
-probably junk. This step is pretty straightforward, and pretty fast. Run
-it thusly:
+probably junk. This step is pretty straightforward, and pretty fast.
 
 ```bash
-$ cd ~/work
 $ ipyrad -p params-simdata.txt -s 4 -c 4
 ```
 ```
@@ -105,7 +103,7 @@ $ ipyrad -p params-simdata.txt -s 4 -c 4
   Interactive assembly and analysis of RAD-seq data
  -------------------------------------------------------------
   loading Assembly: simdata
-  from saved path: ~/work/simdata.json
+  from saved path: ~/simdata.json
   establishing parallel connection:
   host compute node: [4 cores] on e305ff77a529
   
@@ -113,9 +111,8 @@ $ ipyrad -p params-simdata.txt -s 4 -c 4
   [####################] 100%  inferring [H, E]      | 0:00:04
 ```
 
-In terms of results, there isn't as much to look at as in previous
-steps, though you can invoke the `-r` flag to see the estimated
-heterozygosity and error rate per sample.
+Invoke the `-r` flag to see the estimated heterozygosity and error rate per 
+sample.
 
 ```bash
 $ ipyrad -p params-simdata.txt -r
@@ -206,7 +203,7 @@ $ cat simdata_consens/s5_consens_stats.txt
 
 Step 6 clusters consensus sequences across samples. Now that we have
 good estimates for haplotypes within samples we can try to identify
-similar sequences at each locus between samples. We use the same
+similar sequences at each locus among samples. We use the same
 clustering threshold as step 3 to identify sequences between samples
 that are probably homologous, based on sequence similarity.
 
@@ -225,7 +222,7 @@ $ ipyrad -p params-simdata.txt -s 6 -c 4
   Interactive assembly and analysis of RAD-seq data
  -------------------------------------------------------------
   loading Assembly: simdata
-  from saved path: ~/work/simdata.json
+  from saved path: ./simdata.json
   establishing parallel connection:
   host compute node: [4 cores] on e305ff77a529
 
@@ -285,9 +282,7 @@ The final output of step 6 is a file in `simdata_across` called
 all samples. Executing the above command you'll see the output below
 which shows all the reads that align at one particular locus. You'll see
 the sample name of each read followed by the sequence of the read at
-that locus for that sample. If you wish to examine more loci you can
-increase the number of lines you want to view by increasing the value
-you pass to `head` in the above command (e.g. `... | head -n 300`).
+that locus for that sample.
 
 > **Pro tip:** You can also use `less` to look at **all** the loci. Also,
 `less` is smart enough to recognize and unpack the gzipped (.gz) file. Exit
@@ -315,7 +310,7 @@ $ ipyrad -p params-simdata.txt -s 7 -c 2
   Interactive assembly and analysis of RAD-seq data
  -------------------------------------------------------------
   loading Assembly: simdata
-  from saved path: ~/work/simdata.json
+  from saved path: ./simdata.json
   establishing parallel connection:
   host compute node: [4 cores] on e305ff77a529
 
@@ -344,7 +339,7 @@ sequence `simdata.phy` and one including only variable sites `simdata.snps.phy`,
 as well as `simdata.vcf`, and the `simdata.loci` (which is ipyrad's internal 
 format). The full list of available output formats and detailed explanations
 of each of these is available in the [ipyrad output formats documentation](https://ipyrad.readthedocs.io/output_formats.html#full-output-formats).
-The other important file here is the `simdata.txt` which gives
+The other important file here is the `simdata_stats.txt` which gives
 extensive and detailed stats about the final assembly. A quick overview of the
 blocks in this file:
 
