@@ -13,6 +13,3 @@
 * Massive parallelization (use as many cores as available)
 * Support for more RAD-seq protocols (GBS, 2bRAD, 3RAD, etc)
 * ipyrad param file interface and API mode provide a modern UI 
-
-
-* thoughts on missing data
