@@ -41,7 +41,7 @@ import ipyrad.analysis as ipa      ## ipyrad analysis toolkit
 The following cell shows the quickest way to results using a small simulated dataset in `/scratch/af-biota`. Complete explanation of all of the features and options of the PCA module is the focus of the rest of this tutorial. Copy this code into a notebook cell and run it.
 
 ```python
-vcffile = "/tmp/ipyrad-test/rad_outfiles/rad.vcf"
+vcffile = "simdata_outfiles/simdata.vcf"
 ## Create the pca object
 pca = ipa.pca(vcffile)
 ## Bam!
@@ -57,11 +57,20 @@ pca.plot()
 
 ### Simple PCA from vcf file
 
-In the most common use, you'll want to plot the first two PCs, then inspect the output, remove any obvious outliers, and then redo the PCA. It's often desirable to import a vcf file directly rather than to use the ipyrad assembly, so here we'll demonstrate this with the Anolis data.
+In the most common use, you'll want to plot the first two PCs, then inspect the output, remove any obvious outliers, and then redo the PCA. Here we'll use real data (note that __any__ vcf can be imported and plotted with the ipyrad PCA analysis tool).
+
+```python
+## For Linux Users
+!wget https://github.com/radcamp/radcamp.github.io/raw/master/Yale2019/data/anolis.vcf
+```
+```python
+## For Mac Users
+!curl -O !wget https://github.com/radcamp/radcamp.github.io/raw/master/Yale2019/data/anolis.vcf
+```
 
 ```python
 ## Path to the input vcf.
-vcffile = "/home/jovyan/ro-data/anoles_outfiles/anoles.vcf"
+vcffile = "anolis.vcf"
 pca = ipa.pca(vcffile)
 ```
 > **Note:** Here we use the anolis vcf generated with ipyrad, but the `ipyrad.analysis.pca` module can read in from *any* vcf file, so it's possible to quickly generate PCA plots for any vcf from any dataset.
