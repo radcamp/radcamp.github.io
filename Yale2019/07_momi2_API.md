@@ -158,15 +158,14 @@ model.simulate_vcf(out_prefix="momi_simdata",
                     ploidy=2,
                     sampled_n_dict=sampled_n_dict)
 ```
-Now in your `work` directory you'll see three new files:
+Now in your `radcamp-tmp` directory you'll see three new files:
 ```bash
-ls -1 ~/work
+!ls -1 ~/radcamp-tmp
 ```
-```
-momi_simdata.bed
-momi_simdata.vcf.gz
-momi_simdata.vcf.gz.tbi
-```
+    momi_simdata.bed
+    momi_simdata.vcf.gz
+    momi_simdata.vcf.gz.tbi
+
 Taking a quick peek at the vcf file you can verify the typical structure of
 a vcf file, and that we have 2 diploid samples each from North and South
 (you can also see that momi2 vcf is phased):
@@ -219,8 +218,9 @@ stashed a copy in the IBS RADCamp site. We can simply copy the file
 from there into our own `work` directories. 
 
 ```python
-#wget https://radcamp.github.io/Yale2019/Prates_et_al_2016_example_data/anolis_pops.txt
-#cat anolis_pops.txt
+%%bash
+wget https://radcamp.github.io/Yale2019/Prates_et_al_2016_example_data/anolis_pops.txt
+cat anolis_pops.txt
 ```
     punc_ICST764    North
     punc_MUFAL9635  North
@@ -246,7 +246,7 @@ faster to search.
 ```
 %%bash
 ## fetch the vcf from the radcamp site
-wget https://radcamp.github.io/IBS2019/Prates_et_al_2016_example_data/anolis.vcf
+wget https://radcamp.github.io/Yale2019/Prates_et_al_2016_example_data/anolis.vcf
 
 ## bgzip performs a blockwise compression
 ## The -c flag directs bgzip to leave the original vcf file 
