@@ -1,3 +1,7 @@
+Important documentation:  
+* [ipyrad rtd](https://ipyrad.readthedocs.io)
+* [radcamp home](https://radcamp.github.io/)
+
 ## Why use ipyrad at all?
 * Simple: Easy to install, easy to use.
 * Resourceful: Documentation, tutorials, cookbooks, and help forums available.
