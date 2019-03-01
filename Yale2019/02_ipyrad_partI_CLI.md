@@ -62,12 +62,6 @@ result is that **you should not rename or move any of the directories
 inside your project directory**, unless you know what you're doing or
 you don't mind if your assembly breaks.
 
-## Getting started
-The magic of the Jupyter Hub we're using for this workshop conceals some of the
-complexity of working in a real production environment, such as with an HPC
-system at your home campus. In this case we provide [extensive documentation about using ipyrad
-on HPC systems elsewhere on the RADCamp site](https://radcamp.github.io/NYC2018/02_ipyrad_partI_CLI.html#working-with-the-cluster).
-
 ## ipyrad help
 To better understand how to use ipyrad, let's take a look at the help argument. We will use some of the ipyrad arguments in this tutorial (for example: -n, -p, -s, -c, -r). The complete list of optional arguments and their explanation can be accessed with the `--help` flag:
 
@@ -142,9 +136,6 @@ analysing your own data you might call your parameters file something
 more informative, like the name of your organism and some details on the settings.
 
 ```bash 
-# go to our working directory
-$ cd ~/work
-
 # create a new params file named 'simdata'
 $ ipyrad -n simdata
 ```
@@ -207,8 +198,8 @@ these on the bottom of the frame.
 We need to specify where the raw data files are located, the type of data we are using (.e.g., 'gbs', 'rad', 'ddrad', 'pairddrad), and which enzyme cut site overhangs are expected to be present on the reads. Below are the parameter setings you'll need to change for the simulated single-end RAD example data:
 
 ```bash
-/home/jovyan/ro-data/ipsimdata/rad_example_R1_.fastq.gz        ## [2] [raw_fastq_path]: Location ofraw non-demultiplexed fastq files
-/home/jovyan/ro-data/ipsimdata/rad_example_barcodes.txt        ## [3] [barcodes_path]: Location of barcodes file
+ipyrad/tests/ipsimdata/rad_example_R1_.fastq.gz        ## [2] [raw_fastq_path]: Location ofraw non-demultiplexed fastq files
+ipyrad/tests/ipsimdata/rad_example_barcodes.txt        ## [3] [barcodes_path]: Location of barcodes file
 rad                            ## [7] [datatype]: Datatype (see docs): rad, gbs, ddrad, etc.
 TGCAG,                         ## [8] [restriction_overhang]: Restriction overhang (cut1,) or (cut1, cut2)
 ```
@@ -223,24 +214,13 @@ Once we start running the analysis ipyrad will create several new
 directories to hold the output of each step for this assembly. By 
 default the new directories are created in the `project_dir`
 directory and use the prefix specified by the `assembly_name` parameter.
-Because we use the default (`./`) for the `project_dir` for this tutorial, all these 
-intermediate directories will be of the form: `~/work/simdata_*`, 
-or the analagous name that you used for your assembly name.
-
-> **Note:** Again, the `./` notation indicates the current working directory. You can always view the current working directory with the `pwd` command (**p**rint **w**orking **d**irectory).
 
 # Input data format
 
-Before we get started let's take a look at what the raw data looks like.
-
-Your input data will be in fastQ format, usually ending in `.fq`,
-`.fastq`, `.fq.gz`, or `.fastq.gz`. The file/s may be compressed with 
-gzip so that they have a .gz ending, but they do not need to be. Lets take
-a look at first three reads of one of the simulated data.
+Lets take one more look at the raw data, briefly.
 
 ```bash
-$ zcat /home/jovyan/ro-data/ipsimdata/rad_example_R1_.fastq.gz | head -n 12
-```
+$ zcat ipyrad/tests/ipsimdata/rad_example_R1_.fastq.gz | head -n 12
 
 ```
 @lane1_locus0_2G_0_0 1:N:0:
@@ -282,7 +262,7 @@ TGCATGTTTATTGTCTATGTAAAAGGAAAAGCCATGCTATCAGAGATTGGCCTGGGGGGGGGGGGCAAATACATGAAAAA
 Commonly, sequencing facilities will give you one giant .gz file that contains all the reads from all the samples all mixed up together. Step 1 is all about sorting out which reads belong to which samples, so this is where the barcodes file comes in handy. The barcodes file is a simple text file mapping sample names to barcode sequences. Lets look at the simulated barcodes:
 
 ```bash
-$ cat /home/jovyan/ro-data/ipsimdata/rad_example_barcodes.txt
+$ cat ipyrad/tests/ipsimdata/rad_example_barcodes.txt
 1A_0    CATCATCAT
 1B_0    CCAGTGATA
 1C_0    TGGCCTAGT
@@ -315,7 +295,7 @@ hogging up all the CPU. We only have 40 cores so everybody has to share!
 $ ipyrad -p params-simdata.txt -s 1 -c 4
 
  -------------------------------------------------------------
-  ipyrad [v.0.7.28]
+  ipyrad [v.0.7.29]
   Interactive assembly and analysis of RAD-seq data
  -------------------------------------------------------------
   New Assembly: simdata
@@ -650,8 +630,6 @@ each sample in `./simdata_0.85/`. You can get a feel for what
 this looks like by examining a portion of one of the files. 
 
 ```bash
-## Same as above, `zcat` unzips and prints to the screen and 
-## `head -n 24` means just show me the first 24 lines. 
 $  zcat simdata_clust_0.85/1A_0.clustS.gz | head -n 24
 ```
 ```

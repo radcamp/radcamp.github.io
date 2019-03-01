@@ -6,5 +6,6 @@
 2. Install conda [(friendly directions)](https://ipyrad.readthedocs.io/installation.html#linux-install-instructions-for-conda)
 3. Create and switch to new env: `conda create -n ipyrad; conda activate ipyrad`
 4. Install ipyrad: `conda install -c ipyrad ipyrad`
+5. Make a temporary directory for workshop files and switch to it: `mkdir radcamp-tmp; cd radcamp-tmp`
 5. Fetch ipyrad github repo (for the simulated data): `git clone https://github.com/dereneaton/ipyrad`
 6. Extract simulated data: `tar -xvzf ipyrad/tests/ipsimdata.tar.gz -C ipyrad/tests/`
