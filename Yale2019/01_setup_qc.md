@@ -20,30 +20,6 @@ $ echo "wat"
 wat
 ```
 
-## Jupyter hub information
-Computational resources for the duration of this workshop are being provided by the Eaton lab at Columbia University. We will be using a Jupyter Hub instance running on a 40 core workstation in Deren's office on the Upper West Side of Manhattan. Using Jupyter Hub allows us to provide pre-configured, isolated computational environments for each participant, skipping over lots of tedious details related to downloading, installing, and configuring software and getting things set up. Jupyter hub allows us to skip straight to the fun stuff! We do provide [detailed installation and configuration instructions on the RADCamp site](https://radcamp.github.io/NYC2018/01_cluster_basics.html), so that you have some support in getting set up when you return to your home campus.
-
-### Connecting to Jupyter Hub
-The rest of this tutorial assumes that you have already created a GitHub
-account. You will need this to gain access to compute resources, so if
-you haven't done it yet [sign up now](https://github.com/join?source=experiment-header-dropdowns-home).
-
-Once that's done you can surf your browser to [https://jhub.eaton-lab.org/hub/login](https://jhub.eaton-lab.org/hub/login),
-and click the big fat orange "Sign in with GitHub" button. This will do a bunch of magic
-on the backend, and eventually drop you into the browser view of your Jupyter Hub instance.
-
-![png](01_setup_qc_files/01_jupyter_hub_dashboard.png)
-
-By default everyone will have 4 directories listed in their Jupyter home: `home`, `ro-data`, `ro-notebooks`, and `work`. Here's what each of these directories contains:
-* home: An empty directory for keeping random stuff. We won't use this during the workshop.
-* ro-data: A `read only` directory that houses datasets we'll use during the workshop. You can read these datasets, but you can't write to this directory.
-* ro-notebooks: Example analysis notebooks that you can copy to your working directory to run, modify, and save on your own.
-* work: A working directory for creating ipyrad assemblies and analysis output files.
-
-## Opening a terminal on the server
-
-From the dashboard 'Files' tab choose New->Terminal and you'll see a new tab pop open with a little black window and a command prompt, like this:
-
 ![png](01_setup_qc_files/01_jupyter_hub_terminal.png)
 
 ### Command line interface (CLI) basics
@@ -51,7 +27,7 @@ The CLI provides a way to navigate a file system, move files around, and run com
 
 ```bash
 $ pwd
-/home/jovyan
+/home/user
 ```
 `pwd` stands for **"print working directory"**, which literally means "where am I now in this filesystem?". This is a question you should always be aware of when working in a terminal. Just like when you open a file browser window, when you open a new terminal you are located somewhere; the terminal will usually start you out in your "home" directory. Ok, now we know where we are, lets take a look at what's in this directory:
 
@@ -81,42 +57,18 @@ Mac OS has half-baked "spaces in file names" support) but it will be so much for
 the better to get in the habit now of ***never including spaces in file or 
 directory names***.
 
-### Install ipyrad and various analysis tools
-Surprise! We already did this for you. This is one of the strengths of working 
-in a Jupyter Hub environment, that we can curate the [Docker image](https://www.docker.com/) 
-we provide for this workshop (to save time with nitpicky things like 
-installation and configuration). In truth, we rely heavily on the [Conda](https://conda.io/docs/) 
-ecosystem for installation of ipyrad and all dependencies. Conda gives us 
-access to an amazing array of analysis tools for both analyzing and manipulating 
-all kinds of data. We provide [detailed and explicit ipyrad install instructions on the RADCamp site](https://radcamp.github.io/NYC2018/01_cluster_basics.html#download-and-install-software), 
-which you can explore at your leasure outside this workshop.
-
-Test the version of ipyrad installed inside your compute environment:
-```bash
-$ ipyrad --version
-ipyrad 0.8.0.dev0
-```
-
 ## Examine the raw data
-Here we will get hands-on with real data for the first time. We provide three empirical data sets to choose from, and at the workshop we will leave time for exploring this data using some of the ipyrad analysis tools. Each example data set is composed of a dozen or more closely related species or population samples. They are ordered in order of the average divergence among samples. The Anolis data set is a "population-level" data set; the Pedicularis data set is composed of several closely related species and subspecies; and the Finch data set includes several species of finches from two relatively distant clades. 
+For this workshop we will be looking at and working with only the simulated data.
 
-+ [Prates *et al.* 2016](http://www.pnas.org/content/pnas/113/29/7978.full.pdf) (Anolis, single-end GBS).
-+ [Eaton et al. 2013](sysbio.oxfordjournals.org/content/62/5/689) (Pedicularis, single-end RAD).
-+ [DaCosta and Sorenson 2016](https://www.ncbi.nlm.nih.gov/pubmed/26279345) (Finches, single-end ddRAD). 
-+ Simulated datasets
-
-The raw data are located in a special shared folder where we can all access them. Any analyses we run will only read from these files (i.e., they are read-only), not modify them. This is typical of any bioinformatic analysis. We want to develop a set of scripts that start from the unprocessed data and end in new results or statistics. You can use `ls` to examine the data sets in the shared directory space. 
-
-```bash
-$ ls /home/jovyan/ro-data
-ipsimdata  SRP021469  test_outfiles
-
-$ ls /home/joyvan/ro-data/SRP021469
-29154_superba_SRR1754715.fastq.gz       33588_przewalskii_SRR1754727.fastq.gz  40578_rex_SRR1754724.fastq.gz
-30556_thamno_SRR1754720.fastq.gz        35236_rex_SRR1754731.fastq.gz          41478_cyathophylloides_SRR1754722.fastq.gz
-30686_cyathophylla_SRR1754730.fastq.gz  35855_rex_SRR1754726.fastq.gz          41954_cyathophylloides_SRR1754721.fastq.gz
-32082_przewalskii_SRR1754729.fastq.gz   38362_rex_SRR1754725.fastq.gz
-33413_thamno_SRR1754728.fastq.gz        39618_rex_SRR1754723.fastq.gz
+```
+$ ls /home/user/ipyrad/tests/simdata
+gbs_example_barcodes.txt         pairddrad_example_genome.fa.smi        pairgbs_example_barcodes.txt         rad_example_barcodes.txt
+gbs_example_genome.fa            pairddrad_example_R1_.fastq.gz         pairgbs_example_R1_.fastq.gz         rad_example_genome.fa
+gbs_example_R1_.fastq.gz         pairddrad_example_R2_.fastq.gz         pairgbs_example_R2_.fastq.gz         rad_example_genome.fa.fai
+pairddrad_example_barcodes.txt   pairddrad_wmerge_example_barcodes.txt  pairgbs_wmerge_example_barcodes.txt  rad_example_genome.fa.sma
+pairddrad_example_genome.fa      pairddrad_wmerge_example_genome.fa     pairgbs_wmerge_example_genome.fa     rad_example_genome.fa.smi
+pairddrad_example_genome.fa.fai  pairddrad_wmerge_example_R1_.fastq.gz  pairgbs_wmerge_example_R1_.fastq.gz  rad_example_R1_.fastq.gz
+pairddrad_example_genome.fa.sma  pairddrad_wmerge_example_R2_.fastq.gz  pairgbs_wmerge_example_R2_.fastq.gz
 ```
 
 ## Inspect the data
@@ -125,31 +77,27 @@ Then we will use the `zcat` command to read lines of data from one of the files 
 Here we have our first look at a **fastq formatted file**. Each sequenced read is spread over four lines, one of which contains sequence and another the quality scores stored as ASCII characters. The other two lines are used as headers to store information about the read. 
 
 ```bash
-$ zcat /home/jovyan/ro-data/SRP021469/29154_superba_SRR1754715.fastq.gz | head -n 20
-@29154_superba_SRR1754715.1 GRC13_0027_FC:4:1:12560:1179 length=74
-TGCAGGAAGGAGATTTTCGNACGTAGTGNNNNNNNNNNNNNNGCCNTGGATNNANNNGTGTGCGTGAAGAANAN
-+29154_superba_SRR1754715.1 GRC13_0027_FC:4:1:12560:1179 length=74
-IIIIIIIGIIIIIIFFFFF#EEFE<?################################################
-@29154_superba_SRR1754715.2 GRC13_0027_FC:4:1:15976:1183 length=74
-TGCAGTTGTAAATACAAATATCCCAAAANNNNGNNNNNNNTNTAATATTTTGNAANNTTGAGGGGTGTGATNTN
-+29154_superba_SRR1754715.2 GRC13_0027_FC:4:1:15976:1183 length=74
-GGGGHHHHHHHHHHHHHDHGHHHHCAAA##############################################
-@29154_superba_SRR1754715.3 GRC13_0027_FC:4:1:19092:1179 length=74
-TGCAGGCTCTGACAAAGAANTCGACTGANNNNNNNNNNNNNNCACNGGTTCNNGNNNATGTCAATGTGGTANAN
-+29154_superba_SRR1754715.3 GRC13_0027_FC:4:1:19092:1179 length=74
-GGGGHHHHBHHBHEB?B@########################################################
-@29154_superba_SRR1754715.4 GRC13_0027_FC:4:1:1248:1210 length=74
-TGCAGAACTGCTCCCAGAATCTCCAGAAATTGCGAGATTACCCCCAAAATCTCCAGAAATTTCTAGATTACCTC
-+29154_superba_SRR1754715.4 GRC13_0027_FC:4:1:1248:1210 length=74
-HHHHHDHHHFHHHDHBGHGHHHHHHHGDHE<GGE<D>DGHGGHHHDHHHHHHGHHHHFHHHHHHEHGHHEDEF>
-@29154_superba_SRR1754715.5 GRC13_0027_FC:4:1:5242:1226 length=74
-TGCAGCAGTCACCAGTCTGGCCCCTACCTCACAAAGTAGCTTGATGGCCGAACCACTCCCAAGGTGAATAGTGC
-+29154_superba_SRR1754715.5 GRC13_0027_FC:4:1:5242:1226 length=74
-HHHHHHHHHGGGGGHHHGHHHGHGGGGGBHHHBHEE>BGADDDDFHEHFDBGBDCFHBHBB8DD4???::?::?
-@29154_superba_SRR1754715.6 GRC13_0027_FC:4:1:12660:1232 length=74
-TGCAGGCCCAAAATCAACAATTATGCATAATACAACAAAGTTAATTAATTAATTATATTAAAAAAAGAAAAAGA
-+29154_superba_SRR1754715.6 GRC13_0027_FC:4:1:12660:1232 length=74
-HHHHHHHHHHHHHHHHHHHHHHHHHHHHGGHHHHFHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
+$ zcat ipyrad/tests/ipsimdata/rad_example_R1_.fastq.gz | head -n 20
+@lane1_locus0_2G_0_0 1:N:0:
+CTCCAATCCTGCAGTTTAACTGTTCAAGTTGGCAAGATCAAGTCGTCCCTAGCCCCCGCGTCCGTTTTTACCTGGTCGCGGTCCCGACCCAGCTGCCCCC
++
+BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
+@lane1_locus0_2G_0_1 1:N:0:
+CTCCAATCCTGCAGTTTAACTGTTCAAGTTGGCAAGATCAAGTCGTCCCTAGCCCCCGCGTCCGTTTTTACCTGGTCGCGGTCCCCACCCAGCTGCCCCC
++
+BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
+@lane1_locus0_2G_0_2 1:N:0:
+CTCCAATCCTGCAGTTTAACTGTTCAAGTTGGCAAGATCAAGTCGTCCCTAGCCCCCGCGTCCGTTTTTACCTGGTCGCGGTCCCGACCCAGCTGCCCCC
++
+BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
+@lane1_locus0_2G_0_3 1:N:0:
+CTCCAATCCTGCAGTTTAACTGTTCAAGTTGGCAAGATCAAGTCGTCCCTAGCCCCCGCGTCCGTTTTTACCTGGTCGCGGTCCCGACCCAGCTGCCCCC
++
+BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
+@lane1_locus0_2G_0_4 1:N:0:
+CTCCAATCCTGCAGTTTAACTGTTCAAGTTGGCAAGATCAAGTCGTCCCTAGCCCCCGCGTCCGTTTTTACCTGGTCGCGGTCCCGACCCAGCTGCCCCC
++
+BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
 ```
 
 ## FastQC for quality control
@@ -170,14 +118,13 @@ In the interest of saving time during this short workshop we will only indicate 
 
 To run fastqc on all the pedicularis samples you would execute this command:
 ```bash
-$ fastqc -o fastqc-results /home/jovyan/ro-data/SRP021469/*.gz
+$ fastqc -o fastqc-results ipyrad/tests/ipsimdata/rad_example_R1_.fastq.gz
 ```
 > **Note:** The -o flag tells fastqc where to write output files. Running this command will create a directory called `fastqc-results` in your current working directory.
-> **Note:** The `*` here is a special command line character that means "Everything that matches this pattern". So here `SRP021469/*` matches _everything_ in the raws directory. Equivalent (though more verbose) statements are: `ls SRP021469/*.gz`, `ls SRP021469/*.fastq.gz`. All of these will list all the files in the `SRP021469` directory. **Special Challenge:** Can you construct an `ls` command using wildcards that only lists samples in the `SRP021469` directory that include the digit 5 in their sample name?
 
 ### Inspecting and Interpreting FastQC Output
 
-Now lets spend a moment looking at the results from `punc_JFT773_R1__fastqc.html`, one of the Anolis samples. Opening up this html file, on the left you'll see a summary of all the results, which highlights areas FastQC indicates may be worth further examination. We will only look at a few of these.
+Now lets spend a moment looking at the results from some real data from Prates et al (2016) (Anolis punctatus, GBS data).
 
 ![png](01_setup_qc_files/anolis-fastq-main.png)
 
