@@ -17,7 +17,7 @@ __NB:__ This is a very preliminary schedule, so it is subject to change.
 
 Times           | March 1 |
 -----           | ------ |
-1:30-1:45       | Check-in and refreshments |
+1:30-1:45       | [ipyrad intro](00_Intro_RAD.md), check-in and refreshments |
 2:00-2:30      | [Quickstart setup](ipyrad_Install_Quickstart.md) & [QC (if desired)](01_setup_qc.md) |
 2:30-3:30     | [ipyrad part I](02_ipyrad_partI_CLI.md) & [part II](03_ipyrad_partII_CLI.md)|
 3:30-3:45     | Coffee Break\* |
