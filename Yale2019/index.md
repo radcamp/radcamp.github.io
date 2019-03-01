@@ -17,25 +17,23 @@ __NB:__ This is a very preliminary schedule, so it is subject to change.
 
 Times           | March 1 |
 -----           | ------ |
-1:00-1:15       | Check-in and refreshments |
-1:15-2:00      | [Quickstart setup](ipyrad_Install_Quickstart.md) & [QC (if desired)](01_setup_qc.md) |
-2:00-2:30     | [ipyrad part I](02_ipyrad_partI_CLI.md) & [part II](03_ipyrad_partII_CLI.md)|
-2:30-3:00     | Coffee Break\* |
-3:00-4:00     | [Intro/SetupJupyter notebooks](Jupyter_Notebook_Setup.md) and ipyrad analysis modules|
-4:30-5:00     | [RAxML](06_RAxML_API.md) and [momi2](07_momi2_API.md) analysis walkthroughs & small group work analysing real data |
+1:30-1:45       | Check-in and refreshments |
+2:00-2:30      | [Quickstart setup](ipyrad_Install_Quickstart.md) & [QC (if desired)](01_setup_qc.md) |
+2:30-3:30     | [ipyrad part I](02_ipyrad_partI_CLI.md) & [part II](03_ipyrad_partII_CLI.md)|
+3:30-3:45     | Coffee Break\* |
+3:45-4:00     | [Brief Intro/Setup Jupyter notebooks](Jupyter_Notebook_Setup.md) |
+4:00-5:00     | [Clustering analysis: PCA](04_PCA_API.md) and [Demographic Inference: momi2](07_momi2_API.md) analysis walkthroughs |
 
 * Refreshments provided and workshop sponsored by YIBS Center for Genetic Analyses of Biodiversity Laboratory & Director Adalgisa Caccone
 
 ## Additional ipyrad analysis cookbooks
 * [Tetrad - A Quartet-based species tree method](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-tetrad.ipynb)
 * [Phylogenetic inference: RAxML](06_RAxML_API.md)
-* [Clustering analysis: PCA](04_PCA_API.md)
 * [Demographic analysis: momi2](07_momi2_API.md)
 * [Clustering analysis: STRUCTURE](05_STRUCTURE_API.md)
 * [BPP - Bayesian inference under a multi-species coalescent model](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-bpp-species-delimitation.ipynb)
 * [Bucky - Phylogenetic concordance analysis](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-bucky.ipynb)
 * [ABBA-BABA - Admixture analysis](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-abba-baba.ipynb)
-
 
 ## Acknowledgements
 RADCamp Yale 2019 materials are largely based on materials from previous realizations of the workshop which included important contributions from:
