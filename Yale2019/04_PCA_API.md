@@ -24,15 +24,6 @@ all code in cells of a jupyter notebook** that is running on the cluster.
 * [More to explore](#more-to-explore)
 
 ## Create a new notebook for the PCA
-
-Start by launching the [Jupyter Hub](https://jhub.eaton-lab.org)
-
-Now you should see a view of your home directory (somewhat like this):
-![png](04_PCA_API_files/04_PCA_API_Notebook_Home.png)
-
-Lets go inside the ipyrad-workshop folder and create a new notebook using the 'New' button, then 'Python 2' button.
-![png](04_PCA_API_files/04_PCA_API_Notebook_New.png)
-
 First things first, rename your new notebook to give it a meaningful name:
 ![png](04_PCA_API_files/04_PCA_API_Notebook_Rename.png)
 
@@ -50,7 +41,7 @@ import ipyrad.analysis as ipa      ## ipyrad analysis toolkit
 The following cell shows the quickest way to results using a small simulated dataset in `/scratch/af-biota`. Complete explanation of all of the features and options of the PCA module is the focus of the rest of this tutorial. Copy this code into a notebook cell and run it.
 
 ```python
-vcffile = "/home/jovyan/work/simdata_outfiles/simdata.vcf"
+vcffile = "/tmp/ipyrad-test/rad_outfiles/rad.vcf"
 ## Create the pca object
 pca = ipa.pca(vcffile)
 ## Bam!
