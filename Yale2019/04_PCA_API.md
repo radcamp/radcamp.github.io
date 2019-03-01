@@ -60,12 +60,8 @@ pca.plot()
 In the most common use, you'll want to plot the first two PCs, then inspect the output, remove any obvious outliers, and then redo the PCA. Here we'll use real data (note that __any__ vcf can be imported and plotted with the ipyrad PCA analysis tool).
 
 ```python
-## For Linux Users
-!wget https://github.com/radcamp/radcamp.github.io/raw/master/Yale2019/data/anolis.vcf
-```
-```python
-## For Mac Users
-!curl -O !wget https://github.com/radcamp/radcamp.github.io/raw/master/Yale2019/data/anolis.vcf
+## For Linux Users (Mac users must replace wget with curl -O
+!wget https://radcamp.github.io/Yale2019/Prates_et_al_2016_example_data/anolis.vcf
 ```
 
 ```python

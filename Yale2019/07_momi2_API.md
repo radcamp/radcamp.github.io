@@ -13,22 +13,22 @@ The goal of demographic analyses is to understand the history of lineages (somet
 
 **Pronunciation:** Care of Jonathan Terhorst (somewhat cryptically), from a [github issue I created to resolve this conundrum](https://github.com/popgenmethods/momi2/issues/6): "How do you pronounce ∂a∂i? ;-)".... And another perspective from Jack Kamm: "Both pronunciations are valid, but I personally say 'mommy'".
 
-## Setting up the momi environment
-The Jupyter Hub instance we are using is python3, and already has conda installed, so
-will use`this to install momi2. Once again, open a termninal on the Jupyter Hub and run
-the following command (**NB:** All the `-c` arguments again are specifying
-channels that momi2 pulls dependencies from. Order matters here, so copy and paste this
-command to your terminal).
-```
+## Setting up the momi environment (TL;DR)
+(**NB:** All the `-c` arguments again are specifying channels that momi2 pulls 
+dependencies from. Order matters here, so copy and paste this command to your 
+terminal).
+
+```python
+$ conda create -n momi_py36 python=3.6 -y
+$ conda activate momi_py36
 $ conda install momi ipyparallel openblas jupyter -c defaults -c conda-forge -c bioconda -c jackkamm -y
 ```
 This will produce copious output, and should take <5 minutes.
 
 # **momi2** Analyses
-Create a new notebook inside your `~/work/` directory called `
-simdata-momi2.ipynb`. **The rest of the materials in this part of the 
-workshop assume you are running all code in cells of a jupyter notebook** that 
-is running on the Jupyter Hub.
+Create a new notebook called `simdata-momi2.ipynb`. **The rest of the materials 
+in this part of the workshop assume you are running all code in cells of a 
+jupyter notebook**.
 
 * [Constructing and plotting a simple model](#constructing-and-plotting-a-simple-model)
 * [Preparing real data for analysis](#preparing-real-data-for-analysis)
@@ -217,10 +217,10 @@ of the samples we will assign 2 samples to the "North" population, and 8 samples
 to the "South" population. To save some time we created this pops file, and have 
 stashed a copy in the IBS RADCamp site. We can simply copy the file 
 from there into our own `work` directories. 
-```
-%%bash
-wget https://radcamp.github.io/IBS2019/Prates_et_al_2016_example_data/anolis_pops.txt
-cat anolis_pops.txt
+
+```python
+#wget https://radcamp.github.io/Yale2019/Prates_et_al_2016_example_data/anolis_pops.txt
+#cat anolis_pops.txt
 ```
     punc_ICST764    North
     punc_MUFAL9635  North
