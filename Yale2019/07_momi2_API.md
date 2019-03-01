@@ -217,7 +217,7 @@ to the "South" population. To save some time we created this pops file, and have
 stashed a copy in the IBS RADCamp site. We can simply copy the file 
 from there into our own `work` directories. 
 
-```python
+```
 %%bash
 wget https://radcamp.github.io/Yale2019/Prates_et_al_2016_example_data/anolis_pops.txt
 cat anolis_pops.txt
