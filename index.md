@@ -27,10 +27,12 @@ computational experience.
 Workshop attendees will need to bring a laptop computer.
 
 ## Upcoming events:
-* [RADCamp2019-Yale](Yale2019/index.md)
+
+* [RADCamp2019-NYC](NYC2019/index.md)
 
 ## Past events:
 
+* [RADCamp2019-Yale](Yale2019/index.md)
 * [RADCamp2019-IBS](IBS2019/index.md)
 * [RADCamp2018-NYC](NYC2018/index.md)
 * [RADCamp2018-AF-Biota (Brazil)](AF-Biota/index.md)
