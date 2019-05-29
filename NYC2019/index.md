@@ -1,4 +1,4 @@
-# Welcome to RadCamp 2018 - The New York City Edition
+# Welcome to RadCamp 2019 - The New York City Edition
 
 Part I - Wet lab (3RAD protocol)  
 September 14-15, 2019
