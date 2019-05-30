@@ -18,18 +18,32 @@ New York City
 
 # Registration
 
-Participation will be limited to 30 individuals. Registration for this edition of RADCamp is $15, which will cover coffee and light snacks for the 3 day workshop. The registration fee is more of an inducement to prevent people from signing up and then flaking, so __nobody will be turned away for lack of funding.__ If you want to request a fee waiver please contact the organizers.
+Participation will be limited to 30 individuals. Registration for this edition
+of RADCamp has not yet been decided, but it will cover coffee and light snacks
+for the days of the workshop. The registration fee is more of an inducement to prevent
+people from signing up and then flaking, so __nobody will be turned away for
+lack of funding.__ If you want to request a fee waiver please contact the
+organizers.
 
-[Register for RADCamp 2018 NYC](https://www.eventbrite.com/e/radcamp-2018-new-york-city-edition-tickets-48820396119)
+__Registration is not yet available. Stay tuned__
 
-# Schedule
+# Wet Lab (3RAD) Schedule
 
-Times            | Tuesday | Wednesday (Phylogenetics) | Thursday (Population genetics)
------            | ------ | ------- | ---------
-8:30-9:00       | Check-in and refreshments | Check-in and refreshments | Check-in and refreshments
-9:00-12:30      | Intro to RAD-Seq data types | (Instruction) [Jupyter notebook setup](Jupyter_Notebook_Setup.md), [Tetrad - A Quartet-based species tree method](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-tetrad.ipynb), & [Phylogenetic inference: RAxML](06_RAxML_API.md) | (Instruction) [Clustering analysis: PCA](04_PCA_API.md), Demographic analysis ([momi2](07_momi2_API.md))
-12:30-14:00 | Lunch | Lunch | Lunch
-14:00-17:00 |[Cluster basics](01_cluster_basics.md) and [ipyrad parts I](02_ipyrad_partI_CLI.md) & [II](03_ipyrad_partII_CLI.md) | (Small Group work) [Targeted phylogenetics exercises](tba.md) | (Small Group work) [Targeted population genetics exercises](tba.md)
+Times            | Saturday 9/14 | Sunday 9/15 |
+-----            | ------ | ------- |
+8:30-9:00       | Check-in and refreshments | Check-in and refreshments |
+9:00-12:30      | Intro to RAD-Seq data types | Do some stuff |
+12:30-14:00 | Lunch | Lunch |
+14:00-17:00 | Do some stuff | Do some more stuff |
+
+# Bioinformatics (ipyrad) Schedule
+
+Times            | Saturday 10/12 | Sunday 10/13 |
+-----            | ------ | ------- |
+8:30-9:00       | Check-in and refreshments | Check-in and refreshments |
+9:00-12:30      | Intro to RAD-Seq data types | (Instruction) [Jupyter notebook setup](Jupyter_Notebook_Setup.md), [Tetrad - A Quartet-based species tree method](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-tetrad.ipynb), & [Phylogenetic inference: RAxML](06_RAxML_API.md) |
+12:30-14:00 | Lunch | Lunch |
+14:00-17:00 |[Cluster basics](01_cluster_basics.md) and [ipyrad parts I](02_ipyrad_partI_CLI.md) & [II](03_ipyrad_partII_CLI.md) | (Instruction) [Clustering analysis: PCA](04_PCA_API.md), Demographic analysis ([momi2](07_momi2_API.md)) |
 
 ## Additional ipyrad analysis cookbooks
 
