@@ -52,13 +52,13 @@ Times            | Saturday 10/12 | Sunday 10/13 |
 * [Bucky - Phylogenetic concordance analysis](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-bucky.ipynb)
 * [ABBA-BABA - Admixture analysis](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-abba-baba.ipynb)
 
-## RADCamp NYC 2018 co-sponsored by:
+## RADCamp NYC 2019 co-sponsored by:
 
 ![CUNY Graduate Center](images/GC-logo.png)
 ![Columbia E3B](images/E3B-logo.jpg)
 
 # RADCamp NYC 2018 Group Photo
-![jpg](RADCamp-NYC2018-group-photo.jpg)
+Don't forget to get a sweet group photo!
 
 ## Acknowledgements
-RADCamp NYC 2018 materials are largely based on materials from the [RADCamp AF-Biota workshop](https://radcamp.github.io/AF-Biota/) which were created by Isaac Overcast, Mariana Vasconcellos, and Laura Bertola.
+RADCamp NYC 2019 materials are largely based on materials from the [RADCamp AF-Biota workshop](https://radcamp.github.io/AF-Biota/) which were created by Isaac Overcast, Mariana Vasconcellos, and Laura Bertola.
