@@ -54,6 +54,7 @@ Times            | Saturday 10/12 | Sunday 10/13 |
 
 ## RADCamp NYC 2019 co-sponsored by:
 
+![SSB](images/SSB.png)
 ![CUNY Graduate Center](images/GC-logo.png)
 ![Columbia E3B](images/E3B-logo.jpg)
 
