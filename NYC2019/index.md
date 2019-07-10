@@ -66,7 +66,7 @@ workshop if you acknowledge that if accepted, you will commit logistically and e
 attend. A registration fee ($15 per weekend) will be due upon acceptance. Nobody will be turned
 away for lack of funding - if you would like to request a fee waiver, contact the organizers.
 
-**[RADCamp2019-NYC Application](https://forms.gle/WRqVBYeiQjspoMUf6)**
+**[RADCamp2019-NYC Application](https://forms.gle/WRqVBYeiQjspoMUf6)**  
 Application Deadline: **Aug 1st**
 
 # Wet Lab (3RAD) Schedule
