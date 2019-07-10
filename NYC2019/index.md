@@ -15,12 +15,12 @@ This two-part workshop is designed to guide participants through a full RADseq p
 study.
 
 **Part** I of the workshop is an interactive 2-day wet-lab workshop where attendees will be
-guided through a RADseq DNA library preparation (3RAD). Participants will have the option of
-bringing 10-20 of their own extracted DNA samples that can be used in the workshop to develop
-pilot data for their research. In addition to demonstrating and generating 3RAD libraries, we will
-introduce RADseq methods, explain common pitfalls and focus on ways to increase data quality
-and reduce missing data while reducing costs compared to other protocols. At the end of the first
-weekend the libraries will be pooled and sent for paired-end Illumina sequencing to generate
+guided through a RADseq DNA library preparation ([3RAD]( https://www.biorxiv.org/content/10.1101/205799v4)). 
+Participants will have the option of bringing 10-20 of their own extracted DNA samples that can be 
+used in the workshop to develop pilot data for their research. In addition to demonstrating and generating 
+3RAD libraries, we will introduce RADseq methods, explain common pitfalls and focus on ways to increase 
+data quality and reduce missing data while reducing costs compared to other protocols. At the end of the 
+first weekend the libraries will be pooled and sent for paired-end Illumina sequencing to generate
 ~1M reads per sample. The best part is that the sequencing cost will be completely subsidized
 (free!). One month later we will meet again to analyze these data.
 
@@ -50,7 +50,7 @@ College of New York.
   - Deren Eaton (Columbia)
   - Isaac Overcast (CCNY)
   - Sandra Hoffberg (Columbia)
-  - Natalia Bayona (University of Georgia)
+  - Natalia Bayona VÃ¡squez (University of Georgia)
   - Laura Bertola (CCNY)
 
 # Registration
@@ -61,10 +61,11 @@ weekend. This workshop is geared toward practicing field biologists without RADs
 their system and with little or no computational experience. We encourage all scientists to submit
 their application. We especially welcome women and under-represented minorities and early
 stage students, or early-career faculty with the potential to pass on skills to large groups. Note
-that you will be responsible for your own lodging and transportation. Please only apply to the
-workshop if you acknowledge that if accepted, you will commit logistically and economically to
-attend. A registration fee ($15 per weekend) will be due upon acceptance. Nobody will be turned
-away for lack of funding - if you would like to request a fee waiver, contact the organizers.
+that you will be responsible for your own lodging, transportation, and meals We will provide coffee 
+and snacks during breaks. Please only apply to the workshop if you acknowledge that if accepted, 
+you will commit logistically and economically to attend. A registration fee ($15 per weekend) 
+will be due upon acceptance. Nobody will be turned away for lack of funding - if you would like 
+to request a fee waiver, contact the organizers.
 
 **[RADCamp2019-NYC Application](https://forms.gle/WRqVBYeiQjspoMUf6)**  
 Application Deadline: **Aug 1st**
