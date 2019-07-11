@@ -50,7 +50,7 @@ College of New York.
   - Deren Eaton (Columbia)
   - Isaac Overcast (CCNY)
   - Sandra Hoffberg (Columbia)
-  - Natalia Bayona VÃ¡squez (University of Georgia)
+  - Natalia Bayona Va¡squez (University of Georgia)
   - Laura Bertola (CCNY)
 
 # Registration
@@ -61,7 +61,7 @@ weekend. This workshop is geared toward practicing field biologists without RADs
 their system and with little or no computational experience. We encourage all scientists to submit
 their application. We especially welcome women and under-represented minorities and early
 stage students, or early-career faculty with the potential to pass on skills to large groups. Note
-that you will be responsible for your own lodging, transportation, and meals We will provide coffee 
+that you will be responsible for your own lodging, transportation, and meals. We will provide coffee 
 and snacks during breaks. Please only apply to the workshop if you acknowledge that if accepted, 
 you will commit logistically and economically to attend. A registration fee ($15 per weekend) 
 will be due upon acceptance. Nobody will be turned away for lack of funding - if you would like 
