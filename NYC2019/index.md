@@ -78,7 +78,7 @@ Times            | Saturday 9/14 | Sunday 9/15 |
 9:00-12:30      | Test restriction enzymes | Library amplification |
 12:30-13:30 | Lunch | Lunch |
 13:30-17:00 | Digestion and Ligation | Size selection and QC |
-17:00-19:00 |                        | Networking dinner |
+17:00-19:00 |     Free evening       | Networking dinner |
 # Bioinformatics (ipyrad) Schedule
 
 Times            | Saturday 10/12 | Sunday 10/13 |
@@ -87,7 +87,7 @@ Times            | Saturday 10/12 | Sunday 10/13 |
 9:00-12:30      | Intro to RAD-Seq data types | (Instruction) [Jupyter notebook setup](Jupyter_Notebook_Setup.md), [Tetrad - A Quartet-based species tree method](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-tetrad.ipynb), & [Phylogenetic inference: RAxML](06_RAxML_API.md) |
 12:30-14:00 | Lunch | Lunch |
 14:00-17:00 |[Cluster basics](01_cluster_basics.md) and [ipyrad parts I](02_ipyrad_partI_CLI.md) & [II](03_ipyrad_partII_CLI.md) | (Instruction) [Clustering analysis: PCA](04_PCA_API.md), Demographic analysis ([momi2](07_momi2_API.md)) |
-17:00-19:00 |                        | Networking dinner |
+17:00-19:00 | Free evening        | Networking dinner |
 
 ## Additional ipyrad analysis cookbooks
 
