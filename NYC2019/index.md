@@ -78,7 +78,8 @@ Times            | Saturday 9/14 | Sunday 9/15 |
 9:00-12:30      | Test restriction enzymes | Library amplification |
 12:30-13:30 | Lunch | Lunch |
 13:30-17:00 | Digestion and Ligation | Size selection and QC |
-17:00-19:00 | Free evening       | Networking dinner |
+17:00-19:00 | Free evening        | Networking dinner |
+
 # Bioinformatics (ipyrad) Schedule
 
 Times            | Saturday 10/12 | Sunday 10/13 |
