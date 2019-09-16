@@ -104,9 +104,11 @@ Times            | Saturday 10/12 | Sunday 10/13 |
 ![CUNY Graduate Center](images/GC-logo.png)
 ![Columbia E3B](images/E3B-logo.jpg)
 
-# RADCamp NYC 2019 Group Photo
+# RADCamp NYC 2019 Part I Group Photo
 ![jpg](RADCampNYC-2019-PartI.jpg)
 
+
+# RADCamp NYC 2019 Part I Group Photo
 Don't forget to get a sweet group photo!
 
 ## Acknowledgements
