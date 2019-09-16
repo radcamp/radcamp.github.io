@@ -108,7 +108,7 @@ Times            | Saturday 10/12 | Sunday 10/13 |
 ![jpg](RADCampNYC-2019-PartI.jpg)
 
 
-# RADCamp NYC 2019 Part I Group Photo
+# RADCamp NYC 2019 Part II Group Photo
 Don't forget to get a sweet group photo!
 
 ## Acknowledgements
