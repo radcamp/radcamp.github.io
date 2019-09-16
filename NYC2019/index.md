@@ -105,6 +105,8 @@ Times            | Saturday 10/12 | Sunday 10/13 |
 ![Columbia E3B](images/E3B-logo.jpg)
 
 # RADCamp NYC 2019 Group Photo
+![jpg](RADCampNYC-2019-PartI.jpg)
+
 Don't forget to get a sweet group photo!
 
 ## Acknowledgements
