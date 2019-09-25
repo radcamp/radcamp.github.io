@@ -67,17 +67,14 @@ you will commit logistically and economically to attend. A registration fee ($15
 will be due upon acceptance. Nobody will be turned away for lack of funding - if you would like 
 to request a fee waiver, contact the organizers.
 
-**[RADCamp2019-NYC Application](https://forms.gle/WRqVBYeiQjspoMUf6)**  
-Application Deadline: **Aug 1st**
-
 # Wet Lab (3RAD) Schedule
 
 Times            | Saturday 9/14 | Sunday 9/15 |
 -----            | ------ | ------- |
 8:30-9:00       | Check-in and refreshments | Check-in and refreshments |
-9:00-12:30      | Test restriction enzymes | Library amplification |
+9:00-12:30      | Lecture | Library amplification |
 12:30-13:30 | Lunch | Lunch |
-13:30-17:00 | Digestion and Ligation | Size selection and QC |
+13:30-17:00 | Digestion and Ligation | Library amplification and QC |
 17:00-19:00 | Free evening        | Networking dinner |
 
 # Bioinformatics (ipyrad) Schedule
@@ -112,4 +109,5 @@ Times            | Saturday 10/12 | Sunday 10/13 |
 Don't forget to get a sweet group photo!
 
 ## Acknowledgements
-RADCamp NYC 2019 materials are largely based on materials from the [RADCamp AF-Biota workshop](https://radcamp.github.io/AF-Biota/) which were created by Isaac Overcast, Mariana Vasconcellos, and Laura Bertola.
+RADcamp NYC 2019 Part I materials are prepared by Sandra Hoffberg, Natalia Bayona Vasquez, and Travis Glenn. Many things we reference can be found on [BadDNA.uga.edu](baddna.uga.edu). We borrowed supplies from the Rubenstein, Duik-Wasser, and Hickerson labs at Columbia and CCNY.
+RADCamp NYC 2019 Part II materials are largely based on materials from the [RADCamp AF-Biota workshop](https://radcamp.github.io/AF-Biota/) which were created by Isaac Overcast, Mariana Vasconcellos, and Laura Bertola.
