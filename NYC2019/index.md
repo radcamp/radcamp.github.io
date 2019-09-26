@@ -50,7 +50,7 @@ College of New York.
   - Deren Eaton (Columbia)
   - Isaac Overcast (CCNY)
   - Sandra Hoffberg (Columbia)
-  - Natalia Bayona Va¡squez (University of Georgia)
+  - Natalia Bayona Vasquez (University of Georgia)
   - Laura Bertola (CCNY)
 
 # Registration
@@ -72,10 +72,24 @@ to request a fee waiver, contact the organizers.
 Times            | Saturday 9/14 | Sunday 9/15 |
 -----            | ------ | ------- |
 8:30-9:00       | Check-in and refreshments | Check-in and refreshments |
-9:00-12:30      | Lecture | Library amplification |
+9:00-12:30      | [Lecture](Part_I_Files/RADcamp2019_slides.pdf) | Library amplification |
 12:30-13:30 | Lunch | Lunch |
-13:30-17:00 | Digestion and Ligation | Library amplification and QC |
+13:30-17:00 | Digestion and Ligation | [Library amplification and QC](Part_I_Files/gel_images_of_complete_libraries.pdf) |
 17:00-19:00 | Free evening        | Networking dinner |
+
+## 3RAD resources
+* [Indices used during workshop](Part_I_Files/sample_tags.pdf)
+* [Inner barcode sequences for ipyrad](Part_I_Files/plate_inner_barcodes.txt)
+* [Order form with index sequences](Part_I_Files/BadDNA_Oligo_Order_Form_current.xlsx)
+* [Full protocol for plates](Part_I_Files/3RAD_Molecular_ID_Protocol.docx)
+* [Library pooling guide](Part_I_Files/Library_Pooling_Guide_with_directions_June2016.xlsx)
+* [Adapter Info](Part_I_Files/3RAD_iTRu_adapter_TaggiMatrix.xlsx)
+* [How to resuspend adapters](Part_I_Files/Adapter_Mixed_Plate_Instructions.docx)
+* [How to resuspend primers - i7 and i5](Part_I_Files/Primer_Plate_Instructions_1.25nmole.docx)
+* [Index diversity calculator](Part_I_Files/Index_diversity_calculator_June2016.xlsx)
+* [Homemade speedbeads](Part_I_Files/Speedbead_Protocol_June2016.docx)
+
+
 
 # Bioinformatics (ipyrad) Schedule
 
@@ -109,5 +123,5 @@ Times            | Saturday 10/12 | Sunday 10/13 |
 Don't forget to get a sweet group photo!
 
 ## Acknowledgements
-RADcamp NYC 2019 Part I materials are prepared by Sandra Hoffberg, Natalia Bayona Vasquez, and Travis Glenn. Many things we reference can be found on [BadDNA.uga.edu](baddna.uga.edu). We borrowed supplies from the Rubenstein, Duik-Wasser, and Hickerson labs at Columbia and CCNY.
+RADcamp NYC 2019 Part I materials are prepared by Sandra Hoffberg, Natalia Bayona Vasquez, and Travis Glenn. Many things we reference can be found on [badDNA.uga.edu](https://baddna.uga.edu). We borrowed supplies from the Rubenstein, Duik-Wasser, and Hickerson labs at Columbia and CCNY.
 RADCamp NYC 2019 Part II materials are largely based on materials from the [RADCamp AF-Biota workshop](https://radcamp.github.io/AF-Biota/) which were created by Isaac Overcast, Mariana Vasconcellos, and Laura Bertola.
