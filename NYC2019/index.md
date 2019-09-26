@@ -78,10 +78,11 @@ Times            | Saturday 9/14 | Sunday 9/15 |
 17:00-19:00 | Free evening        | Networking dinner |
 
 ## 3RAD resources
-* [Indices used during workshop](Part_I_Files/sample_tags.pdf)
-* [Inner barcode sequences for ipyrad](Part_I_Files/plate_inner_barcodes.txt)
-* [Order form with index sequences](Part_I_Files/BadDNA_Oligo_Order_Form_current.xlsx)
-* [Full protocol for plates](Part_I_Files/3RAD_Molecular_ID_Protocol.docx)
+* [i7 and inner barcodes used during workshop](Part_I_Files/sample_tags.pdf)
+* [Find the i5/i7 index sequence from the name](Part_I_Files/Sample_tags_populator_2019.xlsx)
+* [Inner barcode sequences in ipyrad format](Part_I_Files/plate_inner_barcodes.txt)
+* [BadDNA order form with index sequences](Part_I_Files/BadDNA_Oligo_Order_Form_current.xlsx)
+* [Full 3RAD protocol for plates](Part_I_Files/3RAD_Molecular_ID_Protocol.docx)
 * [Library pooling guide](Part_I_Files/Library_Pooling_Guide_with_directions_June2016.xlsx)
 * [Adapter Info](Part_I_Files/3RAD_iTRu_adapter_TaggiMatrix.xlsx)
 * [How to resuspend adapters](Part_I_Files/Adapter_Mixed_Plate_Instructions.docx)
