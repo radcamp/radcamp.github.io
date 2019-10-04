@@ -1,6 +1,15 @@
 # RADCamp NYC 2019 Part II (Bioinformatics) Day 1 (AM)
 
-Overview of process
+Overview of the morning activities:
+* Participant intro slides (including instructors)
+* Intro to RADSeq (Brief) (Deren)
+* Come take a look at the ipyrad docs
+* Everybody get on binder.
+* Intro to bash scripting/command line stuff (Laura)
+ * Commands and command line arguments
+* Fastqc (pull in a fastqc file from a wget) (conda install fastqc in binder) (Laura)
+ * Wget some fastq data from somewhere (this needs to be set up)
+
 * [Set Jupyter notebook password](#set-jupyter-notebook-password)
 * [Create the config file](#set-default-configuration-behavior)
 * [Start remote notebook server](#run-notebook-server)

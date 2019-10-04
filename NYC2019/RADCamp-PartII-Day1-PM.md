@@ -1,6 +1,13 @@
 # RADCamp NYC 2019 Part II (Bioinformatics) Day 1 (PM)
 
-Overview of process
+Overview of the afternoon activities:
+* ipyrad CLI w/ simdata (pe-ddrad)
+ * Make a params file and edit (learn how to use nano)
+* Standard stuff from here on out. Walk through 1-7.
+* Now we will move to the real data
+ * Covering i7 demultiplexing (Deren, mostly a lecture based thing, w/ an introduction to API mode). Show some results from the real demux process.
+* Last hour at the end of the 1st day. Form the groups at the end of the day organized around the 16 new datasets. Get params files for the real data and fire off the ipyrad assemblies on google cloud instances (needs to be set up).
+
 * [Set Jupyter notebook password](#set-jupyter-notebook-password)
 * [Create the config file](#set-default-configuration-behavior)
 * [Start remote notebook server](#run-notebook-server)
