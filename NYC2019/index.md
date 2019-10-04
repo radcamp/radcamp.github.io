@@ -91,23 +91,26 @@ Times            | Saturday 9/14 | Sunday 9/15 |
 * [Homemade speedbeads](Part_I_Files/Speedbead_Protocol_June2016.docx)
 
 
-
 # Bioinformatics (ipyrad) Schedule
 
 Times            | Saturday 10/12 | Sunday 10/13 |
 -----            | ------ | ------- |
 8:30-9:00       | Check-in and refreshments | Check-in and refreshments |
-9:00-12:30      | Intro to RAD-Seq data types | (Instruction) [Jupyter notebook setup](Jupyter_Notebook_Setup.md), [Tetrad - A Quartet-based species tree method](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-tetrad.ipynb), & [Phylogenetic inference: RAxML](06_RAxML_API.md) |
+9:00-12:30      | [Introductions, setup, bash basics, and data QC](RADCamp-PartII-Day1-morning.md) | [ipyrad API and analysis tools](RADCamp-PartII-Day2-morning.md) |
 12:30-14:00 | Lunch | Lunch |
-14:00-17:00 |[Cluster basics](01_cluster_basics.md) and [ipyrad parts I](02_ipyrad_partI_CLI.md) & [II](03_ipyrad_partII_CLI.md) | (Instruction) [Clustering analysis: PCA](04_PCA_API.md), Demographic analysis ([momi2](07_momi2_API.md)) |
+14:00-17:00 |[ipyrad CLI](RADCamp-PartII-Day1-afternoon.md) |  [Small group analysis of real data](RADCamp-PartII-Day2-afternoon.md) |
 17:00-19:00 | Networking Dinner | Social |
 
 ## Additional ipyrad analysis cookbooks
 
+* [Tetrad - A Quartet-based species tree method](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-tetrad.ipynb)
+* [Phylogenetic inference: RAxML](06_RAxML_API.md)
+* [Clustering analysis: PCA](04_PCA_API.md)
 * [Clustering analysis: STRUCTURE](05_STRUCTURE_API.md)
 * [BPP - Bayesian inference under a multi-species coalescent model](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-bpp-species-delimitation.ipynb)
 * [Bucky - Phylogenetic concordance analysis](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-bucky.ipynb)
 * [ABBA-BABA - Admixture analysis](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-abba-baba.ipynb)
+* [emographic analysis ([momi2](07_momi2_API.md))
 
 ## RADCamp NYC 2019 co-sponsored by:
 
