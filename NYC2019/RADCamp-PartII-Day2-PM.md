@@ -1,4 +1,5 @@
-# RADCamp NYC 2019 Part II (Bioinformatics) Day 1 (PM)
+# RADCamp NYC 2019 Part II (Bioinformatics)
+# Day 2 (PM)
 
 Overview of the morning activities:
 
