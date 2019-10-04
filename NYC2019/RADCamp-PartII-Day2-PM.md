@@ -1,6 +1,14 @@
 # RADCamp NYC 2019 Part II (Bioinformatics) Day 1 (PM)
 
-Overview of process
+Overview of the morning activities:
+
+* Look at results of the structure runs
+* Briefly review the other available API mode tools
+* Break into groups around real data
+ * With the intention of running a few analyses, creating some plots and reporting the results to the rest of the group.
+ * Google drive folder with 1 slideshow per group.
+* End of day 2 with presentations on what people learned.
+
 * [Set Jupyter notebook password](#set-jupyter-notebook-password)
 * [Create the config file](#set-default-configuration-behavior)
 * [Start remote notebook server](#run-notebook-server)
