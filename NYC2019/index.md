@@ -110,7 +110,7 @@ Times            | Saturday 10/12 | Sunday 10/13 |
 * [BPP - Bayesian inference under a multi-species coalescent model](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-bpp-species-delimitation.ipynb)
 * [Bucky - Phylogenetic concordance analysis](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-bucky.ipynb)
 * [ABBA-BABA - Admixture analysis](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-abba-baba.ipynb)
-* [emographic analysis ([momi2](07_momi2_API.md))
+* [Demographic analysis ([momi2](07_momi2_API.md))
 
 ## RADCamp NYC 2019 co-sponsored by:
 
