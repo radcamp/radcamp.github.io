@@ -6,8 +6,8 @@
 * [Examine quality of the assemblies](#examine-quality-of-assemblies)
 * [Next steps after you finish your first assembly](#next-steps-after-you-finish-your-first-assembly)
 * [Intro to genome scale analysis](#intro-to-genome-scale-analysis)
-* [ipyrad analysis API - Principal Component Analysis (PCA)](#ipyrad-analysis-API---Principal-Component-Analysis-(PCA))
-* [ipyrad analysis API - Population STRUCTURE](ipyrad-analysis-API---Population-STRUCTURE)
+* [ipyrad analysis API - Principal Component Analysis (PCA)](#ipyrad-analysis-API-Principal-Component-Analysis-(PCA))
+* [ipyrad analysis API - Population STRUCTURE](#ipyrad-analysis-API-Population-STRUCTURE)
 
 ## Overview of new datasets
 **put link to google drive slides here**
@@ -48,11 +48,11 @@ data and why?
 * Shortcomings/advantages of RAD?
 * Why are the analysis tools better than trying to go out on your own.
 
-## ipyrad analysis API - Principal Component Analysis (PCA)
+## ipyrad analysis API Principal Component Analysis (PCA)
 Lead: Isaac
 
 
-## ipyrad analysis API - Population STRUCTURE
+## ipyrad analysis API Population STRUCTURE
 
 
 Notebook (let it run over lunch)

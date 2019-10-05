@@ -6,14 +6,20 @@
 * [Look at the real data](#Look-at-the-real-data-we-generate)
 * [Assemble real data](#Form-groups-and-assemble-real-data)
 
+## Participant intros Part II
+[1 minute/1 slide participant intros](https://docs.google.com/presentation/d/1OY-laS2s6lITBBQfB_APTNcb-6o7cMdqgFqwZrRBzBg/edit?usp=sharing)
 
 ## ipyrad CLI simulated data assembly
+Lead: Isaac
+
 * Make a params file and edit (learn how to use nano)
 * Standard stuff from here on out. Walk through 1-7.
 
 ## Look at the real data we generated
+Lead: Deren
+
 * Now we will move to the real data
- * Covering i7 demultiplexing (Deren, mostly a lecture based thing, w/ an introduction to API mode).
+ * Covering i7 demultiplexing (Mostly a lecture based thing, w/ an introduction to API mode).
  * Show some results from the real demux process.
 
 ## Form groups and assemble real data

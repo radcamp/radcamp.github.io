@@ -1,25 +1,26 @@
 # RADCamp NYC 2019 Part II (Bioinformatics)
 # Day 2 (PM)
 
-Overview of the morning activities:
+## Overview of the afternoon activities:
+* [Review results of STRUCTURE runs](#review-results-of-STRUCTURE-runs)
+* [Overview of other available API mode tools](#overview-of-other-available-API-mode-tools)
+* [Small group work focused on the pilot datasets](#small-group-work-focused-on-the-pilot-datasets)
+* [Brief presentation of results of small group analysis](#brief-presentation-of-results-of-small-group-analysis)
+* [Wrap-up & adjourn](#wrap-up-&-adjourn)
 
-* Look at results of the structure runs
-* Briefly review the other available API mode tools
-* Break into groups around real data
- * With the intention of running a few analyses, creating some plots and reporting the results to the rest of the group.
- * Google drive folder with 1 slideshow per group.
-* End of day 2 with presentations on what people learned.
+## Review results of STRUCTURE runs
 
-* [Set Jupyter notebook password](#set-jupyter-notebook-password)
-* [Create the config file](#set-default-configuration-behavior)
-* [Start remote notebook server](#run-notebook-server)
-* Establish jupyter notebook ssh tunnel: [Windows](#windows-ssh-tunnel-configuration) - [Mac/Linux](#mac-ssh-tunnel-configuration)
-* **[What do do if your notebook isn't working](#what-to-do-if-the-notebook-is-not-working)**
-* [More information about jupyter](#useful-jupyter-tricks/ideas)
+## Overview of other available API mode tools
 
-### Set Jupyter Notebook Password
-Jupyter was already installed as a dependency of ipyrad, so we just
-need to set a password before we can launch it. This command will
-prompt you for a new password for your notebook (you will **only ever 
-have to do this once on the HPC**). Run this command in a terminal on
-the head node:
+## Small group work focused on the pilot datasets
+Break into groups around real data With the intention of running a few analyses,
+creating some plots and reporting the results to the rest of the group.
+
+Results should be put in a google slides presentation in the RADCamp google
+drive folder.
+
+## Brief presentation of results of small group analysis
+**Link to the google drive with slides for each small group.**
+
+## Wrap-up & adjourn
+Put stuff here.
