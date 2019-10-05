@@ -7,7 +7,7 @@
 * [Intro to ipyrad documentation](#intro-ipyrad-docs)
 * [Connect to a binder instance](#intro-to-binder)
 * [Intro to command line and bash scripting](#command-line-intro)
-* [RADseq quality control (QC)](#data-qc)
+* [RADseq data quality control (QC)](#data-qc)
 
 ## Participant intro slides
 **put link to google drive slides here**
