@@ -1,8 +1,6 @@
 # RADCamp NYC 2019 Part II (Bioinformatics)
 # Day 1 (PM)
 
-## Overview of the morning activities:
-
 ## Overview of the afternoon activities:
 * [ipyrad CLI assembly of simulated data (pe-ddrad)](#ipyrad-cli-simulated-data-assembly)
 * [Look at the real data](#Look-at-the-real-data-we-generate)
