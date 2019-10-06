@@ -2,18 +2,25 @@
 # Day 1 (PM)
 
 ## Overview of the afternoon activities:
-* [ipyrad CLI assembly of simulated data (pe-ddrad)](#ipyrad-cli-simulated-data-assembly)
+* [ipyrad CLI assembly of simulated data Part I](#ipyrad-cli-simulated-data-assembly-part-I)
+* [Coffee breaky](#coffee-breaky)
+* [ipyrad CLI assembly of simulated data Part II](#ipyrad-cli-simulated-data-assembly-part-II)
 * [Look at the real data](#Look-at-the-real-data-we-generate)
 * [Assemble real data](#Form-groups-and-assemble-real-data)
 
 ## Participant intros Part II
 [1 minute/1 slide participant intros](https://docs.google.com/presentation/d/1OY-laS2s6lITBBQfB_APTNcb-6o7cMdqgFqwZrRBzBg/edit?usp=sharing)
 
-## ipyrad CLI simulated data assembly
+## ipyrad CLI simulated data assembly Part I
 Lead: Isaac
 
-* Make a params file and edit (learn how to use nano)
-* Standard stuff from here on out. Walk through 1-7.
+[ipyrad CLI Part I](02_ipyrad_partI_CLI.md)
+
+## Coffee breaky
+
+## ipyrad CLI simulated data assembly Part II
+
+[ipyrad CLI Part II](03_ipyrad_partII_CLI.md)
 
 ## Look at the real data we generated
 Lead: Deren

@@ -73,8 +73,8 @@ First, we will create a new directory with `mkdir`, and then we'll download
 the sample data from the radcamp website:
 
 ```bash
-mkdir data
-cd data
+mkdir ipyrad-workshop
+cd ipyrad-workshop
 wget https://github.com/radcamp/radcamp.github.io/raw/master/NYC2019/data/anolis_R1_.fastq.gz
 ```
 

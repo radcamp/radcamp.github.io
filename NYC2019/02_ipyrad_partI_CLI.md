@@ -50,7 +50,7 @@ The basic steps of this process are as follows:
 * Step 6 - Cluster across Samples
 * Step 7 - Apply filters and write output formats
 
-> **Note on files in the project directory:** Assembling rad-seq type 
+> **Note on files in the project directory:** Assembling RADseq type 
 sequence data requires a lot of different steps, and these steps 
 generate a **lot** of intermediary files. ipyrad organizes these files 
 into directories, and it prepends the name of your assembly to each 
@@ -64,142 +64,67 @@ you don't mind if your assembly breaks.
 
 # Getting Started
 
-If you haven't already installed ipyrad go here first: [installation](https://ipyrad.readthedocs.io/installation.html#installation)
-
-## Working with the cluster
-
-![png](02_ipyrad_partI_CLI_files/02_ipyrad_partI_CLI_simple_cluster_architecture.png)
-
-A typical high performance computing (HPC) cluster architecture looks somewhat
-like this, just with many many more "compute nodes". The "head node" (or 
-login node) is normally the only system that you will interact with. If 
-you want to run a big job on the cluster, you will connect to the head node
-(with ssh), and will submit a job to the 'work queue'. In this job you
-specify how many cores you want to run on, how much RAM you want, and how
-much time you think it'll take. Then the work queue looks at your job 
-and at all the other jobs in the queue and figures out when is the fairest
-time to start your job running. This can be almost immediately, or your 
-job might sit in the queue for hours or days, if the system is very busy. 
-Either way, you will rarely actually "see" your job run because you 
-normally aren't given access to the compute nodes directly. 
-
-This is usually okay, because usually if you want to run a "big" job, this 
-means you want to run ***tons*** of small, quick tasks, or one or a few 
-really really huges and slow tasks, and you kind of don't care what's 
-happening, so long as they finish at some point. For us, for the benefit 
-of exposing and monitoring the processes for the tutorial, having jobs 
-locked away in the work queue is inconvenient. Fortunately, many HPC 
-systems provide an "interactive" mode, which allows you to run certain 
-limited tasks inside a terminal directly on one of the compute nodes.
-
-Therefore, we will run most of this tutorial on assembly and analysis on the Habanero cluster 
-inside an "interactive" job. This will allow us to run our proccesses on 
-compute nodes, but still be able to remain at the command line so 
-we can easily monitor the progress. If you do not still have an active
-ssh window on the cluster, begin by re-establishing the connection 
-through [puTTY (Windows)](01_cluster_basics.md#ssh-for-windows) or 
-[`ssh` (Mac/Linux)](01_cluster_basics.md#ssh-for-maclinux):
-```bash
-$ ssh <username>@habanero.rcs.columbia.edu
-```
-
-### Submitting an interactive job to the cluster
-Now we will submit an interactive job with relatively modest resource
-requests. Every cluster has different limits on its resources in terms of what
-is available to you and for how long. We could find these limits for the Columbia
-Habanero cluster by googling it. In this case we will each request that 4 cores
-be made available to us for 1 hour. Because each node has 24 cores this means 
-that multiple people will actually be sharing the same node, which is not a 
-problem. 
-
-```bash
-# --pty tells it to connect us to compute nodes interactively
-# --account tells it which account's resources to use
-# --reservation tells it to use the resources on edu reserved for us
-# -t tells it how much time to connect for
-# /bin/bash tells it to open a bash terminal when we connect.
-$ srun --pty --account=edu --reservation=edu_23 -t 1:00:00 -c 4 /bin/bash
-```
-Depending on cluster usage the job submission script can take more
-or less time to start. Because we have these resources reserved for us there 
-should be very little wait time. Once your job starts your terminal will show
-that you are now connected to a compute node.
-
-### Inspecting running cluster processes
-At any time you can ask the cluster for the status of your jobs with the 
-`squeue` command. This will list every running job on the cluster which can be
-a pain to sort through. So for efficiency you can add the argument 
-`-u <username>` to limit it to showing just your jobs. 
-
-```bash
-## Check the status of my running job on the 'proto' Queue
-$ squeue -u work1
-   JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
- 8367625      edu2     bash    work1  R       0:09      1 node215
-```                                                                       
-This confirms that the job we submitted started, that it's running on node215, etc.
+We will be running through the assembly of simulated data on a binder instance,
+so if you haven't already, please [launch the ipyrad repo](https://mybinder.org/v2/gh/dereneaton/ipyrad/master?filepath=newdocs%2FAPI-analysis),
+and open a New->Terminal.
 
 ## ipyrad help
-To better understand how to use ipyrad, let's take a look at the help argument. We will use some of the ipyrad arguments in this tutorial (for example: -n, -p, -s, -c, -r). But, the complete list of optional arguments and their explanation is below.
+To better understand how to use ipyrad, let's take a look at the help argument.
+We will use some of the ipyrad arguments in this tutorial (for example: -n, -p,
+-s, -c, -r). But, the complete list of optional arguments and their explanation
+is below.
 
 ```
-$ ipyrad --help
-usage: ipyrad [-h] [-v] [-r] [-f] [-q] [-d] [-n new] [-p params]
-              [-b [branch [branch ...]]] [-m [merge [merge ...]]] [-s steps]
-              [-c cores] [-t threading] [--MPI] [--preview]
-              [--ipcluster [ipcluster]] [--download [download [download ...]]]
+$ ipyrad -h
+
+usage: ipyrad [-h] [-v] [-r] [-f] [-q] [-d] [-n NEW] [-p PARAMS] [-s STEPS] [-b [BRANCH [BRANCH ...]]]
+              [-m [MERGE [MERGE ...]]] [-c cores] [-t threading] [--MPI] [--ipcluster [IPCLUSTER]]
+              [--download [DOWNLOAD [DOWNLOAD ...]]]
 
 optional arguments:
   -h, --help            show this help message and exit
   -v, --version         show program's version number and exit
-  -r, --results         show results summary for Assembly in params.txt and
-                        exit
+  -r, --results         show results summary for Assembly in params.txt and exit
   -f, --force           force overwrite of existing data
   -q, --quiet           do not print to stderror or stdout.
   -d, --debug           print lots more info to ipyrad_log.txt.
-  -n new                create new file 'params-{new}.txt' in current
-                        directory
-  -p params             path to params file for Assembly:
-                        params-{assembly_name}.txt
-  -b [branch [branch ...]]
-                        create a new branch of the Assembly as
-                        params-{branch}.txt
-  -m [merge [merge ...]]
-                        merge all assemblies provided into a new assembly
-  -s steps              Set of assembly steps to perform, e.g., -s 123
-                        (Default=None)
+  -n NEW                create new file 'params-{new}.txt' in current directory
+  -p PARAMS             path to params file for Assembly: params-{assembly_name}.txt
+  -s STEPS              Set of assembly steps to run, e.g., -s 123
+  -b [BRANCH [BRANCH ...]]
+                        create new branch of Assembly as params-{branch}.txt, and can be used to drop samples from
+                        Assembly.
+  -m [MERGE [MERGE ...]]
+                        merge multiple Assemblies into one joint Assembly, and can be used to merge Samples into one
+                        Sample.
   -c cores              number of CPU cores to use (Default=0=All)
-  -t threading          tune threading of binaries (Default=2)
+  -t threading          tune threading of multi-threaded binaries (Default=2)
   --MPI                 connect to parallel CPUs across multiple nodes
-  --preview             run ipyrad in preview mode. Subset the input file so
-                        it'll runquickly so you can verify everything is
-                        working
-  --ipcluster [ipcluster]
-                        connect to ipcluster profile (default: 'default')
-  --download [download [download ...]]
+  --ipcluster [IPCLUSTER]
+                        connect to running ipcluster, enter profile name or profile='default'
+  --download [DOWNLOAD [DOWNLOAD ...]]
                         download fastq files by accession (e.g., SRP or SRR)
 
-  * Example command-line usage: 
-    ipyrad -n data                       ## create new file called params-data.txt 
-    ipyrad -p params-data.txt            ## run ipyrad with settings in params file
+  * Example command-line usage:
+    ipyrad -n data                       ## create new file called params-data.txt
     ipyrad -p params-data.txt -s 123     ## run only steps 1-3 of assembly.
     ipyrad -p params-data.txt -s 3 -f    ## run step 3, overwrite existing data.
 
   * HPC parallelization across 32 cores
     ipyrad -p params-data.txt -s 3 -c 32 --MPI
 
-  * Print results summary 
-    ipyrad -p params-data.txt -r 
+  * Print results summary
+    ipyrad -p params-data.txt -r
 
   * Branch/Merging Assemblies
-    ipyrad -p params-data.txt -b newdata  
+    ipyrad -p params-data.txt -b newdata
     ipyrad -m newdata params-1.txt params-2.txt [params-3.txt, ...]
 
   * Subsample taxa during branching
     ipyrad -p params-data.txt -b newdata taxaKeepList.txt
 
-  * Download sequence data from SRA into directory 'sra-fastqs/' 
-    ipyrad --download SRP021469 sra-fastqs/ 
+  * Download sequence data from SRA into directory 'sra-fastqs/'
+    ipyrad --download SRP021469 sra-fastqs/
 
   * Documentation: http://ipyrad.readthedocs.io
 ```
@@ -208,30 +133,57 @@ optional arguments:
 ipyrad uses a text file to hold all the parameters for a given assembly.
 Start by creating a new parameters file with the `-n` flag. This flag
 requires you to pass in a name for your assembly. In the example we use
-`anolis` but the name can be anything at all. Once you start
+`peddrad` but the name can be anything at all. Once you start
 analysing your own data you might call your parameters file something
-more informative, like the name of your organism and some details on the settings.
+more informative, like the name of your organism and some details on the
+settings.
 
 ```bash 
-# go to our working directory
+# First, make sure you're in your workshop directory
 $ cd ~/ipyrad-workshop
 
-# create a new params file named 'anolis' (Or the name of an alternative library)
-$ ipyrad -n anolis
+# Unpack the simulated data which is included in the ipyrad github repo
+# `tar` is a program for reading and writing archive files, somewhat like zip
+#   -x eXtract from an archive
+#   -z unZip before extracting
+#   -f read from the File
+$ tar -xzf ~/tests/ipsimdata.tar.gz
+
+# Take a look at what we just unpacked
+$ ls ipsimdata
+gbs_example_barcodes.txt         pairddrad_example_R2_.fastq.gz         pairgbs_wmerge_example_genome.fa
+gbs_example_genome.fa            pairddrad_wmerge_example_barcodes.txt  pairgbs_wmerge_example_R1_.fastq.gz
+gbs_example_R1_.fastq.gz         pairddrad_wmerge_example_genome.fa     pairgbs_wmerge_example_R2_.fastq.gz
+pairddrad_example_barcodes.txt   pairddrad_wmerge_example_R1_.fastq.gz  rad_example_barcodes.txt
+pairddrad_example_genome.fa      pairddrad_wmerge_example_R2_.fastq.gz  rad_example_genome.fa
+pairddrad_example_genome.fa.fai  pairgbs_example_barcodes.txt           rad_example_genome.fa.fai
+pairddrad_example_genome.fa.sma  pairgbs_example_R1_.fastq.gz           rad_example_genome.fa.sma
+pairddrad_example_genome.fa.smi  pairgbs_example_R2_.fastq.gz           rad_example_genome.fa.smi
+pairddrad_example_R1_.fastq.gz   pairgbs_wmerge_example_barcodes.txt    rad_example_R1_.fastq.gz
+```
+You can see that we provide a bunch of different example datasets, as well as
+toy genomes for testing different assembly methods. For now we'll go forward
+with the `pairddrad` example dataset.
+
+```bash
+# Now create a new params file named 'peddrad'
+$ ipyrad -n peddrad
 ```
 
-This will create a file in the current directory called `params-anolis.txt`. The params file lists on each line one parameter followed by a \#\# mark, then the name of the parameter, and
-then a short description of its purpose. Lets take a look at it.
+This will create a file in the current directory called `params-peddrad.txt`.
+The params file lists on each line one parameter followed by a \#\# mark,
+then the name of the parameter, and then a short description of its purpose.
+Lets take a look at it.
 
 ``` 
-$ cat params-anolis.txt
-------- ipyrad params file (v.0.7.28)-------------------------------------------
-anolis                         ## [0] [assembly_name]: Assembly name. Used to name output directories for assembly steps
-./                             ## [1] [project_dir]: Project dir (made in curdir if not present)
+$ cat params-peddrad.txt
+------- ipyrad params file (v.0.9.13)-------------------------------------------
+peddrad                        ## [0] [assembly_name]: Assembly name. Used to name output directories for assembly steps
+/home/jovyan/ipyrad-workshop   ## [1] [project_dir]: Project dir (made in curdir if not present)
                                ## [2] [raw_fastq_path]: Location of raw non-demultiplexed fastq files
                                ## [3] [barcodes_path]: Location of barcodes file
                                ## [4] [sorted_fastq_path]: Location of demultiplexed/sorted fastq files
-denovo                         ## [5] [assembly_method]: Assembly method (denovo, reference, denovo+reference, denovo-reference)
+denovo                         ## [5] [assembly_method]: Assembly method (denovo, reference)
                                ## [6] [reference_sequence]: Location of reference sequence file
 rad                            ## [7] [datatype]: Datatype (see docs): rad, gbs, ddrad, etc.
 TGCAG,                         ## [8] [restriction_overhang]: Restriction overhang (cut1,) or (cut1, cut2)
@@ -245,27 +197,33 @@ TGCAG,                         ## [8] [restriction_overhang]: Restriction overha
 0                              ## [16] [filter_adapters]: Filter for adapters/primers (1 or 2=stricter)
 35                             ## [17] [filter_min_trim_len]: Min length of reads after adapter trim
 2                              ## [18] [max_alleles_consens]: Max alleles per site in consensus sequences
-5, 5                           ## [19] [max_Ns_consens]: Max N's (uncalled bases) in consensus (R1, R2)
-8, 8                           ## [20] [max_Hs_consens]: Max Hs (heterozygotes) in consensus (R1, R2)
+0.05                           ## [19] [max_Ns_consens]: Max N's (uncalled bases) in consensus (R1, R2)
+0.05                           ## [20] [max_Hs_consens]: Max Hs (heterozygotes) in consensus (R1, R2)
 4                              ## [21] [min_samples_locus]: Min # samples per locus for output
-20, 20                         ## [22] [max_SNPs_locus]: Max # SNPs per locus (R1, R2)
-8, 8                           ## [23] [max_Indels_locus]: Max # of indels per locus (R1, R2)
-0.5                            ## [24] [max_shared_Hs_locus]: Max # heterozygous sites per locus (R1, R2)
+0.2                            ## [22] [max_SNPs_locus]: Max # SNPs per locus (R1, R2)
+8                              ## [23] [max_Indels_locus]: Max # of indels per locus (R1, R2)
+0.5                            ## [24] [max_shared_Hs_locus]: Max # heterozygous sites per locus
 0, 0, 0, 0                     ## [25] [trim_reads]: Trim raw read edges (R1>, <R1, R2>, <R2) (see docs)
 0, 0, 0, 0                     ## [26] [trim_loci]: Trim locus edges (see docs) (R1>, <R1, R2>, <R2)
-p, s, v                        ## [27] [output_formats]: Output formats (see docs)
+p, s, l                        ## [27] [output_formats]: Output formats (see docs)
                                ## [28] [pop_assign_file]: Path to population assignment file
+                               ## [29] [reference_as_filter]: Reads mapped to this reference are removed in step 3
 ```
 
 In general the defaults are sensible, and we won't mess with them for now, 
-but there are a few parameters we *must* change: the path to the raw data, 
-the dataype, and the restriction overhang sequence.
+but there are a few parameters we *must* change: the path to the raw data and
+the barcodes file, the dataype, and the restriction overhang sequence(s).
 
-We will use the `nano` text editor to modify `params-anolis.txt` and change
+We will use the `nano` text editor to modify `params-peddrad.txt` and change
 these parameters:
 
 ```bash
-$ nano params-anolis.txt
+# First we have to install nano. You will have to do this every time you
+# launch a new binder, since it's not part of the ipyrad rep
+$ conda install nano -y
+
+# Now you can edit the params file
+$ nano params-peddrad.txt
 ```
 ![png](02_ipyrad_partI_CLI_files/ipyrad_part1_nano.png)
 
@@ -274,30 +232,16 @@ on the keyboard for navigating around the file. Nano accepts a few special
 keyboard commands for doing things other than modifying text, and it lists 
 these on the bottom of the frame. 
 
-We need to specify where the raw data files are located, the type of data we are using (.e.g., 'gbs', 'rad', 'ddrad', 'pairddrad), and which enzyme cut site overhangs are expected to be present on the reads. We list the parameter settings for three different empirical libraries below. Choose just one for your example analysis.
+We need to specify where the raw data files are located, the type of data we
+are using (.e.g., 'gbs', 'rad', 'ddrad', 'pairddrad), and which enzyme cut site
+overhangs are expected to be present on the reads. We list the parameter
+settings for three different empirical libraries below. Choose just one for your example analysis.
 
 ```bash
-# Anolis data set
 anoles                         ## [2] project_dir
 /rigel/edu/radcamp/files/anoles/*.gz                    ## [4] [sorted_fastq_path]: Location of demultiplexed/sorted fastq files
 gbs                            ## [7] [datatype]: Datatype (see docs): rad, gbs, ddrad, etc.
 TGCAT,                         ## [8] [restriction_overhang]: Restriction overhang (cut1,) or (cut1, cut2)
-```
-
-```bash
-# Pedicularis data set
-pedicularis                    ## [2] project_dir
-/rigel/edu/radcamp/files/SRP021469/*.gz                    ## [4] [sorted_fastq_path]: Location of demultiplexed/sorted fastq files
-rad                            ## [7] [datatype]: Datatype (see docs): rad, gbs, ddrad, etc.
-TGCAG,                         ## [8] [restriction_overhang]: Restriction overhang (cut1,) or (cut1, cut2)
-```
-
-```bash
-# Finch data set
-finch                          ## [2] project_dir
-/rigel/edu/radcamp/files/SRP059199/*.gz                    ## [4] [sorted_fastq_path]: Location of demultiplexed/sorted fastq files
-ddrad                          ## [7] [datatype]: Datatype (see docs): rad, gbs, ddrad, etc.
-CCTGCAGG,AATTC                 ## [8] [restriction_overhang]: Restriction overhang (cut1,) or (cut1, cut2)
 ```
 
 After you change these parameters you may save and exit nano by typing CTRL+o 
@@ -311,7 +255,7 @@ directories to hold the output of each step for this assembly. By
 default the new directories are created in the `project_dir`
 directory and use the prefix specified by the `assembly_name` parameter.
 Because we use `./` for the `project_dir` for this tutorial, all these 
-intermediate directories will be of the form: `~/ipyrad-workshop/anolis_*`, 
+intermediate directories will be of the form: `~/ipyrad-workshop/peddrad_*`, 
 or the analagous name that you used for your assembly name.
 
 > **Note:** Again, the `./` notation indicates the current working directory. You can always view the current working directory with the `pwd` command (**p**rint **w**orking **d**irectory).
@@ -380,13 +324,13 @@ number of cores that you know are available in this case when using interactive 
 ## -p    the params file we wish to use
 ## -s    the step to run
 ## -c    the number of cores to allocate   <-- Important!
-$ ipyrad -p params-anolis.txt -s 1 -c 4
+$ ipyrad -p params-peddrad.txt -s 1 -c 4
 
  -------------------------------------------------------------
   ipyrad [v.0.7.28]
   Interactive assembly and analysis of RAD-seq data
  -------------------------------------------------------------
-  New Assembly: anolis
+  New Assembly: peddrad
   establishing parallel connection:
   host compute node: [4 cores] on darwin
 
@@ -409,10 +353,10 @@ want it to print stats for.
 
 ```bash
 ## -r fetches informative results from currently executed steps  
-$ ipyrad -p params-anolis.txt -r
+$ ipyrad -p params-peddrad.txt -r
 ```
 ```
-Summary stats of Assembly anolis
+Summary stats of Assembly peddrad
 ------------------------------------------------
                    state  reads_raw
 punc_IBSPCRIB0361      1     250000
@@ -429,7 +373,7 @@ punc_MUFAL9635         1     250000
 
 Full stats files
 ------------------------------------------------
-step 1: ./anolis_s1_demultiplex_stats.txt
+step 1: ./peddrad_s1_demultiplex_stats.txt
 step 2: None
 step 3: None
 step 4: None
@@ -445,7 +389,7 @@ of the step 1 stats at this point isn't very interesting, but we'll
 see stats for later steps are more verbose):
 
 ```bash 
-$ cat anolis_s1_demultiplex_stats.txt 
+$ cat peddrad_s1_demultiplex_stats.txt 
 ```
 ```
                    reads_raw
@@ -476,7 +420,7 @@ filtering to be quite aggressive.
 Edit your params file again with `nano`:
 
 ```bash
-nano params-anolis.txt
+nano params-peddrad.txt
 ```
 
 and change the following two parameter settings:
@@ -488,15 +432,15 @@ and change the following two parameter settings:
 > **Note:** Saving and quitting from `nano`: `CTRL+o` then `CTRL+x`
 
 ```bash
-$ ipyrad -p params-anolis.txt -s 2 -c 4
+$ ipyrad -p params-peddrad.txt -s 2 -c 4
 ```
 ```
  -------------------------------------------------------------
   ipyrad [v.0.7.28]
   Interactive assembly and analysis of RAD-seq data
  -------------------------------------------------------------
-  loading Assembly: anolis
-  from saved path: ~/ipyrad-workshop/anolis.json
+  loading Assembly: peddrad
+  from saved path: ~/ipyrad-workshop/peddrad.json
   establishing parallel connection:
   host compute node: [4 cores] on darwin
 
@@ -504,13 +448,13 @@ $ ipyrad -p params-anolis.txt -s 2 -c 4
   [####################] 100%  processing reads      | 0:01:02
 ```
 
-The filtered files are written to a new directory called `anolis_edits`. Again, 
+The filtered files are written to a new directory called `peddrad_edits`. Again, 
 you can look at the results output by this step and also some handy stats tracked 
 for this assembly.
 
 ```bash
 ## View the output of step 2
-$ cat anolis_edits/s2_rawedit_stats.txt 
+$ cat peddrad_edits/s2_rawedit_stats.txt 
 ```
 ```
                    reads_raw  trim_adapter_bp_read1  trim_quality_bp_read1  reads_filtered_by_Ns  reads_filtered_by_minlen  reads_passed_filter
@@ -528,13 +472,13 @@ punc_MUFAL9635        250000                 114492                 182877      
 
 ```bash
 ## Get current stats including # raw reads and # reads after filtering.
-$ ipyrad -p params-anolis.txt -r
+$ ipyrad -p params-peddrad.txt -r
 ```
 
 You might also take a closer look at the filtered reads: 
 
 ```bash
-$ zcat anolis_edits/punc_IBSPCRIB0361.trimmed_R1_.fastq.gz | head -n 12
+$ zcat peddrad_edits/punc_IBSPCRIB0361.trimmed_R1_.fastq.gz | head -n 12
 ```
 ```
 @D00656:123:C6P86ANXX:8:2201:3857:34366 1:Y:0:8
@@ -563,7 +507,7 @@ of filtering adapters soon as well when we look at the clustered reads next.
 
 Step 3 de-replicates and then clusters reads within each sample by the
 set clustering threshold and then writes the clusters to new files in a
-directory called `anolis_clust_0.85`. Intuitively we are trying to
+directory called `peddrad_clust_0.85`. Intuitively we are trying to
 identify all the reads that map to the same locus within each sample.
 The clustering threshold specifies the minimum percentage of sequence
 similarity below which we will consider two reads to have come from
@@ -603,15 +547,15 @@ vary from a few thousand to many millions).
 Now lets run step 3:
 
 ```bash
-$ ipyrad -p params-anolis.txt -s 3 -c 2
+$ ipyrad -p params-peddrad.txt -s 3 -c 2
 ```
 ```
  -------------------------------------------------------------
   ipyrad [v.0.7.28]
   Interactive assembly and analysis of RAD-seq data
  -------------------------------------------------------------
-  loading Assembly: anolis
-  from saved path: ~/ipyrad-workshop/anolis.json
+  loading Assembly: peddrad
+  from saved path: ~/ipyrad-workshop/peddrad.json
   establishing parallel connection:
   host compute node: [2 cores] on darwin
 
@@ -641,10 +585,10 @@ reads on the assumption that these are probably all mostly due to
 sequencing error.
 
 ```bash
-$ ipyrad -p params-anolis.txt -r
+$ ipyrad -p params-peddrad.txt -r
 ```
 ```
-Summary stats of Assembly anolis
+Summary stats of Assembly peddrad
 ------------------------------------------------
                    state  reads_raw  reads_passed_filter  clusters_total  clusters_hidepth
 punc_IBSPCRIB0361      3     250000               237519           56312              4223
@@ -660,7 +604,7 @@ punc_MUFAL9635         3     250000               231868           59249        
 ```
 
 Again, the final output of step 3 is dereplicated, clustered files for
-each sample in `./anolis_clust_0.85/`. You can get a feel for what
+each sample in `./peddrad_clust_0.85/`. You can get a feel for what
 this looks like by examining a portion of one of the files. 
 
 **We'll take a moment now to compare the outputs of the different empirical libraries.**
@@ -668,7 +612,7 @@ this looks like by examining a portion of one of the files.
 ```bash
 ## Same as above, `zcat` unzips and prints to the screen and 
 ## `head -n 28` means just show me the first 28 lines. 
-$ zcat anolis_clust_0.85/punc_IBSPCRIB0361.clustS.gz | head -n 28
+$ zcat peddrad_clust_0.85/punc_IBSPCRIB0361.clustS.gz | head -n 28
 ```
 ```
 000e3bb624e3bd7e91b47238b7314dc6;size=4;*
