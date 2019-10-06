@@ -324,19 +324,20 @@ Now lets run step 1! For the simulated data this will take just a few moments.
 
 > **Special Note:** It's good practice to specify the number of cores with the
 `-c` flag. If you do not specify the number of cores ipyrad assumes you want
-**all** of them, which in this case is fine because we're running inside a
-binder instance, but which perhaps you wouldn't want in other circumstances.
+**all** of them. Binder instances run on 1 core, so we will specify `-c 1` for
+all ipyrad assembly steps.
 
 ```bash
 ## -p    the params file we wish to use
 ## -s    the step to run
-$ ipyrad -p params-peddrad.txt -s 1
+## -c    run on 1 core
+$ ipyrad -p params-peddrad.txt -s 1 -c 1
 
  -------------------------------------------------------------
   ipyrad [v.0.9.13]
   Interactive assembly and analysis of RAD-seq data
  -------------------------------------------------------------
-  Parallel connection | jupyter-dereneaton-2dipyrad-2d975c3axu: 8 cores
+  Parallel connection | jupyter-dereneaton-2dipyrad-2d975c3axu: 1 cores
 
   Step 1: Demultiplexing fastq data to Samples
   [####################] 100% 0:00:09 | sorting reads
@@ -465,7 +466,7 @@ and change the following two parameter settings:
 > **Note:** Saving and quitting from `nano`: `CTRL+o` then `CTRL+x`
 
 ```bash
-$ ipyrad -p params-peddrad.txt -s 2
+$ ipyrad -p params-peddrad.txt -s 2 -c 1
 ```
 ```
   loading Assembly: peddrad
@@ -475,7 +476,7 @@ $ ipyrad -p params-peddrad.txt -s 2
   ipyrad [v.0.9.13]
   Interactive assembly and analysis of RAD-seq data
  -------------------------------------------------------------
-  Parallel connection | jupyter-dereneaton-2dipyrad-2d975c3axu: 8 cores
+  Parallel connection | jupyter-dereneaton-2dipyrad-2d975c3axu: 1 cores
 
   Step 2: Filtering and trimming reads
   [####################] 100% 0:00:21 | processing reads
@@ -571,7 +572,7 @@ data.
 Now lets run step 3:
 
 ```bash
-$ ipyrad -p params-peddrad.txt -s 3
+$ ipyrad -p params-peddrad.txt -s 3 -c 1
 ```
 ```
   loading Assembly: peddrad
@@ -581,7 +582,7 @@ $ ipyrad -p params-peddrad.txt -s 3
   ipyrad [v.0.9.13]
   Interactive assembly and analysis of RAD-seq data
  -------------------------------------------------------------
-  Parallel connection | jupyter-dereneaton-2dipyrad-2d975c3axu: 8 cores
+  Parallel connection | jupyter-dereneaton-2dipyrad-2d975c3axu: 1 cores
 
   Step 3: Clustering/Mapping reads within samples
   [####################] 100% 0:00:11 | concatenating
