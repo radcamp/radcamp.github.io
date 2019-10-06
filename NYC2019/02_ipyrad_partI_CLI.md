@@ -515,94 +515,87 @@ $ ipyrad -p params-peddrad.txt -r
 You might also take a closer look at the filtered reads: 
 
 ```bash
-$ zcat peddrad_edits/punc_IBSPCRIB0361.trimmed_R1_.fastq.gz | head -n 12
-```
-```
-@D00656:123:C6P86ANXX:8:2201:3857:34366 1:Y:0:8
-TGCATGTTTATTGTCTATGTAAAAGGAAAAGCCATGCTATCAGAGATTGGCCTGGGGGGGGGGGGCAAATACATG
+$ zcat peddrad_edits/1A_0.trimmed_R1_.fastq.gz | head -n 12
+@lane1_locus0_1A_0_0 1:N:0:
+TGCAGTTTAACTGTTCAAGTTGGCAAGATCAAGTCGTCCCTAGCCCCCGCGTCCGTTTTTACCTGGTCGCGGTCC
 +
-;=11>111>1;EDGB1;=DG1=>1:EGG1>:>11?CE1<>1<1<E1>ED1111:00CC..86DG>....//8CDD
-@D00656:123:C6P86ANXX:8:2201:5076:34300 1:N:0:8
-TGCATATGAACCCCAACCTCCCCATCACATTCCACCATAGCAATCAGTTTCCTCTCTTCCTTCTTCTTGACCTCT
+BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
+@lane1_locus0_1A_0_1 1:N:0:
+TGCAGTTTAACTGTTCAAGTTGGCAAGATCAAGTCGTCCCTAGCCCCCGCGTCCGTTTTTACCTGGTCGCGGTCC
 +
-@;BFGEBCC11=/;/E/CFGGGG1ECCE:EFDFCGGGGGGG11EFGGGGGCGG:B0=F0=FF0=F:FG:FDG00:
-@D00656:123:C6P86ANXX:8:2201:5042:34398 1:N:0:8
-TGCATTCAAAGGGAGAAGAGTACAGAAACCAAGCACATATTTGAAAAATGCA
+BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
+@lane1_locus0_1A_0_2 1:N:0:
+TGCAGTTTAACTGTTCAAGTTGGCAAGATCAAGTCGTCCCTAGCCCCCGCGTCCGTTTTTACCTGGTCGCGGTCC
 +
-GGGGGGGCGGGGGGGGGGGGGEGGGFGGGGGGEGGGGGGGGGGGGGFGGGEG
+BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB 
 ```
 
-This is actually really cool, because we can already see the results of 
-both of our applied parameters. All reads have been trimmed to 75bp, 
-and the third read had adapter contamination removed (you can tell because
-it's shorter than 75bp). As an exercise you can go back up to the 
-section where we looked at the raw data initially and see if you can 
-identify the adapter sequence in this read. We will see more about the consequences
-of filtering adapters soon as well when we look at the clustered reads next. 
+This is actually really cool, because we can already see the results of our
+applied parameters. All reads have been trimmed to 75bp.
 
-# Step 3: clustering within-samples
+# Step 3: denovo clustering within-samples
 
-Step 3 de-replicates and then clusters reads within each sample by the
-set clustering threshold and then writes the clusters to new files in a
-directory called `peddrad_clust_0.85`. Intuitively we are trying to
-identify all the reads that map to the same locus within each sample.
-The clustering threshold specifies the minimum percentage of sequence
-similarity below which we will consider two reads to have come from
-different loci.
+For a *de novo* assembly, step 3 de-replicates and then clusters reads within
+each sample by the set clustering threshold and then writes the clusters to new
+files in a directory called `peddrad_clust_0.85`. Intuitively we are trying to
+identify all the reads that map to the same locus within each sample. The
+clustering threshold specifies the minimum percentage of sequence similarity
+below which we will consider two reads to have come from different loci.
 
-The true name of this output directory will be dictated by the value you
-set for the `clust_threshold` parameter in the params file.
+> **NB:** The true name of this output directory will be dictated by the value
+you set for the `clust_threshold` parameter in the params file.
 
 You can see the default value is 0.85, so our default directory is named
-accordingly. This value dictates the percentage of sequence similarity
-that reads must have in order to be considered reads at the same locus.
-You'll more than likely want to experiment with this value, but 0.85 is
-a reliable default, balancing over-splitting of loci vs over-lumping.
-Don't mess with this until you feel comfortable with the overall
-workflow, and also until you've learned about
-[Branching assemblies](https://ipyrad.readthedocs.io/tutorial_advanced_cli.html).
+accordingly. This value dictates the percentage of sequence similarity that
+reads must have in order to be considered reads at the same locus. You'll
+more than likely want to experiment with this value, but 0.85 is a reliable
+default, balancing over-splitting of loci vs over-lumping. Don't mess with
+this until you feel comfortable with the overall workflow, and also until
+you've learned about [branching assemblies](https://ipyrad.readthedocs.io/en/latest/8-branching.html).
 
-There have been many papers written comparing how results of assemblies vary 
-depending on the clustering threshold. In general, my advice is to use a value
-between about .82 and .95. Within this region results typically do not vary too
-significantly, whereas above .95 you will oversplit loci and recover fewer SNPs.
+> **NB:** What is the best clustering threshold to choose? "It depends."
 
-It's also possible to incorporate information from a reference
-genome to improve clustering at this step, if such a resources is
-available for your organism (or one that is relatively closely related).
-We will not cover reference based assemblies in this workshop, but you 
-can refer to the [ipyrad documentation](https://ipyrad.readthedocs.io/tutorial_advanced_cli.html) for more information.
+It's also possible to incorporate information from a reference genome to
+improve clustering at this step, if such a resources is available for your
+organism (or one that is relatively closely related). We will not cover
+reference based assemblies in this workshop, but you can refer to the
+[ipyrad documentation](https://ipyrad.readthedocs.io/tutorial_advanced_cli.html) for more information.
 
-> **Note on performance:** Steps 3 and 6 generally take considerably 
-longer than any of the steps, due to the resource intensive clustering 
-and alignment phases. These can take on the order of 10-100x as long 
-as the next longest running step. This depends heavily on the number of samples
-in your dataset, the number of cores, the length(s) of your reads, and the 
-"messiness" of your data in terms of the number of unique loci present (this can
-vary from a few thousand to many millions).
+> **Note on performance:** Steps 3 and 6 generally take considerably longer
+than any of the steps, due to the resource intensive clustering and alignment
+phases. These can take on the order of 10-100x as long as the next longest
+running step. This depends heavily on the number of samples in your dataset,
+the number of cores, the length(s) of your reads, and the "messiness" of your
+data.
 
 Now lets run step 3:
 
 ```bash
-$ ipyrad -p params-peddrad.txt -s 3 -c 2
+$ ipyrad -p params-peddrad.txt -s 3
 ```
 ```
- -------------------------------------------------------------
-  ipyrad [v.0.7.28]
-  Interactive assembly and analysis of RAD-seq data
- -------------------------------------------------------------
   loading Assembly: peddrad
   from saved path: ~/ipyrad-workshop/peddrad.json
-  establishing parallel connection:
-  host compute node: [2 cores] on darwin
 
-  Step 3: Clustering/Mapping reads
-  [####################] 100%  dereplicating         | 0:00:11  
-  [####################] 100%  clustering            | 0:19:35
-  [####################] 100%  building clusters     | 0:00:06
-  [####################] 100%  chunking              | 0:00:01
-  [####################] 100%  aligning              | 0:14:27
-  [####################] 100%  concatenating         | 0:00:04```
+ -------------------------------------------------------------
+  ipyrad [v.0.9.13]
+  Interactive assembly and analysis of RAD-seq data
+ -------------------------------------------------------------
+  Parallel connection | jupyter-dereneaton-2dipyrad-2d975c3axu: 8 cores
+
+  Step 3: Clustering/Mapping reads within samples
+  [####################] 100% 0:00:11 | concatenating
+  [####################] 100% 0:00:02 | join merged pairs
+  [####################] 100% 0:00:03 | join unmerged pairs
+  [####################] 100% 0:00:01 | dereplicating
+  [####################] 100% 0:00:12 | clustering/mapping
+  [####################] 100% 0:00:00 | building clusters
+  [####################] 100% 0:00:00 | chunking clusters
+  [####################] 100% 0:04:00 | aligning clusters
+  [####################] 100% 0:00:00 | concat clusters
+  [####################] 100% 0:00:00 | calc cluster stats
+
+  Parallel connection closed.
 ```
 
 In-depth operations of step 3:
