@@ -439,15 +439,16 @@ no_match                                         _             _             0
 
 # Step 2: Filter reads
 
-This step filters reads based on quality scores and maximum number of
-uncalled bases, and can be used to detect Illumina adapters in your 
-reads, which is sometimes a problem under couple different library 
-prep scenarios. Recalling from our exploration of the data with FastQC 
-we have some problem with adapters, and a little noise toward the 3' 
-end. To account for this we will trim reads to 75bp and set adapter 
-filtering to be quite aggressive. 
+This step filters reads based on quality scores and maximum number of uncalled
+bases, and can be used to detect Illumina adapters in your reads, which is
+sometimes a problem under a couple different library prep scenarios. We know the
+simulated data is unrealistically clean, so lets just pretend its more like the
+Anolis data we looked at earlier, i.e. some slight adapter contamination, and a
+little noise toward the 3' end of the reads. To account for this we will trim
+reads to 75bp and set adapter filtering to be quite aggressive. 
 
-> **Note:** Trimming to 75bp seems a bit aggressive too, and based on the FastQC results you probably would not want to do this with if these were your real data. However, it will speed up the analysis considerably. Here, we are just trimming the reads for the sake of this workshop.
+> **Note:** Here, we are just trimming the reads for the sake of demonstration.
+In reality you'd want to be more careful about choosing these values.
 
 Edit your params file again with `nano`:
 
@@ -464,20 +465,22 @@ and change the following two parameter settings:
 > **Note:** Saving and quitting from `nano`: `CTRL+o` then `CTRL+x`
 
 ```bash
-$ ipyrad -p params-peddrad.txt -s 2 -c 4
+$ ipyrad -p params-peddrad.txt -s 2
 ```
 ```
- -------------------------------------------------------------
-  ipyrad [v.0.7.28]
-  Interactive assembly and analysis of RAD-seq data
- -------------------------------------------------------------
   loading Assembly: peddrad
   from saved path: ~/ipyrad-workshop/peddrad.json
-  establishing parallel connection:
-  host compute node: [4 cores] on darwin
 
-  Step 2: Filtering reads 
-  [####################] 100%  processing reads      | 0:01:02
+ -------------------------------------------------------------
+  ipyrad [v.0.9.13]
+  Interactive assembly and analysis of RAD-seq data
+ -------------------------------------------------------------
+  Parallel connection | jupyter-dereneaton-2dipyrad-2d975c3axu: 8 cores
+
+  Step 2: Filtering and trimming reads
+  [####################] 100% 0:00:21 | processing reads
+
+  Parallel connection closed.
 ```
 
 The filtered files are written to a new directory called `peddrad_edits`. Again, 
@@ -489,17 +492,19 @@ for this assembly.
 $ cat peddrad_edits/s2_rawedit_stats.txt 
 ```
 ```
-                   reads_raw  trim_adapter_bp_read1  trim_quality_bp_read1  reads_filtered_by_Ns  reads_filtered_by_minlen  reads_passed_filter
-punc_IBSPCRIB0361     250000                 108761                 160210                    66                     12415               237519
-punc_ICST764          250000                 107320                 178463                    68                     13117               236815
-punc_JFT773           250000                 110684                 190803                    46                      9852               240102
-punc_MTR05978         250000                 102932                 144773                    54                     12242               237704
-punc_MTR17744         250000                 103394                 211363                    55                      9549               240396
-punc_MTR21545         250000                 119191                 161709                    63                     21972               227965
-punc_MTR34414         250000                 109207                 193401                    54                     16372               233574
-punc_MTRX1468         250000                 119746                 134069                    45                     19052               230903
-punc_MTRX1478         250000                 116009                 184189                    53                     16549               233398
-punc_MUFAL9635        250000                 114492                 182877                    61                     18071               231868
+      reads_raw  trim_adapter_bp_read1  trim_adapter_bp_read2  trim_quality_bp_read1  trim_quality_bp_read2  reads_filtered_by_Ns  reads_filtered_by_minlen  reads_passed_filter
+1A_0      19835                    331                    379                      0                      0     0                         0                19835
+1B_0      20071                    347                    358                      0                      0     0                         0                20071
+1C_0      19969                    318                    349                      0                      0     0                         0                19969
+1D_0      20082                    350                    400                      0                      0     0                         0                20082
+2E_0      20004                    283                    469                      0                      0     0                         0                20004
+2F_0      19899                    306                    442                      0                      0     0                         0                19899
+2G_0      19928                    302                    424                      0                      0     0                         0                19928
+2H_0      20110                    333                    462                      0                      0     0                         0                20110
+3I_0      20078                    323                    381                      0                      0     0                         0                20078
+3J_0      19965                    310                    374                      0                      0     0                         0                19965
+3K_0      19846                    277                    398                      0                      0     0                         0                19846
+3L_0      20025                    342                    366                      0                      0     0                         0                20025
 ```
 
 ```bash
