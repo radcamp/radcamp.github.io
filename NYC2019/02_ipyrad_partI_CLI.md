@@ -4,10 +4,9 @@ This is the first part of the full tutorial for the command line interface
 (**CLI**) for ipyrad. In this tutorial we'll walk through the entire assembly 
 and analysis process. This is meant as a broad introduction to familiarize 
 users with the general workflow, and some of the parameters and terminology. 
-We will use as an example in this tutorial the Anolis data set from the first
-part of class. However, you can follow along with one of the other example
-data sets if you like and although your results will vary the procedure will 
-be identical. 
+We will use simulated paired-end ddRAD data as an example in this tutorial,
+however, you can follow along with one of the other example datasets if you
+like and although your results will vary the procedure will be identical. 
 
 If you are new to RADseq analyses, this tutorial will provide a simple
 overview of how to execute ipyrad, what the data files look like, how to
@@ -222,6 +221,9 @@ these parameters:
 # launch a new binder, since it's not part of the ipyrad rep
 $ conda install nano -y
 
+# Change one stupid default setting. This is annoying <sorry!>
+$ echo "set nowrap" > ~/.nanorc
+
 # Now you can edit the params file
 $ nano params-peddrad.txt
 ```
@@ -234,14 +236,14 @@ these on the bottom of the frame.
 
 We need to specify where the raw data files are located, the type of data we
 are using (.e.g., 'gbs', 'rad', 'ddrad', 'pairddrad), and which enzyme cut site
-overhangs are expected to be present on the reads. We list the parameter
-settings for three different empirical libraries below. Choose just one for your example analysis.
+overhangs are expected to be present on the reads. Change the following lines
+in your params files to look like this:
 
 ```bash
-anoles                         ## [2] project_dir
-/rigel/edu/radcamp/files/anoles/*.gz                    ## [4] [sorted_fastq_path]: Location of demultiplexed/sorted fastq files
-gbs                            ## [7] [datatype]: Datatype (see docs): rad, gbs, ddrad, etc.
-TGCAT,                         ## [8] [restriction_overhang]: Restriction overhang (cut1,) or (cut1, cut2)
+ipsimdata/pairddrad_example_R*.fastq.gz     ## [2] [raw_fastq_path]: Location of raw non-demultiplexed fastq files
+ipsimdata/pairddrad_example_barcodes.txt    ## [3] [barcodes_path]: Location of barcodes file
+pairddrad                                   ## [7] [datatype]: Datatype (see docs): rad, gbs, ddrad, etc.
+TGCAG, CGG                                  ## [8] [restriction_overhang]: Restriction overhang (cut1,) or (cut1, cut2)
 ```
 
 After you change these parameters you may save and exit nano by typing CTRL+o 
@@ -250,130 +252,142 @@ After you change these parameters you may save and exit nano by typing CTRL+o
 > **Note:** The `CTRL+x` notation indicates that you should hold down the control
 key (which is often styled 'ctrl' on the keyboard) and then push 'x'.
 
-Once we start running the analysis ipyrad will create several new 
-directories to hold the output of each step for this assembly. By 
-default the new directories are created in the `project_dir`
-directory and use the prefix specified by the `assembly_name` parameter.
-Because we use `./` for the `project_dir` for this tutorial, all these 
-intermediate directories will be of the form: `~/ipyrad-workshop/peddrad_*`, 
-or the analagous name that you used for your assembly name.
+Once we start running the analysis ipyrad will create several new directories to
+hold the output of each step for this assembly. By default the new directories
+are created in the `project_dir` directory and use the prefix specified by the
+`assembly_name` parameter. For this example assembly all the intermediate
+directories will be of the form: `~/ipyrad-workshop/peddrad_*`. 
 
-> **Note:** Again, the `./` notation indicates the current working directory. You can always view the current working directory with the `pwd` command (**p**rint **w**orking **d**irectory).
+> **Note:** Again, the `~` notation indicates a shortcut for the user home
+directory, in this case `/home/jovyan`.
 
 # Input data format
 
 Before we get started let's take a look at what the raw data looks like.
 
-Your input data will be in fastQ format, usually ending in `.fq`,
-`.fastq`, `.fq.gz`, or `.fastq.gz`. The file/s may be compressed with 
-gzip so that they have a .gz ending, but they do not need to be. When loading
-pre-demultiplexed data (as we are with the Anolis data) the location 
-of raw sample files should be entered on line 3 of the params file. Below are the 
-first three reads of one of the Anolis files.
+Your input data will be in fastQ format, usually ending in `.fq`, `.fastq`,
+`.fq.gz`, or `.fastq.gz`. The file(s) may be compressed with gzip so that they
+have a .gz ending, but they do not need to be. Below are the first three reads of
+one of the Anolis files.
 
 ```bash
-## For your personal edification here is what this is doing:
-## gunzip -c: Tells gzip to unzip the file and write the contents to the screen
-## head -n 12: Grabs the first 12 lines of the fastq file. Fastq files
-## have 4 lines per read, so the value of `-n` should be a multiple of 4
+## zcat: unZip and conCATenate the file to the screen
+## head -n 20: Just take the first 20 lines of input
 
-$ zcat /rigel/edu/radcamp/files/SRP021469/29154_superba_SRR1754715.fastq.gz | head -n 20
-```
-
-```
-@D00656:123:C6P86ANXX:8:2201:3857:34366 1:Y:0:8
-TGCATGTTTATTGTCTATGTAAAAGGAAAAGCCATGCTATCAGAGATTGGCCTGGGGGGGGGGGGCAAATACATGAAAAAGGGAAAGGCAAAATG
+$ zcat ipsimdata/pairddrad_example_R1_.fastq.gz | head -n 20
+@lane1_locus0_2G_0_0 1:N:0:
+CTCCAATCCTGCAGTTTAACTGTTCAAGTTGGCAAGATCAAGTCGTCCCTAGCCCCCGCGTCCGTTTTTACCTGGTCGCGGTCCCGACCCAGCTGCCCCC
 +
-;=11>111>1;EDGB1;=DG1=>1:EGG1>:>11?CE1<>1<1<E1>ED1111:00CC..86DG>....//8CDD/8C/....68..6.:8....
-@D00656:123:C6P86ANXX:8:2201:5076:34300 1:N:0:8
-TGCATATGAACCCCAACCTCCCCATCACATTCCACCATAGCAATCAGTTTCCTCTCTTCCTTCTTCTTGACCTCTCCACCTCAAAGGCAACTGCA
+BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
+@lane1_locus0_2G_0_1 1:N:0:
+CTCCAATCCTGCAGTTTAACTGTTCAAGTTGGCAAGATCAAGTCGTCCCTAGCCCCCGCGTCCGTTTTTACCTGGTCGCGGTCCCGACCCAGCTGCCCCC
 +
-@;BFGEBCC11=/;/E/CFGGGG1ECCE:EFDFCGGGGGGG11EFGGGGGCGG:B0=F0=FF0=F:FG:FDG00:;@DGGDG@0:E0=C>DGCF0
-@D00656:123:C6P86ANXX:8:2201:5042:34398 1:N:0:8
-TGCATTCAAAGGGAGAAGAGTACAGAAACCAAGCACATATTTGAAAAATGCAAGATCGGAAGAGCGGTTCAGCAGGAATGCCGAGACCGATCTCG
+BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
+@lane1_locus0_2G_0_2 1:N:0:
+CTCCAATCCTGCAGTTTAACTGTTCAAGTTGGCAAGATCAAGTCGTCCCTAGCCCCCGCGTCCGTTTTTACCTGGTCGCGGTCCCGACCCAGCTGCCCCC
 +
-GGGGGGGCGGGGGGGGGGGGGEGGGFGGGGGGEGGGGGGGGGGGGGFGGGEGGGGGGGGGGGGGGGGGGGGGGGGGGGEGGGGGGGGG@@DGGGG
+BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
+@lane1_locus0_2G_0_3 1:N:0:
+CTCCAATCCTGCAGTTTAACTGTTCAAGTTGGCAAGATCAAGTCGTCCCTAGCCCCCGCGTCCGTTTTTACCTGGTCGCGGTCCCGACCCAGCTGCCCCC
++
+BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
+@lane1_locus0_2G_0_4 1:N:0:
+CTCCAATCCTGCAGTTTAACTGTTCAAGTTGGCAAGATCAAGTCGTCCCTAGCCCCCGCGTCCGTTTTTACCTGGTCGCGGTCCCGACCCAGCTGCCCCC
++
+BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
 ```
 
 Each read is composed of four lines. The first is the name of the read (its
-location on the plate). The second line contains the sequence data. The
-third line is unused. And the fourth line is the quality scores for the
-base calls. The [FASTQ wikipedia page](https://en.wikipedia.org/wiki/FASTQ_format) has a good figure depicting the logic behind how quality scores are encoded.
+location on the plate). The second line contains the sequence data. The third
+line is unused. And the fourth line is the quality scores for the base calls.
+The [FASTQ wikipedia page](https://en.wikipedia.org/wiki/FASTQ_format) has a
+good figure depicting the logic behind how quality scores are encoded.
 
-The Anolis data are 96bp single-end reads prepared as GBS. The first five bases (TGCAT) 
-form the restriction site overhang. All following bases make up the sequence data.
+The simulated data are 100bp paired-end reads generated as ddRAD, meaning there
+will be two overhang sequences. In this case the 'rare' cutter leaves the TGCAT
+overhang. Can you find this sequence in the raw data? What's going on with that
+other stuff at the beginning of each read?
 
-# Step 1: Loading the raw data files
+# Step 1: Demultiplexing the raw data
 
-With reads already demultiplexed to samples, step 1 simply scans through 
-the raw data, verifies the input format, and counts reads per sample. It 
-doesn't create any new directories or modify the raw files in any way.
+Since the raw data is still just a huge pile of reads, we need to split it up
+and assign each read to the sample it came from. This will create a new
+directory called `peddrad_fastqs` with one `.gz` file per sample.
 
-> **Note on step 1:** More commonly, rather than returning demultiplexed samples as we have here, sequencing facilities will give you one giant .gz file that contains all the sequences from your run. This situation only slightly modifies step 1, and does not modify further steps, so we will refer you to the [full ipyrad tutorial](http://ipyrad.readthedocs.io/tutorial_intro_cli.html) for guidance in this case.
+> **Note on step 1:** Sometimes, rather than returning the raw data, sequencing
+facilities will give the data pre-demultiplexed to samples. This situation only
+slightly modifies step 1, and does not modify further steps, so we will refer
+you to the [full ipyrad tutorial](http://ipyrad.readthedocs.io/tutorial_intro_cli.html)
+for guidance in this case.
 
-Now lets run step 1! For the Anolis data this will take <1 minute.
+Now lets run step 1! For the simulated data this will take just a few moments.
 
-> **Special Note:** In interactive mode please be aware to *always* specify
-the number of cores with the `-c` flag. If you do not specify the number of 
-cores ipyrad assumes you want **all** of them, but in this case you only have 
-as many cores available as we requested when we started the interactive session.
-This can cause some confusion that will slow things down a bit. So specify the 
-number of cores that you know are available in this case when using interactive mode.
+> **Special Note:** It's good practice to specify the number of cores with the
+`-c` flag. If you do not specify the number of cores ipyrad assumes you want
+**all** of them, which in this case is fine because we're running inside a
+binder instance, but which perhaps you wouldn't want in other circumstances.
 
 ```bash
 ## -p    the params file we wish to use
 ## -s    the step to run
-## -c    the number of cores to allocate   <-- Important!
-$ ipyrad -p params-peddrad.txt -s 1 -c 4
+$ ipyrad -p params-peddrad.txt -s 1
 
  -------------------------------------------------------------
-  ipyrad [v.0.7.28]
+  ipyrad [v.0.9.13]
   Interactive assembly and analysis of RAD-seq data
  -------------------------------------------------------------
-  New Assembly: peddrad
-  establishing parallel connection:
-  host compute node: [4 cores] on darwin
+  Parallel connection | jupyter-dereneaton-2dipyrad-2d975c3axu: 8 cores
 
-  Step 1: Loading sorted fastq data to Samples
-  [####################] 100%  loading reads         | 0:00:04  
-  10 fastq files loaded to 10 Samples.
+  Step 1: Demultiplexing fastq data to Samples
+  [####################] 100% 0:00:09 | sorting reads
+  [####################] 100% 0:00:05 | writing/compressing
+
+  Parallel connection closed.
 ```
 
 ## In-depth operations of running an ipyrad step
 Any time ipyrad is invoked it performs a few housekeeping operations: 
-1. Load the assembly object - Since this is our first time running any steps we need to initialize our assembly.
-2. Start the parallel cluster - ipyrad uses a parallelization library called ipyparallel. Every time we start a step we fire up the parallel clients. This makes your assemblies go **smokin'** fast.
-3. Do the work - Actually perform the work of the requested step(s) (in this case loading in sample reads).
-4. Save, clean up, and exit -  Save the state of the assembly, and spin down the ipyparallel cluster.
+1. Load the assembly object - Since this is our first time running any steps we
+need to initialize our assembly.
+2. Start the parallel cluster - ipyrad uses a parallelization library called
+ipyparallel. Every time we start a step we fire up the parallel clients. This
+makes your assemblies go **smokin'** fast.
+3. Do the work - Actually perform the work of the requested step(s) (in this
+case demultiplexing reads to samples).
+4. Save, clean up, and exit - Save the state of the assembly, and spin down
+the ipyparallel cluster.
 
 As a convenience ipyrad internally tracks the state of all your steps in your 
-current assembly, so at any time you can ask for results by invoking the `-r` flag.
-We also use the `-p` arg to tell is which params file (i.e., which assembly) we 
-want it to print stats for.
+current assembly, so at any time you can ask for results by invoking the `-r`
+flag. We also use the `-p` arg to tell is which params file (i.e., which
+assembly) we want it to print stats for.
 
 ```bash
 ## -r fetches informative results from currently executed steps  
 $ ipyrad -p params-peddrad.txt -r
-```
-```
+  loading Assembly: peddrad
+  from saved path: ~/ipyrad-workshop/peddrad.json
+
 Summary stats of Assembly peddrad
 ------------------------------------------------
-                   state  reads_raw
-punc_IBSPCRIB0361      1     250000
-punc_ICST764           1     250000
-punc_JFT773            1     250000
-punc_MTR05978          1     250000
-punc_MTR17744          1     250000
-punc_MTR21545          1     250000
-punc_MTR34414          1     250000
-punc_MTRX1468          1     250000
-punc_MTRX1478          1     250000
-punc_MUFAL9635         1     250000
+      state  reads_raw
+1A_0      1      19835
+1B_0      1      20071
+1C_0      1      19969
+1D_0      1      20082
+2E_0      1      20004
+2F_0      1      19899
+2G_0      1      19928
+2H_0      1      20110
+3I_0      1      20078
+3J_0      1      19965
+3K_0      1      19846
+3L_0      1      20025
 
 
 Full stats files
 ------------------------------------------------
-step 1: ./peddrad_s1_demultiplex_stats.txt
+step 1: ./peddrad_fastqs/s1_demultiplex_stats.txt
 step 2: None
 step 3: None
 step 4: None
@@ -382,27 +396,45 @@ step 6: None
 step 7: None
 ```
 
-If you want to get even **more** info ipyrad tracks all kinds of wacky
-stats and saves them to a file inside the directories it creates for
-each step. For instance to see full stats for step 1 (the wackyness
-of the step 1 stats at this point isn't very interesting, but we'll
-see stats for later steps are more verbose):
+If you want to get even **more** info ipyrad tracks all kinds of wacky stats and
+saves them to a file inside the directories it creates for each step. For
+instance to see full stats for step 1 (the wackyness of the step 1 stats at this
+point isn't very interesting, but we'll see stats for later steps are more verbose):
 
 ```bash 
-$ cat peddrad_s1_demultiplex_stats.txt 
-```
-```
-                   reads_raw
-punc_IBSPCRIB0361     250000
-punc_ICST764          250000
-punc_JFT773           250000
-punc_MTR05978         250000
-punc_MTR17744         250000
-punc_MTR21545         250000
-punc_MTR34414         250000
-punc_MTRX1468         250000
-punc_MTRX1478         250000
-punc_MUFAL9635        250000
+$ cat peddrad_fastqs/s1_demultiplex_stats.txt
+raw_file                               total_reads    cut_found  bar_matched
+pairddrad_example_R1_.fastq                 239812       239812       239812
+pairddrad_example_R2_.fastq                 239812       239812       239812
+
+sample_name                            total_reads
+1A_0                                         19835
+1B_0                                         20071
+1C_0                                         19969
+1D_0                                         20082
+2E_0                                         20004
+2F_0                                         19899
+2G_0                                         19928
+2H_0                                         20110
+3I_0                                         20078
+3J_0                                         19965
+3K_0                                         19846
+3L_0                                         20025
+
+sample_name                               true_bar       obs_bar     N_records
+1A_0                                     CATCATCAT     CATCATCAT         19835
+1B_0                                     CCAGTGATA     CCAGTGATA         20071
+1C_0                                     TGGCCTAGT     TGGCCTAGT         19969
+1D_0                                     GGGAAAAAC     GGGAAAAAC         20082
+2E_0                                     GTGGATATC     GTGGATATC         20004
+2F_0                                     AGAGCCGAG     AGAGCCGAG         19899
+2G_0                                     CTCCAATCC     CTCCAATCC         19928
+2H_0                                     CTCACTGCA     CTCACTGCA         20110
+3I_0                                     GGCGCATAC     GGCGCATAC         20078
+3J_0                                     CCTTATGTC     CCTTATGTC         19965
+3K_0                                     ACGTGTGTG     ACGTGTGTG         19846
+3L_0                                     TTACTAACA     TTACTAACA         20025
+no_match                                         _             _             0
 ```
 
 # Step 2: Filter reads
