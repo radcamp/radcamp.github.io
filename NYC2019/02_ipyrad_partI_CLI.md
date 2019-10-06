@@ -666,46 +666,10 @@ TGCAGGTCTGCGAATGACGGTGGCTAGTACTCGAGGAAGGGTCGCACCGCAGTAAGCTAATCTGACCCTCTGGAGnnnnA
 ```
 
 Reads that are sufficiently similar (based on the above sequence similarity
-threshold) are grouped together in clusters separated by "//". Again, the
-simulated data is somewhat too clean, so lets look at a small chunk of real
-data:
+threshold) are grouped together in clusters separated by "//". The first cluster
+above is *probably* homozygous with some sequencing error. The second cluster is
+*probably* heterozygous with some sequencing error. We don't want to go through
+and 'decide' by ourselves for each cluster, so thankfully, untangling this mess
+is what steps 4 & 5 are all about. [ipyrad CLI Part II (steps 4-7) is here](03_ipyrad_partII_CLI.html).
 
-```bash
-000e3bb624e3bd7e91b47238b7314dc6;size=4;*
-TGCATATCACAAGAGAAGAAAGCCACTAATTAAGGGGAAAAGAAAAGCCTCTGATATAGCTCCGATATATCATGC-
-75e462e101383cca3db0c02fca80b37a;size=2;-
--GCATATCACAAGAGAAGAAAGCCACTAATTAAGGGGAAAAGAAAAGCCTCTGATATAGCTCCGATATATCATGCA
-//
-//
-0011c57e1e3c03e4a71516bd51c623da;size=1;*
-TGCATGAAATAGATACAACTGAGCACATTTGCTTTGTTTCCAGAGAGTGCAACAAGAGTTTGGAGAATATAAATG
-eef50f7e4849ed4761f1fd38b08d0e12;size=1;+
-TGCATGAAATAGATACTACTGAGCACATTTGCTTTGTTTCCAGAGATTGCATCAAGAGTTTGGAGAATATAAATG
-7f089b34522da8288b0e6ff7db8ffc6c;size=1;+
-TGCATGAAATAGATACAACTGAGCACATTTGCTTTGTTTCCAGAGATTGCAACAAGAGTTTGGAGAATATAAATG
-//
-//
-001236a2310c39a3a16d96c4c6c48df1;size=4;*
-TGCATCTCTTTGGGCTGTTGCTTGGTGGCACACCATGCTGCTTTCTCCTCACTTTTTCTCTCTTTTCCTGAGACT------------------------------
-4644056dca0546a270ba897b018624b4;size=2;-
-------------------------------CACCATGCTGCTTTCTCCTCACTTTTTCTCTCTTTTCCTGAGACTGAGCCAGGGACAGCGGCTGAGGAGGATGCA
-5412b772ec0429af178caf6040d2af30;size=1;+
-TGCATTTCTTTGGGCTGTTGCTTGGTGGCACACCATGCTGCTTTCTCCTCACTTTTTCTCTCTTTTCCTGAGACT------------------------------
-//
-//
-0013684f0db0bd454a0a6fd1b160266f;size=1;*
-TGCATTGTTCATGAATCGTCCCATTGTATACATTTTACCTGATCTATCTCATTGTATTTTACTCCATGGTTTTCA-------------------------
-c26ec07b3e3e77d3167341d100fd2d4e;size=1;-
--------------------------GTATACATTTTACTTGATCTATCTCATTGTATTTTACTCCATGGTTTTCAGTACCTAACAAGCAGCATGTATGCA
-55510205b75b441a2c3ce6249f1eb47c;size=1;-
--------------------------GTATACATTTTACCTGATCTATCTTATTGTATTTTACTCCATGGTTTTCAGTACCTAACAAGCAGCATGTATGCA
-```
-
-That's a little better.... For the second and fourth clusters above these are *probably* homozygous 
-with some sequencing error, but it's hard to tell. For the first and third
-clusters, are there truly two alleles (heterozygote)? Is it a homozygote 
-with lots of sequencing errors, or a heterozygote with few reads for one of the alleles?
-
-Thankfully, untangling this mess is what step 4 is all about.
-
-However, this is probably a good time for a coffee break. [ipyrad CLI Part II (steps 4-7) is here](03_ipyrad_partII_CLI.html).
+However, this is probably a good time for a coffee break. 
