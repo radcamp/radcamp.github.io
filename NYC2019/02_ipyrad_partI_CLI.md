@@ -599,20 +599,20 @@ $ ipyrad -p params-peddrad.txt -s 3
 ```
 
 In-depth operations of step 3:
+* concatenating - If multiple fastq edits per sample then pile them all together
+* join merged/unmerged pairs - For PE data merge overlapping reads per mate pair
 * dereplicating - Merge all identical reads
 * clustering - Find reads matching by sequence similarity threshold
 * building clusters - Group similar reads into clusters
-* chunking - Subsample cluster files to improve performance of alignment step
-* aligning - Align all clusters
-* concatenating - Gather chunked clusters into one full file of aligned clusters
+* chunking clusters - Subsample cluster files to improve performance of alignment step
+* aligning clusters - Align all clusters
+* concat clusters - Gather chunked clusters into one full file of aligned clusters
+* calc cluster stats - Just as it says.
 
-Again we can examine the results. The stats output tells you how many
-clusters were found ('clusters_total'), and the number of clusters that pass the mindepth
-thresholds ('clusters_hidepth'). We'll go into more detail about mindepth settings in some of
-the advanced tutorials but for now all you need to know is that by
-default step 3 will filter out clusters that only have a handful of
-reads on the assumption that these are probably all mostly due to
-sequencing error.
+Again we can examine the results. The stats output tells you how many clusters
+were found ('clusters_total'), and the number of clusters that pass the mindepth
+thresholds ('clusters_hidepth'). We'll go into more detail about mindepth settings
+in some of the advanced tutorials.
 
 ```bash
 $ ipyrad -p params-peddrad.txt -r
@@ -620,31 +620,57 @@ $ ipyrad -p params-peddrad.txt -r
 ```
 Summary stats of Assembly peddrad
 ------------------------------------------------
-                   state  reads_raw  reads_passed_filter  clusters_total  clusters_hidepth
-punc_IBSPCRIB0361      3     250000               237519           56312              4223
-punc_ICST764           3     250000               236815           60626              4302
-punc_JFT773            3     250000               240102           61304              5214
-punc_MTR05978          3     250000               237704           61615              4709
-punc_MTR17744          3     250000               240396           62422              5170
-punc_MTR21545          3     250000               227965           55845              3614
-punc_MTR34414          3     250000               233574           61242              4278
-punc_MTRX1468          3     250000               230903           54411              3988
-punc_MTRX1478          3     250000               233398           57299              4155
-punc_MUFAL9635         3     250000               231868           59249              3866
+      state  reads_raw  reads_passed_filter  refseq_mapped_reads  refseq_unmapped_reads  clusters_total  clusters_hidepth
+1A_0      3      19835                19835                19835                      0            1000              1000
+1B_0      3      20071                20071                20071                      0            1000              1000
+1C_0      3      19969                19969                19969                      0            1000              1000
+1D_0      3      20082                20082                20082                      0            1000              1000
+2E_0      3      20004                20004                20004                      0            1000              1000
+2F_0      3      19899                19899                19899                      0            1000              1000
+2G_0      3      19928                19928                19928                      0            1000              1000
+2H_0      3      20110                20110                20110                      0            1000              1000
+3I_0      3      20078                20078                20078                      0            1000              1000
+3J_0      3      19965                19965                19965                      0            1000              1000
+3K_0      3      19846                19846                19846                      0            1000              1000
+3L_0      3      20025                20025                20025                      0            1000              1000
 ```
 
 Again, the final output of step 3 is dereplicated, clustered files for
 each sample in `./peddrad_clust_0.85/`. You can get a feel for what
 this looks like by examining a portion of one of the files. 
 
-**We'll take a moment now to compare the outputs of the different empirical libraries.**
-
 ```bash
 ## Same as above, `zcat` unzips and prints to the screen and 
 ## `head -n 28` means just show me the first 28 lines. 
-$ zcat peddrad_clust_0.85/punc_IBSPCRIB0361.clustS.gz | head -n 28
+$ zcat zcat peddrad_clust_0.85/1A_0.clustS.gz | head -n 18
 ```
 ```
+0121ac19c8acb83e5d426007a2424b65;size=18;*
+TGCAGTTGGGATGGCGATGCCGTACATTGGCGCATCCAGCCTCGGTCATTGTCGGAGATCTCACCTTTCAACGGTnnnnTGAATGGTCGCGACCCCCAACCACAATCGGCTTTGCCAAGGCAAGGCTAGAGACGTGCTAAAAAAACTCGCTCCG
+521031ed2eeb3fb8f93fd3e8fdf05a5f;size=1;+
+TGCAGTTGGGATGGCGATGCCGTACATTGGCGCATCCAGCCTCGGTCATTGTCGGAGATCTCACCTTTCAACGGTnnnnTGAATGGTCGCGACCCCCAACCACAATCGGCTTTGCCAAGGCAAGGCTAGAGAAGTGCTAAAAAAACTCGCTCCG
+//
+//
+014947fbb43ef09f5388bbd6451bdca0;size=12;*
+TGCAGGACTGCGAATGACGGTGGCTAGTACTCGAGGAAGGGTCGCACCGCAGTAAGCTAATCTGACCCTCTGGAGnnnnACCAGTGGTGGGTAAACACCTCCGATTAAGTATAACGCTACGTGAAGCTAAACGGCACCTATCACATAGACCCCG
+072588460dac78e9da44b08f53680da7;size=8;+
+TGCAGGTCTGCGAATGACGGTGGCTAGTACTCGAGGAAGGGTCGCACCGCAGTAAGCTAATCTGACCCTCTGGAGnnnnACCAGTGGTGGGTAAACACCTCCGATTAAGTATAACGCTACGTGAAGCTAAACGGCACCTATCACATAGACCCCG
+fce2e729af9ea5468bafbef742761a4b;size=1;+
+TGCAGGACTGCGAATGACGGTGGCTAGTACTCGAGGAAGGGTCGCACCGCAGCAAGCTAATCTGACCCTCTGGAGnnnnACCAGTGGTGGGTAAACACCTCCGATTAAGTATAACGCTACGTGAAGCTAAACGGCACCTATCACATAGACCCCG
+24d23e93688f17ab0252fe21f21ce3a7;size=1;+
+TGCAGGTCTGCGAATGACGGTGGCTAGTACTCGAGGAAGGGTCGCACCGCAGAAAGCTAATCTGACCCTCTGGAGnnnnACCAGTGGTGGGTAAACACCTCCGATTAAGTATAACGCTACGTGAAGCTAAACGGCACCTATCACATAGACCCCG
+ef2c0a897eb5976c40f042a9c3f3a8ba;size=1;+
+TGCAGGTCTGCGAATGACGGTGGCTAGTACTCGAGGAAGGGTCGCACCGCAGTAAGCTAATCTGACCCTCTGGAGnnnnACCAGTGGTGGGTAAACACCTCCGATTAAGTATAACGCTACGTGAAGCTAAACGGCACCTATCACATCGACCCCG
+//
+//
+```
+
+Reads that are sufficiently similar (based on the above sequence similarity
+threshold) are grouped together in clusters separated by "//". Again, the
+simulated data is somewhat too clean, so lets look at a small chunk of real
+data:
+
+```bash
 000e3bb624e3bd7e91b47238b7314dc6;size=4;*
 TGCATATCACAAGAGAAGAAAGCCACTAATTAAGGGGAAAAGAAAAGCCTCTGATATAGCTCCGATATATCATGC-
 75e462e101383cca3db0c02fca80b37a;size=2;-
@@ -675,11 +701,11 @@ c26ec07b3e3e77d3167341d100fd2d4e;size=1;-
 -------------------------GTATACATTTTACCTGATCTATCTTATTGTATTTTACTCCATGGTTTTCAGTACCTAACAAGCAGCATGTATGCA
 ```
 
-Reads that are sufficiently similar (based on the above sequence
-similarity threshold) are grouped together in clusters separated by
-"//". For the second and fourth clusters above these are *probably* homozygous 
+That's a little better.... For the second and fourth clusters above these are *probably* homozygous 
 with some sequencing error, but it's hard to tell. For the first and third
 clusters, are there truly two alleles (heterozygote)? Is it a homozygote 
 with lots of sequencing errors, or a heterozygote with few reads for one of the alleles?
 
 Thankfully, untangling this mess is what step 4 is all about.
+
+However, this is probably a good time for a coffee break. [ipyrad CLI Part II (steps 4-7) is here](03_ipyrad_partII_CLI.html).
