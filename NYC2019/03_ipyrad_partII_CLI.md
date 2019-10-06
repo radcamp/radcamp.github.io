@@ -27,21 +27,20 @@ wat
 ```
 
 # Getting set up to continue the assembly
-Just a reminder that all assembly steps in this part of the workshop
-will be run on the Habanero cluster inside an interactive job.
-Here's the quick-setup (for mac/linux users), but if you need more specific details you can
-[look back to the cluster basics section of ipyrad PartI](https://radcamp.github.io/AF-Biota/02_ipyrad_partI_CLI.html#working-with-the-cluster).
+As a reminder, we are running assembly of the simulate data inside binder
+instances running on "the cloud". A small headache is that if you let your
+binder sit long enough it'll time out and die, in which case you'll have to
+redo all the setup, config, and assembly up to the point where you paused. If
+your binder dies for whatever reason you can grab and run [the binder-reinstall.sh](binder-reinstall.sh)
+and it'll bring you right back up to speed!
+
+* [Open a new binder instance](https://mybinder.org/v2/gh/dereneaton/ipyrad/master?filepath=newdocs%2FAPI-analysis)
+* Get a New->Terminal and execute these commands (takes ~5 minutes):
 
 ```bash
-# --pty tells it to connect us to compute nodes interactively
-# --account tells it which account's resources to use
-# --reservation tells it to use the resources on edu reserved for us
-# -t tells it how much time to connect for
-# /bin/bash tells it to open a bash terminal when we connect.
-$ srun --pty --account=edu --reservation=edu_23 -t 1:00:00 -c 4 /bin/bash
+$ wget https://radcamp.github.io/NYC2019/binder-reinstall.sh
+$ bash binder-reinstall.sh
 ```
-
-Windows users should use puTTY.
 
 # Step 3: Recap
 
@@ -99,112 +98,121 @@ TGCATTCCTATGGGAAACATGAAAGGGTTTCTCTCTCCCTCG-TTTTAAAAGCGACCCTGTCCAAACATGGTACAT----
 TGCATTCCAATGGGAAACATGAAAGGGCTTCTCTCTCCCTCG-TTTTTAAAGCGACCCTGTCCAAACTTGGTACAT----
 ```
 
-For this final cluster it's really hard to call by eye, that's why we make the computer do it! 
+For this final cluster it's really hard to call by eye, that's why we make the
+computer do it! 
 
 # Step 4: Joint estimation of heterozygosity and error rate
 
 In this step we jointly estimate sequencing error rate and heterozygosity to 
 help us figure out which reads are "real" and which include sequencing error. 
-We need to know which reads are "real" because in diploid organisms there
-are a maximum of 2 alleles at any given locus. If we look at the raw
-data and there are 5 or ten different "alleles", and 2 of them are very
-high frequency, and the rest are singletons then this gives us evidence
-that the 2 high frequency alleles are good reads and the rest are
-probably junk. This step is pretty straightforward, and pretty fast. Run
-it thusly:
+We need to know which reads are "real" because in diploid organisms there are a
+maximum of 2 alleles at any given locus. If we look at the raw data and there
+are 5 or ten different "alleles", and 2 of them are very high frequency, and
+the rest are singletons then this gives us evidence that the 2 high frequency
+alleles are good reads and the rest are probably junk. This step is pretty
+straightforward, and pretty fast. Run it like this:
 
 ```bash
 $ cd ipyrad-workshop
-$ ipyrad -p params-anolis.txt -s 4 -c 2
+$ ipyrad -p params-peddrad.txt -s 4 -c 1
 ```
 ```
+  loading Assembly: peddrad
+  from saved path: ~/ipyrad-workshop/peddrad.json
+
  -------------------------------------------------------------
-  ipyrad [v.0.7.28]
+  ipyrad [v.0.9.13]
   Interactive assembly and analysis of RAD-seq data
  -------------------------------------------------------------
-  loading Assembly: anolis
-  from saved path: ~/ipyrad-workshop/anolis.json
-  establishing parallel connection:
-  host compute node: [2 cores] on darwin
-  
+  Parallel connection | jupyter-dereneaton-2dipyrad-2dqk37slac: 1 cores
+
   Step 4: Joint estimation of error rate and heterozygosity
-  [####################] 100%  inferring [H, E]      | 0:00:54
+  [####################] 100% 0:00:12 | inferring [H, E]
+
+  Parallel connection closed.
 ```
 
-In terms of results, there isn't as much to look at as in previous
-steps, though you can invoke the `-r` flag to see the estimated
-heterozygosity and error rate per sample.
+In terms of results, there isn't as much to look at as in previous steps, though
+you can invoke the `-r` flag to see the estimated heterozygosity and error rate
+per sample.
 
 ```bash
-$ ipyrad -p params-anolis.txt -r
+$ ipyrad -p params-peddrad.txt -r
 ```
 ```
-Summary stats of Assembly anolis
+Summary stats of Assembly peddrad
 ------------------------------------------------
-                   state  reads_raw  reads_passed_filter  clusters_total  clusters_hidepth  hetero_est  error_est
-punc_IBSPCRIB0361      4     250000               237519           56312              4223    0.021430   0.013049
-punc_ICST764           4     250000               236815           60626              4302    0.024175   0.013043
-punc_JFT773            4     250000               240102           61304              5214    0.019624   0.012015
-punc_MTR05978          4     250000               237704           61615              4709    0.021119   0.011083
-punc_MTR17744          4     250000               240396           62422              5170    0.021159   0.011778
-punc_MTR21545          4     250000               227965           55845              3614    0.024977   0.013339
-punc_MTR34414          4     250000               233574           61242              4278    0.024175   0.013043
-punc_MTRX1468          4     250000               230903           54411              3988    0.023192   0.012638
-punc_MTRX1478          4     250000               233398           57299              4155    0.022146   0.012881
-punc_MUFAL9635         4     250000               231868           59249              3866    0.025000   0.013622
+      state  reads_raw  reads_passed_filter  refseq_mapped_reads  ...  clusters_hidepth  hetero_est  error_est  reads_consens
+1A_0      4      19835                19835                19835  ...              1000    0.001842   0.000773           1000
+1B_0      4      20071                20071                20071  ...              1000    0.001861   0.000751           1000
+1C_0      4      19969                19969                19969  ...              1000    0.002045   0.000761           1000
+1D_0      4      20082                20082                20082  ...              1000    0.001813   0.000725           1000
+2E_0      4      20004                20004                20004  ...              1000    0.002006   0.000767           1000
+2F_0      4      19899                19899                19899  ...              1000    0.002045   0.000761           1000
+2G_0      4      19928                19928                19928  ...              1000    0.001858   0.000765           1000
+2H_0      4      20110                20110                20110  ...              1000    0.002129   0.000730           1000
+3I_0      4      20078                20078                20078  ...              1000    0.001961   0.000749           1000
+3J_0      4      19965                19965                19965  ...              1000    0.001950   0.000748           1000
+3K_0      4      19846                19846                19846  ...              1000    0.001959   0.000768           1000
+3L_0      4      20025                20025                20025  ...              1000    0.001956   0.000753           1000
 ```
-These are pretty typical error rates and heterozygosity estimates. Under
-normal conditions error rate will be much lower than heterozygosity (on 
-the order of 10x lower). Here these are both somewhat high, so this might 
-indicate our clustering threshold value is too low. We'll just proceed 
-with the assembly as is, for now, but if this were real data I would 
-recommend branching here and trying several different clustering threshold 
-values.
+
+Illumina error rates are on the order of 0.01% per base, so your error rates
+will ideally be in this neighborhood. Also, under normal conditions error rate
+will be much, much lower than heterozygosity (on the order of 10x lower). If
+the error rate is >> than 0.01% then you might be using too 
+permissive a clustering threshold. Just a thought.
 
 # Step 5: Consensus base calls
 
-Step 5 uses the inferred error rate and heterozygosity per sample to call 
-the consensus of sequences within each cluster. Here we are identifying what
-we believe to be the real haplotypes at each locus within each sample.
+Step 5 uses the inferred error rate and heterozygosity per sample to call the
+consensus of sequences within each cluster. Here we are identifying what we
+believe to be the real haplotypes at each locus within each sample.
 
 ```bash
-$ ipyrad -p params-anolis.txt -s 5 -c 2
+$ ipyrad -p params-peddrad.txt -s 5 -c 1
 ```
 ```
+  loading Assembly: peddrad
+  from saved path: ~/ipyrad-workshop/peddrad.json
+
  -------------------------------------------------------------
-  ipyrad [v.0.7.28]
+  ipyrad [v.0.9.13]
   Interactive assembly and analysis of RAD-seq data
  -------------------------------------------------------------
-  loading Assembly: anolis
-  from saved path: ~/ipyrad-workshop/anolis.json
-  establishing parallel connection:
-  host compute node: [2 cores] on darwin
+  Parallel connection | jupyter-dereneaton-2dipyrad-2dqk37slac: 1 cores
 
-  Step 5: Consensus base calling 
-  Mean error  [0.01265 sd=0.00079]
-  Mean hetero [0.02270 sd=0.00187]
-  [####################] 100%  calculating depths    | 0:00:08
-  [####################] 100%  chunking clusters     | 0:00:07
-  [####################] 100%  consens calling       | 0:02:23
+  Step 5: Consensus base/allele calling
+  Mean error  [0.00075 sd=0.00001]
+  Mean hetero [0.00195 sd=0.00010]
+  [####################] 100% 0:00:01 | calculating depths
+  [####################] 100% 0:00:00 | chunking clusters
+  [####################] 100% 0:01:03 | consens calling
+  [####################] 100% 0:00:03 | indexing alleles
+
+  Parallel connection closed.
 ```
-In-depth operations of step 5:
-* calculating depths - A simple refinement of the H/E estimates.
-* chunking clusters - Again, breaking big files into smaller chunks to aid parallelization.
-* consensus calling - Actually perform the consensus sequence calling
 
-And here the important information is the number of `reads_consens`.
-This is the number of retained reads within each sample that we'll send on
-to the next step. Retained reads must pass filters on read depth tolerance 
-(both `mindepth_majrule` and `maxdepth`), maximum number of uncalled
-bases (`max_Ns_consens`) and maximum number of heterozygous sites 
-(`max_Hs_consens`) per consensus sequence. This number will almost always
-be lower than `clusters_hidepth`.
+In-depth operations of step 5:
+* calculating depths - A simple refinement of the H/E estimates
+* chunking clusters - Again, breaking big files into smaller chunks to aid
+parallelization
+* consensus calling - Actually perform the consensus sequence calling
+* indexing alleles - Cleaning up and re-joining chunked data
+
+And here the important information is the number of `reads_consens`. This is
+the number of retained reads within each sample that we'll send on to the next
+step. Retained reads must pass filters on read depth tolerance (both
+`mindepth_majrule` and `maxdepth`), maximum number of uncalled bases
+(`max_Ns_consens`) and maximum number of heterozygous sites (`max_Hs_consens`)
+per consensus sequence. This number will almost always be lower than
+`clusters_hidepth`.
 
 ```bash
-$ ipyrad -p params-anolis.txt -r
+$ ipyrad -p params-peddrad.txt -r
 ```
 ```
-Summary stats of Assembly anolis
+Summary stats of Assembly peddrad
 ------------------------------------------------
                    state  reads_raw  reads_passed_filter  clusters_total  clusters_hidepth  hetero_est  error_est  reads_consens
 punc_IBSPCRIB0361      5     250000               237519           56312              4223    0.021430   0.013049           3753
@@ -234,15 +242,15 @@ intensive clustering and alignment phases. These can take on the order
 of 10-100x as long as the next longest running step. Fortunately, with the data we use during this workshop, step 6 will actually be really fast.
 
 ```bash
-$ ipyrad -p params-anolis.txt -s 6 -c 2
+$ ipyrad -p params-peddrad.txt -s 6 -c 2
 ```
 ```
  -------------------------------------------------------------
   ipyrad [v.0.7.28]
   Interactive assembly and analysis of RAD-seq data
  -------------------------------------------------------------
-  loading Assembly: anolis
-  from saved path: ~/ipyrad-workshop/anolis.json
+  loading Assembly: peddrad
+  from saved path: ~/ipyrad-workshop/peddrad.json
   establishing parallel connection:
   host compute node: [2 cores] on darwin
 
@@ -272,7 +280,7 @@ It might be more enlightening to consider the output of step 6 by
 examining the file that contains the reads clustered across samples:
 
 ```bash
-$ zcat anolis/anolis_across/anolis_catclust.gz | head -n 28
+$ zcat peddrad/peddrad_across/peddrad_catclust.gz | head -n 28
 ```
 ```
 punc_IBSPCRIB0361_10
@@ -305,8 +313,8 @@ TGCATAATGGACTTTATGGACTCCATGCCGTCGTTGCACGTACCGTAATTGTGAAATGCA---------------
 //
 ```
 
-The final output of step 6 is a file in `anolis_across` called
-`anolis_catclust.gz`. This file contains all aligned reads across
+The final output of step 6 is a file in `peddrad_across` called
+`peddrad_catclust.gz`. This file contains all aligned reads across
 all samples. Executing the above command you'll see the output below
 which shows all the reads that align at one particular locus. You'll see
 the sample name of each read followed by the sequence of the read at
@@ -327,15 +335,15 @@ conservative.
 To run step 7:
 
 ```bash
-$ ipyrad -p params-anolis.txt -s 7 -c 2
+$ ipyrad -p params-peddrad.txt -s 7 -c 2
 ```
 ```
  -------------------------------------------------------------
   ipyrad [v.0.7.28]
   Interactive assembly and analysis of RAD-seq data
  -------------------------------------------------------------
-  loading Assembly: anolis
-  from saved path: ~/ipyrad-workshop/anolis.json
+  loading Assembly: peddrad
+  from saved path: ~/ipyrad-workshop/peddrad.json
   establishing parallel connection:
   host compute node: [2 cores] on darwin
   
@@ -346,24 +354,24 @@ $ ipyrad -p params-anolis.txt -s 7 -c 2
   [####################] 100%  writing vcf file      | 0:00:00
   [####################] 100%  building arrays       | 0:00:01
   [####################] 100%  writing outfiles      | 0:00:00
-  Outfiles written to: ~/ipyrad-workshop/anolis_outfiles
+  Outfiles written to: ~/ipyrad-workshop/peddrad_outfiles
 ```
 
-A new directory is created called `anolis_outfiles`, and you may inspect
+A new directory is created called `peddrad_outfiles`, and you may inspect
 the contents:
 ```bash
-$ ls anolis_outfiles/
+$ ls peddrad_outfiles/
 ```
 ```
-anolis.hdf5  anolis.loci  anolis.phy  anolis.snps.map  anolis.snps.phy  anolis_stats.txt  anolis.vcf
+peddrad.hdf5  peddrad.loci  peddrad.phy  peddrad.snps.map  peddrad.snps.phy  peddrad_stats.txt  peddrad.vcf
 ```
 
 This directory contains all the output files specified by the 
 `output_formats` parameter in the params file. The default is set to 
 create two different version of phylip output, one including the full 
-sequence `anolis.phy` and one including only variable sites `anolis.snps.phy`, 
-as well as `anolis.vcf`, and the `anolis.loci` (which is ipyrad's internal 
-format). The other important file here is the `anolis_stats.txt` which gives
+sequence `peddrad.phy` and one including only variable sites `peddrad.snps.phy`, 
+as well as `peddrad.vcf`, and the `peddrad.loci` (which is ipyrad's internal 
+format). The other important file here is the `peddrad_stats.txt` which gives
 extensive and detailed stats about the final assembly. A quick overview of the
 blocks in this file:
 
@@ -378,7 +386,7 @@ result), in which case you might reduce this threshold in your params file
 and re-run step 7 in order to retain more loci.
 
 ```bash
-$ cat anolis_outfiles/anolis_stats.txt
+$ cat peddrad_outfiles/peddrad_stats.txt
 ```
 ```
 ## The number of loci caught by each filter.
@@ -503,7 +511,7 @@ punc_MUFAL9635         7     250000               231868           59249        
 
 For our downstream analysis we'll need more than just the default output
 formats, so lets rerun step 7 and generate all supported output formats.
-This can be accomplished by editing the `params-anolis.txt` and setting 
+This can be accomplished by editing the `params-peddrad.txt` and setting 
 the requested `output_formats` to `*` (again, the wildcard character):
 ```
 *                        ## [27] [output_formats]: Output formats (see docs)
@@ -514,7 +522,7 @@ flag, to force overwriting the output files that were previously generated.
 More information about output formats can be found [here](http://ipyrad.readthedocs.io/output_formats.html#full-output-formats).
 
 ```bash
-$ ipyrad -p params-anolis.txt -s 7 -c 2 -f
+$ ipyrad -p params-peddrad.txt -s 7 -c 2 -f
 ```
 
 Congratulations! You've completed your first RAD-Seq assembly. Now you can
