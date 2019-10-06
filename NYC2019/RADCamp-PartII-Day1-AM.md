@@ -147,7 +147,7 @@ data to increase overall quality by trimming for shorter length, and retaining
 data to increase value obtained from sequencing with the result of increasing
 noise toward the ends of reads.
 
-Now run fastqc on one of this sample:
+Now run fastqc on this sample:
 ```bash
 $ fastqc anolis_R1_.fastq.gz
 ```
