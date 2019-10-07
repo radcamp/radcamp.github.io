@@ -42,6 +42,6 @@ p, s, l                        ## [27] [output_formats]: Output formats (see doc
                                ## [29] [reference_as_filter]: Reads mapped to this reference are removed in step 3" > params-peddrad.txt
 
 echo "Assemble simulated data"
-ipyrad -p params-peddrad.txt -s 1234567
+ipyrad -p params-peddrad.txt -s 1234567 -c 1
 
 
