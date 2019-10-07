@@ -96,9 +96,9 @@ Times            | Saturday 9/14 | Sunday 9/15 |
 Times            | Saturday 10/12 | Sunday 10/13 |
 -----            | ------ | ------- |
 8:30-9:00       | Check-in and refreshments | Check-in and refreshments |
-9:00-12:30      | [Introductions, setup, bash basics, and data QC](RADCamp-PartII-Day1-AM.md) | [ipyrad API and analysis tools](RADCamp-PartII-Day2-AM.md) |
+9:00-12:30      | [Introductions, data QC, and ipyrad CLI Part 1](RADCamp-PartII-Day1-AM.md) | [ipyrad API and analysis tools](RADCamp-PartII-Day2-AM.md) |
 12:30-14:00 | Lunch | Lunch |
-14:00-17:00 |[ipyrad CLI](RADCamp-PartII-Day1-PM.md) |  [Small group analysis of real data](RADCamp-PartII-Day2-PM.md) |
+14:00-17:00 |[ipyrad CLI Part 2 & 3RAD Assembly](RADCamp-PartII-Day1-PM.md) |  [Small group analysis of real data](RADCamp-PartII-Day2-PM.md) |
 17:00-19:00 | Networking Dinner | Social |
 
 ## Additional ipyrad analysis cookbooks
