@@ -1,5 +1,13 @@
 #!/bin/bash
 
+if [ -z "$1" ]; 
+then
+    steps="1234"
+else
+    steps=$1
+fi
+echo $steps;
+
 echo "Install/config nano"
 conda install nano -y
 echo "set nowrap" > ~/.nanorc
@@ -41,7 +49,7 @@ p, s, l                        ## [27] [output_formats]: Output formats (see doc
                                ## [28] [pop_assign_file]: Path to population assignment file
                                ## [29] [reference_as_filter]: Reads mapped to this reference are removed in step 3" > params-peddrad.txt
 
-echo "Assemble simulated data"
+echo "Assemble simulated data. Running steps: $steps"
 ipyrad -p params-peddrad.txt -s 1234567 -c 1
 
 
