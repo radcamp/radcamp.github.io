@@ -351,7 +351,7 @@ TGCATAATGGACTTTATGGACTCCATGCCGTCGTTGCACGTACCGTAATTGTGAAATGCA---------------
 The final output of step 6 is a file in `peddrad_across` called
 `peddrad_clust_database.fa`. This file contains all aligned reads across all
 samples. Executing the above command you'll see all the reads that align at
-eachlocus. You'll see the sample name of each read followed by the sequence of
+each locus. You'll see the sample name of each read followed by the sequence of
 the read at that locus for that sample. If you wish to examine more loci you
 can increase the number of lines you want to view by increasing the value you
 pass to `head` in the above command (e.g. `... | head -n 300`).
@@ -359,7 +359,7 @@ pass to `head` in the above command (e.g. `... | head -n 300`).
 # Step 7: Filter and write output files
 
 The final step is to filter the data and write output files in many
-convenient file formats. First we apply filters for maximum number of
+convenient file formats. First, we apply filters for maximum number of
 indels per locus, max heterozygosity per locus, max number of snps per
 locus, and minimum number of samples per locus. All these filters are
 configurable in the params file. You are encouraged to explore

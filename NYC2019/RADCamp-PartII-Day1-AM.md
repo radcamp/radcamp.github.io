@@ -6,8 +6,8 @@
 * [Intro to RADSeq (Brief)](#brief-intro-to-RADSeq)
 * [Intro to ipyrad documentation](#intro-ipyrad-docs)
 * [Connect to a binder instance](#intro-to-binder)
-* [Intro to command line and bash scripting](#command-line-intro)
 * [RADseq data quality control (QC)](#data-qc)
+* [ipyrad CLI assembly of simulated data Part I](#ipyrad-cli-simulated-data-assembly-part-I)
 
 ## Participant intros part I
 [1 minute/1 slide participant intros](https://docs.google.com/presentation/d/1OY-laS2s6lITBBQfB_APTNcb-6o7cMdqgFqwZrRBzBg/edit?usp=sharing)
@@ -20,7 +20,7 @@ Lead: Deren
 **Link to Deren's RADSeq intro here**
 
 ## Intro ipyrad docs
-**Link to ipyrad docs**
+[ipyrad documentation](https://ipyrad.readthedocs.io/en/latest/)
 
 ## Intro to binder
 We will perform the basic assembly and analysis of simulated data using
@@ -52,15 +52,12 @@ machine.
 
 Have patience, this could take a few moments.
 
-## Command line intro
+## Data QC
 Lead: Laura
 
 A brief introduction to bash commands and command line arguments.
 * On the jupyter dashboard choose New->Terminal
 * Do stuff here
-
-## Data QC
-Lead: Laura
 
 The first step of any RADSeq assembly is to inspect your raw data to
 estimate overall quality. We began first with a visual inspection,
@@ -221,6 +218,11 @@ will be treated as "real" data, and potentially bias downstream analysis. In
 the Anolis data this looks like it might be a real concern so we shall keep
 this in mind during step 2 of the ipyrad analysis, and incorporate 3' read
 trimming and aggressive adapter filtering.
+
+## ipyrad CLI simulated data assembly Part I
+Lead: Isaac
+
+[ipyrad CLI Part I](02_ipyrad_partI_CLI.html)
 
 ## Break for lunch
 
