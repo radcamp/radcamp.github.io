@@ -6,7 +6,6 @@ then
 else
     steps=$1
 fi
-echo $steps;
 
 echo "Install/config nano"
 conda install nano -y
