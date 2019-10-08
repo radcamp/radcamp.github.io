@@ -44,7 +44,7 @@ TGCAG, CGG                         ## [8] [restriction_overhang]: Restriction ov
 0.5                            ## [24] [max_shared_Hs_locus]: Max # heterozygous sites per locus
 0, 75, 0, 75                     ## [25] [trim_reads]: Trim raw read edges (R1>, <R1, R2>, <R2) (see docs)
 0, 0, 0, 0                     ## [26] [trim_loci]: Trim locus edges (see docs) (R1>, <R1, R2>, <R2)
-p, s, l                        ## [27] [output_formats]: Output formats (see docs)
+*                        ## [27] [output_formats]: Output formats (see docs)
                                ## [28] [pop_assign_file]: Path to population assignment file
                                ## [29] [reference_as_filter]: Reads mapped to this reference are removed in step 3" > params-peddrad.txt
 
