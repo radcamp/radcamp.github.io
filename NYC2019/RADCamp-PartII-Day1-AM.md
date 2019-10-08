@@ -147,9 +147,7 @@ The first is the name of the read (its location on the plate). The second line c
 In this case the restriction enzyme leaves a TGCAT overhang. Can you find this sequence in the raw data? 
 
 ### FastQC for quality control
-To get a better view of the data quality, without looking at individual reads, we use automated approaches to check the quality. 
-
-We will use [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) to generate a sample-wide
+To get a better view of the data quality, without looking at individual reads, we use automated approaches to check the quality. We will use [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) to generate a sample-wide
 summary of data quality. 
 
 The logic of FastQC is that we want to
