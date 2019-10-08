@@ -66,7 +66,7 @@ Take a look at the contents of the folder you're currently in.
 $ ls
 ```
 
-First, we will create a new directory, which we'll be using during this Workshop. Use `mkdir`.
+There are a bunch of folders. To keep things organized, we will create a new directory which we'll be using during this Workshop. Use `mkdir`. And then navigate into the new folder, using 'cd'.
 ```bash
 $ mkdir ipyrad-workshop
 $ cd ipyrad-workshop
