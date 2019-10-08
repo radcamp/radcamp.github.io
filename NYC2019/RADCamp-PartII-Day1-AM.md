@@ -54,13 +54,13 @@ If it's ready, it should look like this:
 
 ![png](images/Binder_ready.jpg)
 
-## Data QC
+## Data QC: Fastq format and FastQC
 Lead: Laura
 
 To start the terminal on the jupyter dashboard choose New->Terminal.
 ![png](images/Binder_Littleblackwindow.jpg)
 
-Here we'll use bash commands and command line arguments. You can find the most usefull commands on this [cheat sheet](https://github.com/radcamp/radcamp.github.io/blob/master/NYC2019/images/command-line-cheat-sheet-large01.png)
+Here we'll use bash commands and command line arguments. You can find the most usefull commands on this [cheat sheet](https://www.git-tower.com/blog/command-line-cheat-sheet/).
 Take a look at the contents of the folder you're currently in.
 ```bash
 $ ls
@@ -72,30 +72,23 @@ $ mkdir ipyrad-workshop
 $ cd ipyrad-workshop
 ```
 
+### Fastq format
 The first step of any RADSeq assembly is to inspect your raw data to
 estimate overall quality. We began first with a visual inspection,
 but of course we can only visually inspect a very tiny proportion of the
 total data. 
 
-To get a better view of the data quality, we use automated approaches to check the quality of
-our data. 
+TO DO > Amaranthus
 
-
-
-
-
-
-### Inspect the data
-Now we will use the `zcat` command to read lines of data from this file and
+We will use the `zcat` command to read lines of data from this file and
 we will trim this to print only the first 20 lines by piping the output to the
-`head` command. Using a pipe like this passes the output from one command to
+`head` command. Using a pipe (|) like this passes the output from one command to
 another and is a common trick in the command line.
 
 Here we have our first look at a **fastq formatted file**. Each sequenced
 read is spread over four lines, one of which contains sequence and another
 the quality scores stored as ASCII characters. The other two lines are used
 as headers to store information about the read.
-
 
 ```bash
 $ zcat anolis_R1_.fastq.gz | head -n 20
@@ -122,8 +115,12 @@ GE>@FGFGGCEGGGGGGGFGGGGGGGGGGEGGGGGGGGCBGGGGGGGGGGE0CFGGGGEGBGGGGGFGGCGEGGG
 ```
 
 ### FastQC for quality control
-Now we will proceed with an automated function to generate a sample-wide
-summary of data quality using FastQC. The logic of FastQC is that we want to
+To get a better view of the data quality, without looking at individual reads, we use automated approaches to check the quality. 
+
+TO DO > Amaranthus
+
+We will use [FastQC] (https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) to generate a sample-wide
+summary of data quality. The logic of FastQC is that we want to
 obtain a high-level view of the quality of the sequencing. At this stage you 
 can then attempt to improve your dataset by identifying and removing samples
 with failed sequencing. Another key QC procedure involves inspecting average
@@ -154,6 +151,7 @@ data to increase overall quality by trimming for shorter length, and retaining
 data to increase value obtained from sequencing with the result of increasing
 noise toward the ends of reads.
 
+TO DO
 Now run fastqc on this sample:
 ```bash
 $ fastqc anolis_R1_.fastq.gz
@@ -198,15 +196,14 @@ examination. We will only look at a few of these.
 
 ![png](01_cluster_basics_files/anolis-fastq-main.png)
 
-Lets start with Per base sequence quality, because it's very easy to interpret,
-and often times with RAD-Seq data results here will be of special importance.
+Lets start with Per base sequence quality.
 
 ![png](01_cluster_basics_files/anolis-per-base-qual.png)
 
 For the Anolis data the sequence quality per base is uniformly quite high, with
 dips only in the first and last 5 bases (again, this is typical for Illumina
 reads). Based on information from this plot we can see that the Anolis data
-doesn't need a whole lot of trimming, which is good.
+doesn't need any trimming, which is good.
 
 Now lets look at the `Per base sequece content`, which FastQC highlights with a
 scary red **X**.
@@ -221,7 +218,7 @@ concern. Now lets look at `Adapter Content`:
 
 ![png](01_cluster_basics_files/anolis-adapters.png)
 
-Here we can see adapter contamination increases toward the tail of the reads,
+Here, we can see adapter contamination increases toward the tail of the reads,
 approaching 40% of total read content at the very end. The concern here is that
 if adapters represent some significant fraction of the read pool, then they
 will be treated as "real" data, and potentially bias downstream analysis. In
@@ -235,6 +232,3 @@ Lead: Isaac
 [ipyrad CLI Part I](02_ipyrad_partI_CLI.html)
 
 ## Break for lunch
-
-# References
-Prates, I., Xue, A. T., Brown, J. L., Alvarado-Serrano, D. F., Rodrigues, M. T., Hickerson, M. J., & Carnaval, A. C. (2016). Inferring responses to climate dynamics from historical demography in neotropical forest lizards. Proceedings of the National Academy of Sciences, 113(29), 7978-7985.
