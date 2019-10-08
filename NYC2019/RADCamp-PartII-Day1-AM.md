@@ -74,7 +74,11 @@ $ cd ipyrad-workshop
 
 ### Fastq format
 The first step of any RADSeq assembly is to inspect your raw data to
-estimate overall quality. We began first with a visual inspection,
+estimate overall quality. Your input data will be in fastQ format, usually ending in `.fq`, `.fastq`,
+`.fq.gz`, or `.fastq.gz`. The file(s) may be compressed with gzip so that they
+have a .gz ending, but they do not need to be.
+
+We begin first with a visual inspection,
 but of course we can only visually inspect a very tiny proportion of the
 total data. 
 
@@ -113,6 +117,10 @@ TGCATTTTGCAGTGCAGGCATATTTTGCTAATATCGTGGGGTTAGGACAGGCCCCAGACCACTGTTATAATGCAA
 +
 GE>@FGFGGCEGGGGGGGFGGGGGGGGGGEGGGGGGGGCBGGGGGGGGGGE0CFGGGGEGBGGGGGFGGCGEGGG
 ```
+
+The first is the name of the read (its location on the plate). The second line contains the sequence data. The third line is unused. And the fourth line is the quality scores for the base calls. The [FASTQ wikipedia] (https://en.wikipedia.org/wiki/FASTQ_format) page has a good figure depicting the logic behind how quality scores are encoded.
+
+TO DO: The simulated data are 100bp paired-end reads generated as ddRAD, meaning there will be two overhang sequences. In this case the ‘rare’ cutter leaves the TGCAT overhang. Can you find this sequence in the raw data? What’s going on with that other stuff at the beginning of each read?
 
 ### FastQC for quality control
 To get a better view of the data quality, without looking at individual reads, we use automated approaches to check the quality. 
