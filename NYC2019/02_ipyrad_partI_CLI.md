@@ -360,7 +360,7 @@ the ipyparallel cluster.
 
 As a convenience ipyrad internally tracks the state of all your steps in your 
 current assembly, so at any time you can ask for results by invoking the `-r`
-flag. We also use the `-p` arg to tell is which params file (i.e., which
+flag. We also use the `-p` argument to tell it which params file (i.e., which
 assembly) we want it to print stats for.
 
 ```bash
@@ -397,9 +397,9 @@ step 6: None
 step 7: None
 ```
 
-If you want to get even **more** info ipyrad tracks all kinds of wacky stats and
+If you want to get even **more** info, ipyrad tracks all kinds of wacky stats and
 saves them to a file inside the directories it creates for each step. For
-instance to see full stats for step 1 (the wackyness of the step 1 stats at this
+instance, to see full stats for step 1 (the wackyness of the step 1 stats at this
 point isn't very interesting, but we'll see stats for later steps are more verbose):
 
 ```bash 
@@ -443,7 +443,7 @@ no_match                                         _             _             0
 This step filters reads based on quality scores and maximum number of uncalled
 bases, and can be used to detect Illumina adapters in your reads, which is
 sometimes a problem under a couple different library prep scenarios. We know the
-simulated data is unrealistically clean, so lets just pretend its more like the
+simulated data is unrealistically clean, so lets just pretend it's more like the
 Anolis data we looked at earlier, i.e. some slight adapter contamination, and a
 little noise toward the 3' end of the reads. To account for this we will trim
 reads to 75bp and set adapter filtering to be quite aggressive. 
@@ -465,6 +465,7 @@ and change the following two parameter settings:
 ```
 > **Note:** Saving and quitting from `nano`: `CTRL+o` then `CTRL+x`
 
+
 ```bash
 $ ipyrad -p params-peddrad.txt -s 2 -c 1
 ```
@@ -485,7 +486,7 @@ $ ipyrad -p params-peddrad.txt -s 2 -c 1
 ```
 
 The filtered files are written to a new directory called `peddrad_edits`. Again, 
-you can look at the results output by this step and also some handy stats tracked 
+you can look at the results from this step and some handy stats tracked 
 for this assembly.
 
 ```bash
@@ -538,17 +539,14 @@ applied parameters. All reads have been trimmed to 75bp.
 
 For a *de novo* assembly, step 3 de-replicates and then clusters reads within
 each sample by the set clustering threshold and then writes the clusters to new
-files in a directory called `peddrad_clust_0.85`. Intuitively we are trying to
-identify all the reads that map to the same locus within each sample. The
-clustering threshold specifies the minimum percentage of sequence similarity
-below which we will consider two reads to have come from different loci.
+files in a directory called `peddrad_clust_0.85`. Intuitively, we are trying to
+identify all the reads that map to the same locus within each sample. You can see the default value is 0.85, so our default directory is named accordingly. This value dictates the percentage of sequence similarity that
+reads must have in order to be considered reads at the same locus. 
 
 > **NB:** The true name of this output directory will be dictated by the value
 you set for the `clust_threshold` parameter in the params file.
 
-You can see the default value is 0.85, so our default directory is named
-accordingly. This value dictates the percentage of sequence similarity that
-reads must have in order to be considered reads at the same locus. You'll
+You'll
 more than likely want to experiment with this value, but 0.85 is a reliable
 default, balancing over-splitting of loci vs over-lumping. Don't mess with
 this until you feel comfortable with the overall workflow, and also until
@@ -601,7 +599,7 @@ $ ipyrad -p params-peddrad.txt -s 3 -c 1
 
 In-depth operations of step 3:
 * concatenating - If multiple fastq edits per sample then pile them all together
-* join merged/unmerged pairs - For PE data merge overlapping reads per mate pair
+* join merged/unmerged pairs - For pared-end data merge overlapping reads per mate pair
 * dereplicating - Merge all identical reads
 * clustering - Find reads matching by sequence similarity threshold
 * building clusters - Group similar reads into clusters
