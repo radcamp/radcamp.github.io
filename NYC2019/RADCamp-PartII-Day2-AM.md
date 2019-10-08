@@ -2,10 +2,11 @@
 # Day 2 (AM)
 
 ## Overview of the morning activities:
-* [Brief review of the 16 newly generated datasets](#overview-of-new-datasets)
+* [Brief review of the newly generated 3RAD datasets](#overview-of-new-datasets)
 * [Examine quality of the assemblies](#examine-quality-of-assemblies)
 * [Next steps after you finish your first assembly](#next-steps-after-you-finish-your-first-assembly)
 * [Intro to genome scale analysis](#intro-to-genome-scale-analysis)
+* [Coffee Break](#coffee-break)
 * [ipyrad analysis API - Principal Component Analysis (PCA)](#ipyrad-analysis-API-Principal-Component-Analysis-(PCA))
 * [ipyrad analysis API - Population STRUCTURE](#ipyrad-analysis-API-Population-STRUCTURE)
 
@@ -47,6 +48,8 @@ data and why?
 * SNPs vs gene trees?
 * Shortcomings/advantages of RAD?
 * Why are the analysis tools better than trying to go out on your own.
+
+## Coffee Break
 
 ## ipyrad analysis API Principal Component Analysis (PCA)
 Lead: Isaac
