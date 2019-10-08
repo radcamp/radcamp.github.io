@@ -49,11 +49,9 @@ machine.
 **Get everyone on binder here**
 
 [Launch ipyrad with binder.](https://mybinder.org/v2/gh/dereneaton/ipyrad/master?filepath=newdocs%2FAPI-analysis)
-
-Have patience, this could take a few moments.
-
 ![png](images/Binder.jpg)
 
+Have patience, this could take a few moments.
 If it's ready, it should look like this:
 
 ![png](images/Binder_ready.jpg)
@@ -62,7 +60,10 @@ If it's ready, it should look like this:
 Lead: Laura
 
 A brief introduction to bash commands and command line arguments.
-* On the jupyter dashboard choose New->Terminal
+
+To start the terminal on the jupyter dashboard choose New->Terminal.
+![png](images/Binder_Littleblackwindow.jpg)
+
 * Do stuff here
 
 The first step of any RADSeq assembly is to inspect your raw data to
