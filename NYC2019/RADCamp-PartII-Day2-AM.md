@@ -27,7 +27,7 @@ Lets take some time to look at results of the assembly process for some of the
 real datasets. Did they all work perfectly? Why did some work, why did some
 break?
 * Look at runtimes: How long did they take to run?
-* What do the stats files look like? Teaching how to read and interperet stats files 
+* What do the stats files look like? Teaching how to read and interperet stats files. 
 
 ## Next steps after you finish your first assembly
 Lead: Isaac
@@ -44,7 +44,7 @@ Lead: Deren
 Genomic analysis, why do we need more than one gene. What people do with radseq
 data and why?
 * Raxml advantages/shortcomings
-* PCA advantages/shortcoming.
+* PCA advantages/shortcoming
 * SNPs vs gene trees?
 * Shortcomings/advantages of RAD?
 * Why are the analysis tools better than trying to go out on your own.
