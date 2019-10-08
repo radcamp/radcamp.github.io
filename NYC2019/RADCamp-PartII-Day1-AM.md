@@ -142,7 +142,7 @@ TGCATTTTGCAGTGCAGGCATATTTTGCTAATATCGTGGGGTTAGGACAGGCCCCAGACCACTGTTATAATGCAA
 GE>@FGFGGCEGGGGGGGFGGGGGGGGGGEGGGGGGGGCBGGGGGGGGGGE0CFGGGGEGBGGGGGFGGCGEGGG
 ```
 
-The first is the name of the read (its location on the plate). The second line contains the sequence data. The third line is unused. And the fourth line is the quality scores for the base calls. The [FASTQ wikipedia] (https://en.wikipedia.org/wiki/FASTQ_format) page has a good figure depicting the logic behind how quality scores are encoded.
+The first is the name of the read (its location on the plate). The second line contains the sequence data. The third line is unused. And the fourth line is the quality scores for the base calls. The [FASTQ wikipedia](https://en.wikipedia.org/wiki/FASTQ_format) page has a good figure depicting the logic behind how quality scores are encoded.
 
 In this case the restriction enzyme leaves a TGCAT overhang. Can you find this sequence in the raw data? 
 
