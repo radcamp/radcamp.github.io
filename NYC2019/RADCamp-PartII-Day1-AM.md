@@ -52,6 +52,12 @@ machine.
 
 Have patience, this could take a few moments.
 
+![png](images/Binder.jpg)
+
+If it's ready, it should look like this:
+
+![png](images/Binder_ready.jpg)
+
 ## Data QC
 Lead: Laura
 
