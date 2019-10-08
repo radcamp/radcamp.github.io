@@ -57,10 +57,10 @@ If it's ready, it should look like this:
 ## Data QC: Fastq format and FastQC
 Lead: Laura
 
-To start the terminal on the jupyter dashboard choose New->Terminal.
+To start the terminal on the jupyter dashboard, choose New>Terminal.
 ![png](images/Binder_Littleblackwindow.jpg)
 
-Here we'll use bash commands and command line arguments. You can find the most usefull commands on this [cheat sheet](https://www.git-tower.com/blog/command-line-cheat-sheet/).
+Here we'll use bash commands and command line arguments. If you have trouble remembering the different commands, you can find some very usefull commands on this [cheat sheet](https://www.git-tower.com/blog/command-line-cheat-sheet/).
 Take a look at the contents of the folder you're currently in.
 ```bash
 $ ls
