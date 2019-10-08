@@ -11,7 +11,7 @@ like and although your results will vary the procedure will be identical.
 If you are new to RADseq analyses, this tutorial will provide a simple
 overview of how to execute ipyrad, what the data files look like, how to
 check that your analysis is working, and what the final output formats
-will be. We will also cover how to run ipyrad on a cluster and to do so efficiently.
+will be. We will also cover how to run ipyrad on a cluster and how to do so efficiently.
 
 Each grey cell in this tutorial indicates a command line interaction. 
 Lines starting with `$ ` indicate a command that should be executed 
@@ -65,7 +65,7 @@ you don't mind if your assembly breaks.
 
 We will be running through the assembly of simulated data on a binder instance,
 so if you haven't already, please [launch the ipyrad repo](https://mybinder.org/v2/gh/dereneaton/ipyrad/master?filepath=newdocs%2FAPI-analysis),
-and open a New->Terminal.
+and open a New>Terminal.
 
 ## ipyrad help
 To better understand how to use ipyrad, let's take a look at the help argument.
@@ -263,7 +263,7 @@ directory, in this case `/home/jovyan`.
 
 # Input data format
 
-Before we get started let's take a look at what the raw data looks like.
+Before we get started, let's take a look at what the raw data looks like.
 
 Your input data will be in fastQ format, usually ending in `.fq`, `.fastq`,
 `.fq.gz`, or `.fastq.gz`. The file(s) may be compressed with gzip so that they
