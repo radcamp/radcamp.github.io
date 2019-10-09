@@ -27,4 +27,7 @@ Lead: Deren
 ## Form groups and assemble real data
 Last hour at the end of the 1st day. Form the groups at the end of the day
 organized around the 16 new datasets. Get params files for the real data and
-fire off the ipyrad assemblies on google cloud instances (needs to be set up).
+fire off the ipyrad assemblies on google cloud instances.
+
+If you are very curious you can check out how the google cloud infrastructure
+was configured for this workshop: [Google cloud setup](gcloud-install.html)
