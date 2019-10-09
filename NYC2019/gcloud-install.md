@@ -34,7 +34,6 @@ conda install -c bioconda scikit-learn sra-tools raxml treemix -y
 conda install -c eaton-lab toytree toyplot tetrad -y
 
 ## Set the default password for the jupyter notebook serer
-## Set the password to: RADCamp2019
 mkdir .jupyter
 jupyter notebook password
 ```
