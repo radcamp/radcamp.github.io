@@ -31,7 +31,7 @@ As a reminder, we are running assembly of the simulate data inside binder
 instances running on "the cloud". A small headache is that if you let your
 binder sit long enough it'll time out and die, in which case you'll have to
 redo all the setup, config, and assembly up to the point where you paused. If
-your binder dies for whatever reason you can grab and run [the binder-reinstall.sh](binder-reinstall.sh)
+your binder dies for whatever reason you can grab and run the binder-reinstall.sh
 and it'll bring you right back up to speed!
 
 * [Open a new binder instance](https://mybinder.org/v2/gh/dereneaton/ipyrad/master?filepath=newdocs%2FAPI-analysis)
