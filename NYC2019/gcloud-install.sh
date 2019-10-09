@@ -18,8 +18,12 @@ source ~/.bashrc
 conda create -n ipyrad -y
 conda activate ipyrad
 
+conda install anaconda-client -y
 conda install -c conda-forge vim nano -y
-conda install -c bioconda -c ipyrad ipyrad jupyter -y
+conda install -c bioconda -c ipyrad ipyrad jupyter fastqc mpi4py -y
+conda install -c ipyrad structure clumpp bucky bpp -y
+conda install -c bioconda scikit-learn sra-tools raxml treemix -y
+conda install toytree toyplot tetrad -c eaton-lab -y
 
 mkdir .jupyter
 jupyter notebook password
@@ -42,9 +46,22 @@ exit
 
 jupyter notebook --no-browser --ip=$(hostname -i) --port=80 &
 
+## Get notebook to run on startup. Write this command to a file called RADCamp-jupyter.sh
+#!/bin/bash
+echo "Starting jupyter" > /tmp/RADCamp.log
+start-stop-daemon --start --chuid 1001 --chdir /home/isaac_overcast --exec /home/isaac_overcast/miniconda3/envs/ipyrad/bin/jupyter -- notebook --no-browser --port=80 --ip=$(hostname -i) &
+
+## Add this line to /etc/crontab
+@reboot     root        /etc/init.d/RADCamp-jupyter.sh
+
 ## Now you have to stop the template instance in order to create an image
 ## Go to Compute Engine->Images and choose Create Image
 ## Rn it's called image-1
 ## Source -> Disk
 ## Source disk -> instance 1
+
+## Create a new instance from this image:
+# gcloud beta compute --project=radcamp-255318 instances create instance-2 --zone=us-central1-a --machine-type=n1-standard-1 --subnet=default --network-tier=PREMIUM --maintenance-policy=MIGRATE --service-account=446371761382-compute@developer.gserviceaccount.com --scopes=https://www.googleapis.com/auth/devstorage.read_only,https://www.googleapis.com/auth/logging.write,https://www.googleapis.com/auth/monitoring.write,https://www.googleapis.com/auth/servicecontrol,https://www.googleapis.com/auth/service.management.readonly,https://www.googleapis.com/auth/trace.append --tags=http-server,https-server --image=radcamp-template --image-project=radcamp-255318 --boot-disk-size=100GB --boot-disk-type=pd-standard --boot-disk-device-name=instance-2 --reservation-affinity=any
+
+
 
