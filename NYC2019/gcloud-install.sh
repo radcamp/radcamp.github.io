@@ -42,3 +42,9 @@ exit
 
 jupyter notebook --no-browser --ip=$(hostname -i) --port=80 &
 
+## Now you have to stop the template instance in order to create an image
+## Go to Compute Engine->Images and choose Create Image
+## Rn it's called image-1
+## Source -> Disk
+## Source disk -> instance 1
+
