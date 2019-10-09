@@ -3,7 +3,7 @@
 
 ## Overview of the afternoon activities:
 * [ipyrad CLI assembly of simulated data Part II](#ipyrad-cli-simulated-data-assembly-part-II)
-* [Coffee breaky](#coffee-breaky)
+* [Coffee break](#coffee-break)
 * [Look at the real data](#Look-at-the-real-data-we-generate)
 * [Assemble real data](#Form-groups-and-assemble-real-data)
 
@@ -15,7 +15,7 @@ Lead: Isaac
 
 [ipyrad CLI Part II](03_ipyrad_partII_CLI.md)
 
-## Coffee breaky
+## Coffee break
 
 ## Look at the real data we generated
 Lead: Deren
