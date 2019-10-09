@@ -179,7 +179,13 @@ data to increase overall quality by trimming for shorter length, and retaining
 data to increase value obtained from sequencing with the result of increasing
 noise toward the ends of reads.
 
-Now run fastqc on this sample:
+First, install FastQC:
+```bash
+$ conda install -c bioconda fastqc
+```
+Type 'y' when it asks you if you would like to install other packages ('Proceed ([y]/n)?')
+
+Now run FastQC on this sample:
 ```bash
 $ fastqc anolis_R1_.fastq.gz
 ```
@@ -211,8 +217,8 @@ Approx 100% complete for anolis_R1_.fastq.gz
 Analysis complete for anolis_R1_.fastq.gz
 ```
 
-Now back in the jupyter dashboard navigate to /home/data/ and click on
-`anolis_R1__fastqc.html`. This will open the fastqc report which provides
+FastQC will save the output as an html file in the folder you're currently in. You want to look at it in your browser window. So, go back to the jupyter dashboard and navigate to /home/ipyrad-workshop/ and click on
+`anolis_R1__fastqc.html`. This will open the FastQC report which provides
 *extensive* information about the quality of the data, which we will briefly
 review here.
 
