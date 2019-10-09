@@ -46,9 +46,16 @@ exit
 
 jupyter notebook --no-browser --ip=$(hostname -i) --port=80 &
 
+git clone https://github.com/dereneaton/ipyrad.git
+cd ipyrad
+pip install -e .
+
+## Pull from the github repository and 
 ## Get notebook to run on startup. Write this command to a file called RADCamp-jupyter.sh
 #!/bin/bash
 echo "Starting jupyter" > /tmp/RADCamp.log
+echo "Pulling ipyrad repository" >> /tmp/RADCamp.log
+sudo su isaac_overcast - -c "cd ~/ipyrad; git pull >> /tmp/RADCamp.log"
 start-stop-daemon --start --chuid 1001 --chdir /home/isaac_overcast --exec /home/isaac_overcast/miniconda3/envs/ipyrad/bin/jupyter -- notebook --no-browser --port=80 --ip=$(hostname -i) &
 
 ## Add this line to /etc/crontab
