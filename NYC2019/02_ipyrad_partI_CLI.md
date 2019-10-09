@@ -263,12 +263,7 @@ directory, in this case `/home/jovyan`.
 
 # Input data format
 
-Before we get started, let's take a look at what the raw data looks like.
-
-Your input data will be in fastQ format, usually ending in `.fq`, `.fastq`,
-`.fq.gz`, or `.fastq.gz`. The file(s) may be compressed with gzip so that they
-have a .gz ending, but they do not need to be. Below are the first three reads of
-one of the Anolis files.
+Before we get started, let's take a look at what the raw data looks like. Remember that you can use `zcat` and `head` to do this.
 
 ```bash
 ## zcat: unZip and conCATenate the file to the screen
@@ -296,12 +291,6 @@ CTCCAATCCTGCAGTTTAACTGTTCAAGTTGGCAAGATCAAGTCGTCCCTAGCCCCCGCGTCCGTTTTTACCTGGTCGCG
 +
 BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
 ```
-
-Each read is composed of four lines. The first is the name of the read (its
-location on the plate). The second line contains the sequence data. The third
-line is unused. And the fourth line is the quality scores for the base calls.
-The [FASTQ wikipedia page](https://en.wikipedia.org/wiki/FASTQ_format) has a
-good figure depicting the logic behind how quality scores are encoded.
 
 The simulated data are 100bp paired-end reads generated as ddRAD, meaning there
 will be two overhang sequences. In this case the 'rare' cutter leaves the TGCAT

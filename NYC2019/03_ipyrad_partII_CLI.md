@@ -3,7 +3,7 @@
 This is the second part of the full tutorial for the command line interface 
 for ipyrad. In the previous section we imported our data, did some QC, and 
 created clusters of similar reads within each sample. In this section, 
-we now continue with the assembly, with the goal of calling bases, clustering
+we continue with the assembly, with the goal of calling bases, clustering
 across samples based on consensus sequence similarity, and then finally
 writing output in various useful formats.
 
@@ -35,7 +35,7 @@ your binder dies for whatever reason you can grab and run [the binder-reinstall.
 and it'll bring you right back up to speed!
 
 * [Open a new binder instance](https://mybinder.org/v2/gh/dereneaton/ipyrad/master?filepath=newdocs%2FAPI-analysis)
-* Get a New->Terminal and execute these commands (takes ~5 minutes):
+* Get a New>Terminal and execute these commands (takes ~5 minutes):
 
 ```bash
 $ wget https://radcamp.github.io/NYC2019/binder-reinstall.sh
@@ -160,7 +160,7 @@ Summary stats of Assembly peddrad
 Illumina error rates are on the order of 0.01% per base, so your error rates
 will ideally be in this neighborhood. Also, under normal conditions error rate
 will be much, much lower than heterozygosity (on the order of 10x lower). If
-the error rate is >> than 0.01% then you might be using too 
+the error rate is >>0.01% then you might be using too 
 permissive a clustering threshold. Just a thought.
 
 # Step 5: Consensus base calls
@@ -318,7 +318,7 @@ Again, the simulated data are a little boring. Here's something you might see
 more typically with real data:
 
 ```
-dpunc_IBSPCRIB0361_10
+punc_IBSPCRIB0361_10
 TdGCATGCAACTGGAGTGAGGTGGTTTGCATTGATTGCTGTATATTCAATGCAAGCAACAGGAATGAAGTGGATTTCTTTGGTCACTATATACTCAATGCA
 punc_IBSPCRIB0361_1647
 TGCATGCAACAGGAGTGANGTGrATTTCTTTGRTCACTGTAyANTCAATGYA
@@ -443,12 +443,12 @@ of each filter is shown in the `applied_order` column. The total number of
 This is a good place for inspecting how your filtering thresholds are impacting
 your final dataset. For example, you might see that most loci are being filterd
 by `min_sample_locus` (a very common result), in which case you might reduce
-this threshold in your params file and re-run step 7 in order to retain more loci.
+this threshold in your params file and re-run step 7 in order to retain more loci. You can use [branching](https://ipyrad.readthedocs.io/outline.html), so you can re-run part of the analysis, without overwriting the output you already generated.
 
 The next block shows a simple summary of the number of loci retained for each
 sample in the final dataset. Pretty straightforward. If you have some samples
 that have very low sample_coverage here it might be good to remove them and
-re-run step 7.
+re-run step 7. Also this can be done by using [branching](https://ipyrad.readthedocs.io/outline.html).
 ```
 ## The number of loci recovered for each Sample.
 ## ipyrad API location: [assembly].stats_dfs.s7_samples

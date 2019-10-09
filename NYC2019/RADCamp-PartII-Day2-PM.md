@@ -22,11 +22,11 @@
 * [Demographic analysis ([momi2](07_momi2_API.md))
 
 ## Small group work focused on the pilot datasets
-Break into groups around real data With the intention of running a few analyses,
+Break into groups around real data with the intention of running a few analyses,
 creating some plots and reporting the results to the rest of the group.
 
-Results should be put in a google slides presentation in the RADCamp google
-drive folder.
+Results should be put in a google slides presentation in the [RADCamp google
+drive folder](https://drive.google.com/drive/folders/1Nvu6n1PSS5OETiwievADpWEyu-xNbBV2).
 
 ## Brief presentation of results of small group analysis
 Please create a brief presentation (1-2 slides max) to highlight any interesting
