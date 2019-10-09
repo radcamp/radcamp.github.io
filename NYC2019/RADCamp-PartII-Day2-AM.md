@@ -7,15 +7,15 @@
 * [Next steps after you finish your first assembly](#next-steps-after-you-finish-your-first-assembly)
 * [Intro to genome scale analysis](#intro-to-genome-scale-analysis)
 * [Coffee Break](#coffee-break)
-* [ipyrad analysis API - Principal Component Analysis (PCA)](#ipyrad-analysis-API-Principal-Component-Analysis-(PCA))
-* [ipyrad analysis API - Population STRUCTURE](#ipyrad-analysis-API-Population-STRUCTURE)
+* [ipyrad analysis API - Principal Component Analysis (PCA)](#ipyrad-analysis-api-principal-component-analysis))
+* [ipyrad analysis API - Population STRUCTURE](#ipyrad-analysis-api-Population-structure)
 
 ## Overview of new datasets
 **put link to google drive slides here**
 
 This is a 1-slide-maximum introduction to each of the new datasets generated
 during part I of the workshop. Questions to answer include:
-* What is the group?
+* What are the organisms that were sequenced?
 * Geographic/taxonomic scope?
 * What are the research questions? Are they more phylo- or population genetic scale.
 * Do you have some ideas of the analysis you want to perform?`
@@ -51,7 +51,7 @@ data and why?
 
 ## Coffee Break
 
-## ipyrad analysis API Principal Component Analysis (PCA)
+## ipyrad analysis API Principal Component Analysis
 Lead: Isaac
 
 
