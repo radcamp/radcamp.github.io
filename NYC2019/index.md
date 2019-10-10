@@ -84,7 +84,7 @@ Times            | Saturday 9/14 | Sunday 9/15 |
 * [BadDNA order form with index sequences](Part_I_Files/BadDNA_Oligo_Order_Form_current.xlsx)
 * [Full 3RAD protocol for plates](Part_I_Files/3RAD_Molecular_ID_Protocol.docx)
 * [Library pooling guide](Part_I_Files/Library_Pooling_Guide_with_directions_June2016.xlsx)
-* [Adapter Info](Part_I_Files/3RAD_iTRu_adapter_TaggiMatrix.xlsx)
+* [Adapter Info](Part_I_Files/3RAD_iTru_adapter_TaggiMatrix.xlsx)
 * [How to resuspend adapters](Part_I_Files/Adapter_Mixed_Plate_Instructions.docx)
 * [How to resuspend primers - i7 and i5](Part_I_Files/Primer_Plate_Instructions_1.25nmole.docx)
 * [Index diversity calculator](Part_I_Files/Index_diversity_calculator_June2016.xlsx)
