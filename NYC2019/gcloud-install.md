@@ -6,6 +6,13 @@ Unless you initialize the disk with an image they are uninitialized, so you
 have to format and mount. Attach the new disk to a running vm instance
 and follow these [directions for formatting a new disk](https://cloud.google.com/compute/docs/disks/add-persistent-disk?hl=en_US#formatting).
 
+### DL the raw data
+
+The lftp app will do multi-threaded downloads (admera ftp server is dog-slow):
+* sudo apt-get install lftp
+* lftp ftp.admerahealth.com
+* mget -P 10 `*.gz`
+
 ## Create the vm image as you like it
 * Create a new VM instance and choose n1-standard-16
 * Change the boot disk to Ubuntu 19.04 and set size to 100GB (standard persistent disk is default)
