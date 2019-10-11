@@ -240,6 +240,7 @@ doesn't need any trimming, which is good.
 
 Now lets look at the `Per base sequece content`, which FastQC highlights with a
 scary red **X**.
+
 ![png](01_cluster_basics_files/anolis-base-content.png)
 
 The squiggles indicate base composition per base position averaged across the
