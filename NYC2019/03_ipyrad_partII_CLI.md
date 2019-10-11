@@ -3,7 +3,7 @@
 This is the second part of the full tutorial for the command line interface 
 for ipyrad. In the previous section we imported our data, did some QC, and 
 created clusters of similar reads within each sample. In this section, 
-we now continue with the assembly, with the goal of calling bases, clustering
+we continue with the assembly, with the goal of calling bases, clustering
 across samples based on consensus sequence similarity, and then finally
 writing output in various useful formats.
 
@@ -27,21 +27,20 @@ wat
 ```
 
 # Getting set up to continue the assembly
-Just a reminder that all assembly steps in this part of the workshop
-will be run on the Habanero cluster inside an interactive job.
-Here's the quick-setup (for mac/linux users), but if you need more specific details you can
-[look back to the cluster basics section of ipyrad PartI](https://radcamp.github.io/AF-Biota/02_ipyrad_partI_CLI.html#working-with-the-cluster).
+As a reminder, we are running assembly of the simulate data inside binder
+instances running on "the cloud". A small headache is that if you let your
+binder sit long enough it'll time out and die, in which case you'll have to
+redo all the setup, config, and assembly up to the point where you paused. If
+your binder dies for whatever reason you can grab and run the binder-reinstall.sh
+and it'll bring you right back up to speed!
+
+* [Open a new binder instance](https://mybinder.org/v2/gh/dereneaton/ipyrad/master?filepath=newdocs%2FAPI-analysis)
+* Get a New>Terminal and execute these commands (takes ~5 minutes):
 
 ```bash
-# --pty tells it to connect us to compute nodes interactively
-# --account tells it which account's resources to use
-# --reservation tells it to use the resources on edu reserved for us
-# -t tells it how much time to connect for
-# /bin/bash tells it to open a bash terminal when we connect.
-$ srun --pty --account=edu --reservation=edu_23 -t 1:00:00 -c 4 /bin/bash
+$ wget https://radcamp.github.io/NYC2019/binder-reinstall.sh
+$ bash binder-reinstall.sh
 ```
-
-Windows users should use puTTY.
 
 # Step 3: Recap
 
@@ -99,184 +98,228 @@ TGCATTCCTATGGGAAACATGAAAGGGTTTCTCTCTCCCTCG-TTTTAAAAGCGACCCTGTCCAAACATGGTACAT----
 TGCATTCCAATGGGAAACATGAAAGGGCTTCTCTCTCCCTCG-TTTTTAAAGCGACCCTGTCCAAACTTGGTACAT----
 ```
 
-For this final cluster it's really hard to call by eye, that's why we make the computer do it! 
+For this final cluster it's really hard to call by eye, that's why we make the
+computer do it! 
 
 # Step 4: Joint estimation of heterozygosity and error rate
 
 In this step we jointly estimate sequencing error rate and heterozygosity to 
 help us figure out which reads are "real" and which include sequencing error. 
-We need to know which reads are "real" because in diploid organisms there
-are a maximum of 2 alleles at any given locus. If we look at the raw
-data and there are 5 or ten different "alleles", and 2 of them are very
-high frequency, and the rest are singletons then this gives us evidence
-that the 2 high frequency alleles are good reads and the rest are
-probably junk. This step is pretty straightforward, and pretty fast. Run
-it thusly:
+We need to know which reads are "real" because in diploid organisms there are a
+maximum of 2 alleles at any given locus. If we look at the raw data and there
+are 5 or ten different "alleles", and 2 of them are very high frequency, and
+the rest are singletons then this gives us evidence that the 2 high frequency
+alleles are good reads and the rest are probably junk. This step is pretty
+straightforward, and pretty fast. Run it like this:
 
 ```bash
 $ cd ipyrad-workshop
-$ ipyrad -p params-anolis.txt -s 4 -c 2
+$ ipyrad -p params-peddrad.txt -s 4 -c 1
 ```
 ```
+  loading Assembly: peddrad
+  from saved path: ~/ipyrad-workshop/peddrad.json
+
  -------------------------------------------------------------
-  ipyrad [v.0.7.28]
+  ipyrad [v.0.9.13]
   Interactive assembly and analysis of RAD-seq data
  -------------------------------------------------------------
-  loading Assembly: anolis
-  from saved path: ~/ipyrad-workshop/anolis.json
-  establishing parallel connection:
-  host compute node: [2 cores] on darwin
-  
+  Parallel connection | jupyter-dereneaton-2dipyrad-2dqk37slac: 1 cores
+
   Step 4: Joint estimation of error rate and heterozygosity
-  [####################] 100%  inferring [H, E]      | 0:00:54
+  [####################] 100% 0:00:12 | inferring [H, E]
+
+  Parallel connection closed.
 ```
 
-In terms of results, there isn't as much to look at as in previous
-steps, though you can invoke the `-r` flag to see the estimated
-heterozygosity and error rate per sample.
+In terms of results, there isn't as much to look at as in previous steps, though
+you can invoke the `-r` flag to see the estimated heterozygosity and error rate
+per sample.
 
 ```bash
-$ ipyrad -p params-anolis.txt -r
+$ ipyrad -p params-peddrad.txt -r
 ```
 ```
-Summary stats of Assembly anolis
+Summary stats of Assembly peddrad
 ------------------------------------------------
-                   state  reads_raw  reads_passed_filter  clusters_total  clusters_hidepth  hetero_est  error_est
-punc_IBSPCRIB0361      4     250000               237519           56312              4223    0.021430   0.013049
-punc_ICST764           4     250000               236815           60626              4302    0.024175   0.013043
-punc_JFT773            4     250000               240102           61304              5214    0.019624   0.012015
-punc_MTR05978          4     250000               237704           61615              4709    0.021119   0.011083
-punc_MTR17744          4     250000               240396           62422              5170    0.021159   0.011778
-punc_MTR21545          4     250000               227965           55845              3614    0.024977   0.013339
-punc_MTR34414          4     250000               233574           61242              4278    0.024175   0.013043
-punc_MTRX1468          4     250000               230903           54411              3988    0.023192   0.012638
-punc_MTRX1478          4     250000               233398           57299              4155    0.022146   0.012881
-punc_MUFAL9635         4     250000               231868           59249              3866    0.025000   0.013622
+      state  reads_raw  reads_passed_filter  refseq_mapped_reads  ...  clusters_hidepth  hetero_est  error_est  reads_consens
+1A_0      4      19835                19835                19835  ...              1000    0.001842   0.000773           1000
+1B_0      4      20071                20071                20071  ...              1000    0.001861   0.000751           1000
+1C_0      4      19969                19969                19969  ...              1000    0.002045   0.000761           1000
+1D_0      4      20082                20082                20082  ...              1000    0.001813   0.000725           1000
+2E_0      4      20004                20004                20004  ...              1000    0.002006   0.000767           1000
+2F_0      4      19899                19899                19899  ...              1000    0.002045   0.000761           1000
+2G_0      4      19928                19928                19928  ...              1000    0.001858   0.000765           1000
+2H_0      4      20110                20110                20110  ...              1000    0.002129   0.000730           1000
+3I_0      4      20078                20078                20078  ...              1000    0.001961   0.000749           1000
+3J_0      4      19965                19965                19965  ...              1000    0.001950   0.000748           1000
+3K_0      4      19846                19846                19846  ...              1000    0.001959   0.000768           1000
+3L_0      4      20025                20025                20025  ...              1000    0.001956   0.000753           1000
 ```
-These are pretty typical error rates and heterozygosity estimates. Under
-normal conditions error rate will be much lower than heterozygosity (on 
-the order of 10x lower). Here these are both somewhat high, so this might 
-indicate our clustering threshold value is too low. We'll just proceed 
-with the assembly as is, for now, but if this were real data I would 
-recommend branching here and trying several different clustering threshold 
-values.
+
+Illumina error rates are on the order of 0.01% per base, so your error rates
+will ideally be in this neighborhood. Also, under normal conditions error rate
+will be much, much lower than heterozygosity (on the order of 10x lower). If
+the error rate is >>0.01% then you might be using too 
+permissive a clustering threshold. Just a thought.
 
 # Step 5: Consensus base calls
 
-Step 5 uses the inferred error rate and heterozygosity per sample to call 
-the consensus of sequences within each cluster. Here we are identifying what
-we believe to be the real haplotypes at each locus within each sample.
+Step 5 uses the inferred error rate and heterozygosity per sample to call the
+consensus of sequences within each cluster. Here we are identifying what we
+believe to be the real haplotypes at each locus within each sample.
 
 ```bash
-$ ipyrad -p params-anolis.txt -s 5 -c 2
+$ ipyrad -p params-peddrad.txt -s 5 -c 1
 ```
 ```
+  loading Assembly: peddrad
+  from saved path: ~/ipyrad-workshop/peddrad.json
+
  -------------------------------------------------------------
-  ipyrad [v.0.7.28]
+  ipyrad [v.0.9.13]
   Interactive assembly and analysis of RAD-seq data
  -------------------------------------------------------------
-  loading Assembly: anolis
-  from saved path: ~/ipyrad-workshop/anolis.json
-  establishing parallel connection:
-  host compute node: [2 cores] on darwin
+  Parallel connection | jupyter-dereneaton-2dipyrad-2dqk37slac: 1 cores
 
-  Step 5: Consensus base calling 
-  Mean error  [0.01265 sd=0.00079]
-  Mean hetero [0.02270 sd=0.00187]
-  [####################] 100%  calculating depths    | 0:00:08
-  [####################] 100%  chunking clusters     | 0:00:07
-  [####################] 100%  consens calling       | 0:02:23
+  Step 5: Consensus base/allele calling
+  Mean error  [0.00075 sd=0.00001]
+  Mean hetero [0.00195 sd=0.00010]
+  [####################] 100% 0:00:01 | calculating depths
+  [####################] 100% 0:00:00 | chunking clusters
+  [####################] 100% 0:01:03 | consens calling
+  [####################] 100% 0:00:03 | indexing alleles
+
+  Parallel connection closed.
 ```
-In-depth operations of step 5:
-* calculating depths - A simple refinement of the H/E estimates.
-* chunking clusters - Again, breaking big files into smaller chunks to aid parallelization.
-* consensus calling - Actually perform the consensus sequence calling
 
-And here the important information is the number of `reads_consens`.
-This is the number of retained reads within each sample that we'll send on
-to the next step. Retained reads must pass filters on read depth tolerance 
-(both `mindepth_majrule` and `maxdepth`), maximum number of uncalled
-bases (`max_Ns_consens`) and maximum number of heterozygous sites 
-(`max_Hs_consens`) per consensus sequence. This number will almost always
-be lower than `clusters_hidepth`.
+In-depth operations of step 5:
+* calculating depths - A simple refinement of the H/E estimates
+* chunking clusters - Again, breaking big files into smaller chunks to aid
+parallelization
+* consensus calling - Actually perform the consensus sequence calling
+* indexing alleles - Cleaning up and re-joining chunked data
 
 ```bash
-$ ipyrad -p params-anolis.txt -r
+$ ipyrad -p params-peddrad.txt -r
 ```
 ```
-Summary stats of Assembly anolis
+  loading Assembly: peddrad
+  from saved path: ~/ipyrad-workshop/peddrad.json
+
+Summary stats of Assembly peddrad
 ------------------------------------------------
-                   state  reads_raw  reads_passed_filter  clusters_total  clusters_hidepth  hetero_est  error_est  reads_consens
-punc_IBSPCRIB0361      5     250000               237519           56312              4223    0.021430   0.013049           3753
-punc_ICST764           5     250000               236815           60626              4302    0.024175   0.013043           3759
-punc_JFT773            5     250000               240102           61304              5214    0.019624   0.012015           4698
-punc_MTR05978          5     250000               237704           61615              4709    0.021119   0.011083           4223
-punc_MTR17744          5     250000               240396           62422              5170    0.021159   0.011778           4558
-punc_MTR21545          5     250000               227965           55845              3614    0.024977   0.013339           3145
-punc_MTR34414          5     250000               233574           61242              4278    0.024175   0.013043           3751
-punc_MTRX1468          5     250000               230903           54411              3988    0.023192   0.012638           3586
-punc_MTRX1478          5     250000               233398           57299              4155    0.022146   0.012881           3668
-punc_MUFAL9635         5     250000               231868           59249              3866    0.025000   0.013622           3369
+      state  reads_raw  reads_passed_filter  refseq_mapped_reads  ...  clusters_hidepth  hetero_est  error_est  reads_consens
+1A_0      5      19835                19835                19835  ...              1000    0.001842   0.000773           1000
+1B_0      5      20071                20071                20071  ...              1000    0.001861   0.000751           1000
+1C_0      5      19969                19969                19969  ...              1000    0.002045   0.000761           1000
+1D_0      5      20082                20082                20082  ...              1000    0.001813   0.000725           1000
+2E_0      5      20004                20004                20004  ...              1000    0.002006   0.000767           1000
+2F_0      5      19899                19899                19899  ...              1000    0.002045   0.000761           1000
+2G_0      5      19928                19928                19928  ...              1000    0.001858   0.000765           1000
+2H_0      5      20110                20110                20110  ...              1000    0.002129   0.000730           1000
+3I_0      5      20078                20078                20078  ...              1000    0.001961   0.000749           1000
+3J_0      5      19965                19965                19965  ...              1000    0.001950   0.000748           1000
+3K_0      5      19846                19846                19846  ...              1000    0.001959   0.000768           1000
+3L_0      5      20025                20025                20025  ...              1000    0.001956   0.000753           1000
 ```
+
+And here the important information is the number of `reads_consens`. This is
+the number of retained reads within each sample that we'll send on to the next
+step. Retained reads must pass filters on read depth tolerance (both
+`mindepth_majrule` and `maxdepth`), maximum number of uncalled bases
+(`max_Ns_consens`) and maximum number of heterozygous sites (`max_Hs_consens`)
+per consensus sequence. This number will almost always be lower than
+`clusters_hidepth`.
 
 # Step 6: Cluster across samples
 
-Step 6 clusters consensus sequences across samples. Now that we have
-good estimates for haplotypes within samples we can try to identify
-similar sequences at each locus between samples. We use the same
-clustering threshold as step 3 to identify sequences between samples
-that are probably sampled from the same locus, based on sequence
-similarity.
+Step 6 clusters consensus sequences across samples. Now that we have good
+estimates for haplotypes within samples we can try to identify similar sequences
+at each locus among samples. We use the same clustering threshold as step 3 to
+identify sequences among samples that are probably sampled from the same locus,
+based on sequence similarity.
 
-> **Note on performance of each step:** Steps 3 and 6 generally take 
-considerably longer than any of the steps, due to the resource 
-intensive clustering and alignment phases. These can take on the order
-of 10-100x as long as the next longest running step. Fortunately, with the data we use during this workshop, step 6 will actually be really fast.
+> **Note on performance of each step:** Steps 3 and 6 generally take
+considerably longer than any of the steps, due to the resource intensive
+clustering and alignment phases. These can take on the order of 10-100x as long
+as the next longest running step. Fortunately, with the simulated data, step 6
+will actually be really fast.
 
 ```bash
-$ ipyrad -p params-anolis.txt -s 6 -c 2
+$ ipyrad -p params-peddrad.txt -s 6 -c 1
 ```
 ```
+  loading Assembly: peddrad
+  from saved path: ~/ipyrad-workshop/peddrad.json
+
  -------------------------------------------------------------
-  ipyrad [v.0.7.28]
+  ipyrad [v.0.9.13]
   Interactive assembly and analysis of RAD-seq data
  -------------------------------------------------------------
-  loading Assembly: anolis
-  from saved path: ~/ipyrad-workshop/anolis.json
-  establishing parallel connection:
-  host compute node: [2 cores] on darwin
+  Parallel connection | jupyter-dereneaton-2dipyrad-2dpnwm5vfx: 1 cores
 
-  Step 6: Clustering at 0.85 similarity across 10 samples
-  [####################] 100%  concat/shuffle input  | 0:00:01
-  [####################] 100%  clustering across     | 0:00:10
-  [####################] 100%  building clusters     | 0:00:02
-  [####################] 100%  aligning clusters     | 0:00:22
-  [####################] 100%  database indels       | 0:00:01
-  [####################] 100%  indexing clusters     | 0:00:09
-  [####################] 100%  building database     | 0:00:00
+  Step 6: Clustering/Mapping across samples
+  [####################] 100% 0:00:01 | concatenating inputs
+  [####################] 100% 0:00:04 | clustering across
+  [####################] 100% 0:00:00 | building clusters
+  [####################] 100% 0:00:35 | aligning clusters
+
+  Parallel connection closed.
 ```
 In-depth operations of step 6:
-* concat/shuffle input - Gathering all consensus files and preprocessing to improve performance.
-* clustering across - Cluster by similarity threshold across samples.
+* concatenating inputs - Gathering all consensus files and preprocessing to
+improve performance.
+* clustering across - Cluster by similarity threshold across samples
 * building clusters - Group similar reads into clusters
 * aligning clusters - Align within each cluster
-* database indels - Post-processing indels
-* indexing clusters - Post-processing clusters
-* building database - Gathering all data into a unified format
 
-Since in general the stats for results of each step are sample based, 
-the output of `-r` will only display what we had seen after step 5, 
-so this is not that informative.
+Since in general the stats for results of each step are sample based, the output
+of `-r` will only display what we had seen after step 5, so this is not that
+informative.
 
-It might be more enlightening to consider the output of step 6 by
-examining the file that contains the reads clustered across samples:
+It might be more enlightening to consider the output of step 6 by examining the
+file that contains the reads clustered across samples:
 
 ```bash
-$ zcat anolis/anolis_across/anolis_catclust.gz | head -n 28
+$ cat peddrad_across/peddrad_clust_database.fa | head -n 27
 ```
+```
+#1A_0,@1B_0,@1C_0,@1D_0,@2E_0,@2F_0,@2G_0,@2H_0,@3I_0,@3J_0,@3K_0,@3L_0
+>1A_0_11
+TGCAGGCGTAGTAAGCTTGGATGGGAGCGACCACCCGAACGAGATATCATTCACAACGTTATACATACACTGCGCnnnnCCATTATATGGTGTGATATACGTATCCTCAAACCGAATTACAAAACGATGTGCTTACGGCGTAATCTTGGTCCCG
+>1B_0_16
+TGCAGGCGTAGTAAGCTTGGATGGGAGCGACCACCCGAACGAGATATCATTCACAACGTTATACATACACTGCGCnnnnCCATTATATGGTGTGATATACGTATCCTCAAACCGAATTACAAAACGATGTGCTTACGGCGTAATCTTGGTCCCG
+>1C_0_678
+TGCAGGCGTAGTAAGCTTGCATGGGAGCGACCACCCGAACGAGATATCAATCACAACGTTATACATACACTGCGCnnnnCCATTATATGGTGTGATATACGWATCCTCAAACCGAATTACAAAACGATGTGCTTACGGCGTAATCTTGGTCCCG
+>1D_0_509
+TGCAGGCGTAGTAAGCTTGCATGGGAGCGACCACCCGAACGAGATATCATTCACAACGTTATACATACACTGCGCnnnnCCATTATATGGTGTGATATACGTATCCTCAAACCGAATTACAAAACGATGTGCTTACGGCGTAATCTTGGTCCCG
+>2E_0_859
+TGCAGGCGTAGTAAGCTTGCATGGGAGCGACCWCCCGAACGAGATATCATTCACAACGTTATACATACACTGCGCnnnnCCATTATATGGTGTGATATACGTATCCTCAAACCGAATTACAAAACGATGTGCTTACGGCGTAATCTTGGTCCCG
+>2F_0_533
+TGCAGGCGTAGTAAGCTTGCATGGGAGCGACCACCCGAACGAGATATCATTCACAACGTTATACATACACTGCGCnnnnCCATTATATGGTGTGATATACGTATCCTCAAACCGAATTACAAAACGATGTGCTTACGGCGTAATCTTGGTCCCG
+>2G_0_984
+TGCAGGCGTAGTAAGCTTGCATGGGAGCGACCACCCGAACGAGATATCATTCACAACGTTATACATACACTGCGCnnnnCCATTATATGGTGTGATATACGTATCCTCAAACCGAATTACAAAACGATGTGCTTACGGCGTAATCTTGGTCCCG
+>2H_0_529
+TGCAGGCGTAGTAAGCTTGCATGGGAGCGACCACCCGAACGAGATATCATTCACAACGTTATACATACACTGCGCnnnnCCATTATATGGTGTGATATACGTATCCTCAAACCGAATTACAAAACGATGTGCTTACGGCGTAATCTTGGTCCCG
+>3I_0_286
+TGCAGGCGTAGTAAGCTTGCATGCGAGCGACCACCCGAACGAGATATCATTCACAACGTTATACATACACTGCGCnnnnCCATTATATGGTGTTATATACGTATCCTCAAACCGAATTACAAAACGATGTGCTTACGGCGTAATCTTGGTCCCG
+>3J_0_255
+TGCAGGCGTAGTAAGCTTGCATGCGAGCGACCACCCGAACGAGATATCATTCACAACGTTATACATACACTGCGCnnnnCCATTATATGGTGTTATATACGTATCCTCAAACCGAATTACAAAACGATGTGCTTACGGCGTAATCTTGGTCCCG
+>3K_0_264
+TGCAGGCGTAGTAAGCTTGCATGCGAGCGACCACCCGAACGAGATATCATTCACAACGTTATACATACACTGCGCnnnnCCATTATATGGTGTTATATACGTATCCTCAAACCGAATTACAAAACGATGTGCTTACGGCGTAATCTTGGTCCCG
+>3L_0_865
+TGCAGGCGTAGTAAGCTTGCATGCGAGCGACCACCCGAACGAGATATCATTCACAACGTTATACATACACTGCGCnnnnCCATTATATGGTGTTATAYACGTATCCTCAAACCGAATTACAAAACGATGTGCTTACGGCGTAATCTTGGTCCCG
+//
+//
+```
+
+Again, the simulated data are a little boring. Here's something you might see
+more typically with real data:
+
 ```
 punc_IBSPCRIB0361_10
-TGCATGCAACTGGAGTGAGGTGGTTTGCATTGATTGCTGTATATTCAATGCAAGCAACAGGAATGAAGTGGATTTCTTTGGTCACTATATACTCAATGCA
+TdGCATGCAACTGGAGTGAGGTGGTTTGCATTGATTGCTGTATATTCAATGCAAGCAACAGGAATGAAGTGGATTTCTTTGGTCACTATATACTCAATGCA
 punc_IBSPCRIB0361_1647
 TGCATGCAACAGGAGTGANGTGrATTTCTTTGRTCACTGTAyANTCAATGYA
 //
@@ -305,19 +348,18 @@ TGCATAATGGACTTTATGGACTCCATGCCGTCGTTGCACGTACCGTAATTGTGAAATGCA---------------
 //
 ```
 
-The final output of step 6 is a file in `anolis_across` called
-`anolis_catclust.gz`. This file contains all aligned reads across
-all samples. Executing the above command you'll see the output below
-which shows all the reads that align at one particular locus. You'll see
-the sample name of each read followed by the sequence of the read at
-that locus for that sample. If you wish to examine more loci you can
-increase the number of lines you want to view by increasing the value
-you pass to `head` in the above command (e.g. `... | head -n 300`).
+The final output of step 6 is a file in `peddrad_across` called
+`peddrad_clust_database.fa`. This file contains all aligned reads across all
+samples. Executing the above command you'll see all the reads that align at
+each locus. You'll see the sample name of each read followed by the sequence of
+the read at that locus for that sample. If you wish to examine more loci you
+can increase the number of lines you want to view by increasing the value you
+pass to `head` in the above command (e.g. `... | head -n 300`).
 
 # Step 7: Filter and write output files
 
 The final step is to filter the data and write output files in many
-convenient file formats. First we apply filters for maximum number of
+convenient file formats. First, we apply filters for maximum number of
 indels per locus, max heterozygosity per locus, max number of snps per
 locus, and minimum number of samples per locus. All these filters are
 configurable in the params file. You are encouraged to explore
@@ -327,101 +369,111 @@ conservative.
 To run step 7:
 
 ```bash
-$ ipyrad -p params-anolis.txt -s 7 -c 2
+$ ipyrad -p params-peddrad.txt -s 7 -c 1
 ```
 ```
+  loading Assembly: peddrad
+  from saved path: ~/ipyrad-workshop/peddrad.json
+
  -------------------------------------------------------------
-  ipyrad [v.0.7.28]
+  ipyrad [v.0.9.13]
   Interactive assembly and analysis of RAD-seq data
  -------------------------------------------------------------
-  loading Assembly: anolis
-  from saved path: ~/ipyrad-workshop/anolis.json
-  establishing parallel connection:
-  host compute node: [2 cores] on darwin
-  
-  Step 7: Filter and write output files for 10 Samples
-  [####################] 100%  filtering loci        | 0:00:10
-  [####################] 100%  building loci/stats   | 0:00:01
-  [####################] 100%  building vcf file     | 0:00:05
-  [####################] 100%  writing vcf file      | 0:00:00
-  [####################] 100%  building arrays       | 0:00:01
-  [####################] 100%  writing outfiles      | 0:00:00
-  Outfiles written to: ~/ipyrad-workshop/anolis_outfiles
+  Parallel connection | jupyter-dereneaton-2dipyrad-2dpnwm5vfx: 1 cores
+
+  Step 7: Filtering and formatting output files
+  [####################] 100% 0:00:07 | applying filters
+  [####################] 100% 0:00:02 | building arrays
+  [####################] 100% 0:00:01 | writing conversions
+
+  Parallel connection closed.
 ```
 
-A new directory is created called `anolis_outfiles`, and you may inspect
-the contents:
-```bash
-$ ls anolis_outfiles/
-```
-```
-anolis.hdf5  anolis.loci  anolis.phy  anolis.snps.map  anolis.snps.phy  anolis_stats.txt  anolis.vcf
-```
+In-depth operations of step 7:
+* applying filters - Apply filters for max # indels, SNPs, & shared hets, and
+minimum # of samples per locus
+* building arrays - Construct the final output data in hdf5 format
+* writing conversions - Write out all designated output formats
 
-This directory contains all the output files specified by the 
-`output_formats` parameter in the params file. The default is set to 
-create two different version of phylip output, one including the full 
-sequence `anolis.phy` and one including only variable sites `anolis.snps.phy`, 
-as well as `anolis.vcf`, and the `anolis.loci` (which is ipyrad's internal 
-format). The other important file here is the `anolis_stats.txt` which gives
-extensive and detailed stats about the final assembly. A quick overview of the
-blocks in this file:
-
-This block indicates how filtering is impacting your final dataset. Each
-filter is applied in order from top to bottom, and the number of loci
-removed because of each filter is shown in the `applied_order` column. The
-total number of `retained_loci` after each filtering step is displayed in
-the final column. This is a good place for inspecting how your filtering
-thresholds are impacting your final dataset. For example, you might see
-that most loci are being filterd by `min_sample_locus` (a very common
-result), in which case you might reduce this threshold in your params file
-and re-run step 7 in order to retain more loci.
+Step 7 generates output files in the `peddrad_outfiles` directory. All the
+output formats specified by the `output_formats` parameter will be generated
+here. Let's see what's created by default:
 
 ```bash
-$ cat anolis_outfiles/anolis_stats.txt
+$ ls peddrad_outfiles/
+```
+```
+peddrad.loci  peddrad.phy  peddrad.seqs.hdf5  peddrad.snps  peddrad.snps.hdf5  peddrad.snpsmap  peddrad_stats.txt
+```
+
+ipyrad always creates the `peddrad.loci` file, as this is our internal format,
+as well as the `peddrad_stats.txt` file, which reports final statistics for the
+assembly (more below). The other files created fall in to 2 categories: files
+that contain the full sequence (i.e. the `peddrad.phy` and `peddrad.seqs.hdf5`
+files) and files that contain only variable sites (i.e. the `peddrad.snps` and
+`peddrad.snps.hdf5` files). The `peddrad.snpsmap` is a file which maps SNPs to
+loci, which is used downstream in the analysis toolkit for sampling unlinked
+SNPs.
+
+The most informative, human-readable file here is `peddrad_stats.txt` which
+gives extensive and detailed stats about the final assembly. A quick overview
+of the different sections of this file:
+
+```bash
+$ cat peddrad_outfiles/peddrad_stats.txt
 ```
 ```
 ## The number of loci caught by each filter.
 ## ipyrad API location: [assembly].stats_dfs.s7_filters
 
                             total_filters  applied_order  retained_loci
-total_prefiltered_loci               7366              0           7366
-filtered_by_rm_duplicates             250            250           7116
-filtered_by_max_indels                 29             29           7087
-filtered_by_max_snps                  146              5           7082
-filtered_by_max_shared_het            549            434           6648
-filtered_by_min_sample               3715           3662           2986
-filtered_by_max_alleles               872             68           2918
-total_filtered_loci                  2918              0           2918
+total_prefiltered_loci                  0              0           1000
+filtered_by_rm_duplicates               0              0           1000
+filtered_by_max_indels                  0              0           1000
+filtered_by_max_SNPs                    0              0           1000
+filtered_by_max_shared_het              0              0           1000
+filtered_by_min_sample                  0              0           1000
+total_filtered_loci                     0              0           1000
 ```
 
-A simple summary of the number of loci retained for each sample in the
-final dataset. Pretty straightforward. If you have some samples that have
-very low sample_coverage here it might be good to remove them and re-run
-step 7.
+This block indicates how filtering is impacting your final dataset. Each filter
+is applied in order from top to bottom, and the number of loci removed because
+of each filter is shown in the `applied_order` column. The total number of
+`retained_loci` after each filtering step is displayed in the final column.
+This is a good place for inspecting how your filtering thresholds are impacting
+your final dataset. For example, you might see that most loci are being filterd
+by `min_sample_locus` (a very common result), in which case you might reduce
+this threshold in your params file and re-run step 7 in order to retain more loci. You can use [branching](https://ipyrad.readthedocs.io/outline.html), so you can re-run part of the analysis, without overwriting the output you already generated.
+
+The next block shows a simple summary of the number of loci retained for each
+sample in the final dataset. Pretty straightforward. If you have some samples
+that have very low sample_coverage here it might be good to remove them and
+re-run step 7. Also this can be done by using [branching](https://ipyrad.readthedocs.io/outline.html).
 ```
 ## The number of loci recovered for each Sample.
 ## ipyrad API location: [assembly].stats_dfs.s7_samples
 
-                   sample_coverage
-punc_IBSPCRIB0361             1673
-punc_ICST764                  1717
-punc_JFT773                   2073
-punc_MTR05978                 1897
-punc_MTR17744                 2021
-punc_MTR21545                 1597
-punc_MTR34414                 1758
-punc_MTRX1468                 1653
-punc_MTRX1478                 1807
-punc_MUFAL9635                1628
+      sample_coverage
+1A_0             1000
+1B_0             1000
+1C_0             1000
+1D_0             1000
+2E_0             1000
+2F_0             1000
+2G_0             1000
+2H_0             1000
+3I_0             1000
+3J_0             1000
+3K_0             1000
+3L_0             1000
 ```
 
-`locus_coverage` indicates the number of loci that contain exactly a given
-number of samples, and `sum_coverage` is just the running total of these
-in ascending order. So here, if it weren't being filtered, locus coverage 
-in the `1` column would indicate singletons (only one sample at this locus), 
-and locus coverage in the `10` column indicates loci with full coverage 
-(all samples have data at these loci).
+The next block is `locus_coverage`, which indicates the number of loci that
+contain exactly a given number of samples, and `sum_coverage` is just the
+running total of these in ascending order. So here, if it weren't being
+filtered, locus coverage in the `1` column would indicate singletons (only
+one sample at this locus), and locus coverage in the `10` column indicates
+loci with full coverage  (all samples have data at these loci).
 
 > **Note:** It's important to notice that locus coverage below your 
 `min_sample_locus` parameter setting will all naturally equal 0, since 
@@ -435,94 +487,115 @@ by definition these are being removed.
 1                0             0
 2                0             0
 3                0             0
-4              778           778
-5              588          1366
-6              451          1817
-7              371          2188
-8              297          2485
-9              237          2722
-10             196          2918
+4                0             0
+5                0             0
+6                0             0
+7                0             0
+8                0             0
+9                0             0
+10               0             0
+11               0             0
+12            1000          1000
 ```
 
-Whereas the previous block indicated samples per locus, below we 
-are looking at SNPs per locus. In a similar fashion as above,
-these columns record the counts of loci containing given numbers
-of variable sites and parsimony informative sites (pis). For example,
-in the `2` row, this indicates the number of loci with 2 variable
-sites (174), and the number of loci with 2 pis (48). The `sum_*`
+Whereas the previous block indicated samples per locus, below we are looking at
+SNPs per locus. In a similar fashion as above, these columns record the counts
+of loci containing given numbers of variable sites and parsimony informative
+sites (pis). For example, in the `2` row, this indicates the number of loci
+with 2 variable sites (174), and the number of loci with 2 pis (48). The `sum_*`
 columns simply indicate the running total in ascending order.
 
-> **Note:** This block can be a little tricky because loci can
-end up getting double-counted. For example, a locus with 1 pis,
-and 2 autapomorphies will be counted once in the 3 row for `var`,
-and once in the 1 row for `pis`. Apply care with these values.
+> **Note:** This block can be a little tricky because loci can end up getting
+double-counted. For example, a locus with 1 pis, and 2 autapomorphies will be
+counted once in the 3 row for `var`, and once in the 1 row for `pis`. Apply
+care when interpreting these values.
 
 ```
-## The distribution of SNPs (var and pis) per locus.
+The distribution of SNPs (var and pis) per locus.
 ## var = Number of loci with n variable sites (pis + autapomorphies)
 ## pis = Number of loci with n parsimony informative site (minor allele in >1 sample)
 ## ipyrad API location: [assembly].stats_dfs.s7_snps
+## The "reference" sample is included if present unless 'exclude_reference=True'
 
-     var  sum_var   pis  sum_pis
-0   1977        0  2577        0
-1    557      557   214      214
-2    174      905    48      310
-3     77     1136    45      445
-4     51     1340    17      513
-5     26     1470     5      538
-6     18     1578     5      568
-7     15     1683     4      596
-8     12     1779     2      612
-9      3     1806     1      621
-10     3     1836     0      621
-11     2     1858     0      621
-12     0     1858     0      621
-13     1     1871     0      621
-14     0     1871     0      621
-15     0     1871     0      621
-16     1     1887     0      621
-17     1     1904     0      621
+    var  sum_var  pis  sum_pis
+0     1        0  163        0
+1     5        5  288      288
+2    20       45  264      816
+3    46      183  160     1296
+4    66      447   70     1576
+5   111     1002   36     1756
+6   164     1986   13     1834
+7   141     2973    5     1869
+8   122     3949    1     1877
+9   121     5038    0     1877
+10   76     5798    0     1877
+11   57     6425    0     1877
+12   30     6785    0     1877
+13   14     6967    0     1877
+14   15     7177    0     1877
+15    4     7237    0     1877
+16    3     7285    0     1877
+17    4     7353    0     1877
 ```
 
-The final block displays statistics for each sample in the final dataset. Many of these stats will already be familiar, but this provides a nice compact view on how each sample is represented in the output. The one new stat here is `loci_in_assembly`, which indicates how many loci each sample has data for.
+The next block displays statistics for each sample in the final dataset.
+Many of these stats will already be familiar, but this provides a nice compact
+view on how each sample is represented in the output. The one new stat here is
+`loci_in_assembly`, which indicates how many loci each sample has data for.
 ```
 ## Final Sample stats summary
-
-                   state  reads_raw  reads_passed_filter  clusters_total  clusters_hidepth  hetero_est  error_est  reads_consens  loci_in_assembly
-punc_IBSPCRIB0361      7     250000               237519           56312              4223    0.021430   0.013049           3753              1673
-punc_ICST764           7     250000               236815           60626              4302    0.024175   0.013043           3759              1717
-punc_JFT773            7     250000               240102           61304              5214    0.019624   0.012015           4698              2073
-punc_MTR05978          7     250000               237704           61615              4709    0.021119   0.011083           4223              1897
-punc_MTR17744          7     250000               240396           62422              5170    0.021159   0.011778           4558              2021
-punc_MTR21545          7     250000               227965           55845              3614    0.024977   0.013339           3145              1597
-punc_MTR34414          7     250000               233574           61242              4278    0.024175   0.013043           3751              1758
-punc_MTRX1468          7     250000               230903           54411              3988    0.023192   0.012638           3586              1653
-punc_MTRX1478          7     250000               233398           57299              4155    0.022146   0.012881           3668              1807
-punc_MUFAL9635         7     250000               231868           59249              3866    0.025000   0.013622           3369              1628
+      state  reads_raw  reads_passed_filter  refseq_mapped_reads  refseq_unmapped_reads  clusters_total  clusters_hidepthhetero_est  error_est  reads_consens  loci_in_assembly
+1A_0      7      19835                19835                19835                      0            1000              1000  0.001842   0.000773           1000              1000
+1B_0      7      20071                20071                20071                      0            1000              1000  0.001861   0.000751           1000              1000
+1C_0      7      19969                19969                19969                      0            1000              1000  0.002045   0.000761           1000              1000
+1D_0      7      20082                20082                20082                      0            1000              1000  0.001813   0.000725           1000              1000
+2E_0      7      20004                20004                20004                      0            1000              1000  0.002006   0.000767           1000              1000
+2F_0      7      19899                19899                19899                      0            1000              1000  0.002045   0.000761           1000              1000
+2G_0      7      19928                19928                19928                      0            1000              1000  0.001858   0.000765           1000              1000
+2H_0      7      20110                20110                20110                      0            1000              1000  0.002129   0.000730           1000              1000
+3I_0      7      20078                20078                20078                      0            1000              1000  0.001961   0.000749           1000              1000
+3J_0      7      19965                19965                19965                      0            1000              1000  0.001950   0.000748           1000              1000
+3K_0      7      19846                19846                19846                      0            1000              1000  0.001959   0.000768           1000              1000
+3L_0      7      20025                20025                20025                      0            1000              1000  0.001956   0.000753           1000              1000
 ```
 
-For our downstream analysis we'll need more than just the default output
-formats, so lets rerun step 7 and generate all supported output formats.
-This can be accomplished by editing the `params-anolis.txt` and setting 
-the requested `output_formats` to `*` (again, the wildcard character):
+The final block displays some very brief, but informative, summaries of
+missingness in the assembly at both the sequence and the SNP level:
+
+```bash
+## Alignment matrix statistics:
+sequence matrix size: (12, 148725), 0.00% missing sites.
+snps matrix size: (12, 7353), 0.00% missing sites.
+```
+
+For some downstream analyses we might need more than just the default output
+formats, so lets rerun step 7 and generate all supported output formats. This
+can be accomplished by editing the `params-peddrad.txt` file and setting the
+requested `output_formats` to `*` (again, the wildcard character):
+
+```bash
+$ nano params-peddrad.txt
+```
+
+And change this line:
+
 ```
 *                        ## [27] [output_formats]: Output formats (see docs)
 ```
 
-After this we must now re-run step 7, but this time including the `-f`
-flag, to force overwriting the output files that were previously generated. 
-More information about output formats can be found [here](http://ipyrad.readthedocs.io/output_formats.html#full-output-formats).
+After this we must now re-run step 7, but this time including the `-f` flag,
+to force overwriting the output files that were previously generated. More
+information about all supported output formats can be found in the [ipyrad docs](https://ipyrad.readthedocs.io/en/latest/6-params.html#output-formats).
 
 ```bash
-$ ipyrad -p params-anolis.txt -s 7 -c 2 -f
+$ ipyrad -p params-peddrad.txt -s 7 -c 1 -f
 ```
 
-Congratulations! You've completed your first RAD-Seq assembly. Now you can
-try applying what you've learned to assemble your own real data. Please
-consult the [ipyrad online documentation](http://ipyrad.readthedocs.io) for 
-details about many of the more powerful features of ipyrad, including reference 
-sequence mapping, assembly branching, and the extensive `analysis` toolkit, which
-includes extensive downstream analysis tools for such things as clustering and 
+Congratulations! You've completed your first RAD-Seq assembly. Now you can try
+applying what you've learned to assemble your own real data. Please consult the
+[ipyrad online documentation](http://ipyrad.readthedocs.io) for details about
+many of the more powerful features of ipyrad, including reference sequence
+mapping, assembly branching, and the extensive `analysis` toolkit, which
+includes extensive downstream analysis tools for such things as clustering and
 population assignment, phylogenetic tree inference, quartet-based species tree
 inference, and much more.
-

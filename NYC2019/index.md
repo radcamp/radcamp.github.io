@@ -50,7 +50,7 @@ College of New York.
   - Deren Eaton (Columbia)
   - Isaac Overcast (CCNY)
   - Sandra Hoffberg (Columbia)
-  - Natalia Bayona Va¡squez (University of Georgia)
+  - Natalia Bayona Vasquez (University of Georgia)
   - Laura Bertola (CCNY)
 
 # Registration
@@ -72,27 +72,45 @@ to request a fee waiver, contact the organizers.
 Times            | Saturday 9/14 | Sunday 9/15 |
 -----            | ------ | ------- |
 8:30-9:00       | Check-in and refreshments | Check-in and refreshments |
-9:00-12:30      | Test restriction enzymes | Library amplification |
+9:00-12:30      | [Lecture](Part_I_Files/RADcamp2019_slides.pdf) | Library amplification |
 12:30-13:30 | Lunch | Lunch |
-13:30-17:00 | Digestion and Ligation | Size selection and QC |
+13:30-17:00 | Digestion and Ligation | [Library amplification and QC](Part_I_Files/gel_images_of_complete_libraries.pdf) |
 17:00-19:00 | Free evening        | Networking dinner |
+
+## 3RAD resources
+* [i7 and inner barcodes used during workshop](Part_I_Files/sample_tags.pdf)
+* [Find the i5/i7 index sequence from the name](Part_I_Files/Sample_tags_populator_2019.xlsx)
+* [Inner barcode sequences in ipyrad format](Part_I_Files/plate_inner_barcodes.txt)
+* [BadDNA order form with index sequences](Part_I_Files/BadDNA_Oligo_Order_Form_current.xlsx)
+* [Full 3RAD protocol for plates](Part_I_Files/3RAD_Molecular_ID_Protocol.docx)
+* [Library pooling guide](Part_I_Files/Library_Pooling_Guide_with_directions_June2016.xlsx)
+* [Adapter Info](Part_I_Files/3RAD_iTru_adapter_TaggiMatrix.xlsx)
+* [How to resuspend adapters](Part_I_Files/Adapter_Mixed_Plate_Instructions.docx)
+* [How to resuspend primers - i7 and i5](Part_I_Files/Primer_Plate_Instructions_1.25nmole.docx)
+* [Index diversity calculator](Part_I_Files/Index_diversity_calculator_June2016.xlsx)
+* [Homemade speedbeads](Part_I_Files/Speedbead_Protocol_June2016.docx)
+
 
 # Bioinformatics (ipyrad) Schedule
 
 Times            | Saturday 10/12 | Sunday 10/13 |
 -----            | ------ | ------- |
 8:30-9:00       | Check-in and refreshments | Check-in and refreshments |
-9:00-12:30      | Intro to RAD-Seq data types | (Instruction) [Jupyter notebook setup](Jupyter_Notebook_Setup.md), [Tetrad - A Quartet-based species tree method](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-tetrad.ipynb), & [Phylogenetic inference: RAxML](06_RAxML_API.md) |
+9:00-12:30      | [Introductions, data QC, and ipyrad CLI Part 1](RADCamp-PartII-Day1-AM.md) | [ipyrad API and analysis tools](RADCamp-PartII-Day2-AM.md) |
 12:30-14:00 | Lunch | Lunch |
-14:00-17:00 |[Cluster basics](01_cluster_basics.md) and [ipyrad parts I](02_ipyrad_partI_CLI.md) & [II](03_ipyrad_partII_CLI.md) | (Instruction) [Clustering analysis: PCA](04_PCA_API.md), Demographic analysis ([momi2](07_momi2_API.md)) |
-17:00-19:00 | Free evening        | Networking dinner |
+14:00-17:00 |[ipyrad CLI Part 2 & 3RAD Assembly](RADCamp-PartII-Day1-PM.md) |  [Small group analysis of real data](RADCamp-PartII-Day2-PM.md) |
+17:00-19:00 | Networking Dinner | Social |
 
 ## Additional ipyrad analysis cookbooks
 
+* [Tetrad - A Quartet-based species tree method](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-tetrad.ipynb)
+* [Phylogenetic inference: RAxML](06_RAxML_API.md)
+* [Clustering analysis: PCA](04_PCA_API.md)
 * [Clustering analysis: STRUCTURE](05_STRUCTURE_API.md)
 * [BPP - Bayesian inference under a multi-species coalescent model](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-bpp-species-delimitation.ipynb)
 * [Bucky - Phylogenetic concordance analysis](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-bucky.ipynb)
 * [ABBA-BABA - Admixture analysis](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-abba-baba.ipynb)
+* [Demographic analysis ([momi2](07_momi2_API.md))
 
 ## RADCamp NYC 2019 co-sponsored by:
 
@@ -109,4 +127,5 @@ Times            | Saturday 10/12 | Sunday 10/13 |
 Don't forget to get a sweet group photo!
 
 ## Acknowledgements
-RADCamp NYC 2019 materials are largely based on materials from the [RADCamp AF-Biota workshop](https://radcamp.github.io/AF-Biota/) which were created by Isaac Overcast, Mariana Vasconcellos, and Laura Bertola.
+RADcamp NYC 2019 Part I materials are prepared by Sandra Hoffberg, Natalia Bayona Vasquez, and Travis Glenn. Many things we reference can be found on [badDNA.uga.edu](https://baddna.uga.edu). We borrowed supplies from the Rubenstein, Duik-Wasser, and Hickerson labs at Columbia and CCNY.
+RADCamp NYC 2019 Part II materials are largely based on materials from the [RADCamp AF-Biota workshop](https://radcamp.github.io/AF-Biota/) which were created by Isaac Overcast, Mariana Vasconcellos, and Laura Bertola.
