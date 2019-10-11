@@ -109,10 +109,17 @@ sudo echo "@reboot     root        /etc/init.d/RADCamp-jupyter.sh" >> /etc/cront
 * Click create
 
 ## Create a new instance from this image by hand
-Test your image by creating a new vm instance and verifying the setup. Here's
-the command to run in the cloud shell to create a new intance called `instance-2`
-using the `radcamp-image` as the base. You can also do this through the UI, but
-it takes more clicking. Automating this could be cool, but dangerous!
+Test your image by creating a new vm instance and verifying the setup.
+
+* Images->radcamp-image->Create new instance
+* Name: `radcamp-vm1`
+* Machine type: n1-standard-16
+* Allow HTTP/HTTPS
+* Create
+
+Here's the command to run in the cloud shell to create a new intance called
+`instance-2`using the `radcamp-image` as the base. Automating this could be
+cool, but dangerous!
 
 ```bash
 gcloud beta compute --project=radcamp-255318 instances create instance-2 --zone=us-central1-a --machine-type=n1-standard-1 --subnet=default --network-tier=PREMIUM --maintenance-policy=MIGRATE --service-account=446371761382-compute@developer.gserviceaccount.com --scopes=https://www.googleapis.com/auth/devstorage.read_only,https://www.googleapis.com/auth/logging.write,https://www.googleapis.com/auth/monitoring.write,https://www.googleapis.com/auth/servicecontrol,https://www.googleapis.com/auth/service.management.readonly,https://www.googleapis.com/auth/trace.append --tags=http-server,https-server --image=radcamp-template --image-project=radcamp-255318 --boot-disk-size=100GB --boot-disk-type=pd-standard --boot-disk-device-name=instance-2 --reservation-affinity=any
