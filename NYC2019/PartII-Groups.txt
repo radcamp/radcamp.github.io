@@ -1,67 +1,64 @@
-Group   Person
+Group   Person    cloud_ip_address
 
-A   Andrea Paz
+A   Andrea Paz                      35.202.243.29
 A   Andis Arietta
 
-B   Elizabeth P Dahlhoff
+B   Elizabeth P Dahlhoff            34.67.93.84
+B   Ivalu Cacho
 
-C   Juan Diego Gaitan Espitia
+C   Juan Diego Gaitan Espitia       34.68.109.158
 C   Jean P. Domenech Ramos
 
-D   Christine Zolnik
+D   Christine Zolnik                35.202.219.169
 D   Renato Nunes
 
-E   Ida Hartvig
+E   Ida Hartvig                     34.66.40.233
 E   Sarah Hardy
 
-G   Courtney Weyand
+G   Courtney Weyand                 104.198.225.17
 G   Adela Roa-Varon
 
-H   Jared Meek
+H   Jared Meek                      34.67.159.9
 H   Matt Sewell
+H   Robert Laroche
 
-I   Monica Marcelli
+I   Monica Marcelli                 34.67.8.62
 I   Maria Jose Gomez Quijano
 
-J   Fernanda Werneck
+J   Fernanda Werneck                34.68.83.111
 J   Charlotte Benedict
 J   Rafael Leite
 
-K   Giovanni Tolentino Ramos
+K   Giovanni Tolentino Ramos        35.193.188.196
 K   Joceyln P Colella
 
-L   Connor M French
+L   Connor M French                 34.70.207.236
 L   Rilquer Mascarenhas
 
-M   Robert Laroche
-
-N   Patricia Szczys
+N   Patricia Szczys                 34.67.82.190
 N   Kevin Aviles-Rodriguez
 
-P   Andrea Sequeira
+P   Andrea Sequeira                 35.239.37.100
 P   Naoko Kurata
 
-Q   Ioana Anghel
+Q   Ioana Anghel                    34.68.5.255
 Q   Anri Chomentowska
 
-R   Katie Foley
+R   Katie Foley                     35.188.105.242
 R   Laura Van Vranken
 
-S   Kathryn Mercier
+S   Kathryn Mercier                 35.194.12.67
 S   Lidia Farias Martins
 
-T   Sean Keogh
+T   Sean Keogh                      35.188.36.185
 T   Tanya Lama
 
-U   Stephanie Coster
+U   Stephanie Coster                34.70.19.227
 U   Tara Dolan
 
-V   Matias Gomez
+V   Matias Gomez                    35.202.81.52
 V   Marie Claire Chelini
 
-W   Anita Cisternas
-W   Robert Laroche
-W   Ivalu Cacho
-
-X   Camilo A. Calderon Acevedo
+X   Camilo A. Calderon Acevedo      35.202.180.94
 X   Tobit Liyandja
+X   Anita Cisternas
