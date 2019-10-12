@@ -40,7 +40,7 @@ password for your cloud instance will be written on the whiteboard.
 * Make a new directory for fastq results: `mkdir fastq_out`
 * `cd fastq_out`
 * Run fastqc on on the real data, passing in the directory of the 3RAD data
-for your group, which will be of the form `/media/RADCamp/<username>raws/*R1*`
+for your group, which will be of the form `/media/RADCamp/<username>/raws/*R1*`
 and `/media/RADCamp/<username>/raws/*R2*` replacing the username with the last
 name of the participant in your group who generated 3RAD data (should take
 5-10 minutes per file).
