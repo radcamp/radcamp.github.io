@@ -132,6 +132,11 @@ cool, but dangerous!
 gcloud beta compute --project=radcamp-255318 instances create instance-2 --zone=us-central1-a --machine-type=n1-standard-1 --subnet=default --network-tier=PREMIUM --maintenance-policy=MIGRATE --service-account=446371761382-compute@developer.gserviceaccount.com --scopes=https://www.googleapis.com/auth/devstorage.read_only,https://www.googleapis.com/auth/logging.write,https://www.googleapis.com/auth/monitoring.write,https://www.googleapis.com/auth/servicecontrol,https://www.googleapis.com/auth/service.management.readonly,https://www.googleapis.com/auth/trace.append --tags=http-server,https-server --image=radcamp-template --image-project=radcamp-255318 --boot-disk-size=100GB --boot-disk-type=pd-standard --boot-disk-device-name=instance-2 --reservation-affinity=any
 ```
 
+## Create instance from image with RADCamp disk attached ro
+```
+gcloud beta compute --project=radcamp-255318 instances create radcamp-a --zone=us-central1-a --machine-type=n1-standard-16 --subnet=default --network-tier=PREMIUM --maintenance-policy=MIGRATE --service-account=446371761382-compute@developer.gserviceaccount.com --scopes=https://www.googleapis.com/auth/devstorage.read_only,https://www.googleapis.com/auth/logging.write,https://www.googleapis.com/auth/monitoring.write,https://www.googleapis.com/auth/servicecontrol,https://www.googleapis.com/auth/service.management.readonly,https://www.googleapis.com/auth/trace.append --tags=http-server,https-server --image=radcamp-image --image-project=radcamp-255318 --boot-disk-size=100GB --boot-disk-type=pd-standard --boot-disk-device-name=radcamp-a --disk=name=radcamp-data,device-name=radcamp-data,mode=ro,boot=no --reservation-affinity=any
+```
+
 ## Create the instance template
 Instance templates can be used to automate instance creation via the managed
 instance groups thing. Makes it easier to spin up a whole bunch of instances
