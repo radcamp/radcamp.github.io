@@ -56,7 +56,7 @@ into directories, and it prepends the name of your assembly to each
 directory with data that belongs to it. One result of this is that 
 you can have multiple assemblies of the same raw data with different 
 parameter settings and you don't have to manage all the files yourself! 
-(See [Branching assemblies](https://ipyrad.readthedocs.io/tutorial_advanced_cli.html) for more info). Another
+(See [Branching assemblies](https://ipyrad.readthedocs.io/en/latest/8-branching.html) for more info). Another
 result is that **you should not rename or move any of the directories
 inside your project directory**, unless you know what you're doing or
 you don't mind if your assembly breaks.
