@@ -10,9 +10,7 @@
 * [ipyrad CLI assembly of simulated data Part I](#ipyrad-cli-simulated-data-assembly-part-I)
 
 ## Participant intros part I
-[1 minute/1 slide participant intros](https://docs.google.com/presentation/d/1OY-laS2s6lITBBQfB_APTNcb-6o7cMdqgFqwZrRBzBg/edit?usp=sharing)
-
-We talked about doing 1/2 in the morning and 1/2 in the afternoon.
+[1 minute/1 slide participant intros](https://docs.google.com/presentation/d/1EtEWfwzOA7u4mEZMxnzgsXZO_6DvZStA2ON8GQkWb6w/edit?usp=sharing)
 
 ## Brief intro to RADSeq
 Lead: Deren
