@@ -443,12 +443,12 @@ of each filter is shown in the `applied_order` column. The total number of
 This is a good place for inspecting how your filtering thresholds are impacting
 your final dataset. For example, you might see that most loci are being filterd
 by `min_sample_locus` (a very common result), in which case you might reduce
-this threshold in your params file and re-run step 7 in order to retain more loci. You can use [branching](https://ipyrad.readthedocs.io/outline.html), so you can re-run part of the analysis, without overwriting the output you already generated.
+this threshold in your params file and re-run step 7 in order to retain more loci. You can use [branching](https://ipyrad.readthedocs.io/en/latest/8-branching.html), so you can re-run part of the analysis, without overwriting the output you already generated.
 
 The next block shows a simple summary of the number of loci retained for each
 sample in the final dataset. Pretty straightforward. If you have some samples
 that have very low sample_coverage here it might be good to remove them and
-re-run step 7. Also this can be done by using [branching](https://ipyrad.readthedocs.io/outline.html).
+re-run step 7. Also this can be done by using [branching](https://ipyrad.readthedocs.io/en/latest/8-branching.html).
 ```
 ## The number of loci recovered for each Sample.
 ## ipyrad API location: [assembly].stats_dfs.s7_samples
