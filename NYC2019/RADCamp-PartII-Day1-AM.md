@@ -14,8 +14,7 @@
 
 ## Brief intro to RADSeq
 Lead: Deren
-
-**Link to Deren's RADSeq intro here**
+[Introduction to RAD and the terminal](https://eaton-lab.org/slides/radcamp)
 
 ## Intro ipyrad docs
 [ipyrad documentation](https://ipyrad.readthedocs.io/en/latest/)
