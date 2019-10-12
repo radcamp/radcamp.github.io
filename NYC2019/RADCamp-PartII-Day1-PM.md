@@ -45,7 +45,7 @@ and `/media/RADCamp/<username>/raws/*R2*` replacing the username with the last
 name of the participant in your group who generated 3RAD data (should take
 5-10 minutes per file).
 * Examine the results of fastqc by opening the
-l~/ipyrad-workshop/<assembly-name>/fastqc_out/\*.html` files in the jupyter
+`~/ipyrad-workshop/<assembly-name>/fastqc_out/\*.html` files in the jupyter
 notebook browser.
 * Go back to the terminal and `cd ~/ipyrad-workshop/<assembly_name>`.
 * Create a params file for the real data (`ipyrad -n <assembly_name>`).
