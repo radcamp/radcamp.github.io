@@ -1,12 +1,24 @@
 # RADCamp NYC 2019 Part II (Bioinformatics)
 # Day 2 (PM)
 
+[Meek snps file](data/Meek/Meek.snps.hdf5) & [Meek phylip file](data/Meek/Meek.phy)
+
+
+[Results slides](https://docs.google.com/presentation/d/1oEwbGtq0dPsRSfB4x2PohbKan9SIqRKSpujCUN3tJGA/edit#slide=id.p)
+
+
+# Ignore everything below here!
+
+
 ## Overview of the afternoon activities:
 * [Review results of STRUCTURE runs](#review-results-of-STRUCTURE-runs)
 * [Overview of other available API mode tools](#overview-of-other-available-API-mode-tools)
 * [Small group work focused on the pilot datasets](#small-group-work-focused-on-the-pilot-datasets)
 * [Brief presentation of results of small group analysis](#brief-presentation-of-results-of-small-group-analysis)
 * [Wrap-up & adjourn](#wrap-up-&-adjourn)
+
+
+
 
 ## Review results of STRUCTURE runs
 
