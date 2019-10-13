@@ -10,27 +10,18 @@
 * [ipyrad analysis API - Principal Component Analysis (PCA)](#ipyrad-analysis-api-principal-component-analysis))
 * [ipyrad analysis API - Population STRUCTURE](#ipyrad-analysis-api-Population-structure)
 
-## Overview of new datasets
-**put link to google drive slides here**
-
-This is a 1-slide-maximum introduction to each of the new datasets generated
-during part I of the workshop. Questions to answer include:
-* What are the organisms that were sequenced?
-* Geographic/taxonomic scope?
-* What are the research questions? Are they more phylo- or population genetic scale.
-* Do you have some ideas of the analysis you want to perform?`
-
 ## Examine quality of assemblies
-Lead: Isaac
 
 Lets take some time to look at results of the assembly process for some of the
 real datasets. Did they all work perfectly? Why did some work, why did some
 break?
+
+[What the results of the demultiplexing process (step 1) should look like](Demux-Results.txt)
+
 * Look at runtimes: How long did they take to run?
 * What do the stats files look like? Teaching how to read and interperet stats files. 
 
 ## Next steps after you finish your first assembly
-Lead: Isaac
 
 * Why would you want to re-run step 7 with different parameters?
 * Talk about mindepth/minsamp. Branching.
