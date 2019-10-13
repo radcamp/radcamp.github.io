@@ -12,7 +12,7 @@ C   Jean P. Domenech Ramos
 D   Christine Zolnik                35.202.219.169    (Failed. Cleaned up fastqs and restarted. Backup running on 35.202.180.94 in /media/RADCamp-dev/Zolnik)
 D   Renato Nunes
 
-E   Ida Hartvig                     34.66.40.233      (Failed and restarted)
+E   Ida Hartvig                     34.66.40.233      (Failed. Cleaned up fastqs and restarted)
 E   Sarah Hardy
 
 G   Courtney Weyand                 104.198.225.17    (Failed. Cleaned up fastqs and restarted)
@@ -25,7 +25,7 @@ H   Robert Laroche
 I   Monica Marcelli                 34.67.8.62        (Failed, wrong overhangs. Fixed and restared. Correct overhangs: GCTAGA,	TAATTC)
 I   Maria Jose Gomez Quijano
 
-J   Fernanda Werneck                34.68.83.111     (Failed, low disk. Cleaned up space and restarted) 
+J   Fernanda Werneck                34.68.83.111     (OK now. Failed, low disk. Cleaned up space and restarted) 
 J   Charlotte Benedict
 J   Rafael Leite
 
