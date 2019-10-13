@@ -9,7 +9,7 @@ B   Ivalu Cacho
 C   Juan Diego Gaitan Espitia       34.68.109.158     (OK)
 C   Jean P. Domenech Ramos
 
-D   Christine Zolnik                35.202.219.169    (Backup running on 35.202.243.29 in /media/RADCamp-dev)
+D   Christine Zolnik                35.202.219.169    (Failed. Cleaned up fastqs and restarted. Backup running on 35.202.180.94 in /media/RADCamp-dev)
 D   Renato Nunes
 
 E   Ida Hartvig                     34.66.40.233      (Failed and restarted)
@@ -50,7 +50,7 @@ R   Laura Van Vranken
 S   Kathryn Mercier                 35.194.12.67      (OK)
 S   Lidia Farias Martins
 
-T   Sean Keogh                      35.188.36.185     (Branched to remove 2 bad samples and restarted. ipyrad -p params-Keogh.txt -b subset - 8427.1 8427.2)
+T   Sean Keogh                      35.188.36.185     (OK now. Branched to remove 2 bad samples and restarted. ipyrad -p params-Keogh.txt -b subset - 8427.1 8427.2)
 T   Tanya Lama
 
 U   Stephanie Coster                34.70.19.227      (Failed, low disk. Cleaned up space and restarted)
@@ -59,6 +59,6 @@ U   Tara Dolan
 V   Matias Gomez                    35.202.81.52      (OK)
 V   Marie Claire Chelini
 
-X   Camilo A. Calderon Acevedo      35.202.180.94     
+X   Camilo A. Calderon Acevedo      35.202.180.94     (Failed. Notebook server died for some reason. Cleaned up and restar
 X   Tobit Liyandja
 X   Anita Cisternas
