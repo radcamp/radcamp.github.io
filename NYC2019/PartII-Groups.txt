@@ -29,7 +29,7 @@ J   Fernanda Werneck                34.68.83.111     (OK now. Failed, low disk. 
 J   Charlotte Benedict
 J   Rafael Leite
 
-K   Giovanni Tolentino Ramos        35.193.188.196    (Running)
+K   Giovanni Tolentino Ramos        35.193.188.196    (OK)
 K   Joceyln P Colella
 
 L   Connor M French                 34.70.207.236     (OK)
