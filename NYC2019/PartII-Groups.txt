@@ -15,7 +15,7 @@ D   Renato Nunes
 E   Ida Hartvig                     34.66.40.233      (OK now. Failed. Cleaned up fastqs and restarted)
 E   Sarah Hardy
 
-G   Courtney Weyand                 104.198.225.17    (Failed. Cleaned up fastqs and moved to cattywampus)
+G   Courtney Weyand                 104.198.225.17    (OK now. Failed. Cleaned up fastqs and moved to cattywampus)
 G   Adela Roa-Varon
 
 H   Jared Meek                      34.67.159.9       (OK)
