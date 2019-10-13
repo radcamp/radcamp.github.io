@@ -9,7 +9,7 @@ B   Ivalu Cacho
 C   Juan Diego Gaitan Espitia       34.68.109.158     (OK)
 C   Jean P. Domenech Ramos
 
-D   Christine Zolnik                35.202.219.169    (Failed. Cleaned up fastqs and restarted. Backup running on 35.202.180.94 in /media/RADCamp-dev)
+D   Christine Zolnik                35.202.219.169    (Failed. Cleaned up fastqs and restarted. Backup running on 35.202.180.94 in /media/RADCamp-dev/Zolnik)
 D   Renato Nunes
 
 E   Ida Hartvig                     34.66.40.233      (Failed and restarted)
@@ -38,7 +38,7 @@ L   Rilquer Mascarenhas
 N   Patricia Szczys                 34.67.82.190      (Running)
 N   Kevin Aviles-Rodriguez
 
-P   Andrea Sequeira                 35.239.37.100     (Failed, low disk. Cleaned up space and restarted)
+P   Andrea Sequeira                 35.239.37.100     (Failed, low disk. Backup running on 35.202.180.94 in /media/RADCamp-dev/Sequeira)
 P   Naoko Kurata
 
 Q   Ioana Anghel                    34.68.5.255       (OK)
@@ -59,6 +59,6 @@ U   Tara Dolan
 V   Matias Gomez                    35.202.81.52      (OK)
 V   Marie Claire Chelini
 
-X   Camilo A. Calderon Acevedo      35.202.180.94     (Failed. Notebook server died for some reason. Cleaned up and restar
+X   Camilo A. Calderon Acevedo      35.202.180.94     (OK Now. Failed. Notebook server died for some reason. Cleaned up and restarted)
 X   Tobit Liyandja
 X   Anita Cisternas
