@@ -15,14 +15,14 @@ D   Renato Nunes
 E   Ida Hartvig                     34.66.40.233      (OK now. Failed. Cleaned up fastqs and restarted)
 E   Sarah Hardy
 
-G   Courtney Weyand                 104.198.225.17    (Failed. Cleaned up fastqs and restarted)
+G   Courtney Weyand                 104.198.225.17    (Failed. Cleaned up fastqs and moved to cattywampus)
 G   Adela Roa-Varon
 
 H   Jared Meek                      34.67.159.9       (OK)
 H   Matt Sewell
 H   Robert Laroche
 
-I   Monica Marcelli                 34.67.8.62        (Failed, wrong overhangs. Fixed and restared. Correct overhangs: GCTAGA,	TAATTC)
+I   Monica Marcelli                 34.67.8.62        (Failed, wrong overhangs. Fixed and restared. Correct overhangs: GCTAGA,	TAATTC. Failed low disk, moved to Cattywampus.)
 I   Maria Jose Gomez Quijano
 
 J   Fernanda Werneck                34.68.83.111     (OK now. Failed, low disk. Cleaned up space and restarted) 
