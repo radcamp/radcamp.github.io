@@ -1,4 +1,4 @@
-cut_found	Matched barcodes	Unmatched
+	cut_found	Matched barcodes	Unmatched
 Anghel	  4694974	4050507	    644467
 Calderon  31673452	21853947	9819505
 Chelini	  4824	      7     4817
