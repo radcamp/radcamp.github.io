@@ -12,7 +12,7 @@ C   Jean P. Domenech Ramos
 D   Christine Zolnik                35.202.219.169    (Failed. Cleaned up fastqs and restarted. Backup running on 35.202.180.94 in /media/RADCamp-dev/Zolnik)
 D   Renato Nunes
 
-E   Ida Hartvig                     34.66.40.233      (Failed. Cleaned up fastqs and restarted)
+E   Ida Hartvig                     34.66.40.233      (OK now. Failed. Cleaned up fastqs and restarted)
 E   Sarah Hardy
 
 G   Courtney Weyand                 104.198.225.17    (Failed. Cleaned up fastqs and restarted)
@@ -32,13 +32,13 @@ J   Rafael Leite
 K   Giovanni Tolentino Ramos        35.193.188.196    (Running)
 K   Joceyln P Colella
 
-L   Connor M French                 34.70.207.236     (Running)
+L   Connor M French                 34.70.207.236     (OK)
 L   Rilquer Mascarenhas
 
-N   Patricia Szczys                 34.67.82.190      (Running)
+N   Patricia Szczys                 34.67.82.190      (OK)
 N   Kevin Aviles-Rodriguez
 
-P   Andrea Sequeira                 35.239.37.100     (Failed, low disk. Backup running on 35.202.180.94 in /media/RADCamp-dev/Sequeira)
+P   Andrea Sequeira                 35.239.37.100     (OK now. Failed, low disk. Backup running on 35.202.180.94 in /media/RADCamp-dev/Sequeira)
 P   Naoko Kurata
 
 Q   Ioana Anghel                    34.68.5.255       (OK)
@@ -53,7 +53,7 @@ S   Lidia Farias Martins
 T   Sean Keogh                      35.188.36.185     (OK now. Branched to remove 2 bad samples and restarted. ipyrad -p params-Keogh.txt -b subset - 8427.1 8427.2)
 T   Tanya Lama
 
-U   Stephanie Coster                34.70.19.227      (Failed, low disk. Cleaned up space and restarted)
+U   Stephanie Coster                34.70.19.227      (OK now. Failed, low disk. Cleaned up space and restarted)
 U   Tara Dolan
 
 V   Matias Gomez                    35.202.81.52      (OK)
