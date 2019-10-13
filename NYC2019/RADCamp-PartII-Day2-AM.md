@@ -16,7 +16,10 @@ Lets take some time to look at results of the assembly process for some of the
 real datasets. Did they all work perfectly? Why did some work, why did some
 break?
 
+[How did the runs proceed? (AKA What did Isaac do with his night last night)](PartII-Groups.txt)
+
 [What the results of the demultiplexing process (step 1) should look like](Demux-Results.txt)
+
 
 * Look at runtimes: How long did they take to run?
 * What do the stats files look like? Teaching how to read and interperet stats files. 
