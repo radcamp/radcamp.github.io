@@ -1,64 +1,64 @@
 Group   Person    cloud_ip_address
 
-A   Andrea Paz                      35.202.243.29     (Failed, low disk. Deleted Meek and restarted.)
+A   Andrea Paz                      35.202.243.29     Did not finish. (Failed, low disk. Deleted Meek and restarted.)
 A   Andis Arietta
 
-B   Elizabeth P Dahlhoff            34.67.93.84       (OK)
+B   Elizabeth P Dahlhoff            34.67.93.84       Data Saved (OK)
 B   Ivalu Cacho
 
-C   Juan Diego Gaitan Espitia       34.68.109.158     (OK)
+C   Juan Diego Gaitan Espitia       34.68.109.158     Data Saved (OK)
 C   Jean P. Domenech Ramos
 
-D   Christine Zolnik                35.202.219.169    (Failed. Cleaned up fastqs and restarted. Backup running on 35.202.180.94 in /media/RADCamp-dev/Zolnik)
+D   Christine Zolnik                35.202.219.169    Did not finish. (Failed. Cleaned up fastqs and restarted. Backup running on 35.202.180.94 in /media/RADCamp-dev/Zolnik)
 D   Renato Nunes
 
-E   Ida Hartvig                     34.66.40.233      (OK now. Failed. Cleaned up fastqs and restarted)
+E   Ida Hartvig                     34.66.40.233      Data Saved (OK now. Failed. Cleaned up fastqs and restarted)
 E   Sarah Hardy
 
-G   Courtney Weyand                 104.198.225.17    (OK now. Failed. Cleaned up fastqs and moved to cattywampus)
+G   Courtney Weyand                 104.198.225.17    Data Saved (OK now. Failed. Cleaned up fastqs and moved to cattywampus)
 G   Adela Roa-Varon
 
-H   Jared Meek                      34.67.159.9       (OK)
+H   Jared Meek                      34.67.159.9       pedicularis (OK)
 H   Matt Sewell
 H   Robert Laroche
 
-I   Monica Marcelli                 34.67.8.62        (Failed, wrong overhangs. Fixed and restared. Correct overhangs: GCTAGA,	TAATTC. Failed low disk, moved to Cattywampus.)
+I   Monica Marcelli                 34.67.8.62        Did not finish. (Failed, wrong overhangs. Fixed and restared. Correct overhangs: GCTAGA,	TAATTC. Failed low disk, moved to Cattywampus.)
 I   Maria Jose Gomez Quijano
 
-J   Fernanda Werneck                34.68.83.111     (OK now. Failed, low disk. Cleaned up space and restarted) 
+J   Fernanda Werneck                34.68.83.111     Data Saved (OK now. Failed, low disk. Cleaned up space and restarted) 
 J   Charlotte Benedict
 J   Rafael Leite
 
-K   Giovanni Tolentino Ramos        35.193.188.196    (OK)
+K   Giovanni Tolentino Ramos        35.193.188.196    Data Saved (OK)
 K   Joceyln P Colella
 
-L   Connor M French                 34.70.207.236     (OK)
+L   Connor M French                 34.70.207.236     Data Saved (OK)
 L   Rilquer Mascarenhas
 
-N   Patricia Szczys                 34.67.82.190      (OK)
+N   Patricia Szczys                 34.67.82.190      Data Saved (OK)
 N   Kevin Aviles-Rodriguez
 
-P   Andrea Sequeira                 35.239.37.100     (OK now. Failed, low disk. Backup running on 35.202.180.94 in /media/RADCamp-dev/Sequeira)
+P   Andrea Sequeira                 35.239.37.100     Data Saved (OK now. Failed, low disk. Backup running on 35.202.180.94 in /media/RADCamp-dev/Sequeira)
 P   Naoko Kurata
 
-Q   Ioana Anghel                    34.68.5.255       (OK)
+Q   Ioana Anghel                    34.68.5.255       Data Saved (OK)
 Q   Anri Chomentowska
 
-R   Katie Foley                     35.188.105.242    (OK)
+R   Katie Foley                     35.188.105.242    Data Saved (OK)
 R   Laura Van Vranken
 
-S   Kathryn Mercier                 35.194.12.67      (OK)
+S   Kathryn Mercier                 35.194.12.67      Data Saved (OK)
 S   Lidia Farias Martins
 
-T   Sean Keogh                      35.188.36.185     (OK now. Branched to remove 2 bad samples and restarted. ipyrad -p params-Keogh.txt -b subset - 8427.1 8427.2)
+T   Sean Keogh                      35.188.36.185     Data Saved (OK now. Branched to remove 2 bad samples and restarted. ipyrad -p params-Keogh.txt -b subset - 8427.1 8427.2)
 T   Tanya Lama
 
-U   Stephanie Coster                34.70.19.227      (OK now. Failed, low disk. Cleaned up space and restarted)
+U   Stephanie Coster                34.70.19.227      Data Saved (OK now. Failed, low disk. Cleaned up space and restarted)
 U   Tara Dolan
 
-V   Matias Gomez                    35.202.81.52      (OK)
+V   Matias Gomez                    35.202.81.52      Data Saved (OK)
 V   Marie Claire Chelini
 
-X   Camilo A. Calderon Acevedo      35.202.180.94     (OK Now. Failed. Notebook server died for some reason. Cleaned up and restarted)
+X   Camilo A. Calderon Acevedo      35.202.180.94     Data Saved (OK Now. Failed. Notebook server died for some reason. Cleaned up and restarted)
 X   Tobit Liyandja
 X   Anita Cisternas
