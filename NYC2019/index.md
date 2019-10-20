@@ -124,7 +124,7 @@ Times            | Saturday 10/12 | Sunday 10/13 |
 
 
 # RADCamp NYC 2019 Part II Group Photo
-Don't forget to get a sweet group photo!
+![jpg](RADCamp-NYC2019-PartII-photo.jpg)
 
 ## Acknowledgements
 RADcamp NYC 2019 Part I materials are prepared by Sandra Hoffberg, Natalia Bayona Vasquez, and Travis Glenn. Many things we reference can be found on [badDNA.uga.edu](https://baddna.uga.edu). We borrowed supplies from the Rubenstein, Duik-Wasser, and Hickerson labs at Columbia and CCNY.
