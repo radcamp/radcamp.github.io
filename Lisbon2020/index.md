@@ -1,13 +1,14 @@
 # Welcome to RadCamp 2020 - The Lisbon Edition
 
 January 22, 2020
-Location TBD
-University of Lisbon
+
+Location TBD  
+University of Lisbon  
 Lisbon, Portugal
 
 # Organisers, Instructors, and Facilitators
 
-  - Isaac Overcast (Ecole Normale Supe©rieur)
+  - Isaac Overcast (Ecole Normale Superieure)
   - Francisco Pina Martins (Universidade de Lisboa)
 
 # Schedule
