@@ -2,14 +2,23 @@
 
 January 22, 2020
 
-Location TBD  
-University of Lisbon  
-Lisbon, Portugal
+Campus da FCUL
+[C2 building](https://goo.gl/maps/pAwdY8oLWgzguNcq7)
+Room 2.2.16  
+Lisboa, Portugal
 
 # Organisers, Instructors, and Facilitators
 
   - Isaac Overcast (Ecole Normale Superieure)
   - Francisco Pina Martins (Universidade de Lisboa)
+
+# Registration
+
+Participation will be limited to 32 individuals. Registration for this edition
+of RADCamp is **free**. Please fill out this brief registration survey, so we
+can get a better idea of who will attend:
+
+[**Register for RADCamp Lisbon 2020**](https://docs.google.com/forms/d/129_FxaL50mF-twSHeA8_qO8MMeYyy4JL_uVgrMB2O04/edit?ts=5dfff823)
 
 # Schedule
 
