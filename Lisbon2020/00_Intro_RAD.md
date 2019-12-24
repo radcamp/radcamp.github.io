@@ -1,5 +1,5 @@
 ### Important documentation:  
-* [ipyrad rtd](https://ipyrad.readthedocs.io)
+* [ipyrad full documentation](https://ipyrad.readthedocs.io)
 * [radcamp home](https://radcamp.github.io/)
 
 ## Why use ipyrad at all?
@@ -9,11 +9,11 @@
 * Flexible: API access to functions and data to build custom assemblies.
 * Transparent: Providing human readable code and data files.
 
-## Put stuff here
+## RAD-Seq
 * What is RAD-Seq data?
 * What does it look like?
 * Variants of RAD
 * Thoughts on informativeness
-* de novo vs reference assemblies
-* thoughts on missing data
+* *de novo* Vs. reference assemblies
+* Thoughts on missing data
 * Maybe talk about experimental design for different outcomes?
