@@ -1,14 +1,37 @@
 # **Quickstart install guide**
 
-1. Fetch miniconda installer:
-* Mac: `curl -O https://repo.continuum.io/miniconda/Miniconda2-latest-MacOSX-x86_64.sh`
-* Linux: `wget https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh`
-2. Install conda [(friendly directions)](https://ipyrad.readthedocs.io/installation.html#linux-install-instructions-for-conda)
-3. Create and switch to new env: `conda create -n ipyrad; conda activate ipyrad`
-4. Install ipyrad: `conda install -c ipyrad ipyrad`
-5. Make a temporary directory for workshop files and switch to it: `mkdir radcamp-tmp; cd radcamp-tmp`
-5. Fetch ipyrad github repo (for the simulated data): `git clone https://github.com/dereneaton/ipyrad`
-6. Extract simulated data: `tar -xvzf ipyrad/tests/ipsimdata.tar.gz -C ipyrad/tests/`
+Linux install instructions for conda and ipyrad.
 
-# Jupyter hub information
-Or, try your luck with JupyterHub running in Deren's office in Manhattan: [https://jhub.eaton-lab.org/hub/login](https://jhub.eaton-lab.org/hub/login). YMMV, no promises.
+For MacOS the only difference is the conda in fetching the conda installer,
+[docs are on the ipyrad page](https://ipyrad.readthedocs.io/en/latest/3-installation.html#mac-install-instructions-for-conda).
+```
+# Fetch the miniconda installer
+wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
+
+# Install miniconda into $HOME/miniconda3
+#  * Type 'yes' to agree to the license
+#  * Press Enter to use the default install directory
+#  * Type 'yes' to initialize the conda install
+bash Miniconda3-latest-Linux-x86_64.sh
+
+# Refresh your terminal session to see conda
+bash
+
+# test that conda is installed. Will print info about your conda install.
+conda info
+
+conda update -n base conda
+
+# Create and switch to new env
+conda create -n ipyrad
+conda activate ipyrad
+
+# Install ipyrad from the bioconda channel
+conda install -c bioconda ipyrad
+
+# Fetch ipyrad github repo (for the simulated data)
+git clone https://github.com/dereneaton/ipyrad
+
+# Extract simulated data
+tar -xvzf ipyrad/tests/ipsimdata.tar.gz
+```
