@@ -109,36 +109,69 @@ how fastqc is run, and will then focus on interpretation of typical output. More
 detailed information about actually running fastqc are available [elsewhere on
 the RADCamp site](https://radcamp.github.io/NYC2018/01_cluster_basics.html#fastqc-for-quality-control).
 
-To run fastqc on all the pedicularis samples you would execute this command:
+For future reference, you can install fastqc from the bioconda channel:
 ```bash
-$ fastqc -o fastqc-results ipyrad/tests/ipsimdata/rad_example_R1_.fastq.gz
+$ conda install -c bioconda fastqc -y
 ```
-> **Note:** The -o flag tells fastqc where to write output files. Running this
-command will create a directory called `fastqc-results` in your current working
-directory.
+**NB:** The `-y` here just tells conda "When you ask if I'm sure I want to
+install, the answer is YES!", prevents it from prompting you.
+
+To run fastqc on one of the simulated samples you may execute this command:
+```bash
+$ mkdir fastqc-results
+
+# The -o flag tells fastqc where to write output files.
+$ fastqc -o fastqc-results ipsimdata/rad_example_R1_.fastq.gz
+```
+> **Note:** Running fastqc on real data can be somewhat slow, plus most of the
+samples from one library should look mostly the same. It is **always** good
+practice to actually look at your data before proceeding with the assembly,
+but you don't have to look at **all** of it. Typically 3-5 randomly selected
+samples should give a good overall view of quality.
 
 ### Inspecting and Interpreting FastQC Output
 
-Now lets spend a moment looking at the results from some real data from Prates et al (2016) (Anolis punctatus, GBS data).
+Simulated data is too clean to be interesting, so lets spend a moment looking
+at the results from some real data from Prates et al (2016) (Anolis punctatus,
+GBS data).
 
 ![png](01_setup_qc_files/anolis-fastq-main.png)
 
-Lets start with Per base sequence quality, because it's very easy to interpret, and often times with RAD-Seq data results here will be of special importance.
+Lets start with Per base sequence quality, because it's very easy to interpret,
+and often times with RAD-Seq data results here will be of special importance.
 
 ![png](01_setup_qc_files/anolis-per-base-qual.png)
 
-For the Anolis data the sequence quality per base is uniformly quite high, with dips only in the first and last 5 bases (again this is typical for Illumina reads). Based on information from this plot we can see that the Anolis data doesn't need a whole lot of trimming, which is good.
+For the Anolis data the sequence quality per base is uniformly quite high, with
+dips only in the first and last 5 bases (again this is typical for Illumina
+reads). Based on information from this plot we can see that the Anolis data
+doesn't need a whole lot of trimming, which is good.
 
-Now lets look at the `Per base sequece content`, which FastQC highlights with a scary red **X**.
+Now lets look at the `Per base sequece content`, which FastQC highlights with a
+scary red **X**.
 ![png](01_setup_qc_files/anolis-base-content.png)
 
-The squiggles indicate base composition per base position averaged across the reads. It looks like the signal FastQC is concerned about here is related to the *extreme* base composition bias of the first 5 positions. We happen to know this is a result of the restriction enzyme overhang present in all reads (`TGCAT` in this case for the EcoT22I enzyme used), and so it is in fact of no concern. Now lets look at `Adapter Content`:
+The squiggles indicate base composition per base position averaged across the
+reads. It looks like the signal FastQC is concerned about here is related to the
+*extreme* base composition bias of the first 5 positions. We happen to know this
+is a result of the restriction enzyme overhang present in all reads (`TGCAT` in
+this case for the EcoT22I enzyme used), and so it is in fact of no concern. Now
+lets look at `Adapter Content`:
 
 ![png](01_setup_qc_files/anolis-adapters.png)
 
-Here we can see adapter contamination increases toward the tail of the reads, approaching 40% of total read content at the very end. The concern here is that if adapters represent some significant fraction of the read pool, then they will be treated as "real" data, and potentially bias downstream analysis. In the Anolis data this looks like it might be a real concern so if we were assembling this dataset we'd want to keep this in mind during step 2 of the ipyrad analysis, and incorporate 3' read trimming and aggressive adapter filtering.
+Here we can see adapter contamination increases toward the tail of the reads,
+approaching 40% of total read content at the very end. The concern here is that
+if adapters represent some significant fraction of the read pool, then they will
+be treated as "real" data, and potentially bias downstream analysis. In the
+Anolis data this looks like it might be a real concern so if we were assembling
+this dataset we'd want to keep this in mind during step 2 of the ipyrad analysis,
+and incorporate 3' read trimming and aggressive adapter filtering.
 
 Other than this, the data look good and we can proceed with the ipyrad analysis.
 
 # References
-Prates, I., Xue, A. T., Brown, J. L., Alvarado-Serrano, D. F., Rodrigues, M. T., Hickerson, M. J., & Carnaval, A. C. (2016). Inferring responses to climate dynamics from historical demography in neotropical forest lizards. Proceedings of the National Academy of Sciences, 113(29), 7978-7985.
+Prates, I., Xue, A. T., Brown, J. L., Alvarado-Serrano, D. F., Rodrigues, M. T.,
+Hickerson, M. J., & Carnaval, A. C. (2016). Inferring responses to climate
+dynamics from historical demography in neotropical forest lizards. Proceedings
+of the National Academy of Sciences, 113(29), 7978-7985.
