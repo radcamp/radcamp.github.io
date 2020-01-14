@@ -38,7 +38,7 @@ This represent the command prompt. Left of the `@` is your username, and right o
 
 ### Navigation & orientation
 
-<div style="float: right"><img src="assets/shell_prompt_small.gif" /></div>
+<div style="float: right"><img src="02_cli_intro_assets/shell_prompt_small.gif" /></div>
 
 <ul>
 <li>Where am I?</li>
@@ -80,7 +80,7 @@ Typing in the command line can take a while, especially if you are no keyboard w
 
 <ul>
 <li>"Tab" Key</li>
-<div style="float: right"><img src="assets/Tab-Key.png" /></div>
+<div style="float: right"><img src="02_cli_intro_assets/Tab-Key.png" /></div>
   <ul>
   <li>Completes your command</li>
   <li>Try with one or two "*keypresses*"
