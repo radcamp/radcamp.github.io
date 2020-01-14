@@ -12,7 +12,8 @@ be identical.
 If you are new to RADseq analyses, this tutorial will provide a simple
 overview of how to execute ipyrad, what the data files look like, how to
 check that your analysis is working, and what the final output formats
-will be. We will also cover how to run ipyrad on a cluster and to do so efficiently.
+will be. We will also cover how to run ipyrad on a cluster and to do so
+efficiently.
 
 Each grey cell in this tutorial indicates a command line interaction. 
 Lines starting with `$ ` indicate a command that should be executed 
@@ -63,20 +64,24 @@ inside your project directory**, unless you know what you're doing or
 you don't mind if your assembly breaks.
 
 ## Getting started
-The magic of the Jupyter Hub we're using for this workshop conceals some of the
-complexity of working in a real production environment, such as with an HPC
-system at your home campus. In this case we provide [extensive documentation about using ipyrad
-on HPC systems elsewhere on the RADCamp site](https://radcamp.github.io/NYC2018/02_ipyrad_partI_CLI.html#working-with-the-cluster).
+One benefit of the virtual machine we're using for this workshop is that it
+conceals some of the complexity of working in a real production environment,
+such as with an HPC system at your home campus. In this case we provide
+[extensive documentation about using ipyrad on HPC systems elsewhere on the
+RADCamp site](https://radcamp.github.io/NYC2018/02_ipyrad_partI_CLI.html#working-with-the-cluster).
 
 ## ipyrad help
-To better understand how to use ipyrad, let's take a look at the help argument. We will use some of the ipyrad arguments in this tutorial (for example: -n, -p, -s, -c, -r). The complete list of optional arguments and their explanation can be accessed with the `--help` flag:
+To better understand how to use ipyrad, let's take a look at the help argument.
+We will use some of the ipyrad arguments in this tutorial (for example: -n, -p,
+-s, -c, -r). The complete list of optional arguments and their explanation can
+be accessed with the `--help` flag:
 
 ```
 $ ipyrad --help
-usage: ipyrad [-h] [-v] [-r] [-f] [-q] [-d] [-n new] [-p params]
-              [-b [branch [branch ...]]] [-m [merge [merge ...]]] [-s steps]
-              [-c cores] [-t threading] [--MPI] [--preview]
-              [--ipcluster [ipcluster]] [--download [download [download ...]]]
+usage: ipyrad [-h] [-v] [-r] [-f] [-q] [-d] [-n NEW] [-p PARAMS] [-s STEPS]
+              [-b [BRANCH [BRANCH ...]]] [-m [MERGE [MERGE ...]]] [-c cores]
+              [-t threading] [--MPI] [--ipcluster [IPCLUSTER]]
+              [--download [DOWNLOAD [DOWNLOAD ...]]]
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -86,31 +91,28 @@ optional arguments:
   -f, --force           force overwrite of existing data
   -q, --quiet           do not print to stderror or stdout.
   -d, --debug           print lots more info to ipyrad_log.txt.
-  -n new                create new file 'params-{new}.txt' in current
+  -n NEW                create new file 'params-{new}.txt' in current
                         directory
-  -p params             path to params file for Assembly:
+  -p PARAMS             path to params file for Assembly:
                         params-{assembly_name}.txt
-  -b [branch [branch ...]]
-                        create a new branch of the Assembly as
-                        params-{branch}.txt
-  -m [merge [merge ...]]
-                        merge all assemblies provided into a new assembly
-  -s steps              Set of assembly steps to perform, e.g., -s 123
-                        (Default=None)
+  -s STEPS              Set of assembly steps to run, e.g., -s 123
+  -b [BRANCH [BRANCH ...]]
+                        create new branch of Assembly as params-{branch}.txt,
+                        and can be used to drop samples from Assembly.
+  -m [MERGE [MERGE ...]]
+                        merge multiple Assemblies into one joint Assembly, and
+                        can be used to merge Samples into one Sample.
   -c cores              number of CPU cores to use (Default=0=All)
-  -t threading          tune threading of binaries (Default=2)
+  -t threading          tune threading of multi-threaded binaries (Default=2)
   --MPI                 connect to parallel CPUs across multiple nodes
-  --preview             run ipyrad in preview mode. Subset the input file so
-                        it'll runquickly so you can verify everything is
-                        working
-  --ipcluster [ipcluster]
-                        connect to ipcluster profile (default: 'default')
-  --download [download [download ...]]
+  --ipcluster [IPCLUSTER]
+                        connect to running ipcluster, enter profile name or
+                        profile='default'
+  --download [DOWNLOAD [DOWNLOAD ...]]
                         download fastq files by accession (e.g., SRP or SRR)
 
   * Example command-line usage: 
     ipyrad -n data                       ## create new file called params-data.txt 
-    ipyrad -p params-data.txt            ## run ipyrad with settings in params file
     ipyrad -p params-data.txt -s 123     ## run only steps 1-3 of assembly.
     ipyrad -p params-data.txt -s 3 -f    ## run step 3, overwrite existing data.
 
@@ -124,11 +126,12 @@ optional arguments:
     ipyrad -p params-data.txt -b newdata  
     ipyrad -m newdata params-1.txt params-2.txt [params-3.txt, ...]
 
+
   * Subsample taxa during branching
     ipyrad -p params-data.txt -b newdata taxaKeepList.txt
 
   * Download sequence data from SRA into directory 'sra-fastqs/' 
-    ipyrad --download SRP021469 sra-fastqs/ 
+    ipyrad --download SRP021469 sra-fastqs/
 
   * Documentation: http://ipyrad.readthedocs.io
 ```
@@ -139,15 +142,17 @@ Start by creating a new parameters file with the `-n` flag. This flag
 requires you to pass in a name for your assembly. In the example we use
 `simdata` but the name can be anything at all. Once you start
 analysing your own data you might call your parameters file something
-more informative, like the name of your organism and some details on the settings.
+more informative, like the name of your organism and some details on the
+settings.
 
 ```bash 
-# go to our working directory
-$ cd ~/work
+# Make sure you're in your ipyrad-assembly directory
+$ pwd
 
 # create a new params file named 'simdata'
 $ ipyrad -n simdata
 ```
+> **Note:** The `pwd` command (**p**rints **w**orking **d**irectory).
 
 This will create a file in the current directory called `params-simdata.txt`. The 
 params file lists on each line one parameter followed by a \#\# mark, then the name of the 
@@ -155,13 +160,13 @@ parameter, and then a short description of its purpose. Lets take a look at it.
 
 ``` 
 $ cat params-simdata.txt
-------- ipyrad params file (v.0.7.28)-------------------------------------------
-simdata                         ## [0] [assembly_name]: Assembly name. Used to name output directories for assembly steps
-./                             ## [1] [project_dir]: Project dir (made in curdir if not present)
+------- ipyrad params file (v.0.9.26)-------------------------------------------
+simdata                        ## [0] [assembly_name]: Assembly name. Used to name output directories for assembly steps
+/home/radcamp2020/ipyrad-assembly              ## [1] [project_dir]: Project dir (made in curdir if not present)
                                ## [2] [raw_fastq_path]: Location of raw non-demultiplexed fastq files
                                ## [3] [barcodes_path]: Location of barcodes file
                                ## [4] [sorted_fastq_path]: Location of demultiplexed/sorted fastq files
-denovo                         ## [5] [assembly_method]: Assembly method (denovo, reference, denovo+reference, denovo-reference)
+denovo                         ## [5] [assembly_method]: Assembly method (denovo, reference)
                                ## [6] [reference_sequence]: Location of reference sequence file
 rad                            ## [7] [datatype]: Datatype (see docs): rad, gbs, ddrad, etc.
 TGCAG,                         ## [8] [restriction_overhang]: Restriction overhang (cut1,) or (cut1, cut2)
@@ -175,16 +180,17 @@ TGCAG,                         ## [8] [restriction_overhang]: Restriction overha
 0                              ## [16] [filter_adapters]: Filter for adapters/primers (1 or 2=stricter)
 35                             ## [17] [filter_min_trim_len]: Min length of reads after adapter trim
 2                              ## [18] [max_alleles_consens]: Max alleles per site in consensus sequences
-5, 5                           ## [19] [max_Ns_consens]: Max N's (uncalled bases) in consensus (R1, R2)
-8, 8                           ## [20] [max_Hs_consens]: Max Hs (heterozygotes) in consensus (R1, R2)
+0.05                           ## [19] [max_Ns_consens]: Max N's (uncalled bases) in consensus
+0.05                           ## [20] [max_Hs_consens]: Max Hs (heterozygotes) in consensus
 4                              ## [21] [min_samples_locus]: Min # samples per locus for output
-20, 20                         ## [22] [max_SNPs_locus]: Max # SNPs per locus (R1, R2)
-8, 8                           ## [23] [max_Indels_locus]: Max # of indels per locus (R1, R2)
-0.5                            ## [24] [max_shared_Hs_locus]: Max # heterozygous sites per locus (R1, R2)
+0.2                            ## [22] [max_SNPs_locus]: Max # SNPs per locus
+8                              ## [23] [max_Indels_locus]: Max # of indels per locus
+0.5                            ## [24] [max_shared_Hs_locus]: Max # heterozygous sites per locus
 0, 0, 0, 0                     ## [25] [trim_reads]: Trim raw read edges (R1>, <R1, R2>, <R2) (see docs)
 0, 0, 0, 0                     ## [26] [trim_loci]: Trim locus edges (see docs) (R1>, <R1, R2>, <R2)
-p, s, v                        ## [27] [output_formats]: Output formats (see docs)
+p, s, l                        ## [27] [output_formats]: Output formats (see docs)
                                ## [28] [pop_assign_file]: Path to population assignment file
+                               ## [29] [reference_as_filter]: Reads mapped to this reference are removed in step 3
 ```
 
 In general the defaults are sensible, and we won't mess with them for now, 
@@ -204,11 +210,14 @@ on the keyboard for navigating around the file. Nano accepts a few special
 keyboard commands for doing things other than modifying text, and it lists 
 these on the bottom of the frame. 
 
-We need to specify where the raw data files are located, the type of data we are using (.e.g., 'gbs', 'rad', 'ddrad', 'pairddrad), and which enzyme cut site overhangs are expected to be present on the reads. Below are the parameter setings you'll need to change for the simulated single-end RAD example data:
+We need to specify where the raw data files are located, the type of data we
+are using (.e.g., 'gbs', 'rad', 'ddrad', 'pairddrad), and which enzyme cut site
+overhangs are expected to be present on the reads. Below are the parameter
+setings you'll need to change for the simulated single-end RAD example data:
 
 ```bash
-/home/jovyan/ro-data/ipsimdata/rad_example_R1_.fastq.gz        ## [2] [raw_fastq_path]: Location ofraw non-demultiplexed fastq files
-/home/jovyan/ro-data/ipsimdata/rad_example_barcodes.txt        ## [3] [barcodes_path]: Location of barcodes file
+./ipsimdata/rad_example_R1_.fastq.gz        ## [2] [raw_fastq_path]: Location of raw non-demultiplexed fastq files
+./ipsimdata/rad_example_barcodes.txt        ## [3] [barcodes_path]: Location of barcodes file
 rad                            ## [7] [datatype]: Datatype (see docs): rad, gbs, ddrad, etc.
 TGCAG,                         ## [8] [restriction_overhang]: Restriction overhang (cut1,) or (cut1, cut2)
 ```
@@ -223,11 +232,10 @@ Once we start running the analysis ipyrad will create several new
 directories to hold the output of each step for this assembly. By 
 default the new directories are created in the `project_dir`
 directory and use the prefix specified by the `assembly_name` parameter.
-Because we use the default (`./`) for the `project_dir` for this tutorial, all these 
-intermediate directories will be of the form: `~/work/simdata_*`, 
-or the analagous name that you used for your assembly name.
-
-> **Note:** Again, the `./` notation indicates the current working directory. You can always view the current working directory with the `pwd` command (**p**rint **w**orking **d**irectory).
+Because we use the default (`/home/radcamp2020/ipyrad-assembly`) for the `project_dir` for
+this tutorial, all these intermediate directories will be of the form:
+`~/ipyrad-assembly/simdata_*`, or the analagous name that you used for your
+assembly name.
 
 # Input data format
 
@@ -239,7 +247,7 @@ gzip so that they have a .gz ending, but they do not need to be. Lets take
 a look at first three reads of one of the simulated data.
 
 ```bash
-$ zcat /home/jovyan/ro-data/ipsimdata/rad_example_R1_.fastq.gz | head -n 12
+$ zcat ipsimdata/rad_example_R1_.fastq.gz | head -n 12
 ```
 
 ```
@@ -256,33 +264,23 @@ CTCCAATCCTGCAGTTTAACTGTTCAAGTTGGCAAGATCAAGTCGTCCCTAGCCCCCGCGTCCGTTTTTACCTGGTCGCG
 +
 BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
 ```
-> **Exercise for the reader:** Can you find and verify the overhang sequence in the simulated data? 
-Hint: It's not right at the beginning of the sequence, which is where you might expect it to be.... 
-It's always a good idea to look at your data to check for the cut site. Your first sign of a 
-messy dataset is lots of *off target reads*, basically stuff that got sequenced that isn't associated
+> **Exercise for the reader:** Can you find and verify the overhang sequence in
+the simulated data? Hint: It's not right at the beginning of the sequence, which
+is where you might expect it to be.... It's always a good idea to look at your
+data to check for the cut site. Your first sign of a messy dataset is lots of
+*off target reads*, basically stuff that got sequenced that isn't associated
 with a restriction enzyme cutsite.
-
-Each read is composed of four lines. The first is the name of the read (its
-location on the plate). The second line contains the sequence data. The
-third line is unused. And the fourth line is the quality scores for the
-base calls. The [FASTQ wikipedia page](https://en.wikipedia.org/wiki/FASTQ_format) has a good
-figure depicting the logic behind how quality scores are encoded. Here you can see that
-the simulated data are generated with uniformly high quality scores. Quality scores in
-real data are much more all over the place:
-
-```
-@D00656:123:C6P86ANXX:8:2201:3857:34366 1:Y:0:8
-TGCATGTTTATTGTCTATGTAAAAGGAAAAGCCATGCTATCAGAGATTGGCCTGGGGGGGGGGGGCAAATACATGAAAAAGGGAAAGGCAAAATG
-+
-;=11>111>1;EDGB1;=DG1=>1:EGG1>:>11?CE1<>1<1<E1>ED1111:00CC..86DG>....//8CDD/8C/....68..6.:8....
-```
 
 # Step 1: Demultiplexing the raw data
 
-Commonly, sequencing facilities will give you one giant .gz file that contains all the reads from all the samples all mixed up together. Step 1 is all about sorting out which reads belong to which samples, so this is where the barcodes file comes in handy. The barcodes file is a simple text file mapping sample names to barcode sequences. Lets look at the simulated barcodes:
+Commonly, sequencing facilities will give you one giant .gz file that contains
+all the reads from all the samples all mixed up together. Step 1 is all about
+sorting out which reads belong to which samples, so this is where the barcodes
+file comes in handy. The barcodes file is a simple text file mapping sample
+names to barcode sequences. Lets look at the simulated barcodes:
 
 ```bash
-$ cat /home/jovyan/ro-data/ipsimdata/rad_example_barcodes.txt
+$ cat ./ipsimdata/rad_example_barcodes.txt
 1A_0    CATCATCAT
 1B_0    CCAGTGATA
 1C_0    TGGCCTAGT
@@ -297,45 +295,67 @@ $ cat /home/jovyan/ro-data/ipsimdata/rad_example_barcodes.txt
 3L_0    TTACTAACA
 ```
 
-Here the barcodes are all the same length, but ipyrad can also handle variable length barcodes, and in some cases multiplexed barcodes (3RAD and variants). We can also allow for varying amounts of sequencing error in the barcode in the barcode sequences (parameter 15, `max_barcode_mismatch`).
+Here the barcodes are all the same length, but ipyrad can also handle variable
+length barcodes, and in some cases multiplexed barcodes (3RAD and variants). We
+can also allow for varying amounts of sequencing error in the barcode sequences
+(parameter 15, `max_barcode_mismatch`).
 
-> **Note on step 1:** Occasionally sequencing facilities will send back data already demultiplexed to samples. This is totally fine, and is handled natively by ipyrad. In this case you would use the `sorted_fastq_path` in the params file to indiciate the sample fastq.gz files. ipyrad will then scan the samples and load in the raw data.
+> **Note on step 1:** Occasionally sequencing facilities will send back data
+already demultiplexed to samples. This is totally fine, and is handled natively
+by ipyrad. In this case you would use the `sorted_fastq_path` in the params file
+to indiciate the sample fastq.gz files. ipyrad will then scan the samples and
+load in the raw data.
 
 Now lets run step 1! For the simulated data this will take <10 seconds.
 
 > **Special Note:** In command line mode please be aware to *always* specify
 the number of cores with the `-c` flag. If you do not specify the number of 
 cores ipyrad assumes you want **all** of them, which will result in you
-hogging up all the CPU. We only have 40 cores so everybody has to share! 
+hogging up all the CPU on whatever computer you're on. This is fine inside the
+VM, but if you're on an HPC this can cause problems!
 
 ```bash
 ## -p    the params file we wish to use
 ## -s    the step to run
 ## -c    the number of cores to allocate   <-- Important!
-$ ipyrad -p params-simdata.txt -s 1 -c 4
+$ ipyrad -p params-simdata.txt -s 1 -c 3
 
  -------------------------------------------------------------
-  ipyrad [v.0.7.28]
+  ipyrad [v.0.9.26]
   Interactive assembly and analysis of RAD-seq data
- -------------------------------------------------------------
-  New Assembly: simdata
-  establishing parallel connection:
-  host compute node: [4 cores] on e305ff77a529
-
-  Step 1: Loading sorted fastq data to Samples
+ ------------------------------------------------------------- 
+  Parallel connection | radcamp2020-VirtualBox: 3 cores
+  
   Step 1: Demultiplexing fastq data to Samples
-  [####################] 100%  sorting reads         | 0:00:04
-  [####################] 100%  writing/compressing   | 0:00:01
-```
+  [####################] 100% 0:00:10 | sorting reads          
+  [####################] 100% 0:00:02 | writing/compressing    
 
+  Parallel connection closed.
+```
 ## In-depth operations of running an ipyrad step
 Any time ipyrad is invoked it performs a few housekeeping operations: 
-1. Load the assembly object - Since this is our first time running any steps we need to initialize our assembly.
-2. Start the parallel cluster - ipyrad uses a parallelization library called `ipyparallel`. Every time we start a step we fire up the parallel clients. This makes your assemblies go **smokin'** fast.
-3. Do the work - Actually perform the work of the requested step(s) (in this case demux'ing in sample reads).
-4. Save, clean up, and exit - Save the state of the assembly and spin down the ipyparallel cluster.
+1. Load the assembly object - Since this is our first time running any steps
+we need to initialize our assembly.
+2. Start the parallel cluster - ipyrad uses a parallelization library called
+`ipyparallel`. Every time we start a step we fire up the parallel clients.
+This makes your assemblies go **smokin'** fast, and also allows to distribute
+jobs across compute nodes on an HPC.
+3. Do the work - Actually perform the work of the requested step(s) (in this
+case demux'ing in sample reads).
+4. Save, clean up, and exit - Save the state of the assembly and spin down the
+ipyparallel cluster.
 
-As a convenience ipyrad internally tracks the state of all your steps in your 
+The results of step 1 are saved in the `*_fastqs` directory, where `*` is a
+wildcard that stands in for the name of your assembly. In our case it is
+`simdata_fastqs`. Lets look inside this directory:
+
+```bash
+$ ls simdata_fastqs/
+1A_0_R1_.fastq.gz  1C_0_R1_.fastq.gz  2E_0_R1_.fastq.gz  2G_0_R1_.fastq.gz  3I_0_R1_.fastq.gz  3K_0_R1_.fastq.gz  s1_demultiplex_stats.txt
+1B_0_R1_.fastq.gz  1D_0_R1_.fastq.gz  2F_0_R1_.fastq.gz  2H_0_R1_.fastq.gz  3J_0_R1_.fastq.gz  3L_0_R1_.fastq.gz
+```
+
+As a convenience, ipyrad internally tracks the state of all your steps in your 
 current assembly, so at any time you can ask for results by invoking the `-r` flag.
 We also use the `-p` flag to tell it which params file (i.e., which assembly) we 
 want to print stats for.
@@ -363,7 +383,7 @@ Summary stats of Assembly simdata
 
 Full stats files
 ------------------------------------------------
-step 1: ./simdata_fastqs/s1_demultiplex_stats.txt
+step 1: /home/radcamp2020/ipyrad-analysis/simdata_fastqs/s1_demultiplex_stats.txt
 step 2: None
 step 3: None
 step 4: None
@@ -414,9 +434,11 @@ sample_name                               true_bar       obs_bar     N_records
 3L_0                                     TTACTAACA     TTACTAACA         20008
 no_match                                         _            _            0
 ```
-Another early indicator of trouble is if you have a **ton** of reads that are `no_match`. 
-This means maybe your barcodes file is wrong, or maybe your library prep went poorly. Here,
-with the simulated data we have no unmatched barcodes, because, well, it's simulated.
+Another early indicator of trouble is if you have a **ton** of reads that are
+`no_match`. This means maybe your barcodes file is wrong, or maybe your library
+prep went poorly. Here, with the simulated data we have no unmatched barcodes,
+because, well, it's simulated.
+
 
 # Step 2: Filter reads
 
@@ -443,25 +465,27 @@ and change the following two parameter settings:
 > **Note:** Saving and quitting from `nano`: `CTRL+o` then `CTRL+x`
 
 ```bash
-$ ipyrad -p params-simdata.txt -s 2 -c 4
+$ ipyrad -p params-simdata.txt -s 2 -c 3
 ```
 ```
- -------------------------------------------------------------
-  ipyrad [v.0.7.28]
-  Interactive assembly and analysis of RAD-seq data
- -------------------------------------------------------------
   loading Assembly: simdata
-  from saved path: ~/work/simdata.json
-  establishing parallel connection:
-  host compute node: [4 cores] on darwin
+  from saved path: ~/ipyrad-assembly/simdata.json
 
-  Step 2: Filtering reads 
-  [####################] 100%  processing reads      | 0:00:12
+ -------------------------------------------------------------
+  ipyrad [v.0.9.26]
+  Interactive assembly and analysis of RAD-seq data
+ ------------------------------------------------------------- 
+  Parallel connection | radcamp2020-VirtualBox: 3 cores
+  
+  Step 2: Filtering and trimming reads
+  [####################] 100% 0:00:08 | processing reads     
+
+  Parallel connection closed.
 ```
 
-The filtered files are written to a new directory called `simdata_edits`. Again, 
-you can look at the results output by this step and also some handy stats tracked 
-for this assembly.
+The filtered files are written to a new directory called `simdata_edits`. Again,
+you can look at the results output by this step and also some handy stats
+tracked for this assembly.
 
 ```bash
 ## View the output of step 2
