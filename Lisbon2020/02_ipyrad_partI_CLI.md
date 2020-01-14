@@ -58,10 +58,10 @@ into directories, and it prepends the name of your assembly to each
 directory with data that belongs to it. One result of this is that 
 you can have multiple assemblies of the same raw data with different 
 parameter settings and you don't have to manage all the files yourself! 
-(See [Branching assemblies](https://ipyrad.readthedocs.io/tutorial_advanced_cli.html) for more info). Another
-result is that **you should not rename or move any of the directories
-inside your project directory**, unless you know what you're doing or
-you don't mind if your assembly breaks.
+(See [Branching assemblies](https://ipyrad.readthedocs.io/en/latest/8-branching.html)
+for more info). Another result is that **you should not rename or move any of
+the directories inside your project directory**, unless you know what you're
+doing or you don't mind if your assembly breaks.
 
 ## Getting started
 One benefit of the virtual machine we're using for this workshop is that it
@@ -574,8 +574,8 @@ You'll more than likely want to experiment with this value, but 0.85 is
 a reliable default, balancing over-splitting of loci vs over-lumping.
 Don't mess with this until you feel comfortable with the overall
 workflow, and also until you've learned about
-[Branching assemblies](https://ipyrad.readthedocs.io/tutorial_advanced_cli.html)
-(which we will get to later this afternoon).
+[Branching assemblies](https://ipyrad.readthedocs.io/en/latest/8-branching.html)
+(which we may get to later this afternoon).
 
 There have been many papers written comparing how results of assemblies vary 
 depending on the clustering threshold. In general, my advice is to use a value
@@ -586,60 +586,60 @@ It's also possible to incorporate information from a reference
 genome to improve clustering at this step, if such a resources is
 available for your organism (or one that is relatively closely related).
 We will not cover reference based assemblies in this workshop, but you 
-can refer to the [ipyrad documentation](https://ipyrad.readthedocs.io/tutorial_advanced_cli.html)
+can refer to the [ipyrad documentation](https://ipyrad.readthedocs.io/en/latest/tutorial_advanced_cli.html#reference-sequence-mapping)
 for more information.
 
 > **Note on performance:** Steps 3 and 6 generally take considerably 
 longer than any of the other steps, due to the resource intensive clustering 
 and alignment phases. These can take on the order of 10-100x as long 
 as the next longest running step. This depends heavily on the number of samples
-in your dataset, the number of cores on your computer, the length(s) of your reads, and the 
-"messiness" of your data in terms of the number of unique loci present (this can
-vary from a few thousand to many millions).
+in your dataset, the number of cores on your computer, the length(s) of your
+reads, and the "messiness" of your data in terms of the number of unique loci
+present (this can vary from a few thousand to many millions).
 
 Now lets run step 3:
 
 ```bash
-$ ipyrad -p params-simdata.txt -s 3 -c 4
+$ ipyrad -p params-simdata.txt -s 3 -c 3
 ```
 ```
- -------------------------------------------------------------
-  ipyrad [v.0.7.28]
-  Interactive assembly and analysis of RAD-seq data
- -------------------------------------------------------------
   loading Assembly: simdata
-  from saved path: ~/work/simdata.json
-  establishing parallel connection:
-  host compute node: [4 cores] on e305ff77a529
+  from saved path: ~/ipyrad-assembly/simdata.json
 
+ -------------------------------------------------------------
+  ipyrad [v.0.9.26]
+  Interactive assembly and analysis of RAD-seq data
+ ------------------------------------------------------------- 
+  Parallel connection | radcamp2020-VirtualBox: 3 cores
+  
   Step 3: Clustering/Mapping reads within samples
-  [####################] 100% 0:00:01 | concatenating
-  [####################] 100% 0:00:01 | dereplicating
-  [####################] 100% 0:00:00 | clustering/mapping
-  [####################] 100% 0:00:00 | building clusters
-  [####################] 100% 0:00:00 | chunking clusters
-  [####################] 100% 0:00:03 | aligning clusters
-  [####################] 100% 0:00:00 | concat clusters
-  [####################] 100% 0:00:00 | calc cluster stats
+  [####################] 100% 0:00:02 | dereplicating          
+  [####################] 100% 0:00:03 | clustering/mapping     
+  [####################] 100% 0:00:00 | building clusters      
+  [####################] 100% 0:00:00 | chunking clusters      
+  [####################] 100% 0:00:48 | aligning clusters      
+  [####################] 100% 0:00:00 | concat clusters        
+  [####################] 100% 0:00:00 | calc cluster stats     
+
+  Parallel connection closed.
 ```
 
 In-depth operations of step 3:
-* concatenating - Concatenate files from merged assemblies
 * dereplicating - Merge all identical reads
-* clustering - Find reads matching by sequence similarity threshold
+* clustering/mapping - Find reads matching by sequence similarity threshold
 * building clusters - Group similar reads into clusters
-* chunking - Subsample cluster files to improve performance of alignment step
-* aligning - Align all clusters
-* concatenating - Gather chunked clusters into one full file of aligned clusters
+* chunking clusters - Subsample cluster files to improve performance of alignment step
+* aligning clusters - Align all clusters
+* concat clusters - Gather chunked clusters into one full file of aligned clusters
 * calc cluster stats - Just as it says!
 
 Again we can examine the results. The stats output tells you how many
-clusters were found ('clusters_total'), and the number of clusters that pass the mindepth
-thresholds ('clusters_hidepth'). We go into more detail about mindepth settings in some of
-the [advanced tutorials](https://ipyrad.readthedocs.io/userguide.html#tutorials-running-ipyrad)
-but for now all you need to know is that by default step 3 will filter out clusters that 
-only have a handful of reads on the assumption that it will be difficult to accurately call
-bases at such low depth.
+clusters were found ('clusters_total'), and the number of clusters that pass
+the mindepth thresholds ('clusters_hidepth'). We go into more detail about
+mindepth settings in some of the [advanced tutorials](https://ipyrad.readthedocs.io/userguide.html#tutorials-running-ipyrad)
+but for now all you need to know is that by default step 3 will filter out
+clusters that only have a handful of reads on the assumption that it will be
+difficult to accurately call bases at such low depth.
 
 ```bash
 $ ipyrad -p params-simdata.txt -r
