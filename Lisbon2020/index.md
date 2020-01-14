@@ -36,7 +36,7 @@ Times           | Wed Jan 22 |
 15:30-15:45     | Coffee Break |
 15:45-17:00      | [Clustering analysis: STRUCTURE](05_STRUCTURE_API.md) & [Demographic Inference: momi2](07_momi2_API.md) |
 
-* Refreshments provided and workshop sponsored by 
+* Refreshments provided and workshop sponsored by cE3c. 
 
 ## Additional ipyrad analysis cookbooks
 * [Tetrad - A Quartet-based species tree method](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-tetrad.ipynb)
@@ -44,6 +44,9 @@ Times           | Wed Jan 22 |
 * [BPP - Bayesian inference under a multi-species coalescent model](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-bpp-species-delimitation.ipynb)
 * [Bucky - Phylogenetic concordance analysis](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-bucky.ipynb)
 * [ABBA-BABA - Admixture analysis](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-abba-baba.ipynb)
+
+## Group Photo
+Don't forget to get a sweet group photo!
 
 ## Acknowledgements
 RADCamp Lisbon 2020 materials are largely based on materials from previous

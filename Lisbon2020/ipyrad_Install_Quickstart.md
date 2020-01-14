@@ -20,8 +20,6 @@ bash
 # test that conda is installed. Will print info about your conda install.
 conda info
 
-conda update -n base conda
-
 # Create and switch to new env
 conda create -n ipyrad
 conda activate ipyrad

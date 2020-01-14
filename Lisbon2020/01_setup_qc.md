@@ -3,7 +3,6 @@
 # Setting up the environment and basic quality control
 Before we get going with our first RAD-seq assembly, we need to get set up and oriented to our working environment. We make no assumptions about prior experience with cluster environments, so we scaffold the entire participant workshop experience from first principles. More advanced users hopefully will find value in some of the finer details we present.
 
-* [Connecting to the Jupyter Hub](#connect-to-jupyter-hub)
 * [Basic quality control (FastQC)](#fastqc-for-quality-control)
 * [Viewing and interpreting FastQC results](#inspecting-fastqc-utput)
 
@@ -19,43 +18,6 @@ $ touch ~/watdo.txt
 $ echo "wat"
 wat
 ```
-
-![png](01_setup_qc_files/01_jupyter_hub_terminal.png)
-
-### Command line interface (CLI) basics
-The CLI provides a way to navigate a file system, move files around, and run commands all inside a little black window. The down side of CLI is that you have to learn many at first seemingly esoteric commands for doing all the things you would normally do with a mouse. However, there are several advantages of CLI: 1) you can use it on servers that don't have a GUI interface (such as HPC clusters); 2) it's scriptable, so you can write programs to execute common tasks or run analyses and others can easily reproduce these tasks exactly; 3) it's often faster and more efficient than click-and-drag GUI interfaces. For now we will start with 4 of the most common and useful commands:
-
-```bash
-$ pwd
-/home/user
-```
-`pwd` stands for **"print working directory"**, which literally means "where am I now in this filesystem?". This is a question you should always be aware of when working in a terminal. Just like when you open a file browser window, when you open a new terminal you are located somewhere; the terminal will usually start you out in your "home" directory. Ok, now we know where we are, lets take a look at what's in this directory:
-
-```bash
-$ ls
-home  ro-data  ro-notebooks  work
-```
-
-`ls` stands for **"list"** and you should notice a strong correlation between 
-the results of `ls` and the contents of the directories presented by the Jupyter 
-Hub dashboard. Try to use `ls` to look inside your `home` and `work` directories. 
-**Not Much There.** That's okay, because throughout the workshop we will be 
-adding files and directories and by the time we're done, not only will you have 
-a bunch of experience with RAD-Seq analysis, but you'll also have a ***ton*** of 
-stuff in your home directory.
-
-Throughout the workshop we will be introducing new commands as the need for them 
-arises. We will pay special attention to highlighting and explaining new commands 
-and giving examples to practice with. 
-
-> **Special Note:** Notice that neither of the 'read-only' directories are called 
-`ro data`, for example. This is **very important**, as spaces in directory names 
-are known to cause havoc on HPC systems. All linux based operating systems do not 
-recognize file or directory names that include spaces because spaces act as default 
-delimiters between arguments to commands. There are ways around this (for example 
-Mac OS has half-baked "spaces in file names" support) but it will be so much for 
-the better to get in the habit now of ***never including spaces in file or 
-directory names***.
 
 ## Examine the raw data
 For this workshop we will be looking at and working with only the simulated data.
