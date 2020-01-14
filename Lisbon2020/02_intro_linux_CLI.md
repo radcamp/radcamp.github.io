@@ -79,8 +79,9 @@ $ man ls  # The full user manual of `ls`
 Typing in the command line can take a while, especially if you are no keyboard warrior. It is also error prone, and typos may ruin your day on the CLI. However, you can use some useful shortcuts to help overcome this issue:
 
 
-* "Tab" Key
 <div style="float: right"><img src="02_cli_intro_assets/Tab-Key.png" /></div>
+
+* "Tab" Key
   * Completes your command
   * Try with one or two "*keypresses*"
 * ↓ and ↑ keys
