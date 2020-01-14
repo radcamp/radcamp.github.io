@@ -10,7 +10,7 @@ tasks or run analyses in an automated and reproducible fashion; 3)
 it's often faster and more efficient than click-and-drag GUI interfaces.
 
 
-## Tutorial documentation conventions
+### Tutorial documentation conventions
 
 Each grey cell in this tutorial indicates a command line interaction. Lines starting with `$` indicate a command that should be executed in a terminal, for example by copying and pasting the text after the `$` sign into your terminal. All after a `#` is a "comment" and is ignored when entered into the command line. Elements in code cells surrounded by angle brackets (e.g. `<username>`) are variables that need to be replaced by the user. All other lines should be interpreted as output from the issued commands.
 Below is an example code cell:
@@ -78,18 +78,14 @@ $ man ls  # The full user manual of `ls`
 
 Typing in the command line can take a while, especially if you are no keyboard warrior. It is also error prone, and typos may ruin your day on the CLI. However, you can use some useful shortcuts to help overcome this issue:
 
-<ul>
-<li>"Tab" Key</li>
+
+* "Tab" Key
 <div style="float: right"><img src="02_cli_intro_assets/Tab-Key.png" /></div>
-  <ul>
-  <li>Completes your command</li>
-  <li>Try with one or two "*keypresses*"
-  </ul>
-<li>↓ and ↑ keys</li>
-  <ul>
-  <li>Navigate previous commands</li>
-  </ul>
-</ul>
+  * Completes your command
+  * Try with one or two "*keypresses*"
+* ↓ and ↑ keys
+  * Navigate previous commands
+
 
 ### The PATH
 
