@@ -23,7 +23,7 @@ wat
 For this workshop we will be looking at and working with only the simulated data.
 
 ```
-$ ls /home/user/ipyrad/tests/simdata
+$ ls ipsimdata
 gbs_example_barcodes.txt         pairddrad_example_genome.fa.smi        pairgbs_example_barcodes.txt         rad_example_barcodes.txt
 gbs_example_genome.fa            pairddrad_example_R1_.fastq.gz         pairgbs_example_R1_.fastq.gz         rad_example_genome.fa
 gbs_example_R1_.fastq.gz         pairddrad_example_R2_.fastq.gz         pairgbs_example_R2_.fastq.gz         rad_example_genome.fa.fai
@@ -34,12 +34,18 @@ pairddrad_example_genome.fa.sma  pairddrad_wmerge_example_R2_.fastq.gz  pairgbs_
 ```
 
 ## Inspect the data
-Then we will use the `zcat` command to read lines of data from one of the files and we will trim this to print only the first 20 lines by piping the output to the `head` command. Using a pipe (`|`) like this passes the output from one command to another and is a common trick in the command line. 
+Then we will use the `zcat` command to read lines of data from one of the files
+and we will trim this to print only the first 20 lines by piping the output to
+the `head` command. Using a pipe (`|`) like this passes the output from one
+command to another and is a common trick in the command line. 
 
-Here we have our first look at a **fastq formatted file**. Each sequenced read is spread over four lines, one of which contains sequence and another the quality scores stored as ASCII characters. The other two lines are used as headers to store information about the read. 
+Here we have our first look at a **fastq formatted file**. Each sequenced read
+is spread over four lines, one of which contains sequence and another the quality
+scores stored as ASCII characters. The other two lines are used as headers to
+store information about the read. 
 
 ```bash
-$ zcat ipyrad/tests/ipsimdata/rad_example_R1_.fastq.gz | head -n 20
+$ zcat ipsimdata/rad_example_R1_.fastq.gz | head -n 20
 @lane1_locus0_2G_0_0 1:N:0:
 CTCCAATCCTGCAGTTTAACTGTTCAAGTTGGCAAGATCAAGTCGTCCCTAGCCCCCGCGTCCGTTTTTACCTGGTCGCGGTCCCGACCCAGCTGCCCCC
 +
@@ -63,26 +69,53 @@ BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
 ```
 
 ## FastQC for quality control
-The first step of any RAD-Seq assembly is to inspect your raw data to estimate overall quality. We began first with a visual inspection above, but of course we can only visually inspect a very tiny proportion of the total data. So instead we use automated approaches to check the quality of our data. 
+The first step of any RAD-Seq assembly is to inspect your raw data to estimate
+overall quality. We began first with a visual inspection above, but of course
+we can only visually inspect a very tiny proportion of the total data. So
+instead we use automated approaches to check the quality of our data. 
 
-At this stage you can then attempt to improve your dataset by identifying and removing samples with failed sequencing. Another key QC procedure involves inspecting average quality scores per base position and trimming read edges, which is where low quality base-calls tend to accumulate. In this figure, the X-axis shows the position on the read in base-pairs and the Y-axis depicts information about [Phred quality score](https://en.wikipedia.org/wiki/Phred_quality_score) per base for all reads, including median (center red line), IQR (yellow box), and 10%-90% (whiskers). As an example, here is a very clean base sequence quality report for a 75bp RAD-Seq library. These reads have generally high quality across their entire length, with only a slight (barely worth mentioning) dip toward the end of the reads:
+At this stage you can then attempt to improve your dataset by identifying and
+removing samples with failed sequencing. Another key QC procedure involves
+inspecting average quality scores per base position and trimming read edges,
+which is where low quality base-calls tend to accumulate. In this figure, the
+X-axis shows the position on the read in base-pairs and the Y-axis depicts
+information about [Phred quality score](https://en.wikipedia.org/wiki/Phred_quality_score)
+per base for all reads, including median (center red line), IQR (yellow box),
+and 10%-90% (whiskers). As an example, here is a very clean base sequence
+quality report for a 75bp RAD-Seq library. These reads have generally high
+quality across their entire length, with only a slight (barely worth mentioning)
+dip toward the end of the reads:
 
 ![png](01_setup_qc_files/fastqc-high-quality-example.png)
 
-In contrast, here is a somewhat typical base sequence quality report for R1 of a 300bp paired-end Illumina run of ezrad data:
+In contrast, here is a somewhat typical base sequence quality report for R1 of
+a 300bp paired-end Illumina run of ezrad data:
 
 ![png](01_setup_qc_files/fastqc-quality-example.png)
 
-This figure depicts a common artifact of current Illumina chemistry, whereby quality scores per base drop off precipitously toward the ends of reads, with the effect being magnified for read lengths > 150bp. The purpose of using FastQC to examine reads is to determine whether and how much to trim our reads to reduce sequencing error interfering with basecalling. In the above figure, as in most real dataset, we can see there is a tradeoff between throwing out data to increase overall quality by trimming for shorter length, and retaining data to increase value obtained from sequencing with the result of increasing noise toward the ends of reads.
+This figure depicts a common artifact of current Illumina chemistry, whereby
+quality scores per base drop off precipitously toward the ends of reads, with
+the effect being magnified for read lengths > 150bp. The purpose of using FastQC
+to examine reads is to determine whether and how much to trim our reads to
+reduce sequencing error interfering with basecalling. In the above figure, as in
+most real dataset, we can see there is a tradeoff between throwing out data to
+increase overall quality by trimming for shorter length, and retaining data to
+increase value obtained from sequencing with the result of increasing noise
+toward the ends of reads.
 
 ### Running FastQC
-In the interest of saving time during this short workshop we will only indicate how fastqc is run, and will then focus on interpretation of typical output. More detailed information about actually running fastqc are available [elsewhere on the RADCamp site](https://radcamp.github.io/NYC2018/01_cluster_basics.html#fastqc-for-quality-control).
+In the interest of saving time during this short workshop we will only indicate
+how fastqc is run, and will then focus on interpretation of typical output. More
+detailed information about actually running fastqc are available [elsewhere on
+the RADCamp site](https://radcamp.github.io/NYC2018/01_cluster_basics.html#fastqc-for-quality-control).
 
 To run fastqc on all the pedicularis samples you would execute this command:
 ```bash
 $ fastqc -o fastqc-results ipyrad/tests/ipsimdata/rad_example_R1_.fastq.gz
 ```
-> **Note:** The -o flag tells fastqc where to write output files. Running this command will create a directory called `fastqc-results` in your current working directory.
+> **Note:** The -o flag tells fastqc where to write output files. Running this
+command will create a directory called `fastqc-results` in your current working
+directory.
 
 ### Inspecting and Interpreting FastQC Output
 
