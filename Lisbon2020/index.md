@@ -41,7 +41,11 @@ Times           | Wed Jan 22 |
 
 * Refreshments provided and workshop sponsored by:
 
+<div style="float: center">
+
 [![cE3c](logos/cE3c.png)](https://ce3c.ciencias.ulisboa.pt)
+
+</div>
 
 ## Additional ipyrad analysis cookbooks
 * [Tetrad - A Quartet-based species tree method](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-tetrad.ipynb)
