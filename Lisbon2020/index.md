@@ -33,9 +33,9 @@ Times           | Wed Jan 22 |
 09:00-09:30     | **ipyrad Assembly:** [Quickstart setup](ipyrad_Install_Quickstart.md) & [Intro to CLI](02_intro_linux_CLI.md) |
 09:30-10:30     | [RADSeq QC](01_setup_qc.md) & [ipyrad part I](02_ipyrad_partI_CLI.md) |
 10:30-10:45     | Coffee Break |
-10:45-12:30     | [ipyrad part II](03_ipyrad_partII_CLI.md)
+10:45-12:30     | [ipyrad part II](03_ipyrad_partII_CLI.md) & **ipyrad Analysis:** [Brief Intro/Setup Jupyter notebooks](Jupyter_Notebook_Setup.md) |
 12:30-13:30      | Lunch |
-13:30-15:30      | **ipyrad Analysis:** [Brief Intro/Setup Jupyter notebooks](Jupyter_Notebook_Setup.md) & [Clustering analysis: PCA](04_PCA_API.md) & [Demographic Inference: momi2](07_momi2_API.md) (if time allows)| 
+13:30-15:30      | [Clustering analysis: PCA](04_PCA_API.md) & [Demographic Inference: momi2](07_momi2_API.md) (if time allows)| 
 15:30-15:45     | Coffee Break |
 15:45-17:00      | [Clustering analysis: STRUCTURE](05_STRUCTURE_API.md) |
 
