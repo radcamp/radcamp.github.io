@@ -7,24 +7,6 @@ we now continue with the assembly, with the goal of calling bases, clustering
 across samples based on consensus sequence similarity, and then finally
 writing output in various useful formats.
 
-Each grey cell in this tutorial indicates a command line interaction. 
-Lines starting with `$ ` indicate a command that should be executed 
-in a terminal on the Jupyter Hub instance, for example by copying and 
-pasting the text into your terminal. All lines in code cells beginning 
-with \#\# are comments and should not be copied and executed. Elements 
-in code cells surrounded by angle brackets (e.g. <username>) are variables 
-that need to be replaced by the user. All other lines should be 
-interpreted as output from the issued commands.
-
-```bash
-## Example Code Cell.
-## Create an empty file in my home directory called `watdo.txt`
-$ touch ~/watdo.txt
-
-## Print "wat" to the screen
-$ echo "wat"
-wat
-```
 # Step 3: Recap
 
 Recall that we clustered reads within samples in Step 3. Reads that are sufficiently 
@@ -92,25 +74,28 @@ are a maximum of 2 alleles at any given locus. If we look at the raw
 data and there are 5 or ten different "alleles", and 2 of them are very
 high frequency, and the rest are singletons then this gives us evidence
 that the 2 high frequency alleles are good reads and the rest are
-probably junk. This step is pretty straightforward, and pretty fast. Run
-it thusly:
+probably junk. This step is pretty straightforward and pretty fast.
 
 ```bash
-$ cd ~/work
-$ ipyrad -p params-simdata.txt -s 4 -c 4
+# Ensure you are in the workshop assembly directory
+$ cd ~/ipyrad-assembly
+
+$ ipyrad -p params-simdata.txt -s 4 -c 3
 ```
 ```
- -------------------------------------------------------------
-  ipyrad [v.0.7.28]
-  Interactive assembly and analysis of RAD-seq data
- -------------------------------------------------------------
   loading Assembly: simdata
-  from saved path: ~/work/simdata.json
-  establishing parallel connection:
-  host compute node: [4 cores] on e305ff77a529
+  from saved path: ~/ipyrad-assembly/simdata.json
+
+ -------------------------------------------------------------
+  ipyrad [v.0.9.26]
+  Interactive assembly and analysis of RAD-seq data
+ ------------------------------------------------------------- 
+  Parallel connection | radcamp2020-VirtualBox: 3 cores
   
   Step 4: Joint estimation of error rate and heterozygosity
-  [####################] 100%  inferring [H, E]      | 0:00:04
+  [####################] 100% 0:00:12 | inferring [H, E]       
+
+  Parallel connection closed.
 ```
 
 In terms of results, there isn't as much to look at as in previous
@@ -142,6 +127,16 @@ the order of 10x lower). If these rates are on the same order this might
 be an indication that the clustering threshold is too permissive (i.e. reads 
 from different loci are being clustered and error rate is inflated).
 
+>> **NB:** Typical Illumina error rates are on the order of 0.001 per base, or
+rather 1 bad basecall per 1000 bases, so if your error rate is much higher
+than this it could be something to investigate further.
+
+>> **NB:** Another thing to think about, within species genetic diveristy
+tends to be on the order of 0.001 (Homo) to ~0.05 (Drosophila) (see Leffler
+et al. 2012). If your "mean hetero" value is much larger than this, or larger
+than might be expected given the natural history of your focal organism, your
+`clust_threshold` parameter may be too permissive.
+
 # Step 5: Consensus base calls
 
 Step 5 uses the inferred error rate and heterozygosity per sample to call 
@@ -149,29 +144,34 @@ the consensus of sequences within each cluster. Here we are identifying what
 we believe to be the real haplotypes at each locus within each sample.
 
 ```bash
-$ ipyrad -p params-simdata.txt -s 5 -c 4
+$ ipyrad -p params-simdata.txt -s 5 -c 3
 ```
-```
- -------------------------------------------------------------
-  ipyrad [v.0.7.28]
-  Interactive assembly and analysis of RAD-seq data
- -------------------------------------------------------------
-  loading Assembly: simdata
-  from saved path: ~/work/simdata.json
-  establishing parallel connection:
-  host compute node: [4 cores] on e305ff77a529
 
-  Step 5: Consensus base calling
+```
+loading Assembly: simdata
+  from saved path: ~/ipyrad-assembly/simdata.json
+
+ -------------------------------------------------------------
+  ipyrad [v.0.9.26]
+  Interactive assembly and analysis of RAD-seq data
+ ------------------------------------------------------------- 
+  Parallel connection | radcamp2020-VirtualBox: 3 cores
+  
+  Step 5: Consensus base/allele calling 
   Mean error  [0.00076 sd=0.00001]
   Mean hetero [0.00192 sd=0.00011]
-  [####################] 100%  calculating depths    | 0:00:01
-  [####################] 100%  chunking clusters     | 0:00:00
-  [####################] 100%  consens calling       | 0:00:09
-  [####################] 100%  indexing alleles      | 0:00:01
+  [####################] 100% 0:00:02 | calculating depths     
+  [####################] 100% 0:00:00 | chunking clusters      
+  [####################] 100% 0:00:47 | consens calling        
+  [####################] 100% 0:00:01 | indexing alleles       
+
+  Parallel connection closed.
 ```
+
 In-depth operations of step 5:
 * calculating depths - A simple refinement of the H/E estimates.
-* chunking clusters - Again, breaking big files into smaller chunks to aid parallelization.
+* chunking clusters - Again, breaking big files into smaller chunks to aid
+parallelization.
 * consensus calling - Actually perform the consensus sequence calling
 * indexing alleles - Keeping track of phase information
 
@@ -204,52 +204,59 @@ $ cat simdata_consens/s5_consens_stats.txt
 
 # Step 6: Cluster across samples
 
-Step 6 clusters consensus sequences across samples. Now that we have
-good estimates for haplotypes within samples we can try to identify
-similar sequences at each locus between samples. We use the same
-clustering threshold as step 3 to identify sequences between samples
-that are probably homologous, based on sequence similarity.
+Step 6 clusters consensus sequences across samples. Now that we have good
+estimates for haplotypes within samples we can try to identify similar
+sequences at each locus between samples. We use the same clustering
+threshold as step 3 to identify sequences between samples that are
+probably homologous, based on sequence similarity.
 
 > **Note on performance of each step:** Steps 3 and 6 generally take 
-considerably longer than any of the steps, due to the resource 
+considerably longer than any of the other steps, due to the resource 
 intensive clustering and alignment phases. These can take on the order
 of 10-100x as long as the next longest running step. Fortunately, with 
 the data we use during this workshop, step 6 will actually be really fast.
 
-```bash
-$ ipyrad -p params-simdata.txt -s 6 -c 4
-```
-```
- -------------------------------------------------------------
-  ipyrad [v.0.7.28]
-  Interactive assembly and analysis of RAD-seq data
- -------------------------------------------------------------
-  loading Assembly: simdata
-  from saved path: ~/work/simdata.json
-  establishing parallel connection:
-  host compute node: [4 cores] on e305ff77a529
+> **NB:** The recent update to *ipyrad* v.0.9.\* included **massive**
+optimizations for step 6 for both *de novo* and *reference* based assemblies.
 
-  Step 6: Clustering at 0.85 similarity across 12 samples
-  [####################] 100%  concatenating inputs  | 0:00:01
-  [####################] 100%  clustering across     | 0:00:01
-  [####################] 100%  building clusters     | 0:00:03
-  [####################] 100%  aligning clusters     | 0:00:04
+```bash
+$ ipyrad -p params-simdata.txt -s 6 -c 3
+```
+```
+  loading Assembly: simdata
+  from saved path: ~/ipyrad-assembly/simdata.json
+
+ -------------------------------------------------------------
+  ipyrad [v.0.9.26]
+  Interactive assembly and analysis of RAD-seq data
+ ------------------------------------------------------------- 
+  Parallel connection | radcamp2020-VirtualBox: 3 cores
+  
+  Step 6: Clustering/Mapping across samples 
+  [####################] 100% 0:00:02 | concatenating inputs   
+  [####################] 100% 0:00:03 | clustering across    
+  [####################] 100% 0:00:02 | building clusters      
+  [####################] 100% 0:00:13 | aligning clusters      
+
+  Parallel connection closed.
 ```
 In-depth operations of step 6:
-* concatenating inputs - Gathering all consensus files and preprocessing to improve performance
+* concatenating inputs - Gathering all consensus files and preprocessing to
+improve performance
 * clustering across - Cluster by similarity threshold across samples
 * building clusters - Group similar reads into clusters
 * aligning clusters - Align within each cluster
 
-Since in general the stats for results of each step are sample based, 
-the output of `-r` will only display what we had seen after step 5, 
-so this is not that informative.
-
-It might be more enlightening to consider the output of step 6 by
-examining the file that contains the reads clustered across samples:
+Since in general the stats for results of each step are sample based, the output
+of `-r` will only display what we had seen after step 5, so calling `ipyrad`
+with `-r` after step 6 won't be that informative. It might be more enlightening
+to consider the output of step 6 by examining the file that contains the reads
+clustered across samples:
 
 ```bash
-zcat simdata_across/simdata_catclust.gz | head -n 26
+# The output file from step 6 is in fasta format (not gzipped), so we use cat
+# to view it, and take the first 26 lines.
+cat simdata_across/simdata_clust_database.fa | head -n 26
 ```
 ```
 1A_0_102
@@ -281,72 +288,74 @@ TGCAGAAACAGTAGCGGCCCATCTTTTTAAACTTTTACCAAGTCTGTGCAGCCGACCGATCTGAAGAGGTTTACACCGAT
 ```
 
 The final output of step 6 is a file in `simdata_across` called
-`simdata_catclust.gz`. This file contains all aligned reads across
-all samples. Executing the above command you'll see the output below
-which shows all the reads that align at one particular locus. You'll see
-the sample name of each read followed by the sequence of the read at
-that locus for that sample. If you wish to examine more loci you can
-increase the number of lines you want to view by increasing the value
-you pass to `head` in the above command (e.g. `... | head -n 300`).
+`simdata_clust_database.fa`. This file contains all aligned reads across all
+samples. Executing the above command you'll see the output above which shows
+all the reads that align at one particular locus. You'll see the sample name of
+each read followed by the sequence of the read at that locus for that sample.
+If you wish to examine more loci you can increase the number of lines you want
+to view by increasing the value you pass to `head` in the above command (e.g.
+`... | head -n 300`).
 
-> **Pro tip:** You can also use `less` to look at **all** the loci. Also,
-`less` is smart enough to recognize and unpack the gzipped (.gz) file. Exit
-`less` by pushing the `q` key to *quit*.
+> **Pro tip:** You can also use `less` to look at **all** the loci, i.e.
+`less simdata_across/simdata_clust_database.fa`. Exit `less` by pushing the
+`q` key to *quit*.
 
 # Step 7: Filter and write output files
 
-The final step is to filter the data and write output files in many
-convenient file formats. First we apply filters for maximum number of
-indels per locus, max heterozygosity per locus, max number of snps per
-locus, and minimum number of samples per locus. All these filters are
-configurable in the params file. You are encouraged to explore
-different settings, but the defaults are quite good and quite
-conservative.
+The final step is to filter the data and write output files in many convenient
+file formats. First we apply filters for maximum number of indels per locus,
+max heterozygosity per locus, max number of snps per locus, and minimum number
+of samples per locus. All these filters are configurable in the params file.
+You are encouraged to explore different settings, but the defaults are quite
+good and quite conservative.
 
 To run step 7:
 
 ```bash
-$ ipyrad -p params-simdata.txt -s 7 -c 2
+$ ipyrad -p params-simdata.txt -s 7 -c 3
 ```
 ```
-
- -------------------------------------------------------------
-  ipyrad [v.0.7.28]
-  Interactive assembly and analysis of RAD-seq data
- -------------------------------------------------------------
   loading Assembly: simdata
-  from saved path: ~/work/simdata.json
-  establishing parallel connection:
-  host compute node: [4 cores] on e305ff77a529
+  from saved path: ~/ipyrad-assembly/simdata.json
 
-  Step 7: Filter and write output files for 12 Samples
-  [####################] 100% 0:00:02 | applying filters
-  [####################] 100% 0:00:01 | building arrays
-  [####################] 100% 0:00:00 | writing conversions
-  [####################] 100% 0:00:00 | indexing vcf depths
-  [####################] 100% 0:00:01 | writing vcf output
-  Outfiles written to: ~/work/simdata_outfiles
+ -------------------------------------------------------------
+  ipyrad [v.0.9.26]
+  Interactive assembly and analysis of RAD-seq data
+ ------------------------------------------------------------- 
+  Parallel connection | radcamp2020-VirtualBox: 3 cores
+  
+  Step 7: Filtering and formatting output files 
+  [####################] 100% 0:00:12 | applying filters       
+  [####################] 100% 0:00:02 | building arrays        
+  [####################] 100% 0:00:00 | writing conversions    
+
+  Parallel connection closed.
 ```
-
 A new directory is created called `simdata_outfiles`, and you may inspect
 the contents:
 ```bash
 $ ls simdata_outfiles/
 ```
 ```
-simdata.hdf5  simdata.loci  simdata.phy  simdata.snps.map  simdata.snps.phy  simdata_stats.txt  simdata.vcf
+simdata.loci  simdata.phy  simdata.seqs.hdf5  simdata.snps  simdata.snps.hdf5  simdata.snpsmap  simdata_stats.txt
 ```
 
-This directory contains all the output files specified by the 
-`output_formats` parameter in the params file. The default is set to 
-create two different version of phylip output, one including the full 
-sequence `simdata.phy` and one including only variable sites `simdata.snps.phy`, 
-as well as `simdata.vcf`, and the `simdata.loci` (which is ipyrad's internal 
-format). The full list of available output formats and detailed explanations
-of each of these is available in the [ipyrad output formats documentation](https://ipyrad.readthedocs.io/output_formats.html#full-output-formats).
-The other important file here is the `simdata.txt` which gives
+This directory contains all the output files specified by the `output_formats`
+parameter in the params file. The defaults will create two different version of
+phylip output, one including the full sequence `simdata.phy` and one including
+only variable sites `simdata.snps`, as well as a `.snpsmap` file which
+indicates the location of each snp within each locus, a `simdata.vcf` file
+including all the SNPs in VCF format, and the `simdata.loci` file which is
+ipyrad's internal format recording the full sequence for each sample at each
+locus. The full list of available output formats and detailed explanations of
+each of these is available in the [ipyrad output formats documentation](https://ipyrad.readthedocs.io/en/latest/output_formats.html#full-output-formats).
+
+> **NB:** To get generate all available output files from ipyrad step 7 you can
+specify `*` for parameter `output_formats` parameter in the params file.
+
+The other important file here is the `simdata_stats.txt` which gives
 extensive and detailed stats about the final assembly. A quick overview of the
-blocks in this file:
+blocks in the stats file:
 
 ```bash
 $ less simdata_outfiles/simdata_stats.txt
@@ -562,3 +571,6 @@ includes extensive downstream analysis tools for such things as clustering and
 population assignment, phylogenetic tree inference, quartet-based species tree
 inference, and much more.
 
+## References
+Leffler, Ellen M., et al. "Revisiting an old riddle: what determines genetic
+diversity levels within species?." PLoS biology 10.9 (2012): e1001388.
