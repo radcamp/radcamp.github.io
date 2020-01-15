@@ -41,7 +41,7 @@ Times           | Wed Jan 22 |
 
 * Refreshments provided and workshop sponsored by:
 
-<div class="center" markdown="1">
+<div align="center" markdown="1">
 
 [![cE3c](logos/cE3c.png)](https://ce3c.ciencias.ulisboa.pt)
 
