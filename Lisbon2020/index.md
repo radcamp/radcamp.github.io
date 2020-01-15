@@ -1,8 +1,11 @@
 # Welcome to RadCamp 2020 - The Lisbon Edition
 
+<div style="float: right"><img src="logos/FCUL.png" /></div>
+
 January 22, 2020
 
-Campus da FCUL  
+Campus da FCUL
+
 [C2 building](https://goo.gl/maps/pAwdY8oLWgzguNcq7)  
 Room 2.2.16  
 Lisboa, Portugal
@@ -36,7 +39,13 @@ Times           | Wed Jan 22 |
 15:30-15:45     | Coffee Break |
 15:45-17:00      | [Clustering analysis: STRUCTURE](05_STRUCTURE_API.md) & [Demographic Inference: momi2](07_momi2_API.md) |
 
-* Refreshments provided and workshop sponsored by cE3c. 
+* Refreshments provided and workshop sponsored by:
+
+<div align="center" markdown="1">
+
+[![cE3c](logos/cE3c.png)](https://ce3c.ciencias.ulisboa.pt)
+
+</div>
 
 ## Additional ipyrad analysis cookbooks
 * [Tetrad - A Quartet-based species tree method](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-tetrad.ipynb)
