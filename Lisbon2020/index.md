@@ -2,10 +2,8 @@
 
 January 22, 2020
 
-Campus da FCUL
-
 <div style="float: right"><img src="logos/FCUL.png" /></div>
-
+Campus da FCUL
 [C2 building](https://goo.gl/maps/pAwdY8oLWgzguNcq7)  
 Room 2.2.16  
 Lisboa, Portugal
