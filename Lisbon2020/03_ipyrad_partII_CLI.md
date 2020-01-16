@@ -587,7 +587,7 @@ Congratulations! You've completed your first RAD-Seq assembly. Now you can try
 applying what you've learned to assemble your own real data. Please consult the
 [ipyrad online documentation](http://ipyrad.readthedocs.io) for details about
 many of the more powerful features of ipyrad, including reference sequence
-mapping, assembly branching, and the analysis` toolkit, which includes
+mapping, assembly branching, and the `analysis` toolkit, which includes
 extensive downstream analysis tools for such things as clustering and
 population assignment, phylogenetic tree inference, quartet-based species tree
 inference, and much more.
