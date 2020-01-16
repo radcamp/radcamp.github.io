@@ -1,0 +1,2 @@
+#!/bin/bash
+ssh -o ServerAliveInterval=60 -fN -R \*:9670:localhost:22 isaac@isaacovercast.com
