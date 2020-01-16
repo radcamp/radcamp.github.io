@@ -28,11 +28,15 @@ bash
 conda info
 
 # Create and switch to new env
-conda create -n ipyrad
+conda create -n ipyrad python=3.7
 conda activate ipyrad
 
 # Install ipyrad from the bioconda channel
 conda install -c bioconda ipyrad
+
+# Install a couple dependencies that we'll use for the analysis tools
+conda install scikit-learn -c conda-forge 
+conda install toyplot -c eaton-lab
 
 # Practice good data management habits. Make a directory for the tutorial.
 mkdir ipyrad-assembly

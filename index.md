@@ -29,7 +29,6 @@ Workshop attendees will need to bring a laptop computer.
 ## Upcoming events:
 
 * [RADCamp2020-Lisbon](Lisbon2020/index.md)
-* [RADCamp2020-Leipzig](Leipzig2020/index.md)
 * [RADCamp2020-Marseilles](Marseilles2020/index.md)
 
 ## Past events:
