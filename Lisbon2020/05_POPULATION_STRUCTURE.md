@@ -41,7 +41,31 @@ optional arguments:
 
 ```
 
+### Getting data
+
+Before we start using *Strucutre_threader* we need to get some data. For this example we will resort once again to data from [Prates et al (2016)](https://www.pnas.org/node/170792.full). Create a new directory and download the necessary files there:
+
+```bash
+$ mkdir ~/str_analyses
+$ cd ~/str_analyses
+$ wget https://raw.githubusercontent.com/radcamp/radcamp.github.io/master/Lisbon2020/Prates_et_al_2016_example_data/anolis.vcf
+$ wget https://raw.githubusercontent.com/radcamp/radcamp.github.io/master/Lisbon2020/Prates_et_al_2016_example_data/Anolis.popfile
+$ wget https://raw.githubusercontent.com/radcamp/radcamp.github.io/master/Lisbon2020/Prates_et_al_2016_example_data/Anolis.indfile
+```
+
+When analysing RAD-Seq data, linkage desequilibrium (LD) can be a problem [Hendricks et al. 2018](https://onlinelibrary.wiley.com/doi/10.1111/eva.12659). One way to minimize its effect is to use only a single SNP from each locus. To do that we will need yet another scrpt: [vcv_parser.py](https://raw.githubusercontent.com/CoBiG2/RAD_Tools/6648d1ce1bc1e4c2d2e4256abdefdf53dc079b8c/vcf_parser.py), which can be found in [this github repository](https://github.com/CoBiG2/RAD_Tools). Use `wget` to obtain it and perform the filtering:
+
+```bash
+$ wget https://raw.githubusercontent.com/CoBiG2/RAD_Tools/6648d1ce1bc1e4c2d2e4256abdefdf53dc079b8c/vcf_parser.py
+$ python3 vcf_parser.py --center-snp -vcf anolis.vcf 
+```
+
+This command will output a new VCF file, with a smaller number of SNPs than the original called `anolis_CenterSNP.vcf`. You can instead pass "--one-snp" to retain the first SNP instead of the center one, or "--random-snp" to retain a random one.
+
+
 ### Using *Structure_threader*
 
 *Structure_threader*'s CLI interface was built in order to be as simple as possible, considering it has to allow the user to run 4 different program under a similar interface.
 *Structure_threader* can run in three different modes: `run` (to actually run the analyses), `plot` (to draw admixture plots from already performed analyses) and `params` (the generate skeleton parameter files for *STRUCTURE* and *MavericK*). You can ask *Structure_threader* for help on each of the modes by running `structure_threader <mode> -h`. Due to time constraints we will focus on the `run` mode.
+
+For now we will perform an example run using *fastStructure*.
