@@ -232,7 +232,11 @@ pca.draw()
 ![png](04_PCA_API_files/04_PCA_API_02_Anolis_PCA_rep1.png)
 ![png](04_PCA_API_files/04_PCA_API_02_Anolis_PCA_rep2.png)
 
-Notice anything?
+Notice anything? The relationships between samples change a bit, but also the
+total number of SNPs retained was reduced from 1187 to 786. This is because we
+impose a default minimum of 1 sample with a variable site per SNP within each
+population. You can tune this, but it's an advanced feature we'll talk about
+later.
 
 ## Subsampling SNPs
 By default run() will randomly subsample one SNP per RAD locus to reduce the
@@ -252,8 +256,21 @@ is disabled. Now we can use the subsampling to our advantage to generate an
 estimate of uncertainty in the results!
 
 ## Subsampling with replication
+Subsampling unlinked SNPs is generally a good idea for PCA analyses since you
+want to remove the effects of linkage from your data. It also presents a
+convenient way to explore the confidence in your results. By using the option
+`nreplicates` you can run many replicate analyses that subsample a different
+random set of unlinked SNPs each time. The replicate results are drawn with a
+lower opacity and the centroid of all the points for each sample is plotted
+with full fill and black stroke. Again, you can hover over the points with
+your cursor to see the sample names pop-up.
 
+```
+pca.run(nreplicates=25)
+pca.draw()
+```
 
+![png](04_PCA_API_files/04_PCA_API_02_Anolis_PCA_replicates.png)
 
 ## Removing "bad" samples and replotting.
 In PC analysis, it's common for "bad" samples to dominate several of the first
@@ -340,8 +357,23 @@ pca.plot(title="Anolis w/o Northern Samples", outfile="Anolis_no_north.png")
 
 ![png](04_PCA_API_files/04_PCA_API_04_Anolis_PCA_NoNorth.png)
 
+## Imputation
+They `ipyrad.analysis.pca` module offers three algorithms for imputing missing
+data:
+* sample: Randomly sample genotypes based on the frequency of alleles within
+(user-defined) populations (imap).
+* kmeans: Randomly sample genotypes based on the frequency of alleles in (kmeans
+cluster-generated) populations.
+* None: All missing values are imputed with zeros (ancestral allele).
+
+We won't dive into the differences between these imputation methods here, but
+if you are interested you can find much more information on in the docs for the
+[pca module](https://ipyrad.readthedocs.io/en/latest/API-analysis/cookbook-pca.html#No-imputation-(None))
+
 ## Looking at PCs other than 1 & 2
-PCs 1 and 2 by definition explain the most variation in the data, but sometimes PCs further down the chain can also be useful and informative. The plot function makes it simple to ask for PCs directly.
+PCs 1 and 2 by definition explain the most variation in the data, but sometimes
+PCs further down the chain can also be useful and informative. The plot function
+makes it simple to ask for PCs directly.
 
 ```python
 ## Lets reload the full dataset so we have all the samples
