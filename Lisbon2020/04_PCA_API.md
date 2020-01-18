@@ -147,35 +147,62 @@ By default all samples are assigned to one population, so everything will
 be the same color.
 
 ```python
+# First run the PCA
+pca.run()
+# Now draw the results
 pca.draw()
 ```
-    <matplotlib.axes._subplots.AxesSubplot at 0x7fe0beb3a650>
-
+```
+Subsampling SNPs: 508/1187
+(<toyplot.canvas.Canvas at 0x7f12b04a0b50>,
+ <toyplot.coordinates.Cartesian at 0x7f12b04a0bd0>,
+ <toyplot.mark.Point at 0x7f12b048f290>)
+ <matplotlib.axes._subplots.AxesSubplot at 0x7fe0beb3a650>
+```
 ![png](04_PCA_API_files/04_PCA_API_01_Anolis_PCA.png)
 
 ### Population assignment for sample colors
-In the tl;dr example the assembly of our simulated data had included a `pop_assign_file`, so the 'pca()' was smart enough to find this and color samples accordingly. In some cases you might not have used a population assignment file, so it's also possible to specify population assignments in a dictionary. The format of the dictionary should have populations as keys and lists of samples as values. Sample names need to be identical to the names in the vcf file, which we can verify with the `samples_vcforder` property of the PCA object.
+By default all the samples are assigned to the same poplution, which is cool,
+but it's not very useful. Fortunately, we make it possible to specify
+population assignments in a dictionary. The format of the dictionary should
+have populations as keys and lists of samples as values. Sample names need to
+be identical to the names in the vcf file, which we can verify with the
+`names` property of the PCA object.
 
-Here we create a python 'dictionary', which is a key/value pair data structure. The keys are the population names, and the values are the lists of samples that belong to those populations. You can copy and paste this into a new cell in your notebook.
+Here we create a python 'dictionary', which is a key/value pair data structure.
+The keys are the population names, and the values are the lists of samples that
+belong to those populations. You can copy and paste this into a new cell in your
+notebook (saves typing and prevents copy/paste errors).
+
 ```python
-pops_dict = {
+# create the imap dict to map individuals to populations
+imap = {
      "South":['punc_IBSPCRIB0361', 'punc_MTR05978','punc_MTR21545','punc_JFT773',
              'punc_MTR17744', 'punc_MTR34414', 'punc_MTRX1478', 'punc_MTRX1468'],
      "North":['punc_ICST764', 'punc_MUFAL9635']
 }
 ```
-Now create the `pca` object with the vcf file again, this time passing 
-in the pops_dict as the second argument, and plot the new figure. We can 
-also easily add a title to our PCA plots with the `title=` argument.
+Now recreate the `pca` object with the vcf file again, this time passing 
+in the imap as the second argument, and plot the new figure.
+
 ```python
-pca = ipa.pca(vcffile, pops_dict)
-pca.plot(title="Anolis Colored By Population")
+pca = ipa.pca(data=vcffile, imap=imap)
+pca.run()
+pca.draw()
 ```
     <matplotlib.axes._subplots.AxesSubplot at 0x7fe092fbbe50>
 
 ![png](04_PCA_API_files/04_PCA_API_02_Anolis_PCA_colored.png)
 
-This is just much nicer looking now, and it's also much more straightforward to interpret.
+This is just much nicer looking now, and it's also much more straightforward to
+interpret. The plotting feature uses [toyplot](toyplot.rtft.io) on the backend,
+so it does a bunch of nice things for us automatically, like create a legend,
+and also it provides a nice 'hover' function so you can identify which samples
+are which. Hover one of the points in the figure and you'll see the name pop
+up:
+
+![png](04_PCA_API_files/04_PCA_API_02_Anolis_PCA_hover.png)
+
 
 ## Removing "bad" samples and replotting.
 In PC analysis, it's common for "bad" samples to dominate several of the first PCs, and thus "pop out" in a degenerate looking way. Bad samples of this kind can often be attributed to poor sequence quality or sample misidentifcation. Samples with lots of missing data tend to pop way out on their own, causing distortion in the signal in the PCs. Normally it's best to evaluate the quality of the sample, and if it can be seen to be of poor quality, to remove it and replot the PCA. The Anolis dataset is actually relatively nice, but for the sake of demonstration lets imagine the "North" samples are "bad samples".
