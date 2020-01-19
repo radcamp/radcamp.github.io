@@ -284,18 +284,18 @@ geckos:
 
 ![png](04_PCA_API_files/04_PCA_API_bad_geckos.png)
 
-Here, 5 samples from El Charco House) are dominating the figure, with all the
+Here, 5 samples from El Charco House are dominating the figure, with all the
 remaining samples crushed down into the little blue dot on the left. Removing
 those 5 samples gives a more reasonable looking result.
 
 ![png](04_PCA_API_files/04_PCA_API_good_geckos.png)
 
+The Anolis dataset is actually relatively nice, but for the sake of
+demonstration lets imagine the "North" samples are "bad samples". From the
+figure we can see that "North" samples are distinguished by positive values
+on PC1. 
 
-
-The Anolis dataset is actually relatively nice, but for the sake
-of demonstration lets imagine the "North" samples are "bad samples".
-From the figure we can see that we can see that "North" samples are
-distinguished by positive values on PC1. 
+![png](04_PCA_API_files/04_PCA_API_02_Anolis_PCA_unsampled.png)
 
 We can get a more quantitative view on this by accessing `pca.pcs()`, which is
 a property of the `pca` object that is populated after the `run()` function is
@@ -314,7 +314,7 @@ significant digits, just to make it less messy looking.
 pca.pcs().to_csv("Anolis_10PCs.csv")
 ```
 
-> **Note** It's always good practice to use informative file names, f.e. here
+> **Note** It's always good practice to use informative file names, i.e. here
 we use the name of the dataset and the number of PCs retained.
 
 ![png](04_PCA_API_files/04_PCA_API_03_Anolis_PCA_PCS.png)
@@ -325,7 +325,8 @@ this way. We can construct a 'mask' based on the value of PC1, and then remove
 samples that don't pass this filter.
 
 ```python
-mask = pca.pcs.values[:, 0] > 0
+pc1_column = 0
+mask = pca.pcs().values[:, pc1_column] > 0
 print(mask)
 ```
     [False  True False False False False False False False  True]
