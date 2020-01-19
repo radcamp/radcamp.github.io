@@ -279,9 +279,21 @@ can often be attributed to poor sequence quality or sample misidentifcation.
 Samples with lots of missing data tend to pop way out on their own, causing
 distortion in the signal in the PCs. Normally it's best to evaluate the quality
 of the sample, and if it can be seen to be of poor quality, to remove it and
-replot the PCA. The Anolis dataset is actually relatively nice, but for the sake
-of demonstration lets imagine the "North" samples are "bad samples".
+replot the PCA. Here's a good example from a study using RADSeq data from 161
+geckos:
 
+![png](04_PCA_API_files/04_PCA_API_bad_geckos.png)
+
+Here, 5 samples from El Charco House) are dominating the figure, with all the
+remaining samples crushed down into the little blue dot on the left. Removing
+those 5 samples gives a more reasonable looking result.
+
+![png](04_PCA_API_files/04_PCA_API_good_geckos.png)
+
+
+
+The Anolis dataset is actually relatively nice, but for the sake
+of demonstration lets imagine the "North" samples are "bad samples".
 From the figure we can see that we can see that "North" samples are
 distinguished by positive values on PC1. 
 
