@@ -331,44 +331,50 @@ print(mask)
 ```
     [False  True False False False False False False False  True]
 
-> **Note:** In this call we are "masking" all samples (i.e. rows of the data matrix) which have values greater than 0 for the first column, which here is the '0' in the `[:, 0]` fragment. This is somewhat confusing because python matrices are 0-indexed, whereas it's typical for PCs to be 1-indexed. It's a nomencalture issue, really, but it can bite us if we don't keep it in mind. 
+> **Note:** In this call we are "masking" all samples (i.e. rows of the data
+matrix) which have values greater than 0 for the first column, which here is the
+'0' in the `[:, 0]` fragment. This is somewhat confusing because python matrices
+are 0-indexed, whereas it's typical for PCs to be 1-indexed. It's a nomencalture
+issue, really, but it can bite us if we don't keep it in mind. In the `pca`
+analysis tool we adopt the convention of 0-indexing the PCs. 
 
-You can see above that the mask is a list of booleans that is the same length as the number of samples. We can use this mask to  print out the names of just the samples we would like to remove.
+You can see above that the mask is a list of booleans that is the same length as
+the number of samples. We can use this mask to select just the samples we want
+to remove. First lets verify that we're removing the samples we think we're
+removing by applying the mask to the dataframe of PCs:
 
 ```python
-bad_samples = pca.samples_vcforder[mask]
-bad_samples
+pca.pcs()[mask].index
 ```
     array([u'punc_ICST764', u'punc_MUFAL9635'], dtype=object)
 
-We can then use this list of "bad" samples in a call to `pca.remove_samples` and then replot the new PCA:
+Now we can use the mask to remove the samples from the PCA:
 
 ```python
 pca.remove_samples(bad_samples)
 ```
-    INFO: Number of PCs may not exceed the number of samples.
-    Setting number of PCs = 8
 
-> **Note:** The `remove_samples` function is destructive of the samples in the `pca` object. This means that the removed samples are actually deleted from the `pca`, so if you want to get them back you have to reload the original vcf data.
-> **Note:** The number of PCs may not exceed the number of samples in the dataset. The `pca` module detects this and automatically reduces the number of PCs calculated.
+> **Note:** The `remove_samples` function is destructive of the samples in the
+`pca` object. This means that the removed samples are actually deleted from the
+`pca`, so if you want to get them back you have to reload the original vcf data.
 
 ```
 ## Lets prove that the removed samples are gone now
-print(pca.samples_vcforder)
+print(pca.names)
 ```
     [u'punc_IBSPCRIB0361' u'punc_JFT773' u'punc_MTR05978' u'punc_MTR17744'
      u'punc_MTR21545' u'punc_MTR34414' u'punc_MTRX1468' u'punc_MTRX1478']
 
-And now plot the new figure with the "bad" samples removed. We also introduce another nice feature of the `pca.plot()` function, which is the `outfile` argument. This argument will cause the plot function to not only draw to the screen, but also to save a `png` formatted file to the filesystem.
+And now plot the new figure with the "bad" samples removed.
 
 ```python
-pca.plot(title="Anolis w/o Northern Samples", outfile="Anolis_no_north.png")
+pca.run()
+pca.draw()
 ```
-    <matplotlib.axes._subplots.AxesSubplot at 0x7fe0f8c25410>
-    
-> **Note:** Spaces in filenames are ***BAD***. It's good practice, as we demonstrate here, to always substitute underscores (`_`) for spaces in filenames.
 
 ![png](04_PCA_API_files/04_PCA_API_04_Anolis_PCA_NoNorth.png)
+
+# Further advanced topics (if time allows)
 
 ## Imputation
 They `ipyrad.analysis.pca` module offers three algorithms for imputing missing
@@ -390,15 +396,24 @@ makes it simple to ask for PCs directly.
 
 ```python
 ## Lets reload the full dataset so we have all the samples
-pca = ipa.pca(vcffile, pops_dict)
-pca.plot(pcs=[3,4])
+pca = ipa.pca(data=vcffile, imap=imap)
+pca.plot(ax0=1, ax1=2)
 ```
-    <matplotlib.axes._subplots.AxesSubplot at 0x7fa3d05fd190>
 
 ![png](04_PCA_API_files/04_PCA_API_05_Anolis_PCA_PC34.png)
 
 ## Multi-panel PCA
-This is a last example of a couple of the nice features of the `pca` module, including the ability to pass in the axis to draw to, and toggling the legend. First, lets say we want to look at PCs 1/2 and 3/4 simultaneously. We can create a multi-panel figure with matplotlib, and pas in the axis for `pca` to plot to. We won't linger on the details of the matplotlib calls, but illustrate this here so you might have some example code to use in the future.
+This is a last example of a couple of the nice features of the `pca` module,
+including the ability to pass in the axis to draw to, and toggling the legend.
+First, lets say we want to look at PCs 1/2 and 3/4 simultaneously. We can create
+a multi-panel figure with matplotlib, and pas in the axis for `pca` to plot to.
+We won't linger on the details of the matplotlib calls, but illustrate this here
+so you might have some example code to use in the future.
+
+> **NB:** This section is just a sketch to give some ideas how to do more
+sophisticated plotting with matplotlib. It hasn't been updated to the newest
+ipyrad.analysis.pca api yet, so it doesn't 100% work.
+
 ```python
 import matplotlib.pyplot as plt
 
