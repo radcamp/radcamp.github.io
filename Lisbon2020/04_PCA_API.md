@@ -351,16 +351,16 @@ pca.pcs()[mask].index
 Now we can use the mask to remove the samples from the PCA:
 
 ```python
-pca.remove_samples(bad_samples)
+pca_clean = pca.remove_samples(bad_samples)
 ```
 
-> **Note:** The `remove_samples` function is destructive of the samples in the
-`pca` object. This means that the removed samples are actually deleted from the
-`pca`, so if you want to get them back you have to reload the original vcf data.
-
+> **Note:** The `remove_samples` function is non-destructive of the original
+`pca` object. This means that the function returns a **copy** of the original
+with specified samples removed which you'll have to assign to a new variable.
+Here we assign it to `pca_clean`
 ```
 ## Lets prove that the removed samples are gone now
-print(pca.names)
+print(pca_clean.names)
 ```
     [u'punc_IBSPCRIB0361' u'punc_JFT773' u'punc_MTR05978' u'punc_MTR17744'
      u'punc_MTR21545' u'punc_MTR34414' u'punc_MTRX1468' u'punc_MTRX1478']
@@ -368,8 +368,8 @@ print(pca.names)
 And now plot the new figure with the "bad" samples removed.
 
 ```python
-pca.run()
-pca.draw()
+pca_clean.run()
+pca_clean.draw()
 ```
 
 ![png](04_PCA_API_files/04_PCA_API_04_Anolis_PCA_NoNorth.png)
