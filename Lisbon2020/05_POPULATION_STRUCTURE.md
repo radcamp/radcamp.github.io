@@ -7,7 +7,7 @@ Inferring population structure is a frequent analysis, to such an extent that a 
 
 ### Estimating 'K'
 
-Identifying the true number of genetic clusters in a sample is a long standing, and difficult problem (see for example [Evanno et al 2005](https://onlinelibrary.wiley.com/doi/full/10.1111/j.1365-294X.2005.02553.x), [Verity & Nichols 2016](http://www.genetics.org/content/early/2016/06/10/genetics.115.180992), and partiulcarly [Janes et al 2017 (titled "The K = 2 conundrum"](https://onlinelibrary.wiley.com/doi/abs/10.1111/mec.14187)). Famously, the method of identifying the best K presented in [Pritchard et al (2000)](http://www.genetics.org/content/155/2/945) is described as "dubious at best". Even Evanno et al (2005) (cited over 12,000 times) "... insist that this (deltaK) criterion is another ad hoc criterion...." Because of this we stress that population structure analysis is as an exploratory method, and should be approached in a hierarchical fashion.
+Identifying the true number of genetic clusters in a sample is a long standing, and difficult problem (see for example [Evanno et al 2005](https://onlinelibrary.wiley.com/doi/full/10.1111/j.1365-294X.2005.02553.x), [Verity & Nichols 2016](http://www.genetics.org/content/early/2016/06/10/genetics.115.180992), and partiulcarly [Janes et al 2017 (titled "The K = 2 conundrum"](https://onlinelibrary.wiley.com/doi/abs/10.1111/mec.14187)). Famously, the method of identifying the best K presented in [Pritchard et al (2000)](http://www.genetics.org/content/155/2/945) is described as "dubious at best". Even Evanno et al (2005) (cited over 12,000 times) "... insist that this (deltaK) criterion is another ad hoc criterion...." Because of this we stress that population structure analysis is as an exploratory method, and should be approached in a hierarchical fashion. Although methods such as *STRUCTURE* and *fastStrcuture* have a "standard" way to estimate `K`, programs like *MavericK* are focused precisely on improved estimations of this value, and *ALStructure* has no way to estimate it when missing data is present.
 
 
 ## Setup
@@ -46,7 +46,7 @@ optional arguments:
 
 ### Getting data
 
-Before we start using *Strucutre_threader* we need to get some data. For this example we will resort once again to data from [Prates et al (2016)](https://www.pnas.org/node/170792.full). Create a new directory and download the necessary files there:
+Before we start using *Strucutre_threader* we need to get some data. For this example we will resort to data from [Silliman (2019)](https://doi.org/10.1111/eva.12766). Create a new directory and download the necessary files there:
 
 ```bash
 $ mkdir ~/str_analyses
@@ -54,22 +54,23 @@ $ cd ~/str_analyses
 $ wget https://raw.githubusercontent.com/radcamp/radcamp.github.io/master/Lisbon2020/Prates_et_al_2016_example_data/anolis.vcf
 $ wget https://raw.githubusercontent.com/radcamp/radcamp.github.io/master/Lisbon2020/Prates_et_al_2016_example_data/Anolis.popfile
 $ wget https://raw.githubusercontent.com/radcamp/radcamp.github.io/master/Lisbon2020/Prates_et_al_2016_example_data/Anolis.indfile
+$ wget https://raw.githubusercontent.com/radcamp/radcamp.github.io/master/Lisbon2020/Prates_et_al_2016_example_data/anolis_pops.txt
 ```
 
 
 #### Minimum Minor Allele Frequency (WARNING: controversial issue)
 
-It has been shown that singletons can have a confounding effect ([Linck & Battey 2019](https://doi.org/10.1111/1755-0998.12995)) when inferring population genetic structure. Depending on each case, removing SNPs whose minor allele has a frequency below a certain threshold may be helpful. Even though it is not particularly relevant in the current data (there are no singletons in our dataset, so no SNPs will be filtered out), we will perform this filtering anyway. For this we will require the program `vcftools`.
+It has been shown that singletons can have a confounding effect ([Linck & Battey 2019](https://doi.org/10.1111/1755-0998.12995)) when inferring population genetic structure. Depending on each case, removing SNPs whose minor allele has a frequency below a certain threshold may be helpful. We will perform this filtering using the program `vcftools`.
 
 ```bash
 conda install -c bioconda vcftools
-vcftools --vcf anolis.vcf --maf 0.05 --recode --out anolisMAF05
-mv anolisMAF05.recode.vcf anolisMAF05.vcf
+vcftools --vcfgz oyster.vcf.gz --maf 0.005 --recode --out oysterMAF005
+mv oysterMAF005.recode.vcf oysterMAF005.vcf
 ```
 
-Notice two important things: 
-* The value of 0.05 represents a single allele in 10 diploid individuals (10 * 2 * 0.05 = 1);
-* The output from `vcftools` will be named `anolisMAF05.recode.vcf`, which we will then rename for clarity;
+Please notice two important things: 
+* The value of 0.005 represents a single allele in 117 diploid individuals (117 * 2 * 0.005 = 1.17, which is < 2 but > 1);
+* The output from `vcftools` will be named `oysterMAF005.recode.vcf`, which we will then rename for clarity;
 
 
 #### Dealing with Linkage Disequilibrium
@@ -86,16 +87,15 @@ This command will output a new VCF file, with a smaller number of SNPs than the 
 
 #### From VCF to STRUCTURE format
 
-<!--
-Despite its ubiquity, not all programs take VCF file as input. *fastStructure* is one such program, and as such we need to convert our VCF file into either STRUCTURE, or PLINK format. Here we will use the STRUCTURE format, which is also common to *STRUCTURE*, whereas PLINK will only work with *fastStructure*. Ironically we will use the software *PLINK* to perform the conversion:
+Despite its ubiquity, not all programs take VCF file as input. *fastStructure* is one such program, and as such we need to convert our VCF file into either STRUCTURE, or PLINK format. Here we will use the STRUCTURE format, which is also common to *STRUCTURE*, whereas PLINK will only work with *fastStructure*. We will use the software [*PGDSpider*](http://www.cmpg.unibe.ch/software/PGDSpider) to perform the conversion:
 
 ```bash
-conda install -c bioconda plink
-plink --vcf anolisMAF05CenterSNP.vcf --recode structure --out anolisMAF05CenterSNP
-mv anolisMAF05CenterSNP.recode.strc_in anolisMAF05CenterSNP.str
+$ conda install -c openjdk
+$ wget http://www.cmpg.unibe.ch/software/PGDSpider/PGDSpider_2.1.1.5.zip
+$ unzip PDGSpider_2.1.1.5.zip
 ```
 
-Unfortunately, the conversion process is not done yet. `PLINK` will add 2 header line to our file, which should contain loci names, but are unavailable. Therefore we need to get rid of them using a bit of "shell magic".
+Unfortunately, *PGDSpider* is unavailable in the conda repositories, so we need to do this the old fasioned way: download and unzip.
 
 ```bash
 tail -n +3 anolisMAF05CenterSNP.recode.strc_in > anolisMAF05CenterSNPnoheader.recode.strc_in
