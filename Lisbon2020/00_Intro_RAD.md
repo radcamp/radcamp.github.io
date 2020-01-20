@@ -12,8 +12,23 @@
 ## RAD-Seq
 * What is RAD-Seq data?
 * What does it look like?
+
+![png](00_Intro_RAD_files/RAD.png)
+
+From Andrews et al 2016.
+
 * Variants of RAD
+
+![png](00_Intro_RAD_files/GBS.png)
+![png](00_Intro_RAD_files/ddRAD.png)
+
+
 * Thoughts on informativeness
 * *de novo* Vs. reference assemblies
 * Thoughts on missing data
 * Maybe talk about experimental design for different outcomes?
+
+## References
+* Andrews KR, Good JM, Miller MR, Luikart G, Hohenlohe PA. Harnessing the power
+of RADseq for ecological and evolutionary genomics. Nature Reviews Genetics.
+2016 Feb;17(2):81.
