@@ -3,7 +3,7 @@
 * [radcamp home](https://radcamp.github.io/)
 
 ## RAD-Seq
-* What is RADSeq data?
+### What is RADSeq data?
 RADSeq is a technique for creating a reduced representation of genomic
 variation of a given set of samples. Restriction endonucleases are used
 to randomly fragment genomic DNA, which is followed by several different
@@ -13,14 +13,14 @@ The core concept of RADSeq is that we want to sequence a random subset of
 the total genomic DNA to obtain genome-wide variation at a fraction of the cost
 of whole-genome sequencing.
 
-* What does it look like?
+### What does it look like?
 
 The "Original" RAD protocol looks something like this:
 ![png](00_Intro_RAD_files/RAD.png)
 
 > **Figure from Andrews et al 2016.**
 
-* Variants of RAD
+### Variants of RAD
 Many protocols exist that generate fragments in numerous different ways,
 including using 1 or 2 restriction enzymes, with or without a PCR step,
 including multiplexed barcodes to further increase sample throughput, and so on.
@@ -32,15 +32,15 @@ Andrews).
 ![png](00_Intro_RAD_files/GBS.png)
 ![png](00_Intro_RAD_files/ddRAD.png)
 
-* Thoughts on informativeness
+### Thoughts on informativeness
 
 
-* *de novo* Vs. reference assemblies
+### *de novo* Vs. reference assemblies
 
 
-* Thoughts on missing data
+### Thoughts on missing data
 
-* Maybe talk about experimental design for different outcomes?
+### Maybe talk about experimental design for different outcomes?
 
 ## Why use ipyrad (Eaton & Overcast 2020) at all?
 * Simple: Easy to install, easy to use.
