@@ -268,7 +268,7 @@ might be used to if you have used dadi or fastsimcoal2. Here we load the SFS
 generated above into the `sfs` object and print a few properties.
 
 ```python
-sfs = anolis_ac.extract_sfs(n_blocks=50)
+sfs = anolis_ac.extract_sfs(n_blocks=None)
 print("nsnps", sfs.n_snps())
 print("populations", sfs.populations)
 print("percent missing data per population", sfs.p_missing)
@@ -278,6 +278,9 @@ nsnps 1187.0
 populations ('North', 'South')
 percent missing data per population [0.55714286 0.52402548]
 ```
+> **NB:** By specifying `n_blocks=None` here we are telling momi to use the
+locus information included in the vcf file for partitioning the data for
+for bootstrap resampling.
 
 ## Inference procedure
 In the previous examples where we constructed and plotted DemographicModels, 
