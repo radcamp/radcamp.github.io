@@ -37,7 +37,7 @@ Times           | Wed Jan 22 |
 12:30-13:30      | Group Photo & Lunch |
 13:30-15:30      | [Clustering analysis: PCA](04_PCA_API.md) & [Demographic Inference: momi2](07_momi2_API.md)| 
 15:30-15:45     | Coffee Break |
-15:45-17:00      | [Clustering analysis: STRUCTURE](05_STRUCTURE_API.md) |
+15:45-17:00      | [Clustering analysis: STRUCTURE](05_POPULATION_STRUCTURE.md) |
 
 * Refreshments provided and workshop sponsored by:
 
