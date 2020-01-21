@@ -89,7 +89,7 @@ Please notice a few important things:
 
 #### Dealing with Linkage Disequilibrium
 
-When analysing RAD-Seq data, linkage disequilibrium (LD) can be a problem [Hendricks et al. 2018](https://onlinelibrary.wiley.com/doi/10.1111/eva.12659). One way to minimize its effect is to use only a single SNP from each locus. To do that we will need yet another scrpt: [vcv_parser.py](https://raw.githubusercontent.com/CoBiG2/RAD_Tools/6648d1ce1bc1e4c2d2e4256abdefdf53dc079b8c/vcf_parser.py), which can be found in [this github repository](https://github.com/CoBiG2/RAD_Tools). Use `wget` to obtain it and perform the filtering:
+When analysing RAD-Seq data, linkage disequilibrium (LD) can be a problem [Hendricks et al. 2018](https://onlinelibrary.wiley.com/doi/10.1111/eva.12659). One way to minimize its effect is to use only a single SNP from each locus. To do that we will need yet another script: [vcv_parser.py](https://raw.githubusercontent.com/CoBiG2/RAD_Tools/6648d1ce1bc1e4c2d2e4256abdefdf53dc079b8c/vcf_parser.py), which can be found in [this github repository](https://github.com/CoBiG2/RAD_Tools). Use `wget` to obtain it and perform the filtering:
 
 ```bash
 $ wget https://raw.githubusercontent.com/CoBiG2/RAD_Tools/6648d1ce1bc1e4c2d2e4256abdefdf53dc079b8c/vcf_parser.py
@@ -116,7 +116,7 @@ For this module we will perform an example run using *ALStructure*. I choose thi
 *ALStrucutre* takes a `.tsv` file as input, which is different from every other software for the same purpose. However, instead of forcing you to convert to another file format, *Structure_threader* will internally convert any `VCF` file to something *ALStructure* can read, so we already have everything we need to get our admixture plot.
 
 ```bash
-$ structure_threader run -i oysterMAF005MM60CenterSNP.vcf -o ./results_oysterMAF005MM60CenterSNP -als ~/miniconda3/bin/alstructure_wrapper.R -K 10 -t 3 --ind oyster.indfile
+$ structure_threader run -i oysterMAF005MM60CenterSNP.vcf -o ./results_oysterMAF005MM60CenterSNP -als ~/miniconda3/envs/structure/bin/alstructure_wrapper.R -K 10 -t 3 --ind oyster.indfile
 ```
 
 The first time you run this, *Structure_threader* will find and install any missing *ALStructure* R dependencies that may be missing. Since *ALStrucutre* requires **a lot** of dependencies, this might take a while.
