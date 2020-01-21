@@ -89,7 +89,7 @@ Please notice a few important things:
 
 #### Dealing with Linkage Disequilibrium
 
-When analysing RAD-Seq data, linkage disequilibrium (LD) can be a problem [Hendricks et al. 2018](https://onlinelibrary.wiley.com/doi/10.1111/eva.12659). One way to minimize its effect is to use only a single SNP from each locus. To do that we will need yet another scrpt: [vcv_parser.py](https://raw.githubusercontent.com/CoBiG2/RAD_Tools/6648d1ce1bc1e4c2d2e4256abdefdf53dc079b8c/vcf_parser.py), which can be found in [this github repository](https://github.com/CoBiG2/RAD_Tools). Use `wget` to obtain it and perform the filtering:
+When analysing RAD-Seq data, linkage disequilibrium (LD) can be a problem [Hendricks et al. 2018](https://onlinelibrary.wiley.com/doi/10.1111/eva.12659). One way to minimize its effect is to use only a single SNP from each locus. To do that we will need yet another script: [vcv_parser.py](https://raw.githubusercontent.com/CoBiG2/RAD_Tools/6648d1ce1bc1e4c2d2e4256abdefdf53dc079b8c/vcf_parser.py), which can be found in [this github repository](https://github.com/CoBiG2/RAD_Tools). Use `wget` to obtain it and perform the filtering:
 
 ```bash
 $ wget https://raw.githubusercontent.com/CoBiG2/RAD_Tools/6648d1ce1bc1e4c2d2e4256abdefdf53dc079b8c/vcf_parser.py
