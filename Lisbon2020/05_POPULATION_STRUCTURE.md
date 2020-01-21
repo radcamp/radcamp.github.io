@@ -104,7 +104,7 @@ Just for the sake of completeness, we should mention that this step is not perfo
 ### Using *Structure_threader*
 
 *Structure_threader*'s CLI interface was built in order to be as simple as possible, considering it has to allow the user to run 4 different programs under a similar interface.
-*Structure_threader* can run in three different modes: `run` (to actually run the analyses), `plot` (to draw admixture plots from already performed analyses) and `params` (the generate skeleton parameter files for *STRUCTURE* and *MavericK*). You can ask *Structure_threader* for help on each of the modes by running `structure_threader <mode> -h`. Due to time constraints we will focus on the `run` mode.
+*Structure_threader* can run in three different modes: `run` (to actually run the analyses), `plot` (to draw admixture plots from already performed analyses) and `params` (the generate skeleton parameter files for *STRUCTURE* and *MavericK*). You can ask *Structure_threader* for help on each of the modes by running `structure_threader <mode> -h`. Due to time constraints we will focus on the `run` mode. If you are ever stuck on something, you can always consult [the manual](https://structure-threader.readthedocs.io/en/latest/).
 
 For this module we will perform an example run using *ALStructure*. I choose this one for several reasons:
 
