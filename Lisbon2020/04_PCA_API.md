@@ -348,10 +348,13 @@ pca.pcs()[mask].index
 ```
     array([u'punc_ICST764', u'punc_MUFAL9635'], dtype=object)
 
+> **NB:** Here we apply the `mask` to the pcs dataframe, and then just print
+the index.
+
 Now we can use the mask to remove the samples from the PCA:
 
 ```python
-pca_clean = pca.remove_samples(bad_samples)
+pca_clean = pca.remove_samples(mask)
 ```
 
 > **Note:** The `remove_samples` function is non-destructive of the original

@@ -16,6 +16,7 @@ of whole-genome sequencing.
 ### What does it look like?
 
 The "Original" RAD protocol looks something like this:
+
 ![png](00_Intro_RAD_files/RAD.png)
 
 > **Figure from Andrews et al 2016.**
@@ -33,14 +34,21 @@ Andrews).
 ![png](00_Intro_RAD_files/ddRAD.png)
 
 ### Thoughts on informativeness
-
-
-### *de novo* Vs. reference assemblies
-
+There is a pervasive misconception that "stacks is for population genetic
+scale" and "ipyrad is for phylogenetic scale". I don't know where this idea
+came from but it's folklore. ipyrad can assemble data from within population
+samples to data including deeply diverged lineages (>50my). Please help me
+dispel this myth if you encounter it in the wild.
 
 ### Thoughts on missing data
+RADSeq is *characterized* by missing data, yet people still have a tendency
+to want to treat it as large-scale multi-locus data. Often this manifests as
+setting the `min_samples_locus` parameter to remove 80-90% of missing data.
+This is *bad practice* in most cases, and results in throwing away most of your
+data. The ipyrad analysis tools allow you to make the best use of the data by
+implementing replicated subsampling, for instance.
 
-### Maybe talk about experimental design for different outcomes?
+RADSeq is not multi-locus data.
 
 ## Why use ipyrad (Eaton & Overcast 2020) at all?
 * Simple: Easy to install, easy to use.
