@@ -40,8 +40,8 @@ terminal).
 
 ```python
 # Go back to the command line on your vm and make sure you're still in the
-# ipyrad_py37 conda environment
-$ conda activate ipyrad_py37
+# ipyrad conda environment
+$ conda activate ipyrad
 
 # Install momi and dependencies
 $ conda install momi ipyparallel openblas -c conda-forge -c bioconda -c jackkamm -y

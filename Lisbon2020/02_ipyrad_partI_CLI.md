@@ -34,6 +34,24 @@ $ echo "wat"
 wat
 ```
 
+# Fetch and unpack the simulated data
+First we will practice good data management habits by creating a new directory
+for the workshop materials, switching to this directory, and fetching and
+unpacking the simulated data
+
+```
+# Practice good data management habits. Make a directory for the tutorial.
+(ipyrad)$ cd ~
+(ipyrad)$ mkdir ipyrad-assembly
+(ipyrad)$ cd ipyrad-assembly
+
+# Fetch ipyrad github repo (for the simulated data)
+(ipyrad)$ git clone https://github.com/dereneaton/ipyrad
+
+# Extract simulated data
+(ipyrad)$ tar -xvzf ipyrad/tests/ipsimdata.tar.gz
+```
+
 # Overview of Assembly Steps
 Very roughly speaking, ipyrad exists to transform raw data coming off the 
 sequencing instrument into output files that you can use for downstream 
