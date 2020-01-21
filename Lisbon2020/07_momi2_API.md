@@ -175,10 +175,6 @@ In order to simplify this tutorial analysis we'll use a subset of the Prates et 
 2016 dataset (which will enable a nice 2 population model). First, we need to 
 gather and construct several input files before we can actually apply momi2 to 
 our Anolis data.
-* [**Population assignment file**](#population-assignment-file) - This is a tab
-or space separated list of sample names and population names to which they are
-assigned. Sample names need to be exactly the same as they are in the VCF file.
-Population names can be anything, but it's useful if they're meaningful.
 * [**Properly formatted VCF**](#properly-formatted-vcf) - We do have the VCF
 file output from the ipyrad Anolis assembly, but it requires a bit of massaging
 before it's ready for momi2. It must be zipped and indexed in such a way as to
@@ -191,30 +187,6 @@ is an intermediate file that we must generate on the way to constructing the
 SFS. momi2 provides a function for this.
 * [**Genereate the SFS**](#genereate-the-sfs) - The culmination of all this
 housekeeping is the SFS file which we will use for demographic inference.
-
-### Population assignment file
-We will use the same "North" and "South" populations as from the `pca`
-analysis. To save some time we will just grab a stashed copy from a previous
-RADCamp realization. We can use `wget` again copy the file:
-
-```
-%%bash
-wget https://radcamp.github.io/Yale2019/Prates_et_al_2016_example_data/anolis_pops.txt
-cat anolis_pops.txt
-```
-    punc_ICST764    North
-    punc_MUFAL9635  North
-    punc_IBSPCRIB0361       South
-    punc_JFT773     South
-    punc_MTR05978   South
-    punc_MTR17744   South
-    punc_MTR21545   South
-    punc_MTR34414   South
-    punc_MTRX1468   South
-    punc_MTRX1478   South
-
-> **Note:** the `%%bash` header inside a notebook cell is a `magic` command that 
-indicates to interpret everything in that shell as linux commands rather than python.
 
 ### Properly formatted VCF
 In this tutorial we are using a very small dataset, so manipulating the VCF is very 
@@ -235,9 +207,12 @@ bgzip -c anolis.vcf > anolis.vcf.gz
 
 ## tabix indexes the file for searching
 tabix anolis.vcf.gz
-ls anolis/*
+ls anolis*
 ```
     anolis_pops.txt  anolis.vcf  anolis.vcf.gz  anolis.vcf.gz.tbi
+
+> **Note:** the `%%bash` header inside a notebook cell is a `magic` command that 
+indicates to interpret everything in that shell as linux commands rather than python.
 
 ### BED file
 The last file we need to construct is a BED file specifying which genomic 
@@ -279,7 +254,8 @@ population. Since each diploid individual has 2 alleles per snp, the total count
 of alleles per population will be 2n at maximum, and 0 at minimum.
 
 ```python
-## The population assignments transformed into a sample-to-population dictionary
+## This is the same population assignment mapping from the pca exercise, but
+## here transformed into a sample-to-population dictionary.
 ind2pop = {'punc_IBSPCRIB0361': 'South', 'punc_MTR05978': 'South', 'punc_MTR21545': 'South', 'punc_JFT773': 'South', 'punc_MTR17744': 'South', 'punc_MTR34414': 'South', 'punc_MTRX1478': 'South', 'punc_MTRX1468': 'South', 'punc_ICST764': 'North', 'punc_MUFAL9635': 'North'}
 
 ## Create the snp allele counts array
@@ -321,7 +297,7 @@ model, and constructing bootstrap confidence intervals on these values
 Here we will invesigate three different 2 population models:
 * `no_migration_model` - All parameters fixed, except divergence time.
 * `pop_sizes_model` - North and South populations are allowed to have 
-different, variable sizes. Here we also estimate divergence time.
+different population sizes. Here we also estimate divergence time.
 * `migration_model` - Allow one pulse of migration in both directions, at 
 possibly different times, and with different migration fractions. Also, 
 include all other parameters above (population sizes and divergence time).
