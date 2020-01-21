@@ -14,10 +14,10 @@ Identifying the true number of genetic clusters in a sample is a long standing, 
 
 In order to perform *STRUCTURE* like analyses in a **fast**, **automated** and **reproducible** way we will setup and use [*Structure_threader*](https://structure-threader.readthedocs.io/en/latest/). This software wraps four different programs that perform STRUCTURE analyses under an unifying interface and performs multiple runs in parallel. The 4 programs *Structure_threader* can wrap and automate are:
 
-* [*STRUCTURE*](https://web.stanford.edu/group/pritchardlab/structure.html) [Paper](https://www.genetics.org/content/155/2/945)
-* [*fastStructure*](http://rajanil.github.io/fastStructure/) [Paper]( https://doi.org/10.1534/genetics.114.164350)
-* [*MavericK*](https://github.com/bobverity/maverick) [Paper](https://dx.doi.org/10.1534%2Fgenetics.115.180992)
-* [*ALStructure*](https://github.com/StoreyLab/alstructure) [Paper](https://doi.org/10.1534/genetics.119.302159)
+* [*STRUCTURE*](https://web.stanford.edu/group/pritchardlab/structure.html) - [Paper](https://www.genetics.org/content/155/2/945)
+* [*fastStructure*](http://rajanil.github.io/fastStructure/) - [Paper]( https://doi.org/10.1534/genetics.114.164350)
+* [*MavericK*](https://github.com/bobverity/maverick) - [Paper](https://dx.doi.org/10.1534%2Fgenetics.115.180992)
+* [*ALStructure*](https://github.com/StoreyLab/alstructure) - [Paper](https://doi.org/10.1534/genetics.119.302159)
 
 Under GNU/Linux and OSX systems, *Structure_threader* will automatically install all of the "wrapable" programs for you. Under Windows, well, you are on your own. 
 
