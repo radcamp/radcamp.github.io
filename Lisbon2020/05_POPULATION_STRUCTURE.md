@@ -116,7 +116,7 @@ For this module we will perform an example run using *ALStructure*. I choose thi
 *ALStrucutre* takes a `.tsv` file as input, which is different from every other software for the same purpose. However, instead of forcing you to convert to another file format, *Structure_threader* will internally convert any `VCF` file to something *ALStructure* can read, so we already have everything we need to get our admixture plot.
 
 ```bash
-$ structure_threader run -i oysterMAF005MM60CenterSNP.vcf -o ./results_oysterMAF005MM60CenterSNP -als ~/miniconda3/bin/alstructure_wrapper.R -K 10 -t 3 --ind oyster.indfile
+$ structure_threader run -i oysterMAF005MM60CenterSNP.vcf -o ./results_oysterMAF005MM60CenterSNP -als ~/miniconda3/envs/structure/bin/alstructure_wrapper.R -K 10 -t 3 --ind oyster.indfile
 ```
 
 The first time you run this, *Structure_threader* will find and install any missing *ALStructure* R dependencies that may be missing. Since *ALStrucutre* requires **a lot** of dependencies, this might take a while.
