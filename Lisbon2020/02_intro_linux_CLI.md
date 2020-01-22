@@ -1,3 +1,5 @@
+## Command line intro
+
 ### Preamble
 
 The Command Line Interface (CLI) provides a way to navigate a filesystem, move files around, and run
@@ -19,21 +21,26 @@ Below is an example code cell:
 # This is a comment. It is frequently used to describe the line(s) below
 
 # "Folders" are called "directories" in Unix systems
-# The command below will show all files and directories in your current directory
+# The command below will show all files and directories in your current directory (AKA: dir)
 
 $ ls  # Comments can also be placed after a command. In this case you should type 'ls' in your command line
 ```
 
 
+### Before you start
+
+In order to minimize workspace "pollution", it is recommended that you place your VM in "Fullscreen" mode, and forget you are using a VM. For that, press `Right Ctrl + F`.
+
+
 ### Getting started
 
-First you need to open a terminal window. On the provided VM, you just have to click the word "Activities" in the top left of your screen, type the first few letters of "Terminal" and press `Enter`. A new window with a terminal window should open in your screen. You should notice something written in this window:
+Now that you are set up, you need to open a terminal window. On the provided VM, you just have to click the word "Activities" in the top left of your screen, type the first few letters of "Terminal" and press `Enter`. A new window with a terminal (or console) should open in your screen. You should notice text similar to this:
 
 ```
 user@machine:~$
 ```
 
-This represent the command prompt. Left of the `@` is your username, and right of the `@` is the name of th machine you are logged in to. The `:` is a separator (to separate the machine's name from the next information). The `~` represents your current location; don't worry about it for now, but keep in mind that it changes as you move in the filesystem. Finally the `$` character; it represents the end of the prompt and informally means you are an unprivileged user (the default in UNIX systems). The convention is to have a `#` to represent the `root` user (administrator). As with most things \*NIX, the prompt can be altered and is likely to change depending on the system you are using; keep this in mind when using other systems.
+This represent the command prompt. Left of the `@` is your username, and right of the `@` is the name of th machine you are logged in to. The `:` is a separator (to separate the machine's name from the next information). The `~` represents your current location; don't worry about it for now, but keep in mind that it changes as you move in the filesystem. Finally the `$` character; it represents the end of the prompt and informally means you are an unprivileged user (the default in \*NIX systems). The convention is to have a `#` to represent the `root` user (administrator). As with most things \*NIX, the prompt can be altered and is likely to change depending on the system you are using; keep this in mind when using other systems.
 
 
 ### Navigation & orientation
@@ -60,9 +67,8 @@ This represent the command prompt. Left of the `@` is your username, and right o
 
 The above commands will help you navigate your filesystem. `pwd` will indicate your current location in the filesystem, `ls` will show which files and directories exist in your current location, and `cd` will navigate to another directory (type `cd ..` to move up in the directory hierarchy). Be sure to experiment with them now.
 
-Throughout the workshop we will be introducing new commands as the need for them
-arises. We will pay special attention to highlighting and explaining new commands
-and giving examples to practice with.
+Throughout the workshop we will be introducing new commands as the need for them arises. We will pay special attention to highlighting and explaining new commands and giving examples to practice with.
+
 
 ### What if I'm lost?
 
@@ -73,6 +79,7 @@ $ whatis ls  # What `ls` does
 $ ls --help  # A quick guide on the most common options of `ls`
 $ man ls  # The full user manual of `ls`
 ```
+
 
 ### Some shortcuts
 
@@ -123,7 +130,7 @@ However, should you encounter filenames with spaces, or really enjoy using them 
 
 ```bash
 cat 'filename with spaces.txt'  # Type the filename within quotes
-cat filename\ with\ spaces.txt  # Escape the wihtespace with a backslash
+cat filename\ with\ spaces.txt  # Escape the whitespace with a backslash
 ```
 
 The first case is relatively straightforward, but the second one, not so much. What has happened here? If we use a `\` character before a whitespace we are telling the CLI to interpret it not as a split, but rather as a *literal* space, which makes it loose any special meaning it might represent. You can do this to *any* character that has a special meaning on the CLI.
@@ -155,6 +162,7 @@ There are many CLI programs. Some of them are very common and equally useful. He
 * `wget` - a download utility. Pass it an URL as an argument and download it from the web directly to your filesystem
 * `gzip` - a file compressing utility
 * `gunzip` - a file uncompressing utility
+
 
 ### [Would you like to know more?](https://www.youtube.com/watch?v=RvPRrIOa8Nw)
 
