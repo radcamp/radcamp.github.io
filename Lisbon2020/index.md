@@ -55,7 +55,8 @@ Times           | Wed Jan 22 |
 * [ABBA-BABA - Admixture analysis](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-abba-baba.ipynb)
 
 ## Group Photo
-![jpg](RADCampLisbon2020-1.jpg)
+![Group photo with a missing participant](RADCampLisbon2020-1.jpg)
+![Group photo with a missing instructor](RADCampLisbon2020-2.jpg)
 
 ## Acknowledgements
 RADCamp Lisbon 2020 materials are largely based on materials from previous
