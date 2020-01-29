@@ -54,7 +54,7 @@ Times           | Wed Jan 22 |
 * [Bucky - Phylogenetic concordance analysis](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-bucky.ipynb)
 * [ABBA-BABA - Admixture analysis](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-abba-baba.ipynb)
 
-## Group Photo
+## Group Photos
 ![Group photo with a missing participant](RADCampLisbon2020-1.jpg)
 ![Group photo with a missing instructor](RADCampLisbon2020-2.jpg)
 
