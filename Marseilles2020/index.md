@@ -1,25 +1,49 @@
 # Welcome to RadCamp 2020 - The Marseilles Edition
 
-Date and location TBD
+October 5-7, 2020
+Location TBD
+Aix-Marseille University
+Luminy campus, inside the Calanques National Park : http://www.calanques-parcnational.fr/fr
+Marseilles, France
+
+# Registration
+There are no registration fees, and participants should manage on their own
+for accomodations. Only lunches will be provided. The number of participants
+is limited to 20. If you are interested please send a mail to
+**radcamp2020@osupytheas.fr** with a short CV, and a description of your project(s)
+with RAD sequencing.
+
+Registration deadline is **August 10, 2020**. Participants will be informed of
+acceptance shortly thereafter.
+
+# Online content
+To facilitate participation by people who may be subject to travel
+restrictions we will provide a Zoom feed of the instruction, with access
+to the chat channel for participating in the discussion. Link to come.
 
 # Organisers, Instructors, and Facilitators
 
-  - Isaac Overcast (CCNY)
+  - Didier Aurelle (Aix-Marseille UniversitÃ©Institut MÃ©diterranÃ©en'OcÃ©anologe)
+  - Alex Baumel (Institut MÃ©diterranÃ©en de BiodiversitÃ© et d'Ecologie marine et continent)
+  - Joana Boavida (University of Montpellier)
+  - Isaac Overcast (Institut de Biologie de l'Ecole Normale Superieure)
 
 # Schedule
 
 __NB:__ This is a very preliminary schedule, so it is subject to change.
 
-Times           | Day 1 |
------           | ------ |
-1:30-1:45       | [ipyrad intro](00_Intro_RAD.md), check-in and refreshments |
-2:00-2:30      | [Quickstart setup](ipyrad_Install_Quickstart.md) & [QC (if desired)](01_setup_qc.md) |
-2:30-3:30     | [ipyrad part I](02_ipyrad_partI_CLI.md) & [part II](03_ipyrad_partII_CLI.md)|
-3:30-3:45     | Coffee Break\* |
-3:45-4:00     | [Brief Intro/Setup Jupyter notebooks](Jupyter_Notebook_Setup.md) |
-4:00-5:00     | [Clustering analysis: PCA](04_PCA_API.md) and [Demographic Inference: momi2](07_momi2_API.md) analysis walkthroughs |
+Times           | Day 1 | Day 2 | Day 3 |
+-----           | ------ | ------ | ------ |
+1:30-1:45       | [ipyrad intro](00_Intro_RAD.md), check-in and refreshments | tbd | tbd |
+2:00-2:30      | [Quickstart setup](ipyrad_Install_Quickstart.md) & [QC (if desired)](01_setup_qc.md) | tbd | tbd |
+2:30-3:30     | [ipyrad part I](02_ipyrad_partI_CLI.md) & [part II](03_ipyrad_partII_CLI.md)| tbd | tbd |
+3:30-3:45     | Coffee Break\* | tbd | tbd |
+3:45-4:00     | [Brief Intro/Setup Jupyter notebooks](Jupyter_Notebook_Setup.md) | tbd | tbd |
+4:00-5:00     | [Clustering analysis: PCA](04_PCA_API.md) and [Demographic Inference: momi2](07_momi2_API.md) analysis walkthroughs | tbd | tbd |
 
-* Refreshments provided and workshop sponsored by 
+## Refreshments provided and workshop sponsored by 
+This session is funded by the Eccorev Research Federation, the Environmental
+Genomics Research Group, the IMBE laboratory and the Aix-Marseille University.
 
 ## Additional ipyrad analysis cookbooks
 * [Tetrad - A Quartet-based species tree method](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-tetrad.ipynb)
@@ -37,3 +61,5 @@ realizations of the workshop which included important contributions from:
 * Mariana Vasconcellos
 * Laura Bertola
 * Sandra Hoffberg
+* Natalia Vasquez
+* Francisco Pina Martins
