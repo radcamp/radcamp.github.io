@@ -36,7 +36,7 @@ __NB:__ This is a very preliminary schedule, so it is subject to change.
 Times           | Day 1 | Day 2 | Day 3 |
 -----           | ------ | ------ | ------ |
 8:30-9:00       | Check-in | Check-in | Check-in |
-9:00-12:00      | [Introductions, data QC, and ipyrad CLI Part 1](RADCamp-Day1-AM.md) | [ipyrad.analysis api for phylogenetic inference](RADCamp-Day2-AM.md) | Other optional analysis cookbooks |
+9:00-12:00      | [Introductions, data QC, and ipyrad CLI Part 1](RADCamp-Day1-AM.md) | [ipyrad.analysis api for phylogenetic inference](RADCamp-Day2-AM.md) | [Running ipyrad on HPC](ipyrad_HPC_setup.md) & other optional analysis cookbooks |
 12:00-1:30      | Lunch | Lunch | Lunch |
 3:15-5:00       | [ipyrad CLI Part 2 & empirical assemblies](RADCamp-Day1-PM.md) | [ipyrad.analysis api for population genetic inference](RADCamp-Day2-PM.md) | Assisted work session |
 
