@@ -1,5 +1,5 @@
 
-# Welcome to RadCamp 2020 - The Marseilles Edition
+# Welcome to RadCamp 2020 - The Marseille Edition
 
 October 5-7, 2020  
 Location TBD  
@@ -35,15 +35,10 @@ __NB:__ This is a very preliminary schedule, so it is subject to change.
 
 Times           | Day 1 | Day 2 | Day 3 |
 -----           | ------ | ------ | ------ |
-9:00-9:30       | [ipyrad intro](00_Intro_RAD.md), check-in and refreshments | tbd | tbd |
-9:30-10:30      | [Quickstart setup](ipyrad_Install_Quickstart.md) & [QC (if desired)](01_setup_qc.md) | tbd | tbd |
-10:30-10:45     | Coffee Break | tbd | tbd |
-10:45-12:00       | [ipyrad part I](02_ipyrad_partI_CLI.md) | tbd | tbd |
-12:00-1:30     | Lunch | Lunch | Lunch |
-1:30-3:00       | [part II](03_ipyrad_partII_CLI.md) | tbd | tbd |
-3:00-3:15     | Coffee Break\* | tbd | tbd |
-3:15-4:00      | [Brief Intro/Setup Jupyter notebooks](Jupyter_Notebook_Setup.md) | tbd | tbd |
-4:00-5:00     | [Clustering analysis: PCA](04_PCA_API.md) and [Demographic Inference: momi2](07_momi2_API.md) analysis walkthroughs | tbd | tbd |
+8:30-9:00       | Check-in | Check-in | Check-in |
+9:00-12:00      | [Introductions, data QC, and ipyrad CLI Part 1](RADCamp-Day1-AM.md) | [ipyrad.analysis api for phylogenetic inference](RADCamp-Day2-AM.md) | Other optional analysis cookbooks |
+12:00-1:30      | Lunch | Lunch | Lunch |
+3:15-5:00       | [ipyrad CLI Part 2 & empirical assemblies](RADCamp-Day1-PM.md) | [ipyrad.analysis api for population genetic inference](RADCamp-Day2-PM.md) | Assisted work session |
 
 ### Workshop sponsors
 This session is funded by the Eccorev Research Federation, the Environmental
