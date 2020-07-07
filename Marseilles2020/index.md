@@ -1,6 +1,3 @@
----
-layout: post
----
 
 # Welcome to RadCamp 2020 - The Marseilles Edition
 
