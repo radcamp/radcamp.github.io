@@ -36,15 +36,15 @@ Times           | Day 1 | Day 2 | Day 3 |
 -----           | ------ | ------ | ------ |
 9:00-9:30       | [ipyrad intro](00_Intro_RAD.md), check-in and refreshments | tbd | tbd |
 9:30-10:30      | [Quickstart setup](ipyrad_Install_Quickstart.md) & [QC (if desired)](01_setup_qc.md) | tbd | tbd |
-10:30-10:45     | Coffee Break\* | tbd | tbd |
+10:30-10:45     | Coffee Break | tbd | tbd |
 10:45-12:00       | [ipyrad part I](02_ipyrad_partI_CLI.md) | tbd | tbd |
-12:00-1:30     | Lunch\* | Lunch | Lunch |
+12:00-1:30     | Lunch | Lunch | Lunch |
 1:30-3:00       | [part II](03_ipyrad_partII_CLI.md) | tbd | tbd |
 3:00-3:15     | Coffee Break\* | tbd | tbd |
 3:15-4:00      | [Brief Intro/Setup Jupyter notebooks](Jupyter_Notebook_Setup.md) | tbd | tbd |
 4:00-5:00     | [Clustering analysis: PCA](04_PCA_API.md) and [Demographic Inference: momi2](07_momi2_API.md) analysis walkthroughs | tbd | tbd |
 
-### \*Refreshments provided and workshop sponsored by 
+### Workshop sponsors
 This session is funded by the Eccorev Research Federation, the Environmental
 Genomics Research Group, the IMBE laboratory and the Aix-Marseille University.
 
