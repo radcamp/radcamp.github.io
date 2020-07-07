@@ -1,9 +1,9 @@
 # Welcome to RadCamp 2020 - The Marseilles Edition
 
-October 5-7, 2020
-Location TBD
-Aix-Marseille University
-Luminy campus, inside the Calanques National Park : http://www.calanques-parcnational.fr/fr
+October 5-7, 2020  
+Location TBD  
+Aix-Marseille University  
+Luminy campus  
 Marseilles, France
 
 # Registration
