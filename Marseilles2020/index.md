@@ -24,7 +24,7 @@ to the chat channel for participating in the discussion. Link to come.
 
 # Organisers, Instructors, and Facilitators
 
-  - Didier Aurelle (Aix-Marseille UniversitÃ/Mediterranean Institute of Oceanography)
+  - Didier Aurelle (Aix-Marseille Universite/Mediterranean Institute of Oceanography)
   - Alex Baumel (Institut MÃ©diterranÃ©en de BiodiversitÃ© et d'Ecologie marine et continent)
   - Joana Boavida (CCMAR Center of Marine Sciences (Portugal))
   - Isaac Overcast (Institut de Biologie de l'Ecole Normale Superieure)
