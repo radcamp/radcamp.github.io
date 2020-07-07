@@ -5,7 +5,7 @@ October 5-7, 2020
 Location TBD  
 Aix-Marseille University  
 Luminy campus  
-Marseilles, France
+Marseille, France
 
 # Registration
 There are no registration fees, and participants should manage on their own
@@ -52,6 +52,9 @@ Genomics Research Group, the IMBE laboratory and the Aix-Marseille University.
 * [BPP - Bayesian inference under a multi-species coalescent model](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-bpp-species-delimitation.ipynb)
 * [Bucky - Phylogenetic concordance analysis](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-bucky.ipynb)
 * [ABBA-BABA - Admixture analysis](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-abba-baba.ipynb)
+
+# RADCamp Marseilles 2020 Group Photo
+Don't forget to get a sweet group photo to commemorate the fun times!
 
 ## Acknowledgements
 RADCamp Marseilles 2020 materials are largely based on materials from previous
