@@ -1,5 +1,4 @@
-# RADCamp Marseille 2020
-# Day 1 (PM)
+# RADCamp Marseille 2020 - Day 1 (PM)
 
 ## Overview of the afternoon activities:
 * [1 minute/1 slide participant intros](https://docs.google.com/presentation/d/1OY-laS2s6lITBBQfB_APTNcb-6o7cMdqgFqwZrRBzBg/edit?usp=sharing)

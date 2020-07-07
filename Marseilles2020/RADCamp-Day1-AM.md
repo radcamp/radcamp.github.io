@@ -1,5 +1,4 @@
-# RADCamp Marseille 2020
-# Day 1 (AM)
+# RADCamp Marseille 2020 - Day 1 (AM)
 
 ## Overview of the morning activities:
 * [Welcome and participant intro slides](#participant-intros-part-I)
@@ -10,10 +9,9 @@
 * [ipyrad CLI assembly of simulated data Part I](#ipyrad-cli-simulated-data-assembly-part-I)
 
 ## Participant intros part I
-[1 minute/1 slide participant intros](https://docs.google.com/presentation/d/1EtEWfwzOA7u4mEZMxnzgsXZO_6DvZStA2ON8GQkWb6w/edit?usp=sharing)
+[1 minute/1 slide participant intros]() <- TBD
 
 ## Brief intro to RADSeq
-Lead: Deren
 [Introduction to RAD and the terminal](https://eaton-lab.org/slides/radcamp)
 
 ## Intro ipyrad docs
@@ -52,16 +50,15 @@ If it's ready, it should look like this:
 ![png](images/Binder_ready.jpg)
 
 ## Data QC: Fastq format and FastQC
-Lead: Laura
 
 Each grey cell in this tutorial indicates a command line interaction. 
 Lines starting with `$ ` indicate a command that should be executed 
-in a terminal connected to the Habanero cluster, for example by copying and 
-pasting the text into your terminal. Elements in code cells surrounded 
-by angle brackets (e.g. <username>) are variables that need to be 
-replaced by the user. All lines in code cells beginning with \#\# are 
-comments and should not be copied and executed. All other lines should 
-be interpreted as output from the issued commands.
+in a terminal, for example by copying and pasting the text into your
+terminal. Elements in code cells surrounded by angle brackets (e.g.
+<username>) are variables that need to be replaced by the user. All
+lines in code cells beginning with \#\# are comments and should not
+be copied and executed. All other lines should be interpreted as
+output from the issued commands.
 
 ```bash
 ## Example Code Cell.
@@ -159,12 +156,12 @@ quality report for a 75bp RAD-Seq library. These reads have generally high
 quality across their entire length, with only a slight (barely worth
 mentioning) dip toward the end of the reads:
 
-![png](01_cluster_basics_files/fastqc-high-quality-example.png)
+![png](fastqc_files/fastqc-high-quality-example.png)
 
 In contrast, here is a somewhat typical base sequence quality report for R1 of
 a 300bp paired-end Illumina run of ezRAD data:
 
-![png](01_cluster_basics_files/fastqc-quality-example.png)
+![png](fastqc_files/fastqc-quality-example.png)
 
 This figure depicts a common artifact of current Illumina chemistry, whereby
 quality scores per base drop off precipitously toward the ends of reads, with
@@ -224,11 +221,11 @@ Opening up this html file, on the left you'll see a summary of all the
 results, which highlights areas FastQC indicates may be worth further
 examination. We will only look at a few of these.
 
-![png](01_cluster_basics_files/anolis-fastq-main.png)
+![png](fastqc_files/anolis-fastq-main.png)
 
 Lets start with Per base sequence quality.
 
-![png](01_cluster_basics_files/anolis-per-base-qual.png)
+![png](fastqc_files/anolis-per-base-qual.png)
 
 For the Anolis data the sequence quality per base is uniformly quite high, with
 dips only in the first and last 5 bases (again, this is typical for Illumina
@@ -238,7 +235,7 @@ doesn't need any trimming, which is good.
 Now lets look at the `Per base sequece content`, which FastQC highlights with a
 scary red **X**.
 
-![png](01_cluster_basics_files/anolis-base-content.png)
+![png](fastqc_files/anolis-base-content.png)
 
 The squiggles indicate base composition per base position averaged across the
 reads. It looks like the signal FastQC is concerned about here is related to
@@ -247,7 +244,7 @@ this is a result of the restriction enzyme overhang present in all reads
 (`TGCAT` in this case for the EcoT22I enzyme used), and so it is in fact of no
 concern. Now lets look at `Adapter Content`:
 
-![png](01_cluster_basics_files/anolis-adapters.png)
+![png](fastqc_files/anolis-adapters.png)
 
 Here, we can see adapter contamination increases toward the tail of the reads,
 approaching 40% of total read content at the very end. The concern here is that
