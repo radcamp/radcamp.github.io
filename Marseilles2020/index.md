@@ -1,4 +1,4 @@
-﻿# Welcome to RadCamp 2020 - The Marseilles Edition
+# Welcome to RadCamp 2020 - The Marseilles Edition
 
 October 5-7, 2020  
 Location TBD  
