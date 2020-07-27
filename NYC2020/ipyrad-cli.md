@@ -247,8 +247,8 @@ overhangs are expected to be present on the reads. Change the following lines
 in your params files to look like this:
 
 ```bash
-ipsimdata/pairddrad_example_R*.fastq.gz     ## [2] [raw_fastq_path]: Location of raw non-demultiplexed fastq files
-ipsimdata/pairddrad_example_barcodes.txt    ## [3] [barcodes_path]: Location of barcodes file
+/home/jovyan/ipyrad/tests/ipsimdata/pairddrad_example_R*.fastq.gz    ## [2] [raw_fastq_path]: Location of raw non-demultiplexed fastq files
+/home/jovyan/ipyrad/tests/ipsimdata/pairddrad_example_barcodes.txt    ## [3] [barcodes_path]: Location of barcodes file
 pairddrad                                   ## [7] [datatype]: Datatype (see docs): rad, gbs, ddrad, etc.
 TGCAG, CGG                                  ## [8] [restriction_overhang]: Restriction overhang (cut1,) or (cut1, cut2)
 *                                           ## [27] [output_formats]: Output formats (see docs)
