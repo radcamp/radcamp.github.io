@@ -55,7 +55,7 @@ the PCA module are documented here, but given the limited time, we will only
 be covering this very briefly.
 
 ```python
-vcffile = "/home/jovyan/ipyrad-workshop/peddrad_outfiles/peddrad.vcf"
+vcffile = "/home/jovyan/ipyrad-workshop/rad_outfiles/rad.vcf"
 ## Create the pca object
 pca = ipa.pca(vcffile)
 ## Bam!

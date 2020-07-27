@@ -138,7 +138,7 @@ optional arguments:
 ipyrad uses a text file to hold all the parameters for a given assembly.
 Start by creating a new parameters file with the `-n` flag. This flag
 requires you to pass in a name for your assembly. In the example we use
-`peddrad` but the name can be anything at all. Once you start
+`rad` but the name can be anything at all. Once you start
 analysing your own data you might call your parameters file something
 more informative, like the name of your organism and some details on the
 settings.
@@ -171,19 +171,19 @@ toy genomes for testing different assembly methods. For now we'll go forward
 with the `pairddrad` example dataset.
 
 ```bash
-# Now create a new params file named 'peddrad'
-$ ipyrad -n peddrad
+# Now create a new params file named 'rad'
+$ ipyrad -n rad
 ```
 
-This will create a file in the current directory called `params-peddrad.txt`.
+This will create a file in the current directory called `params-rad.txt`.
 The params file lists on each line one parameter followed by a \#\# mark,
 then the name of the parameter, and then a short description of its purpose.
 Lets take a look at it.
 
 ``` 
-$ cat params-peddrad.txt
+$ cat params-rad.txt
 ------- ipyrad params file (v.0.9.13)-------------------------------------------
-peddrad                        ## [0] [assembly_name]: Assembly name. Used to name output directories for assembly steps
+rad                        ## [0] [assembly_name]: Assembly name. Used to name output directories for assembly steps
 /home/jovyan/ipyrad-workshop   ## [1] [project_dir]: Project dir (made in curdir if not present)
                                ## [2] [raw_fastq_path]: Location of raw non-demultiplexed fastq files
                                ## [3] [barcodes_path]: Location of barcodes file
@@ -220,7 +220,7 @@ In general the defaults are sensible, and we won't mess with them for now,
 but there are a few parameters we *must* change: the path to the raw data and
 the barcodes file, the dataype, and the restriction overhang sequence(s).
 
-We will use the `nano` text editor to modify `params-peddrad.txt` and change
+We will use the `nano` text editor to modify `params-rad.txt` and change
 these parameters:
 
 ```bash
@@ -232,7 +232,7 @@ $ conda install nano -y
 $ echo "set nowrap" > ~/.nanorc
 
 # Now you can edit the params file
-$ nano params-peddrad.txt
+$ nano params-rad.txt
 ```
 ![png](images/nano.png)
 
@@ -264,7 +264,7 @@ Once we start running the analysis ipyrad will create several new directories to
 hold the output of each step for this assembly. By default the new directories
 are created in the `project_dir` directory and use the prefix specified by the
 `assembly_name` parameter. For this example assembly all the intermediate
-directories will be of the form: `~/ipyrad-workshop/peddrad_*`.
+directories will be of the form: `~/ipyrad-workshop/rad_*`.
 
 > **Note:** Again, the `~` notation indicates a shortcut for the user home
 directory, in this case `/home/jovyan`.
@@ -309,7 +309,7 @@ other stuff at the beginning of each read?
 
 Since the raw data is still just a huge pile of reads, we need to split it up
 and assign each read to the sample it came from. This will create a new
-directory called `peddrad_fastqs` with one `.gz` file per sample.
+directory called `rad_fastqs` with one `.gz` file per sample.
 
 Now lets run step 1! For the simulated data this will take just a few moments.
 
@@ -322,7 +322,7 @@ all ipyrad assembly steps.
 ## -p    the params file we wish to use
 ## -s    the step to run
 ## -c    run on 1 core
-$ ipyrad -p params-peddrad.txt -s 1 -c 1
+$ ipyrad -p params-rad.txt -s 1 -c 1
 
  -------------------------------------------------------------
   ipyrad [v.0.9.13]
@@ -344,11 +344,11 @@ assembly) we want it to print stats for.
 
 ```bash
 ## -r fetches informative results from currently executed steps
-$ ipyrad -p params-peddrad.txt -r
-  loading Assembly: peddrad
-  from saved path: ~/ipyrad-workshop/peddrad.json
+$ ipyrad -p params-rad.txt -r
+  loading Assembly: rad
+  from saved path: ~/ipyrad-workshop/rad.json
 
-Summary stats of Assembly peddrad
+Summary stats of Assembly rad
 ------------------------------------------------
       state  reads_raw
 1A_0      1      19835
@@ -367,7 +367,7 @@ Summary stats of Assembly peddrad
 
 Full stats files
 ------------------------------------------------
-step 1: ./peddrad_fastqs/s1_demultiplex_stats.txt
+step 1: ./rad_fastqs/s1_demultiplex_stats.txt
 step 2: None
 step 3: None
 step 4: None
@@ -380,7 +380,7 @@ step 7: None
 explore these on your own later.
 
 ```bash 
-$ cat peddrad_fastqs/s1_demultiplex_stats.txt
+$ cat rad_fastqs/s1_demultiplex_stats.txt
 ```
 
 # Step 2: Filter reads
@@ -399,7 +399,7 @@ In reality you'd want to be more careful about choosing these values.
 Edit your params file again with `nano`:
 
 ```bash
-nano params-peddrad.txt
+nano params-rad.txt
 ```
 
 and change the following two parameter settings:
@@ -412,12 +412,12 @@ and change the following two parameter settings:
 
 
 ```bash
-$ ipyrad -p params-peddrad.txt -s 2 -c 1
+$ ipyrad -p params-rad.txt -s 2 -c 1
 ```
 
 ```
-  loading Assembly: peddrad
-  from saved path: ~/ipyrad-workshop/peddrad.json
+  loading Assembly: rad
+  from saved path: ~/ipyrad-workshop/rad.json
 
  -------------------------------------------------------------
   ipyrad [v.0.9.13]
@@ -431,20 +431,20 @@ $ ipyrad -p params-peddrad.txt -s 2 -c 1
   Parallel connection closed.
 ```
 
-The filtered files are written to a new directory called `peddrad_edits`. Again,
+The filtered files are written to a new directory called `rad_edits`. Again,
 you can look at the results from this step and some handy stats tracked
 for this assembly.
 
 ```bash
 ## View the output of step 2
-$ cat peddrad_edits/s2_rawedit_stats.txt
+$ cat rad_edits/s2_rawedit_stats.txt
 ```
 
 # Step 3: denovo clustering within-samples
 
 For a *de novo* assembly, step 3 de-replicates and then clusters reads within
 each sample by the set clustering threshold and then writes the clusters to new
-files in a directory called `peddrad_clust_0.85`. Intuitively, we are trying to
+files in a directory called `rad_clust_0.85`. Intuitively, we are trying to
 identify all the reads that map to the same locus within each sample. You can see the default value is 0.85, so our default directory is named accordingly. This value dictates the percentage of sequence similarity that
 reads must have in order to be considered reads at the same locus.
 
@@ -475,11 +475,11 @@ data.
 Now lets run step 3:
 
 ```bash
-$ ipyrad -p params-peddrad.txt -s 3 -c 1
+$ ipyrad -p params-rad.txt -s 3 -c 1
 ```
 ```
-  loading Assembly: peddrad
-  from saved path: ~/ipyrad-workshop/peddrad.json
+  loading Assembly: rad
+  from saved path: ~/ipyrad-workshop/rad.json
 
  -------------------------------------------------------------
   ipyrad [v.0.9.13]
@@ -526,11 +526,11 @@ straightforward, and pretty fast. Run it like this:
 
 ```bash
 $ cd ipyrad-workshop
-$ ipyrad -p params-peddrad.txt -s 4 -c 1
+$ ipyrad -p params-rad.txt -s 4 -c 1
 ```
 ```
-  loading Assembly: peddrad
-  from saved path: ~/ipyrad-workshop/peddrad.json
+  loading Assembly: rad
+  from saved path: ~/ipyrad-workshop/rad.json
 
  -------------------------------------------------------------
   ipyrad [v.0.9.13]
@@ -561,11 +561,11 @@ consensus of sequences within each cluster. Here we are identifying what we
 believe to be the real haplotypes at each locus within each sample.
 
 ```bash
-$ ipyrad -p params-peddrad.txt -s 5 -c 1
+$ ipyrad -p params-rad.txt -s 5 -c 1
 ```
 ```
-  loading Assembly: peddrad
-  from saved path: ~/ipyrad-workshop/peddrad.json
+  loading Assembly: rad
+  from saved path: ~/ipyrad-workshop/rad.json
 
  -------------------------------------------------------------
   ipyrad [v.0.9.13]
@@ -599,11 +599,11 @@ as the next longest running step. Fortunately, with the simulated data, step 6
 will actually be really fast.
 
 ```bash
-$ ipyrad -p params-peddrad.txt -s 6 -c 1
+$ ipyrad -p params-rad.txt -s 6 -c 1
 ```
 ```
-  loading Assembly: peddrad
-  from saved path: ~/ipyrad-workshop/peddrad.json
+  loading Assembly: rad
+  from saved path: ~/ipyrad-workshop/rad.json
 
  -------------------------------------------------------------
   ipyrad [v.0.9.13]
@@ -640,11 +640,11 @@ conservative.
 To run step 7:
 
 ```bash
-$ ipyrad -p params-peddrad.txt -s 7 -c 1
+$ ipyrad -p params-rad.txt -s 7 -c 1
 ```
 ```
-  loading Assembly: peddrad
-  from saved path: ~/ipyrad-workshop/peddrad.json
+  loading Assembly: rad
+  from saved path: ~/ipyrad-workshop/rad.json
 
  -------------------------------------------------------------
   ipyrad [v.0.9.13]
@@ -666,32 +666,32 @@ minimum # of samples per locus
 * building arrays - Construct the final output data in hdf5 format
 * writing conversions - Write out all designated output formats
 
-Step 7 generates output files in the `peddrad_outfiles` directory. All the
+Step 7 generates output files in the `rad_outfiles` directory. All the
 output formats specified by the `output_formats` parameter will be generated
 here. Let's see what's created by default:
 
 ```bash
-$ ls peddrad_outfiles/
+$ ls rad_outfiles/
 ```
 ```
-peddrad.loci  peddrad.phy  peddrad.seqs.hdf5  peddrad.snps  peddrad.snps.hdf5  peddrad.snpsmap  peddrad_stats.txt
+rad.loci  rad.phy  rad.seqs.hdf5  rad.snps  rad.snps.hdf5  rad.snpsmap  rad_stats.txt
 ```
 
-ipyrad always creates the `peddrad.loci` file, as this is our internal format,
-as well as the `peddrad_stats.txt` file, which reports final statistics for the
+ipyrad always creates the `rad.loci` file, as this is our internal format,
+as well as the `rad_stats.txt` file, which reports final statistics for the
 assembly (more below). The other files created fall in to 2 categories: files
-that contain the full sequence (i.e. the `peddrad.phy` and `peddrad.seqs.hdf5`
-files) and files that contain only variable sites (i.e. the `peddrad.snps` and
-`peddrad.snps.hdf5` files). The `peddrad.snpsmap` is a file which maps SNPs to
+that contain the full sequence (i.e. the `rad.phy` and `rad.seqs.hdf5`
+files) and files that contain only variable sites (i.e. the `rad.snps` and
+`rad.snps.hdf5` files). The `rad.snpsmap` is a file which maps SNPs to
 loci, which is used downstream in the analysis toolkit for sampling unlinked
 SNPs.
 
-The most informative, human-readable file here is `peddrad_stats.txt` which
+The most informative, human-readable file here is `rad_stats.txt` which
 gives extensive and detailed stats about the final assembly. A quick overview
 of the different sections of this file:
 
 ```bash
-$ cat peddrad_outfiles/peddrad_stats.txt
+$ cat rad_outfiles/rad_stats.txt
 ```
 
 ongratulations! You've completed your first RAD-Seq assembly. Now you can try
