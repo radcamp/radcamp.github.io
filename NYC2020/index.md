@@ -27,7 +27,7 @@ Times            | Wednesday Aug 5th |
 -----            | ------ |
 11:40-12:10      | [A tour of empirical RADseq data: Common properties, analysis workflows, and some examples of evolutionary inference](empirical-radseq.md) |
 12:10-12:40      | [ipyrad CLI](ipyrad-cli.md) |
-12:40-13:10      | [ipyrad API and analysis tools](ipyrad-analysis-api.md) |
+12:40-13:10      | ipyrad API and analysis tools: [PCA](PCA_API.md) & [RAxML](RAxML_API.md) |
 
 ## Additional ipyrad analysis cookbooks
 
