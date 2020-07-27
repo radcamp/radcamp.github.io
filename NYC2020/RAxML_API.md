@@ -30,20 +30,35 @@ import toyplot                   ## plotting library
 import toytree                   ## tree plotting
 ```
 
+We will use the anolis data again, just because simulated data is so boring.
+In a new cell you may fetch the `anolis.phy` file from the RADCamp site with
+`wget`:
+
+```python
+## Use wget to fetch the vcf from the RADCamp website
+!wget https://radcamp.github.io/NYC2020/Prates_et_al_2016_example_data/anolis.phy
+```
+
 Now create a RAxML object. The only required argument to initialize the object
 is a phylip formatted sequence file. In this example we provide a name and
 working directory as well:
 
 ```python
 rax = ipa.raxml(
-    data="./anolis_outfiles/anolis.phy",
+    data="./anolis.phy",
     name="anolis-tree", 
     workdir="./anolis-raxml",
     );
 ```
 
 ### Additional options
-RAxML has a **ton** of parameters for modifying how it behaves, and we will only explore just a fraction of these. For more info on RAxML parameters, look [here](https://sco.h-its.org/exelixis/resource/download/NewManual.pdf). You can also specify many of these parameters by setting values in the params dictionary of your RAxML object. In the following cell we modify the number of bootstrapping runs on distinct starting trees (`params.N`), the number of threads to use (`params.T`), and the outgroup samples (`params.o`). 
+RAxML has a **ton** of parameters for modifying how it behaves, and we will only
+explore just a fraction of these. For more info on RAxML parameters, look
+[here](https://sco.h-its.org/exelixis/resource/download/NewManual.pdf). You can
+also specify many of these parameters by setting values in the params dictionary
+of your RAxML object. In the following cell we modify the number of
+bootstrapping runs on distinct starting trees (`params.N`), the number of
+threads to use (`params.T`), and the outgroup samples (`params.o`). 
 
 ```python
 ## Number of runs
@@ -61,7 +76,8 @@ rax.params.o = None
 ```
 
 ### Print the command string 
-It is good practice to always print the command string so that you know exactly what was called for your analysis and it is documented. 
+It is good practice to always print the command string so that you know exactly
+what was called for your analysis and it is documented. 
 
 ```python
 print(rax.command)
@@ -80,17 +96,27 @@ Explanation of RAxML arguments:
 * -s: specifies the name of the input alignment file in PHYLIP format.
 
 ### Run the job
-This will start the job running. The subsampled dataset we are using should run very quickly (~1-2 minutes).
+This will start the job running. The subsampled dataset we are using should run
+very quickly (~1-2 minutes).
 
 ```python
 rax.run(force=True)
 ```
     job aligntest finished successfully
 
-> Note: We are running only 10 bootstraps, which takes very little time. In fact, when running a real analysis, we should run at least 500 or 1000 bootstraps. For real large datasets, running an alignment of the entire loci can be very time consumming. Because of that, you can explore RAxML using only SNPs in a PHYLIP format (e.g. anolis.snps.phy) and excluding the invariant sites. Using only variable sites should reduce considerably the running time. However, branch lenghts can be biased when using only variable sites, especially with high levels of missing data. See [Leaché et al 2015](https://www.ncbi.nlm.nih.gov/pubmed/26227865) for methods correcting for aquisition bias in RAxML when using SNP's only.
+> Note: We are running only 10 bootstraps, which takes very little time. In
+fact, when running a real analysis, we should run at least 500 or 1000
+bootstraps. For real large datasets, running an alignment of the entire loci can
+be very time consumming. Because of that, you can explore RAxML using only SNPs
+in a PHYLIP format (e.g. anolis.snps.phy) and excluding the invariant sites.
+Using only variable sites should reduce considerably the running time. However,
+branch lenghts can be biased when using only variable sites, especially with
+high levels of missing data. See [Leaché et al 2015](https://www.ncbi.nlm.nih.gov/pubmed/26227865)
+for methods correcting for aquisition bias in RAxML when using SNP's only.
 
 ### Access results
-One of the reasons it is so convenient to run your RAxML jobs this way is that the results files are easily accessible from your RAxML objects. 
+One of the reasons it is so convenient to run your RAxML jobs this way is that
+the results files are easily accessible from your RAxML objects. 
 
 ```python
 rax.trees
@@ -115,31 +141,43 @@ tre.draw(
     height=300,
     width=800,
     node_labels=tre.get_node_values("support"),
-);
+    node_sizes=15
+)
 ```
-> **Note:** Toytree is a simple yet flexible and powerful tree drawing program, which we will only briefly introduce. Extensive docs and a tutorial are available on the [toytree documentation site](https://toytree.readthedocs.io/en/latest/).
+> **Note:** Toytree is a simple yet flexible and powerful tree drawing program,
+which we will only briefly introduce. Extensive docs and a tutorial are
+available on the [toytree documentation site](https://toytree.readthedocs.io/en/latest/).
 
 ![png](RAxML_API_files/RAxML_API_00_unrooted.png)
 
 ### Rooting the tree
-In the above figure the two Northern samples are nested deep within the Southern clade, but this tree is unrooted. Lets say we want to root the tree on the Northern samples and replot. This is accomplished by adding the `root` parameter to the `tree.draw()` function and specifying the samples to root the tree to:
+In the above figure the two Northern samples are nested deep within the Southern
+clade, but this tree is unrooted. Lets say we want to root the tree on the
+Northern samples and replot. This is accomplished by adding the `root` parameter
+to the `tree.draw()` function and specifying the samples to root the tree to:
 ```
 tre = toytree.tree(rax.trees.bipartitions)
+tre = tre.root(["punc_ICST764", "punc_MUFAL9635"])
 tre.draw(
-    tre.root(["punc_ICST764", "punc_MUFAL9635"]),
     width=600,
     node_labels=tre.get_node_values("support"),
-);
+    node_sizes=15
+)
 ```
 ![png](RAxML_API_files/RAxML_API_01_rooted.png)
 
-> **Note:** The `root()` function accepts a list of samples, so if you have multiple samples from the root taxon, you can include them like this: `tre.root(["punc_ICST764", "punc_MUFAL9635", "punc_MTR05978"])`
+> **Note:** The `root()` function accepts a list of samples, so if you have
+multiple samples from the root taxon, you can include them like this:
+`tre.root(["punc_ICST764", "punc_MUFAL9635", "punc_MTR05978"])`
 
 ### Experimenting with the simulated data
-Tree rooting can also be accomplished with the `wildcard` parameter of the `tree.root()` function. This is somewhat more straightforward to demonstrate with the simulated data, so we can create a new `raxml` object with the simulated phylip file, rerun the RAxML tree inference, and then do some plotting:
+Tree rooting can also be accomplished with the `wildcard` parameter of the
+`tree.root()` function. This is somewhat more straightforward to demonstrate
+with the simulated data, so we can create a new `raxml` object with the
+simulated phylip file, rerun the RAxML tree inference, and then do some plotting:
 ```
 rax = ipa.raxml(
-    data="/scratch/af-biota/simrad-example/simrad_outfiles/simrad.phy",
+    data="rad_outfiles/rad.phy",
     name="aligntest", 
     workdir="./analysis-raxml",
     );
@@ -150,17 +188,22 @@ rax.params.o = None
 
 rax.run(force=True)
 ```
-Here the `wildcard="3"` argument specifies to root the tree using all the samples that include "3" in their names.
+Here the `wildcard="3"` argument specifies to root the tree using all the
+samples that include "3" in their names.
 ```
 tre = toytree.tree(rax.trees.bipartitions)
+tre = tre.root(wildcard="3")
 tre.draw(
-    tre.root(wildcard="3"),
     width=600,
     node_labels=tre.get_node_values("support"),
+    node_sizes=15
 );
 ```
 ![png](RAxML_API_files/RAxML_API_02_sim_rooted.png)
 
 ### Further exploration
 
-We provide a more thorough exploration of the `ipyrad.analysis.raxml` module in a notebook on the [ipyrad github site](https://github.com/dereneaton/ipyrad/blob/master/tests/cookbook-raxml-pedicularis.ipynb), including more details about how to take full advantage of running parallel RAxML processes on a cluster.
+We provide a more thorough exploration of the `ipyrad.analysis.raxml` module in
+a notebook on the [ipyrad github site](https://github.com/dereneaton/ipyrad/blob/master/tests/cookbook-raxml-pedicularis.ipynb),
+including more details about how to take full advantage of running parallel
+RAxML processes on a cluster.
