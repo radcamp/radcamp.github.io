@@ -544,7 +544,7 @@ In terms of results, there isn't as much to look at as in previous steps, though
 you can invoke the `-r` flag to see the estimated heterozygosity and error rate
 per sample.
 
-Illumina error rates are on the order of 0.01% per base, so your error rates
+Illumina error rates are on the order of 0.1% per base, so your error rates
 will ideally be in this neighborhood. Also, under normal conditions error rate
 will be much, much lower than heterozygosity (on the order of 10x lower). If
 the error rate is >>0.01% then you might be using too
