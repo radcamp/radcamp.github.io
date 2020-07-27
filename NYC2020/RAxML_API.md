@@ -1,17 +1,26 @@
 
 ## The ipyrad.analysis module: RAxML
 
-As part of the `ipyrad.analysis` toolkit we've created convenience functions for easily running common [**RAxML**](https://sco.h-its.org/exelixis/web/software/raxml/index.html) commands, a maximum likelihood inference of phylogenetic trees. This can be useful when you want to run all of your analyses in a clean stream-lined way in a jupyter notebook to create a completely reproducible study. 
+As part of the `ipyrad.analysis` toolkit we've created convenience functions for
+easily running common [**RAxML**](https://sco.h-its.org/exelixis/web/software/raxml/index.html)
+commands, a maximum likelihood inference of phylogenetic trees. This can be
+useful when you want to run all of your analyses in a clean stream-lined way in
+a jupyter notebook to create a completely reproducible study. 
 
 ### Install software
-There are many ways to install RAxML, the simplest of which is to use conda. This will install several RAxML binaries into your conda path. Open an ssh session on the cluster and run the following command:
+There are many ways to install RAxML, the simplest of which is to use conda.
+This will install several RAxML binaries into your conda path. Switch back to
+the terminal (or open a new one) and run this command:
 
 ```
 $ conda install raxml -c bioconda
 ```
 # **RAxML** Phylogenetic Inference
 
-Create a new notebook inside your `/home/<username>/ipyrad-workshop/` directory called `anolis-raxml.ipynb` (refer to the [jupyter notebook configuration page](Jupyter_Notebook_Setup.md) for a refresher on connecting to the notebook server). The rest of the materials in this part of the workshop assume you are running all code in cells of a jupyter notebook that is running on the USP cluster.
+Create a new notebook inside your `/home/jovyan/ipyrad-workshop/` directory
+called `anolis-raxml.ipynb`. The rest of the materials in this part of the
+workshop assume you are running all code in cells of a jupyter notebook inside
+your binder instance.
 
 ## Create a RAxML Class object
 First, copy and paste the usual imports into a notebook cell and run it:
@@ -21,7 +30,9 @@ import toyplot                   ## plotting library
 import toytree                   ## tree plotting
 ```
 
-Now create a RAxML object. The only required argument to initialize the object is a phylip formatted sequence file. In this example we provide a name and working directory as well:
+Now create a RAxML object. The only required argument to initialize the object
+is a phylip formatted sequence file. In this example we provide a name and
+working directory as well:
 
 ```python
 rax = ipa.raxml(

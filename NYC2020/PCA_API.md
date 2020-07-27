@@ -32,7 +32,9 @@ all code in cells of a jupyter notebook** that is running on the cluster.
 * [More to explore](#more-to-explore)
 
 ## Create a new notebook for the PCA
-Return to your jupyter notebook dashboard and choose **New->Python 3**.
+Return to your jupyter notebook dashboard, navigate to your `ipyrad-workshop`
+directory, and create a new notebook by choosing **New->Python 3**, in the
+upper right hand corner.
 
 ### Import Python libraries
 The `import` keyword directs python to load a module into the currently running
