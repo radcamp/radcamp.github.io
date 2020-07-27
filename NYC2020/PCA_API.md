@@ -139,13 +139,10 @@ draw to the screen, but also to save a `png` formatted file to the filesystem.
 ```python
 pca.plot(title="Anolis samples", outfile="Anolis_pca.png")
 ```
-    <matplotlib.axes._subplots.AxesSubplot at 0x7fe0f8c25410>
-    
+
 > **Note:** Spaces in filenames are ***BAD***. It's good practice, as we
 demonstrate here, to always substitute underscores (`_`) for spaces in
 filenames.
-
-![png](PCA_API_files/PCA_API_04_Anolis_PCA_NoNorth.png)
 
 # More advanced features of the PCA analysis module which you may explore later
 
