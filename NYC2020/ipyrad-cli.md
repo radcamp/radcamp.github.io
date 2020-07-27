@@ -168,7 +168,7 @@ pairddrad_example_R1_.fastq.gz   pairgbs_wmerge_example_barcodes.txt    rad_exam
 ```
 You can see that we provide a bunch of different example datasets, as well as
 toy genomes for testing different assembly methods. For now we'll go forward
-with the `pairddrad` example dataset.
+with the `rad` example dataset.
 
 ```bash
 # Now create a new params file named 'rad'
@@ -247,10 +247,10 @@ overhangs are expected to be present on the reads. Change the following lines
 in your params files to look like this:
 
 ```bash
-/home/jovyan/ipsimdata/pairddrad_example_R*.fastq.gz    ## [2] [raw_fastq_path]: Location of raw non-demultiplexed fastq files
-/home/jovyan/ipsimdata/pairddrad_example_barcodes.txt    ## [3] [barcodes_path]: Location of barcodes file
-pairddrad                                   ## [7] [datatype]: Datatype (see docs): rad, gbs, ddrad, etc.
-TGCAG, CGG                                  ## [8] [restriction_overhang]: Restriction overhang (cut1,) or (cut1, cut2)
+ipsimdata/rad_example_R*.fastq.gz    ## [2] [raw_fastq_path]: Location of raw non-demultiplexed fastq files
+ipsimdata/rad_example_barcodes.txt    ## [3] [barcodes_path]: Location of barcodes file
+rad                                   ## [7] [datatype]: Datatype (see docs): rad, gbs, ddrad, etc.
+TGCAG,                                  ## [8] [restriction_overhang]: Restriction overhang (cut1,) or (cut1, cut2)
 *                                           ## [27] [output_formats]: Output formats (see docs)
 ```
 
@@ -277,7 +277,7 @@ Before we get started, let's take a look at what the raw data looks like. Rememb
 ## zcat: unZip and conCATenate the file to the screen
 ## head -n 20: Just take the first 20 lines of input
 
-$ zcat ipsimdata/pairddrad_example_R1_.fastq.gz | head -n 20
+$ zcat ipsimdata/rad_example_R1_.fastq.gz | head -n 20
 @lane1_locus0_2G_0_0 1:N:0:
 CTCCAATCCTGCAGTTTAACTGTTCAAGTTGGCAAGATCAAGTCGTCCCTAGCCCCCGCGTCCGTTTTTACCTGGTCGCGGTCCCGACCCAGCTGCCCCC
 +
@@ -300,10 +300,9 @@ CTCCAATCCTGCAGTTTAACTGTTCAAGTTGGCAAGATCAAGTCGTCCCTAGCCCCCGCGTCCGTTTTTACCTGGTCGCG
 BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
 ```
 
-The simulated data are 100bp paired-end reads generated as ddRAD, meaning there
-will be two overhang sequences. In this case the 'rare' cutter leaves the TGCAT
-overhang. Can you find this sequence in the raw data? What's going on with that
-other stuff at the beginning of each read?
+The simulated data are 100bp single-end reads generated as original RAD, meaning
+there will be one overhang sequence. Can you find this sequence in the raw data?
+What's going on with that other stuff at the beginning of each read?
 
 # Step 1: Demultiplexing the raw data
 
@@ -489,8 +488,6 @@ $ ipyrad -p params-rad.txt -s 3 -c 1
 
   Step 3: Clustering/Mapping reads within samples
   [####################] 100% 0:00:11 | concatenating
-  [####################] 100% 0:00:02 | join merged pairs
-  [####################] 100% 0:00:03 | join unmerged pairs
   [####################] 100% 0:00:01 | dereplicating
   [####################] 100% 0:00:12 | clustering/mapping
   [####################] 100% 0:00:00 | building clusters
@@ -504,7 +501,6 @@ $ ipyrad -p params-rad.txt -s 3 -c 1
 
 In-depth operations of step 3:
 * concatenating - If multiple fastq edits per sample then pile them all together
-* join merged/unmerged pairs - For pared-end data merge overlapping reads per mate pair
 * dereplicating - Merge all identical reads
 * clustering - Find reads matching by sequence similarity threshold
 * building clusters - Group similar reads into clusters
