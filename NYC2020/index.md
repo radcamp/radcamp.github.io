@@ -32,13 +32,13 @@ Times            | Wednesday Aug 5th |
 ## Additional ipyrad analysis cookbooks
 
 * [Tetrad - A Quartet-based species tree method](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-tetrad.ipynb)
-* [Phylogenetic inference: RAxML](06_RAxML_API.md)
-* [Clustering analysis: PCA](04_PCA_API.md)
-* [Clustering analysis: STRUCTURE](05_STRUCTURE_API.md)
+* [Phylogenetic inference: RAxML](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-raxml-pedicularis.ipynb)
+* [Clustering analysis: PCA](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-PCA-pedicularis.ipynb)
+* [Clustering analysis: STRUCTURE](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-structure-pedicularis.ipynb)
 * [BPP - Bayesian inference under a multi-species coalescent model](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-bpp-species-delimitation.ipynb)
 * [Bucky - Phylogenetic concordance analysis](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-bucky.ipynb)
 * [ABBA-BABA - Admixture analysis](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-abba-baba.ipynb)
-* [Demographic analysis ([momi2](07_momi2_API.md))
+* [Demographic analysis: momi2](07_momi2_API.md)
 
 # RADCamp NYC 2020 Group Photo
 Don't forget to take a screenshot to keep the 'group photo' tradition alive.
