@@ -31,6 +31,15 @@ all code in cells of a jupyter notebook** that is running on the cluster.
 * [Multi-panel PCA](#multi-panel-pca)
 * [More to explore](#more-to-explore)
 
+### Install software
+In order to visualize plots directly in the notebook, we will install matplotlib, using conda. Switch back to
+the terminal (or open a new one) and run this command:
+
+```
+$ conda install matplotlib
+```
+Type 'y' when it asks you if you want to proceed.
+
 ## Create a new notebook for the PCA
 Return to your jupyter notebook dashboard, navigate to your `ipyrad-workshop`
 directory, and create a new notebook by choosing **New->Python 3**, in the
@@ -60,11 +69,12 @@ be covering this very briefly.
 vcffile = "/home/jovyan/ipyrad-workshop/rad_outfiles/rad.vcf"
 ## Create the pca object
 pca = ipa.pca(vcffile)
+## Run the PCA analysis
+pca.run()
 ## Bam!
-pca.plot()
+pca.draw(0,1)
 ```
-    <matplotlib.axes._subplots.AxesSubplot at 0x7fb6fdf82050>
-
+   
 ![png](PCA_API_files/PCA_API_00_Simulated_Example.png)
 
 > **Note** The `#` at the beginning of a line indicates to python that this is
@@ -76,7 +86,7 @@ Simply comment them out with the `#`!
 
 ### Simple PCA from vcf file
 
-In the most common use, you'll want to plot the first two PCs, then inspect
+In the most common use, you'll want to plot the first two PCs (here called axis 0 and axis 1), then inspect
 the output, remove any obvious outliers, and then redo the PCA. It's often
 desirable to import a vcf file directly rather than to use the ipyrad assembly,
 so here we'll demonstrate this with Anolis data from Prates et al 2016.
@@ -92,18 +102,14 @@ pca = ipa.pca(vcffile)
 to quickly generate PCA plots for any vcf from any dataset.
 
 ```python
-pca.plot()
+pca.run()
+pca.draw(0,1)
 ```
-    <matplotlib.axes._subplots.AxesSubplot at 0x7fe0beb3a650>
 
 ![png](PCA_API_files/PCA_API_01_Anolis_PCA.png)
 
 ### Population assignment for sample colors
-In the tl;dr example the PCA shown above in this notebook was generated with
-an assembly that had included a `pop_assign_file`, so the 'pca()' was smart
-enough to find this and color samples accordingly. In some cases you might
-not have used a population assignment file, so it's also possible to specify
-population assignments in a dictionary. The format of the dictionary should
+For the interpretation of the plot it can be very useful to know which points represent which sample, or which population. You can create a dictionary including this information. The format of the dictionary should
 have populations as keys and lists of samples as values. Sample names need
 to be identical to the names in the vcf file, which we can verify with the
 `samples_vcforder` property of the PCA object.
@@ -125,9 +131,10 @@ in the pops_dict as the second argument, and plot the new figure. We can
 also easily add a title to our PCA plots with the `title=` argument.
 ```python
 pca = ipa.pca(vcffile, pops_dict)
+pca.run()
+pca.draw(0,1)
 pca.plot(title="Anolis Colored By Population")
 ```
-    <matplotlib.axes._subplots.AxesSubplot at 0x7fe092fbbe50>
 
 ![png](PCA_API_files/PCA_API_02_Anolis_PCA_colored.png)
 
@@ -158,7 +165,6 @@ makes it simple to ask for PCs directly.
 pca = ipa.pca(vcffile, pops_dict)
 pca.plot(pcs=[3,4])
 ```
-    <matplotlib.axes._subplots.AxesSubplot at 0x7fa3d05fd190>
 
 ![png](PCA_API_files/PCA_API_05_Anolis_PCA_PC34.png)
 
@@ -188,8 +194,7 @@ pca.plot(ax=ax2, pcs=[3, 4], title="PCs 3 & 4")
 ## Saving the plot as a .png file
 plt.savefig("Anolis_2panel_PCs1-4.png", bbox_inches="tight")
 ```
-    <matplotlib.axes._subplots.AxesSubplot at 0x7fa3d0a04290>
-
+   
 > **Note** Saving the two panel figure is a little different, because we're making
 a composite of two different PCA plots. We need to use the native matplotlib
 `savefig()` function, to save the entire figure, not just one panel. `bbox_inches`
@@ -213,7 +218,6 @@ pca.plot(ax=ax2, pcs=[3, 4], title="PCs 3 & 4")
 ## And save the plot as .png
 plt.savefig("My_PCA_plot_axis1-4.png", bbox_inches="tight")
 ```
-    <matplotlib.axes._subplots.AxesSubplot at 0x7fa3d0a8db10>
 
 ![png](PCA_API_files/PCA_API_07_Anolis_PCA_MultiNoLegend.png)
 
