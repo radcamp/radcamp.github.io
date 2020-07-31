@@ -133,7 +133,6 @@ also easily add a title to our PCA plots with the `title=` argument.
 pca = ipa.pca(vcffile, pops_dict)
 pca.run()
 pca.draw(0,1)
-pca.plot(title="Anolis Colored By Population")
 ```
 
 ![png](PCA_API_files/PCA_API_02_Anolis_PCA_colored.png)
@@ -156,14 +155,15 @@ filenames.
 # More advanced features of the PCA analysis module which you may explore later
 
 ## Looking at PCs other than 1 & 2
-PCs 1 and 2 by definition explain the most variation in the data, but sometimes
+PCs 0 and 1 by definition explain the most variation in the data, but sometimes
 PCs further down the chain can also be useful and informative. The plot function
 makes it simple to ask for PCs directly.
 
 ```python
 ## Lets reload the full dataset so we have all the samples
 pca = ipa.pca(vcffile, pops_dict)
-pca.plot(pcs=[3,4])
+pca.run()
+pca.draw(2,3)
 ```
 
 ![png](PCA_API_files/PCA_API_05_Anolis_PCA_PC34.png)
@@ -228,4 +228,3 @@ The `ipyrad.analysis.pca` module has many more features that we just don't have 
 * [Fine grained control of colors per populations](https://radcamp.github.io/AF-Biota/PCA_Advanced_Features.html#controlling-colors)
 * [Dealing with missing data](https://radcamp.github.io/AF-Biota/PCA_Advanced_Features.html#dealing-with-missing-data)
 * [Dealing with unequal sampling](https://radcamp.github.io/AF-Biota/PCA_Advanced_Features.html#dealing-with-unequal-sampling)
-* [Dealing with linked snps](https://radcamp.github.io/AF-Biota/PCA_Advanced_Features.html#dealing-with-linked-snps)
