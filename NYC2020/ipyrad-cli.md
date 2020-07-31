@@ -135,14 +135,10 @@ optional arguments:
   * Documentation: http://ipyrad.readthedocs.io
 ```
 
-## Unpack your data & Create a new parameters file
-ipyrad uses a text file to hold all the parameters for a given assembly.
-Start by creating a new parameters file with the `-n` flag. This flag
-requires you to pass in a name for your assembly. In the example we use
-`rad` but the name can be anything at all. Once you start
-analysing your own data you might call your parameters file something
-more informative, like the name of your organism and some details on the
-settings.
+## Unpack the example data & Create a new parameters file
+For this workshop, we provide a bunch of different example datasets, as well as
+toy genomes for testing different assembly methods. For now we'll go forward
+with the `rad` example dataset. First we need to unpack the data, which are located in the tests folder.
 
 ```bash 
 # First, make sure you're in your workshop directory
@@ -167,9 +163,14 @@ pairddrad_example_genome.fa.sma  pairgbs_example_R1_.fastq.gz           rad_exam
 pairddrad_example_genome.fa.smi  pairgbs_example_R2_.fastq.gz           rad_example_genome.fa.smi
 pairddrad_example_R1_.fastq.gz   pairgbs_wmerge_example_barcodes.txt    rad_example_R1_.fastq.gz
 ```
-You can see that we provide a bunch of different example datasets, as well as
-toy genomes for testing different assembly methods. For now we'll go forward
-with the `rad` example dataset.
+
+ipyrad uses a text file to hold all the parameters for a given assembly.
+Start by creating a new parameters file with the `-n` flag. This flag
+requires you to pass in a name for your assembly. In the example we use
+`rad` but the name can be anything at all. Once you start
+analysing your own data you might call your parameters file something
+more informative, like the name of your organism and some details on the
+settings.
 
 ```bash
 # Now create a new params file named 'rad'
