@@ -669,13 +669,16 @@ minimum # of samples per locus
 
 Step 7 generates output files in the `rad_outfiles` directory. All the
 output formats specified by the `output_formats` parameter will be generated
-here. Let's see what's created by default:
+here. Let's see what's created, using all output options:
 
 ```bash
 $ ls rad_outfiles/
 ```
 ```
-rad.loci  rad.phy  rad.seqs.hdf5  rad.snps  rad.snps.hdf5  rad.snpsmap  rad_stats.txt
+rad.alleles  rad.migrate    rad.snps       rad.str      rad.ustr
+rad.geno     rad.nex        rad.snps.hdf5  rad.treemix  rad.vcf
+rad.gphocs   rad.phy        rad.snpsmap    rad.ugeno
+rad.loci     rad.seqs.hdf5  rad_stats.txt  rad.usnps
 ```
 
 ipyrad always creates the `rad.loci` file, as this is our internal format,
@@ -685,7 +688,7 @@ that contain the full sequence (i.e. the `rad.phy` and `rad.seqs.hdf5`
 files) and files that contain only variable sites (i.e. the `rad.snps` and
 `rad.snps.hdf5` files). The `rad.snpsmap` is a file which maps SNPs to
 loci, which is used downstream in the analysis toolkit for sampling unlinked
-SNPs.
+SNPs. Some files have a 'u' in the format (e.g. rad.str versus rad.ustr), which indicates that only one SNP per locus is included. 
 
 The most informative, human-readable file here is `rad_stats.txt` which
 gives extensive and detailed stats about the final assembly. A quick overview
