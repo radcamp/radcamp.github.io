@@ -18,7 +18,8 @@ $ conda install raxml -c bioconda
 # **RAxML** Phylogenetic Inference
 
 Create a new notebook inside your `/home/jovyan/ipyrad-workshop/` directory
-called `anolis-raxml.ipynb`. The rest of the materials in this part of the
+called `anolis-raxml.ipynb` by choosing **New->Python 3**, in the
+upper right hand corner. The rest of the materials in this part of the
 workshop assume you are running all code in cells of a jupyter notebook inside
 your binder instance.
 
@@ -31,7 +32,7 @@ import toytree                   ## tree plotting
 ```
 
 We will use the anolis data again, just because simulated data is so boring.
-In a new cell you may fetch the `anolis.phy` file from the RADCamp site with
+In a new cell (**+**) you may fetch the `anolis.phy` file from the RADCamp site with
 `wget`:
 
 ```python
@@ -82,7 +83,7 @@ what was called for your analysis and it is documented.
 ```python
 print(rax.command)
 ```
-    raxmlHPC-PTHREADS-SSE3 -f a -T 2 -m GTRGAMMA -N 10 -x 12345 -p 54321 -n anolis-tree -w /home/<username>/ipyrad-workshop/anolis-raxml -s /home/<username>/ipyrad-workshop/anolis_outfiles/anolis.phy
+    /srv/conda/envs/notebook/bin/raxmlHPC-PTHREADS-AVX2 -f a -T 2 -m GTRGAMMA -n anolis-tree -w /home/jovyan/newdocs/API-analysis/anolis-raxml -s /home/jovyan/newdocs/API-analysis/anolis.phy -p 54321 -N 10 -x 12345
     
 Explanation of RAxML arguments:
 * -f: selects the algorithm RAxML will execute. In this case, `-f a` will perform a rapid bootstrap analysis and search for best-scoring ML tree in a single run.
@@ -112,7 +113,7 @@ in a PHYLIP format (e.g. anolis.snps.phy) and excluding the invariant sites.
 Using only variable sites should reduce considerably the running time. However,
 branch lenghts can be biased when using only variable sites, especially with
 high levels of missing data. See [Leaché et al 2015](https://www.ncbi.nlm.nih.gov/pubmed/26227865)
-for methods correcting for aquisition bias in RAxML when using SNP's only.
+for methods correcting for aquisition bias in RAxML when using SNPs only.
 
 ### Access results
 One of the reasons it is so convenient to run your RAxML jobs this way is that
