@@ -222,6 +222,6 @@ Much better!
 ## More to explore
 The `ipyrad.analysis.pca` module has many more features that we just don't have time to go over, but you might be interested in checking them out later:
 * [Fine grained control of colors per populations](https://radcamp.github.io/AF-Biota/PCA_Advanced_Features.html#controlling-colors)
-* [Dealing with missing data](PCA_Advanced_Features.md#dealing-with-missing-data)
-* [Dealing with unequal sampling](PCA_Advanced_Features.md#dealing-with-unequal-sampling)
-* [Dealing with linked snps](PCA_Advanced_Features.md#dealing-with-linked-snps)
+* [Dealing with missing data](https://radcamp.github.io/AF-Biota/PCA_Advanced_Features.html#dealing-with-missing-data)
+* [Dealing with unequal sampling](https://radcamp.github.io/AF-Biota/PCA_Advanced_Features.html#dealing-with-unequal-sampling)
+* [Dealing with linked snps](https://radcamp.github.io/AF-Biota/PCA_Advanced_Features.html#dealing-with-linked-snps)
