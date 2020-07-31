@@ -301,13 +301,13 @@ CTCCAATCCTGCAGTTTAACTGTTCAAGTTGGCAAGATCAAGTCGTCCCTAGCCCCCGCGTCCGTTTTTACCTGGTCGCG
 BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
 ```
 
-More information on the FASTQ format, and what the different lines mean, can be found here: FASTQ_format[https://en.wikipedia.org/wiki/FASTQ_format].
+More information on the FASTQ format, and what the different lines mean, can be found here: [FASTQ_format](https://en.wikipedia.org/wiki/FASTQ_format).
 
 The simulated data are 100bp single-end reads generated as original RAD, meaning
 there will be one overhang sequence. Can you find this sequence in the raw data?
 What's going on with that other stuff at the beginning of each read?
 
-When working on your own data, you would probably want to check the quality of your reads more thoroughly. A good tool to do this, is FastQC[https://www.bioinformatics.babraham.ac.uk/projects/fastqc/], which summarized the quality of all your reads in easy to interpret plots. If this would for example show that the quality at the end of the reads drops, you can consider to trim your reads. Option `[25]` in the params file allows you to do that.
+When working on your own data, you would probably want to check the quality of your reads more thoroughly. A good tool to do this, is [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/), which summarized the quality of all your reads in easy to interpret plots. If this would for example show that the quality at the end of the reads drops, you can consider to trim your reads. Option [25] in the params file allows you to do that.
 
 # Step 1: Demultiplexing the raw data
 
