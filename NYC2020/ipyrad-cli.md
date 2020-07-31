@@ -6,7 +6,7 @@ and reproducible environments by facilitating execution of jupyter notebooks
 in a simple, web-based format. More information about the binder project is
 available in the [binder documentation](https://mybinder.readthedocs.io/en/latest/introduction.html).
 
-**NB:** The binder instance we will use here for the first day is a service
+**NB:** The binder instance we will use here is a service
 to the community provided by the binder project, so it has limited computational
 capacity. This capacity is sufficient to assemble the very small simulated
 datasets we provide as examples, but it is in no way capable of assembling
@@ -133,6 +133,7 @@ optional arguments:
     ipyrad --download SRP021469 sra-fastqs/
 
   * Documentation: http://ipyrad.readthedocs.io
+```
 
 ## Create a new parameters file
 ipyrad uses a text file to hold all the parameters for a given assembly.
