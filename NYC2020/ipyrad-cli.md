@@ -307,7 +307,7 @@ The simulated data are 100bp single-end reads generated as original RAD, meaning
 there will be one overhang sequence. Can you find this sequence in the raw data?
 What's going on with that other stuff at the beginning of each read?
 
-When working on your own data, you would probably want to check the quality of your reads more thoroughly. A good tool to do this, is [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/), which summarized the quality of all your reads in easy to interpret plots. If this would for example show that the quality at the end of the reads drops, you can consider to trim your reads. Option [25] in the params file allows you to do that.
+When working on your own data, you would probably want to check the quality of your reads more thoroughly. A good tool to do this, is [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/), which summarized the quality of all your reads in easy to interpret plots. If this would, for example, show that the quality at the end of the reads drops, you can consider to trim your reads. Option [25] in the params file allows you to do that. We'll get back to that during Step 2.
 
 # Step 1: Demultiplexing the raw data
 
@@ -341,7 +341,7 @@ $ ipyrad -p params-rad.txt -s 1 -c 1
   Parallel connection closed.
 ```
 
-As a convenience ipyrad internally tracks the state of all your steps in your
+As a convenience, ipyrad internally tracks the state of all your steps in your
 current assembly, so at any time you can ask for results by invoking the `-r`
 flag. We also use the `-p` argument to tell it which params file (i.e., which
 assembly) we want it to print stats for.
@@ -392,8 +392,7 @@ $ cat rad_fastqs/s1_demultiplex_stats.txt
 This step filters reads based on quality scores and maximum number of uncalled
 bases, and can be used to detect Illumina adapters in your reads, which is
 sometimes a problem under a couple different library prep scenarios. We know the
-simulated data is unrealistically clean, so lets just pretend it's more like the
-Anolis data we looked at earlier, i.e. some slight adapter contamination, and a
+simulated data is unrealistically clean, so lets just pretend it's more like a real world dataset, i.e. some slight adapter contamination, and a
 little noise toward the 3' end of the reads. To account for this we will trim
 reads to 75bp and set adapter filtering to be quite aggressive.
 
@@ -514,7 +513,7 @@ In-depth operations of step 3:
 * concat clusters - Gather chunked clusters into one full file of aligned clusters
 * calc cluster stats - Just as it says.
 
-Step 4: Joint estimation of heterozygosity and error rate
+# Step 4: Joint estimation of heterozygosity and error rate
 
 In this step we jointly estimate sequencing error rate and heterozygosity to
 help us figure out which reads are "real" and which include sequencing error.
@@ -632,7 +631,7 @@ improve performance.
 
 The final step is to filter the data and write output files in many
 convenient file formats. First, we apply filters for maximum number of
-indels per locus, max heterozygosity per locus, max number of snps per
+indels per locus, max heterozygosity per locus, max number of SNPs per
 locus, and minimum number of samples per locus. All these filters are
 configurable in the params file. You are encouraged to explore
 different settings, but the defaults are quite good and quite
@@ -695,7 +694,7 @@ of the different sections of this file:
 $ cat rad_outfiles/rad_stats.txt
 ```
 
-ongratulations! You've completed your first RAD-Seq assembly. Now you can try
+Congratulations! You've completed your first RAD-Seq assembly. Now you can try
 applying what you've learned to assemble your own real data. Please consult the
 [ipyrad online documentation](http://ipyrad.readthedocs.io) for details about
 many of the more powerful features of ipyrad, including reference sequence
