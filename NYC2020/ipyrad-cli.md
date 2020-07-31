@@ -249,10 +249,10 @@ in your params files to look like this:
 
 ```bash
 ipsimdata/rad_example_R*.fastq.gz    ## [2] [raw_fastq_path]: Location of raw non-demultiplexed fastq files
-ipsimdata/rad_example_barcodes.txt    ## [3] [barcodes_path]: Location of barcodes file
-rad                                   ## [7] [datatype]: Datatype (see docs): rad, gbs, ddrad, etc.
-TGCAG,                                  ## [8] [restriction_overhang]: Restriction overhang (cut1,) or (cut1, cut2)
-*                                           ## [27] [output_formats]: Output formats (see docs)
+ipsimdata/rad_example_barcodes.txt   ## [3] [barcodes_path]: Location of barcodes file
+rad                                  ## [7] [datatype]: Datatype (see docs): rad, gbs, ddrad, etc.
+TGCAG,                               ## [8] [restriction_overhang]: Restriction overhang (cut1,) or (cut1, cut2)
+*                                    ## [27] [output_formats]: Output formats (see docs)
 ```
 
 After you change these parameters you may save and exit nano by typing CTRL+o
@@ -267,12 +267,12 @@ are created in the `project_dir` directory and use the prefix specified by the
 `assembly_name` parameter. For this example assembly all the intermediate
 directories will be of the form: `~/ipyrad-workshop/rad_*`.
 
-> **Note:** Again, the `~` notation indicates a shortcut for the user home
+> **Note:** The `~` notation indicates a shortcut for the user home
 directory, in this case `/home/jovyan`.
 
 # Input data format
 
-Before we get started, let's take a look at what the raw data looks like. Remember that you can use `zcat` and `head` to do this.
+Before we get started, let's take a look at what the raw data looks like. You can use `zcat` and `head` to do this.
 
 ```bash
 ## zcat: unZip and conCATenate the file to the screen
@@ -301,9 +301,13 @@ CTCCAATCCTGCAGTTTAACTGTTCAAGTTGGCAAGATCAAGTCGTCCCTAGCCCCCGCGTCCGTTTTTACCTGGTCGCG
 BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
 ```
 
+More information on the FASTQ format, and what the different lines mean, can be found here: FASTQ_format[https://en.wikipedia.org/wiki/FASTQ_format].
+
 The simulated data are 100bp single-end reads generated as original RAD, meaning
 there will be one overhang sequence. Can you find this sequence in the raw data?
 What's going on with that other stuff at the beginning of each read?
+
+When working on your own data, you would probably want to check the quality of your reads more thoroughly. A good tool to do this, is FastQC[https://www.bioinformatics.babraham.ac.uk/projects/fastqc/], which summarized the quality of all your reads in easy to interpret plots. If this would for example show that the quality at the end of the reads drops, you can consider to trim your reads. Option `[25]` in the params file allows you to do that.
 
 # Step 1: Demultiplexing the raw data
 
