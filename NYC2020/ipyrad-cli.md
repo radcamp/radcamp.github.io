@@ -467,7 +467,7 @@ It's also possible to incorporate information from a reference genome to
 improve clustering at this step, if such a resources is available for your
 organism (or one that is relatively closely related). We will not cover
 reference based assemblies in this workshop, but you can refer to the
-[ipyrad documentation](https://ipyrad.readthedocs.io/tutorial_advanced_cli.html) for more information.
+[ipyrad documentation](https://ipyrad.readthedocs.io/en/latest/tutorial_advanced_cli.html#reference-sequence-mapping) for more information.
 
 > **Note on performance:** Steps 3 and 6 generally take considerably longer
 than any of the steps, due to the resource intensive clustering and alignment
