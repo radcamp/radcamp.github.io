@@ -16,7 +16,7 @@ application and interpretation of PCA in the context of population genetics:
 
 ## A note on Jupyter/IPython
 [Jupyter notebooks](http://jupyter.org/) are primarily a way to generate
-reproducible scientific analysis workflows in python. ipyrad analysis tools are
+reproducible scientific analysis workflows in python, R or Julia. ipyrad analysis tools are
 best run inside Jupyter notebooks, as the analysis can be monitored and tweaked
 and provides a self-documenting workflow.
 
@@ -166,7 +166,7 @@ pca.plot(pcs=[3,4])
 This is a last example of a couple of the nice features of the `pca` module,
 including the ability to pass in the axis to draw to, and toggling the legend.
 First, lets say we want to look at PCs 1/2 and 3/4 simultaneously. We can create
-a multi-panel figure with matplotlib, and pas in the axis for `pca` to plot to.
+a multi-panel figure with matplotlib, and pass in the axis for `pca` to plot to.
 We won't linger on the details of the matplotlib calls, but illustrate this here
 so you might have some example code to use in the future.
 
@@ -221,7 +221,7 @@ Much better!
 
 ## More to explore
 The `ipyrad.analysis.pca` module has many more features that we just don't have time to go over, but you might be interested in checking them out later:
-* [Fine grained control of colors per populations](PCA_Advanced_Features.md#controlling-colors)
+* [Fine grained control of colors per populations](https://radcamp.github.io/AF-Biota/PCA_Advanced_Features.html#controlling-colors)
 * [Dealing with missing data](PCA_Advanced_Features.md#dealing-with-missing-data)
 * [Dealing with unequal sampling](PCA_Advanced_Features.md#dealing-with-unequal-sampling)
 * [Dealing with linked snps](PCA_Advanced_Features.md#dealing-with-linked-snps)
