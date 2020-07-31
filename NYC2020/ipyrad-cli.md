@@ -135,7 +135,7 @@ optional arguments:
   * Documentation: http://ipyrad.readthedocs.io
 ```
 
-## Create a new parameters file
+## Unpack your data & Create a new parameters file
 ipyrad uses a text file to hold all the parameters for a given assembly.
 Start by creating a new parameters file with the `-n` flag. This flag
 requires you to pass in a name for your assembly. In the example we use
