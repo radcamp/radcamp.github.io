@@ -33,8 +33,7 @@ Times            | Wednesday Aug 5th |
 In case your binder instance crashes or you need to restart it, it'll be a blank canvas
 so you can get back up to speed quickly with these links:
 * [Launch an ipyrad binder instance](https://mybinder.org/v2/gh/dereneaton/ipyrad/master)
-* One-shot reinstall binder
-
+* One-shot reinstall binder script (run in a new notebook terminal):
 ```
 wget https://raw.githubusercontent.com/radcamp/radcamp.github.io/master/NYC2020/binder-reinstall.sh
 bash binder-reinstall.sh
