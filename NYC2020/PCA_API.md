@@ -145,7 +145,7 @@ the `outfile` argument. This argument will cause the plot function to not only
 draw to the screen, but also to save a `png` formatted file to the filesystem.
 
 ```python
-pca.draw(label="Anolis PCA", outfile="Anolis_pca.png")
+pca.draw(label="Anolis PCA", outfile="Anolis_pca.pdf")
 ```
 
 > **Note:** Spaces in filenames are ***BAD***. It's good practice, as we
@@ -161,7 +161,7 @@ makes it simple to ask for PCs directly.
 
 ```python
 ## Lets reload the full dataset so we have all the samples
-pca = ipa.pca(vcffile, pops_dict)
+pca = ipa.pca(vcffile, imap=imap)
 pca.run()
 pca.draw(2,3)
 ```
