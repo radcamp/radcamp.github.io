@@ -22,7 +22,7 @@ be saved if you close your browser tab, so don't expect any results to be
 persistent. Save anything you generate here that you want to keep to your local
 machine.
 
-**Get everyone on binder here:** [Launch ipyrad with binder.](https://mybinder.org/v2/gh/dereneaton/ipyrad/master?filepath=newdocs%2FAPI-analysis)
+**Get everyone on binder here:** [Launch ipyrad with binder.](https://mybinder.org/v2/gh/dereneaton/ipyrad/master)
 ![png](images/Binder.jpg)
 
 Have patience, this could take a few moments.
