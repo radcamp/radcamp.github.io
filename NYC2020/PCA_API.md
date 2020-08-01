@@ -120,7 +120,7 @@ of samples that belong to those populations. You can copy and paste this
 into a new cell in your notebook.
 
 ```python
-pops_dict = {
+imap = {
      "South":['punc_IBSPCRIB0361', 'punc_MTR05978','punc_MTR21545','punc_JFT773',
              'punc_MTR17744', 'punc_MTR34414', 'punc_MTRX1478', 'punc_MTRX1468'],
      "North":['punc_ICST764', 'punc_MUFAL9635']
@@ -130,9 +130,9 @@ Now create the `pca` object with the vcf file again, this time passing
 in the pops_dict as the second argument, and plot the new figure. We can 
 also easily add a title to our PCA plots with the `title=` argument.
 ```python
-pca = ipa.pca(vcffile, pops_dict)
+pca = ipa.pca(vcffile, imap=imap)
 pca.run()
-pca.draw(0,1)
+pca.draw()
 ```
 
 ![png](PCA_API_files/PCA_API_02_Anolis_PCA_colored.png)
@@ -145,7 +145,7 @@ the `outfile` argument. This argument will cause the plot function to not only
 draw to the screen, but also to save a `png` formatted file to the filesystem.
 
 ```python
-pca.plot(title="Anolis samples", outfile="Anolis_pca.png")
+pca.draw(outfile="Anolis_pca.png")
 ```
 
 > **Note:** Spaces in filenames are ***BAD***. It's good practice, as we
@@ -225,6 +225,7 @@ Much better!
 
 ## More to explore
 The `ipyrad.analysis.pca` module has many more features that we just don't have time to go over, but you might be interested in checking them out later:
+* [Full PCA cookbook](https://ipyrad.readthedocs.io/en/latest/API-analysis/cookbook-pca.html)
 * [Fine grained control of colors per populations](https://radcamp.github.io/AF-Biota/PCA_Advanced_Features.html#controlling-colors)
 * [Dealing with missing data](https://radcamp.github.io/AF-Biota/PCA_Advanced_Features.html#dealing-with-missing-data)
 * [Dealing with unequal sampling](https://radcamp.github.io/AF-Biota/PCA_Advanced_Features.html#dealing-with-unequal-sampling)
