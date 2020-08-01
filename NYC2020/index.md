@@ -29,6 +29,17 @@ Times            | Wednesday Aug 5th |
 12:10-12:40      | [ipyrad CLI](ipyrad-cli.md) |
 12:40-13:10      | ipyrad API and analysis tools: [PCA](PCA_API.md) & [RAxML](RAxML_API.md) |
 
+## Technical quick-links
+In case your binder instance crashes or you need to restart it, it'll be a blank canvas
+so you can get back up to speed quickly with these links:
+* [Launch an ipyrad binder instance](https://mybinder.org/v2/gh/dereneaton/ipyrad/master)
+* One-shot reinstall binder
+
+````
+wget https://raw.githubusercontent.com/radcamp/radcamp.github.io/master/NYC2020/binder-reinstall.sh
+bash binder-reinstall.sh
+```
+
 ## Additional ipyrad analysis cookbooks
 
 * [Tetrad - A Quartet-based species tree method](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-tetrad.ipynb)
