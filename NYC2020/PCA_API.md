@@ -72,7 +72,7 @@ pca = ipa.pca(vcffile)
 ## Run the PCA analysis
 pca.run()
 ## Bam!
-pca.draw(0,1)
+pca.draw()
 ```
    
 ![png](PCA_API_files/PCA_API_00_Simulated_Example.png)
@@ -103,7 +103,7 @@ to quickly generate PCA plots for any vcf from any dataset.
 
 ```python
 pca.run()
-pca.draw(0,1)
+pca.draw()
 ```
 
 ![png](PCA_API_files/PCA_API_01_Anolis_PCA.png)
