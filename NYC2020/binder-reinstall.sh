@@ -6,7 +6,6 @@ cd ipyrad-workshop
 tar -xzf ~/tests/ipsimdata.tar.gz
 conda install nano matplotlib raxml -c bioconda -y
 echo "set nowrap" > ~/.nanorc
-sed '/six/s/.*/fault/' file
 
 echo "------- ipyrad params file (v.0.9.56)-------------------------------------------
 rad                            ## [0] [assembly_name]: Assembly name. Used to name output directories for assembly steps
