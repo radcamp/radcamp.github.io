@@ -178,7 +178,7 @@ with the simulated data, so we can create a new `raxml` object with the
 simulated phylip file, rerun the RAxML tree inference, and then do some plotting:
 ```
 rax = ipa.raxml(
-    data="rad_outfiles/rad.phy",
+    data="ipyrad-workshop/rad_outfiles/rad.phy",
     name="aligntest", 
     workdir="./analysis-raxml",
     );
