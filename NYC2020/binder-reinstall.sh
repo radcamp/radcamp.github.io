@@ -10,7 +10,7 @@ sed '/six/s/.*/fault/' file
 
 echo "------- ipyrad params file (v.0.9.56)-------------------------------------------
 rad                            ## [0] [assembly_name]: Assembly name. Used to name output directories for assembly steps
-/home/isaac/radcamp.github.io/NYC2020 ## [1] [project_dir]: Project dir (made in curdir if not present)
+ ## [1] [project_dir]: Project dir (made in curdir if not present)
 ipsimdata/rad_example_R*.fastq.gz    ## [2] [raw_fastq_path]: Location of raw non-demultiplexed fastq files
 ipsimdata/rad_example_barcodes.txt   ## [3] [barcodes_path]: Location of barcodes file
                                ## [4] [sorted_fastq_path]: Location of demultiplexed/sorted fastq files
