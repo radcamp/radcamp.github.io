@@ -128,11 +128,11 @@ imap = {
 ```
 Now create the `pca` object with the vcf file again, this time passing 
 in the pops_dict as the second argument, and plot the new figure. We can 
-also easily add a title to our PCA plots with the `title=` argument.
+also easily add a title to our PCA plots with the `label=` argument.
 ```python
 pca = ipa.pca(vcffile, imap=imap)
 pca.run()
-pca.draw()
+pca.draw(label="Anolis PCA")
 ```
 
 ![png](PCA_API_files/PCA_API_02_Anolis_PCA_colored.png)
@@ -145,7 +145,7 @@ the `outfile` argument. This argument will cause the plot function to not only
 draw to the screen, but also to save a `png` formatted file to the filesystem.
 
 ```python
-pca.draw(outfile="Anolis_pca.png")
+pca.draw(label="Anolis PCA", outfile="Anolis_pca.png")
 ```
 
 > **Note:** Spaces in filenames are ***BAD***. It's good practice, as we
