@@ -35,7 +35,7 @@ so you can get back up to speed quickly with these links:
 * [Launch an ipyrad binder instance](https://mybinder.org/v2/gh/dereneaton/ipyrad/master)
 * One-shot reinstall binder
 
-````
+```
 wget https://raw.githubusercontent.com/radcamp/radcamp.github.io/master/NYC2020/binder-reinstall.sh
 bash binder-reinstall.sh
 ```
