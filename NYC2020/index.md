@@ -25,7 +25,7 @@ methods for inferring phylogenetic relationships, population structure, and admi
 
 Times            | Wednesday Aug 5th |
 -----            | ------ |
-11:40-12:10      | [A tour of empirical RADseq data: Common properties, analysis workflows, and some examples of evolutionary inference](empirical-radseq.md) |
+11:40-12:10      | [A tour of empirical RADseq data: Common properties, analysis workflows, and some examples of evolutionary inference](https://docs.google.com/presentation/d/1v52QZEGN8GgCf7wwM30rHrn7V4Z7R4gPt9XolCgH4CM/edit?usp=sharing) |
 12:10-12:40      | End-to-end population genetic-scale analysis of RADseq data using the ipyrad.analysis tools: [The ipyrad CLI](ipyrad-cli.md) |
 12:40-13:10      | ipyrad API and analysis tools: [PCA](PCA_API.md) & [RAxML](RAxML_API.md) |
 
