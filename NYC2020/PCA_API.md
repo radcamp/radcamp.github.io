@@ -170,7 +170,7 @@ pca.draw(2,3)
 
 ## Subsampling with replication
 
-The exact plots may look a bit different if you allow random sampling of SNPs per locus (when not using a seed number in the pca.run() command). However, we can also run replications in the subsampling. The replicate results are drawn with a lower opacity and the centroid of all the points for each sample is plotted in high opacity. Note that the Anolis dataset we use here, is severly downsampled, which may lead to quite a lot of noise. 
+The exact plots may look a bit different because of random sampling of one SNP per locus. However, we can also run replications in the subsampling. The replicate results are drawn with a lower opacity and the centroid of all the points for each sample is plotted in high opacity. Note that the Anolis dataset we use here, is severly downsampled, which may lead to quite a lot of noise. 
 
 ```python
 ## Lets reload the full dataset so we have all the samples
@@ -178,6 +178,7 @@ pca = ipa.pca(vcffile, imap=imap)
 pca.run(nreplicates=10)
 pca.draw()
 ```
+
 ![png](PCA_API_files/PCA_API_06_Anolis_replicates.png)
 
 ## More to explore
