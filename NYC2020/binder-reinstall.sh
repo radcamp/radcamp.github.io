@@ -6,11 +6,10 @@ cd ipyrad-workshop
 tar -xzf ~/tests/ipsimdata.tar.gz
 conda install nano matplotlib raxml -c bioconda -y
 echo "set nowrap" > ~/.nanorc
-sed '/six/s/.*/fault/' file
 
 echo "------- ipyrad params file (v.0.9.56)-------------------------------------------
 rad                            ## [0] [assembly_name]: Assembly name. Used to name output directories for assembly steps
-/home/isaac/radcamp.github.io/NYC2020 ## [1] [project_dir]: Project dir (made in curdir if not present)
+./ ## [1] [project_dir]: Project dir (made in curdir if not present)
 ipsimdata/rad_example_R*.fastq.gz    ## [2] [raw_fastq_path]: Location of raw non-demultiplexed fastq files
 ipsimdata/rad_example_barcodes.txt   ## [3] [barcodes_path]: Location of barcodes file
                                ## [4] [sorted_fastq_path]: Location of demultiplexed/sorted fastq files
@@ -36,8 +35,8 @@ TGCAG,                         ## [8] [restriction_overhang]: Restriction overha
 0.5                            ## [24] [max_shared_Hs_locus]: Max # heterozygous sites per locus
 0, 0, 0, 0                     ## [25] [trim_reads]: Trim raw read edges (R1>, <R1, R2>, <R2) (see docs)
 0, 0, 0, 0                     ## [26] [trim_loci]: Trim locus edges (see docs) (R1>, <R1, R2>, <R2)
-p, s, l                        ## [27] [output_formats]: Output formats (see docs)
-*                              ## [28] [pop_assign_file]: Path to population assignment file
+*                        ## [27] [output_formats]: Output formats (see docs)
+                              ## [28] [pop_assign_file]: Path to population assignment file
                                ## [29] [reference_as_filter]: Reads mapped to this reference are removed in step 3" > params-rad.txt
 
 ipyrad -p params-rad.txt -s 1234567 -c 1

@@ -72,7 +72,7 @@ pca = ipa.pca(vcffile)
 ## Run the PCA analysis
 pca.run()
 ## Bam!
-pca.draw(0,1)
+pca.draw()
 ```
    
 ![png](PCA_API_files/PCA_API_00_Simulated_Example.png)
@@ -103,7 +103,7 @@ to quickly generate PCA plots for any vcf from any dataset.
 
 ```python
 pca.run()
-pca.draw(0,1)
+pca.draw()
 ```
 
 ![png](PCA_API_files/PCA_API_01_Anolis_PCA.png)
@@ -120,7 +120,7 @@ of samples that belong to those populations. You can copy and paste this
 into a new cell in your notebook.
 
 ```python
-pops_dict = {
+imap = {
      "South":['punc_IBSPCRIB0361', 'punc_MTR05978','punc_MTR21545','punc_JFT773',
              'punc_MTR17744', 'punc_MTR34414', 'punc_MTRX1478', 'punc_MTRX1468'],
      "North":['punc_ICST764', 'punc_MUFAL9635']
@@ -128,11 +128,11 @@ pops_dict = {
 ```
 Now create the `pca` object with the vcf file again, this time passing 
 in the pops_dict as the second argument, and plot the new figure. We can 
-also easily add a title to our PCA plots with the `title=` argument.
+also easily add a title to our PCA plots with the `label=` argument.
 ```python
-pca = ipa.pca(vcffile, pops_dict)
+pca = ipa.pca(vcffile, imap=imap)
 pca.run()
-pca.draw(0,1)
+pca.draw(label="Anolis PCA")
 ```
 
 ![png](PCA_API_files/PCA_API_02_Anolis_PCA_colored.png)
@@ -145,7 +145,7 @@ the `outfile` argument. This argument will cause the plot function to not only
 draw to the screen, but also to save a `png` formatted file to the filesystem.
 
 ```python
-pca.plot(title="Anolis samples", outfile="Anolis_pca.png")
+pca.draw(label="Anolis PCA", outfile="Anolis_pca.pdf")
 ```
 
 > **Note:** Spaces in filenames are ***BAD***. It's good practice, as we
@@ -161,70 +161,29 @@ makes it simple to ask for PCs directly.
 
 ```python
 ## Lets reload the full dataset so we have all the samples
-pca = ipa.pca(vcffile, pops_dict)
+pca = ipa.pca(vcffile, imap=imap)
 pca.run()
 pca.draw(2,3)
 ```
 
 ![png](PCA_API_files/PCA_API_05_Anolis_PCA_PC34.png)
 
-## Multi-panel PCA
-This is a last example of a couple of the nice features of the `pca` module,
-including the ability to pass in the axis to draw to, and toggling the legend.
-First, lets say we want to look at PCs 1/2 and 3/4 simultaneously. We can create
-a multi-panel figure with matplotlib, and pass in the axis for `pca` to plot to.
-We won't linger on the details of the matplotlib calls, but illustrate this here
-so you might have some example code to use in the future.
+## Subsampling with replication
+
+The exact plots may look a bit different because of random sampling of one SNP per locus. However, we can also run replications in the subsampling. The replicate results are drawn with a lower opacity and the centroid of all the points for each sample is plotted in high opacity. Note that the Anolis dataset we use here is severly downsampled, which may lead to quite a lot of noise. 
 
 ```python
-import matplotlib.pyplot as plt
-
-## Create a new figure 12 inches wide by 5 inches high
-fig = plt.figure(figsize=(12, 5))
-
-## These two calls divide the figure evenly into left and right
-## halfs, and assigns the left half to `ax1` and the right half to `ax2`
-ax1 = fig.add_subplot(1, 2, 1)
-ax2 = fig.add_subplot(1, 2, 2)
-
-## Plot PCs 1 & 2 on the left half of the figure, and PCs 3 & 4 on the right
-pca.plot(ax=ax1, pcs=[1, 2], title="PCs 1 & 2")
-pca.plot(ax=ax2, pcs=[3, 4], title="PCs 3 & 4")
-
-## Saving the plot as a .png file
-plt.savefig("Anolis_2panel_PCs1-4.png", bbox_inches="tight")
-```
-   
-> **Note** Saving the two panel figure is a little different, because we're making
-a composite of two different PCA plots. We need to use the native matplotlib
-`savefig()` function, to save the entire figure, not just one panel. `bbox_inches`
-is an argument that makes the output figure look nicer, it crops the bounding box
-more accurately.
-
-![png](PCA_API_files/PCA_API_06_Anolis_PCA_Multi.png)
-
-It's nice to see PCs 1-4 here, but it's kind of stupid to plot the legend twice,
-so we can just turn off the legend on the first plot.
-
-```python
-fig = plt.figure(figsize=(12, 5))
-ax1 = fig.add_subplot(1, 2, 1)
-ax2 = fig.add_subplot(1, 2, 2)
-
-## The difference here is we switch off the legend on the first PCA
-pca.plot(ax=ax1, pcs=[1, 2], title="PCs 1 & 2", legend=False)
-pca.plot(ax=ax2, pcs=[3, 4], title="PCs 3 & 4")
-
-## And save the plot as .png
-plt.savefig("My_PCA_plot_axis1-4.png", bbox_inches="tight")
+## Lets reload the full dataset so we have all the samples
+pca = ipa.pca(vcffile, imap=imap)
+pca.run(nreplicates=10)
+pca.draw()
 ```
 
-![png](PCA_API_files/PCA_API_07_Anolis_PCA_MultiNoLegend.png)
-
-Much better!
+![png](PCA_API_files/PCA_API_06_Anolis_replicates.png)
 
 ## More to explore
 The `ipyrad.analysis.pca` module has many more features that we just don't have time to go over, but you might be interested in checking them out later:
+* [Full PCA cookbook](https://ipyrad.readthedocs.io/en/latest/API-analysis/cookbook-pca.html)
 * [Fine grained control of colors per populations](https://radcamp.github.io/AF-Biota/PCA_Advanced_Features.html#controlling-colors)
 * [Dealing with missing data](https://radcamp.github.io/AF-Biota/PCA_Advanced_Features.html#dealing-with-missing-data)
 * [Dealing with unequal sampling](https://radcamp.github.io/AF-Biota/PCA_Advanced_Features.html#dealing-with-unequal-sampling)
