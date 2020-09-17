@@ -9,7 +9,7 @@
 * [ipyrad CLI assembly of simulated data Part I](#ipyrad-cli-simulated-data-assembly-part-I)
 
 ## Participant intros part I
-[1 minute/1 slide participant intros]() <- TBD
+[3 minute/1 slide participant intros]() <- TBD
 
 ## Brief intro to RADSeq
 [Introduction to RAD and the terminal](https://eaton-lab.org/slides/radcamp)
