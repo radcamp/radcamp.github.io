@@ -25,7 +25,7 @@ Times           | Oct 5 | Oct 6 | Oct 7 |
 11:00-12:00       | [Introductions/Participant slides](https://docs.google.com/presentation/d/1kcjUdyS8BeLBjIdN6SLW9mMeByIWJ_5K5dRwYr5kUyE/edit?usp=sharing) | N/A | N/A |
 14:00-15:20      | [Data QC and ipyrad CLI Part 1](RADCamp-Day1-AM.md) | [ipyrad.analysis api for phylogenetic inference](RADCamp-Day2-AM.md) | [Assembing and using RAD locus catalogs: exploring the parameter space](index.md), [Running ipyrad on HPC](ipyrad_HPC_setup.md) & other optional analysis cookbooks |
 15:20-15:30      | Break | Break | Break |
-15:30-17:00       | [ipyrad CLI Part 2 & empirical assemblies](RADCamp-Day1-PM.md) | [ipyrad.analysis api for population genetic inference](RADCamp-Day2-PM.md) | Assisted work session |
+15:30-17:00       | [ipyrad CLI Part 2](03_ipyrad_partII_CLI.md) | [ipyrad.analysis api for population genetic inference](RADCamp-Day2-PM.md) | Assisted work session |
 
 ### Workshop sponsors
 This session is funded by the Eccorev Research Federation, the Environmental
