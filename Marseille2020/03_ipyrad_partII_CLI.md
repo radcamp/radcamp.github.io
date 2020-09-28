@@ -38,7 +38,7 @@ and it'll bring you right back up to speed!
 * Get a New>Terminal and execute these commands (takes ~5 minutes):
 
 ```bash
-$ wget https://radcamp.github.io/Marsaille/binder-reinstall.sh
+$ wget https://radcamp.github.io/Marseille2020/binder-reinstall.sh
 $ bash binder-reinstall.sh
 ```
 
@@ -589,6 +589,14 @@ information about all supported output formats can be found in the [ipyrad docs]
 
 ```bash
 $ ipyrad -p params-peddrad.txt -s 7 -c 1 -f
+```
+
+And now you can see the numerous new output formats that have been created:
+```bash
+$ ls peddrad_outfiles/
+peddrad.alleles  peddrad.loci     peddrad.phy        peddrad.snps.hdf5  peddrad.str      peddrad.usnps
+peddrad.geno     peddrad.migrate  peddrad.seqs.hdf5  peddrad.snpsmap    peddrad.treemix  peddrad.ustr
+peddrad.gphocs   peddrad.nex      peddrad.snps       peddrad_stats.txt  peddrad.ugeno    peddrad.vcf
 ```
 
 Congratulations! You've completed your first RAD-Seq assembly. Now you can try

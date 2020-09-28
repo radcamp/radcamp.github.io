@@ -8,7 +8,7 @@ conda install nano matplotlib raxml -c bioconda -y
 echo "set nowrap" > ~/.nanorc
 
 echo "------- ipyrad params file (v.0.9.56)-------------------------------------------
-rad                            ## [0] [assembly_name]: Assembly name. Used to name output directories for assembly steps
+peddrad                            ## [0] [assembly_name]: Assembly name. Used to name output directories for assembly steps
 ./ ## [1] [project_dir]: Project dir (made in curdir if not present)
 ipsimdata/pairddrad_example_R*.fastq.gz    ## [2] [raw_fastq_path]: Location of raw non-demultiplexed fastq files
 ipsimdata/pairddrad_example_barcodes.txt   ## [3] [barcodes_path]: Location of barcodes file
