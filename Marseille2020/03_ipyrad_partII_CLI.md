@@ -38,7 +38,7 @@ and it'll bring you right back up to speed!
 * Get a New>Terminal and execute these commands (takes ~5 minutes):
 
 ```bash
-$ wget https://radcamp.github.io/NYC2019/binder-reinstall.sh
+$ wget https://radcamp.github.io/Marsaille/binder-reinstall.sh
 $ bash binder-reinstall.sh
 ```
 
@@ -121,7 +121,7 @@ $ ipyrad -p params-peddrad.txt -s 4 -c 1
   from saved path: ~/ipyrad-workshop/peddrad.json
 
  -------------------------------------------------------------
-  ipyrad [v.0.9.13]
+  ipyrad [v.0.9.59]
   Interactive assembly and analysis of RAD-seq data
  -------------------------------------------------------------
   Parallel connection | jupyter-dereneaton-2dipyrad-2dqk37slac: 1 cores
@@ -157,11 +157,11 @@ Summary stats of Assembly peddrad
 3L_0      4      20025                20025                20025  ...              1000    0.001956   0.000753           1000
 ```
 
-Illumina error rates are on the order of 0.01% per base, so your error rates
+Illumina error rates are on the order of 0.1% per base, so your error rates
 will ideally be in this neighborhood. Also, under normal conditions error rate
 will be much, much lower than heterozygosity (on the order of 10x lower). If
-the error rate is >>0.01% then you might be using too 
-permissive a clustering threshold. Just a thought.
+the error rate is >> 0.1% then you might be using too permissive a clustering
+threshold. Just a thought.
 
 # Step 5: Consensus base calls
 
@@ -177,7 +177,7 @@ $ ipyrad -p params-peddrad.txt -s 5 -c 1
   from saved path: ~/ipyrad-workshop/peddrad.json
 
  -------------------------------------------------------------
-  ipyrad [v.0.9.13]
+  ipyrad [v.0.9.59]
   Interactive assembly and analysis of RAD-seq data
  -------------------------------------------------------------
   Parallel connection | jupyter-dereneaton-2dipyrad-2dqk37slac: 1 cores
@@ -254,7 +254,7 @@ $ ipyrad -p params-peddrad.txt -s 6 -c 1
   from saved path: ~/ipyrad-workshop/peddrad.json
 
  -------------------------------------------------------------
-  ipyrad [v.0.9.13]
+  ipyrad [v.0.9.59]
   Interactive assembly and analysis of RAD-seq data
  -------------------------------------------------------------
   Parallel connection | jupyter-dereneaton-2dipyrad-2dpnwm5vfx: 1 cores
@@ -376,7 +376,7 @@ $ ipyrad -p params-peddrad.txt -s 7 -c 1
   from saved path: ~/ipyrad-workshop/peddrad.json
 
  -------------------------------------------------------------
-  ipyrad [v.0.9.13]
+  ipyrad [v.0.9.59]
   Interactive assembly and analysis of RAD-seq data
  -------------------------------------------------------------
   Parallel connection | jupyter-dereneaton-2dipyrad-2dpnwm5vfx: 1 cores
