@@ -140,31 +140,6 @@ settings.
 ```bash 
 # First, make sure you're in your workshop directory
 $ cd ~/ipyrad-workshop
-
-# Unpack the simulated data which is included in the ipyrad github repo
-# `tar` is a program for reading and writing archive files, somewhat like zip
-#   -x eXtract from an archive
-#   -z unZip before extracting
-#   -f read from the File
-$ tar -xzf ~/tests/ipsimdata.tar.gz
-
-# Take a look at what we just unpacked
-$ ls ipsimdata
-gbs_example_barcodes.txt         pairddrad_example_R2_.fastq.gz         pairgbs_wmerge_example_genome.fa
-gbs_example_genome.fa            pairddrad_wmerge_example_barcodes.txt  pairgbs_wmerge_example_R1_.fastq.gz
-gbs_example_R1_.fastq.gz         pairddrad_wmerge_example_genome.fa     pairgbs_wmerge_example_R2_.fastq.gz
-pairddrad_example_barcodes.txt   pairddrad_wmerge_example_R1_.fastq.gz  rad_example_barcodes.txt
-pairddrad_example_genome.fa      pairddrad_wmerge_example_R2_.fastq.gz  rad_example_genome.fa
-pairddrad_example_genome.fa.fai  pairgbs_example_barcodes.txt           rad_example_genome.fa.fai
-pairddrad_example_genome.fa.sma  pairgbs_example_R1_.fastq.gz           rad_example_genome.fa.sma
-pairddrad_example_genome.fa.smi  pairgbs_example_R2_.fastq.gz           rad_example_genome.fa.smi
-pairddrad_example_R1_.fastq.gz   pairgbs_wmerge_example_barcodes.txt    rad_example_R1_.fastq.gz
-```
-You can see that we provide a bunch of different example datasets, as well as
-toy genomes for testing different assembly methods. For now we'll go forward
-with the `pairddrad` example dataset.
-
-```bash
 # Now create a new params file named 'peddrad'
 $ ipyrad -n peddrad
 ```
@@ -263,39 +238,42 @@ directory, in this case `/home/jovyan`.
 
 # Input data format
 
-Before we get started, let's take a look at what the raw data looks like. Remember that you can use `zcat` and `head` to do this.
+Before we get started, let's take a look at what the raw data looks like.
+Remember that you can use `zcat` and `head` to do this. Since we already looked
+at R1 in the last section, lets look at R2 this time:
 
 ```bash
 ## zcat: unZip and conCATenate the file to the screen
 ## head -n 20: Just take the first 20 lines of input
 
-$ zcat ipsimdata/pairddrad_example_R1_.fastq.gz | head -n 20
-@lane1_locus0_2G_0_0 1:N:0:
-CTCCAATCCTGCAGTTTAACTGTTCAAGTTGGCAAGATCAAGTCGTCCCTAGCCCCCGCGTCCGTTTTTACCTGGTCGCGGTCCCGACCCAGCTGCCCCC
+$ zcat pairddrad_example_R2_.fastq.gz | head -n 20
+@lane1_locus0_2G_0_0 2:N:0:
+CGGGGTTAAGAGGCCAGTTAACTGCAGCGGGATCGCGCACCATAGCGGCCGTGCCTACGAGTCAGATGTCACTTTTCAGACGCTCATGGAAGTGAGTGCA
 +
 BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
-@lane1_locus0_2G_0_1 1:N:0:
-CTCCAATCCTGCAGTTTAACTGTTCAAGTTGGCAAGATCAAGTCGTCCCTAGCCCCCGCGTCCGTTTTTACCTGGTCGCGGTCCCGACCCAGCTGCCCCC
+@lane1_locus0_2G_0_1 2:N:0:
+CGGGGTTAAGAGGCCAGTTAACTGCAGCGGGATCGCGCACCATAGCGGCCGTGCCTACGAGTCAGATGTCACTTTTCAGACGCTCATGGAAGTGAGTGCA
 +
 BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
-@lane1_locus0_2G_0_2 1:N:0:
-CTCCAATCCTGCAGTTTAACTGTTCAAGTTGGCAAGATCAAGTCGTCCCTAGCCCCCGCGTCCGTTTTTACCTGGTCGCGGTCCCGACCCAGCTGCCCCC
+@lane1_locus0_2G_0_2 2:N:0:
+CGGGGTTAAGAGGCCAGGTAACTGCAGCGGGATCGCGCACCATAGCGGCCGTGCCTACGAGTCAGATGTCACTTTTCAGACGCTCATGGAAGTGAGTGCA
 +
 BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
-@lane1_locus0_2G_0_3 1:N:0:
-CTCCAATCCTGCAGTTTAACTGTTCAAGTTGGCAAGATCAAGTCGTCCCTAGCCCCCGCGTCCGTTTTTACCTGGTCGCGGTCCCGACCCAGCTGCCCCC
+@lane1_locus0_2G_0_3 2:N:0:
+CGGGGTTAAGAGGCCAGTTAACTGCAGCGGGATCGCGCACCATAGCGGCCGTGCCTACGAGTCAGATGTCACTTTTCAGACGCTCATGGAAGTGAGTGCA
 +
 BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
-@lane1_locus0_2G_0_4 1:N:0:
-CTCCAATCCTGCAGTTTAACTGTTCAAGTTGGCAAGATCAAGTCGTCCCTAGCCCCCGCGTCCGTTTTTACCTGGTCGCGGTCCCGACCCAGCTGCCCCC
+@lane1_locus0_2G_0_4 2:N:0:
+CGGGGTTAAGAGGCCAGTTAACTGCAGCGGGATCGCGCACCATAGCGGCCGTGCCTACGAGTCAGATGTCACTTTTCAGACGCTCATGGAAGTGAGTGCA
 +
 BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
 ```
 
 The simulated data are 100bp paired-end reads generated as ddRAD, meaning there
-will be two overhang sequences. In this case the 'rare' cutter leaves the TGCAT
-overhang. Can you find this sequence in the raw data? What's going on with that
-other stuff at the beginning of each read?
+will be two overhang sequences. In this case the 'common' cutter leaves the CGG
+overhang. Can you find this sequence in the raw data? One would think that the
+second overhang sequence would come at the **end** of the R2 reads, so what is
+going on with the orientation of these reads?
 
 # Step 1: Demultiplexing the raw data
 
@@ -323,7 +301,7 @@ all ipyrad assembly steps.
 $ ipyrad -p params-peddrad.txt -s 1 -c 1
 
  -------------------------------------------------------------
-  ipyrad [v.0.9.13]
+  ipyrad [v.0.9.59]
   Interactive assembly and analysis of RAD-seq data
  -------------------------------------------------------------
   Parallel connection | jupyter-dereneaton-2dipyrad-2d975c3axu: 1 cores
@@ -463,7 +441,7 @@ $ ipyrad -p params-peddrad.txt -s 2 -c 1
   from saved path: ~/ipyrad-workshop/peddrad.json
 
  -------------------------------------------------------------
-  ipyrad [v.0.9.13]
+  ipyrad [v.0.9.59]
   Interactive assembly and analysis of RAD-seq data
  -------------------------------------------------------------
   Parallel connection | jupyter-dereneaton-2dipyrad-2d975c3axu: 1 cores
@@ -566,7 +544,7 @@ $ ipyrad -p params-peddrad.txt -s 3 -c 1
   from saved path: ~/ipyrad-workshop/peddrad.json
 
  -------------------------------------------------------------
-  ipyrad [v.0.9.13]
+  ipyrad [v.0.9.59]
   Interactive assembly and analysis of RAD-seq data
  -------------------------------------------------------------
   Parallel connection | jupyter-dereneaton-2dipyrad-2d975c3axu: 1 cores

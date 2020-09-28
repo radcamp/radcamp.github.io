@@ -1,4 +1,4 @@
-# RADCamp Marseille 2020 - Day 1 (AM)
+# RADCamp Marseille 2020 - Day 1
 
 ## Overview of the morning activities:
 * [Intro to RADSeq (Brief)](#brief-intro-to-RADSeq)
@@ -162,7 +162,8 @@ the quality scores for the base calls. The [FASTQ wikipedia](https://en.wikipedi
 page has a good figure depicting the logic behind how quality scores are encoded.
 
 In this case the restriction enzyme leaves a TGCAT overhang. Can you find this
-sequence in the raw data? 
+sequence in the raw data? What's going on with that other stuff at the beginning
+of each read?
 
 To get a better view of the data quality, without looking at individual reads,
 we use automated approaches to check the quality. We will use
@@ -258,6 +259,8 @@ will be treated as "real" data, and potentially bias downstream analysis. In
 the Anolis data this looks like it might be a real concern so we shall keep
 this in mind during step 2 of the ipyrad analysis, and incorporate 3' read
 trimming and aggressive adapter filtering.
+
+## ipyrad assembly part I
 
 [ipyrad CLI Part I](02_ipyrad_partI_CLI.html)
 
