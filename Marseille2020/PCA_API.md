@@ -21,7 +21,7 @@ best run inside Jupyter notebooks, as the analysis can be monitored and tweaked
 and provides a self-documenting workflow.
 
 **The rest of the materials in this part of the workshop assume you are running
-all code in cells of a jupyter notebook** that is running on the cluster.
+all code in cells of a jupyter notebook** that is running inside binder.
 
 # **PCA** analyses
 
@@ -30,15 +30,6 @@ all code in cells of a jupyter notebook** that is running on the cluster.
 * [Specifying which PCs to plot](#looking-at-pcs-other-than-1--2)
 * [Multi-panel PCA](#multi-panel-pca)
 * [More to explore](#more-to-explore)
-
-### Install software
-In order to visualize plots directly in the notebook, we will install matplotlib, using conda. Switch back to
-the terminal (or open a new one) and run this command:
-
-```
-$ conda install matplotlib
-```
-Type 'y' when it asks you if you want to proceed.
 
 ## Create a new notebook for the PCA
 Return to your jupyter notebook dashboard, navigate to your `ipyrad-workshop`
@@ -52,12 +43,8 @@ importing ipyrad, as well as the analysis module. Copy the code below into a
 notebook cell and click run. 
 
 ```python
-%matplotlib inline
-import ipyrad
 import ipyrad.analysis as ipa      ## ipyrad analysis toolkit
 ```
-> **Note:** The call to `%matplotlib inline` here is a jupyter notebook
-'magic' command that enables support for plotting directly inside the notebook.
 
 ## Quick guide (tl;dr)
 The following cell shows the quickest way to results using the simulated data
@@ -93,7 +80,7 @@ so here we'll demonstrate this with Anolis data from Prates et al 2016.
 
 ```python
 ## Use wget to fetch the vcf from the RADCamp website
-!wget https://radcamp.github.io/NYC2020/Prates_et_al_2016_example_data/anolis.vcf
+!wget https://radcamp.github.io/Marseille2020/Prates_et_al_2016_example_data/anolis.vcf
 vcffile = "anolis.vcf"
 pca = ipa.pca(vcffile)
 ```
@@ -109,8 +96,10 @@ pca.draw()
 ![png](PCA_API_files/PCA_API_01_Anolis_PCA.png)
 
 ### Population assignment for sample colors
-For the interpretation of the plot it can be very useful to know which points represent which sample, or which population. You can create a dictionary including this information. The format of the dictionary should
-have populations as keys and lists of samples as values. Sample names need
+For the interpretation of the plot it can be very useful to know which points
+represent which sample, or which population. You can create a dictionary
+including this information. The format of the dictionary should have
+populations as keys and lists of samples as values. Sample names need
 to be identical to the names in the vcf file, which we can verify with the
 `samples_vcforder` property of the PCA object.
 
@@ -129,6 +118,7 @@ imap = {
 Now create the `pca` object with the vcf file again, this time passing 
 in the pops_dict as the second argument, and plot the new figure. We can 
 also easily add a title to our PCA plots with the `label=` argument.
+
 ```python
 pca = ipa.pca(vcffile, imap=imap)
 pca.run()
@@ -139,10 +129,14 @@ pca.draw(label="Anolis PCA")
 
 This is just much nicer looking now, and it's also much more straightforward to
 interpret.
+> **Question:** Why does the figure look a little different every time you call
+run() and draw()?
 
+## Writing the figure to a file
 Here we introduce another nice feature of the `pca.plot()` function, which is
-the `outfile` argument. This argument will cause the plot function to not only
-draw to the screen, but also to save a `png` formatted file to the filesystem.
+the `outfile` argument. This argument will cause the plot function to write
+the figure to a file in either `png`, `pdf`, or `svg` format (determined by
+the file extension you ask for).
 
 ```python
 pca.draw(label="Anolis PCA", outfile="Anolis_pca.pdf")
@@ -170,7 +164,11 @@ pca.draw(2,3)
 
 ## Subsampling with replication
 
-The exact plots may look a bit different because of random sampling of one SNP per locus. However, we can also run replications in the subsampling. The replicate results are drawn with a lower opacity and the centroid of all the points for each sample is plotted in high opacity. Note that the Anolis dataset we use here is severly downsampled, which may lead to quite a lot of noise. 
+The exact plots may look a bit different because of random sampling of one SNP
+per locus. However, we can also run replications in the subsampling. The
+replicate results are drawn with a lower opacity and the centroid of all the
+points for each sample is plotted in high opacity. Note that the Anolis dataset
+we use here is severly downsampled, which may lead to quite a lot of noise. 
 
 ```python
 ## Lets reload the full dataset so we have all the samples

@@ -36,6 +36,7 @@ of a jupyter notebook inside your binder instance.
 ## Create a RAxML Class object
 First, copy and paste the usual imports into a notebook cell and run it (click
 the 'play' button):
+
 ```python
 import ipyrad.analysis as ipa    ## ipyrad analysis toolkit
 import toytree                   ## tree plotting
