@@ -7,7 +7,7 @@ commands, a maximum likelihood inference of phylogenetic trees. This can be
 useful when you want to run all of your analyses in a clean stream-lined way in
 a jupyter notebook to create a completely reproducible study. 
 
-### Install software
+### Install software and fetch data
 There are many ways to install RAxML, the simplest of which is to use conda.
 This will install several RAxML binaries into your conda path. Switch back to
 the terminal (or open a new one) and run this command:
@@ -15,6 +15,15 @@ the terminal (or open a new one) and run this command:
 ```
 $ conda install raxml -c bioconda -y
 ```
+
+We will use the anolis data again, just because simulated data is so boring.
+You can fetch the `anolis.phy` file phyllip file from the RADCamp site with
+`wget`:
+
+```
+$ wget https://radcamp.github.io/Marseille2020/Prates_et_al_2016_example_data/anolis.phy
+```
+
 # **RAxML** Phylogenetic Inference
 
 Return to your notebook dashboard and create a new notebook inside your
@@ -32,16 +41,7 @@ import ipyrad.analysis as ipa    ## ipyrad analysis toolkit
 import toytree                   ## tree plotting
 ```
 
-We will use the anolis data again, just because simulated data is so boring.
-In a new cell (**+**) you may fetch the `anolis.phy` file from the RADCamp site with
-`wget`:
-
-```python
-## Use wget to fetch the vcf from the RADCamp website
-!wget https://radcamp.github.io/Marseille2020/Prates_et_al_2016_example_data/anolis.phy
-```
-
-Now create a RAxML object. The only required argument to initialize the object
+In a new cell (**+**) create a RAxML object. The only required argument to initialize the object
 is a phylip formatted sequence file. In this example we provide a name and
 working directory as well:
 
@@ -104,7 +104,7 @@ very quickly (~1-2 minutes).
 ```python
 rax.run(force=True)
 ```
-    job aligntest finished successfully
+    job anolis-tree finished successfully
 
 > Note: We are running only 10 bootstraps, which takes very little time. In
 fact, when running a real analysis, we should run at least 500 or 1000
@@ -112,7 +112,7 @@ bootstraps. For real large datasets, running an alignment of the entire loci can
 be very time consumming. Because of that, you can explore RAxML using only SNPs
 in a PHYLIP format (e.g. anolis.snps.phy) and excluding the invariant sites.
 Using only variable sites should reduce considerably the running time. However,
-branch lenghts can be biased when using only variable sites, especially with
+branch lengths can be biased when using only variable sites, especially with
 high levels of missing data. See [Leaché et al 2015](https://www.ncbi.nlm.nih.gov/pubmed/26227865)
 for methods correcting for aquisition bias in RAxML when using SNPs only.
 
@@ -179,7 +179,7 @@ with the simulated data, so we can create a new `raxml` object with the
 simulated phylip file, rerun the RAxML tree inference, and then do some plotting:
 ```
 rax = ipa.raxml(
-    data="ipyrad-workshop/rad_outfiles/rad.phy",
+    data="peddrad_outfiles/peddrad.phy",
     name="aligntest", 
     workdir="./analysis-raxml",
     );
