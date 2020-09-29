@@ -13,21 +13,22 @@ This will install several RAxML binaries into your conda path. Switch back to
 the terminal (or open a new one) and run this command:
 
 ```
-$ conda install raxml -c bioconda
+$ conda install raxml -c bioconda -y
 ```
 # **RAxML** Phylogenetic Inference
 
-Create a new notebook inside your `/home/jovyan/ipyrad-workshop/` directory
-called `anolis-raxml.ipynb` by choosing **New->Python 3**, in the
-upper right hand corner. The rest of the materials in this part of the
-workshop assume you are running all code in cells of a jupyter notebook inside
-your binder instance.
+Return to your notebook dashboard and create a new notebook inside your
+`/home/jovyan/ipyrad-workshop/` directory by choosing **New->Python 3**, in the
+upper right hand corner. Once the notebook starts you can rename it by clicking
+on "Untitled" and typing a new name like 'ipyrad-raxml.ipynb'. The rest of the
+materials in this part of the workshop assume you are running all code in cells
+of a jupyter notebook inside your binder instance.
 
 ## Create a RAxML Class object
-First, copy and paste the usual imports into a notebook cell and run it:
+First, copy and paste the usual imports into a notebook cell and run it (click
+the 'play' button):
 ```python
 import ipyrad.analysis as ipa    ## ipyrad analysis toolkit
-import toyplot                   ## plotting library
 import toytree                   ## tree plotting
 ```
 
@@ -37,7 +38,7 @@ In a new cell (**+**) you may fetch the `anolis.phy` file from the RADCamp site 
 
 ```python
 ## Use wget to fetch the vcf from the RADCamp website
-!wget https://radcamp.github.io/NYC2020/Prates_et_al_2016_example_data/anolis.phy
+!wget https://radcamp.github.io/Marseille2020/Prates_et_al_2016_example_data/anolis.phy
 ```
 
 Now create a RAxML object. The only required argument to initialize the object

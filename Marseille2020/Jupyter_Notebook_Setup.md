@@ -16,8 +16,6 @@ remember the parameters for a bunch of esoteric analyses I ran, or
 even remember **which** analyses I ran, because ***they're all here
 in one document***.
 
-**Insert live notebook demo**
-
 If you are familiar with RStudio, the workflow is somewhat similar, the main
 difference being that with jupyter notebooks you can export your entire
 session with figures, tables, and results, all embedded between consecutive
@@ -31,7 +29,10 @@ jupyter notebook environment.
 > **NB:** If you're a native R coder, [R markdown files](https://rmarkdown.rstudio.com/)
 provide a conceptually identical experience.
 
-# Getting Set up with Jupyter Notebooks
+**Everything below here is provided for your future reference if you want
+to run jupyter on your laptop.**
+
+# Getting Set up with Jupyter Notebooks (on your local computer)
 Setting up a Jupyter notebook session involves running a couple commands on your
 local machine.
 
