@@ -573,12 +573,6 @@ formats, so lets rerun step 7 and generate all supported output formats. This
 can be accomplished by editing the `params-peddrad.txt` file and setting the
 requested `output_formats` to `*` (again, the wildcard character):
 
-```bash
-$ nano params-peddrad.txt
-```
-
-And change this line:
-
 ```
 *                        ## [27] [output_formats]: Output formats (see docs)
 ```

@@ -188,26 +188,10 @@ In general the defaults are sensible, and we won't mess with them for now,
 but there are a few parameters we *must* change: the path to the raw data and
 the barcodes file, the dataype, and the restriction overhang sequence(s).
 
-We will use the `nano` text editor to modify `params-peddrad.txt` and change
-these parameters:
-
-```bash
-# First we have to install nano. You will have to do this every time you
-# launch a new binder, since it's not part of the ipyrad rep
-$ conda install nano -y
-
-# Change one stupid default setting. This is annoying <sorry!>
-$ echo "set nowrap" > ~/.nanorc
-
-# Now you can edit the params file
-$ nano params-peddrad.txt
-```
-![png](02_ipyrad_partI_CLI_files/ipyrad_part1_nano.png)
-
-Nano is a command line editor, so you'll need to use only the arrow keys 
-on the keyboard for navigating around the file. Nano accepts a few special
-keyboard commands for doing things other than modifying text, and it lists 
-these on the bottom of the frame. 
+Fortunately jupyter includes a simple text editor, so select the tab
+with the jupyter dashboard, and navigate to the `ipyrad-workshop` directory.
+You can now click on the `params-peddrad.txt` and it will open in the editor
+in a new tab.
 
 We need to specify where the raw data files are located, the type of data we
 are using (.e.g., 'gbs', 'rad', 'ddrad', 'pairddrad), and which enzyme cut site
@@ -221,11 +205,7 @@ pairddrad                                   ## [7] [datatype]: Datatype (see doc
 TGCAG, CGG                                  ## [8] [restriction_overhang]: Restriction overhang (cut1,) or (cut1, cut2)
 ```
 
-After you change these parameters you may save and exit nano by typing CTRL+o 
-(to write **O**utput), and then CTRL+x (to e**X**it the program).
-
-> **Note:** The `CTRL+x` notation indicates that you should hold down the control
-key (which is often styled 'ctrl' on the keyboard) and then push 'x'.
+After you change these parameters choose `File->Save`.
 
 Once we start running the analysis ipyrad will create several new directories to
 hold the output of each step for this assembly. By default the new directories
@@ -246,7 +226,7 @@ at R1 in the last section, lets look at R2 this time:
 ## zcat: unZip and conCATenate the file to the screen
 ## head -n 20: Just take the first 20 lines of input
 
-$ zcat pairddrad_example_R2_.fastq.gz | head -n 20
+$ zcat ipsimdata/pairddrad_example_R2_.fastq.gz | head -n 20
 @lane1_locus0_2G_0_0 2:N:0:
 CGGGGTTAAGAGGCCAGTTAACTGCAGCGGGATCGCGCACCATAGCGGCCGTGCCTACGAGTCAGATGTCACTTTTCAGACGCTCATGGAAGTGAGTGCA
 +
@@ -418,20 +398,13 @@ reads to 75bp and set adapter filtering to be quite aggressive.
 > **Note:** Here, we are just trimming the reads for the sake of demonstration.
 In reality you'd want to be more careful about choosing these values.
 
-Edit your params file again with `nano`:
-
-```bash
-nano params-peddrad.txt
-```
-
-and change the following two parameter settings:
+Return to the tab with the params file open in the text editor (or open it
+again if you closed it and change the following two parameter settings:
 
 ```
 2                               ## [16] [filter_adapters]: Filter for adapters/primers (1 or 2=stricter)
 0, 75, 0, 0                     ## [25] [trim_reads]: Trim raw read edges (R1>, <R1, R2>, <R2) (see docs)
 ```
-> **Note:** Saving and quitting from `nano`: `CTRL+o` then `CTRL+x`
-
 
 ```bash
 $ ipyrad -p params-peddrad.txt -s 2 -c 1
@@ -606,9 +579,7 @@ each sample in `./peddrad_clust_0.85/`. You can get a feel for what
 this looks like by examining a portion of one of the files. 
 
 ```bash
-## Same as above, `zcat` unzips and prints to the screen and 
-## `head -n 28` means just show me the first 28 lines. 
-$ zcat zcat peddrad_clust_0.85/1A_0.clustS.gz | head -n 18
+$ zcat peddrad_clust_0.85/1A_0.clustS.gz | head -n 18
 ```
 ```
 0121ac19c8acb83e5d426007a2424b65;size=18;*
