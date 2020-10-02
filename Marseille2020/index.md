@@ -12,10 +12,10 @@ to the chat channel for participating in the discussion. Link to come.
 # Organisers, Instructors, and Facilitators
 
   - Didier Aurelle (Aix-Marseille Université/Mediterranean Institute of Oceanography)
-  - Alex Baumel (Institut Méditerranéen de Biodiversité'Ecologie marine et continent)
+  - Alex Baumel (Institut Méditerranéen de Biodiversité et d'Ecologie marine et continent)
   - Joana Boavida (CCMAR Center of Marine Sciences (Portugal))
   - Isaac Overcast (Institut de Biologie de l'Ecole Normale Superieure)
-  - Eric Pante (La Rochelle UniversitÃ)
+  - Eric Pante (La Rochelle Université)
 
 # Schedule
 
