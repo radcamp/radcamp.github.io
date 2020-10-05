@@ -264,7 +264,5 @@ trimming and aggressive adapter filtering.
 
 [ipyrad CLI Part I](02_ipyrad_partI_CLI.html)
 
-## Stretch break (10 minutes)
-
 # References
 Prates, I., Xue, A. T., Brown, J. L., Alvarado-Serrano, D. F., Rodrigues, M. T., Hickerson, M. J., & Carnaval, A. C. (2016). Inferring responses to climate dynamics from historical demography in neotropical forest lizards. Proceedings of the National Academy of Sciences, 113(29), 7978-7985.
