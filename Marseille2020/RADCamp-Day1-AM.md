@@ -161,7 +161,7 @@ contains the sequence data. The third line is unused. And the fourth line is
 the quality scores for the base calls. The [FASTQ wikipedia](https://en.wikipedia.org/wiki/FASTQ_format)
 page has a good figure depicting the logic behind how quality scores are encoded.
 
-In this case the restriction enzyme leaves a TGCAT overhang. Can you find this
+In this case the restriction enzyme leaves a TGCAG overhang. Can you find this
 sequence in the raw data? What's going on with that other stuff at the beginning
 of each read?
 
