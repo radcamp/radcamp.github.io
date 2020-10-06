@@ -25,6 +25,7 @@ to the chat channel for participating in the discussion. Link to come.
 ```bash
 $ wget https://radcamp.github.io/Marseille2020/binder-reinstall.sh
 $ bash binder-reinstall.sh
+```
 
 # Schedule
 
