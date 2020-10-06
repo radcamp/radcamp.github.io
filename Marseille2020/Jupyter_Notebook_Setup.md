@@ -29,10 +29,9 @@ jupyter notebook environment.
 > **NB:** If you're a native R coder, [R markdown files](https://rmarkdown.rstudio.com/)
 provide a conceptually identical experience.
 
-**Everything below here is provided for your future reference if you want
-to run jupyter on your laptop.**
+# **Everything below here is provided for your future reference if you want to run jupyter on your laptop.**
 
-# Getting Set up with Jupyter Notebooks (on your local computer)
+## Getting Set up with Jupyter Notebooks (on your local computer)
 Setting up a Jupyter notebook session involves running a couple commands on your
 local machine.
 
