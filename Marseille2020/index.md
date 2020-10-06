@@ -19,6 +19,13 @@ to the chat channel for participating in the discussion. Link to come.
 
 # Binder link
 [Launch a binder instance](https://mybinder.org/v2/gh/dereneaton/ipyrad/master)
+
+* Get a New>Terminal and execute these commands (takes ~5 minutes):
+
+```bash
+$ wget https://radcamp.github.io/Marseille2020/binder-reinstall.sh
+$ bash binder-reinstall.sh
+
 # Schedule
 
 __NB:__ All times are CEST (UTC+2)
