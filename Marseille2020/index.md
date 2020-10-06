@@ -17,6 +17,8 @@ to the chat channel for participating in the discussion. Link to come.
   - Isaac Overcast (Institut de Biologie de l'Ecole Normale Superieure)
   - Eric Pante (La Rochelle Université)
 
+# Binder link
+[Launch a binder instance](https://mybinder.org/v2/gh/dereneaton/ipyrad/master)
 # Schedule
 
 __NB:__ All times are CEST (UTC+2)
