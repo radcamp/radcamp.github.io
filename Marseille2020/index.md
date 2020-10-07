@@ -52,7 +52,8 @@ Genomics Research Group, the IMBE laboratory and the Aix-Marseille University.
 * [ABBA-BABA - Admixture analysis](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-abba-baba.ipynb)
 
 # RADCamp Marseilles 2020 Group Photo
-Don't forget to get a sweet group photo to commemorate the fun times!
+![Group "photo" 1](GroupPhoto1.png)
+![Group "photo" 2](GroupPhoto2.png)
 
 ## Acknowledgements
 RADCamp Marseilles 2020 materials are largely based on materials from previous
