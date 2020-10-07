@@ -34,7 +34,7 @@ __NB:__ All times are CEST (UTC+2)
 Times           | Oct 5 | Oct 6 | Oct 7 |
 -----           | ------ | ------ | ------ |
 11:00-12:00       | [Introductions/Participant slides](https://docs.google.com/presentation/d/1kcjUdyS8BeLBjIdN6SLW9mMeByIWJ_5K5dRwYr5kUyE/edit?usp=sharing) | N/A | N/A |
-14:00-15:20      | [Opening Remarks](https://amubox.univ-amu.fr/apps/onlyoffice/s/KGRP7aSKymXPASf), [Setup/Data QC](RADCamp-Day1-AM.md) & [ipyrad CLI Part 1](02_ipyrad_partI_CLI.html) | [Jupyter notebook intro](Jupyter_Notebook_Setup.html) & [ipyrad.analysis api for phylogenetic inference (RAxML)](RAxML_API.md) | [Assembing and using RAD locus catalogs: exploring the parameter space](Pante_intro_slide.pdf), [Running ipyrad on HPC](ipyrad_HPC_setup.md) & other optional analysis cookbooks |
+14:00-15:20      | [Opening Remarks](https://amubox.univ-amu.fr/apps/onlyoffice/s/KGRP7aSKymXPASf), [Setup/Data QC](RADCamp-Day1-AM.md) & [ipyrad CLI Part 1](02_ipyrad_partI_CLI.html) | [Jupyter notebook intro](Jupyter_Notebook_Setup.html) & [ipyrad.analysis api for phylogenetic inference (RAxML)](RAxML_API.md) | [Assembing and using RAD locus catalogs: exploring the parameter space](RADtags_radcamp.pdf), [Running ipyrad on HPC](ipyrad_HPC_setup.md) & other optional analysis cookbooks |
 15:20-15:30      | Break | Break | Break |
 15:30-17:00       | [ipyrad CLI Part 2](03_ipyrad_partII_CLI.md) | [ipyrad.analysis api for population genetic inference (PCA)](PCA_API.md) | Assisted work session |
 
