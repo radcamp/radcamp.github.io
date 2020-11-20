@@ -177,6 +177,23 @@ pca.run(nreplicates=10)
 pca.draw()
 ```
 
+## Fine grained color control
+Very fine control over exact colors for each population can be manipulated
+with the `colors` argument for `pca.draw()`. `colors` takes a list which should
+be the same length as the imap dictionary. Colors can be specified either as
+CSS color names, or as `toyplot.color.rgb` values.
+
+```python
+import toyplot
+
+imap = {"p1":['1A_0', '1B_0', '1C_0', '1D_0'], "p2":['2E_0', '2F_0', '2G_0', '2H_0'],
+        "p3":['3I_0', '3J_0', '3K_0', '3L_0']}
+
+pca = ipa.pca(data, imap=imap)
+pca.run()
+pca.draw(colors=[toyplot.color.rgb(1, 0, 0), "maroon", "red"])
+```
+
 ![png](PCA_API_files/PCA_API_06_Anolis_replicates.png)
 
 ## More to explore
