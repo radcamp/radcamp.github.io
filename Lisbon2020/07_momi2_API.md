@@ -197,6 +197,9 @@ very interesting, but we are basically compressing and indexing the VCF so it's
 faster to search.
 ```
 %%bash
+## install bgzip/tabix if you need it
+conda install -c bioconda tabix -y
+
 ## fetch the vcf from the radcamp site
 wget https://radcamp.github.io/Yale2019/Prates_et_al_2016_example_data/anolis.vcf
 
