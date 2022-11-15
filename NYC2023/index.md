@@ -48,9 +48,9 @@ College of New York.
 # Organisers, Instructors, and Facilitators
 
   - Deren Eaton (Columbia)
-  - Isaac Overcast (CCNY)
+  - Isaac Overcast (UMaine)
   - Sandra Hoffberg (Columbia)
-  - Natalia Bayona Vasquez (University of Georgia)
+  - Natalia Bayona Vasquez (Emory University)
 
 # Registration
 
