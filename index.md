@@ -27,6 +27,7 @@ computational experience.
 Workshop attendees will need to bring a laptop computer.
 
 ## Upcoming events:
+* [RADCamp2023-NYC](NYC2023/index.md)
 
 ## Past events:
 
