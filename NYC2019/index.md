@@ -126,6 +126,15 @@ Times            | Saturday 10/12 | Sunday 10/13 |
 # RADCamp NYC 2019 Part II Group Photo
 ![jpg](RADCamp-NYC2019-PartII-photo.jpg)
 
+## RADCamp NYC 2019 Impact Evaluation/Grant Report
+With support from the societies, Columbia University, and the CUNY Graduate Center,
+we were able to completely cover the costs of all reagents and sequencing, so
+participants only had to isolate DNA and pay for travel and accommodation. The full
+report of the impact and outcome of this activity is provided in the following document:
+
+[RADCampNYC-2019-SSE-SSB-Grant-Report](https://docs.google.com/document/d/1byyE1j-c_7eTxc2SEvtLT-GQ_lOXaRiS4UnoNz1CseU/edit)
+
+
 ## Acknowledgements
 RADcamp NYC 2019 Part I materials are prepared by Sandra Hoffberg, Natalia Bayona Vasquez, and Travis Glenn. Many things we reference can be found on [badDNA.uga.edu](https://baddna.uga.edu). We borrowed supplies from the Rubenstein, Duik-Wasser, and Hickerson labs at Columbia and CCNY.
 RADCamp NYC 2019 Part II materials are largely based on materials from the [RADCamp AF-Biota workshop](https://radcamp.github.io/AF-Biota/) which were created by Isaac Overcast, Mariana Vasconcellos, and Laura Bertola.
