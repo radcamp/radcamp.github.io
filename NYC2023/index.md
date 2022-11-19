@@ -10,6 +10,8 @@ Schermerhorn Extension Building Room 1010
 Columbia University  
 New York City  
 
+__Application for RADCamp NYC 2023 is available now!__ (see below for more info): [RADCamp 2023 Application](https://radcamp.github.io/NYC2023/)
+
 # Summary
 This two-part workshop is designed to guide participants through a full RADseq pilot
 study.
