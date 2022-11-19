@@ -1,10 +1,10 @@
 # Welcome to RADcamp 2023 - The New York City Edition
 
 Part I - Wet lab (3RAD protocol)  
-Week of May 15th 2023
+May 12-13th 2023
 
 Part II - Bioinformatics (ipyrad)  
-Week of June 12th 2023
+June 11-12th 2023
 
 Schermerhorn Extension Building Room 1010  
 Columbia University  
@@ -57,15 +57,23 @@ of Maine.
   - Sandra Hoffberg (Columbia)
   - Natalia Bayona Vasquez (Emory University)
 
-# Registration
+# Application/Registration
 
-Registration for each weekend will be separate and preference will be given to participants who
-can commit to attending both weekends. A registration fee ($30 per weekend) will be due upon acceptance.
+__Application for RADCamp NYC 2023 is available now!__: [RADCamp 2023 Application](https://radcamp.github.io/NYC2023/)
 
-This year, partial, need-based support for travel and accommodations in NYC will be available! 
-Apply for this in the workshop application.  Otherwise, you will be responsible for your own 
-lodging, transportation, and meals. We will provide coffee and snacks during breaks. 
-The workshop will be limited to ~20 participants per weekend. 
+Application review will begin __December 15__ and continue until all spots are filled. Decisions on
+workshop participation will be communicated to all applicants the first week of January 2023.
+
+__Fees:__ A registration fee ($30 per weekend) will be due upon acceptance.
+Need-based fee waivers will be considered, and well qualified applicants will not be
+turned away for lack of funds.
+
+Partial, need-based support for travel and accommodations in NYC is also available! 
+Please indicate your request for travel/lodging support in the online application.
+We will provide coffee and snacks during breaks. The workshop will be limited
+to ~20 participants per weekend. 
+
+Please contact us at __radcamp.nyc@gmail.com__ with any questions.
 
 # Wet Lab (3RAD) Schedule
 
@@ -96,9 +104,9 @@ Times            | Day 1 | Day 2 |
 Times            | Day 3 | Day 4 |
 -----            | ------ | ------- |
 8:30-9:00       | Check-in and refreshments | Check-in and refreshments |
-9:00-12:30      | [Introductions, data QC, and ipyrad CLI Part 1](RADCamp-PartII-Day1-AM.md) | [ipyrad API and analysis tools](RADCamp-PartII-Day2-AM.md) |
+9:00-12:30      | Introductions, data QC, and ipyrad CLI Part 1 | ipyrad API and analysis tools |
 12:30-14:00 | Lunch | Lunch |
-14:00-17:00 |[ipyrad CLI Part 2 & 3RAD Assembly](RADCamp-PartII-Day1-PM.md) |  [Small group analysis of real data](RADCamp-PartII-Day2-PM.md) |
+14:00-17:00 |ipyrad CLI Part 2 & 3RAD Assembly | Small group analysis of real data |
 17:00-19:00 | Networking Dinner | Social |
 
 ## Additional ipyrad analysis cookbooks
