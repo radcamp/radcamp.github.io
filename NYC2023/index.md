@@ -10,7 +10,7 @@ Schermerhorn Extension Building Room 1010
 Columbia University  
 New York City  
 
-__Application for RADCamp NYC 2023 is available now!__ (see below for more info): [RADCamp 2023 Application](https://radcamp.github.io/NYC2023/)
+__Application for RADCamp NYC 2023 is available now!__ (see below for more info): [RADCamp 2023 Application](https://forms.gle/eZc5GTJCDNMGFLHE6)
 
 # Summary
 This two-part workshop is designed to guide participants through a full RADseq pilot
@@ -61,7 +61,7 @@ of Maine.
 
 # Application/Registration
 
-__Application for RADCamp NYC 2023 is available now!__: [RADCamp 2023 Application](https://radcamp.github.io/NYC2023/)
+__Application for RADCamp NYC 2023 is available now!__: [RADCamp 2023 Application](https://forms.gle/eZc5GTJCDNMGFLHE6)
 
 Application review will begin __December 15__ and continue until all spots are filled. Decisions on
 workshop participation will be communicated to all applicants the first week of January 2023.
