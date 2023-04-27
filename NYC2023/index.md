@@ -126,16 +126,16 @@ Times            | Day 3 | Day 4 |
 
 ## RADCamp NYC 2023 co-sponsored by:
 
-![American Genetics Association](images/AGA-logo.jpg){: width="50%"}  
+![American Genetics Association](images/AGA-logo.jpg){: width="25%"}  
 __American Genetics Association through the Special Event Awards program__
 
-![Columbia E3B](images/E3B-logo.jpg){: width="50%"}  
+![Columbia E3B](images/E3B-logo.jpg){: width="25%"}  
 __Columbia University's Ecology, Evolution and Environmental Biology Department__
 
-![Maine Center for Genetics in the Environment and University of Maine](images/MAINE_crest_4c.png){: width="50%"}  
+![Maine Center for Genetics in the Environment and University of Maine](images/MAINE_crest_4c.png){: width="25%"}  
 __Maine Center for Genetics in the Environment & The University of Maine__
 
-![Code Ocean](images/CodeOcean-VerticalLogo.png)
+![Code Ocean](images/CodeOcean-VerticalLogo.png){: width="25%"}
 __Code Ocean__
 ```
 Our mission is to make computational research a connected community that together drives
