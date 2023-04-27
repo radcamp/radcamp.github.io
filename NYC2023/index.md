@@ -135,6 +135,17 @@ __Columbia University's Ecology, Evolution and Environmental Biology Department_
 ![Maine Center for Genetics in the Environment and University of Maine](images/MAINE_crest_4c.png){: width="50%"}  
 __Maine Center for Genetics in the Environment & The University of Maine__
 
+![Code Ocean](images/CodeOcean-VerticalLogo.png)
+__Code Ocean__
+```
+Our mission is to make computational research a connected community that together drives
+for faster, more collaborative, higher-quality discoveries. Code Ocean is where great
+computational research is created, organized, and shared in one place. It is the best way
+for research teams to standardize research workflow, plus track and reproduce all computations
+and discoveries. Research and development organizations benefit from lower IT costs, automation
+to operationalize reproducibility, and saving wasted researcher and collaboration time.
+```
+
 # RADCamp NYC 2023 Part I Group Photo
 
 # RADCamp NYC 2023 Part II Group Photo
