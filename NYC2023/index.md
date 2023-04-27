@@ -136,7 +136,7 @@ __Columbia University's Ecology, Evolution and Environmental Biology Department_
 __Maine Center for Genetics in the Environment & The University of Maine__
 
 ![Code Ocean](images/CodeOcean-VerticalLogo.png){: width="25%"}
-__Code Ocean__
+
 ```
 Code Ocean's mission is to make computational research a connected community that together drives
 for faster, more collaborative, higher-quality discoveries. Code Ocean is where great
