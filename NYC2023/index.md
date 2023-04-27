@@ -138,7 +138,7 @@ __Maine Center for Genetics in the Environment & The University of Maine__
 ![Code Ocean](images/CodeOcean-VerticalLogo.png){: width="25%"}
 __Code Ocean__
 ```
-Our mission is to make computational research a connected community that together drives
+Code Ocean's mission is to make computational research a connected community that together drives
 for faster, more collaborative, higher-quality discoveries. Code Ocean is where great
 computational research is created, organized, and shared in one place. It is the best way
 for research teams to standardize research workflow, plus track and reproduce all computations
