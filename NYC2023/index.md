@@ -61,6 +61,7 @@ of Maine.
   - Isaac Overcast (UMaine)
   - Sandra Hoffberg (Code Ocean)
   - Natalia Bayona Vasquez (Emory University)
+  - Edgar Benavides (Columbia University)
 
 # Application/Registration
 
@@ -85,9 +86,9 @@ Times            | Day 1 | Day 2 |
 -----            | ------ | ------- |
 8:30-9:00       | Check-in and refreshments | Check-in and refreshments |
 9:00-12:30      | Lecture | Library amplification |
-12:30-13:30 | Lunch | Lunch |
-13:30-17:00 | Digestion and Ligation | Library amplification and QC |
-17:00-19:00 | Free evening        | Networking dinner |
+12:30-13:45 | Lunch | Lunch |
+13:45-18:00 | Digestion, Ligation, Clean up | Clean up and QC |
+18:00-20:00 | Casual evening        | Code Ocean Networking dinner |
 
 ## 3RAD resources (added after workshop)
 * i7 and inner barcodes used during workshop
