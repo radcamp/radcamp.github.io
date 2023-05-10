@@ -1,15 +1,14 @@
-# Welcome to RadCamp 2018 - The New York City Edition
+# Welcome to RadCamp 2023 - The Kigali Edition (ICCB)
 
-August 28-30, 2018  
-Schermerhorn Extension Building Room 1010  
-Columbia University  
-New York City  
+July 22-23, 2023  
+Kigali, Rwanda
 
 # Organisers, Instructors, and Facilitators
 
-  - Deren Eaton (Columbia)
-  - Isaac Overcast (CCNY)
-  - Sandra Hoffberg (Columbia)
+  - Isaac Overcast - University of Maine
+  - Laura Bertola - University of Copenhagen
+  - Josiah Kuja - University of Copenhagen
+  - Anubhab Khan - University of Glasgow
 
 # Registration
 
