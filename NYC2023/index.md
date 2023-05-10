@@ -127,22 +127,47 @@ Times            | Day 3 | Day 4 |
 
 ## RADCamp NYC 2023 co-sponsored by:
 
-![American Genetics Association](images/AGA-logo.jpg){: width="25%"}  
-__American Genetics Association through the Special Event Awards program__
+<table width="100%">
+  <tr> <td width="50%" align="center">
+<img src="images/E3B-logo.jpg"/>
+    <p><b>American Genetics Association through the Special Event Awards program</b></p>
+  </td> <td width="50%" align="center">
+<img src="images/AGA-logo.jpg"/>
+    <p><b>Columbia University's Ecology, Evolution and Environmental Biology Department</b></p>
+  </td> </tr>
+  <tr> <td width="50%" align="center">
+<img src="images/MAINE_crest_4c.png" width="50%"/>
+    <p><b>Maine Center for Genetics in the Environment & The University of Maine</b></p>
+  </td> <td width="50%" align="center">
+<img src="images/SSB.png"/>
+    <p><b>Society of Systematic Biologists</b></p>
+  </td> </tr>
+  <tr> <td width="50%" align="center">
+<img src="images/CodeOcean-VerticalLogo.png"/>
+  </td> </tr>
+</table>
+
+<!--
+Old unformatted logo images:
+
+* __American Genetics Association through the Special Event Awards program__  
+* __Columbia University's Ecology, Evolution and Environmental Biology Department__  
+* __Maine Center for Genetics in the Environment & The University of Maine__  
+* __Society of Systematic Biologists__  
+* __Code Ocean__  
 
 ![Columbia E3B](images/E3B-logo.jpg){: width="25%"}  
-__Columbia University's Ecology, Evolution and Environmental Biology Department__
+
+![American Genetics Association](images/AGA-logo.jpg){: width="25%"}  
 
 ![Maine Center for Genetics in the Environment and University of Maine](images/MAINE_crest_4c.png){: width="25%"}  
-__Maine Center for Genetics in the Environment & The University of Maine__
 
 ![Society of Systematic Biologists](images/SSB.png){: width="25%"}  
-__Society of Systematic Biologists__
 
 ![Code Ocean](images/CodeOcean-VerticalLogo.png){: width="25%"}
+-->
 
-
-Code Ocean's mission is to make computational research a connected community that together drives
+**Code Ocean**'s mission is to make computational research a connected community that together drives
 for faster, more collaborative, higher-quality discoveries. Code Ocean is where great
 computational research is created, organized, and shared in one place. It is the best way
 for research teams to standardize research workflow, plus track and reproduce all computations
