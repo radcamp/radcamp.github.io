@@ -136,6 +136,9 @@ __Columbia University's Ecology, Evolution and Environmental Biology Department_
 ![Maine Center for Genetics in the Environment and University of Maine](images/MAINE_crest_4c.png){: width="25%"}  
 __Maine Center for Genetics in the Environment & The University of Maine__
 
+![Society of Systematic Biologists](images/SSB.png){: width="25%"}  
+__Society of Systematic Biologists__
+
 ![Code Ocean](images/CodeOcean-VerticalLogo.png){: width="25%"}
 
 
