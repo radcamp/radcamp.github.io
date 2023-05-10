@@ -130,10 +130,10 @@ Times            | Day 3 | Day 4 |
 <table width="100%">
   <tr> <td width="50%" align="center">
 <img src="images/E3B-logo.jpg"/>
-    <p><b>American Genetics Association through the Special Event Awards program</b></p>
+    <p><b>Columbia University's Ecology, Evolution and Environmental Biology Department</b></p>
   </td> <td width="50%" align="center">
 <img src="images/AGA-logo.jpg"/>
-    <p><b>Columbia University's Ecology, Evolution and Environmental Biology Department</b></p>
+    <p><b>American Genetics Association through the Special Event Awards program</b></p>
   </td> </tr>
   <tr> <td width="50%" align="center">
 <img src="images/MAINE_crest_4c.png" width="50%"/>
