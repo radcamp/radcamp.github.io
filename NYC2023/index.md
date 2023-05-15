@@ -176,9 +176,10 @@ to operationalize reproducibility, and saving wasted researcher and collaboratio
 
 
 # RADCamp NYC 2023 Part I Group Photo
+![RADCampNYC2023-PartI-picnic](images/PartI-picnic.jpeg)
 
 # RADCamp NYC 2023 Part II Group Photo
 
 ## Acknowledgements
 RADcamp NYC 2023 Part I materials are prepared by Sandra Hoffberg, Natalia Bayona Vasquez, and Travis Glenn. Many things we reference can be found on [badDNA.uga.edu](https://baddna.uga.edu).
-RADCamp NYC 2023 Part II materials are largely based on materials from the [RADCamp AF-Biota workshop](https://radcamp.github.io/AF-Biota/) which were created by Isaac Overcast, Mariana Vasconcellos, and Laura Bertola.
+RADCamp NYC 2023 Part II tutorial contributors (over the years): Deren Eaton, Isaac Overcast, Mariana Vasconcellos, and Laura Bertola.
