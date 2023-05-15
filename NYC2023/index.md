@@ -176,7 +176,7 @@ to operationalize reproducibility, and saving wasted researcher and collaboratio
 
 
 # RADCamp NYC 2023 Part I Group Photo
-![RADCampNYC2023-PartI-picnic](images/PartI-picnic.jpeg)
+![RADCampNYC2023-PartI-picnic](images/RADCampNYC2023-PartI.jpeg)
 
 # RADCamp NYC 2023 Part II Group Photo
 
