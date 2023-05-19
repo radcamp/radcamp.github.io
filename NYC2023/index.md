@@ -90,18 +90,18 @@ Times            | Day 1 | Day 2 |
 13:45-18:00 | Digestion, Ligation, Clean up | Clean up and QC |
 18:00-20:00 | Casual evening        | Code Ocean Networking dinner |
 
-## 3RAD resources (added after workshop)
+## 3RAD resources
 * i7 and inner barcodes used during workshop
 * Find the i5/i7 index sequence from the name
-* Inner barcode sequences in ipyrad format
+* [Inner barcode sequences in ipyrad format](Part_I_files/plate_inner_barcodes.txt)
 * BadDNA order form with index sequences
 * Full 3RAD protocol for plates
 * Library pooling guide
-* Adapter Info
-* How to resuspend adapters
-* How to resuspend primers - i7 and i5
-* Index diversity calculator
-* Homemade speedbeads
+* [Adapter Info for ordering](Part_I_files/3RAD_iTru_adapter_TaggiMatrix.xlsx)
+* [How to resuspend adapters](Part_I_files/Adapter_Mixed_Plate_Instructions.docx)
+* [How to resuspend i5 and i7 primers](Part_I_files/Primer_Plate_Instructions_1.25nmole.docx)
+* [Index diversity calculator](Part_I_files/Index_diversity_calculator_June2016.xlsx)
+* [Homemade speedbeads](Part_1_files/Speedbead_Protocol_June2016.docx)
 
 
 # Bioinformatics (ipyrad) Schedule
