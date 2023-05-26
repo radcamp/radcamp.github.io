@@ -3,17 +3,19 @@
 
 ## Overview of the afternoon activities:
 * [ipyrad CLI assembly of simulated data Part II](#ipyrad-cli-simulated-data-assembly-part-II)
+* [Intro to HPC using the Code Ocean environment](#intro-to-code-ocean)
 * [Coffee break](#coffee-break)
 * [Look at the real data](#Look-at-the-real-data-we-generate)
+* [RADseq data quality control (QC)](#data-qc)
 * [Assemble real data](#Form-groups-and-assemble-real-data)
 
 ## Participant intros Part II
 [1 minute/1 slide participant intros](https://docs.google.com/presentation/d/1OY-laS2s6lITBBQfB_APTNcb-6o7cMdqgFqwZrRBzBg/edit?usp=sharing)
 
-## ipyrad CLI simulated data assembly Part II
-Lead: Isaac
+## Intro to Code Ocean
+Lead: Sandra
 
-[ipyrad CLI Part II](03_ipyrad_partII_CLI.md)
+(Sandra's CO intro and walkthrough presentation goes here)
 
 ## Coffee break
 
@@ -32,6 +34,10 @@ cloud infrastructure which you will use to perform the assembly and analysis.
 
 [RADCamp groups for assembling and analysing the real data](PartII-Groups.txt)
 
+## Data QC
+Lead: Isaac
+
+[3RAD Data Quality Control (fastqc)](Part_II_files/fastqc.md)
 
 ### New: follow this link to open instructions in slide form
 [Slide instructions to start empirical assemblies](https://eaton-lab.org/slides/radcamped)
@@ -39,7 +45,6 @@ cloud infrastructure which you will use to perform the assembly and analysis.
 
 ###  older instructions
 * Form your groups and brief introductions
-* Open a browser tab and go the ip address indicated in the file above. The
 password for your cloud instance will be written on the whiteboard.
 * Open a new terminal window and `cd ipyrad-workshop`.
 * Make a new directory for your 3RAD assembly: `mkdir <assembly_name>`.
