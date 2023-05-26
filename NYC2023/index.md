@@ -10,11 +10,6 @@ Schermerhorn Extension Building Room 1010
 Columbia University  
 New York City  
 
-__Applications for RADCamp NYC 2023 are now closed!__
-
-We will be communicating with applicants in the next several days. For questions about applications
-please contact radcamp.nyc@gmail.com. (Updated Jan 6, 2023)
-
 # Summary
 This two-part workshop is designed to guide participants through a full RADseq pilot
 study.
@@ -67,7 +62,7 @@ of Maine.
 
 __Applications for RADCamp NYC 2023 are now closed!__
 
-Decisions on workshop participation will be communicated to all applicants the first week of January 2023.
+<!-- Decisions on workshop participation will be communicated to all applicants the first week of January 2023.
 
 __Fees:__ A registration fee ($30 per weekend) will be due upon acceptance.
 Need-based fee waivers will be considered, and well qualified applicants will not be
@@ -77,7 +72,7 @@ Partial, need-based support for travel and accommodations in NYC is also availab
 Please indicate your request for travel/lodging support in the online application.
 We will provide coffee and snacks during breaks. The workshop will be limited
 to ~20 participants per weekend. 
-
+-->
 Please contact us at __radcamp.nyc@gmail.com__ with any questions.
 
 # Wet Lab (3RAD) Schedule
@@ -109,9 +104,9 @@ Times            | Day 1 | Day 2 |
 Times            | Day 3 | Day 4 |
 -----            | ------ | ------- |
 8:30-9:00       | Check-in and refreshments | Check-in and refreshments |
-9:00-12:30      | Introductions, data QC, and ipyrad CLI Part 1 | ipyrad API and analysis tools |
+9:00-12:30      | [Introductions and iPyrad Assembly Tutorial](RADCamp-PartII-Day1-AM.md) | [ipyrad API and analysis tools](RADCamp-PartII-Day2-AM.md) |
 12:30-14:00 | Lunch | Lunch |
-14:00-17:00 |ipyrad CLI Part 2 & 3RAD Assembly | Small group analysis of real data |
+14:00-17:00 | [Intro to HPC, Data QC, and 3RAD Assembly](RADCamp-PartII-Day1-PM.md) | [Small group analysis of real data](RADCamp-PartII-Day2-PM.md) |
 17:00-19:00 | Networking Dinner | Social |
 
 ## Additional ipyrad analysis cookbooks
