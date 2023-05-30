@@ -1,4 +1,4 @@
-# RADCamp NYC 2020 Part II (Bioinformatics)
+# RADCamp NYC 2023 Part II (Bioinformatics)
 # Day 1 (PM)
 
 ## Overview of the afternoon activities:
