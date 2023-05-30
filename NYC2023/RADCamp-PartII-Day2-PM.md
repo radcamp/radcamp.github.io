@@ -1,4 +1,4 @@
-# RADCamp NYC 2019 Part II (Bioinformatics)
+# RADCamp NYC 2023 Part II (Bioinformatics)
 # Day 2 (PM)
 
 [Meek snps file](data/Meek/Meek.snps.hdf5) & [Meek phylip file](data/Meek/Meek.phy)
