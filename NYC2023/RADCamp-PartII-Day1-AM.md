@@ -2,66 +2,93 @@
 # Day 1 (AM)
 
 ## Overview of the morning activities:
-* [Welcome and participant intro slides](#participant-intros-part-I)
-* [Intro to RADSeq (Brief)](#brief-intro-to-RADSeq)
-* [Intro to ipyrad documentation](#intro-ipyrad-docs)
-* [Connect to a binder instance](#intro-to-binder)
-* [ipyrad CLI assembly of simulated data Part I](#ipyrad-cli-simulated-data-assembly-part-I)
-* [ipyrad CLI assembly of simulated data Part II](#ipyrad-cli-simulated-data-assembly-part-II)
+* [Welcome and Introductions](#welcome-and-introductions)
+* [Lecture: Intro to RADSeq (Brief)](#brief-intro-to-RADSeq)
+* [Exercise 1: HPC systems, Linux/Bash, and the FASTQ data format](#intro-to-cli-and-fastq)
+* Coffee Break (10:30-10:50)
+* [Lecture: ipyrad history, philosophy and workflow](#ipyrad-history-philosophy-and-workflow)
+* [Exercise 2: ipyrad CLI assembly of simulated data](#ipyrad-cli-simulated-data-assembly)
+* Break for Lunch (12:45-1:30)
 
-## Participant intros part I
-[1 minute/1 slide participant intros](https://docs.google.com/presentation/d/1EtEWfwzOA7u4mEZMxnzgsXZO_6DvZStA2ON8GQkWb6w/edit?usp=sharing)
+## Welcome and Introductions
+
+### Learning objectives.
+By the end of this workshop you will gain experience with:
+* Basic bioinformatics skills
+* Using HPC infrastructure to run genomic analyses
+* Understanding how RAD sequence data is related to the methods we performed in the lab to create it
+* Assembling a RAD-Seq dataset with ipyrad
+* Understanding and dealing with missing data in RAD-seq analyses
+* Running several evolutionary analysis tools on RAD-seq data
+
 
 ## Brief intro to RADSeq
 Lead: Deren
 [Introduction to RAD and the terminal](https://eaton-lab.org/slides/radcamp)
 
-## Intro ipyrad docs
-[ipyrad documentation](https://ipyrad.readthedocs.io/en/latest/)
+## Intro to CLI and FASTQ
+Lead: Isaac
 
-## Intro to binder
-We will perform the basic assembly and analysis of simulated data using
-[binder](https://mybinder.org/), to launch a working copy of the ipyrad github
-repository. The binder project allows the creation of shareable, interactive,
-and reproducible environments by facilitating execution of jupyter notebooks
-in a simple, web-based format. More information about the binder project is
-available in the [binder documentation](https://mybinder.readthedocs.io/en/latest/introduction.html).
+* Genomics/Bioinformatics requires computing resources. Specifically, CPUs,
+RAM, and a lot of disk space. Options: workstation, HPC, or cloud computing.
+* A server is simply a program running on a remote (different) computer with
+which you can interact over the internet. You send it instructions/code, it
+runs the code and sends a response. This way you can use your laptop to run
+very intensive code on a larger remote machine.
+* For this workshop we are going to use compute infrastructure provided by
+[CodeOcean](https://codeocean.com) which is a cloud platform for reproducible
+data science. CodeOcean allows the creation of shareable, interactive,
+and reproducible scientific computing workflows.
 
-**NB:** The binder instance we will use here for the first day is a service
-to the community provided by the binder project, so it has limited computational
-capacity. This capacity is sufficient to assemble the very small simulated
-datasets we provide as examples, but it is in no way capable of assembling
-real data, so don't even think about it! We use binder here as a quick and
-easy way of demonstrating workflows and API mode interactions without all the
-hassle of going through the installation in a live environment. When you
-return to your home institution, if you wish to use ipyrad we provide
-[extensive documentation for setup and config for both local installs
-and installs on HPC systems](https://ipyrad.readthedocs.io/en/latest/3-installation.html).
+### Accessing a command line interface on CodeOcean
+We will perform the basic assembly and analysis of simulated RADSeq data using a
+command line interface on a CodeOcean 'capsule'. For the moment, to stay focused
+on the details of the ipyrad assembly process, we will pop right to the command
+line (using the following procedure), but we will hear much more about the unique
+features of CodeOcean after lunch.
 
-**NB:** Binder images are transient! Nothing you do inside this instance will
-be saved if you close your browser tab, so don't expect any results to be
-persistent. Save anything you generate here that you want to keep to your local
-machine.
+**Get everyone on CodeOcean here:**
+* [Log in to the RADCamp CodeOcean instance (https://radcamp.codeocean.com/)](https://radcamp.codeocean.com/)
+* On the landing page choose "New Capsule" and then "Create New"
+![png](images/CO-NewCapsule.png)
 
-**Get everyone on binder here:** [Launch ipyrad with binder.](https://mybinder.org/v2/gh/dereneaton/ipyrad/master?filepath=newdocs%2FAPI-analysis)
-![png](images/Binder.jpg)
+* Select the "Ubuntu with ipyrad (0.9.92)" Environment
+* Choose 'Select compute resources' and change it to 16 cores/128GB RAM
+![png](images/CO-ipyradCapsule.png)
 
-Have patience, this could take a few moments.
-If it's ready, it should look like this:
+* Now we are going to "launch a cloud workstation" by clicking the button with the prompt on it:
+![png](images/CO-LaunchTerminal.png)
 
-![png](images/Binder_ready.jpg)
+* A bunch of stuff happens with progress bars and moments later you have a
+terminal running on cloud infrastructure. In other words, the commands you type
+in this terminal are not run on your own computer, they are run on a 16 core
+virtual machine somewhere out in the ether:
+![png](images/CO-LittleBlackwindow.png)
 
-To start the terminal on the jupyter dashboard, choose New>Terminal.
-![png](images/Binder_Littleblackwindow.jpg)
+### Navigating the command line
+Bash basics on CodeOcean
+* Unix tools: cd, ls, less, cat, nano, grep.
 
-## ipyrad CLI simulated data assembly Part I
+**NB:** A word about the behavoir of different CO directories.
+
+### First view of FASTQ data
+* Describe fastq format.
+* Format of RAD-seq (3RAD) fastqs before and after i7 and barcode demux
+* How is the RAD-seq format related to the 3RAD molecular protocol? Show image of the “How to add PCR duplicate identifier” slide from part I. 
+* View/highlight RE, i7, and inline barcodes on R1 and R2 files. Play the
+"Why is this the restriction overhang floating out there?" game.
+
+## Coffee break (20 minutes)
+
+## ipyrad history, philosophy, and workflow
+Lead: Deren
+* [ipyrad documentation](https://ipyrad.readthedocs.io/en/latest/)
+
+## ipyrad CLI simulated data assembly
 Lead: Isaac
 
 [ipyrad CLI Part I](Part_II_files/ipyrad_partI_CLI.html)
-
-## ipyrad CLI simulated data assembly Part II
-Lead: Isaac
-
 [ipyrad CLI Part II](Part_II_files/ipyrad_partII_CLI.md)
+
 
 ## Break for lunch
