@@ -1,9 +1,9 @@
 ## FastQC for quality control
 
-To get a better view of the data quality, without looking at individual reads,
-we use automated approaches to check the quality. We will use
-[FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) to generate a sample-wide
-summary of data quality.
+To get a better view of the data quality, without looking at individual reads by
+hand like we did earlier, we use automated approaches to check the quality. We
+will use [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/)
+to generate a sample-wide summary of data quality.
 
 The logic of FastQC is that we want to obtain a high-level view of the quality
 of the sequencing. You may be able to detect low quality samples, but if you
@@ -25,7 +25,7 @@ mentioning) dip toward the end of the reads:
 In contrast, here is a somewhat typical base sequence quality report for R1 of
 a 300bp paired-end Illumina run of ezRAD data:
 
-![png](../images/fastqc-quality-example.png)
+![png](../images/fastqc-low-quality-example.png)
 
 This figure depicts a common artifact of current Illumina chemistry, whereby
 quality scores per base drop off precipitously toward the ends of reads, with
@@ -37,6 +37,11 @@ data to increase overall quality by trimming for shorter length, and retaining
 data to increase value obtained from sequencing with the result of increasing
 noise toward the ends of reads.
 
+**NB:** Part of the *point* of running fastqc is to determine where the error
+rate is too high in the sequences to reliably call bases. Once this is determined
+one would then use the `trim_reads` parameter in ipyrad to remove these low quality
+regions. In the above example we might choose to trim these reads to ~200bp.
+
 First, install FastQC:
 ```bash
 $ conda install -c bioconda fastqc
@@ -45,6 +50,7 @@ Type 'y' when it asks you if you would like to install other packages ('Proceed 
 
 Now run FastQC on this sample:
 ```bash
+$ cd /scratch/ipyrad-workshop
 $ fastqc anolis_R1_.fastq.gz
 ```
 
@@ -119,7 +125,29 @@ the Anolis data this looks like it might be a real concern so we shall keep
 this in mind during step 2 of the ipyrad analysis, and incorporate 3' read
 trimming and aggressive adapter filtering.
 
-References
+### Running fastqc on empirical data
+Now we will run fastqc on a couple of samples from the empirical data. To do
+this we will first change directory (`cd`) to where the demultiplexed samples
+live, inside `/data/Step1-Results`. 
+```
+$ cd /data/Step1-Results/Alaasam/Alaasam_fastqs
+$ fastqc 07089_C18_5_R1_.fastq.gz -o /scratch/ipyrad-workshop/
+$ fastqc 07089_C18_5_R1_.fastq.gz -o /scratch/ipyrad-workshop/
+```
+**NB:** The data assets attached to capsules in CO are 'read-only' meaning
+we have to write the fastqc outputs to some other directory. This is what the
+`-o` flag is telling fastqc, to write the outputs to `/scratch/ipyrad-workshop`.
+
+In the remaining time, consult with your group members and each choose 1-2 samples
+to run fastqc on both R1 and R2. After the runs finish, inspect the results and
+try to come to a consensus about what the results indicate.
+
+Be prepared to answer the following questions:
+* Were there any significant quality issues with any of the samples?
+* Will you choose to use `trim_reads` to remove low quality regions? If so what values?
+* Was there noticeable adapter contamination?
+
+### References
 Prates, I., Xue, A. T., Brown, J. L., Alvarado-Serrano, D. F., Rodrigues, M. T.,
 Hickerson, M. J., & Carnaval, A. C. (2016). Inferring responses to climate dynamics
 from historical demography in neotropical forest lizards. Proceedings of the
