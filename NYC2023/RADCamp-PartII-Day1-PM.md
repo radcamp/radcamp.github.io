@@ -5,7 +5,7 @@
 * [A Tour of the Code Ocean Environment](#intro-to-code-ocean)
 * [Look at the real data](#Look-at-the-real-data-we-generate)
 * [Exercise 3: RADseq data quality control (QC)](#empirical-data-qc)
-* [Coffee break](#coffee-break)
+* Coffee break (3:30-3:45)
 * [Assemble real data](#Form-groups-and-assemble-real-data)
 
 ## Intro to Code Ocean
@@ -57,7 +57,7 @@ data to make this step faster and easier.
 Now the groups will work together on the data QC for their specific dataset.
 [3RAD Data Quality Control (fastqc)](Part_II_files/fastqc.md)
 
-## Coffee break
+## Coffee break (3:30-3:45)
 
 ## Briefly report back on fastqc results
 * Were there any significant problems with any of the samples?
