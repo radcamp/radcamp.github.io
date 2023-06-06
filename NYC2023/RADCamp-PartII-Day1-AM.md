@@ -3,7 +3,7 @@
 
 ## Overview of the morning activities:
 * [Welcome and Introductions](#welcome-and-introductions)
-* [Lecture: Intro to RADSeq (Brief)](#brief-intro-to-RADSeq)
+* [Lecture: Intro to RADSeq (Brief)](#brief-intro-to-radseq)
 * [Exercise 1: HPC systems, Linux/Bash, and the FASTQ data format](#intro-to-cli-and-fastq)
 * Coffee Break (10:30-10:50)
 * [Lecture: ipyrad history, philosophy and workflow](#ipyrad-history-philosophy-and-workflow)
@@ -56,13 +56,15 @@ features of CodeOcean after lunch.
 * Choose 'Select compute resources' and change it to 16 cores/128GB RAM
 ![png](images/CO-ipyradCapsule.png)
 
-* Now we are going to "launch a cloud workstation" by clicking the button with the prompt on it:
-![png](images/CO-LaunchTerminal.png)
+* Now we are going to "launch a cloud workstation" with JupyterLab enabled:
+![png](images/CO-LaunchJupyterLab.png)
 
-* A bunch of stuff happens with progress bars and moments later you have a
-terminal running on cloud infrastructure. In other words, the commands you type
-in this terminal are not run on your own computer, they are run on a 16 core
-virtual machine somewhere out in the ether:
+* A bunch of stuff happens with progress bars and moments later you will see
+the 'JupyterLab' interface, which is our UI to the cloud computers provided by CO.
+We will learn more about Jupyter notebooks later in the workshop, but for now
+click on "Terminal" in the launcher window. The commands you type in this
+terminal are not run on your own computer, they are run on a 16 core virtual
+machine somewhere out in the ether:
 ![png](images/CO-LittleBlackwindow.png)
 
 ### Navigating the command line

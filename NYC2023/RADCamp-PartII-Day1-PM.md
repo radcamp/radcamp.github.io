@@ -2,42 +2,41 @@
 # Day 1 (PM)
 
 ## Overview of the afternoon activities:
-* [ipyrad CLI assembly of simulated data Part II](#ipyrad-cli-simulated-data-assembly-part-II)
-* [Intro to HPC using the Code Ocean environment](#intro-to-code-ocean)
-* [Coffee break](#coffee-break)
+* [A Tour of the Code Ocean Environment](#intro-to-code-ocean)
 * [Look at the real data](#Look-at-the-real-data-we-generate)
-* [RADseq data quality control (QC)](#data-qc)
+* [Exercise 3: RADseq data quality control (QC)](#empirical-data-qc)
+* [Coffee break](#coffee-break)
 * [Assemble real data](#Form-groups-and-assemble-real-data)
-
-## Participant intros Part II
-[1 minute/1 slide participant intros](https://docs.google.com/presentation/d/1OY-laS2s6lITBBQfB_APTNcb-6o7cMdqgFqwZrRBzBg/edit?usp=sharing)
 
 ## Intro to Code Ocean
 Lead: Sandra
 
-(Sandra's CO intro and walkthrough presentation goes here)
+**(Sandra's CO intro and walkthrough presentation goes here)**
+
+
+## Look at the real data we generated
+Lead: Isaac
+
+* Now we will move to the real data
+ * Covering i7 demultiplexing
+ * Show some results from the real demux process.
+
+## Empirical Data QC
+Lead: Isaac
+
+# Form groups for working with the empirical data
+Groups will be organized around the 10 sets of samples that obtained sufficient
+sequencing. Each group will have a lead, normally the individual who the samples
+belong to, and the groups will work together to run assemblies today and analyse
+the data tomorrow. The following file indicates the group membership:
+[RADCamp groups for assembling and analysing the real data](PartII-Groups.md)
+
+Now the groups will work together on the data QC for their specific dataset.
+[3RAD Data Quality Control (fastqc)](Part_II_files/fastqc.md)
 
 ## Coffee break
 
-## Look at the real data we generated
-Lead: Deren
-
-* Now we will move to the real data
- * Covering i7 demultiplexing (Mostly a lecture based thing, w/ an introduction to API mode).
- * Show some results from the real demux process.
-
-## Form groups and assemble real data
-Last hour at the end of the 1st day. Form the groups at the end of the day
-organized around the new datasets. The following file indicates the group
-membership as well as an ip address of a VM instance running on the google
-cloud infrastructure which you will use to perform the assembly and analysis.
-
-[RADCamp groups for assembling and analysing the real data](PartII-Groups.txt)
-
-## Data QC
-Lead: Isaac
-
-[3RAD Data Quality Control (fastqc)](Part_II_files/fastqc.md)
+## Briefly report back on fastqc results
 
 ### New: follow this link to open instructions in slide form
 [Slide instructions to start empirical assemblies](https://eaton-lab.org/slides/radcamped)
@@ -45,7 +44,6 @@ Lead: Isaac
 
 ###  older instructions
 * Form your groups and brief introductions
-password for your cloud instance will be written on the whiteboard.
 * Open a new terminal window and `cd ipyrad-workshop`.
 * Make a new directory for your 3RAD assembly: `mkdir <assembly_name>`.
 * Make a new directory for fastq results: `mkdir fastq_out`
@@ -68,5 +66,3 @@ to 2.
 * Launch ipyrad steps 1-7
 * Go to the mixer and eat pizza and socialize! The results will be done tomorrow.
 
-If you are very curious you can check out how the google cloud infrastructure
-was configured for this workshop: [Google cloud setup](gcloud-install.html)

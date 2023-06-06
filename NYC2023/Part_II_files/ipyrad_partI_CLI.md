@@ -37,7 +37,7 @@ Very roughly speaking, ipyrad exists to transform raw data coming off the
 sequencing instrument into output files that you can use for downstream 
 analysis. 
 
-![png](Part_II_files/ipyrad_workflow.png)
+![png](ipyrad_workflow.png)
 
 The basic steps of this process are as follows:
 
@@ -63,9 +63,8 @@ you don't mind if your assembly breaks.
 
 # Getting Started
 
-We will be running through the assembly of simulated data on a binder instance,
-so if you haven't already, please [launch the ipyrad repo](https://mybinder.org/v2/gh/dereneaton/ipyrad/master?filepath=newdocs%2FAPI-analysis),
-and open a New>Terminal.
+We will be running through the assembly of simulated data using the ipyrad
+CLI, so if you haven't already done so please access the CodeOcean [RADCamp instance](https://radcamp.codeocean.com) and launch a 
 
 ## ipyrad help
 To better understand how to use ipyrad, let's take a look at the help argument.
@@ -213,6 +212,7 @@ In general the defaults are sensible, and we won't mess with them for now,
 but there are a few parameters we *must* change: the path to the raw data and
 the barcodes file, the dataype, and the restriction overhang sequence(s).
 
+## Don't use nano, just use the file editor in jupyter
 We will use the `nano` text editor to modify `params-peddrad.txt` and change
 these parameters:
 
