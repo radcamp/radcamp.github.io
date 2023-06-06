@@ -1,8 +1,8 @@
 # ipyrad command line tutorial - Part I
 
-This is the first part of the full tutorial for the command line interface 
-(**CLI**) for ipyrad. In this tutorial we'll walk through the entire assembly 
-and analysis process. This is meant as a broad introduction to familiarize 
+This is the full tutorial for the command line interface (**CLI**) for ipyrad.
+In this tutorial we'll walk through the entire assembly, from raw data to output
+files for downstream analysis. This is meant as a broad introduction to familiarize 
 users with the general workflow, and some of the parameters and terminology. 
 We will use simulated paired-end ddRAD data as an example in this tutorial,
 however, you can follow along with one of the other example datasets if you
@@ -138,14 +138,14 @@ settings.
 
 ```bash 
 # First, make sure you're in your workshop directory
-$ cd ~/ipyrad-workshop
+$ cd /scratch/ipyrad-workshop
 
 # Unpack the simulated data which is included in the ipyrad github repo
 # `tar` is a program for reading and writing archive files, somewhat like zip
 #   -x eXtract from an archive
 #   -z unZip before extracting
 #   -f read from the File
-$ tar -xzf ~/tests/ipsimdata.tar.gz
+$ tar -xzf /ipyrad/tests/ipsimdata.tar.gz
 
 # Take a look at what we just unpacked
 $ ls ipsimdata
@@ -177,7 +177,7 @@ Lets take a look at it.
 $ cat params-peddrad.txt
 ------- ipyrad params file (v.0.9.13)-------------------------------------------
 peddrad                        ## [0] [assembly_name]: Assembly name. Used to name output directories for assembly steps
-/home/jovyan/ipyrad-workshop   ## [1] [project_dir]: Project dir (made in curdir if not present)
+/scratch/ipyrad-workshop   ## [1] [project_dir]: Project dir (made in curdir if not present)
                                ## [2] [raw_fastq_path]: Location of raw non-demultiplexed fastq files
                                ## [3] [barcodes_path]: Location of barcodes file
                                ## [4] [sorted_fastq_path]: Location of demultiplexed/sorted fastq files
@@ -212,27 +212,9 @@ In general the defaults are sensible, and we won't mess with them for now,
 but there are a few parameters we *must* change: the path to the raw data and
 the barcodes file, the dataype, and the restriction overhang sequence(s).
 
-## Don't use nano, just use the file editor in jupyter
-We will use the `nano` text editor to modify `params-peddrad.txt` and change
-these parameters:
-
-```bash
-# First we have to install nano. You will have to do this every time you
-# launch a new binder, since it's not part of the ipyrad rep
-$ conda install nano -y
-
-# Change one stupid default setting. This is annoying <sorry!>
-$ echo "set nowrap" > ~/.nanorc
-
-# Now you can edit the params file
-$ nano params-peddrad.txt
-```
-![png](Part_II_files/ipyrad_part1_nano.png)
-
-Nano is a command line editor, so you'll need to use only the arrow keys 
-on the keyboard for navigating around the file. Nano accepts a few special
-keyboard commands for doing things other than modifying text, and it lists 
-these on the bottom of the frame. 
+Open the new params file by double-clicking on `params-peddrad.txt` in the
+left-nav file browser (you might need to navigate to this directory first).
+![png](../images/CO-EditParams.png)
 
 We need to specify where the raw data files are located, the type of data we
 are using (.e.g., 'gbs', 'rad', 'ddrad', 'pairddrad), and which enzyme cut site
@@ -245,21 +227,13 @@ ipsimdata/pairddrad_example_barcodes.txt    ## [3] [barcodes_path]: Location of 
 pairddrad                                   ## [7] [datatype]: Datatype (see docs): rad, gbs, ddrad, etc.
 TGCAG, CGG                                  ## [8] [restriction_overhang]: Restriction overhang (cut1,) or (cut1, cut2)
 ```
-
-After you change these parameters you may save and exit nano by typing CTRL+o 
-(to write **O**utput), and then CTRL+x (to e**X**it the program).
-
-> **Note:** The `CTRL+x` notation indicates that you should hold down the control
-key (which is often styled 'ctrl' on the keyboard) and then push 'x'.
+**NB:** Don't forget to choose "File->Save Text" after you are done editing!
 
 Once we start running the analysis ipyrad will create several new directories to
 hold the output of each step for this assembly. By default the new directories
 are created in the `project_dir` directory and use the prefix specified by the
 `assembly_name` parameter. For this example assembly all the intermediate
-directories will be of the form: `~/ipyrad-workshop/peddrad_*`. 
-
-> **Note:** Again, the `~` notation indicates a shortcut for the user home
-directory, in this case `/home/jovyan`.
+directories will be of the form: `/scratch/ipyrad-workshop/peddrad_*`. 
 
 # Input data format
 
@@ -311,22 +285,21 @@ for guidance in this case.
 
 Now lets run step 1! For the simulated data this will take just a few moments.
 
-> **Special Note:** It's good practice to specify the number of cores with the
-`-c` flag. If you do not specify the number of cores ipyrad assumes you want
-**all** of them. Binder instances run on 1 core, so we will specify `-c 1` for
-all ipyrad assembly steps.
+> **Special Note:** In some cases it's useful to specify the number of cores with
+the `-c` flag. If you do not specify the number of cores ipyrad assumes you want
+**all** of them. Our CO capsules have 16 cores so we'll practice that here.
 
 ```bash
 ## -p    the params file we wish to use
 ## -s    the step to run
-## -c    run on 1 core
-$ ipyrad -p params-peddrad.txt -s 1 -c 1
+## -c    run on 16 cores
+$ ipyrad -p params-peddrad.txt -s 1 -c 16
 
  -------------------------------------------------------------
-  ipyrad [v.0.9.13]
+  ipyrad [v.0.9.92]
   Interactive assembly and analysis of RAD-seq data
  -------------------------------------------------------------
-  Parallel connection | jupyter-dereneaton-2dipyrad-2d975c3axu: 1 cores
+  Parallel connection | jupyter-dereneaton-2dipyrad-2d975c3axu: 16 cores
 
   Step 1: Demultiplexing fastq data to Samples
   [####################] 100% 0:00:09 | sorting reads
@@ -440,20 +413,12 @@ reads to 75bp and set adapter filtering to be quite aggressive.
 > **Note:** Here, we are just trimming the reads for the sake of demonstration.
 In reality you'd want to be more careful about choosing these values.
 
-Edit your params file again with `nano`:
-
-```bash
-nano params-peddrad.txt
-```
-
-and change the following two parameter settings:
+Edit your params file again with and change the following two parameter settings:
 
 ```
 2                               ## [16] [filter_adapters]: Filter for adapters/primers (1 or 2=stricter)
 0, 75, 0, 0                     ## [25] [trim_reads]: Trim raw read edges (R1>, <R1, R2>, <R2) (see docs)
 ```
-> **Note:** Saving and quitting from `nano`: `CTRL+o` then `CTRL+x`
-
 
 ```bash
 $ ipyrad -p params-peddrad.txt -s 2 -c 1
@@ -660,4 +625,3 @@ above is *probably* homozygous with some sequencing error. The second cluster is
 and 'decide' by ourselves for each cluster, so thankfully, untangling this mess
 is what steps 4 & 5 are all about. [ipyrad CLI Part II (steps 4-7) is here](03_ipyrad_partII_CLI.html).
 
-However, this is probably a good time for a coffee break. 
