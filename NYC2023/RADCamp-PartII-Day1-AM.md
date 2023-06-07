@@ -109,11 +109,11 @@ $ cd ipyrad-workshop
 **NB:** A word about the behavoir of different CO directories.
 
 ### First view of FASTQ data
-* Describe fastq format.
-* Format of RAD-seq (3RAD) fastqs before and after i7 and barcode demux
-* How is the RAD-seq format related to the 3RAD molecular protocol? Show image of the “How to add PCR duplicate identifier” slide from part I. 
-* View/highlight RE, i7, and inline barcodes on R1 and R2 files. Play the
-"Why is this the restriction overhang floating out there?" game.
+Goals of this module:
+* View and understand the fastq format
+* Understand how the RADseq fastq data is related to the 3RAD molecular protocol? Show image of the “How to add PCR duplicate identifier” slide from part I. 
+* Be able to locate the restriction enzyme recognition sequence, the i7, and
+inline barcodes on R1 and R2 files.
 
 For this exercise we will use one sample from an Amaranthus dataset
 which is also 3RAD. We will download some of these data, using the command `wget`.
@@ -168,10 +168,11 @@ The pair of sequences at the end of each header line (TATCGGTC+CAACCGGG)
 have special meaning in 3RAD data. These are the i5 and i7 tags
 SANDRA CAN YOU HELP ME EXPLAIN THESE IN A SIMPLE WAY HERE?
 
-* In this case the restriction enzyme leaves a ATCGG overhang. Can you find this
+A few activities to work through on your own (or in small groups)
+* In this data the restriction enzyme leaves a ATCGG overhang. Can you find this
 sequence in the raw data?
-* Why is the overhang sequence not right at the beginning of the reads?
-
+* Why is the overhang sequence not right at the beginning of the R1 reads? What is that other stuff?
+* Use zcat and head to view the first 20 lines of R2. See if you can figure out what the overhang sequence is in R2.
 
 ## Coffee break (20 minutes)
 
