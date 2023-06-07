@@ -39,9 +39,10 @@ that you can plug and unplug, but they are much easier to work with. If your
 capsule is running you'll need to first 'pause' it by choosing the power button
 in the upper left hand corner, and then choosing "Hold", this will suspend
 but not entirely decommision your capsule.
+
 ![png](images/CO-HoldCapsule.png)
 
-* Once your capsule spins down, look at the file nave on the left and choose
+* Once your capsule spins down, look at the file nav on the left and choose
 "Manage Data Assets" next to the Data folder.
 * Hover over the data asset that belongs to your group and click the paperclip
 icon to attach this dataset to your capsule.

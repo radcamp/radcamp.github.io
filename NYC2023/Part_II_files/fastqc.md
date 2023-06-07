@@ -44,46 +44,49 @@ regions. In the above example we might choose to trim these reads to ~200bp.
 
 First, install FastQC:
 ```bash
-$ conda install -c bioconda fastqc
+$ conda install -c bioconda fastqc -y
 ```
-Type 'y' when it asks you if you would like to install other packages ('Proceed ([y]/n)?')
+The '-y' flag tells conda "Yes, please just do this and don't ask me any
+questions." The '-c bioconda' flag tells conda to search for fastqc in the
+bioconda channel. Conda has many many channels, which are repositories of
+different packages.
 
 Now run FastQC on this sample:
 ```bash
 $ cd /scratch/ipyrad-workshop
-$ fastqc anolis_R1_.fastq.gz
+$ fastqc Amaranthus_R1_.fastq.gz
 ```
 
 FastQC will indicate its progress in the terminal. This toy data will run quite
 quickly, but real data can take somewhat longer to analyse (10s of minutes).
 ```
-Started analysis of anolis_R1_.fastq.gz
-Approx 5% complete for anolis_R1_.fastq.gz
-Approx 10% complete for anolis_R1_.fastq.gz
-Approx 15% complete for anolis_R1_.fastq.gz
-Approx 20% complete for anolis_R1_.fastq.gz
-Approx 25% complete for anolis_R1_.fastq.gz
-Approx 30% complete for anolis_R1_.fastq.gz
-Approx 35% complete for anolis_R1_.fastq.gz
-Approx 40% complete for anolis_R1_.fastq.gz
-Approx 45% complete for anolis_R1_.fastq.gz
-Approx 50% complete for anolis_R1_.fastq.gz
-Approx 55% complete for anolis_R1_.fastq.gz
-Approx 60% complete for anolis_R1_.fastq.gz
-Approx 65% complete for anolis_R1_.fastq.gz
-Approx 70% complete for anolis_R1_.fastq.gz
-Approx 75% complete for anolis_R1_.fastq.gz
-Approx 80% complete for anolis_R1_.fastq.gz
-Approx 85% complete for anolis_R1_.fastq.gz
-Approx 90% complete for anolis_R1_.fastq.gz
-Approx 95% complete for anolis_R1_.fastq.gz
-Approx 100% complete for anolis_R1_.fastq.gz
-Analysis complete for anolis_R1_.fastq.gz
+Started analysis of Amaranthus_R1_.fastq.gz
+Approx 5% complete for Amaranthus_R1_.fastq.gz
+Approx 10% complete for Amaranthus_R1_.fastq.gz
+Approx 15% complete for Amaranthus_R1_.fastq.gz
+Approx 20% complete for Amaranthus_R1_.fastq.gz
+Approx 25% complete for Amaranthus_R1_.fastq.gz
+Approx 30% complete for Amaranthus_R1_.fastq.gz
+Approx 35% complete for Amaranthus_R1_.fastq.gz
+Approx 40% complete for Amaranthus_R1_.fastq.gz
+Approx 45% complete for Amaranthus_R1_.fastq.gz
+Approx 50% complete for Amaranthus_R1_.fastq.gz
+Approx 55% complete for Amaranthus_R1_.fastq.gz
+Approx 60% complete for Amaranthus_R1_.fastq.gz
+Approx 65% complete for Amaranthus_R1_.fastq.gz
+Approx 70% complete for Amaranthus_R1_.fastq.gz
+Approx 75% complete for Amaranthus_R1_.fastq.gz
+Approx 80% complete for Amaranthus_R1_.fastq.gz
+Approx 85% complete for Amaranthus_R1_.fastq.gz
+Approx 90% complete for Amaranthus_R1_.fastq.gz
+Approx 95% complete for Amaranthus_R1_.fastq.gz
+Approx 100% complete for Amaranthus_R1_.fastq.gz
+Analysis complete for Amaranthus_R1_.fastq.gz
 ```
 
 FastQC will save the output as an html file in the folder you're currently in.
 You want to look at it in your browser window. So, go back to the jupyter dashboard
-and navigate to /home/ipyrad-workshop/ and click on `anolis_R1__fastqc.html`.
+and navigate to /home/ipyrad-workshop/ and click on `Amaranthus_R1__fastqc.html`.
 This will open the FastQC report which provides *extensive* information about
 the quality of the data, which we will briefly review here.
 
@@ -98,9 +101,9 @@ Lets start with Per base sequence quality.
 
 ![png](../images/anolis-per-base-qual.png)
 
-For the Anolis data the sequence quality per base is uniformly quite high, with
+For this data the sequence quality per base is uniformly quite high, with
 dips only in the first and last 5 bases (again, this is typical for Illumina
-reads). Based on information from this plot we can see that the Anolis data
+reads). Based on information from this plot we can see that this data
 doesn't need any trimming, which is good.
 
 Now lets look at the `Per base sequece content`, which FastQC highlights with a
@@ -121,7 +124,7 @@ Here, we can see adapter contamination increases toward the tail of the reads,
 approaching 40% of total read content at the very end. The concern here is that
 if adapters represent some significant fraction of the read pool, then they
 will be treated as "real" data, and potentially bias downstream analysis. In
-the Anolis data this looks like it might be a real concern so we shall keep
+the Amaranthus data this looks like it might be a real concern so we shall keep
 this in mind during step 2 of the ipyrad analysis, and incorporate 3' read
 trimming and aggressive adapter filtering.
 
@@ -147,8 +150,3 @@ Be prepared to answer the following questions:
 * Will you choose to use `trim_reads` to remove low quality regions? If so what values?
 * Was there noticeable adapter contamination?
 
-### References
-Prates, I., Xue, A. T., Brown, J. L., Alvarado-Serrano, D. F., Rodrigues, M. T.,
-Hickerson, M. J., & Carnaval, A. C. (2016). Inferring responses to climate dynamics
-from historical demography in neotropical forest lizards. Proceedings of the
-National Academy of Sciences, 113(29), 7978-7985.
