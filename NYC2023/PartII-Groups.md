@@ -1,22 +1,22 @@
 # Remote groups
 
-Group Letter | Members | Raw Data File | Breakout Room Link |
+Group Letter | Members | Raw Data File | Overhang Sequences | Breakout Room Link |
 ------------ | ------- | ------------- | ------------------ |
-A | \*Sanda, Chu, Ball | Sanda | (link) | 
-B | \*Paguio, Brose, Alda | Paguio | (link) | 
-C | \*Rometsch, Alomar, Hou | Rometsch | (link) | 
-D | \*Alaasam, Farhan, Reyes | Alaasam | (link) | 
-E | \*Mendez, Muller, Al Ghaithi | Mendez | (link) | 
-F | \*Kwapich, Kamath, Nichodemus | Kwapich | (link) | 
-G | \*Woods, Trzebny, Ribeiro | Woods & Guzman | (link) | 
+A | \*Sanda, Chu, Ball | Sanda | ATCGG, CGATCC | (link) | 
+B | \*Paguio, Brose, Alda | Paguio | ATCGG, CGATCC | (link) | 
+C | \*Rometsch, Alomar, Hou | Rometsch | GCTAG, TAATTC | (link) | 
+D | \*Alaasam, Farhan, Reyes | Alaasam | GCTAG, TAATTC | (link) | 
+E | \*Mendez, Muller, Al Ghaithi | Mendez | ATCGG, CGATCC | (link) | 
+F | \*Kwapich, Kamath, Nichodemus | Kwapich | GCTAG, TAATTC | (link) | 
+G | \*Woods, Trzebny, Ribeiro | Woods & Guzman | ATCGG, CGATCC | (link) | 
 
 
 # In person groups
 
-Group Letter | Members | Raw Data File |
+Group Letter | Members | Raw Data File | Overhang Sequences |
 ------------ | ------- | ------------- |
-H | \*Medeiros, Torres-Sánchez, Ocean | Medeiros |
-I | \*Staniczenko, Barragán, Negrin, Flynn | Mauricio |
-J | \*Guzmán, Paredes-Burneo, Piergiorgio | Woods & Guzman |
+H | \*Medeiros, Torres-Sánchez, Ocean | Medeiros | ATCGG, CGATCC |
+I | \*Staniczenko, Barragán, Negrin, Flynn | Mauricio | GCTAG, TAATTC |
+J | \*Guzmán, Paredes-Burneo, Piergiorgio | Woods & Guzman | ATCGG, CGATCC |
 
 \*Indicates default group leader, but you can change it if you like.
