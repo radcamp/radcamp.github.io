@@ -78,7 +78,7 @@ sharing screen so everyone who is not driving can watch.
 * Open a new terminal window and `cd /scratch/ipyrad-workshop`.
 * Create a params file for the real data (`ipyrad -n <assembly_name>`).
 * Update your params file as necessary including the correct
-[overhang sequences](PartII-Groups.txt) and read trimming and adapter
+[overhang sequences](PartII-Groups.md) and read trimming and adapter
 filtering settings based on the results from fastqc.
 * Also, based on preliminary anaylsis, set `max_barcodes_mismatch` to 1.
 * Launch ipyrad steps 1-7
