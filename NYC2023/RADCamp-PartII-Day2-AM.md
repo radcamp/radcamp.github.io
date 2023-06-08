@@ -4,53 +4,60 @@
 ## Overview of the morning activities:
 * [Brief review of the newly generated 3RAD datasets](#overview-of-new-datasets)
 * [Examine quality of the assemblies](#examine-quality-of-assemblies)
-* [Next steps after you finish your first assembly](#next-steps-after-you-finish-your-first-assembly)
-* [Intro to genome scale analysis](#intro-to-genome-scale-analysis)
+* [Reproducibility, jupyter notebooks, and the ipyrad API mode](#ipyrad-api-and-jupyter-notebooks)
+* [ipyrad analysis API - Phylogenetic trees with RAxML](#ipyrad-analysis-api-phylogenetic-trees-with-raxml)
 * [Coffee Break](#coffee-break)
-* [ipyrad analysis API - Principal Component Analysis (PCA)](#ipyrad-analysis-api-principal-component-analysis))
-* [ipyrad analysis API - Population STRUCTURE](#ipyrad-analysis-api-Population-structure)
+* [Interactive: Multi-locus genetic analysis](#Interactive-multi-locus-genetic-analysis)
+* [ipyrad analysis API - Principal Component Analysis (PCA)](#ipyrad-analysis-api-principal-component-analysis)
 
 ## Examine quality of assemblies
+Lead: Isaac (30')
 
 Lets take some time to look at results of the assembly process for some of the
 real datasets. Did they all work perfectly? Why did some work, why did some
-break?
+break? Look at runtimes: How long did they take to run?
 
-[How did the runs proceed? (AKA What did Isaac do with his night last night)](PartII-Groups.txt)
+[Overview of 3RAD assembly results](PartII-Groups.txt)
 
-[What the results of the demultiplexing process (step 1) should look like](Demux-Results.txt)
+*Next steps after you finish your first assembly*
 
-
-* Look at runtimes: How long did they take to run?
-* What do the stats files look like? Teaching how to read and interperet stats files. 
-
-## Next steps after you finish your first assembly
-
+* Reading and interpereting step 7 stats files. 
 * Why would you want to re-run step 7 with different parameters?
 * Talk about mindepth/minsamp. Branching.
 * Filtering your data
-* Missing data stuff
+* Dealing with missing data
 * Analysis
 
-## Intro to genome scale analysis
-Lead: Deren
+## ipyrad API and Jupyter Notebooks
+Lead: Deren (30')
 
-Genomic analysis, why do we need more than one gene. What people do with radseq
-data and why?
-* Raxml advantages/shortcomings
-* PCA advantages/shortcoming
-* SNPs vs gene trees?
-* Shortcomings/advantages of RAD?
-* Why are the analysis tools better than trying to go out on your own.
+* Talk about branching
+* ipyrad API mode
+* Intro to running jupyter notebooks
 
-## Coffee Break
+## ipyrad analysis API - Phylogenetic trees with RAxML
+Lead: Isaac (30')
+
+* A brief overview of ipyrad analysis tools
+* ipa.window-extractor
+* The ipa.raxml tool
+* Run quickly and plot a tree
+
+## Coffee Break (10:40-11)
+
+## Interactive: Multi-locus genetic analysis
+Lead: Deren (60')
+
+Why do we need/want many loci?
+* Coalescent variation and incomplete lineage sorting.
+* Single pop coalescent vs multispecies coalescent. Genealogical 
+* ILS and discordance.
+* Notebook 1 example: simulate, visualize coalescent variation
+* Notebook 2 example: simulate, infer raxml concat tree, see errors.
+* Notebook 3 example: simulate and write to HDF5. Test w/ any ipa tool. Example, PCA.
 
 ## ipyrad analysis API Principal Component Analysis
-Lead: Isaac
+Lead: Isaac (30')
 
-
-## ipyrad analysis API Population STRUCTURE
-
-
-Notebook (let it run over lunch)
+## Lunch (12:30-1:15)
 
