@@ -41,8 +41,8 @@ Results should be put in a google slides presentation in the [RADCamp google
 drive folder](https://drive.google.com/drive/folders/1Nvu6n1PSS5OETiwievADpWEyu-xNbBV2).
 
 ## Brief presentation of results of small group analysis
-Please create a brief presentation (1-2 slides max) to highlight any interesting
-results you might have obtained in the [Google Drive folder for draft results slides](https://drive.google.com/drive/folders/1Nvu6n1PSS5OETiwievADpWEyu-xNbBV2?usp=sharing).
+Please update the brief presentation (1-2 slides max) to highlight any interesting
+results you might have obtained in the [Google Drive folder for draft results slides](https://docs.google.com/presentation/d/1jDYFz-l4UNr2m0rhXbsU3iKJjTTUGky9qGfENfCoBRQ/edit#slide=id.p).
 
 ## Wrap-up & adjourn
 Put stuff here.
