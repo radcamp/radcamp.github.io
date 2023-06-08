@@ -59,5 +59,7 @@ Why do we need/want many loci?
 ## ipyrad analysis API Principal Component Analysis
 Lead: Isaac (30')
 
+[Exercise: ipyrad analysis API for PCA](PCA_API.md)
+
 ## Lunch (12:30-1:15)
 
