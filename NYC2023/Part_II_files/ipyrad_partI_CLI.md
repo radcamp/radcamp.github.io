@@ -623,5 +623,5 @@ threshold) are grouped together in clusters separated by "//". The first cluster
 above is *probably* homozygous with some sequencing error. The second cluster is
 *probably* heterozygous with some sequencing error. We don't want to go through
 and 'decide' by ourselves for each cluster, so thankfully, untangling this mess
-is what steps 4 & 5 are all about. [ipyrad CLI Part II (steps 4-7) is here](03_ipyrad_partII_CLI.html).
+is what steps 4 & 5 are all about. [ipyrad CLI Part II (steps 4-7) is here](ipyrad_partII_CLI.html).
 
