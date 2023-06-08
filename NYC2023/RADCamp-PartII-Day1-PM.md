@@ -17,9 +17,11 @@ Lead: Sandra
 ## Look at the real data we generated
 Lead: Isaac
 
-* Now we will move to the real data
- * Covering i7 demultiplexing
- * [Let's look at the results from the real demux process](Demux-Results.txt)
+Now we will move to the real data
+* Covering i7 demultiplexing
+* [Let's look at the results from the real demux process](Demux-Results.txt)
+* Unfortunately several of the libraries failed sequencing. There was not an
+apparent reason for this (different groups, different enzyme combos).
 
 ## Empirical Data QC
 Lead: Isaac
