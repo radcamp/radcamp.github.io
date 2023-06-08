@@ -1,0 +1,153 @@
+
+## The number of loci caught by each filter.
+## ipyrad API location: [assembly].stats_dfs.s7_filters
+
+                           total_filters applied_order retained_loci
+total_prefiltered_loci                 0             0           160
+filtered_by_rm_duplicates              3             3           157
+filtered_by_max_indels                 5             5           152
+filtered_by_max_SNPs                   0             0           152
+filtered_by_max_shared_het             8             8           144
+filtered_by_min_sample                89            89            55
+total_filtered_loci                  105           105            55
+
+
+## The number of loci recovered for each Sample.
+## ipyrad API location: [assembly].stats_dfs.s7_samples
+
+         sample_coverage
+KLU334                16
+KLU95                 18
+KLU96                 15
+KLU98                 19
+ODE1                  14
+ODE14                  7
+ODE30                 25
+ODE36                 21
+ODE40                 18
+ODE56                 23
+SADAu12               11
+SADAu7                11
+SCA1                  12
+SCA101                10
+SCA2                   6
+SCA85                  1
+SCA87                  1
+SCA94                 21
+TAS20                 21
+TAS21                 18
+VEN16                 16
+VEN5                   2
+VEN89                 13
+VEN96                 14
+
+
+## The number of loci for which N taxa have data.
+## ipyrad API location: [assembly].stats_dfs.s7_loci
+
+    locus_coverage  sum_coverage
+1                0             0
+2                0             0
+3                0             0
+4               24            24
+5                5            29
+6                5            34
+7                7            41
+8                6            47
+9                3            50
+10               4            54
+11               0            54
+12               0            54
+13               0            54
+14               0            54
+15               0            54
+16               0            54
+17               0            54
+18               1            55
+19               0            55
+20               0            55
+21               0            55
+22               0            55
+23               0            55
+24               0            55
+
+
+The distribution of SNPs (var and pis) per locus.
+## var = Number of loci with n variable sites (pis + autapomorphies)
+## pis = Number of loci with n parsimony informative site (minor allele in >1 sample)
+## ipyrad API location: [assembly].stats_dfs.s7_snps
+## The "reference" sample is included if present unless 'exclude_reference=True'
+
+    var  sum_var  pis  sum_pis
+0     8        0   21        0
+1    13       13    9        9
+2     3       19    8       25
+3     6       37    1       28
+4     1       41    4       44
+5     0       41    5       69
+6     3       59    0       69
+7     6      101    2       83
+8     3      125    0       83
+9     3      152    1       92
+10    0      152    1      102
+11    0      152    0      102
+12    0      152    1      114
+13    2      178    0      114
+14    1      192    1      128
+15    0      192    0      128
+16    0      192    0      128
+17    2      226    0      128
+18    0      226    1      146
+19    0      226    0      146
+20    0      226    0      146
+21    0      226    0      146
+22    0      226    0      146
+23    1      249    0      146
+24    0      249    0      146
+25    1      274    0      146
+26    0      274    0      146
+27    0      274    0      146
+28    0      274    0      146
+29    0      274    0      146
+30    0      274    0      146
+31    1      305    0      146
+32    0      305    0      146
+33    0      305    0      146
+34    0      305    0      146
+35    0      305    0      146
+36    0      305    0      146
+37    0      305    0      146
+38    1      343    0      146
+
+
+## Final Sample stats summary
+         state  reads_raw  reads_passed_filter  clusters_total  clusters_hidepth  hetero_est  error_est  reads_consens  loci_in_assembly
+KLU334       7       8952                 8872            4977                56    0.018069   0.006335             40                16
+KLU95        7      12242                12102            5866                86    0.020807   0.005376             51                18
+KLU96        7      12780                12639            6227                77    0.019695   0.006631             48                15
+KLU98        7      12983                12848            7227                73    0.021419   0.006686             48                19
+ODE1         7       9156                 9058            4975                63    0.025020   0.007096             39                14
+ODE14        7       5713                 5647            2977                33    0.021280   0.006537             22                 7
+ODE30        7      14948                14784            7173                96    0.019896   0.006287             67                25
+ODE36        7      16186                16011            7102                99    0.027102   0.005367             54                21
+ODE40        7      16858                16671            7665                91    0.021136   0.006978             59                18
+ODE56        7      17642                17440            8042               119    0.023680   0.005730             82                23
+SADAu12      7       5415                 5359            2648                31    0.022108   0.001610             23                11
+SADAu7       7       4386                 4326            2425                39    0.019500   0.008840             25                11
+SCA1         7       9930                 9862            4974                50    0.016940   0.009604             34                12
+SCA101       7       6264                 6183            3227                28    0.019527   0.007534             18                10
+SCA2         7       8873                 8805            4659                36    0.022877   0.005725             18                 6
+SCA85        7         65                   63              40                 2    0.042566   0.014730              2                 1
+SCA87        7         58                   58              25                 2    0.038093   0.016114              1                 1
+SCA94        7      10345                10219            5155                73    0.023654   0.004657             49                21
+TAS20        7      19786                19613            9181               130    0.022997   0.005326             88                21
+TAS21        7      12203                12056            6445                72    0.020247   0.006425             51                18
+VEN16        7      14452                14312            6721                91    0.021742   0.007726             57                16
+VEN5         7       1561                 1543            1012                 9    0.014446   0.006239              5                 2
+VEN89        7       6706                 6623            3498                32    0.020292   0.010726             23                13
+VEN96        7      11042                10940            5528                63    0.025229   0.009050             40                14
+
+
+## Alignment matrix statistics:
+snps matrix size: (24, 343), 79.45% missing sites.
+sequence matrix size: (24, 11260), 76.67% missing sites.

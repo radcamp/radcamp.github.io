@@ -1,0 +1,156 @@
+
+## The number of loci caught by each filter.
+## ipyrad API location: [assembly].stats_dfs.s7_filters
+
+                           total_filters applied_order retained_loci
+total_prefiltered_loci                 0             0         16914
+filtered_by_rm_duplicates            283           283         16631
+filtered_by_max_indels               822           822         15809
+filtered_by_max_SNPs                   2             0         15809
+filtered_by_max_shared_het           672           617         15192
+filtered_by_min_sample              6881          6881          8311
+total_filtered_loci                 8660          8603          8311
+
+
+## The number of loci recovered for each Sample.
+## ipyrad API location: [assembly].stats_dfs.s7_samples
+
+              sample_coverage
+Paguio-CB5               5285
+Paguio-DB11              5515
+Paguio-DB13               842
+Paguio-DB22              1493
+Paguio-DB23              4687
+Paguio-DB8                 48
+Paguio-DE12                 3
+Paguio-DE21                 1
+Paguio-DE23                94
+Paguio-DE7                 11
+Paguio-G88               2244
+Paguio-KB103             2105
+Paguio-KB106             1328
+Paguio-KB108             6003
+Paguio-KB79              3974
+Paguio-MB74              5919
+Paguio-MB77              6302
+Paguio-MB83              5429
+Paguio-MB88                 8
+Paguio-NS24              5435
+Paguio-NS9               6356
+Paguio-RB20              5241
+Paguio-RB35              3831
+Paguio-RB36              1250
+
+
+## The number of loci for which N taxa have data.
+## ipyrad API location: [assembly].stats_dfs.s7_loci
+
+    locus_coverage  sum_coverage
+1                0             0
+2                0             0
+3                0             0
+4             1308          1308
+5              935          2243
+6              820          3063
+7              708          3771
+8              668          4439
+9              585          5024
+10             548          5572
+11             521          6093
+12             496          6589
+13             439          7028
+14             387          7415
+15             280          7695
+16             235          7930
+17             161          8091
+18             163          8254
+19              50          8304
+20               5          8309
+21               1          8310
+22               1          8311
+23               0          8311
+24               0          8311
+
+
+The distribution of SNPs (var and pis) per locus.
+## var = Number of loci with n variable sites (pis + autapomorphies)
+## pis = Number of loci with n parsimony informative site (minor allele in >1 sample)
+## ipyrad API location: [assembly].stats_dfs.s7_snps
+## The "reference" sample is included if present unless 'exclude_reference=True'
+
+     var  sum_var   pis  sum_pis
+0   3430        0  4833        0
+1   1824     1824  1503     1503
+2   1047     3918   770     3043
+3    617     5769   425     4318
+4    395     7349   248     5310
+5    254     8619   162     6120
+6    181     9705   113     6798
+7    118    10531    52     7162
+8     77    11147    50     7562
+9     67    11750    46     7976
+10    55    12300    32     8296
+11    30    12630    11     8417
+12    36    13062    17     8621
+13    19    13309    10     8751
+14    35    13799    13     8933
+15    21    14114     7     9038
+16    16    14370     5     9118
+17    12    14574     2     9152
+18     8    14718     0     9152
+19    10    14908     2     9190
+20     7    15048     2     9230
+21     7    15195     0     9230
+22     4    15283     2     9274
+23     7    15444     2     9320
+24     4    15540     0     9320
+25     2    15590     0     9320
+26     3    15668     2     9372
+27     4    15776     0     9372
+28     5    15916     1     9400
+29     2    15974     0     9400
+30     1    16004     0     9400
+31     1    16035     0     9400
+32     1    16067     0     9400
+33     2    16133     1     9433
+34     2    16201     0     9433
+35     0    16201     0     9433
+36     2    16273     0     9433
+37     1    16310     0     9433
+38     0    16310     0     9433
+39     1    16349     0     9433
+40     1    16389     0     9433
+41     2    16471     0     9433
+
+
+## Final Sample stats summary
+              state  reads_raw  reads_passed_filter  clusters_total  clusters_hidepth  hetero_est  error_est  reads_consens  loci_in_assembly
+Paguio-CB5        7     712885               705578           21368              7767    0.009412   0.001457           6898              5285
+Paguio-DB11       7    1041179              1033204           23182              8389    0.009871   0.001393           7396              5515
+Paguio-DB13       7      79407                78701            7891              1457    0.016572   0.003920           1137               842
+Paguio-DB22       7     175128               173435           10685              2438    0.013840   0.003595           1986              1493
+Paguio-DB23       7     781579               774912           19643              7020    0.010536   0.001445           6167              4687
+Paguio-DB8        7       7807                 7737            2313               143    0.032191   0.004986             88                48
+Paguio-DE12       7        755                  748             278                17    0.011831   0.003315             11                 3
+Paguio-DE21       7        811                  800             275                20    0.026784   0.004606             16                 1
+Paguio-DE23       7      15892                15761            5274               260    0.017192   0.005258            181                94
+Paguio-DE7        7       4388                 4351            1282                70    0.029644   0.006671             38                11
+Paguio-G88        7     271172               268785           30587              5185    0.011628   0.002733           4333              2244
+Paguio-KB103      7     249943               247648           39282              4743    0.012045   0.002447           3971              2105
+Paguio-KB106      7     151403               150232           25490              2711    0.012962   0.003432           2247              1328
+Paguio-KB108      7     990078               979783           43178              9850    0.009832   0.001496           8706              6003
+Paguio-KB79       7     401577               398195           37158              6660    0.011029   0.002206           5707              3974
+Paguio-MB74       7    1722386              1705901          104957             17841    0.013298   0.001608          15068              5919
+Paguio-MB77       7    1680862              1667111           83655             15843    0.012338   0.001434          13620              6302
+Paguio-MB83       7     948932               940121           46475             10310    0.010885   0.001679           8938              5429
+Paguio-MB88       7       3741                 3711            1697                57    0.017794   0.004742             41                 8
+Paguio-NS24       7     988897               980048           21574              8247    0.009753   0.001253           7297              5435
+Paguio-NS9        7    1712768              1698374           33808             10502    0.010304   0.001018           9322              6356
+Paguio-RB20       7     810487               802906           73067             10828    0.013892   0.002174           9082              5241
+Paguio-RB35       7     547444               542836           70881              9543    0.012560   0.003105           7856              3831
+Paguio-RB36       7     169183               167460           43035              3842    0.012928   0.003248           3161              1250
+
+
+## Alignment matrix statistics:
+snps matrix size: (24, 16471), 65.89% missing sites.
+sequence matrix size: (24, 1927707), 62.48% missing sites.

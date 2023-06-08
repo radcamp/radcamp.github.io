@@ -19,4 +19,9 @@ H | \*Medeiros, Torres-Sánchez, Ocean | Medeiros |  | [Medeiros_stats.txt](step
 I | \*Staniczenko, Barragán, Negrin, Flynn | Mauricio |  | [Mauricio_stats.txt](step7_stats/Mauricio_stats.txt) |
 J | \*Guzmán, Paredes-Burneo, Piergiorgio | Woods & Guzman |  | [Guzman_stats.txt](step7_stats/Guzman_stats.txt) |
 
-\*Indicates default group leader, but you can change it if you like.
+# Libraries failed sequencing
+
+* [Brose_stats.txt](step7_stats/Brose_stats.txt)
+* [Ocean_stats.txt](step7_stats/Ocean_stats.txt)
+* [Alda_s5_stats.txt](step7_stats/Alda_s5_consens_stats.txt)
+
