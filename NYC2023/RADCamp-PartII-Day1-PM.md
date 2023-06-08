@@ -19,7 +19,7 @@ Lead: Isaac
 
 * Now we will move to the real data
  * Covering i7 demultiplexing
- * Show some results from the real demux process.
+ * [Let's look at the results from the real demux process](Demux-Results.txt)
 
 ## Empirical Data QC
 Lead: Isaac
@@ -66,32 +66,20 @@ Now the groups will work together on the data QC for their specific dataset.
 * Was there noticeable adapter contamination?
 * Any other questions?
 
-### New: follow this link to open instructions in slide form
 # TODO: Are we updating these slides or the directions below?
+### New: follow this link to open instructions in slide form
 [Slide instructions to start empirical assemblies](https://eaton-lab.org/slides/radcamped)
 
 
 ###  older instructions
-* Form your groups and brief introductions
+* Get back into your groups (in person or in breakout rooms) and
+choose 1 person to be the 'leader' to run the assembly. Consider
+sharing screen so everyone who is not driving can watch.
 * Open a new terminal window and `cd /scratch/ipyrad-workshop`.
-* Make a new directory for your 3RAD assembly and `cd` to it: `mkdir <assembly_name>`.
-* Make a new directory for fastq results: `mkdir fastq_out`
-* `cd fastq_out`
-* Run fastqc on on the real data, passing in the directory of the 3RAD data
-for your group, which will be of the form `/data/<username>/*R1*`
-and `/media/<username>/*R2*` replacing the username with the last
-name of the participant in your group who generated 3RAD data (should take
-5-10 minutes per file).
-* Examine the results of fastqc by opening the
-`~/ipyrad-workshop/<assembly-name>/fastqc_out/\*.html` files in the jupyter
-notebook browser.
-* Go back to the terminal and `cd ~/ipyrad-workshop/<assembly_name>`.
 * Create a params file for the real data (`ipyrad -n <assembly_name>`).
 * Update your params file as necessary including the correct
 [overhang sequences](PartII-Groups.txt) and read trimming and adapter
 filtering settings based on the results from fastqc.
-* Also, based on preliminary anaylsis, set `max_barcodes_mismatch`
-to 1.
+* Also, based on preliminary anaylsis, set `max_barcodes_mismatch` to 1.
 * Launch ipyrad steps 1-7
 * Go to the mixer and eat pizza and socialize! The results will be done tomorrow.
-
