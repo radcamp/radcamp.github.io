@@ -176,7 +176,7 @@ sequence in the raw data?
 * Why is the overhang sequence not right at the beginning of the R1 reads? What is that other stuff?
 * Use zcat and head to view the first 20 lines of R2. See if you can figure out what the overhang sequence is in R2.
 
-## Coffee break (20 minutes)
+## Coffee break (10:30-10:50)
 
 ## ipyrad history, philosophy, and workflow
 Lead: Deren

@@ -6,7 +6,7 @@
 * [Examine quality of the assemblies](#examine-quality-of-assemblies)
 * [Reproducibility, jupyter notebooks, and the ipyrad API mode](#ipyrad-api-and-jupyter-notebooks)
 * [ipyrad analysis API - Phylogenetic trees with RAxML](#ipyrad-analysis-api-phylogenetic-trees-with-raxml)
-* [Coffee Break](#coffee-break)
+* [Coffee Break (10:40-11:00)](#coffee-break)
 * [Interactive: Multi-locus genetic analysis](#Interactive-multi-locus-genetic-analysis)
 * [ipyrad analysis API - Principal Component Analysis (PCA)](#ipyrad-analysis-api-principal-component-analysis)
 
