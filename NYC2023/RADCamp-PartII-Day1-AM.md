@@ -16,7 +16,7 @@
 
 ### Learning objectives.
 By the end of this workshop you will gain experience with:
-* Basic bioinformatics skills
+* More efficiently use tools for reproducible bioinformatics (unix, jupyter, ipyrad, CodeOcean, etc)
 * Using HPC infrastructure to run genomic analyses
 * Understanding how RAD sequence data is related to the methods we performed in the lab to create it
 * Assembling a RAD-Seq dataset with ipyrad
