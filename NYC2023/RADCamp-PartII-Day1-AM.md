@@ -115,7 +115,8 @@ $ cd ipyrad-workshop
 ### First view of FASTQ data
 Goals of this module:
 * View and understand the fastq format
-* Understand how the RADseq fastq data is related to the 3RAD molecular protocol? Show image of the “How to add PCR duplicate identifier” slide from part I. 
+* Understand how the RADseq fastq data is related to the 3RAD molecular protocol?
+See: [“How to add PCR duplicate identifier”](https://docs.google.com/presentation/d/1Tvw5m4Y33aHe1ItiHSA7LXV3y3k0BGQj3HwlIIfDE_0/edit#slide=id.p)
 * Be able to locate the restriction enzyme recognition sequence, the i7, and
 inline barcodes on R1 and R2 files.
 

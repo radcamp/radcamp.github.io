@@ -25,13 +25,6 @@ all code in cells of a jupyter notebook** that is running on a CodeOcean capsule
 
 # **PCA** analyses
 
-* [Simple PCA from a VCF file](#simple-pca-from-vcf-file)
-* [Coloring by population assignment](#population-assignment-for-sample-colors)
-* [Removing "bad" samples and replotting](#removing-bad-samples-and-replotting)
-* [Specifying which PCs to plot](#looking-at-pcs-other-than-1--2)
-* [Multi-panel PCA](#multi-panel-pca)
-* [More to explore](#more-to-explore)
-
 ## A bit of setup
 Inside your CO capsule open a new terminal and install `scikit-learn`, which we
 use internally for some of the PCA functions.
@@ -67,7 +60,8 @@ import ipyrad.analysis as ipa
 The following cell shows the quickest way to results using a small simulated
 dataset in `/scratch/ipyrad-workshop`. Complete explanation of all of the
 features and options of the PCA module is the focus of the rest of this tutorial.
-Copy this code into a notebook cell and run it.
+Copy this code into a new notebook cell (small grey *+* button on the toolbar)
+and run it.
 
 ```python
 data = "peddrad_outfiles/peddrad.snps.hdf5"
@@ -81,28 +75,27 @@ pca.draw()
 
 ![png](images/CO-PCA-TLDRExample.png)
 
-> **Note** The `#` at the beginning of a line indicates to python that this is a comment, so it doesn't try to run this line. This is a very handy thing if you want to add or remove lines of code from an analysis without deleting them. Simply comment them out with the `#`!
+> **Note:** In this block of code, the `#` at the beginning of a line indicates
+to python that this is a comment, so it doesn't try to run this line. This is a
+very handy thing if you want to add or remove lines of code from an analysis
+without deleting them. Simply comment them out with the `#`!
 
 ## Full guide
 
-### Simple PCA from vcf file
+### Simple PCA from ipyrad hdf5 file
 
-In the most common use, you'll want to plot the first two PCs, then inspect the output, remove any obvious outliers, and then redo the PCA. It's often desirable to import a vcf file directly rather than to use the ipyrad assembly, so here we'll demonstrate this with the Anolis data.
+In the most common use, you'll want to plot the first two PCs, then inspect the
+output, remove any obvious outliers, and then redo the PCA.
 
 ```python
 ## Path to the input vcf.
-vcffile = "/rigel/edu/radcamp/users/work1/ipyrad-workshop/anoles_outfiles/anoles.vcf"
-pca = ipa.pca(vcffile)
+data = "peddrad_outfiles/peddrad.snps.hdf5"
+pca = ipa.pca(data)
 ```
-> **Note:** Here we use the anolis vcf generated with ipyrad, but the `ipyrad.analysis.pca` module can read in from *any* vcf file, so it's possible to quickly generate PCA plots for any vcf from any dataset.
-
-We can inspect the samples included in the PCA plot by asking the `pca` object for `samples_vcforder`.
-```python
-print(pca.samples_vcforder)
-```
-    [u'punc_IBSPCRIB0361' u'punc_ICST764' u'punc_JFT773' u'punc_MTR05978'
-     u'punc_MTR17744' u'punc_MTR21545' u'punc_MTR34414' u'punc_MTRX1468'
-     u'punc_MTRX1478' u'punc_MUFAL9635']
+> **Note:** Here we use the hdf5 file with SNPs generated with ipyrad from the
+simulated data, but the `ipyrad.analysis.pca` module can also read in data from
+*any* vcf file, so it's possible to quickly generate PCA plots for any vcf from
+any dataset.
 
 Now construct the default plot, which shows all samples and PCs 1 and 2.
 By default all samples are assigned to one population, so everything will 
@@ -111,14 +104,40 @@ be the same color.
 ```python
 pca.plot()
 ```
-    <matplotlib.axes._subplots.AxesSubplot at 0x7fe0beb3a650>
 
-![png](PCA_API_files/04_PCA_API_01_Anolis_PCA.png)
+![png](files/images/CO-PCA-TLDRExample.png)
 
 ### Population assignment for sample colors
-In the tl;dr example the assembly of our simulated data had included a `pop_assign_file`, so the 'pca()' was smart enough to find this and color samples accordingly. In some cases you might not have used a population assignment file, so it's also possible to specify population assignments in a dictionary. The format of the dictionary should have populations as keys and lists of samples as values. Sample names need to be identical to the names in the vcf file, which we can verify with the `samples_vcforder` property of the PCA object.
+Typically it is useful to color points in a PCA by some a priori grouping, such
+as presumed population, or by experimental treatment groups, etc. To facilitate
+this it is possible to specify population assignments in a `dictionary`. The
+format of the dictionary should have populations as keys and lists of samples
+as values. Sample names need to be identical to the names in the input dataset,
+which we can verify with the `names` property of the PCA object. Open a new cell
+and type this:
 
-Here we create a python 'dictionary', which is a key/value pair data structure. The keys are the population names, and the values are the lists of samples that belong to those populations. You can copy and paste this into a new cell in your notebook.
+```python
+pca.names
+```
+```
+['1A_0',
+ '1B_0',
+ '1C_0',
+ '1D_0',
+ '2E_0',
+ '2F_0',
+ '2G_0',
+ '2H_0',
+ '3I_0',
+ '3J_0',
+ '3K_0',
+ '3L_0']
+```
+
+Here we create a python 'dictionary', which is a key/value pair data structure.
+The keys are the population names, and the values are the lists of samples that
+belong to those populations. You can copy and paste this into a new cell in your
+notebook.
 ```python
 pops_dict = {
      "South":['punc_IBSPCRIB0361', 'punc_MTR05978','punc_MTR21545','punc_JFT773',
