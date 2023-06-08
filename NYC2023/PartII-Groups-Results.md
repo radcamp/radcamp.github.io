@@ -23,5 +23,5 @@ J | \*Guzmán, Paredes-Burneo, Piergiorgio | Woods & Guzman |  | [Guzman_stats.t
 
 * [Brose_stats.txt](step7_stats/Brose_stats.txt)
 * [Ocean_stats.txt](step7_stats/Ocean_stats.txt)
-* [Alda_s5_stats.txt](step7_stats/Alda_s5_consens_stats.txt)
+* [Alda_stats.txt](step7_stats/Alda-subset_stats.txt) / [Alda_s5_stats.txt](step7_stats/Alda_s5_consens_stats.txt)
 
