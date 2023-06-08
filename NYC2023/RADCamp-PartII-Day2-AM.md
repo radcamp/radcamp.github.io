@@ -17,7 +17,7 @@ Lets take some time to look at results of the assembly process for some of the
 real datasets. Did they all work perfectly? Why did some work, why did some
 break? Look at runtimes: How long did they take to run?
 
-[Overview of 3RAD assembly results](PartII-Groups.txt)
+[Overview of 3RAD assembly results](PartII-Groups-Results.md)
 
 *Next steps after you finish your first assembly*
 
