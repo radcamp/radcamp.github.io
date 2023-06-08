@@ -169,9 +169,12 @@ contains the sequence data. The third line is unused. And the fourth line is the
 quality scores for the base calls. The [FASTQ wikipedia](https://en.wikipedia.org/wiki/FASTQ_format)
 page has a good figure depicting the logic behind how quality scores are encoded.
 
-The pair of sequences at the end of each header line (TATCGGTC+CAACCGGG)
-have special meaning in 3RAD data. These are the i5 and i7 tags
-SANDRA CAN YOU HELP ME EXPLAIN THESE IN A SIMPLE WAY HERE?
+The pair of sequences at the end of each header line (TATCGGTC+CAACCGGG) are
+Illumina's i7 and i5 read sequences.  The libraries you created/will be
+analyzing used the i7 as the participant identifier and the i5 as the PCR
+duplicate identifier (unique molecular index).  So you should see the same i7
+across all reads in your fastq file but different i5 sequences across different
+reads of the fastq file.
 
 A few activities to work through on your own (or in small groups)
 * In this data the restriction enzyme leaves a ATCGG overhang. Can you find this
