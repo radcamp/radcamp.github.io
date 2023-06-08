@@ -64,9 +64,11 @@ features of CodeOcean after lunch.
 * A bunch of stuff happens with progress bars and moments later you will see
 the 'JupyterLab' interface, which is our UI to the cloud computers provided by CO.
 We will learn more about Jupyter notebooks later in the workshop, but for now
-click on "Terminal" in the launcher window. The commands you type in this
-terminal are not run on your own computer, they are run on a 16 core virtual
-machine somewhere out in the ether:
+click on "Terminal" in the launcher window.
+![png](images/CO-JupyterLabLauncher.png)
+
+The commands you type in this terminal are not run on your own computer, they are
+run on a 16 core virtual machine somewhere out in the ether:
 ![png](images/CO-LittleBlackWindow.png)
 
 ### Navigating the command line
