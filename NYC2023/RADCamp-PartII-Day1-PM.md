@@ -32,26 +32,22 @@ Lead: Isaac
 
 ### Form groups for working with the empirical data
 Groups will be organized around the 10 sets of samples that obtained sufficient
-sequencing. Each group will have a lead, normally the individual who the samples
-belong to, and the groups will work together to run assemblies today and analyse
-the data tomorrow. The following file indicates the group membership:  
+sequencing (>3m reads total). Each group will have a lead, normally the individual
+who the samples belong to, and the groups will work together to run assemblies
+today and analyse the data tomorrow. The following file indicates the group membership:  
 
 [RADCamp groups for assembling and analysing the real data](PartII-Groups.md)
 
 ### Attaching 'Data Assets' in CodeOcean
 Before we can start QC'ing the data we need to first attach the 'Data Assets'
 that contain the raw data files. Data assets are just like physical disk drives
-that you can plug and unplug, but they are much easier to work with. If your
-capsule is running you'll need to first 'pause' it by choosing the power button
-in the upper left hand corner, and then choosing "Hold", this will suspend
-but not entirely decommision your capsule.
+that you can plug and unplug, but they are much easier to work with.
 
-![png](images/CO-HoldCapsule.png)
+* In the top right of the CO panel choose "Manage Data".
+![png](images/CO-ManageData.png)
 
-* Once your capsule spins down, look at the file nav on the left and choose
-"Manage Data Assets" next to the Data folder.
 * Hover over the data asset that belongs to your group and click the paperclip
-icon to attach this dataset to your capsule.
+icon to attach this dataset to your capsule (you'll use this later).
 * You will also want to attach the "\_DemultiplexedData" asset as well.
 * When you have attached both of these you can choose "\<Close" to exit that pane.
 ![png](images/CO-ManageDataAssets.png)
