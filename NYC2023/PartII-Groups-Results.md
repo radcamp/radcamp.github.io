@@ -24,4 +24,6 @@ J | \*Guzmán, Paredes-Burneo, Flynn | Woods & Guzman |  | [Guzman_stats.txt](st
 * [Brose_stats.txt](step7_stats/Brose_stats.txt)
 * [Ocean_stats.txt](step7_stats/Ocean_stats.txt)
 * [Alda_stats.txt](step7_stats/Alda-subset_stats.txt) / [Alda_s5_stats.txt](step7_stats/Alda_s5_consens_stats.txt)
-
+* [Chu_stats.txt](step7_stats/Chu_stats.txt)
+* [Ball_stats.txt](step7_stats/Ball_stats.txt)
+* [Torres_stats.txt](step7_stats/Torres_stats.txt)

@@ -1,0 +1,131 @@
+
+## The number of loci caught by each filter.
+## ipyrad API location: [assembly].stats_dfs.s7_filters
+
+                           total_filters applied_order retained_loci
+total_prefiltered_loci                 0             0            55
+filtered_by_rm_duplicates              3             3            52
+filtered_by_max_indels                 1             1            51
+filtered_by_max_SNPs                   0             0            51
+filtered_by_max_shared_het            10            10            41
+filtered_by_min_sample                18            18            23
+total_filtered_loci                   32            32            23
+
+
+## The number of loci recovered for each Sample.
+## ipyrad API location: [assembly].stats_dfs.s7_samples
+
+                     sample_coverage
+Angelito_L_U_10                   13
+Angelito_L_U_11                   12
+Angelito_L_U_12                   10
+Angelito_L_U_13                   11
+Angelito_L_U_8                     9
+Angelito_L_U_9                     9
+Carr9966E300_L_S_14                7
+Carr9966E300_L_S_15               17
+Carr9966E300_L_S_16                6
+Carr9966E300_L_S_17               16
+Carr9966E300_L_S_18               10
+EastPeak_H_S_5                    11
+EastPeak_H_S_6                    12
+EastPeak_H_S_7                    10
+EastPeak_H_U_1                    12
+EastPeak_H_U_2                    14
+EastPeak_H_U_27                   11
+EastPeak_H_U_3                    14
+MtBritton_H_U_20                   9
+MtBritton_H_U_21                  16
+MtBritton_H_U_24                   8
+MtBritton_H_U_32                   9
+MtBritton_H_U_33                  12
+MtBritton_H_U_34                  11
+
+
+## The number of loci for which N taxa have data.
+## ipyrad API location: [assembly].stats_dfs.s7_loci
+
+    locus_coverage  sum_coverage
+1                0             0
+2                0             0
+3                0             0
+4                6             6
+5                1             7
+6                2             9
+7                2            11
+8                2            13
+9                1            14
+10               0            14
+11               0            14
+12               0            14
+13               0            14
+14               0            14
+15               0            14
+16               1            15
+17               0            15
+18               0            15
+19               2            17
+20               0            17
+21               2            19
+22               1            20
+23               1            21
+24               2            23
+
+
+The distribution of SNPs (var and pis) per locus.
+## var = Number of loci with n variable sites (pis + autapomorphies)
+## pis = Number of loci with n parsimony informative site (minor allele in >1 sample)
+## ipyrad API location: [assembly].stats_dfs.s7_snps
+## The "reference" sample is included if present unless 'exclude_reference=True'
+
+    var  sum_var  pis  sum_pis
+0     4        0    9        0
+1     4        4    7        7
+2     4       12    2       11
+3     4       24    1       14
+4     1       28    0       14
+5     2       38    3       29
+6     0       38    0       29
+7     1       45    0       29
+8     1       53    0       29
+9     0       53    0       29
+10    0       53    0       29
+11    0       53    0       29
+12    1       65    0       29
+13    0       65    0       29
+14    0       65    1       43
+15    0       65    0       43
+16    1       81    0       43
+
+
+## Final Sample stats summary
+                     state  reads_raw  reads_passed_filter  clusters_total  clusters_hidepth  hetero_est  error_est  reads_consens  loci_in_assembly
+Angelito_L_U_10          7       7388                 7326            5068                44    0.030281   0.006456             24                13
+Angelito_L_U_11          7       8388                 8287            5769                44    0.027935   0.007692             26                12
+Angelito_L_U_12          7       4298                 4256            3107                27    0.027016   0.008286             17                10
+Angelito_L_U_13          7       6966                 6888            4782                38    0.029973   0.007574             22                11
+Angelito_L_U_8           7       3586                 3545            2580                20    0.025173   0.009987             12                 9
+Angelito_L_U_9           7       4678                 4631            3268                26    0.026182   0.009946             16                 9
+Carr9966E300_L_S_14      7       2605                 2568            1902                16    0.029537   0.013925             11                 7
+Carr9966E300_L_S_15      7       9138                 9048            6218                52    0.034522   0.007610             30                17
+Carr9966E300_L_S_16      7       2682                 2652            1971                20    0.024113   0.007676             12                 6
+Carr9966E300_L_S_17      7      11865                11734            7732                63    0.021859   0.009452             35                16
+Carr9966E300_L_S_18      7       6463                 6389            4449                37    0.024556   0.009120             21                10
+EastPeak_H_S_5           7       5105                 5061            3602                27    0.026265   0.007769             15                11
+EastPeak_H_S_6           7       8761                 8672            5843                43    0.026265   0.008480             22                12
+EastPeak_H_S_7           7       3829                 3781            2681                23    0.030334   0.005741             16                10
+EastPeak_H_U_1           7       4515                 4470            3275                28    0.031231   0.007438             17                12
+EastPeak_H_U_2           7       9603                 9495            6448                47    0.029038   0.008373             26                14
+EastPeak_H_U_27          7       6351                 6278            4428                26    0.023606   0.006730             17                11
+EastPeak_H_U_3           7       7777                 7676            5207                35    0.029496   0.009697             23                14
+MtBritton_H_U_20         7       4229                 4183            3050                24    0.020285   0.007689             13                 9
+MtBritton_H_U_21         7      12883                12764            8378                72    0.028541   0.008090             40                16
+MtBritton_H_U_24         7       4879                 4811            3400                27    0.017841   0.010058             19                 8
+MtBritton_H_U_32         7       5317                 5257            3717                25    0.032815   0.007916             12                 9
+MtBritton_H_U_33         7       5582                 5515            3905                34    0.017301   0.010902             22                12
+MtBritton_H_U_34         7       5509                 5457            3887                29    0.035058   0.006507             19                11
+
+
+## Alignment matrix statistics:
+snps matrix size: (24, 81), 55.45% missing sites.
+sequence matrix size: (24, 4981), 48.65% missing sites.
