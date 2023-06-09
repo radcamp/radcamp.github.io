@@ -16,9 +16,8 @@ efficiently.
 
 Each grey cell in this tutorial indicates a command line interaction. 
 Lines starting with `$ ` indicate a command that should be executed 
-in a terminal connected to the Habanero cluster, for example by copying and 
-pasting the text into your terminal. Elements in code cells surrounded 
-by angle brackets (e.g. <username>) are variables that need to be 
+by copying and pasting the text into your terminal. Elements in code cells
+surrounded by angle brackets (e.g. <username>) are variables that need to be 
 replaced by the user. All lines in code cells beginning with \#\# are 
 comments and should not be copied and executed. All other lines should 
 be interpreted as output from the issued commands.
@@ -219,7 +218,8 @@ but there are a few parameters we *must* change:
 
 Open the new params file by double-clicking on `params-peddrad.txt` in the
 left-nav file browser (you might need to navigate to this directory first).
-![png](../images/CO-EditParams.png)
+
+![png](images/CO-EditParams.png)
 
 We need to specify where the raw data files are located, the type of data we
 are using (.e.g., 'gbs', 'rad', 'ddrad', 'pairddrad), and which enzyme cut site
@@ -242,7 +242,8 @@ directories will be of the form: `/scratch/ipyrad-workshop/peddrad_*`.
 
 # Input data format
 
-Before we get started, let's take a look at what the raw data looks like. Remember that you can use `zcat` and `head` to do this.
+Before we get started with the assembly, let's take a look at what the raw data
+looks like. Remember that you can use `zcat` and `head` to do this.
 
 ```bash
 ## zcat: unZip and conCATenate the file to the screen
@@ -273,8 +274,9 @@ BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
 
 The simulated data are 100bp paired-end reads generated as ddRAD, meaning there
 will be two overhang sequences. In this case the 'rare' cutter leaves the TGCAT
-overhang. Can you find this sequence in the raw data? What's going on with that
-other stuff at the beginning of each read?
+overhang.
+* Can you find this sequence in the raw data?
+* What's going on with that other stuff at the beginning of each read?
 
 # Step 1: Demultiplexing the raw data
 
