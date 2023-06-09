@@ -54,6 +54,6 @@ results you might have obtained in the [Google Drive folder for draft results sl
 
 
 ## Wrap-up & adjourn
-Put stuff here.
-
+* Please take a moment to fill out the [RADCamp 2023 Exit Survey](https://docs.google.com/forms/d/e/1FAIpQLScoeUYN_fbnnlOjEKs7R85Sa8F0x3LzcRnyCEtGAnHJhixktw/viewform?usp=sharing)
+* Thanks for joining us!!!!!!!
 

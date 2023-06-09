@@ -69,12 +69,9 @@ Now the groups will work together on the data QC for their specific dataset.
 * Was there noticeable adapter contamination?
 * Any other questions?
 
-# TODO: Are we updating these slides or the directions below?
-### New: follow this link to open instructions in slide form
-[Slide instructions to start empirical assemblies](https://eaton-lab.org/slides/radcamped)
-
-
-###  older instructions
+## Empirical assembly
+<!--[Slide instructions to start empirical assemblies](https://eaton-lab.org/slides/radcamped)
+-->
 * Get back into your groups (in person or in breakout rooms) and
 choose 1 person to be the 'leader' to run the assembly. Consider
 sharing screen so everyone who is not driving can watch.
@@ -85,4 +82,6 @@ sharing screen so everyone who is not driving can watch.
 filtering settings based on the results from fastqc.
 * Also, based on preliminary anaylsis, set `max_barcodes_mismatch` to 1.
 * Launch ipyrad steps 1-7 `ipyrad -p params-wat.txt -s 1234567 -c 16`
+* After you verify that the assembly is running you may close your browser tab
+and the capsule will continue running on the cloud.
 * Go to the mixer and eat pizza and socialize! The results will be done tomorrow.
