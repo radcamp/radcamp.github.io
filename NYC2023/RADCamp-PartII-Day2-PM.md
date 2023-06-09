@@ -25,14 +25,14 @@ drive folder](https://docs.google.com/presentation/d/1jDYFz-l4UNr2m0rhXbsU3iKJjT
 
 ### Overview of other available API mode tools
 
-* [Tetrad - A Quartet-based species tree method](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-tetrad.ipynb)
-* [Phylogenetic inference: RAxML](06_RAxML_API.md)
-* [Clustering analysis: PCA](04_PCA_API.md)
-* [Clustering analysis: STRUCTURE](05_STRUCTURE_API.md)
-* [BPP - Bayesian inference under a multi-species coalescent model](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-bpp-species-delimitation.ipynb)
-* [Bucky - Phylogenetic concordance analysis](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-bucky.ipynb)
-* [ABBA-BABA - Admixture analysis](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-abba-baba.ipynb)
-* [Demographic analysis ([momi2](07_momi2_API.md))
+The core analysis tools all have detailed cookbooks available on the ipyrad
+[API analysis tools page](https://ipyrad.readthedocs.io/en/master/API-analysis/index.html).
+
+A couple other cookbooks that are useful for understanding the data but not on
+that page include:
+* [Pairwise sharing of present/missing data](https://github.com/dereneaton/ipyrad/blob/master/newdocs/API-analysis/cookbook-sharing.ipynb)
+* [Pairwise genetic distance](https://github.com/dereneaton/ipyrad/blob/master/newdocs/API-analysis/cookbook-distance.ipynb)
+* [Demographic analysis with the site frequency spectrum & momi2](../NYC2019/07_momi2_API.md))
 
 ## Analysis breakout rooms 1
 Lead: All (60')

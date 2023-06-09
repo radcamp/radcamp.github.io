@@ -93,8 +93,11 @@ output, remove any obvious outliers, and then redo the PCA.
 data = "peddrad_outfiles/peddrad.snps.hdf5"
 pca = ipa.pca(data)
 ```
-> **Note:** Here we use the hdf5 file with SNPs generated with ipyrad from the
-simulated data, but the `ipyrad.analysis.pca` module can also read in data from
+> **Note:** Here we use the hdf5 database file with SNPs generated with ipyrad from the
+simulated data. The database file contains the genotype calls information as well
+as linkage information that is used for subsampling unlinked SNPs and bootstrap resampling.
+
+> **Note:** The `ipyrad.analysis.pca` module can also read in data from
 *any* vcf file, so it's possible to quickly generate PCA plots for any vcf from
 any dataset.
 
@@ -231,7 +234,3 @@ pca.draw(colors=["hotpink", "skyblue", "goldenrod"])
 The `ipyrad.analysis.pca` module has many more features that we just don't have
 time to go over, but you might be interested in checking them out later:
 * [Full ipyrad.analysis.pca cookbook](https://ipyrad.readthedocs.io/en/master/API-analysis/cookbook-pca.html)
-* [Finer grained control of colors per populations](PCA_Advanced_Features.md#controlling-colors)
-* [Dealing with missing data](PCA_Advanced_Features.md#dealing-with-missing-data)
-* [Dealing with unequal sampling](PCA_Advanced_Features.md#dealing-with-unequal-sampling)
-* [Dealing with linked snps](PCA_Advanced_Features.md#dealing-with-linked-snps)
