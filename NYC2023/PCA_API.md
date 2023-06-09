@@ -20,8 +20,8 @@ reproducible scientific analysis workflows in python. ipyrad analysis tools are
 best run inside Jupyter notebooks, as the analysis can be monitored and tweaked
 and provides a self-documenting workflow.
 
-**The rest of the materials in this part of the workshop assume you are running
-all code in cells of a jupyter notebook** that is running on a CodeOcean capsule.
+The rest of the materials in this part of the workshop assume you are running
+all code in cells of a jupyter notebook.
 
 # **PCA** analyses
 
@@ -35,6 +35,7 @@ conda install -c conda-forge scikit-learn
 ## Create a new notebook for the PCA
 In the file browser on the left of JupyterLab browse to the directory with the
 assembly of the simulated data: `/scratch/ipyrad-workshop`.
+
 ![png](images/CO-PCA-WorkshopDirectory.png)
 
 Open the launcher (the big blue *+* button) and open a new "Python 3" notebook.
@@ -44,7 +45,7 @@ either click the small 'disk' icon in the upper left corner of the notebook or c
 File->Save Notebook
 ![png](images/CO-PCA-API-NotebookRename.png)
 
-### Import Python libraries
+### Import ipyrad.analysis module
 The `import` keyword directs python to load a module into the currently running
 context. This is very similar to the `library()` function in R. We begin by
 importing the ipyrad analysis module. Copy the code below into a
@@ -57,7 +58,7 @@ import ipyrad.analysis as ipa
 `ipyrad.analysis` **as** `ipa`, which is just faster to type.
 
 ## Quick guide (tl;dr)
-The following cell shows the quickest way to results using a small simulated
+The following cell shows the quickest way to results using the small simulated
 dataset in `/scratch/ipyrad-workshop`. Complete explanation of all of the
 features and options of the PCA module is the focus of the rest of this tutorial.
 Copy this code into a new notebook cell (small grey *+* button on the toolbar)
@@ -139,55 +140,73 @@ The keys are the population names, and the values are the lists of samples that
 belong to those populations. You can copy and paste this into a new cell in your
 notebook.
 ```python
-pops_dict = {
-     "South":['punc_IBSPCRIB0361', 'punc_MTR05978','punc_MTR21545','punc_JFT773',
-             'punc_MTR17744', 'punc_MTR34414', 'punc_MTRX1478', 'punc_MTRX1468'],
-     "North":['punc_ICST764', 'punc_MUFAL9635']
-}
+pops_dict = {"pop1":['1A_0', '1B_0', '1C_0', '1D_0'],
+             "pop2":['2E_0', '2F_0', '2G_0', '2H_0'],
+             "pop3":['3I_0', '3J_0', '3K_0', '3L_0']}
 ```
-Now create the `pca` object with the vcf file again, this time passing 
-in the pops_dict as the second argument, and plot the new figure. We can 
-also easily add a title to our PCA plots with the `title=` argument.
+Now create the `pca` object with the input data again, this time passing 
+in the pops_dict as the second argument and specifying this as the `imap`,
+and plot the new figure. We can also easily add a title to our PCA plots
+with the `label=` argument.
+
 ```python
-pca = ipa.pca(vcffile, pops_dict)
-pca.plot(title="Anolis Colored By Population")
+pca = ipa.pca(data, imap=pops_dict)
+pca.run()
+pca.draw(label="Sims colored by pop")
 ```
-    <matplotlib.axes._subplots.AxesSubplot at 0x7fe092fbbe50>
 
-![png](PCA_API_files/04_PCA_API_02_Anolis_PCA_colored.png)
+![png](images/CO-PCA-ColoredByPop.png)
 
-This is just much nicer looking now, and it's also much more straightforward to interpret.
+This is just much nicer looking now, and it's also much more straightforward
+to interpret.
 
 ## Removing "bad" samples and replotting.
-In PC analysis, it's common for "bad" samples to dominate several of the first PCs, and thus "pop out" in a degenerate looking way. Bad samples of this kind can often be attributed to poor sequence quality or sample misidentifcation. Samples with lots of missing data tend to pop way out on their own, causing distortion in the signal in the PCs. Normally it's best to evaluate the quality of the sample, and if it can be seen to be of poor quality, to remove it and replot the PCA. The Anolis dataset is actually relatively nice, but for the sake of demonstration lets imagine the "North" samples are "bad samples".
+In PC analysis, it's common for "bad" samples to dominate several of the first
+PCs, and thus "pop out" in a degenerate looking way. Bad samples of this kind
+can often be attributed to poor sequence quality or sample misidentifcation.
+Samples with lots of missing data tend to pop way out on their own, causing
+distortion in the signal in the PCs. Normally it's best to evaluate the quality
+of the sample, and if it can be seen to be of poor quality, to remove it and
+replot the PCA. The simulated dataset is actually relatively nice, but for the
+sake of demonstration lets imagine the "pop3" samples are "bad samples".
 
-From the figure we can see that we can see that "North" samples are distinguished by positive values on PC1. 
+From the figure we can see that "pop3" samples are distinguished by positive
+values on PC1. 
 
-We can get a more quantitative view on this by accessing `pca.pcs`, which is a property of the `pca` object that is populated after the plot() function is called. It contains the first 10 PCs for each sample. Let's have a look at these values by printing `pca.pcs`:
+We can get a more quantitative view on this by accessing `pca.pcs`, which is a
+property of the `pca` object that is populated after the plot() function is
+called. It contains the first 10 PCs for each sample. Let's have a look at these
+values by printing `pca.pcs`:
 
 ```python
-## Saving the PCs table to a .csv file
-pca.pcs.to_csv("Anolis_10PCs.csv")
-
 ## Printing PCs to the screen
-pca.pcs
+pca.pcs()
 ```
-> **Note** It's always good practice to use informative file names, f.e. here we use the name of the dataset and the number of PCs retained.
+![png](images/CO-PCA-ShowPCs.png)
 
-![png](PCA_API_files/04_PCA_API_03_Anolis_PCA_PCS.png)
-
-You can see that indeed punc_ICST764 and punc_MUFAL9635 have positive values for PC1 and all the rest have negative values, so we can target them for removal in this way. We can construct a 'mask' based on the value of PC1, and then remove samples that don't pass this filter.
+You can see that indeed all the `3\*_0` samples have positive values for PC1
+and all the rest have negative values, so we can target them for removal in
+this way. We can construct a 'mask' based on the value of PC1, and then remove
+samples that don't pass this filter.
 
 ```python
-mask = pca.pcs.values[:, 0] > 0
+mask = pca.pcs().values[:, 0] > 0
 print(mask)
 ```
-    [False  True False False False False False False False  True]
+    [False, False, False, False, False, False, False, False,  True,
+        True,  True,  True]
 
-> **Note:** In this call we are "masking" all samples (i.e. rows of the data matrix) which have values greater than 0 for the first column, which here is the '0' in the `[:, 0]` fragment. This is somewhat confusing because python matrices are 0-indexed, whereas it's typical for PCs to be 1-indexed. It's a nomencalture issue, really, but it can bite us if we don't keep it in mind. 
+> **Note:** In this call we are "masking" all samples (i.e. rows of the data
+matrix) which have values greater than 0 for the first column, which here is
+the '0' in the `[:, 0]` fragment. This is somewhat confusing because python
+matrices are 0-indexed, whereas it's typical for PCs to be 1-indexed. It's a
+nomencalture issue, really, but it can bite us if we don't keep it in mind. 
 
-You can see above that the mask is a list of booleans that is the same length as the number of samples. We can use this mask to  print out the names of just the samples we would like to remove.
+You can see above that the mask is a list of booleans that is the same length
+as the number of samples. We can use this mask to  print out the names of just
+the samples we would like to remove.
 
+### Nothing below here works
 ```python
 bad_samples = pca.samples_vcforder[mask]
 bad_samples
