@@ -191,8 +191,7 @@ Lead: Deren
 ## ipyrad CLI simulated data assembly
 Lead: Isaac
 
-[ipyrad CLI Part I](Part_II_files/ipyrad_partI_CLI.html)
-[ipyrad CLI Part II](Part_II_files/ipyrad_partII_CLI.md)
+[Exercise: ipyrad command line assembly with simulated data](ipyrad-CLI-FullTutorial.html)
 
 
-## Break for lunch
+## Break for lunch (12:45-1:30)
