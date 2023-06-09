@@ -228,8 +228,10 @@ pca.draw(colors=["hotpink", "skyblue", "goldenrod"])
 
 
 ## More to explore
-The `ipyrad.analysis.pca` module has many more features that we just don't have time to go over, but you might be interested in checking them out later:
-* [Fine grained control of colors per populations](PCA_Advanced_Features.md#controlling-colors)
+The `ipyrad.analysis.pca` module has many more features that we just don't have
+time to go over, but you might be interested in checking them out later:
+* [Full ipyrad.analysis.pca cookbook](https://ipyrad.readthedocs.io/en/master/API-analysis/cookbook-pca.html)
+* [Finer grained control of colors per populations](PCA_Advanced_Features.md#controlling-colors)
 * [Dealing with missing data](PCA_Advanced_Features.md#dealing-with-missing-data)
 * [Dealing with unequal sampling](PCA_Advanced_Features.md#dealing-with-unequal-sampling)
 * [Dealing with linked snps](PCA_Advanced_Features.md#dealing-with-linked-snps)
