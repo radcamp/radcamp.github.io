@@ -89,7 +89,7 @@ In the most common use, you'll want to plot the first two PCs, then inspect the
 output, remove any obvious outliers, and then redo the PCA.
 
 ```python
-## Path to the input vcf.
+## Path to the input data in snps.hdf5 format 
 data = "peddrad_outfiles/peddrad.snps.hdf5"
 pca = ipa.pca(data)
 ```
@@ -106,7 +106,7 @@ be the same color.
 pca.plot()
 ```
 
-![png](files/images/CO-PCA-TLDRExample.png)
+![png](images/CO-PCA-TLDRExample.png)
 
 ### Population assignment for sample colors
 Typically it is useful to color points in a PCA by some a priori grouping, such
@@ -168,141 +168,64 @@ Samples with lots of missing data tend to pop way out on their own, causing
 distortion in the signal in the PCs. Normally it's best to evaluate the quality
 of the sample, and if it can be seen to be of poor quality, to remove it and
 replot the PCA. The simulated dataset is actually relatively nice, but for the
-sake of demonstration lets imagine the "pop3" samples are "bad samples".
+sake of demonstration lets imagine the sample "1D_0" is 'bad'.
 
-From the figure we can see that "pop3" samples are distinguished by positive
-values on PC1. 
+> **Note:** We make a lot of use of the interactivity of jupyter notebooks in
+the ipyrad.analysis tools. In the PCA you can 'hover' over points to reveal
+their sample ID.
 
-We can get a more quantitative view on this by accessing `pca.pcs`, which is a
-property of the `pca` object that is populated after the plot() function is
-called. It contains the first 10 PCs for each sample. Let's have a look at these
-values by printing `pca.pcs`:
-
-```python
-## Printing PCs to the screen
-pca.pcs()
-```
-![png](images/CO-PCA-ShowPCs.png)
-
-You can see that indeed all the `3\*_0` samples have positive values for PC1
-and all the rest have negative values, so we can target them for removal in
-this way. We can construct a 'mask' based on the value of PC1, and then remove
-samples that don't pass this filter.
+The easiest way to achieve this is to simply remove the sample from the `imap`
+file and run the PCA again.
 
 ```python
-mask = pca.pcs().values[:, 0] > 0
-print(mask)
+pops_dict = {"pop1":['1A_0', '1B_0', '1C_0'],
+             "pop2":['2E_0', '2F_0', '2G_0', '2H_0'],
+             "pop3":['3I_0', '3J_0', '3K_0', '3L_0']}
+pca = ipa.pca(data, imap=pops_dict)
+pca.run()
+pca.draw(label="Sims colored by pop (no 1D_0)")
 ```
-    [False, False, False, False, False, False, False, False,  True,
-        True,  True,  True]
 
-> **Note:** In this call we are "masking" all samples (i.e. rows of the data
-matrix) which have values greater than 0 for the first column, which here is
-the '0' in the `[:, 0]` fragment. This is somewhat confusing because python
-matrices are 0-indexed, whereas it's typical for PCs to be 1-indexed. It's a
-nomencalture issue, really, but it can bite us if we don't keep it in mind. 
+![png](images/CO-PCA-No1D.png)
 
-You can see above that the mask is a list of booleans that is the same length
-as the number of samples. We can use this mask to  print out the names of just
-the samples we would like to remove.
-
-### Nothing below here works
-```python
-bad_samples = pca.samples_vcforder[mask]
-bad_samples
-```
-    array([u'punc_ICST764', u'punc_MUFAL9635'], dtype=object)
-
-We can then use this list of "bad" samples in a call to `pca.remove_samples` and then replot the new PCA:
+## Subsampling with replication
+By default `run()` will randomly subsample one SNP per RAD locus to reduce the
+effect of linkage on your results. This can be turned off by setting
+`subsample=False`. However, subsampling *unlinked* SNPs is generally a good
+idea for PCA analyses since you want to remove the effects of linkage from your
+data. It also presents a convenient way to explore the confidence in your
+results. By using the option `nreplicates` you can run many replicate analyses
+that subsample a different random set of unlinked SNPs each time. The replicate
+results are drawn with a lower opacity and the centroid of all the points for
+each sample is plotted as a black point. 
 
 ```python
-pca.remove_samples(bad_samples)
+pca.run(nreplicates=25, seed=12345)
+pca.draw();
 ```
-    INFO: Number of PCs may not exceed the number of samples.
-    Setting number of PCs = 8
+![png](images/CO-PCA-Replicates.png)
 
-> **Note:** The `remove_samples` function is destructive of the samples in the `pca` object. This means that the removed samples are actually deleted from the `pca`, so if you want to get them back you have to reload the original vcf data.
-> **Note:** The number of PCs may not exceed the number of samples in the dataset. The `pca` module detects this and automatically reduces the number of PCs calculated.
-
-```
-## Lets prove that the removed samples are gone now
-print(pca.samples_vcforder)
-```
-    [u'punc_IBSPCRIB0361' u'punc_JFT773' u'punc_MTR05978' u'punc_MTR17744'
-     u'punc_MTR21545' u'punc_MTR34414' u'punc_MTRX1468' u'punc_MTRX1478']
-
-And now plot the new figure with the "bad" samples removed. We also introduce another nice feature of the `pca.plot()` function, which is the `outfile` argument. This argument will cause the plot function to not only draw to the screen, but also to save a `png` formatted file to the filesystem.
+## Plotting PCs other than 0 and 1
+Even though PC 0 and 1 by definition explain the most variance in the data,
+it is still often useful to examine other PCs. You can do this by specifying
+which PCs to plot in in the call to `draw`.
 
 ```python
-pca.plot(title="Anolis w/o Northern Samples", outfile="Anolis_no_north.png")
+pca.draw(0, 2)
 ```
-    <matplotlib.axes._subplots.AxesSubplot at 0x7fe0f8c25410>
-    
-> **Note:** Spaces in filenames are ***BAD***. It's good practice, as we demonstrate here, to always substitute underscores (`_`) for spaces in filenames.
+![png](images/CO-PCA-PC02.png)
 
-![png](PCA_API_files/04_PCA_API_04_Anolis_PCA_NoNorth.png)
-
-## Looking at PCs other than 1 & 2
-PCs 1 and 2 by definition explain the most variation in the data, but sometimes PCs further down the chain can also be useful and informative. The plot function makes it simple to ask for PCs directly.
+## Custom color points
+Another nice feature of the `draw` method is the ability to pass in any custom
+color that you like for each population. You can do this in a couple different
+ways, but the most straightforward is just to pass in a list of valid color names
+from the ['named colors' matplotlib documentation](https://matplotlib.org/stable/gallery/color/named_colors.html).
 
 ```python
-## Lets reload the full dataset so we have all the samples
-pca = ipa.pca(vcffile, pops_dict)
-pca.plot(pcs=[3,4])
+pca.draw(colors=["hotpink", "skyblue", "goldenrod"])
 ```
-    <matplotlib.axes._subplots.AxesSubplot at 0x7fa3d05fd190>
+![png](images/CO-PCA-NamedColors.png)
 
-![png](PCA_API_files/04_PCA_API_05_Anolis_PCA_PC34.png)
-
-## Multi-panel PCA
-This is a last example of a couple of the nice features of the `pca` module, including the ability to pass in the axis to draw to, and toggling the legend. First, lets say we want to look at PCs 1/2 and 3/4 simultaneously. We can create a multi-panel figure with matplotlib, and pas in the axis for `pca` to plot to. We won't linger on the details of the matplotlib calls, but illustrate this here so you might have some example code to use in the future.
-```python
-import matplotlib.pyplot as plt
-
-## Create a new figure 12 inches wide by 5 inches high
-fig = plt.figure(figsize=(12, 5))
-
-## These two calls divide the figure evenly into left and right
-## halfs, and assigns the left half to `ax1` and the right half to `ax2`
-ax1 = fig.add_subplot(1, 2, 1)
-ax2 = fig.add_subplot(1, 2, 2)
-
-## Plot PCs 1 & 2 on the left half of the figure, and PCs 3 & 4 on the right
-pca.plot(ax=ax1, pcs=[1, 2], title="PCs 1 & 2")
-pca.plot(ax=ax2, pcs=[3, 4], title="PCs 3 & 4")
-
-## Saving the plot as a .png file
-plt.savefig("Anolis_2panel_PCs1-4.png", bbox_inches="tight")
-```
-    <matplotlib.axes._subplots.AxesSubplot at 0x7fa3d0a04290>
-
-> **Note** Saving the two panel figure is a little different, because we're making
-a composite of two different PCA plots. We need to use the native matplotlib
-`savefig()` function, to save the entire figure, not just one panel. `bbox_inches`
-is an argument that makes the output figure look nicer, it crops the bounding box
-more accurately.
-
-![png](PCA_API_files/04_PCA_API_06_Anolis_PCA_Multi.png)
-
-It's nice to see PCs 1-4 here, but it's kind of stupid to plot the legend twice, so we can just turn off the legend on the first plot.
-
-```python
-fig = plt.figure(figsize=(12, 5))
-ax1 = fig.add_subplot(1, 2, 1)
-ax2 = fig.add_subplot(1, 2, 2)
-
-## The difference here is we switch off the legend on the first PCA
-pca.plot(ax=ax1, pcs=[1, 2], title="PCs 1 & 2", legend=False)
-pca.plot(ax=ax2, pcs=[3, 4], title="PCs 3 & 4")
-
-## And save the plot as .png
-plt.savefig("My_PCA_plot_axis1-4.png", bbox_inches="tight")
-```
-    <matplotlib.axes._subplots.AxesSubplot at 0x7fa3d0a8db10>
-
-![png](PCA_API_files/04_PCA_API_07_Anolis_PCA_MultiNoLegend.png)
-
-Much better!
 
 ## More to explore
 The `ipyrad.analysis.pca` module has many more features that we just don't have time to go over, but you might be interested in checking them out later:
