@@ -1,0 +1,98 @@
+
+## The number of loci caught by each filter.
+## ipyrad API location: [assembly].stats_dfs.s7_filters
+
+                           total_filters applied_order retained_loci
+total_prefiltered_loci                 0             0             3
+filtered_by_rm_duplicates              0             0             3
+filtered_by_max_indels                 0             0             3
+filtered_by_max_SNPs                   0             0             3
+filtered_by_max_shared_het             0             0             3
+filtered_by_min_sample                 3             3             0
+total_filtered_loci                    3             3             0
+
+
+## The number of loci recovered for each Sample.
+## ipyrad API location: [assembly].stats_dfs.s7_samples
+
+               sample_coverage
+NBC-Cr-CL-01                 0
+NBC-Cr-CL-02                 0
+NBC-Cr-CL-03                 0
+NBC-Cr-CL-04                 0
+NBC-Cr-LM3-03                0
+NBC-Cr-LM3-04                0
+NBC-Cr-LM3-07                0
+SBR-Cr-ABI-01                0
+SBR-Cr-ABI-02                0
+SBR-Cr-ABI-03                0
+SBR-Cr-ABI-04                0
+SBR-Cr-BP-03                 0
+SBR-Cr-BP-07                 0
+SBR-Cr-BT-01                 0
+SCM-Cr-IF-01                 0
+SCM-Cr-JR3-01                0
+SCM-Cr-JR3-02                0
+SCM-Cr-JR3-05                0
+SCM-Cr-JR3-08                0
+
+
+## The number of loci for which N taxa have data.
+## ipyrad API location: [assembly].stats_dfs.s7_loci
+
+    locus_coverage  sum_coverage
+1                0             0
+2                0             0
+3                0             0
+4                0             0
+5                0             0
+6                0             0
+7                0             0
+8                0             0
+9                0             0
+10               0             0
+11               0             0
+12               0             0
+13               0             0
+14               0             0
+15               0             0
+16               0             0
+17               0             0
+18               0             0
+19               0             0
+
+
+The distribution of SNPs (var and pis) per locus.
+## var = Number of loci with n variable sites (pis + autapomorphies)
+## pis = Number of loci with n parsimony informative site (minor allele in >1 sample)
+## ipyrad API location: [assembly].stats_dfs.s7_snps
+## The "reference" sample is included if present unless 'exclude_reference=True'
+
+   var  sum_var  pis  sum_pis
+0    0        0    0        0
+
+
+## Final Sample stats summary
+               state  reads_raw  reads_passed_filter  clusters_total  clusters_hidepth  hetero_est  error_est  reads_consens  loci_in_assembly
+NBC-Cr-CL-01       7       1295                 1283             795                 6    0.014309   0.004773              5                 0
+NBC-Cr-CL-02       7       1373                 1365             841                 9    0.027466   0.003056              7                 0
+NBC-Cr-CL-03       7       1209                 1204             760                 6    0.020690   0.000002              4                 0
+NBC-Cr-CL-04       7       1045                 1040             659                 7    0.014545   0.001663              6                 0
+NBC-Cr-LM3-03      7       1438                 1424             861                 5    0.000031   0.008736              4                 0
+NBC-Cr-LM3-04      7        741                  733             499                 2    0.017598   0.000739              2                 0
+NBC-Cr-LM3-07      7       1284                 1272             790                 2    0.072445   0.010040              1                 0
+SBR-Cr-ABI-01      7       1009                 1007             638                 3    0.017273   0.003502              2                 0
+SBR-Cr-ABI-02      7       1250                 1238             769                 4    0.000016   0.001215              4                 0
+SBR-Cr-ABI-03      7       1274                 1264             825                 5    0.016776   0.001680              4                 0
+SBR-Cr-ABI-04      7        727                  722             478                 3    0.000729   0.003599              2                 0
+SBR-Cr-BP-03       7        797                  794             520                 2    0.002847   0.006910              1                 0
+SBR-Cr-BP-07       7       1545                 1524             917                10    0.011195   0.000882              9                 0
+SBR-Cr-BT-01       7       1415                 1403             849                 6    0.012680   0.000829              5                 0
+SCM-Cr-IF-01       7        372                  370             239                 3    0.036845   0.010472              1                 0
+SCM-Cr-JR3-01      7       1181                 1173             747                 5    0.016892   0.001163              4                 0
+SCM-Cr-JR3-02      7       1141                 1140             717                 1    0.000078   0.002080              1                 0
+SCM-Cr-JR3-05      7        574                  571             381                 2    0.057649   0.004404              1                 0
+SCM-Cr-JR3-08      7        803                  797             520                 3    0.049391   0.001216              1                 0
+
+
+## Alignment matrix statistics:

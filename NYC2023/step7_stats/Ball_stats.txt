@@ -1,0 +1,86 @@
+
+## The number of loci caught by each filter.
+## ipyrad API location: [assembly].stats_dfs.s7_filters
+
+                           total_filters applied_order retained_loci
+total_prefiltered_loci                 0             0            90
+filtered_by_rm_duplicates              2             2            88
+filtered_by_max_indels                 1             1            87
+filtered_by_max_SNPs                   0             0            87
+filtered_by_max_shared_het             2             2            85
+filtered_by_min_sample                47            47            38
+total_filtered_loci                   52            52            38
+
+
+## The number of loci recovered for each Sample.
+## ipyrad API location: [assembly].stats_dfs.s7_samples
+
+                 sample_coverage
+Cos_macrocarpa                 7
+Ham_patens                    33
+Hil_bonoi                     34
+Hil_macbridei                 29
+Hil_parasitica1               20
+Hil_parasitica2               37
+Hil_parasitica6                0
+Hil_parasitica7               13
+Hil_pumila1                    7
+Hil_pumila2                    3
+Hil_pumila3                    6
+Hil_wurdackii1                 1
+Hil_wurdackii2                21
+
+
+## The number of loci for which N taxa have data.
+## ipyrad API location: [assembly].stats_dfs.s7_loci
+
+    locus_coverage  sum_coverage
+1                0             0
+2                0             0
+3                0             0
+4               15            15
+5                7            22
+6                9            31
+7                2            33
+8                1            34
+9                2            36
+10               1            37
+11               0            37
+12               1            38
+13               0            38
+
+
+The distribution of SNPs (var and pis) per locus.
+## var = Number of loci with n variable sites (pis + autapomorphies)
+## pis = Number of loci with n parsimony informative site (minor allele in >1 sample)
+## ipyrad API location: [assembly].stats_dfs.s7_snps
+## The "reference" sample is included if present unless 'exclude_reference=True'
+
+   var  sum_var  pis  sum_pis
+0   20        0   28        0
+1   10       10    8        8
+2    6       22    2       12
+3    1       25    0       12
+4    1       29    0       12
+
+
+## Final Sample stats summary
+                 state  reads_raw  reads_passed_filter  clusters_total  clusters_hidepth  hetero_est  error_est  reads_consens  loci_in_assembly
+Cos_macrocarpa       7       1009                  980             601                 7    0.000033   0.000420              7                 7
+Ham_patens           7      23353                22997            5704               271    0.037946   0.012334            134                33
+Hil_bonoi            7      17629                17295            3488               162    0.016087   0.000913            135                34
+Hil_macbridei        7       3618                 3581            1593                53    0.017196   0.001714             46                29
+Hil_parasitica1      7       2243                 2219            1279                28    0.006976   0.001065             26                20
+Hil_parasitica2      7      10270                10194            3165               114    0.024162   0.002784             85                37
+Hil_parasitica6      7        785                  773             600                 1    0.000591   0.000093              1                 0
+Hil_parasitica7      7       2238                 2169             709                24    0.019567   0.002284             18                13
+Hil_pumila1          7       3563                 3475            2550                10    0.000090   0.000167             10                 7
+Hil_pumila2          7       1201                 1180             869                 3    0.001307   0.000083              3                 3
+Hil_pumila3          7       1390                 1339             906                 8    0.006018   0.000011              7                 6
+Hil_wurdackii1       7         71                   70              45                 1    0.001307   0.000083              1                 1
+Hil_wurdackii2       7       3746                 3670             974                66    0.023481   0.005645             41                21
+
+
+## Alignment matrix statistics:
+snps matrix size: (13, 29), 59.15% missing sites.
+sequence matrix size: (13, 6003), 61.13% missing sites.

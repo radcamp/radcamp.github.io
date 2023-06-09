@@ -1,0 +1,169 @@
+
+## The number of loci caught by each filter.
+## ipyrad API location: [assembly].stats_dfs.s7_filters
+
+                           total_filters applied_order retained_loci
+total_prefiltered_loci                 0             0         15401
+filtered_by_rm_duplicates            116           116         15285
+filtered_by_max_indels               658           658         14627
+filtered_by_max_SNPs                   0             0         14627
+filtered_by_max_shared_het            69            62         14565
+filtered_by_min_sample             12673         12673          1892
+total_filtered_loci                13516         13509          1892
+
+
+## The number of loci recovered for each Sample.
+## ipyrad API location: [assembly].stats_dfs.s7_samples
+
+                         sample_coverage
+EC01_US_AZVV_Fo_perp                 394
+EC04_US_AZVV_Po_mar_occ              299
+EC05_US_AZMG_Fo_gnav                 191
+EC07_MX_SOSJSD_Ph_rhea                76
+EC107_US_AZCBP_La_sp                1181
+EC111_US_AZCP_Cr_C                  1174
+EC113_US_AZCP_Cr_C                   390
+EC114_US_AZCP_Li_apic               1168
+EC11_MX_SOSE_Fo_gnav                  21
+EC15_MX_SOSJRZ_Ph_rhea                55
+EC16_MX_SOSE_Ph_obtu                  25
+EC18_US_AZPC_Ph_obtu                 151
+EC19_US_AZPC_Tr_ariz                 292
+EC20_MX_SOSJRSF_Ph_rhea              266
+EC21_MX_SOSJRZ_La_sp                 151
+EC24_US_AZCH_Cr_C                    829
+EC33_US_AZPAY_Li_apic                311
+EC35_US_AZPAY_Ca_vici                151
+EC36_US_AZPC_Ca_ocre                   0
+EC58_US_AZPC_Ph_hyat_bi              615
+EC66_US_AZPC_Ca_sans                 305
+EC69_US_MABF_Ca_penn                 534
+EC91_US_AZPC_Ca_sans                  82
+
+
+## The number of loci for which N taxa have data.
+## ipyrad API location: [assembly].stats_dfs.s7_loci
+
+    locus_coverage  sum_coverage
+1                0             0
+2                0             0
+3                0             0
+4             1385          1385
+5              258          1643
+6              107          1750
+7               74          1824
+8               25          1849
+9               14          1863
+10              11          1874
+11               6          1880
+12               4          1884
+13               2          1886
+14               2          1888
+15               2          1890
+16               0          1890
+17               1          1891
+18               0          1891
+19               0          1891
+20               1          1892
+21               0          1892
+22               0          1892
+23               0          1892
+
+
+The distribution of SNPs (var and pis) per locus.
+## var = Number of loci with n variable sites (pis + autapomorphies)
+## pis = Number of loci with n parsimony informative site (minor allele in >1 sample)
+## ipyrad API location: [assembly].stats_dfs.s7_snps
+## The "reference" sample is included if present unless 'exclude_reference=True'
+
+    var  sum_var  pis  sum_pis
+0   155        0  687        0
+1   188      188  276      276
+2   149      486  134      544
+3    98      780  106      862
+4    65     1040   89     1218
+5    57     1325   85     1643
+6    50     1625   62     2015
+7    57     2024   58     2421
+8    44     2376   46     2789
+9    38     2718   49     3230
+10   54     3258   33     3560
+11   47     3775   32     3912
+12   56     4447   35     4332
+13   64     5279   33     4761
+14   52     6007   18     5013
+15   49     6742   21     5328
+16   62     7734   28     5776
+17   44     8482   20     6116
+18   39     9184   13     6350
+19   46    10058    9     6521
+20   39    10838    8     6681
+21   26    11384    9     6870
+22   39    12242    8     7046
+23   42    13208   13     7345
+24   36    14072    3     7417
+25   36    14972    3     7492
+26   32    15804    3     7570
+27   25    16479    0     7570
+28   40    17599    3     7654
+29   25    18324    1     7683
+30   23    19014    2     7743
+31   12    19386    4     7867
+32   18    19962    0     7867
+33    9    20259    1     7900
+34   10    20599    0     7900
+35   10    20949    0     7900
+36    5    21129    0     7900
+37    8    21425    0     7900
+38    4    21577    0     7900
+39    8    21889    0     7900
+40    6    22129    0     7900
+41    3    22252    0     7900
+42    4    22420    0     7900
+43    2    22506    0     7900
+44    2    22594    0     7900
+45    2    22684    0     7900
+46    0    22684    0     7900
+47    1    22731    0     7900
+48    0    22731    0     7900
+49    4    22927    0     7900
+50    2    23027    0     7900
+51    0    23027    0     7900
+52    0    23027    0     7900
+53    1    23080    0     7900
+54    1    23134    0     7900
+55    1    23189    0     7900
+56    1    23245    0     7900
+57    1    23302    0     7900
+
+
+## Final Sample stats summary
+                         state  reads_raw  reads_passed_filter  clusters_total  clusters_hidepth  hetero_est  error_est  reads_consens  loci_in_assembly
+EC01_US_AZVV_Fo_perp         7      81393                80651           16284              3163    0.005384   0.001405           2935               394
+EC04_US_AZVV_Po_mar_occ      7      53733                53199           12884              2071    0.006186   0.001747           1910               299
+EC05_US_AZMG_Fo_gnav         7      98507                97458           22336              4049    0.007405   0.001852           3718               191
+EC07_MX_SOSJSD_Ph_rhea       7      34597                34218            9690              1121    0.008344   0.001912           1015                76
+EC107_US_AZCBP_La_sp         7     292037               288946           30054              8547    0.005438   0.001455           7956              1181
+EC111_US_AZCP_Cr_C           7     322688               319110           28987              8536    0.005705   0.001421           7967              1174
+EC113_US_AZCP_Cr_C           7     377246               373280           32127             10491    0.004416   0.000979          10024               390
+EC114_US_AZCP_Li_apic        7     233997               231304           24679              6831    0.005641   0.001467           6377              1168
+EC11_MX_SOSE_Fo_gnav         7      16243                16116            4590               184    0.014202   0.003880            139                21
+EC15_MX_SOSJRZ_Ph_rhea       7      18337                18163            7386               394    0.013235   0.005402            299                55
+EC16_MX_SOSE_Ph_obtu         7      18714                18542            5860               279    0.014829   0.004291            221                25
+EC18_US_AZPC_Ph_obtu         7      24885                24622            7934               661    0.010872   0.002418            564               151
+EC19_US_AZPC_Tr_ariz         7      45529                45090           12523              1437    0.010861   0.002489           1237               292
+EC20_MX_SOSJRSF_Ph_rhea      7     125545               124384           20679              4645    0.005504   0.001456           4387               266
+EC21_MX_SOSJRZ_La_sp         7      65413                64675           18362              2190    0.010535   0.002446           1911               151
+EC24_US_AZCH_Cr_C            7      53130                52654           11427              1599    0.008207   0.002318           1416               829
+EC33_US_AZPAY_Li_apic        7      51958                51452           14846              1880    0.007753   0.001897           1697               311
+EC35_US_AZPAY_Ca_vici        7      29056                28763            9698               626    0.010501   0.002801            534               151
+EC36_US_AZPC_Ca_ocre         7        431                  417             280                 2    0.066526   0.010077              1                 0
+EC58_US_AZPC_Ph_hyat_bi      7     332489               329358           29366              9266    0.007055   0.001145           8691               615
+EC66_US_AZPC_Ca_sans         7     271124               268375           34972              9597    0.006721   0.001544           8953               305
+EC69_US_MABF_Ca_penn         7     548688               542392           40090             13582    0.007014   0.001468          12582               534
+EC91_US_AZPC_Ca_sans         7      31248                30908           10931               875    0.010910   0.003416            736                82
+
+
+## Alignment matrix statistics:
+snps matrix size: (23, 23302), 77.84% missing sites.
+sequence matrix size: (23, 538972), 80.30% missing sites.
