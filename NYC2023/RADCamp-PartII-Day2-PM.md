@@ -14,10 +14,12 @@ Lead: Isaac (20')
 
 Break into groups around real data with the intention of running a few analyses,
 creating some plots and reporting the results to the rest of the group.
-* For the groups with assemblies that did not finish running, you will need to
+* Assign one group member to lead/coordinate analysis and to update the results slides.
+* For groups with assemblies that finished running you'll use the output files in
+your `/scratch/ipyrad-workshop/*_outfiles` directory.
+* For the groups with assemblies that *did not finish* running, you will need to
 attach a data asset which is called `*_assembly` which contains the complete
 assembly including outfiles which we have performed in advance.
-* Assign one group member to lead/coordinate analysis and to update the results slides.
 * Ideally, everyone will run every type of analysis. But there is limited time.
 So each person will instead choose one analysis to run first, and can do other
 analyses after if they have time.
