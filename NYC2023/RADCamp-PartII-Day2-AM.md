@@ -38,6 +38,7 @@ Lead: Deren (30')
 ## ipyrad analysis API - Phylogenetic trees with RAxML
 Lead: Isaac (30')
 
+[Exercise: ipyrad analysis API for RAxML](RAxML_API.md)
 * A brief overview of ipyrad analysis tools
 * ipa.window-extractor
 * The ipa.raxml tool

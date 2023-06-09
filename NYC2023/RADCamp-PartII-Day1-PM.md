@@ -9,13 +9,12 @@
 * [Assemble real data](#Form-groups-and-assemble-real-data)
 
 ## Intro to Code Ocean
-Lead: Sandra
+Lead: Sandra (45')
 
-**(Sandra's CO intro and walkthrough presentation goes here)**
-
+[Code Ocean: The Digital Lab for Computational Scientists](https://docs.google.com/presentation/d/17xszqJnK5aLJJhXaX3UBVFZkO2_pEpkKPUzWT8uNH-I/edit?usp=drive_link)
 
 ## Look at the real data we generated
-Lead: Isaac
+Lead: Isaac (30')
 
 Now we will move to the real data
 * Covering i7 demultiplexing
@@ -28,7 +27,7 @@ apparent reason for this (different groups, different enzyme combos).
 it didn't change the outcome.
 
 ## Empirical Data QC
-Lead: Isaac
+Lead: Isaac (45')
 
 ### Form groups for working with the empirical data
 Groups will be organized around the 10 sets of samples that obtained sufficient
