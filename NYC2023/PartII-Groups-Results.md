@@ -16,8 +16,8 @@ G | \*Woods, Trzebny, Ribeiro | Woods & Guzman |  | [Woods_stats.txt](step7_stat
 Group Letter | Members | Raw Data File | Overhang Sequences | Barcodes File |
 ------------ | ------- | ------------- | ------------------ | ------------- |
 H | \*Medeiros, Torres-Sánchez, Ocean | Medeiros |  | [Medeiros_stats.txt](step7_stats/Medeiros_stats.txt) |
-I | \*Staniczenko, Barragán, Negrin, Flynn | Mauricio |  | [Mauricio_stats.txt](step7_stats/Mauricio_stats.txt) |
-J | \*Guzmán, Paredes-Burneo, Piergiorgio | Woods & Guzman |  | [Guzman_stats.txt](step7_stats/Guzman_stats.txt) |
+I | \*Staniczenko, Barragán, Negrin | Mauricio |  | [Mauricio_stats.txt](step7_stats/Mauricio_stats.txt) |
+J | \*Guzmán, Paredes-Burneo, Flynn | Woods & Guzman |  | [Guzman_stats.txt](step7_stats/Guzman_stats.txt) |
 
 # Libraries failed sequencing
 

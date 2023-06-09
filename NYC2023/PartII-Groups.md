@@ -16,7 +16,7 @@ G | \*Woods, Trzebny, Ribeiro | Woods & Guzman | ATCGG, CGATCC | [Woods_barcodes
 Group Letter | Members | Raw Data File | Overhang Sequences | Barcodes File |
 ------------ | ------- | ------------- | ------------------ | ------------- |
 H | \*Medeiros, Torres-Sánchez, Ocean | Medeiros | ATCGG, CGATCC | [Medeiros_barcodes.txt](barcodes/Medeiros_barcodes.txt) |
-I | \*Staniczenko, Barragán, Negrin, Flynn | Mauricio | GCTAG, TAATTC | [Mauricio_barcodes.txt](barcodes/Mauricio_barcodes.txt) |
-J | \*Guzmán, Paredes-Burneo, Piergiorgio | Woods & Guzman | ATCGG, CGATCC | [Guzman_barcodes.txt](barcodes/Guzman_barcodes.txt) |
+I | \*Staniczenko, Barragán, Negrin | Mauricio | GCTAG, TAATTC | [Mauricio_barcodes.txt](barcodes/Mauricio_barcodes.txt) |
+J | \*Guzmán, Paredes-Burneo, Flynn | Woods & Guzman | ATCGG, CGATCC | [Guzman_barcodes.txt](barcodes/Guzman_barcodes.txt) |
 
 \*Indicates default group leader, but you can change it if you like.
