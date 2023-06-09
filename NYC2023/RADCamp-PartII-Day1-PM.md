@@ -58,6 +58,7 @@ entire raw data files (slow), so we have cheated a bit and pre-demux'd all the
 data to make this step faster and easier.
 
 Now the groups will work together on the data QC for their specific dataset.
+
 [3RAD Data Quality Control (fastqc)](fastqc-exercise.md)
 
 ## Coffee break (3:30-3:45)
