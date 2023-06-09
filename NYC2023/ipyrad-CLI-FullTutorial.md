@@ -1,4 +1,4 @@
-# ipyrad command line tutorial - Part I
+# ipyrad command line assembly tutorial
 
 This is the full tutorial for the command line interface (**CLI**) for ipyrad.
 In this tutorial we'll walk through the entire assembly, from raw data to output
