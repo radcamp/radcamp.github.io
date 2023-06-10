@@ -25,8 +25,11 @@ By the end of this workshop you will gain experience with:
 
 
 ## Brief intro to RADSeq
-Lead: Deren
-[Introduction to RAD and the terminal](https://eaton-lab.org/slides/radcamp)
+Lead: Deren  
+* Slides: [Introduction to RAD and the terminal](https://eaton-lab.org/slides/radcamp)  
+* History of RAD-seq.  
+* When to use RAD-seq and comparison to alternatives.  
+* Brief introduction to the command-line and filesystems.  
 
 ## Intro to CLI and FASTQ
 Lead: Isaac
