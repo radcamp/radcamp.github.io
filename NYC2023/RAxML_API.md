@@ -22,12 +22,11 @@ all code in cells of a jupyter notebook.
 # **RAxML** analyses
 
 ## A bit of setup
-Inside your CO capsule open a new terminal and install `raxml` and `toytree`,
-which we will use during this tutorial.
+Inside your CO capsule open a new terminal and install `raxml`, which we will
+use during this tutorial.
 
 ```
 conda install -c bioconda raxml -y
-conda install -c conda-forge toytree -y
 ```
 
 ## Create a new notebook for the RAxML analysis
