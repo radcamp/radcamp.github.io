@@ -128,12 +128,13 @@ rax.params.N = 10
 rax.params.f = "d"
 ```
 This will perform 10 rapid hill-climbing ML analyses from random starting trees,
-with no bootstrap replicates.
+with no bootstrap replicates. 10 is a small value so it will run fast.
 
 ## Styling the tree
-The default tree is nice but a little boring. `toytree` offers a huge number
-of options for styling phylogenetic trees. A complete overview is available
-in the [toytree tree styling documentation](https://toytree.readthedocs.io/en/latest/4-tutorial.html#Drawing-trees:-styles), here we'll just show a few of the useful ones.
+The default plotted tree can be manipulated with `toytree`, which offers a huge
+number of options for styling phylogenetic trees. A complete overview is available
+in the [toytree tree styling documentation](https://toytree.readthedocs.io/en/latest/8-styling.html)
+here we'll just show a few of these.
 
 ```python
 # Add node labels showing node support
@@ -142,7 +143,34 @@ rtre.draw(node_sizes=15, node_labels="support")
 
 ![png](images/CO-RAxML-NodeSupport.png)
 
+```python
+# Change the tree style
+rtre.draw(tree_style='d')          # dark-style
+rtre.draw(tree_style='o')          # umlaut-style
+```
 
+![png](images/CO-RAxML-TreeStyles.png)
 
+```python
+# Change the orientation
+rtre.draw(tree_style="o", layout='d')
+```
 
+![png](images/CO-RAxML-TreeLayout.png)
 
+Again, much more is available in the [toytree tree styling documentation](https://toytree.readthedocs.io/en/latest/8-styling.html).
+
+## More to explore
+If the RADSeq assembly was performed with mapping to a reference genome
+this creates the opportunity to perform phylogenetic inference within genomic
+windows using blocks of RAD loci mapped to contiguous regions of a reference
+chromosome. The ipyrad analysis toolkit provides `window_extracter` for doing
+this (and more).
+
+[ipyrad-analysis toolkit: window_extracter](https://ipyrad.readthedocs.io/en/latest/API-analysis/cookbook-window_extracter.html)
+
+Window extracter has several key features:
+* Automatically concatenates ref-mapped RAD loci in sliding windows.
+* Filter to remove sites by missing data.
+* Optionally remove samples from alignments.
+* Optionally use consensus seqs to represent clades of multiple samples.
