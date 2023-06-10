@@ -46,11 +46,13 @@ data science. CodeOcean allows the creation of shareable, interactive,
 and reproducible scientific computing workflows.
 
 ### Accessing a command line interface on CodeOcean
-We will perform the basic assembly and analysis of simulated RADSeq data using a
-command line interface on a CodeOcean 'capsule'. For the moment, to stay focused
-on the details of the ipyrad assembly process, we will pop right to the command
-line (using the following procedure), but we will hear much more about the unique
-features of CodeOcean after lunch.
+Our first goal will be to use a command line interface to view RAD-seq data
+as way to become familiar with the format of the raw data that we will analyze, 
+while also learning about basic command line programs. For this, we will connect
+to CodeOcean as a remote server. For the moment, to stay focused
+on the topic of RAD-seq and the ipyrad assembly process, we will pop right to 
+the command line, but we will hear much more about the unique
+features of the CodeOcean platform after lunch.
 
 **Get everyone on CodeOcean here:**
 * [Log in to the RADCamp CodeOcean instance (https://radcamp.codeocean.com/)](https://radcamp.codeocean.com/)
