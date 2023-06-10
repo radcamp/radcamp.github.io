@@ -229,6 +229,46 @@ pca.draw(colors=["hotpink", "skyblue", "goldenrod"])
 ```
 ![png](images/CO-PCA-NamedColors.png)
 
+## Dealing with missing data in PCA
+PCA can be _extremely_ sensitive to missing data if there is any pattern
+at all in the missingness.
+
+We offer three algorithms for imputing missing data:
+
+* `sample`: Randomly sample genotypes based on the frequency of alleles within
+(user-defined) populations (`imap`).
+* `kmeans`: Randomly sample genotypes based on the frequency of alleles in
+(kmeans cluster-generated) populations.
+* 'random': This is less an imputation method than an attempt to reduce the bias
+of assigning all missing data to the ancestral state. Instead missing data
+are randomly assigned to ancestral or derived states.
+* `None` (default): All missing values are imputed with zeros (ancestral allele).
+
+Here is an example of how to select an `impute_method`:
+```python
+pca1 = ipa.pca(
+    data=data,
+    imap=imap,
+    impute_method=`sample`,
+)
+```
+
+A fourth approach is to simply enforce an lower bound on missing data with
+the `mincov` parameter. `mincov` specifies the minimum coverage threshold
+below which a snp is excluded from the analysis.
+
+This code will exclude any snp not present in 100% of samples, a very strict
+threshold.
+```python
+pca2 = ipa.pca(
+    data=data,
+    mincov=1.0,
+    impute_method=None,
+)
+```
+
+We encourage you to experiment with different imputation schemes
+and missing data thresholds when analysing your own data later.
 
 ## More to explore
 The `ipyrad.analysis.pca` module has many more features that we just don't have
