@@ -143,12 +143,12 @@ The keys are the population names, and the values are the lists of samples that
 belong to those populations. You can copy and paste this into a new cell in your
 notebook.
 ```python
-pops_dict = {"pop1":['1A_0', '1B_0', '1C_0', '1D_0'],
-             "pop2":['2E_0', '2F_0', '2G_0', '2H_0'],
-             "pop3":['3I_0', '3J_0', '3K_0', '3L_0']}
+imap = {"pop1":['1A_0', '1B_0', '1C_0', '1D_0'],
+        "pop2":['2E_0', '2F_0', '2G_0', '2H_0'],
+        "pop3":['3I_0', '3J_0', '3K_0', '3L_0']}
 ```
 Now create the `pca` object with the input data again, this time passing 
-in the pops_dict as the second argument and specifying this as the `imap`,
+in the new dictionary as the second argument and specifying this as the `imap`,
 and plot the new figure. We can also easily add a title to our PCA plots
 with the `label=` argument.
 
@@ -181,10 +181,10 @@ The easiest way to achieve this is to simply remove the sample from the `imap`
 file and run the PCA again.
 
 ```python
-pops_dict = {"pop1":['1A_0', '1B_0', '1C_0'],
-             "pop2":['2E_0', '2F_0', '2G_0', '2H_0'],
-             "pop3":['3I_0', '3J_0', '3K_0', '3L_0']}
-pca = ipa.pca(data, imap=pops_dict)
+imap = {"pop1":['1A_0', '1B_0', '1C_0'],
+        "pop2":['2E_0', '2F_0', '2G_0', '2H_0'],
+        "pop3":['3I_0', '3J_0', '3K_0', '3L_0']}
+pca = ipa.pca(data, imap=imap)
 pca.run()
 pca.draw(label="Sims colored by pop (no 1D_0)")
 ```
