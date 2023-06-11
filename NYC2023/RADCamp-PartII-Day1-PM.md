@@ -17,8 +17,6 @@ Lead: Sandra (45')
 Lead: Isaac (30')
 
 Now we will move to the real data
-* Covering i7 demultiplexing
-![png](images/i7-DemuxNotebook.png)
 * [Let's look at the results from the real demux process](Demux-Results.txt)
 * Unfortunately several of the libraries failed sequencing. There was not an
 apparent reason for this (different groups, different enzyme combos).
