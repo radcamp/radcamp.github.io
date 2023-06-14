@@ -176,6 +176,7 @@ to operationalize reproducibility, and saving wasted researcher and collaboratio
 ![RADCampNYC2023-PartI-picnic](images/RADCampNYC2023-PartI.jpeg)
 
 # RADCamp NYC 2023 Part II Group Photo
+![RADCampNYC2023-PartII](images/RADCamp-NYC2023-Group-PartII.jpeg)
 
 ## Acknowledgements
 RADcamp NYC 2023 Part I materials are prepared by Sandra Hoffberg, Natalia Bayona Vasquez, and Travis Glenn. Many things we reference can be found on [badDNA.uga.edu](https://baddna.uga.edu).
