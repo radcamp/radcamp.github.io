@@ -71,14 +71,26 @@ this ([from this page](https://towardsdatascience.com/run-jupyter-notebook-as-a-
  WantedBy=multi-user.target
 ```
 
-* Confugre the autorun systemd service
+* Configure the autorun systemd service
 
 ```
 # start at boot
-systemctl enable jupyter
+sudo systemctl enable jupyter
 # start it now
-systemctl start jupyter
+sudo systemctl start jupyter
 ```
+
+* Clean up and export VM appliance
+
+```
+# Clean up conda packages and cache
+conda clean -a
+
+# clean apt package files
+sudo apt clean
+```
+
+Now shut down the running VM and File->Export Appliance.
 
 ### For Ubuntu Desktop
 **This is not how it is set up for this workshop, but is from a first attempt.**

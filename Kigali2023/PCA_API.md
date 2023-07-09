@@ -36,14 +36,7 @@ conda install -c conda-forge scikit-learn
 In the file browser on the left of JupyterLab browse to the directory with the
 assembly of the simulated data: `/scratch/ipyrad-workshop`.
 
-![png](images/CO-PCA-WorkshopDirectory.png)
-
 Open the launcher (the big blue *+* button) and open a new "Python 3" notebook.
-
-First things first, rename your new notebook to give it a meaningful name. You can
-either click the small 'disk' icon in the upper left corner of the notebook or choose
-File->Save Notebook
-![png](images/CO-PCA-API-NotebookRename.png)
 
 ### Import ipyrad.analysis module
 The `import` keyword directs python to load a module into the currently running
@@ -74,7 +67,7 @@ pca.run()
 pca.draw()
 ```
 
-![png](images/CO-PCA-TLDRExample.png)
+![png](images/PCA-TLDRExample.png)
 
 > **Note:** In this block of code, the `#` at the beginning of a line indicates
 to python that this is a comment, so it doesn't try to run this line. This is a
@@ -109,7 +102,7 @@ be the same color.
 pca.plot()
 ```
 
-![png](images/CO-PCA-TLDRExample.png)
+![png](images/PCA-TLDRExample.png)
 
 ### Population assignment for sample colors
 Typically it is useful to color points in a PCA by some a priori grouping, such
@@ -158,7 +151,7 @@ pca.run()
 pca.draw(label="Sims colored by pop")
 ```
 
-![png](images/CO-PCA-ColoredByPop.png)
+![png](images/PCA-ColoredByPop.png)
 
 This is just much nicer looking now, and it's also much more straightforward
 to interpret.
@@ -189,7 +182,7 @@ pca.run()
 pca.draw(label="Sims colored by pop (no 1D_0)")
 ```
 
-![png](images/CO-PCA-No1D.png)
+![png](images/PCA-No1D.png)
 
 ## Subsampling with replication
 By default `run()` will randomly subsample one SNP per RAD locus to reduce the
@@ -206,7 +199,7 @@ each sample is plotted as a black point.
 pca.run(nreplicates=25, seed=12345)
 pca.draw();
 ```
-![png](images/CO-PCA-Replicates.png)
+![png](images/PCA-Replicates.png)
 
 ## Plotting PCs other than 0 and 1
 Even though PC 0 and 1 by definition explain the most variance in the data,
@@ -216,7 +209,7 @@ which PCs to plot in in the call to `draw`.
 ```python
 pca.draw(0, 2)
 ```
-![png](images/CO-PCA-PC02.png)
+![png](images/PCA-PC02.png)
 
 ## Custom color points
 Another nice feature of the `draw` method is the ability to pass in any custom
@@ -227,7 +220,7 @@ from the ['named colors' matplotlib documentation](https://matplotlib.org/stable
 ```python
 pca.draw(colors=["hotpink", "skyblue", "goldenrod"])
 ```
-![png](images/CO-PCA-NamedColors.png)
+![png](images/PCA-NamedColors.png)
 
 ## Dealing with missing data in PCA
 PCA can be _extremely_ sensitive to missing data if there is any pattern
