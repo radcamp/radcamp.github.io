@@ -68,4 +68,4 @@ passwd: osboxes.org
 ```
 
 If you are interested in how we set up this image, the techinal details are
-here: [RADCamp VM technical setup](_technical_configuration.md)
+here: [RADCamp VM technical setup](vm-technical-configuration.md)
