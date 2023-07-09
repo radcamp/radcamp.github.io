@@ -41,6 +41,7 @@ conda config --set solver libmamba
 ```
 
 * Install ipyrad and sklearn/raxml/toytree
+
 ```
 conda install -c conda-forge -c bioconda ipyrad -y
 conda install -c conda-forge toytree scikit-learn -y
