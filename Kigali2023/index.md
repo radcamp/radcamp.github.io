@@ -1,5 +1,9 @@
 # Welcome to RADCamp 2023 - The Kigali Edition (ICCB)
 
+In association with the The Society for Conservation Biology's 31st
+International Congress for Conservation Biology (ICCB 2023)  
+![ICCB 2023](images/ICCB2023-logo.jpg){: width="75%"}  
+
 July 22-23, 2023  
 University of Rwanda  
 College of Science and Technology (CST), Former KIST  
@@ -62,6 +66,8 @@ Times            | Saturday (July 22) | Sunday (July 23) |
 
 ![University of Rwanda Center of Excellence in Biodiversity and Natural Resources Management](images/URwanda-CoEB.png)  
 **University of Rwanda Center of Excellence in Biodiversity and Natural Resources Management**
+
+**One anonymous donor**
 
 # RADCamp Kigali 2023 Group Photo
 
