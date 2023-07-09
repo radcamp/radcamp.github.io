@@ -55,16 +55,13 @@ Times            | Saturday (July 22) | Sunday (July 23) |
 ## RADCamp Kigali 2023 co-sponsored by:
 
 ![The Heller Group @ University of Copenhagen](images/KU-logo.png){: width="25%"}  
+**The Heller Group at the University of Copenhagen**
 
-The Heller Group at the University of Copenhagen
+![The Genetics Society](images/GeneticsSociety.png){: width="75%"}  
+**The Genetics Society**
 
-![The Genetics Society](images/GeneticsSociety.png)
-
-The Genetics Society
-
-![University of Rwanda Center of Excellence in Biodiversity and Natural Resources Management](images/URwanda-CoEB.png)
-
-University of Rwanda Center of Excellence in Biodiversity and Natural Resources Management
+![University of Rwanda Center of Excellence in Biodiversity and Natural Resources Management](images/URwanda-CoEB.png)  
+**University of Rwanda Center of Excellence in Biodiversity and Natural Resources Management**
 
 # RADCamp Kigali 2023 Group Photo
 
