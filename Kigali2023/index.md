@@ -38,16 +38,16 @@ during break times (attendees should have Rwandan francs for this as well).
 
 # Schedule
 
-Times            | Saturday (July 22) | Sunday (July 23) |
------            | ------------------ | ---------------- | 
-8:30-9:00       | Check-in and refreshments | Check-in and refreshments |
-9:00-10:30      | Intro to Conservation Genetics | [Phylogenetic inference: RAxML](06_RAxML_API.md) [Clustering analysis: PCA](04_PCA_API.md) |
+Times       | Saturday (July 22) | Sunday (July 23) |
+-----       | ------------------ | ---------------- | 
+8:30-9:00   | Check-in and Introductions | Check-in and Recap Day 1 |
+9:00-10:30  | Intro to Conservation Genetics | [RADSeq Assembly w/ ipyrad part I](02_ipyrad_partI_CLI.md) |
 10:30-10:45 | Coffee Break | Coffee Break |
-10:45-12:00 | [Software setup](setup.md) | AM  |
+10:45-12:00 | [Software setup](setup.md) & [Clustering analysis: PCA](04_PCA_API.md) | [RADSeq Assembly w/ ipyrad part II](03_ipyrad_partII_CLI.md)  |
 12:00-13:00 | Lunch | Lunch |
-13:00-14:45 |[setup](01_cluster_basics.md) and [ipyrad parts I](02_ipyrad_partI_CLI.md) & [II](03_ipyrad_partII_CLI.md) | (Small Group work) [Targeted phylogenetics exercises](tba.md) (Small Group work) [Targeted population genetics exercises](tba.md) |
+13:00-14:45 | [Phylogenetic inference: RAxML](06_RAxML_API.md) | Spatial Population Genetic Structure: EEMS |
 14:45-15:00 | Coffee Break | Coffee Break |
-15:00-17:00 | PM | PM |
+15:00-17:00 | Small Group Work: PCA/RAxML analysis w/ Cheetah Data | Small Group Work: EEMS analysis w/ Cheeta Data |
 
 ## Additional ipyrad analysis cookbooks
 
