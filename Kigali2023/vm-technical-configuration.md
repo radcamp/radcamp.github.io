@@ -3,8 +3,8 @@
 ## Configure the VM and set up networking
 * Grab the ubuntu linux server image from [osboxes.org](https://www.osboxes.org/virtualbox-images/)
 * Create a new vm and add the osboxes image as the disk
-* [Set port mapping for the vm (port forwarding rules)](https://serverfault.com/questions/908615/virtualbox-and-windows-10-cant-connect-to-a-server-hosted-on-virtualbox)
-Virtualbox->Choose image->Settings->Network->Advanced->Port forwarding. Add new:
+* [Set port mapping for the vm (port forwarding rules)](https://serverfault.com/questions/908615/virtualbox-and-windows-10-cant-connect-to-a-server-hosted-on-virtualbox): Virtualbox->Choose image->Settings->Network->Advanced->Port forwarding.
+Add new:
 ```
 Host IP 127.0.0.1
 Host port 8800
@@ -14,6 +14,7 @@ Guest port 8800
 
 ## Configure the VM itself (inside the running image)
 * Install miniconda
+
 ```
 # fetch the installer
 wget https://repo.anaconda.com/miniconda/Miniconda3-py38_23.3.1-0-Linux-x86_64.sh
@@ -24,6 +25,7 @@ bash Miniconda*
 ```
 
 * Create and set default conda env
+
 ```
 conda create -n ipyrad
 # Set ipyrad as the default env in the .bashrc
@@ -31,6 +33,7 @@ echo "conda activate ipyrad" > ~/.bashrc
 ```
 
 * Install and set libmamba solver as default
+
 ```
 conda update -n base conda
 conda install -n base conda-libmamba-solver
@@ -67,6 +70,7 @@ this ([from this page](https://towardsdatascience.com/run-jupyter-notebook-as-a-
 ```
 
 * Confugre the autorun systemd service
+
 ```
 # start at boot
 systemctl enable jupyter
@@ -74,7 +78,12 @@ systemctl enable jupyter
 systemctl start jupyter
 ```
 
-### Ubuntu desktop you can do this to make it nicer
+### For Ubuntu Desktop
+**This is not how it is set up for this workshop, but is from a first attempt.**
+
+We can do this on an Ubuntu Desktop image as well, and this is how I did it
+at first, but the Desktop `.ova` image was >6GB, so I chose to switch to the
+server image and have everything run in notebooks on the host computer:
 * Set autologin
 * Run jupyter notebook on startup:
 https://linuxconfig.org/how-to-autostart-applications-on-ubuntu-22-04-jammy-jellyfish-linux
