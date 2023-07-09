@@ -56,10 +56,9 @@ Times            | Saturday (July 22) | Sunday (July 23) |
 
 ![The Heller Group @ University of Copenhagen](images/KU-logo.png){: width="25%"}  
 
-![The Genetics Society](images/GeneticsSociety.png){: width="25%"}
+![The Genetics Society](images/GeneticsSociety.png)
 
-![University of Rwanda Center of Excellence in Biodiversity and Natural Resources Management](images/URwanda-CoEB.png){: width="25%"}
-
+![University of Rwanda Center of Excellence in Biodiversity and Natural Resources Management](images/URwanda-CoEB.png)
 
 # RADCamp Kigali 2023 Group Photo
 
