@@ -5,6 +5,7 @@
 * Create a new vm and add the osboxes image as the disk
 * [Set port mapping for the vm (port forwarding rules)](https://serverfault.com/questions/908615/virtualbox-and-windows-10-cant-connect-to-a-server-hosted-on-virtualbox): Virtualbox->Choose image->Settings->Network->Advanced->Port forwarding.
 Add new:
+
 ```
 Host IP 127.0.0.1
 Host port 8800
