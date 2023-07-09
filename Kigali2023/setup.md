@@ -16,7 +16,7 @@ computer or to run a Windows VM on your computer!
 Here is a more detailed explaination of [Virtual Machines](https://www.mongodb.com/cloud-explained/virtual-machines).
 
 ## Why use a Virtual Machine?
-In a workshop environment there are two main reasons for VMs:
+In a workshop environment there are two main advantages for using VMs:
 * **Heterogeneity of participant laptop configurations:** Each workshop
 participant comes with their own laptop which is as unique to them as their
 own personality. Each laptop has a different operating system (OS), with
@@ -56,7 +56,7 @@ to proceed.
 "Run headless" because it doesn't open the vm in a new window, as it is
 unnecessary)
 ![Start RADCamp virtualbox image](images/VBox-StartImage.png)
-* Open a web browser on your computer and navigate to http://localhost:8800
+* Open a web browser on your computer and navigate to `http://localhost:8800`
 * This should present you with a jupyter notebook environment running inside the vm with all necessary packages installed (for the ipyrad/RADcamp part of the workshop)
 ![Jupyter Notebook Landing Page](images/VBox-JupyterNotebookLanding.png)
 
@@ -66,3 +66,6 @@ the vm the username/password are:
 uname: osboxes
 passwd: osboxes.org
 ```
+
+If you are interested in how we set up this image, the techinal details are
+here: [RADCamp VM technical setup](_technical_configuration.md)
