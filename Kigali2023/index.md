@@ -20,7 +20,6 @@ Times            | Saturday (July 22) | Sunday (July 23) |
 -----            | ------------------ | ---------------- | 
 8:30-9:00       | Check-in and refreshments | Check-in and refreshments |
 9:00-10:30      | Intro to Conservation Genetics | [Phylogenetic inference: RAxML](06_RAxML_API.md) [Clustering analysis: PCA](04_PCA_API.md) |
-
 10:30-10:45 | Coffee Break | Coffee Break |
 10:45-12:00 | [Software setup](setup.md) | AM  |
 12:00-13:00 | Lunch | Lunch |
