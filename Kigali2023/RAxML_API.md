@@ -21,25 +21,14 @@ all code in cells of a jupyter notebook.
 
 # **RAxML** analyses
 
-## A bit of setup
-Inside your CO capsule open a new terminal and install `raxml`, which we will
-use during this tutorial.
-
-```
-conda install -c bioconda raxml -y
-```
-
 ## Create a new notebook for the RAxML analysis
-In the file browser on the left of JupyterLab browse to the directory with the
-assembly of the simulated data: `/scratch/ipyrad-workshop`.
+In the jupyter notebook browser interface create a "New->Python" Notebook.
 
-![png](images/CO-PCA-WorkshopDirectory.png)
-
-Open the launcher (the big blue *+* button) and open a new "Python 3" notebook.
+![png](images/raxml-CreateNotebook.png)
 
 First things first, rename your new notebook to give it a meaningful name. You can
-either click the small 'disk' icon in the upper left corner of the notebook or choose
-`File->Save Notebook` and rename your notebook to "RAxML-peddrad.ipynb"
+either click the small 'disk' icon in the upper left corner of the notebook or
+choose `File->Save Notebook` and rename your notebook to "RAxML-peddrad.ipynb"
 
 ### Import ipyrad.analysis module
 The `import` keyword directs python to load a module into the currently running
@@ -61,7 +50,7 @@ accessing the `.params` dictionary. You can view the raxml command string that i
 generated from the input arguments and you can call `.run()` to start the tree inference. 
 
 The following cell shows the quickest way to results using the small simulated
-dataset in `/scratch/ipyrad-workshop`. Copy this code into a new notebook cell
+peddrad dataset we assembled earlier. Copy this code into a new notebook cell
 (small grey *+* button on the toolbar) and run it.
 
 ```python
@@ -96,7 +85,7 @@ rtre = tre.root(wildcard="3")
 rtre.draw(tip_labels_align=True, node_labels="support");
 ```
 
-![png](images/CO-RAxML-TLDRExample.png)
+![png](images/raxml-TLDRExample.png)
 
 ## Setting parameters
 By default several parameters are pre-set in the raxml object. To remove those
@@ -140,7 +129,7 @@ here we'll just show a few of these.
 rtre.draw(node_sizes=15, node_labels="support")
 ```
 
-![png](images/CO-RAxML-NodeSupport.png)
+![png](images/raxml-NodeSupport.png)
 
 ```python
 # Change the tree style
@@ -148,14 +137,14 @@ rtre.draw(tree_style='d')          # dark-style
 rtre.draw(tree_style='o')          # umlaut-style
 ```
 
-![png](images/CO-RAxML-TreeStyles.png)
+![png](images/raxml-TreeStyles.png)
 
 ```python
 # Change the orientation
 rtre.draw(tree_style="o", layout='d')
 ```
 
-![png](images/CO-RAxML-TreeLayout.png)
+![png](images/raxml-TreeLayout.png)
 
 Again, much more is available in the [toytree tree styling documentation](https://toytree.readthedocs.io/en/latest/8-styling.html).
 
