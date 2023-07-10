@@ -64,8 +64,14 @@ you don't mind if your assembly breaks.
 # Getting Started
 
 We will be running through the assembly of simulated data using the ipyrad
-CLI, so if you haven't already done so please access the CodeOcean
-[RADCamp instance](https://radcamp.codeocean.com) and launch a new terminal.
+CLI, so if you haven't already done so please start your VM, open a browser
+window and navigate to `http://localhost:8800` and create a **new "Terminal"**
+using the "New" button.
+
+![png](images/ipyrad-NewTerminal.png)
+
+Which, after you open it will look like this:
+![png](images/ipyrad-CleanTerminal.png)
 
 ## ipyrad help
 To better understand how to use ipyrad, let's take a look at the help argument.
@@ -138,15 +144,12 @@ more informative, like the name of your organism and some details on the
 settings.
 
 ```bash 
-# First, make sure you're in your workshop directory
-$ cd /scratch/ipyrad-workshop
-
 # Unpack the simulated data which is included in the ipyrad github repo
 # `tar` is a program for reading and writing archive files, somewhat like zip
 #   -x eXtract from an archive
 #   -z unZip before extracting
 #   -f read from the File
-$ tar -xzf /ipyrad/tests/ipsimdata.tar.gz
+$ tar -xzf /home/osboxes/src/ipyrad/tests/ipsimdata.tar.gz
 
 # Take a look at what we just unpacked
 $ ls ipsimdata
@@ -216,10 +219,15 @@ but there are a few parameters we *must* change:
 * The dataype
 * The restriction overhang sequence(s)
 
-Open the new params file by double-clicking on `params-peddrad.txt` in the
-left-nav file browser (you might need to navigate to this directory first).
+If you return to the browser tab with your jupyter notebook interface you'll
+now see a new file `params-peddrad.txt` in the file browser.
 
-![png](images/CO-EditParams.png)
+![png](images/ipyrad-NewParams.png)
+
+Clicking on this new file will open a text editor so you can modify and save
+changes to this params file.
+
+![png](images/ipyrad-EditParams.png)
 
 We need to specify where the raw data files are located, the type of data we
 are using (.e.g., 'gbs', 'rad', 'ddrad', 'pairddrad), and which enzyme cut site
