@@ -3,8 +3,9 @@
 ## Configure the VM and set up networking
 * Grab the ubuntu linux server image from [osboxes.org](https://www.osboxes.org/virtualbox-images/)
 * Create a new vm and add the osboxes image as the disk
+ * Set 16GB of RAM and 4 CPU cores
 * [Set port mapping for the vm (port forwarding rules)](https://serverfault.com/questions/908615/virtualbox-and-windows-10-cant-connect-to-a-server-hosted-on-virtualbox): Virtualbox->Choose image->Settings->Network->Advanced->Port forwarding.
-Add new:
+Add new (and add another identical one for feems w/ port 8801):
 
 ```
 Host IP 127.0.0.1
@@ -49,6 +50,25 @@ conda install -c conda-forge toytree scikit-learn -y
 conda install -c bioconda raxml -y
 ```
 
+## Clone ipyrad and feems repositories
+mkdir ~/src; cd ~/src
+git clone https://github.com/dereneaton/ipyrad.git
+git clone https://github.com/NovembreLab/feems.git
+
+## Install feems dependencies
+Fetch and install feems deps from here: [Issue #15](https://github.com/NovembreLab/feems/issues/15)
+```
+wget https://github.com/NovembreLab/feems/files/11152453/feems.txt
+conda create --name feems --file feems.txt
+conda activate feems
+
+# Install more feems deps from requirements.txt
+conda install -c conda-forge -c bioconda --file ~/src/feems/requirements.txt
+
+# Install feems in developer mode
+pip install -e ~/src/feems/
+```
+
 ## Set an autorun to start the jupyter notebook server
 
 Create a new file `/etc/systemd/system/jupyter.service` and make it look like
@@ -71,6 +91,10 @@ this ([from this page](https://towardsdatascience.com/run-jupyter-notebook-as-a-
  WantedBy=multi-user.target
 ```
 
+**Make another copy of this file called `feems.service`**. Change the port to
+8801, the env to `envs/feems`, and the PIDFile to `feems-notebook.pid`
+
+
 * Configure the autorun systemd service
 
 ```
@@ -78,6 +102,10 @@ this ([from this page](https://towardsdatascience.com/run-jupyter-notebook-as-a-
 sudo systemctl enable jupyter
 # start it now
 sudo systemctl start jupyter
+
+# Start the feems notebooks server as well
+sudo systemctl enable feems 
+sudo systemctl start feems
 ```
 
 * Clean up and export VM appliance

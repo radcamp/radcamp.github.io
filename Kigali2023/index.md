@@ -56,6 +56,10 @@ Times       | Saturday (July 22) | Sunday (July 23) |
 * [Bucky - Phylogenetic concordance analysis](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-bucky.ipynb)
 * [ABBA-BABA - Admixture analysis](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-abba-baba.ipynb)
 
+## Source of Empirical Data for the Workshop
+* [Cheetah data from Prost et al 2022](https://onlinelibrary.wiley.com/doi/10.1111/mec.16577)
+* [Fetching and formatting the Cheetah data](Cheetah_data.md)
+
 ## RADCamp Kigali 2023 co-sponsored by:
 
 ![The Heller Group @ University of Copenhagen](images/KU-logo.png){: width="25%"}  
