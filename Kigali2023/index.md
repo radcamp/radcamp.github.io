@@ -5,7 +5,7 @@ In association with the The Society for Conservation Biology's
 
 ![ICCB 2023](images/ICCB2023-logo.jpg){: width="75%"}  
 
-**RADCamp 2023**
+**RADCamp 2023** 
 July 22-23, 2023  
 University of Rwanda  
 College of Science and Technology (CST), Former KIST  
