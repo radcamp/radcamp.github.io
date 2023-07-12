@@ -1,7 +1,7 @@
-# Empirical data for Acinonyx jubatus
+# Empirical data for *Acinonyx jubatus*
 
 Prost et al 2022 - Genomic analyses show extremely perilous conservation
-status of African and Asiatic cheetahs (Acinonyx jubatus)  
+status of African and Asiatic cheetahs (*Acinonyx jubatus*)  
 [https://doi.org/10.1111/mec.16577](https://doi.org/10.1111/mec.16577)
 
 [BioProject PRJNA624893](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA624893)
