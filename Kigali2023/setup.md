@@ -60,7 +60,7 @@ unnecessary)
 * This should present you with a Jupyter notebook environment running inside the VM with all necessary packages installed (for the ipyrad/RADcamp part of the workshop)
 ![Jupyter Notebook Landing Page](images/VBox-JupyterNotebookLanding.png)
 
-> **Command Line Access to the VBox image:** If you want to actually log into
+**Command Line Access to the VBox image:** If you want to actually log into
 the VM the username/password are:
 ```
 uname: osboxes
