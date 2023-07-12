@@ -43,7 +43,7 @@ even with unstable/patchy internet access**.
 Now that you know more about VMs it's time to get set up with the custom
 VM image we've developed for this workshop:
 * Install the **virtualization software** for your OS: [Virtualbox installers](https://www.virtualbox.org/wiki/Downloads)
-* Download the [RADCamp virtualbox image](https://www.transfernow.net/dl/20230708ZJ5IIvVf)
+* We'll distribute a virtualbox image containing all software and data at the beginning of the workshop.
 * Start virtualbox and choose File->Import appliance.
 ![Import to RADCamp virtualbox appliance](images/VBox-ImportAppliance.png)
 * Browse to the downloaded file, choose it and click 'Import'
