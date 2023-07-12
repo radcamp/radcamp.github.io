@@ -1,9 +1,11 @@
 # Welcome to RADCamp 2023 - The Kigali Edition
 
-In association with the The Society for Conservation Biology's **31st
-International Congress for Conservation Biology (ICCB 2023)**  
+In association with the The Society for Conservation Biology's [**31st
+International Congress for Conservation Biology (ICCB 2023)**](https://conbio.org/mini-sites/iccb-2023/)  
+
 ![ICCB 2023](images/ICCB2023-logo.jpg){: width="75%"}  
 
+RADCamp 2023
 July 22-23, 2023  
 University of Rwanda  
 College of Science and Technology (CST), Former KIST  
@@ -15,8 +17,8 @@ You can view a [map of the campus here](https://cst.ur.ac.rw/IMG/pdf/ur_nyarugen
 
 ## Arriving at the University
 Sessions will take place in the Muhabura Block/Building. There are three gates
-to the university. The most convenient gate to enter (and the gate closest to
-the Muhabura Block/Building is the Muhabura Gate. Local drivers (if you’re
+to the university. The most convenient gate to enter, and closest to
+the Muhabura Block/Building, is the Muhabura Gate. Local drivers (if you’re
 taking a taxi or the popular boda boda motorbike taxi) refer to this gate as near
 “KUBISMA”). 
 
@@ -62,16 +64,13 @@ Times       | Saturday (July 22) | Sunday (July 23) |
 
 ## RADCamp Kigali 2023 co-sponsored by:
 
-![The Heller Group @ University of Copenhagen](images/KU-logo.png){: width="25%"}  
-**The Heller Group at the University of Copenhagen**
-
+* **University of Copenhagen**
+![The Heller Group @ University of Copenhagen](images/KU-logo.png){: width="15%"}  
+* **The Genetics Society**
 ![The Genetics Society](images/GeneticsSociety.png){: width="75%"}  
-**The Genetics Society**
-
+* **University of Rwanda Center of Excellence in Biodiversity and Natural Resources Management**
 ![University of Rwanda Center of Excellence in Biodiversity and Natural Resources Management](images/URwanda-CoEB.png)  
-**University of Rwanda Center of Excellence in Biodiversity and Natural Resources Management**
-
-**One anonymous donor**
+* **Anonymous donor**
 
 # RADCamp Kigali 2023 Group Photo
 
