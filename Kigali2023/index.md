@@ -1,7 +1,7 @@
 # Welcome to RADCamp 2023 - The Kigali Edition
 
-In association with the The Society for Conservation Biology's [**31st
-International Congress for Conservation Biology (ICCB 2023)**](https://conbio.org/mini-sites/iccb-2023/)  
+In association with the The Society for Conservation Biology's 
+[**31st International Congress for Conservation Biology (ICCB 2023)**](https://conbio.org/mini-sites/iccb-2023/)  
 
 ![ICCB 2023](images/ICCB2023-logo.jpg){: width="75%"}  
 
