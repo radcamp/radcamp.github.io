@@ -5,7 +5,7 @@ International Congress for Conservation Biology (ICCB 2023)**](https://conbio.or
 
 ![ICCB 2023](images/ICCB2023-logo.jpg){: width="75%"}  
 
-**RADCamp 2023**
+RADCamp 2023
 July 22-23, 2023  
 University of Rwanda  
 College of Science and Technology (CST), Former KIST  
@@ -70,7 +70,7 @@ Times       | Saturday (July 22) | Sunday (July 23) |
 * **The Genetics Society** <br>
 ![The Genetics Society](images/GeneticsSociety.png){: width="60%"}
 
-* **University of Rwanda Center of Excellence in Biodiversity and Natural Resources Management** <br>
+* **University of Rwanda Center of Excellence in Biodiversity & Natural Resources Management** <br>
 ![University of Rwanda Center of Excellence in Biodiversity and Natural Resources Management](images/URwanda-CoEB.png)
 
 * **Anonymous donor**
