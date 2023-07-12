@@ -48,16 +48,16 @@ VM image we've developed for this workshop:
 ![Import to RADCamp virtualbox appliance](images/VBox-ImportAppliance.png)
 * Browse to the downloaded file, choose it and click 'Import'
 ![Browse to RADCamp virtualbox image](images/VBox-BrowseImage.png)
-* RADCamp virtualbox appliance settings will be displayed. Click 'Import'
+* RADCamp Virtualbox appliance settings will be displayed. Click 'Next' and 'Finish'
 to proceed.
 ![Finalize RADCamp virtualbox appliance import](images/VBox-NewImageSettings.png)
 * The new image will appear in the left nav as `RC-Kigali-server`.
-* Right click, choose Run and wait for it to fire up (alternatively I prefer
-"Run headless" because it doesn't open the vm in a new window, as it is
+* Right click, choose 'Start' and wait for it to fire up (alternatively I prefer
+'Headless Start' because it doesn't open the vm in a new window, as it is
 unnecessary)
 ![Start RADCamp virtualbox image](images/VBox-StartImage.png)
 * Open a web browser on your computer and navigate to `http://localhost:8800`
-* This should present you with a jupyter notebook environment running inside the vm with all necessary packages installed (for the ipyrad/RADcamp part of the workshop)
+* This should present you with a Jupyter notebook environment running inside the vm with all necessary packages installed (for the ipyrad/RADcamp part of the workshop)
 ![Jupyter Notebook Landing Page](images/VBox-JupyterNotebookLanding.png)
 
 > **Command Line Access to the VBox image:** If you want to actually log into
