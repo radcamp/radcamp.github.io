@@ -51,9 +51,11 @@ conda install -c bioconda raxml -y
 ```
 
 ## Clone ipyrad and feems repositories
+```
 mkdir ~/src; cd ~/src
 git clone https://github.com/dereneaton/ipyrad.git
 git clone https://github.com/NovembreLab/feems.git
+```
 
 ## Install feems dependencies
 Fetch and install feems deps from here: [Issue #15](https://github.com/NovembreLab/feems/issues/15)
