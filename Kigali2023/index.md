@@ -1,4 +1,4 @@
-<h1 style="font-size: 20px; display: inline-block;"># Welcome to RADCamp 2023 - The Kigali Edition</h1>
+# Welcome to RADCamp 2023 - The Kigali Edition
 
 In association with the The Society for Conservation Biology's<br>
 [**31st International Congress for Conservation Biology (ICCB 2023)**](https://conbio.org/mini-sites/iccb-2023/)  
