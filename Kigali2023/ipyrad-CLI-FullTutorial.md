@@ -63,7 +63,7 @@ We will use some of the ipyrad arguments in this tutorial (for example: -n, -p,
 is below.
 
 ```
-$ ipyrad -h
+(ipyrad) osboxes@osboxes:~/ipyrad-workshop$ ipyrad -h
 
 usage: ipyrad [-h] [-v] [-r] [-f] [-q] [-d] [-n NEW] [-p PARAMS] [-s STEPS] [-b [BRANCH [BRANCH ...]]]
               [-m [MERGE [MERGE ...]]] [-c cores] [-t threading] [--MPI] [--ipcluster [IPCLUSTER]]
@@ -137,7 +137,7 @@ then the name of the parameter, and then a short description of its purpose.
 Lets take a look at it.
 
 ``` 
-$ cat params-peddrad.txt
+(ipyrad) osboxes@osboxes:~/ipyrad-workshop$ cat params-cheetah.txt
 ------- ipyrad params file (v.0.9.92)-------------------------------------------
 cheetah                          ## [0] [assembly_name]: Assembly name. Used to name output directories for assembly steps
 /home/osboxes//ipyrad-workshop   ## [1] [project_dir]: Project dir (made in curdir if not present)
