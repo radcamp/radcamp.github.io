@@ -211,37 +211,18 @@ directories will be of the form: `/ipyrad-workshop/cheetah_*`.
 # Input data format
 
 Before we get started with the assembly, let's take a look at what the raw data
-looks like. Remember that you can use `zcat` and `head` to do this.
+looks like. We can use `zcat` and `head` to do this.
 
 ```bash
 ## zcat: unZip and conCATenate the file to the screen
 ## head -n 20: Just take the first 20 lines of input
 
-$ zcat ipsimdata/pairddrad_example_R1_.fastq.gz | head -n 20
-@lane1_locus0_2G_0_0 1:N:0:
-CTCCAATCCTGCAGTTTAACTGTTCAAGTTGGCAAGATCAAGTCGTCCCTAGCCCCCGCGTCCGTTTTTACCTGGTCGCGGTCCCGACCCAGCTGCCCCC
-+
-BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
-@lane1_locus0_2G_0_1 1:N:0:
-CTCCAATCCTGCAGTTTAACTGTTCAAGTTGGCAAGATCAAGTCGTCCCTAGCCCCCGCGTCCGTTTTTACCTGGTCGCGGTCCCGACCCAGCTGCCCCC
-+
-BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
-@lane1_locus0_2G_0_2 1:N:0:
-CTCCAATCCTGCAGTTTAACTGTTCAAGTTGGCAAGATCAAGTCGTCCCTAGCCCCCGCGTCCGTTTTTACCTGGTCGCGGTCCCGACCCAGCTGCCCCC
-+
-BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
-@lane1_locus0_2G_0_3 1:N:0:
-CTCCAATCCTGCAGTTTAACTGTTCAAGTTGGCAAGATCAAGTCGTCCCTAGCCCCCGCGTCCGTTTTTACCTGGTCGCGGTCCCGACCCAGCTGCCCCC
-+
-BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
-@lane1_locus0_2G_0_4 1:N:0:
-CTCCAATCCTGCAGTTTAACTGTTCAAGTTGGCAAGATCAAGTCGTCCCTAGCCCCCGCGTCCGTTTTTACCTGGTCGCGGTCCCGACCCAGCTGCCCCC
-+
-BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
+(ipyrad) osboxes@osboxes:~/ipyrad-workshop$ zcat ipsimdata/pairddrad_example_R1_.fastq.gz | head -n 20
 ```
+![png](images/zcat_fastq.png)
 
-The simulated data are 100bp paired-end reads generated as ddRAD, meaning there
-will be two overhang sequences. In this case the 'rare' cutter leaves the TGCAT
+The cheetah data are 110bp single-end reads generated as ddRAD, meaning there
+will be two overhang sequences. In this case the 'rare' cutter leaves the AGCTT
 overhang.
 * Can you find this sequence in the raw data?
 * What's going on with that other stuff at the beginning of each read?
