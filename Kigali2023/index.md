@@ -47,7 +47,7 @@ Times       | Saturday (July 22) | Sunday (July 23) |
 10:30-10:45 | Coffee Break | Coffee Break |
 10:45-12:00 | [Software Setup](setup.md) & [Data QC](data_QC.md) | [Phylogenetic Inference: RAxML](RAxML_API.md) |
 12:00-13:00 | Lunch | Lunch |
-13:00-14:45 | [RADSeq Assembly w/ ipyrad part I](ipyrad-CLI-FullTutorial.md) | Spatial Popgen Analysis: EEMS |
+13:00-14:45 | [Intro to RADSeq data](./radseq-intro) & [RADSeq Assembly w/ ipyrad part I](ipyrad-CLI-FullTutorial.md) | Spatial Popgen Analysis: EEMS |
 14:45-15:00 | Coffee Break | Coffee Break |
 15:00-17:00 | [RADSeq Assembly w/ ipyrad part II](ipyrad-CLI-FullTutorial.md) | Wrap-up and Working on own data |
 
