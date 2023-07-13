@@ -172,12 +172,12 @@ p, s, l                          ## [27] [output_formats]: Output formats (see d
 ```
 
 In general the defaults are sensible, and we won't mess with them for now, 
-but there are a few parameters we *must* change:
+but there are a few parameters we *must* check and update:
 * The path to the raw data
 * The dataype
 * The restriction overhang sequence(s)
 
-You can also change `[27] [output_formats]`. When you put `*`, ipyrad will automatically save your output in all available formats, see [the manual](https://ipyrad.readthedocs.io/en/master/output_formats.html#full-output-formats).
+Because we're looking at population-level data, we suggest to increase the clustering threshold `[14] [clust_threshold]`. You can also change `[27] [output_formats]`. When you put `*`, ipyrad will automatically save your output in all available formats, see [the manual](https://ipyrad.readthedocs.io/en/master/output_formats.html#full-output-formats).
 
 If you return to the browser tab with your jupyter notebook interface you'll
 now see a new file `params-peddrad.txt` in the file browser.
@@ -195,9 +195,9 @@ overhangs are expected to be present on the reads. Change the following lines
 in your params files to look like this:
 
 ```bash
-./subset-R1-raws/*.fastq.gz     ## [2] [raw_fastq_path]: Location of raw non-demultiplexed fastq files
-pairddrad                       ## [7] [datatype]: Datatype (see docs): rad, gbs, ddrad, etc.
-CATGC,AGCTT                     ## [8] [restriction_overhang]: Restriction overhang (cut1,) or (cut1, cut2)
+./subset-R1-raws/*.fastq.gz     ## [4] [sorted_fastq_path]: Location of demultiplexed/sorted fastq files
+CATGC                           ## [8] [restriction_overhang]: Restriction overhang (cut1,) or (cut1, cut2)
+0.9                             ## [14] [clust_threshold]: Clustering threshold for de novo assembly
 *                               ## [27] [output_formats]: Output formats (see docs)
 ```
 **NB:** Don't forget to choose "File->Save Text" after you are done editing!
@@ -221,36 +221,24 @@ looks like. We can use `zcat` and `head` to do this.
 ```
 ![png](images/zcat_fastq.png)
 
-The cheetah data are 110bp single-end reads generated as ddRAD, meaning there
-will be two overhang sequences. In this case the 'rare' cutter leaves the AGCTT
-overhang.
-* Can you find this sequence in the raw data?
-* What's going on with that other stuff at the beginning of each read?
-
 # Step 1: Demultiplexing the raw data
 
-Since the raw data is still just a huge pile of reads, we need to split it up
-and assign each read to the sample it came from. This will create a new
-directory called `peddrad_fastqs` with two `.gz` files per sample, one for
-R1 and one for R2.
+Sometimes, you'll receive your data as a huge pile of reads, and you'll need to split it up
+and assign each read to the sample it came from. This is called demultiplexing and is done by unique barcodes which allow you to recognize individual samples. In that case, you'll have to provide a path to the raw non-demultiplexed fastq files `[2]` and the path to the barcode file `[3]` in your params file. In our case, the samples are already demultiplexed and we have 1 file per sample. The path to these files is indicated in `[4]` in the params file. Even though we do not need to demultiplex our data here, we still need to run this step to import the data into ipyrad.
 
-> **Note on step 1:** Sometimes, rather than returning the raw data, sequencing
-facilities will give the data pre-demultiplexed to samples. This situation only
-slightly modifies step 1, and does not modify further steps, so we will refer
-you to the [full ipyrad tutorial](http://ipyrad.readthedocs.io/tutorial_intro_cli.html)
-for guidance in this case.
+> **Note on step 1:** If we would have data which need demultiplexing, Step 1 will create a new folder, called `cheetah_fastqs`. Because our data are already demultiplexed, this folder will not be created.
 
-Now lets run step 1! For the simulated data this will take just a few moments.
+Now lets run step 1! 
 
 > **Special Note:** In some cases it's useful to specify the number of cores with
 the `-c` flag. If you do not specify the number of cores ipyrad assumes you want
-**all** of them. Our CO capsules have 16 cores so we'll practice that here.
+**all** of them. 
 
 ```bash
 ## -p    the params file we wish to use
 ## -s    the step to run
 ## -c    run on 16 cores
-$ ipyrad -p params-peddrad.txt -s 1 -c 16
+$ ipyrad -p params-cheeteah.txt -s 1 -c 4
 
  -------------------------------------------------------------
   ipyrad [v.0.9.92]
