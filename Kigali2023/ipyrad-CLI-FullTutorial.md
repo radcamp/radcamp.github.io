@@ -238,18 +238,17 @@ the `-c` flag. If you do not specify the number of cores ipyrad assumes you want
 ## -p    the params file we wish to use
 ## -s    the step to run
 ## -c    run on 16 cores
-$ ipyrad -p params-cheeteah.txt -s 1 -c 4
+(ipyrad) osboxes@osboxes:~/ipyrad-workshop$ ipyrad -p params-cheeteah.txt -s 1 -c 4
 
  -------------------------------------------------------------
   ipyrad [v.0.9.92]
   Interactive assembly and analysis of RAD-seq data
  -------------------------------------------------------------
-  Parallel connection | d2d17ccd3643: 16 cores
+  Parallel connection | osboxes: 4 cores
 
-  Step 1: Demultiplexing fastq data to Samples
-  [####################] 100% 0:00:09 | sorting reads
-  [####################] 100% 0:00:05 | writing/compressing
-
+  Step 1: Loading sorted fastq data to Samples
+  [####################] 100% 0:00:13 | loading reads
+  53 fastq files loaded to 52 Samples.
   Parallel connection closed.
 ```
 
@@ -272,30 +271,71 @@ assembly) we want it to print stats for.
 
 ```bash
 ## -r fetches informative results from currently executed steps  
-$ ipyrad -p params-peddrad.txt -r
-  loading Assembly: peddrad
-  from saved path: ~/ipyrad-workshop/peddrad.json
+(ipyrad) osboxes@osboxes:~/ipyrad-workshop$ ipyrad -p params-cheetah.txt -r
+  loading Assembly: cheetah
+  from saved path: ~/ipyrad-workshop/cheetah.json
 
-Summary stats of Assembly peddrad
+Summary stats of Assembly cheetah
 ------------------------------------------------
-      state  reads_raw
-1A_0      1      19835
-1B_0      1      20071
-1C_0      1      19969
-1D_0      1      20082
-2E_0      1      20004
-2F_0      1      19899
-2G_0      1      19928
-2H_0      1      20110
-3I_0      1      20078
-3J_0      1      19965
-3K_0      1      19846
-3L_0      1      20025
+              state  reads_raw
+SRR19760910      1     125000
+SRR19760911      1     125000
+SRR19760912      1     125000
+SRR19760913      1     125000
+SRR19760914      1     125000
+SRR19760915      1     125000
+SRR19760916      1     125000
+SRR19760917      1     125000
+SRR19760918      1     125000
+SRR19760919      1     125000
+SRR19760920      1     125000
+SRR19760921      1     125000
+SRR19760922      1     125000
+SRR19760923      1     125000
+SRR19760924      1     125000
+SRR19760925      1     125000
+SRR19760926      1     125000
+SRR19760927      1     125000
+SRR19760928      1     125000
+SRR19760929      1     125000
+SRR19760930      1     125000
+SRR19760931      1     125000
+SRR19760932      1     125000
+SRR19760933      1     125000
+SRR19760934      1     125000
+SRR19760935      1     125000
+SRR19760936      1     125000
+SRR19760937      1     125000
+SRR19760938      1     125000
+SRR19760939      1     125000
+SRR19760940      1     125000
+SRR19760941      1     125000
+SRR19760942      1     125000
+SRR19760943      1     125000
+SRR19760944      1     125000
+SRR19760945      1     125000
+SRR19760946      1     125000
+SRR19760947      1     125000
+SRR19760948      1     125000
+SRR19760949      1     125000
+SRR19760950      1     125000
+SRR19760951      1     125000
+SRR19760952      1     125000
+SRR19760953      1     120739
+SRR19760954      1     125000
+SRR19760955      1     125000
+SRR19760956      1     125000
+SRR19760957      1     125000
+SRR19760958      1     125000
+SRR19760959      1     125000
+SRR19760960      1     125000
+SRR19760961      1     125000
+SRR19760962      1     125000
 
 
 Full stats files
 ------------------------------------------------
-step 1: ./peddrad_fastqs/s1_demultiplex_stats.txt
+step 1: ./cheetah_s1_demultiplex_stats.txt
 step 2: None
 step 3: None
 step 4: None
@@ -309,50 +349,14 @@ saves them to a file inside the directories it creates for each step. For
 instance, to see full stats for step 1 (the wackyness of the step 1 stats at this
 point isn't very interesting, but we'll see stats for later steps are more verbose):
 
-```bash 
-$ cat peddrad_fastqs/s1_demultiplex_stats.txt
-raw_file                               total_reads    cut_found  bar_matched
-pairddrad_example_R1_.fastq                 239812       239812       239812
-pairddrad_example_R2_.fastq                 239812       239812       239812
-
-sample_name                            total_reads
-1A_0                                         19835
-1B_0                                         20071
-1C_0                                         19969
-1D_0                                         20082
-2E_0                                         20004
-2F_0                                         19899
-2G_0                                         19928
-2H_0                                         20110
-3I_0                                         20078
-3J_0                                         19965
-3K_0                                         19846
-3L_0                                         20025
-
-sample_name                               true_bar       obs_bar     N_records
-1A_0                                     CATCATCAT     CATCATCAT         19835
-1B_0                                     CCAGTGATA     CCAGTGATA         20071
-1C_0                                     TGGCCTAGT     TGGCCTAGT         19969
-1D_0                                     GGGAAAAAC     GGGAAAAAC         20082
-2E_0                                     GTGGATATC     GTGGATATC         20004
-2F_0                                     AGAGCCGAG     AGAGCCGAG         19899
-2G_0                                     CTCCAATCC     CTCCAATCC         19928
-2H_0                                     CTCACTGCA     CTCACTGCA         20110
-3I_0                                     GGCGCATAC     GGCGCATAC         20078
-3J_0                                     CCTTATGTC     CCTTATGTC         19965
-3K_0                                     ACGTGTGTG     ACGTGTGTG         19846
-3L_0                                     TTACTAACA     TTACTAACA         20025
-no_match                                         _             _             0
-```
-
 # Step 2: Filter reads
 
 This step filters reads based on quality scores and maximum number of uncalled
 bases, and can be used to detect Illumina adapters in your reads, which is
 sometimes a problem under a couple different library prep scenarios. We know the
-simulated data is unrealistically clean, so lets just pretend like there is a
+our data are very clean (remember the FastQC results!), so lets just pretend like there is a
 little noise toward the 3' end of R1 reads. To account for this we will trim
-reads to 75bp. 
+reads to 100bp. 
 
 > **Note:** Here, we are just trimming the reads for the sake of demonstration.
 In reality you'd want to be more careful about choosing these values.
@@ -360,86 +364,126 @@ In reality you'd want to be more careful about choosing these values.
 Edit your params file again with and change the following two parameter settings:
 
 ```
-0, 75, 0, 0                     ## [25] [trim_reads]: Trim raw read edges (R1>, <R1, R2>, <R2) (see docs)
+0, 100, 0, 0                     ## [25] [trim_reads]: Trim raw read edges (R1>, <R1, R2>, <R2) (see docs)
 ```
 
 ```bash
-$ ipyrad -p params-peddrad.txt -s 2 -c 16
+(ipyrad) osboxes@osboxes:~/ipyrad-workshop$ ipyrad -p params-cheetah.txt -s 2 -c 4
 ```
 ```
-  loading Assembly: peddrad
-  from saved path: ~/ipyrad-workshop/peddrad.json
+  loading Assembly: cheetah
+  from saved path: ~/ipyrad-workshop/cheetah.json
 
  -------------------------------------------------------------
   ipyrad [v.0.9.92]
   Interactive assembly and analysis of RAD-seq data
  -------------------------------------------------------------
-  Parallel connection | d2d17ccd3643: 16 cores
+  Parallel connection | osboxes: 4 cores
 
   Step 2: Filtering and trimming reads
-  [####################] 100% 0:00:02 | processing reads
+  [####################] 100% 0:01:29 | processing reads
 
   Parallel connection closed.
 ```
 
-The filtered files are written to a new directory called `peddrad_edits`. Again, 
+The filtered files are written to a new directory called `cheetah_edits`. Again, 
 you can look at the results from this step and some handy stats tracked 
 for this assembly.
 
 ```bash
 ## View the output of step 2
-$ cat peddrad_edits/s2_rawedit_stats.txt 
+(ipyrad) osboxes@osboxes:~/ipyrad-workshop$ cat cheetah_edits/s2_rawedit_stats.txt 
 ```
 ```
       reads_raw  trim_adapter_bp_read1  trim_adapter_bp_read2  trim_quality_bp_read1  trim_quality_bp_read2  reads_filtered_by_Ns  reads_filtered_by_minlen  reads_passed_filter
-1A_0      19835                    331                    379                      0                      0     0                         0                19835
-1B_0      20071                    347                    358                      0                      0     0                         0                20071
-1C_0      19969                    318                    349                      0                      0     0                         0                19969
-1D_0      20082                    350                    400                      0                      0     0                         0                20082
-2E_0      20004                    283                    469                      0                      0     0                         0                20004
-2F_0      19899                    306                    442                      0                      0     0                         0                19899
-2G_0      19928                    302                    424                      0                      0     0                         0                19928
-2H_0      20110                    333                    462                      0                      0     0                         0                20110
-3I_0      20078                    323                    381                      0                      0     0                         0                20078
-3J_0      19965                    310                    374                      0                      0     0                         0                19965
-3K_0      19846                    277                    398                      0                      0     0                         0                19846
-3L_0      20025                    342                    366                      0                      0     0                         0                20025
+reads_raw  trim_adapter_bp_read1  trim_quality_bp_read1  reads_filtered_by_Ns  reads_filtered_by_minlen  reads_passed_filter
+SRR19760910     125000                   3907                 151184       53                       266               124681
+SRR19760911     125000                   3856                 186458       25                       357               124618
+SRR19760912     125000                   4316                 232833       40                       631               124329
+SRR19760913     125000                   4265                 193283       41                       521               124438
+SRR19760914     125000                   4163                  49957        9                        55               124936
+SRR19760915     125000                   4173                  43122        4                        29               124967
+SRR19760916     125000                   4146                  40942        6                        34               124960
+SRR19760917     125000                   4032                  49573        5                        59               124936
+SRR19760918     125000                   4029                  44448        3                        37               124960
+SRR19760919     125000                   8438                 255180       40                      4822               120138
+SRR19760920     125000                   3981                  46216        5                        47               124948
+SRR19760921     125000                   4140                  45663       14                        31               124955
+SRR19760922     125000                   4036                  38845        9                        28               124963
+SRR19760923     125000                   3990                  47930       12                        43               124945
+SRR19760924     125000                   4355                  42285        7                        47               124946
+SRR19760925     125000                   3972                  45035       14                        35               124951
+SRR19760926     125000                   4156                  44653        4                        38               124958
+SRR19760927     125000                   4120                  51549        6                        52               124942
+SRR19760928     125000                   4068                  44598        3                        46               124951
+SRR19760929     125000                   3995                  54751       12                        75               124913
+SRR19760930     125000                   4170                 201275       43                       439               124518
+SRR19760931     125000                   4033                  49982        6                        53               124941
+SRR19760932     125000                   3989                  42909       14                        45               124941
+SRR19760933     125000                   4631                  42686        5                       175               124820
+SRR19760934     125000                   4169                  41241       11                        79               124910
+SRR19760935     125000                   4060                  54484        3                        70               124927
+SRR19760936     125000                   4012                  45833        7                        45               124948
+SRR19760937     125000                   6790                  71102       11                      2182               122807
+SRR19760938     125000                   4164                  43295       10                        41               124949
+SRR19760939     125000                   4255                  45007        8                        32               124960
+SRR19760940     125000                   4058                  48365        5                        57               124938
+SRR19760941     125000                   4145                 184167       25                       418               124557
+SRR19760942     125000                   4210                  48041        5                       250               124745
+SRR19760943     125000                   3993                  43990        7                        52               124941
+SRR19760944     125000                   4069                  44424       10                        46               124944
+SRR19760945     125000                   4190                  46991        4                        52               124944
+SRR19760946     125000                   4538                  39388        3                       390               124607
+SRR19760947     125000                   4335                  44185       14                        39               124947
+SRR19760948     125000                   4034                  46506        7                        58               124935
+SRR19760949     125000                   4383                 187211       31                       313               124656
+SRR19760950     125000                   3757                 184015       26                       393               124581
+SRR19760951     125000                   3956                 261547       43                       677               124280
+SRR19760952     125000                   4270                 202805       44                       427               124529
+SRR19760953     120739                   4097                 119160       42                       268               120429
+SRR19760954     125000                   4176                 238676       31                       639               124330
+SRR19760955     125000                   3783                 241923       32                       584               124384
+SRR19760956     125000                   4290                 178120       43                       379               124578
+SRR19760957     125000                   4068                 191626       27                       410               124563
+SRR19760958     125000                   4290                 177849       27                       354               124619
+SRR19760959     125000                   4027                 221129       50                       523               124427
+SRR19760960     125000                   4127                 171203       36                       316               124648
+SRR19760961     125000                   3976                 254342       35                       640               124325
+SRR19760962     125000                   3948                 220764       24                       530               124446
 ```
 
 ```bash
 ## Get current stats including # raw reads and # reads after filtering.
-$ ipyrad -p params-peddrad.txt -r
+(ipyrad) osboxes@osboxes:~/ipyrad-workshop$ ipyrad -p params-cheetah.txt -r
 ```
 
 You might also take a closer look at the filtered reads: 
 
 ```bash
-$ zcat peddrad_edits/1A_0.trimmed_R1_.fastq.gz | head -n 12
-@lane1_locus0_1A_0_0 1:N:0:
-TGCAGTTTAACTGTTCAAGTTGGCAAGATCAAGTCGTCCCTAGCCCCCGCGTCCGTTTTTACCTGGTCGCGGTCC
+(ipyrad) osboxes@osboxes:~/ipyrad-workshop$ zcat cheetah_edits/SRR19760910.trimmed_R1_.fastq.gz | head -n 12
+@SRR19760910.1 1 length=110
+CATGCACGTGCAGCATATAAGAAGGATGTTTGTCATGCATTATCTTATTTGATGTTTACGGAAGCCCCATGGTTATCCCCATTTTAGGGATGAAGAAACG
 +
-BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
-@lane1_locus0_1A_0_1 1:N:0:
-TGCAGTTTAACTGTTCAAGTTGGCAAGATCAAGTCGTCCCTAGCCCCCGCGTCCGTTTTTACCTGGTCGCGGTCC
+BFFFFFF<FBFFFFFF<FB//////<<FFFBFF//<FFFFFFBF/FBFFFFFFFFFFFFBB<F/BFFFFFFFFBFF/<<</BFBBFF/<FF<FF<7FFFF
+@SRR19760910.2 2 length=110
+CATGCAACTCTTGGTCTCGGGGTCTTGAGTTCGAGCCCCACGTTGGATTAGAGATTACTTAAATAAATAAAGTTCAAAAGTTTTAGAATGTTATCATTTT
 +
-BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
-@lane1_locus0_1A_0_2 1:N:0:
-TGCAGTTTAACTGTTCAAGTTGGCAAGATCAAGTCGTCCCTAGCCCCCGCGTCCGTTTTTACCTGGTCGCGGTCC
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+@SRR19760910.3 3 length=110
+CATGCCATTTCCCATGGGCAAGGATCTCAGGCTGTGCTCATTCCCAAGGACAAGACCAAGCCAATTCCCAATCCCCATATTTAAGGAGCTGCTTCCTGGG
 +
-BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB 
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF<FFFFFFFFFFFFFFFBFFFFFFFFFFFFFFFFFFFFFFFFFFBFFFFFFFFFBFFFFFFFFFFFFF 
 ```
 
 This is actually really cool, because we can already see the results of our
-applied parameters. All reads have been trimmed to 75bp.
+applied parameters. All reads have been trimmed to 100bp.
 
 # Step 3: denovo clustering within-samples
 
 For a *de novo* assembly, step 3 de-replicates and then clusters reads within
 each sample by the set clustering threshold and then writes the clusters to new
-files in a directory called `peddrad_clust_0.85`. Intuitively, we are trying to
-identify all the reads that map to the same locus within each sample. You can
-see the default value is 0.85, so our default directory is named accordingly.
-This value dictates the percentage of sequence similarity that reads must
+files in a directory called `cheetah_clust_0.9`. Intuitively, we are trying to
+identify all the reads that map to the same locus within each sample. You may remember the default value is 0.85, but we have increased if to 0.9 in our params file. This value dictates the percentage of sequence similarity that reads must
 have in order to be considered reads at the same locus. 
 
 > **NB:** The true name of this output directory will be dictated by the value
@@ -448,7 +492,7 @@ you set for the `clust_threshold` parameter in the params file.
 You'll more than likely want to experiment with this value, but 0.85 is a
 reasonable default, balancing over-splitting of loci vs over-lumping. Don't mess
 with this until you feel comfortable with the overall workflow, and also until
-you've learned about [branching assemblies](https://ipyrad.readthedocs.io/en/latest/8-branching.html).
+you've learned about [branching assemblies](https://ipyrad.readthedocs.io/en/latest/8-branching.html). We're increasing it here because we know that our dataset has relatively little variation, so we can apply a more strict clustering threshold.
 
 > **NB:** What is the best clustering threshold to choose? "It depends."
 
@@ -468,34 +512,31 @@ data.
 Now lets run step 3:
 
 ```bash
-$ ipyrad -p params-peddrad.txt -s 3 -c 16
+(ipyrad) osboxes@osboxes:~/ipyrad-workshop$ ipyrad -p params-cheetah.txt -s 3 -c 4
 ```
 ```
-  loading Assembly: peddrad
-  from saved path: ~/ipyrad-workshop/peddrad.json
+  loading Assembly: cheetah
+  from saved path: ~/ipyrad-workshop/cheetah.json
 
  -------------------------------------------------------------
   ipyrad [v.0.9.92]
   Interactive assembly and analysis of RAD-seq data
  -------------------------------------------------------------
-  Parallel connection | d2d17ccd3643: 16 cores
+  Parallel connection | osboxes: 4 cores
 
   Step 3: Clustering/Mapping reads within samples
-  [####################] 100% 0:00:11 | concatenating
-  [####################] 100% 0:00:02 | join merged pairs
-  [####################] 100% 0:00:03 | join unmerged pairs
-  [####################] 100% 0:00:01 | dereplicating
-  [####################] 100% 0:00:12 | clustering/mapping
+  [####################] 100% 0:00:13 | dereplicating
+  [####################] 100% 0:09:46 | clustering/mapping
   [####################] 100% 0:00:00 | building clusters
   [####################] 100% 0:00:00 | chunking clusters
-  [####################] 100% 0:04:00 | aligning clusters
-  [####################] 100% 0:00:00 | concat clusters
-  [####################] 100% 0:00:00 | calc cluster stats
+  [####################] 100% 0:16:25 | aligning clusters
+  [####################] 100% 0:00:59 | concat clusters
+  [####################] 100% 0:00:05 | calc cluster stats
 
   Parallel connection closed.
 ```
 
-In-depth operations of step 3:
+In-depth operations of step 3 (the first two do not occur with our dataset):
 * concatenating - If multiple fastq edits per sample then pile them all together
 * join merged/unmerged pairs - For paired-end data merge overlapping reads per
 mate pair (R1/R2)
@@ -514,35 +555,92 @@ thresholds ('clusters_hidepth'). We'll go into more detail about mindepth settin
 in some of the advanced tutorials.
 
 ```bash
-$ ipyrad -p params-peddrad.txt -r
+(ipyrad) osboxes@osboxes:~/ipyrad-workshop$ ipyrad -p params-cheetah.txt -r
 ```
 ```
-Summary stats of Assembly peddrad
+Summary stats of Assembly cheetah
 ------------------------------------------------
-      state  reads_raw  reads_passed_filter  refseq_mapped_reads  refseq_unmapped_reads  clusters_total  clusters_hidepth
-1A_0      3      19835                19835                19835                      0            1000              1000
-1B_0      3      20071                20071                20071                      0            1000              1000
-1C_0      3      19969                19969                19969                      0            1000              1000
-1D_0      3      20082                20082                20082                      0            1000              1000
-2E_0      3      20004                20004                20004                      0            1000              1000
-2F_0      3      19899                19899                19899                      0            1000              1000
-2G_0      3      19928                19928                19928                      0            1000              1000
-2H_0      3      20110                20110                20110                      0            1000              1000
-3I_0      3      20078                20078                20078                      0            1000              1000
-3J_0      3      19965                19965                19965                      0            1000              1000
-3K_0      3      19846                19846                19846                      0            1000              1000
-3L_0      3      20025                20025                20025                      0            1000              1000
+             state  reads_raw  ...  clusters_total  clusters_hidepth
+SRR19760910      3     125000  ...           35988              6441
+SRR19760911      3     125000  ...           34721              6127
+SRR19760912      3     125000  ...           38474              6108
+SRR19760913      3     125000  ...           35732              6723
+SRR19760914      3     125000  ...           35349              6589
+SRR19760915      3     125000  ...           35409              6763
+SRR19760916      3     125000  ...           34888              6843
+SRR19760917      3     125000  ...           34940              6791
+SRR19760918      3     125000  ...           34531              6984
+SRR19760919      3     125000  ...           34678              6097
+SRR19760920      3     125000  ...           34711              6844
+SRR19760921      3     125000  ...           34374              7012
+SRR19760922      3     125000  ...           34950              6785
+SRR19760923      3     125000  ...           33585              7026
+SRR19760924      3     125000  ...           35067              6783
+SRR19760925      3     125000  ...           34489              6965
+SRR19760926      3     125000  ...           35037              6845
+SRR19760927      3     125000  ...           34823              6943
+SRR19760928      3     125000  ...           35053              6870
+SRR19760929      3     125000  ...           34655              7002
+SRR19760930      3     125000  ...           37222              6302
+SRR19760931      3     125000  ...           35375              6760
+SRR19760932      3     125000  ...           33826              7059
+SRR19760933      3     125000  ...           47864              5197
+SRR19760934      3     125000  ...           36045              6725
+SRR19760935      3     125000  ...           35145              6940
+SRR19760936      3     125000  ...           34930              7054
+SRR19760937      3     125000  ...           51209              4056
+SRR19760938      3     125000  ...           34908              6791
+SRR19760939      3     125000  ...           34775              6573
+SRR19760940      3     125000  ...           34735              6258
+SRR19760941      3     125000  ...           32890              7215
+SRR19760942      3     125000  ...           36458              6642
+SRR19760943      3     125000  ...           35755              6725
+SRR19760944      3     125000  ...           34670              6986
+SRR19760945      3     125000  ...           37036              6731
+SRR19760946      3     125000  ...           40642              6145
+SRR19760947      3     125000  ...           37124              6261
+SRR19760948      3     125000  ...           35054              6823
+SRR19760949      3     125000  ...           37410              6182
+SRR19760950      3     125000  ...           33143              6098
+SRR19760951      3     125000  ...           33692              6758
+SRR19760952      3     125000  ...           39092              6426
+SRR19760953      3     120739  ...           33461              6230
+SRR19760954      3     125000  ...           35743              6358
+SRR19760955      3     125000  ...           32989              6195
+SRR19760956      3     125000  ...           39718              5968
+SRR19760957      3     125000  ...           37857              6202
+SRR19760958      3     125000  ...           38453              6055
+SRR19760959      3     125000  ...           38091              6188
+SRR19760960      3     125000  ...           38052              6244
+SRR19760961      3     125000  ...           36576              6348
+SRR19760962      3     125000  ...           33377              7107
+
+[53 rows x 5 columns]
+
+
+Full stats files
+------------------------------------------------
+step 1: ./cheetah_s1_demultiplex_stats.txt
+step 2: ./cheetah_edits/s2_rawedit_stats.txt
+step 3: ./cheetah_clust_0.9/s3_cluster_stats.txt
+step 4: None
+step 5: None
+step 6: None
+step 7: None
 ```
 
 Again, the final output of step 3 is dereplicated, clustered files for
-each sample in `./peddrad_clust_0.85/`. You can get a feel for what
+each sample in `./cheetah_clust_0.9/`. You can get a feel for what
 this looks like by examining a portion of one of the files. 
 
 ```bash
 ## Same as above, `zcat` unzips and prints to the screen and 
 ## `head -n 18` means just show me the first 18 lines. 
-$ zcat zcat peddrad_clust_0.85/1A_0.clustS.gz | head -n 18
+(ipyrad) osboxes@osboxes:~/ipyrad-workshop$t zcat cheetah_clust_0.9/SRR19760910.clustS.gz | head -n 18
 ```
+
+You'll see something similar to what is printed below:
+
 ```
 0121ac19c8acb83e5d426007a2424b65;size=18;*
 TGCAGTTGGGATGGCGATGCCGTACATTGGCGCATCCAGCCTCGGTCATTGTCGGAGATCTCACCTTTCAACGGTnnnnTGAATGGTCGCGACCCCCAACCACAATCGGCTTTGCCAAGGCAAGGCTAGAGACGTGCTAAAAAAACTCGCTCCG
@@ -635,26 +733,26 @@ In this step we jointly estimate sequencing error rate and heterozygosity to
 help us figure out which reads are "real" and which include sequencing error. 
 We need to know which reads are "real" because in diploid organisms there are a
 maximum of 2 alleles at any given locus. If we look at the raw data and there
-are 5 or ten different "alleles", and 2 of them are very high frequency, and
+are 20 different "alleles", and 2 of them are very high frequency, and
 the rest are singletons then this gives us evidence that the 2 high frequency
-alleles are good reads and the rest are probably junk. This step is pretty
+alleles are the good reads and the rest are probably junk. This step is pretty
 straightforward, and pretty fast. Run it like this:
 
 ```bash
-$ ipyrad -p params-peddrad.txt -s 4 -c 16
+(ipyrad) osboxes@osboxes:~/ipyrad-workshop$ ipyrad -p params-cheetah.txt -s 4 -c 4
 ```
 ```
-  loading Assembly: peddrad
-  from saved path: ~/ipyrad-workshop/peddrad.json
+  loading Assembly: cheetah
+  from saved path: ~/ipyrad-workshop/cheetah.json
 
  -------------------------------------------------------------
   ipyrad [v.0.9.92]
   Interactive assembly and analysis of RAD-seq data
  -------------------------------------------------------------
-  Parallel connection | d2d17ccd3643: 16 cores
+  Parallel connection | osboxes: 4 cores
 
   Step 4: Joint estimation of error rate and heterozygosity
-  [####################] 100% 0:00:12 | inferring [H, E]
+  [####################] 100% 0:01:46 | inferring [H, E]
 
   Parallel connection closed.
 ```
@@ -664,31 +762,84 @@ you can invoke the `-r` flag to see the estimated heterozygosity and error rate
 per sample.
 
 ```bash
-$ ipyrad -p params-peddrad.txt -r
+(ipyrad) osboxes@osboxes:~/ipyrad-workshop$ ipyrad -p params-cheetah.txt -r
 ```
 ```
-Summary stats of Assembly peddrad
+Summary stats of Assembly cheetah
 ------------------------------------------------
-      state  reads_raw  reads_passed_filter  refseq_mapped_reads  ...  clusters_hidepth  hetero_est  error_est  reads_consens
-1A_0      4      19835                19835                19835  ...              1000    0.001842   0.000773           1000
-1B_0      4      20071                20071                20071  ...              1000    0.001861   0.000751           1000
-1C_0      4      19969                19969                19969  ...              1000    0.002045   0.000761           1000
-1D_0      4      20082                20082                20082  ...              1000    0.001813   0.000725           1000
-2E_0      4      20004                20004                20004  ...              1000    0.002006   0.000767           1000
-2F_0      4      19899                19899                19899  ...              1000    0.002045   0.000761           1000
-2G_0      4      19928                19928                19928  ...              1000    0.001858   0.000765           1000
-2H_0      4      20110                20110                20110  ...              1000    0.002129   0.000730           1000
-3I_0      4      20078                20078                20078  ...              1000    0.001961   0.000749           1000
-3J_0      4      19965                19965                19965  ...              1000    0.001950   0.000748           1000
-3K_0      4      19846                19846                19846  ...              1000    0.001959   0.000768           1000
-3L_0      4      20025                20025                20025  ...              1000    0.001956   0.000753           1000
+             state  reads_raw  ...  hetero_est  error_est
+SRR19760910      4     125000  ...    0.001740   0.001839
+SRR19760911      4     125000  ...    0.001695   0.001309
+SRR19760912      4     125000  ...    0.001803   0.001405
+SRR19760913      4     125000  ...    0.001403   0.001184
+SRR19760914      4     125000  ...    0.001925   0.001948
+SRR19760915      4     125000  ...    0.001849   0.001835
+SRR19760916      4     125000  ...    0.001985   0.001741
+SRR19760917      4     125000  ...    0.002020   0.002164
+SRR19760918      4     125000  ...    0.001935   0.001832
+SRR19760919      4     125000  ...    0.001491   0.001496
+SRR19760920      4     125000  ...    0.001852   0.001741
+SRR19760921      4     125000  ...    0.001787   0.001775
+SRR19760922      4     125000  ...    0.001676   0.001722
+SRR19760923      4     125000  ...    0.001610   0.001826
+SRR19760924      4     125000  ...    0.001620   0.001796
+SRR19760925      4     125000  ...    0.001635   0.001801
+SRR19760926      4     125000  ...    0.002057   0.001983
+SRR19760927      4     125000  ...    0.001829   0.001967
+SRR19760928      4     125000  ...    0.001839   0.001744
+SRR19760929      4     125000  ...    0.001746   0.002172
+SRR19760930      4     125000  ...    0.001532   0.001385
+SRR19760931      4     125000  ...    0.001789   0.002052
+SRR19760932      4     125000  ...    0.001742   0.001828
+SRR19760933      4     125000  ...    0.001813   0.001728
+SRR19760934      4     125000  ...    0.001914   0.001647
+SRR19760935      4     125000  ...    0.001799   0.002048
+SRR19760936      4     125000  ...    0.001894   0.001819
+SRR19760937      4     125000  ...    0.002263   0.001956
+SRR19760938      4     125000  ...    0.001674   0.001287
+SRR19760939      4     125000  ...    0.002000   0.001576
+SRR19760940      4     125000  ...    0.001812   0.001374
+SRR19760941      4     125000  ...    0.001593   0.001151
+SRR19760942      4     125000  ...    0.001650   0.001633
+SRR19760943      4     125000  ...    0.001887   0.001785
+SRR19760944      4     125000  ...    0.001758   0.001703
+SRR19760945      4     125000  ...    0.001853   0.001874
+SRR19760946      4     125000  ...    0.002003   0.001762
+SRR19760947      4     125000  ...    0.002222   0.001965
+SRR19760948      4     125000  ...    0.001629   0.001813
+SRR19760949      4     125000  ...    0.003099   0.001201
+SRR19760950      4     125000  ...    0.001138   0.001279
+SRR19760951      4     125000  ...    0.001326   0.001431
+SRR19760952      4     125000  ...    0.001507   0.001356
+SRR19760953      4     120739  ...    0.001782   0.001899
+SRR19760954      4     125000  ...    0.001685   0.001530
+SRR19760955      4     125000  ...    0.001842   0.001504
+SRR19760956      4     125000  ...    0.001618   0.001326
+SRR19760957      4     125000  ...    0.001713   0.001194
+SRR19760958      4     125000  ...    0.001790   0.001265
+SRR19760959      4     125000  ...    0.001467   0.001375
+SRR19760960      4     125000  ...    0.001425   0.001066
+SRR19760961      4     125000  ...    0.001542   0.001444
+SRR19760962      4     125000  ...    0.001513   0.001323
+
+[53 rows x 7 columns]
+
+
+Full stats files
+------------------------------------------------
+step 1: ./cheetah_s1_demultiplex_stats.txt
+step 2: ./cheetah_edits/s2_rawedit_stats.txt
+step 3: ./cheetah_clust_0.9/s3_cluster_stats.txt
+step 4: ./cheetah_clust_0.9/s4_joint_estimate.txt
+step 5: None
+step 6: None
+step 7: None     
 ```
 
 Illumina error rates are on the order of 0.1% per base, so your error rates
 will ideally be in this neighborhood. Also, under normal conditions error rate
 will be much, much lower than heterozygosity (on the order of 10x lower). If
-the error rate is >>0.1% then you might be using too 
-permissive a clustering threshold. Just a thought.
+the error rate is >>0.1% then you might be using too permissive a clustering threshold. Just a thought.
 
 # Step 5: Consensus base calls
 
@@ -697,25 +848,25 @@ consensus of sequences within each cluster. Here we are identifying what we
 believe to be the real haplotypes at each locus within each sample.
 
 ```bash
-$ ipyrad -p params-peddrad.txt -s 5 -c 16
+(ipyrad) osboxes@osboxes:~/ipyrad-workshop$ ipyrad -p params-cheetah.txt -s 5 -c 4
 ```
 ```
-  loading Assembly: peddrad
-  from saved path: ~/ipyrad-workshop/peddrad.json
+  loading Assembly: cheetah
+  from saved path: ~/ipyrad-workshop/cheetah.json
 
  -------------------------------------------------------------
   ipyrad [v.0.9.92]
   Interactive assembly and analysis of RAD-seq data
  -------------------------------------------------------------
-  Parallel connection | d2d17ccd3643: 16 cores
+  Parallel connection | osboxes: 4 cores
 
   Step 5: Consensus base/allele calling
-  Mean error  [0.00075 sd=0.00001]
-  Mean hetero [0.00195 sd=0.00010]
-  [####################] 100% 0:00:01 | calculating depths
-  [####################] 100% 0:00:00 | chunking clusters
-  [####################] 100% 0:01:03 | consens calling
-  [####################] 100% 0:00:03 | indexing alleles
+  Mean error  [0.00164 sd=0.00029]
+  Mean hetero [0.00177 sd=0.00028]
+  [####################] 100% 0:00:04 | calculating depths
+  [####################] 100% 0:00:05 | chunking clusters
+  [####################] 100% 0:10:05 | consens calling
+  [####################] 100% 0:00:19 | indexing alleles
 
   Parallel connection closed.
 ```
@@ -728,27 +879,81 @@ parallelization
 * indexing alleles - Cleaning up and re-joining chunked data
 
 ```bash
-$ ipyrad -p params-peddrad.txt -r
+(ipyrad) osboxes@osboxes:~/ipyrad-workshop$ ipyrad -p params-cheetah.txt -r
 ```
 ```
-  loading Assembly: peddrad
-  from saved path: ~/ipyrad-workshop/peddrad.json
+  loading Assembly: cheetah
+  from saved path: ~/ipyrad-workshop/cheetah.json
 
-Summary stats of Assembly peddrad
+Summary stats of Assembly cheetah
 ------------------------------------------------
-      state  reads_raw  reads_passed_filter  refseq_mapped_reads  ...  clusters_hidepth  hetero_est  error_est  reads_consens
-1A_0      5      19835                19835                19835  ...              1000    0.001842   0.000773           1000
-1B_0      5      20071                20071                20071  ...              1000    0.001861   0.000751           1000
-1C_0      5      19969                19969                19969  ...              1000    0.002045   0.000761           1000
-1D_0      5      20082                20082                20082  ...              1000    0.001813   0.000725           1000
-2E_0      5      20004                20004                20004  ...              1000    0.002006   0.000767           1000
-2F_0      5      19899                19899                19899  ...              1000    0.002045   0.000761           1000
-2G_0      5      19928                19928                19928  ...              1000    0.001858   0.000765           1000
-2H_0      5      20110                20110                20110  ...              1000    0.002129   0.000730           1000
-3I_0      5      20078                20078                20078  ...              1000    0.001961   0.000749           1000
-3J_0      5      19965                19965                19965  ...              1000    0.001950   0.000748           1000
-3K_0      5      19846                19846                19846  ...              1000    0.001959   0.000768           1000
-3L_0      5      20025                20025                20025  ...              1000    0.001956   0.000753           1000
+             state  reads_raw  ...  error_est  reads_consens
+SRR19760910      5     125000  ...   0.001839           6358
+SRR19760911      5     125000  ...   0.001309           6048
+SRR19760912      5     125000  ...   0.001405           6030
+SRR19760913      5     125000  ...   0.001184           6665
+SRR19760914      5     125000  ...   0.001948           6523
+SRR19760915      5     125000  ...   0.001835           6692
+SRR19760916      5     125000  ...   0.001741           6755
+SRR19760917      5     125000  ...   0.002164           6718
+SRR19760918      5     125000  ...   0.001832           6899
+SRR19760919      5     125000  ...   0.001496           6033
+SRR19760920      5     125000  ...   0.001741           6773
+SRR19760921      5     125000  ...   0.001775           6939
+SRR19760922      5     125000  ...   0.001722           6714
+SRR19760923      5     125000  ...   0.001826           6953
+SRR19760924      5     125000  ...   0.001796           6723
+SRR19760925      5     125000  ...   0.001801           6885
+SRR19760926      5     125000  ...   0.001983           6764
+SRR19760927      5     125000  ...   0.001967           6866
+SRR19760928      5     125000  ...   0.001744           6798
+SRR19760929      5     125000  ...   0.002172           6935
+SRR19760930      5     125000  ...   0.001385           6234
+SRR19760931      5     125000  ...   0.002052           6684
+SRR19760932      5     125000  ...   0.001828           6994
+SRR19760933      5     125000  ...   0.001728           5136
+SRR19760934      5     125000  ...   0.001647           6651
+SRR19760935      5     125000  ...   0.002048           6862
+SRR19760936      5     125000  ...   0.001819           6973
+SRR19760937      5     125000  ...   0.001956           3996
+SRR19760938      5     125000  ...   0.001287           6714
+SRR19760939      5     125000  ...   0.001576           6488
+SRR19760940      5     125000  ...   0.001374           6178
+SRR19760941      5     125000  ...   0.001151           7138
+SRR19760942      5     125000  ...   0.001633           6575
+SRR19760943      5     125000  ...   0.001785           6652
+SRR19760944      5     125000  ...   0.001703           6908
+SRR19760945      5     125000  ...   0.001874           6659
+SRR19760946      5     125000  ...   0.001762           6079
+SRR19760947      5     125000  ...   0.001965           6178
+SRR19760948      5     125000  ...   0.001813           6752
+SRR19760949      5     125000  ...   0.001201           6097
+SRR19760950      5     125000  ...   0.001279           6046
+SRR19760951      5     125000  ...   0.001431           6694
+SRR19760952      5     125000  ...   0.001356           6366
+SRR19760953      5     120739  ...   0.001899           6159
+SRR19760954      5     125000  ...   0.001530           6289
+SRR19760955      5     125000  ...   0.001504           6112
+SRR19760956      5     125000  ...   0.001326           5912
+SRR19760957      5     125000  ...   0.001194           6137
+SRR19760958      5     125000  ...   0.001265           5973
+SRR19760959      5     125000  ...   0.001375           6133
+SRR19760960      5     125000  ...   0.001066           6181
+SRR19760961      5     125000  ...   0.001444           6282
+SRR19760962      5     125000  ...   0.001323           7037
+
+[53 rows x 8 columns]
+
+
+Full stats files
+------------------------------------------------
+step 1: ./cheetah_s1_demultiplex_stats.txt
+step 2: ./cheetah_edits/s2_rawedit_stats.txt
+step 3: ./cheetah_clust_0.9/s3_cluster_stats.txt
+step 4: ./cheetah_clust_0.9/s4_joint_estimate.txt
+step 5: ./cheetah_consens/s5_consens_stats.txt
+step 6: None
+step 7: None
 ```
 
 And here the important information is the number of `reads_consens`. This is
@@ -771,23 +976,23 @@ based on sequence similarity.
 for large empirical datasets, but it's normally faster than step 3.
 
 ```bash
-$ ipyrad -p params-peddrad.txt -s 6 -c 16
+(ipyrad) osboxes@osboxes:~/ipyrad-workshop$ ipyrad -p params-cheetah.txt -s 6 -c 4
 ```
 ```
-  loading Assembly: peddrad
-  from saved path: ~/ipyrad-workshop/peddrad.json
+  loading Assembly: cheetah
+  from saved path: ~/ipyrad-workshop/cheetah.json
 
  -------------------------------------------------------------
   ipyrad [v.0.9.92]
   Interactive assembly and analysis of RAD-seq data
  -------------------------------------------------------------
-  Parallel connection | d2d17ccd3643: 16 cores
+  Parallel connection | osboxes: 4 cores
 
   Step 6: Clustering/Mapping across samples
-  [####################] 100% 0:00:01 | concatenating inputs
-  [####################] 100% 0:00:04 | clustering across
-  [####################] 100% 0:00:00 | building clusters
-  [####################] 100% 0:00:35 | aligning clusters
+  [####################] 100% 0:00:03 | concatenating inputs
+  [####################] 100% 0:01:18 | clustering across
+  [####################] 100% 0:00:06 | building clusters
+  [####################] 100% 0:02:55 | aligning clusters
 
   Parallel connection closed.
 ```
@@ -806,74 +1011,53 @@ It might be more enlightening to consider the output of step 6 by examining the
 file that contains the reads clustered across samples:
 
 ```bash
-$ cat peddrad_across/peddrad_clust_database.fa | head -n 27
+(ipyrad) osboxes@osboxes:~/ipyrad-workshop$ cat cheetah_across/cheetah_clust_database.fa | head -n 27
 ```
 ```
-#1A_0,@1B_0,@1C_0,@1D_0,@2E_0,@2F_0,@2G_0,@2H_0,@3I_0,@3J_0,@3K_0,@3L_0
->1A_0_11
-TGCAGGCGTAGTAAGCTTGGATGGGAGCGACCACCCGAACGAGATATCATTCACAACGTTATACATACACTGCGCnnnnCCATTATATGGTGTGATATACGTATCCTCAAACCGAATTACAAAACGATGTGCTTACGGCGTAATCTTGGTCCCG
->1B_0_16
-TGCAGGCGTAGTAAGCTTGGATGGGAGCGACCACCCGAACGAGATATCATTCACAACGTTATACATACACTGCGCnnnnCCATTATATGGTGTGATATACGTATCCTCAAACCGAATTACAAAACGATGTGCTTACGGCGTAATCTTGGTCCCG
->1C_0_678
-TGCAGGCGTAGTAAGCTTGCATGGGAGCGACCACCCGAACGAGATATCAATCACAACGTTATACATACACTGCGCnnnnCCATTATATGGTGTGATATACGWATCCTCAAACCGAATTACAAAACGATGTGCTTACGGCGTAATCTTGGTCCCG
->1D_0_509
-TGCAGGCGTAGTAAGCTTGCATGGGAGCGACCACCCGAACGAGATATCATTCACAACGTTATACATACACTGCGCnnnnCCATTATATGGTGTGATATACGTATCCTCAAACCGAATTACAAAACGATGTGCTTACGGCGTAATCTTGGTCCCG
->2E_0_859
-TGCAGGCGTAGTAAGCTTGCATGGGAGCGACCWCCCGAACGAGATATCATTCACAACGTTATACATACACTGCGCnnnnCCATTATATGGTGTGATATACGTATCCTCAAACCGAATTACAAAACGATGTGCTTACGGCGTAATCTTGGTCCCG
->2F_0_533
-TGCAGGCGTAGTAAGCTTGCATGGGAGCGACCACCCGAACGAGATATCATTCACAACGTTATACATACACTGCGCnnnnCCATTATATGGTGTGATATACGTATCCTCAAACCGAATTACAAAACGATGTGCTTACGGCGTAATCTTGGTCCCG
->2G_0_984
-TGCAGGCGTAGTAAGCTTGCATGGGAGCGACCACCCGAACGAGATATCATTCACAACGTTATACATACACTGCGCnnnnCCATTATATGGTGTGATATACGTATCCTCAAACCGAATTACAAAACGATGTGCTTACGGCGTAATCTTGGTCCCG
->2H_0_529
-TGCAGGCGTAGTAAGCTTGCATGGGAGCGACCACCCGAACGAGATATCATTCACAACGTTATACATACACTGCGCnnnnCCATTATATGGTGTGATATACGTATCCTCAAACCGAATTACAAAACGATGTGCTTACGGCGTAATCTTGGTCCCG
->3I_0_286
-TGCAGGCGTAGTAAGCTTGCATGCGAGCGACCACCCGAACGAGATATCATTCACAACGTTATACATACACTGCGCnnnnCCATTATATGGTGTTATATACGTATCCTCAAACCGAATTACAAAACGATGTGCTTACGGCGTAATCTTGGTCCCG
->3J_0_255
-TGCAGGCGTAGTAAGCTTGCATGCGAGCGACCACCCGAACGAGATATCATTCACAACGTTATACATACACTGCGCnnnnCCATTATATGGTGTTATATACGTATCCTCAAACCGAATTACAAAACGATGTGCTTACGGCGTAATCTTGGTCCCG
->3K_0_264
-TGCAGGCGTAGTAAGCTTGCATGCGAGCGACCACCCGAACGAGATATCATTCACAACGTTATACATACACTGCGCnnnnCCATTATATGGTGTTATATACGTATCCTCAAACCGAATTACAAAACGATGTGCTTACGGCGTAATCTTGGTCCCG
->3L_0_865
-TGCAGGCGTAGTAAGCTTGCATGCGAGCGACCACCCGAACGAGATATCATTCACAACGTTATACATACACTGCGCnnnnCCATTATATGGTGTTATAYACGTATCCTCAAACCGAATTACAAAACGATGTGCTTACGGCGTAATCTTGGTCCCG
+>SRR19760910_0
+CATGCATCTAAAATTATAGAGTACTCATGTTTTACAAAGGAATTCAGCCTGTTTTACAAACACATCAGGTGAGCATCACCCACCTTAGCTAATGTTATGG
+>SRR19760912_0
+CATGCATCTAAAATTATAGAGTACTCATGTTTTACAAAGGAATTCAGCCTGTTTTACAAACACATCAGGTGAGCATCACCCACCTTAGCTAATGTTATGG
+>SRR19760919_1
+CATGCATCTAAAATTATAGAGTACTCATGTTTTACAAAGGAATTCAGCCTGTTTTACAAACACATCAGGTGAGCATCACCCACCTTAGCTAATGTTATGG
+>SRR19760947_0
+CATGCATCTAAAATTATAGAGTACTCATGTTTTACAAAGGAATTCAGCCTGTTTTACAAACACATCAGGTGAGCATCACCCACCTTAGCTAATGTTATGG
+>SRR19760951_1
+CATGCATCTAAAATTATAGAGTACTCATGTTTTACAAAGGAATTCAGCCTGTTTTACAAACACATCAGGTGAGCATCACCCACCTTAGCTAATGTTATGG
+>SRR19760954_5064
+CATGCATCTAAAATTATAGAGTACTCATGTTTTACAAAGGAATTCAGCCTGTTTTACAAACACATCAGGTGAGCATCACCCACCTTAGCTAATGTTATGG
+>SRR19760957_5406
+CATGCATCTAAAATTATAGAGTACTCATGTTTTACAAAGGAATTCAGCCTGTTTTACAAACACATCAGGTGAGCATCACCCACCTTAGCTAATGTTATGG
+>SRR19760961_5265
+CATGCATCTAAAATTATAGAGTACTCATGTTTTACAAAGGAATTCAGCCTGTTTTACAAACACATCAGGTGAGCATCACCCACCTTAGCTAATGTTATGG
 //
 //
-```
-
-Again, the simulated data are a little boring. Here's something you might see
-more typically with real data:
-
-```
-punc_IBSPCRIB0361_10
-TdGCATGCAACTGGAGTGAGGTGGTTTGCATTGATTGCTGTATATTCAATGCAAGCAACAGGAATGAAGTGGATTTCTTTGGTCACTATATACTCAATGCA
-punc_IBSPCRIB0361_1647
-TGCATGCAACAGGAGTGANGTGrATTTCTTTGRTCACTGTAyANTCAATGYA
-//
-//
-punc_IBSPCRIB0361_100
-TGCATCTCAACGTGGTCTCGTCACATTTCAAGGCGCACATCAGAATGCAGTACAATAATCCCTCCCCAAATGCA
-punc_MUFAL9635_687
-TGCATCTCAACATGGTCTCGTCACATTTCAAGGCGCACATCAGAATGCAGTACAATAATCCCTCCCCAAATGCA
-punc_ICST764_3619
-TGCATCTCAACGTGGTCTCGTCACATTTCAAGGCGCACATCAGAATGCAGTACAATAATCCCTCCCCAAATGCA
-punc_JFT773_4219
-TGCATCTCAACGTGGTCTCGTCACATTTCAAGGCGCACATCAGAATGCAGTACAATAATCCCTCCCCAAATGCA
-punc_MTR05978_111
-TGCATCTCAACGTGGTCTCGTCACATTTCAAGGCGCACATCAGAATGCAGTACAATAATCCCTCCCCAAATGCA
-punc_MTR17744_1884
-TGCATCTCAACGTGGTCTCGTCACATTTCAAGGCGCACATCAGAATGCA-------------------------
-punc_MTR34414_3503
-TGCATCTCAACGTGGTCTCGTCACATTTCAAGGCGCACATCAGAATGCAGTACAATAATCCCTCCCCAAATGCA
-//
-//
-punc_IBSPCRIB0361_1003
-TGCATAATGGACTTTATGGACTCCATGCCGTCGTTGCACGTACCGTAATTGTGAAATGCAAGATCGGGAGCGGTT
-punc_MTRX1478_1014
-TGCATAATGGACTTTATGGACTCCATGCCGTCGTTGCACGTACCGTAATTGTGAAATGCA---------------
+>SRR19760910_10
+CATGCTCTGCTCTGCAGCCTGCAGTCTTTATGTTTGCTCTATGTCATAAGAATTCTGGCATACTTGTTTCTGTGAAATACCTGTATTTAGAGAACAGACG
+>SRR19760911_4305
+CATGCTCTGCTCTGCAGCCTGCAGTCTTTATGTTTGCTCTATGTCATAAGAATTCTGGCATACTTGTTTCTGTGAAATACCTGTATTTAGAGAACAGACG
+>SRR19760913_9
+CATGCTCTGCTCTGCAGCCTGCAGTCTTTATGTTTGCTCTATGTCATAAGAATTCTGGCATACTTGTTTCTGTGAAATACCTGTATTTAGAGAACAGACG
+>SRR19760920_12
+CATGCTCTGCTCTGCAGCCTGCAGTCTTTATGTTTGCTCTATGTCATAAGAATTCTGGCATACTTGTTTCTGTGAAATACCTGTATTTAGAGAACAGACG
+>SRR19760921_14
+CATGCTCTGCTCTGCAGCCTGCAGTCTTTATGTTTGCTCTATGTCATAAGAATTCTGGCATACTTGTTTCTGTGAAATACCTGTATTTAGAGAACAGACG
+>SRR19760951_11
+CATGCTCTGCTCTGCAGCCTGCAGTCTTTATGTTTGCTCTATGTCATAAGAATTCTGGCATACTTGTTTCTGTGAAATACCTGTATTTAGAGAACAGACG
+>SRR19760952_11
+CATGCTCTGCTCTGCAGCCTGCAGTCTTTATGTTTGCTCTATGTCATAAGAATTCTGGCATACTTGTTTCTGTGAAATACCTGTATTTAGAGAACAGACG
+>SRR19760957_12
+CATGCTCTGCTCTGCAGCCTGCAGTCTTTATGTTTGCTCTATGTCATAAGAATTCTGGCATACTTGTTTCTGTGAAATACCTGTATTTAGAGAACAGACG
+>SRR19760958_8
+CATGCTCTGCTCTGCAGCCTGCAGTCTTTATGTTTGCTCTATGTCATAAGAATTCTGGCATACTTGTTTCTGTGAAATACCTGTATTTAGAGAACAGACG
+>SRR19760962_9
+CATGCTCTGCTCTGCAGCCTGCAGTCTTTATGTTTGCTCTATGTCATAAGAATTCTGGCATACTTGTTTCTGTGAAATACCTGTATTTAGAGAACAGACG
 //
 //
 ```
 
-The final output of step 6 is a file in `peddrad_across` called
-`peddrad_clust_database.fa`. This file contains all aligned reads across all
+The final output of step 6 is a file in `cheetah_across` called
+`cheetah_clust_database.fa`. This file contains all aligned reads across all
 samples. Executing the above command you'll see all the reads that align at
 each locus. You'll see the sample name of each read followed by the sequence of
 the read at that locus for that sample. If you wish to examine more loci you
@@ -893,22 +1077,24 @@ conservative.
 To run step 7:
 
 ```bash
-$ ipyrad -p params-peddrad.txt -s 7 -c 16
+(ipyrad) osboxes@osboxes:~/ipyrad-workshop$ ipyrad -p params-cheetah.txt -s 7 -c 4
 ```
 ```
-  loading Assembly: peddrad
-  from saved path: ~/ipyrad-workshop/peddrad.json
+  loading Assembly: cheetah
+  from saved path: ~/ipyrad-workshop/cheetah.json
 
  -------------------------------------------------------------
   ipyrad [v.0.9.92]
   Interactive assembly and analysis of RAD-seq data
  -------------------------------------------------------------
-  Parallel connection | d2d17ccd3643:: 16 cores
+  Parallel connection | osboxes:: 4 cores
 
   Step 7: Filtering and formatting output files
-  [####################] 100% 0:00:07 | applying filters
-  [####################] 100% 0:00:02 | building arrays
-  [####################] 100% 0:00:01 | writing conversions
+  [####################] 100% 0:00:16 | applying filters
+  [####################] 100% 0:00:09 | building arrays
+  [####################] 100% 0:00:13 | writing conversions
+  [####################] 100% 0:00:28 | indexing vcf depths
+  [####################] 100% 0:00:05 | writing vcf output
 
   Parallel connection closed.
 ```
@@ -919,45 +1105,49 @@ minimum # of samples per locus
 * building arrays - Construct the final output data in hdf5 format
 * writing conversions - Write out all designated output formats
 
-Step 7 generates output files in the `peddrad_outfiles` directory. All the
+Step 7 generates output files in the `cheetah_outfiles` directory. All the
 output formats specified by the `output_formats` parameter will be generated
-here. Let's see what's created by default:
+here. Let's see what's been created:
 
 ```bash
-$ ls peddrad_outfiles/
+(ipyrad) osboxes@osboxes:~/ipyrad-workshop$ ls cheetah_outfiles/
 ```
 ```
-peddrad.loci  peddrad.phy  peddrad.seqs.hdf5  peddrad.snps  peddrad.snps.hdf5  peddrad.snpsmap  peddrad_stats.txt
+cheetah.alleles  cheetah.nex        cheetah.snpsmap    cheetah.usnps
+cheetah.geno     cheetah.phy        cheetah_stats.txt  cheetah.ustr
+cheetah.gphocs   cheetah.seqs.hdf5  cheetah.str        cheetah.vcf
+cheetah.loci     cheetah.snps       cheetah.treemix
+cheetah.migrate  cheetah.snps.hdf5  cheetah.ugeno
 ```
 
-ipyrad always creates the `peddrad.loci` file, as this is our internal format,
-as well as the `peddrad_stats.txt` file, which reports final statistics for the
+ipyrad always creates the `cheetah.loci` file, as this is our internal format,
+as well as the `cheetah_stats.txt` file, which reports final statistics for the
 assembly (more below). The other files created fall in to 2 categories: files
-that contain the full sequence (i.e. the `peddrad.phy` and `peddrad.seqs.hdf5`
-files) and files that contain only variable sites (i.e. the `peddrad.snps` and
-`peddrad.snps.hdf5` files). The `peddrad.snpsmap` is a file which maps SNPs to
+that contain the full sequence (i.e. the `cheetah.phy` and `cheetah.seqs.hdf5`
+files) and files that contain only variable sites (i.e. the `cheetah.snps` and
+`cheetah.snps.hdf5` files). The `cheetah.snpsmap` is a file which maps SNPs to
 loci, which is used downstream in the analysis toolkit for sampling unlinked
 SNPs.
 
-The most informative, human-readable file here is `peddrad_stats.txt` which
+The most informative, human-readable file here is `cheetah_stats.txt` which
 gives extensive and detailed stats about the final assembly. A quick overview
 of the different sections of this file:
 
 ```bash
-$ cat peddrad_outfiles/peddrad_stats.txt
+(ipyrad) osboxes@osboxes:~/ipyrad-workshop$ cat cheetah_outfiles/cheetah_stats.txt
 ```
 ```
 ## The number of loci caught by each filter.
 ## ipyrad API location: [assembly].stats_dfs.s7_filters
 
-                            total_filters  applied_order  retained_loci
-total_prefiltered_loci                  0              0           1000
-filtered_by_rm_duplicates               0              0           1000
-filtered_by_max_indels                  0              0           1000
-filtered_by_max_SNPs                    0              0           1000
-filtered_by_max_shared_het              0              0           1000
-filtered_by_min_sample                  0              0           1000
-total_filtered_loci                     0              0           1000
+                           total_filters applied_order retained_loci
+total_prefiltered_loci                 0             0         28420
+filtered_by_rm_duplicates             20            20         28400
+filtered_by_max_indels                50            50         28350
+filtered_by_max_SNPs                   2             2         28348
+filtered_by_max_shared_het           121           121         28227
+filtered_by_min_sample              5839          5839         22388
+total_filtered_loci                 6032          6032         22388
 ```
 
 This block indicates how filtering is impacting your final dataset. Each filter
@@ -977,19 +1167,60 @@ re-run step 7. Also this can be done by using [branching](https://ipyrad.readthe
 ## The number of loci recovered for each Sample.
 ## ipyrad API location: [assembly].stats_dfs.s7_samples
 
-      sample_coverage
-1A_0             1000
-1B_0             1000
-1C_0             1000
-1D_0             1000
-2E_0             1000
-2F_0             1000
-2G_0             1000
-2H_0             1000
-3I_0             1000
-3J_0             1000
-3K_0             1000
-3L_0             1000
+             sample_coverage
+SRR19760910             5831
+SRR19760911             5143
+SRR19760912             5709
+SRR19760913             6357
+SRR19760914             6093
+SRR19760915             6421
+SRR19760916             6508
+SRR19760917             6265
+SRR19760918             6639
+SRR19760919             5651
+SRR19760920             6527
+SRR19760921             6683
+SRR19760922             6475
+SRR19760923             6685
+SRR19760924             6478
+SRR19760925             6647
+SRR19760926             6437
+SRR19760927             6660
+SRR19760928             6586
+SRR19760929             6712
+SRR19760930             5962
+SRR19760931             6440
+SRR19760932             6742
+SRR19760933             4882
+SRR19760934             6398
+SRR19760935             6502
+SRR19760936             6750
+SRR19760937             3437
+SRR19760938             5975
+SRR19760939             5865
+SRR19760940             5145
+SRR19760941             5827
+SRR19760942             6294
+SRR19760943             6405
+SRR19760944             6649
+SRR19760945             6416
+SRR19760946             5821
+SRR19760947             5562
+SRR19760948             6514
+SRR19760949             4546
+SRR19760950             5437
+SRR19760951             6230
+SRR19760952             6083
+SRR19760953             5573
+SRR19760954             5207
+SRR19760955             5145
+SRR19760956             5453
+SRR19760957             5785
+SRR19760958             5426
+SRR19760959             5838
+SRR19760960             5838
+SRR19760961             5949
+SRR19760962             6513
 ```
 
 The next block is `locus_coverage`, which indicates the number of loci that
@@ -1011,23 +1242,62 @@ by definition these are being removed.
 1                0             0
 2                0             0
 3                0             0
-4                0             0
-5                0             0
-6                0             0
-7                0             0
-8                0             0
-9                0             0
-10               0             0
-11               0             0
-12            1000          1000
+4             2200          2200
+5             1771          3971
+6             1573          5544
+7             1397          6941
+8             1206          8147
+9             1144          9291
+10            1037         10328
+11             966         11294
+12             871         12165
+13             825         12990
+14             711         13701
+15             701         14402
+16             622         15024
+17             580         15604
+18             563         16167
+19             497         16664
+20             516         17180
+21             473         17653
+22             391         18044
+23             368         18412
+24             364         18776
+25             387         19163
+26             317         19480
+27             309         19789
+28             306         20095
+29             283         20378
+30             276         20654
+31             206         20860
+32             185         21045
+33             193         21238
+34             151         21389
+35             127         21516
+36             137         21653
+37             132         21785
+38             107         21892
+39              87         21979
+40             102         22081
+41              84         22165
+42              62         22227
+43              48         22275
+44              37         22312
+45              28         22340
+46              23         22363
+47               9         22372
+48               2         22374
+49               4         22378
+50               3         22381
+51               1         22382
+52               2         22384
+53               4         22388
 ```
 
 Whereas the previous block indicated samples per locus, below we are looking at
 SNPs per locus. In a similar fashion as above, these columns record the counts
 of loci containing given numbers of variable sites and parsimony informative
-sites (pis). For example, in the `2` row, this indicates the number of loci
-with 2 variable sites (174), and the number of loci with 2 pis (48). The `sum_*`
-columns simply indicate the running total in ascending order.
+sites (pis). The `sum_*` columns simply indicate the running total in ascending order.
 
 > **Note:** This block can be a little tricky because loci can end up getting
 double-counted. For example, a locus with 1 pis, and 2 autapomorphies will be
@@ -1041,25 +1311,27 @@ The distribution of SNPs (var and pis) per locus.
 ## ipyrad API location: [assembly].stats_dfs.s7_snps
 ## The "reference" sample is included if present unless 'exclude_reference=True'
 
-    var  sum_var  pis  sum_pis
-0     1        0  163        0
-1     5        5  288      288
-2    20       45  264      816
-3    46      183  160     1296
-4    66      447   70     1576
-5   111     1002   36     1756
-6   164     1986   13     1834
-7   141     2973    5     1869
-8   122     3949    1     1877
-9   121     5038    0     1877
-10   76     5798    0     1877
-11   57     6425    0     1877
-12   30     6785    0     1877
-13   14     6967    0     1877
-14   15     7177    0     1877
-15    4     7237    0     1877
-16    3     7285    0     1877
-17    4     7353    0     1877
+      var  sum_var    pis  sum_pis
+0   16034        0  20067        0
+1    4203     4203   1960     1960
+2    1225     6653    209     2378
+3     478     8087     67     2579
+4     187     8835     33     2711
+5      93     9300     20     2811
+6      53     9618     16     2907
+7      36     9870      4     2935
+8      21    10038      6     2983
+9      24    10254      3     3010
+10     11    10364      1     3020
+11      7    10441      1     3031
+12      8    10537      0     3031
+13      4    10589      0     3031
+14      1    10603      0     3031
+15      0    10603      1     3046
+16      1    10619      0     3046
+17      1    10636      0     3046
+18      0    10636      0     3046
+19      1    10655      0     3046
 ```
 
 The next block displays statistics for each sample in the final dataset.
@@ -1069,18 +1341,61 @@ view on how each sample is represented in the output. The one new stat here is
 ```
 ## Final Sample stats summary
       state  reads_raw  reads_passed_filter  refseq_mapped_reads  refseq_unmapped_reads  clusters_total  clusters_hidepthhetero_est  error_est  reads_consens  loci_in_assembly
-1A_0      7      19835                19835                19835                      0            1000              1000  0.001842   0.000773           1000              1000
-1B_0      7      20071                20071                20071                      0            1000              1000  0.001861   0.000751           1000              1000
-1C_0      7      19969                19969                19969                      0            1000              1000  0.002045   0.000761           1000              1000
-1D_0      7      20082                20082                20082                      0            1000              1000  0.001813   0.000725           1000              1000
-2E_0      7      20004                20004                20004                      0            1000              1000  0.002006   0.000767           1000              1000
-2F_0      7      19899                19899                19899                      0            1000              1000  0.002045   0.000761           1000              1000
-2G_0      7      19928                19928                19928                      0            1000              1000  0.001858   0.000765           1000              1000
-2H_0      7      20110                20110                20110                      0            1000              1000  0.002129   0.000730           1000              1000
-3I_0      7      20078                20078                20078                      0            1000              1000  0.001961   0.000749           1000              1000
-3J_0      7      19965                19965                19965                      0            1000              1000  0.001950   0.000748           1000              1000
-3K_0      7      19846                19846                19846                      0            1000              1000  0.001959   0.000768           1000              1000
-3L_0      7      20025                20025                20025                      0            1000              1000  0.001956   0.000753           1000              1000
+## Final Sample stats summary
+             state  reads_raw  reads_passed_filter  clusters_total  clusters_hidepth  hetero_est  error_est  reads_consens  loci_in_assembly
+SRR19760910      7     125000               124681           35988              6441    0.001740   0.001839           6358              5831
+SRR19760911      7     125000               124618           34721              6127    0.001695   0.001309           6048              5143
+SRR19760912      7     125000               124329           38474              6108    0.001803   0.001405           6030              5709
+SRR19760913      7     125000               124438           35732              6723    0.001403   0.001184           6665              6357
+SRR19760914      7     125000               124936           35349              6589    0.001925   0.001948           6523              6093
+SRR19760915      7     125000               124967           35409              6763    0.001849   0.001835           6692              6421
+SRR19760916      7     125000               124960           34888              6843    0.001985   0.001741           6755              6508
+SRR19760917      7     125000               124936           34940              6791    0.002020   0.002164           6718              6265
+SRR19760918      7     125000               124960           34531              6984    0.001935   0.001832           6899              6639
+SRR19760919      7     125000               120138           34678              6097    0.001491   0.001496           6033              5651
+SRR19760920      7     125000               124948           34711              6844    0.001852   0.001741           6773              6527
+SRR19760921      7     125000               124955           34374              7012    0.001787   0.001775           6939              6683
+SRR19760922      7     125000               124963           34950              6785    0.001676   0.001722           6714              6475
+SRR19760923      7     125000               124945           33585              7026    0.001610   0.001826           6953              6685
+SRR19760924      7     125000               124946           35067              6783    0.001620   0.001796           6723              6478
+SRR19760925      7     125000               124951           34489              6965    0.001635   0.001801           6885              6647
+SRR19760926      7     125000               124958           35037              6845    0.002057   0.001983           6764              6437
+SRR19760927      7     125000               124942           34823              6943    0.001829   0.001967           6866              6660
+SRR19760928      7     125000               124951           35053              6870    0.001839   0.001744           6798              6586
+SRR19760929      7     125000               124913           34655              7002    0.001746   0.002172           6935              6712
+SRR19760930      7     125000               124518           37222              6302    0.001532   0.001385           6234              5962
+SRR19760931      7     125000               124941           35375              6760    0.001789   0.002052           6684              6440
+SRR19760932      7     125000               124941           33826              7059    0.001742   0.001828           6994              6742
+SRR19760933      7     125000               124820           47864              5197    0.001813   0.001728           5136              4882
+SRR19760934      7     125000               124910           36045              6725    0.001914   0.001647           6651              6398
+SRR19760935      7     125000               124927           35145              6940    0.001799   0.002048           6862              6502
+SRR19760936      7     125000               124948           34930              7054    0.001894   0.001819           6973              6750
+SRR19760937      7     125000               122807           51209              4056    0.002263   0.001956           3996              3437
+SRR19760938      7     125000               124949           34908              6791    0.001674   0.001287           6714              5975
+SRR19760939      7     125000               124960           34775              6573    0.002000   0.001576           6488              5865
+SRR19760940      7     125000               124938           34735              6258    0.001812   0.001374           6178              5145
+SRR19760941      7     125000               124557           32890              7215    0.001593   0.001151           7138              5827
+SRR19760942      7     125000               124745           36458              6642    0.001650   0.001633           6575              6294
+SRR19760943      7     125000               124941           35755              6725    0.001887   0.001785           6652              6405
+SRR19760944      7     125000               124944           34670              6986    0.001758   0.001703           6908              6649
+SRR19760945      7     125000               124944           37036              6731    0.001853   0.001874           6659              6416
+SRR19760946      7     125000               124607           40642              6145    0.002003   0.001762           6079              5821
+SRR19760947      7     125000               124947           37124              6261    0.002222   0.001965           6178              5562
+SRR19760948      7     125000               124935           35054              6823    0.001629   0.001813           6752              6514
+SRR19760949      7     125000               124656           37410              6182    0.003099   0.001201           6097              4546
+SRR19760950      7     125000               124581           33143              6098    0.001138   0.001279           6046              5437
+SRR19760951      7     125000               124280           33692              6758    0.001326   0.001431           6694              6230
+SRR19760952      7     125000               124529           39092              6426    0.001507   0.001356           6366              6083
+SRR19760953      7     120739               120429           33461              6230    0.001782   0.001899           6159              5573
+SRR19760954      7     125000               124330           35743              6358    0.001685   0.001530           6289              5207
+SRR19760955      7     125000               124384           32989              6195    0.001842   0.001504           6112              5145
+SRR19760956      7     125000               124578           39718              5968    0.001618   0.001326           5912              5453
+SRR19760957      7     125000               124563           37857              6202    0.001713   0.001194           6137              5785
+SRR19760958      7     125000               124619           38453              6055    0.001790   0.001265           5973              5426
+SRR19760959      7     125000               124427           38091              6188    0.001467   0.001375           6133              5838
+SRR19760960      7     125000               124648           38052              6244    0.001425   0.001066           6181              5838
+SRR19760961      7     125000               124325           36576              6348    0.001542   0.001444           6282              5949
+SRR19760962      7     125000               124446           33377              7107    0.001513   0.001323           7037              6513
 ```
 
 The final block displays some very brief, but informative, summaries of
@@ -1088,30 +1403,12 @@ missingness in the assembly at both the sequence and the SNP level:
 
 ```bash
 ## Alignment matrix statistics:
-sequence matrix size: (12, 148725), 0.00% missing sites.
-snps matrix size: (12, 7353), 0.00% missing sites.
+snps matrix size: (53, 10655), 70.79% missing sites.
+sequence matrix size: (53, 2117428), 73.16% missing sites.
 ```
+> **Note on files in the project directory:** Sometimes you want to rerun a step that you've run before, and overwrite the results you already obtained. You can do that by adding the `-f` flag, **forcing** ipyrad to overwrite already existing files. Remember that if you don't want to overwrite existing data, you may want to use [branching](https://ipyrad.readthedocs.io/en/latest/8-branching.html).
 
-For some downstream analyses we might need more than just the default output
-formats, so lets rerun step 7 and generate all supported output formats. This
-can be accomplished by editing the `params-peddrad.txt` file and setting the
-requested `output_formats` to `*` (the wildcard character):
-
-And change his line:
-
-```
-*                        ## [27] [output_formats]: Output formats (see docs)
-```
-
-After this we must now re-run step 7, but this time including the `-f` flag,
-to force overwriting the output files that were previously generated. More
-information about all supported output formats can be found in the [ipyrad docs](https://ipyrad.readthedocs.io/en/latest/6-params.html#output-formats).
-
-```bash
-$ ipyrad -p params-peddrad.txt -s 7 -c 16 -f
-```
-
-Congratulations! You've completed your first RAD-Seq assembly. Now you can try
+**Congratulations!** You've completed your first RAD-Seq assembly. Now you can try
 applying what you've learned to assemble your own real data. Please consult the
 [ipyrad online documentation](http://ipyrad.readthedocs.io) for details about
 many of the more powerful features of ipyrad, including reference sequence
