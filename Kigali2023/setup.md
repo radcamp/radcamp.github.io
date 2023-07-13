@@ -60,6 +60,17 @@ unnecessary)
 * This should present you with a Jupyter notebook environment running inside the VM with all necessary packages installed (for the ipyrad/RADcamp part of the workshop)
 ![Jupyter Notebook Landing Page](images/VBox-JupyterNotebookLanding.png)
 
+We will be running through the quality control and assembly of the cheetah data using the ipyrad
+CLI, so in your Jupyter notebook environment, create a **new "Terminal"**
+using the "New" button.
+
+![png](images/ipyrad-NewTerminal.png)
+
+Which, after you open it will look like this:
+![png](images/ipyrad-CleanTerminal.png)
+
+Now, we're ready to look at the data and start the analyses!
+
 **Command Line Access to the VBox image:** If you want to actually log into
 the VM the username/password are:
 ```
