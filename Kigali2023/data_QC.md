@@ -1,5 +1,3 @@
-
-
 # Empirical data & Quality Control (QC)
 
 ## Command line interface (CLI) basics
@@ -25,7 +23,7 @@ miniconda src subset-R1-raws.tgz
 `mkdir` stands for **"make directory"**, and unlike the other two commands, this command takes an "argument". This argument is the name of the directory you wish to create, so here we direct mkdir to create a new directory called "ipyrad-workshop". Now you can use `ls` again, to look at the contents of your home directory and you should see this new directory now:
 
 ```
-$ ls
+(ipyrad) osboxes@osboxes:~$ ls
 ipyrad-workshop miniconda src subset-R1-raws.tgz
 ```
 
@@ -34,7 +32,7 @@ Throughout the workshop we will be introducing new commands as the need for them
 > **Special Note:** Notice that the above directory we are making is not called `ipyrad workshop`. This is **very important**, as spaces in directory names are known to cause havoc on HPC systems. All linux based operating systems do not recognize file or directory names that include spaces because spaces act as default delimiters between arguments to commands. There are ways around this (for example Mac OS has half-baked "spaces in file names" support) but it will be so much for the better to get in the habit now of ***never including spaces in file or directory names***.
 
 ## Exploring the cheetah data
-We will be reanalysing RAD-Seq data from cheetahs (*Acinonyx jubatus*) sampled from across their distribution in Africa and Iran and published in [Prost *et al.* 2022](https://onlinelibrary.wiley.com/doi/10.1111/mec.16577). This study uses various datatypes, including mitochondrial data, MHC data, minisatellites and RADseq data. For this workshop, we will focus only on the RADseq data, which consists of 55 individuals from 6 populations. The data were generated using a double-digest restriction-site associated DNA (ddRAD) sequencing approach [Peterson *et al.*, 2012](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0037135). Note that raw reads have been randomly downsampled to 500,000 reads per sample, in order to create a dataset that will be computationally tractable with the expectation of finishing in a reasonable time. 
+We will be reanalysing RAD-Seq data from cheetahs (*Acinonyx jubatus*) sampled from across their distribution in Africa and Iran and published in [Prost *et al.* 2022](https://onlinelibrary.wiley.com/doi/10.1111/mec.16577). This study used various datatypes, including whole genome sequencing (WGS), mitochondrial data, MHC data, minisatellites and RADseq data. For this workshop, we will focus only on the RADseq data, which consists of 52 individuals from 6 populations, and one outgroup (puma; *Puma concolor*). The data were generated using a double-digest restriction-site associated DNA (ddRAD) sequencing approach [Peterson *et al.*, 2012](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0037135). Note that raw reads have been randomly downsampled to 500,000 reads per sample, in order to create a dataset that will be computationally tractable with the expectation of finishing in a reasonable time. 
 
 You've already seen where the subset of raw data is located when you did `ls` earlier. Now, let's **move** them into the ipyrad-workshop folder you've just created, using the command `mv`. 
 ```
@@ -56,122 +54,76 @@ Finally, you'll notice the raw data is in `.tgz` format, which is similar to a z
 
 Now use `ls` to list the contents of your current directory. You'll see that there is a new directory, called subset-R1-raws, for which you can list the contents as well:
 ```
-$ ls
+(ipyrad) osboxes@osboxes:~$ ls
 subset-R1-raws subset-R1-raws.tgz
 ```
 ```
-$ ls subset-R1-raws/
+(ipyrad) osboxes@osboxes:~$ ls subset-R1-raws/
 ```
 ![png](images/ls_raws.png)
 
 ## FastQC for quality control
 The first step of any RAD-Seq assembly is to inspect your raw data to estimate overall quality. At this stage you can then attempt to improve your dataset by identifying and removing samples with failed sequencing. Another key QC procedure involves inspecting average quality scores per base position and trimming read edges, which is where low quality base-calls tend to accumulate. In this figure, the X-axis shows the position on the read in base-pairs and the Y-axis depicts information about [Phred quality score](https://en.wikipedia.org/wiki/Phred_quality_score) per base for all reads, including median (center red line), IQR (yellow box), and 10%-90% (whiskers). As an example, here is a very clean base sequence quality report for a 75bp RAD-Seq library. These reads have generally high quality across their entire length, with only a slight (barely worth mentioning) dip toward the end of the reads:
 
-![png](01_cluster_basics_files/fastqc-high-quality-example.png)
+![png](images/fastqc-high-quality-example.png)
 
-In contrast, here is a somewhat typical base sequence quality report for R1 of a 300bp paired-end Illumina run of ezrad data:
+In contrast, here is a somewhat typical base sequence quality report for R1 of a 300bp paired-end Illumina run of another RADseq dataset:
 
-![png](01_cluster_basics_files/fastqc-quality-example.png)
+![png](images/fastqc-quality-example.png)
 
-This figure depicts a common artifact of current Illumina chemistry, whereby quality scores per base drop off precipitously toward the ends of reads, with the effect being magnified for read lengths > 150bp. The purpose of using FastQC to examine reads is to determine whether and how much to trim our reads to reduce sequencing error interfering with basecalling. In the above figure, as in most real dataset, we can see there is a tradeoff between throwing out data to increase overall quality by trimming for shorter length, and retaining data to increase value obtained from sequencing with the result of increasing noise toward the ends of reads.
+This figure depicts a common artifact of current Illumina chemistry, whereby quality scores per base drop off precipitously toward the ends of reads, with the effect being magnified for read lengths >150bp. The purpose of using FastQC to examine reads is to determine whether and how much to trim our reads to reduce sequencing error interfering with basecalling. In the above figure, as in most real dataset, we can see there is a tradeoff between throwing out data to increase overall quality by trimming for shorter length, and retaining data to increase value obtained from sequencing with the result of increasing noise toward the ends of reads.
 
-### Running FastQC on the Anolis data
+### Running FastQC on the cheetah data
 In preparation for running FastQC on our raw data we need to make an output directory to keep the FastQC results organized:
 
 ```
-$ cd ~/ipyrad-workshop
-$ mkdir fastqc-results
+(ipyrad) osboxes@osboxes:~/ipyrad-workshop$ mkdir fastqc-results
 ```
 Now run fastqc on one of the samples:
 ```
-$ fastqc -o fastqc-results raws/punc_IBSPCRIB0361_R1_.fastq.gz
+(ipyrad) osboxes@osboxes:~/ipyrad-workshop$ fastqc -o fastqc-results subset-R1-raws/SRR19760910_R1_.fastq.gz
 ```
-> **Note:** The `-o` flag tells fastqc where to write output files. **Especially Notice** the *relative path* to the raw file. The difference between *relative* and *absolute* paths is an important one to learn. Relative paths are specified with respect to the current working directory. Since I am in `/home/isaac/ipyrad-workshop`, and this is the directory the `raws` directory is in, I can simply reference it directly. If I was in any other directory I could specify the *absolute path* to the target fastq.gz file which would be `/home/isaac/ipyrad-workshop/raws/punc_IBSPCRIB0361_R1_.fastq.gz`. Absolute paths are always more precise, but also always (often _much_) longer.
+> **Note:** The `-o` flag tells fastqc where to write output files. **Especially Notice** the *relative path* to the raw file. The difference between *relative* and *absolute* paths is an important one to learn. Relative paths are specified with respect to the current working directory. Since I am in `/home/ipyrad-workshop`, and this is the directory the `subset-R1-raws` directory is in, I can simply reference it directly. If I was in any other directory I could specify the *absolute path* to the target fastq.gz file which would be `/home/ipyrad-workshop/subset-R1-raws/SRR19760910_R1_.fastq.gz`. Absolute paths are always more precise, but also always (often _much_) longer.
 
 FastQC will indicate its progress in the terminal. This toy data will run quite quickly, but real data can take somewhat longer to analyse (10s of minutes).
-```
-Started analysis of punc_IBSPCRIB0361_R1_.fastq.gz
-Approx 5% complete for punc_IBSPCRIB0361_R1_.fastq.gz
-Approx 10% complete for punc_IBSPCRIB0361_R1_.fastq.gz
-Approx 15% complete for punc_IBSPCRIB0361_R1_.fastq.gz
-Approx 20% complete for punc_IBSPCRIB0361_R1_.fastq.gz
-Approx 25% complete for punc_IBSPCRIB0361_R1_.fastq.gz
-Approx 30% complete for punc_IBSPCRIB0361_R1_.fastq.gz
-Approx 35% complete for punc_IBSPCRIB0361_R1_.fastq.gz
-Approx 40% complete for punc_IBSPCRIB0361_R1_.fastq.gz
-Approx 45% complete for punc_IBSPCRIB0361_R1_.fastq.gz
-Approx 50% complete for punc_IBSPCRIB0361_R1_.fastq.gz
-Approx 55% complete for punc_IBSPCRIB0361_R1_.fastq.gz
-Approx 60% complete for punc_IBSPCRIB0361_R1_.fastq.gz
-Approx 65% complete for punc_IBSPCRIB0361_R1_.fastq.gz
-Approx 70% complete for punc_IBSPCRIB0361_R1_.fastq.gz
-Approx 75% complete for punc_IBSPCRIB0361_R1_.fastq.gz
-Approx 80% complete for punc_IBSPCRIB0361_R1_.fastq.gz
-Approx 85% complete for punc_IBSPCRIB0361_R1_.fastq.gz
-Approx 90% complete for punc_IBSPCRIB0361_R1_.fastq.gz
-Approx 95% complete for punc_IBSPCRIB0361_R1_.fastq.gz
-Approx 100% complete for punc_IBSPCRIB0361_R1_.fastq.gz
-Analysis complete for punc_IBSPCRIB0361_R1_.fastq.gz
-```
+
+![png](images/fastqc-run.png)
+
 If you feel so inclined you can QC all the raw data using a wildcard substitution:
 ```
-$ fastqc -o fastqc-results raws/*
+(ipyrad) osboxes@osboxes:~/ipyrad-workshop$ fastqc -o fastqc-results subset-R1-raws/*
 ```
-> **Note:** The `*` here is a special command line character that means "Everything that matches this pattern". So here `raws/*` matches _everything_ in the raws directory. Equivalent (though more verbose) statements are: `ls raws/*.gz`, `ls raws/*.fastq.gz`, `ls raws/*_R1_.fastq.gz`. All of these will list all the files in the `raws` directory. **Special Challenge:** Can you construct an `ls` command using wildcards that only lists samples in the `raws` directory that include the digit 5 in their sample name?
+> **Note:** The `*` here is a special command line character that means "Everything that matches this pattern". So here `subset-R1-raws/*` matches _everything_ in the raws directory. Equivalent (though more verbose) statements are: `ls subset-R1-raws/*.gz`, `ls subset-R1-raws/*.fastq.gz`, `ls subset-R1-raws/*_R1_.fastq.gz`. All of these will list all the files in the `raws` directory. **Special Challenge:** Can you construct an `ls` command using wildcards that only lists samples in the `subset-R1-raws` directory that include the digit 5 in their sample name?
 
-Examining the output directory you'll see something like this:
-```
-$ ls fastqc-results/
-punc_IBSPCRIB0361_R1__fastqc.html  punc_JFT773_R1__fastqc.html    punc_MTR17744_R1__fastqc.html  punc_MTR34414_R1__fastqc.html  punc_MTRX1478_R1__fastqc.html
-punc_IBSPCRIB0361_R1__fastqc.zip   punc_JFT773_R1__fastqc.zip     punc_MTR17744_R1__fastqc.zip   punc_MTR34414_R1__fastqc.zip   punc_MTRX1478_R1__fastqc.zip
-punc_ICST764_R1__fastqc.html       punc_MTR05978_R1__fastqc.html  punc_MTR21545_R1__fastqc.html  punc_MTRX1468_R1__fastqc.html  punc_MUFAL9635_R1__fastqc.html
-punc_ICST764_R1__fastqc.zip        punc_MTR05978_R1__fastqc.zip   punc_MTR21545_R1__fastqc.zip   punc_MTRX1468_R1__fastqc.zip   punc_MUFAL9635_R1__fastqc.zip
-```
+Examining the output directory you'll see something like this (assuming that you ran FastQC on all files):
 
-Now we have output files that include html and images depicting lots of information about the quality of our reads, but we can't inspect these because we only have a CLI interface on the cluster. How do we get access to the output of FastQC?
+![png](images/fastqc-folder.png)
 
-### Obtaining FastQC Output (sftp)
+Now we have output files that include html and images depicting lots of information about the quality of our reads, but we can't inspect these from inside our little black window. But we can go back to the Notebook server, and navigate to the results by first clicking on `ipyrad-workshop` and then `fastqc-results`. Open one of the html files by double clicking on them.
 
-Moving files between the cluster and your local computer is a very common task, and this will typically be accomplished with a secure file transfer protocol (**sftp**) client. Various Free/Open Source GUI tools exist but we recommend [WinSCP](https://winscp.net/eng/download.php) for Windows and [Fugu](https://faq.oit.gatech.edu/content/how-do-i-install-fugu-mac) for MacOS. 
-
-**Windows:**
-After downloading, installing, and opening WinSCP, you will see the following screen. First, ensure that the "File Protocol is set to "SFTP". **The connection will fail if "SFTP" is not chosen her.** Next, fill out the host name (`lem.ib.usp.br`), your username and password, and click "Login". 
-![png](01_cluster_basics_files/01_WinSCP1.png)
-Two windows file browsers will appear: your laptop on the left, and the cluster on the right. You can navigate through the folders and transfer files from the cluster to your laptop by dragging and dropping them. 
-![png](01_cluster_basics_files/01_WinSCP2.png)
-
-**Mac/Linux:**
-After downloading, installing and opening Fugu, you will see the following screen:
-![png](01_cluster_basics_files/01_Fugu1.png)
-
-Fill out the host name (`lem.ib.usp.br`) in the window "Connect to", and your username below. Click "Connect".
-![png](01_cluster_basics_files/01_Fugu2.png)
-Two windows file browsers will appear: your laptop on the left, and the cluster on the right. You can navigate through the folders and transfer files from the cluster to your laptop by dragging and dropping them. 
+![png](images/notebook-fastqc.png)
 
 ### Instpecting and Interpreting FastQC Output
 
-Just taking a random one, lets spend a moment looking at the results from `punc_JFT773_R1__fastqc.html`. Opening up this html file, on the left you'll see a summary of all the results, which highlights areas FastQC indicates may be worth further examination. We will only look at a few of these.
+Just taking a random one, lets spend a moment looking at the results from `SRR19760910_R1__fastqc.html`. Opening up this html file, on the left you'll see a summary of all the results, which highlights areas FastQC indicates may be worth further examination. We will only look at a few of these.
 
-![png](01_cluster_basics_files/anolis-fastq-main.png)
+![png](images/fastqc-summary.png)
 
 Lets start with Per base sequence quality, because it's very easy to interpret, and often times with RAD-Seq data results here will be of special importance.
 
-![png](01_cluster_basics_files/anolis-per-base-qual.png)
+![png](images/fastqc-perbasequal.png)
 
-For the Anolis data the sequence quality per base is uniformly quite high, with dips only in the first and last 5 bases (again, this is typical for Illumina reads). Based on information from this plot we can see that the Anolis data doesn't need a whole lot of trimming, which is good.
+For the cheetah data the sequence quality per base is uniformly quite high, with minor dips only in the first and last few bases (again, this is typical for Illumina reads). Based on information from this plot we can see that the cheetah data doesn't need trimming, which is good.
 
 Now lets look at the `Per base sequece content`, which FastQC highlights with a scary red **X**.
-![png](01_cluster_basics_files/anolis-base-content.png)
+![png](images/fastqc-perbasecontent.png)
 
-The squiggles indicate base composition per base position averaged across the reads. It looks like the signal FastQC is concerned about here is related to the *extreme* base composition bias of the first 5 positions. We happen to know this is a result of the restriction enzyme overhang present in all reads (`TGCAT` in this case for the EcoT22I enzyme used), and so it is in fact of no concern. Now lets look at `Adapter Content`:
+The squiggles indicate base composition per base position averaged across the reads. It looks like the signal FastQC is concerned about here is related to the *extreme* base composition bias of the first 5 positions. We happen to know this is a result of the restriction enzyme overhang present in all reads (`CATGC` in this case for the SphI enzyme used), and so it is in fact of no concern. 
 
-![png](01_cluster_basics_files/anolis-adapters.png)
-
-Here we can see adapter contamination increases toward the tail of the reads, approaching 40% of total read content at the very end. The concern here is that if adapters represent some significant fraction of the read pool, then they will be treated as "real" data, and potentially bias downstream analysis. In the Anolis data this looks like it might be a real concern so we shall keep this in mind during step 2 of the ipyrad analysis, and incorporate 3' read trimming and aggressive adapter filtering.
-
-Other than this, the data look good and we can proceed with the ipyrad analysis.
+All in all, the data look good and we can proceed with the ipyrad analysis.
 
 # References
-Elshire, R. J., Glaubitz, J. C., Sun, Q., Poland, J. A., Kawamoto, K., Buckler, E. S., & Mitchell, S. E. (2011). A robust, simple genotyping-by-sequencing (GBS) approach for high diversity species. PloS one, 6(5), e19379.
+Prost, Stefan, Ana Paula Machado, Julia Zumbroich, Lisa Preier, Sarita Mahtani-Williams, Rene Meissner, Katerina Guschanski, et al. 2022. Genomic Analyses Show Extremely Perilous Conservation Status of African and Asiatic Cheetahs (Acinonyx Jubatus). Molecular Ecology 31 (16): 4208–23.
 
-Prates, I., Xue, A. T., Brown, J. L., Alvarado-Serrano, D. F., Rodrigues, M. T., Hickerson, M. J., & Carnaval, A. C. (2016). Inferring responses to climate dynamics from historical demography in neotropical forest lizards. Proceedings of the National Academy of Sciences, 113(29), 7978-7985.
+Peterson, Brant K., Jesse N. Weber, Emily H. Kay, Heidi S. Fisher, and Hopi E. Hoekstra. 2012. Double Digest RADseq: An Inexpensive Method for de Novo SNP Discovery and Genotyping in Model and Non-Model Species. PloS One 7 (5): e37135.
+
