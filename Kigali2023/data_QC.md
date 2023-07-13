@@ -1,175 +1,68 @@
 
 
-# Cluster Basics and Housekeeping
-The bulk of the activities this morning involve getting oriented on the cluster and getting programs and resources set up for the actual assembly and analysis. We make no assumptions about prior experience with cluster environments, so we scaffold the entire participant workshop experience from first principles. More advanced users hopefully will find value in some of the finer details we present.
-
-* [Connecting to the cluster](#ssh-intro): [Windows](#ssh-for-windows)/[Mac/Linux](#ssh-for-mac)
-* [Basic command line navigation](#command-line-basics)
-* [Setting up the computing environment](#download-and-install-software)
-* [Fetching the data](#fetch-the-raw-data)
-* [Basic quality control (FastQC)](#fastqc-for-quality-control)
-* [Viewing and interpreting FAstQC results](#inspecting-fastqc-utput)
-
-## Tutorial documentation conventions
-Each grey cell in this tutorial indicates a command line interaction. Lines starting with $ indicate a command that should be executed in a terminal, for example by copying and pasting the text into your terminal. All lines in code cells beginning with ## are comments and should not be copied and executed. Elements in code cells surrounded by angle brackets (e.g. `<username>`) are variables that need to be replaced by the user. All other lines should be interpreted as output from the issued commands.
-
-```
-## Example Code Cell.
-## Create an empty file in my home directory called `watdo.txt`
-$ touch ~/watdo.txt
-
-## Print "wat" to the screen
-$ echo "wat"
-wat
-```
-
-## USP Zoology HPC Facility Info
-Computational resources for the duration of this workshop have been generously provided by the Zoology HPC facility, with special thanks to Diogo Melo for technical support and Roberta Damasceno for coordinating access. The cluster we will be using is located at `lem.ib.usp.br`. Further details about cluster resources and available queues can be found on the [USP Cluster Info](USP_Cluster_Info.md) page.
-
-## SSH Intro
-Unlike laptop or desktop computers, cluster systems typically (almost exclusively) do not have graphical user input interfaces. Interacting with an HPC system therefore requires use of the command line to establish a connection, and for running programs and submitting jobs remotely on the cluster.
-
-### SSH for windows
-Windows computers need to use a 3rd party app for connecting to remote computers. The best app for this in my experience is [puTTY](https://www.putty.org/), a free SSH client. Right click and "Save link as" on the [64-bit binary executable link](https://the.earth.li/~sgtatham/putty/latest/w64/putty.exe). 
-
-After installing puTTY, open it and you will see a box where you can enter the "Host Name (or IP Address)" of the computer you want to connect to (the 'host'). To connect to the USP cluster, enter: `lem.ib.usp.br`. The default "Connection Type" should be "SSH", and the default "Port" should be "22". It's good to verify these values. Leave everything else as defualt and click "Open".
-
-![png](01_cluster_basics_files/01_puTTY.png)
-
-### SSH for mac/linux
-Linux operating systems come preinstalled with an ssh command line client, which we will assume linux users are aware of how to use. Mac computers are built top of a linux-like operating system so they too ship with an SSH client, which can be accessed through the Terminal app. In a Finder window open Applications->Utilities->Terminal, then you can start an ssh session like this:
-
-```
-$ ssh <username>@lem.ib.usp.br
-```
-
-> **Note on usage:** In command line commands we'll use the convention of wrapping variable names in angle-brackets. For example, in the command above you should substitute your own username for `<username>`.
-
-### **Change your password**
-The USP cluster admin assigned passwords which you should all have received. Now that you are logged in for the first time on ssh you can change this password to something easier to remember. The command to change your login password on linux is `passwd` and it looks like this:
-
-```
-$ passwd
-Changing password for isaac.
-(current) UNIX password: 
-Enter new UNIX password: 
-Retype new UNIX password: 
-passwd: password updated successfully
-```
-> **Note:** During the password changing process when you type your old and new passwords the characters will not appear on the screen. This is a security "feature", that can sometimes be confusing. Just type your password and believe that the characters are entering correctly. If you type your current password correctly and the new password the same way twice then you'll see the success message as above.
+# Empirical data & Quality Control
 
 ## Command line interface (CLI) basics
 The CLI provides a way to navigate a file system, move files around, and run commands all inside a little black window. The down side of CLI is that you have to learn many at first seemingly esoteric commands for doing all the things you would normally do with a mouse. However, there are several advantages of CLI: 1) you can use it on servers that don't have a GUI interface (such as HPC clusters); 2) it's scriptable, so you can write programs to execute common tasks or run analyses; 3) it's often faster and more efficient that click-and-drag GUI interfaces. For now we will start with 4 of the most common and useful commands:
 
 ```
-$ pwd
-/home/<username>
+(ipyrad) osboxes@osboxes:~$ pwd
+/home/osboxes
 ```
 `pwd` stands for **"print working directory"**, which literally means "where am I now in this filesystem". Just like when you open a file browser with windows or mac, when you open a new terminal the command line will start you out in your "home" directory. Ok, now we know where we are, lets take a look at what's in this directory:
 
 ```
+(ipyrad) osboxes@osboxes:~$ ls
+miniconda src subset-R1-raws.tgz
+```
+
+`ls` stands for **"list"** and in our home directory there is are two folders with related to the software we'll be using in the course, and the cheetah data we'll be looking at, called subset-R1-raws.tgz. Throughout the workshop we will be adding files and directories and by the time we're done, not only will you have a bunch of experience with RAD-Seq analysis, but you'll also have a ***ton*** of stuff in your home directory. We can start out by adding the first directory for this workshop:
+
+```
+(ipyrad) osboxes@osboxes:~$ mkdir ipyrad-workshop
+```
+
+`mkdir` stands for **"make directory"**, and unlike the other two commands, this command takes an "argument". This argument is the name of the directory you wish to create, so here we direct mkdir to create a new directory called "ipyrad-workshop". Now you can use `ls` again, to look at the contents of your home directory and you should see this new directory now:
+
+```
 $ ls
-
-```
-
-`ls` stands for **"list"** and in our home directory there is **not much, it appears!** In fact right now there is nothing. This is okay, because you just got a brand new account, so you won't expect to have anything there. Throughout the workshop we will be adding files and directories and by the time we're done, not only will you have a bunch of experience with RAD-Seq analysis, but you'll also have a ***ton*** of stuff in your home directory. We can start out by adding the first directory for this workshop:
-
-```
-$ mkdir ipyrad-workshop
-```
-
-`mkdir` stands for **"make directory"**, and unlike the other two commands, this command takes one "argument". This argument is the name of the directory you wish to create, so here we direct mkdir to create a new directory called "ipyrad-workshop". Now you can use `ls` again, to look at the contents of your home directory and you should see this new directory now:
-
-```
-$ ls
-ipyrad-workshop
+ipyrad-workshop miniconda src subset-R1-raws.tgz
 ```
 
 Throughout the workshop we will be introducing new commands as the need for them arises. We will pay special attention to highlighting and explaining new commands and giving examples to practice with. 
 
 > **Special Note:** Notice that the above directory we are making is not called `ipyrad workshop`. This is **very important**, as spaces in directory names are known to cause havoc on HPC systems. All linux based operating systems do not recognize file or directory names that include spaces because spaces act as default delimiters between arguments to commands. There are ways around this (for example Mac OS has half-baked "spaces in file names" support) but it will be so much for the better to get in the habit now of ***never including spaces in file or directory names***.
 
-## Download and Install Software
-### Install conda
-[Conda](https://conda.io/docs/) is a command line software installation tool based on python. It will allow us to install and run various useful applications inside our home directory that we would otherwise have to hassle the HPC admins to install for us. Conda provides an isolated environment for each user, allowing us all to manage our own independent suites of applications, based on our own computing needs.
+## Exploring the cheetah data
+We will be reanalysing RAD-Seq data from cheetahs (*Acinonyx jubatus*) sampled from across their distribution in Africa and Iran and published in [Prost *et al.* 2022](https://onlinelibrary.wiley.com/doi/10.1111/mec.16577). This study uses various datatypes, including mitochondrial data, MHC data, minisatellites and RADseq data. For this workshop, we will focus only on the RADseq data, which consists of 55 individuals from 6 populations. The data were generated using a double-digest restriction-site associated DNA (ddRAD) sequencing approach [Peterson *et al.*, 2012](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0037135). Note that raw reads have been randomly downsampled to 500,000 reads per sample, in order to create a dataset that will be computationally tractable with the expectation of finishing in a reasonable time. 
 
-64-Bit Python2.7 conda installer for linux is here: [https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh](https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh), so copy and paste this link into the commands as below:
+You've already seen where the subset of raw data is located when you did `ls` earlier. Now, let's **move** them into the ipyrad-workshop folder you've just created, using the command `mv`. 
+```
+(ipyrad) osboxes@osboxes:~$ mv subset-R1-raws.tgz ipyrad-workshop
+```
 
+If you do `ls` now, you'll see that the subset-R1-raws.tgz file is no longer there, since you've just moved it somewhere else. Let's take a look in your ipyrad-workshop folder, by navigating there first using `cd` and then listing everything in that folder.
 ```
-$ wget https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh
+(ipyrad) osboxes@osboxes:~$ cd ipyrad-workshop
+(ipyrad) osboxes@osboxes:~/ipyrad-workshop$ ls
+subset-R1-raws.tgz
 ```
-> **Note:** `wget` is a command line utility for fetching content from the internet. You use it when you want to **get** stuff from the **w**eb, so that's why it's called `wget`.
-
-After the download finishes you can execute the conda installer using `bash`. `bash` is the name of the terminal program that runs on the cluster, and `.sh` files are scripts that bash knows how to run: 
-
-```
-$ bash Miniconda2-latest-Linux-x86_64.sh
-```
-Accept the license terms, and use the default conda directory (mine is `/home/isaac/miniconda2`). After the install completes it will ask about modifying your PATH, and you should say 'yes' for this. Next run the following two commands:
-
-```
-$ source .bashrc
-$ which python
-/home/<username>/miniconda2/bin/python
-```
-The `source` command tells the server to recognize the conda install (you only ever have to do this once, so don't worry too much about remembering it). The `which` command will show you the path to the python binary, which will now be in your personal minconda directory:
-
-### Install ipyrad and fastqc
-Conda gives us access to an amazing array of all kinds of analysis tools for both analyzing and manipulating all kinds of data. Here we'll just scratch the surface by installing [ipyrad](http://ipyrad.readthedocs.io/), the RAD-Seq assembly and analysis tool that we'll use throughout the workshop, [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/), an application for filtering fasta files based on several quality control metrics. As long as we're installing conda packages we'll include [toytree](https://toytree.readthedocs.io/en/latest/) as well, which is a plotting library used by the ipyrad analysis toolkit.
-
-```
-$ conda install -c ipyrad -c bioconda ipyrad toytree fastqc
-```
-> **Note:** The `-c` flag indicates that we're asking conda to fetch apps from the `ipyrad`, `bioconda`, and `eaton-lab` channels. Channels are seperate repositories of apps maintained by independent developers.
-
-After you type `y` to proceed with install, these commands will produce a lot of output that looks like this:
-```
-libxml2-2.9.8        |  2.0 MB | ################################################################################################################################# | 100%
-expat-2.2.5          |  186 KB | ################################################################################################################################# | 100% 
-singledispatch-3.4.0 |   15 KB | ################################################################################################################################# | 100%
-pandocfilters-1.4.2  |   12 KB | ################################################################################################################################# | 100% 
-pandoc-2.2.1         | 21.0 MB | ################################################################################################################################# | 100%
-mistune-0.8.3        |  266 KB | ################################################################################################################################# | 100% 
-send2trash-1.5.0     |   16 KB | ################################################################################################################################# | 100%
-gstreamer-1.14.0     |  3.8 MB | ################################################################################################################################# | 100% 
-qt-5.9.6             | 86.7 MB | ################################################################################################################################# | 100%
-freetype-2.9.1       |  821 KB | ################################################################################################################################# | 100% 
-wcwidth-0.1.7        |   25 KB | ################################################################################################################################# | 100%
-```
-These (and many more) are all the dependencies of ipyrad and fastqc. Dependencies can include libraries, frameworks, and/or other applications that we make use of in the architecture of our software. Conda knows all about which dependencies will be needed and installs them automatically for you. Once the process is complete (may take several minutes), you can verify the install by asking what version of each of these apps is now available for you on the cluster.
-
-```
-$ ipyrad --version
-ipyrad 0.7.28
-$ fastqc --version
-FastQC v0.11.7
-```
-## Fetch the raw data
-We will be reanalysing RAD-Seq data from *Anolis punctatus* sampled from across their distribution on the South American continent and published in [Prates *et al.* 2016](http://www.pnas.org/content/pnas/113/29/7978.full.pdf). The original dataset included 43 individuals of *A. punctatus*, utilized the Genotyping-By-Sequencing (GBS) single-enzyme library prep protocol [Ellshire *et al.* 2011](http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0019379), sequenced 100bp single-end reads on an Illumina Hi-Seq and resulted in final raw sequence counts on the order of 1e6 per sample.
-
-We will be using a subset of 10 individuals distributed along the coastal extent of the central and northern Atlantic forest. Additionally, raw reads have been randomly downsampled to 2.5e5 per sample, in order to create a dataset that will be computationally tractable for 20 people to run simultaneously with the expectation of finishing in a reasonable time.
-
-The subset of truncated raw data is located in a special folder on the HPC system. You can *change directory* into your ipyrad working directory, and then copy the raw data with these commands:
-```
-$ cd ipyrad-workshop
-$ cp /scratch/af-biota/raw_data/a_punctatus.tgz .
-```
-> **Note:** The form of the copy command is `copy <source> <destination>`. Here the source file is clear, it's simply the data file you want to copy. The destination is `.`, which is another linux shortcut that means "My current directory", or "Right here in the directory I'm in".
 
 Finally, you'll notice the raw data is in `.tgz` format, which is similar to a zip archive. We can unpack our raw data in the current directory using the `tar` command:
 ```
-$ tar -xvzf a_punctatus.tgz
+(ipyrad) osboxes@osboxes:~/ipyrad-workshop$ tar -xvzf subset-R1-raws.tgz
 ```
 > **Point of interest:** All linux commands, such as `tar`, can have their behavior modified by passing various arguments. Here the arguments are `-x` to "Extract" the archive file; `-v` to add "verbosity" by printing progress to the screen; `z` to "unzip" the archive during extraction; and `-f` to "force" the extraction which prevents `tar` from pestering you with decisions.
 
-Now use `ls` to list the contents of your current directory, and also to list the contents of the newly created `raws` directory:
+Now use `ls` to list the contents of your current directory. You'll see that there is a new directory, called subset-R1-raws, for which you can list the contents as well:
 ```
 $ ls
-a_punctatus.tgz  raws
-$ ls raws/
-punc_IBSPCRIB0361_R1_.fastq.gz  punc_JFT773_R1_.fastq.gz    punc_MTR17744_R1_.fastq.gz  punc_MTR34414_R1_.fastq.gz  punc_MTRX1478_R1_.fastq.gz
-punc_ICST764_R1_.fastq.gz       punc_MTR05978_R1_.fastq.gz  punc_MTR21545_R1_.fastq.gz  punc_MTRX1468_R1_.fastq.gz  punc_MUFAL9635_R1_.fastq.gz
+subset-R1-raws subset-R1-raws.tgz
 ```
+```
+$ ls subset-R1-raws/
+```
+![png](ls_raws.png)
 
 ## FastQC for quality control
 The first step of any RAD-Seq assembly is to inspect your raw data to estimate overall quality. At this stage you can then attempt to improve your dataset by identifying and removing samples with failed sequencing. Another key QC procedure involves inspecting average quality scores per base position and trimming read edges, which is where low quality base-calls tend to accumulate. In this figure, the X-axis shows the position on the read in base-pairs and the Y-axis depicts information about [Phred quality score](https://en.wikipedia.org/wiki/Phred_quality_score) per base for all reads, including median (center red line), IQR (yellow box), and 10%-90% (whiskers). As an example, here is a very clean base sequence quality report for a 75bp RAD-Seq library. These reads have generally high quality across their entire length, with only a slight (barely worth mentioning) dip toward the end of the reads:
