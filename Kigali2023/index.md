@@ -45,7 +45,7 @@ Times       | Saturday (July 22) | Sunday (July 23) |
 8:30-9:00   | Check-in and Introductions | Check-in and Recap Day 1 |
 9:00-10:30  | Intro to Conservation Genetics | [Phylogenetic Inference: RAxML](RAxML_API.md) |
 10:30-10:45 | Coffee Break | Coffee Break |
-10:45-12:00 | [Software Setup](setup.md) & [RADSeq Assembly w/ ipyrad part I](ipyrad-CLI-FullTutorial.md) | Small Group Work: RAxML analysis w/ Cheetah Data |
+10:45-12:00 | [Software Setup](setup.md) & [Data QC](data_QC.md) & [RADSeq Assembly w/ ipyrad part I](ipyrad-CLI-FullTutorial.md) | Small Group Work: RAxML analysis w/ Cheetah Data |
 12:00-13:00 | Lunch | Lunch |
 13:00-14:45 | [RADSeq Assembly w/ ipyrad part II](ipyrad-CLI-FullTutorial.md) | Spatial Popgen Analysis: EEMS |
 14:45-15:00 | Coffee Break | Coffee Break |
