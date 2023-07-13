@@ -35,6 +35,8 @@ The basic steps of this process are as follows:
 * Step 6 - Cluster across Samples
 * Step 7 - Apply filters and write output formats
 
+Detailed information about ipyrad, including instructions for installation and troubleshooting, can be found [here](https://ipyrad.readthedocs.io/en/master/).
+
 > **Note on files in the project directory:** Assembling RADseq type 
 sequence data requires a lot of different steps, and these steps 
 generate a **lot** of intermediary files. ipyrad organizes these files 
@@ -172,9 +174,10 @@ p, s, l                          ## [27] [output_formats]: Output formats (see d
 In general the defaults are sensible, and we won't mess with them for now, 
 but there are a few parameters we *must* change:
 * The path to the raw data
-* The barcodes file
 * The dataype
 * The restriction overhang sequence(s)
+
+You can also change `[27] [output_formats]`. When you put `*`, ipyrad will automatically save your output in all available formats, see [the manual](https://ipyrad.readthedocs.io/en/master/output_formats.html#full-output-formats).
 
 If you return to the browser tab with your jupyter notebook interface you'll
 now see a new file `params-peddrad.txt` in the file browser.
