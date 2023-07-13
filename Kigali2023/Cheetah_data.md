@@ -147,3 +147,23 @@ ipyrad -p params-cheetah.txt -s234567 -c 40
   [####################] 100% 0:00:36 | aligning clusters      
 ```
 
+## Other EEMS datasets we did not use
+
+Warthog Genomes Resolve an Evolutionary Conundrum and Reveal Introgression of Disease Resistance Genes
+* EEMS Files: https://github.com/GenisGE/warthogscripts/tree/main/analyses/eems
+
+Sky, sea, and forest islands: diversification in the African leaf-folding frog
+Afrixalus paradorsalis (Anura: Hyperoliidae) of the Lower Guineo-Congolian
+rainforest
+* EEMS files: osf.io/5dcy2 
+
+DRYAD: Data from: Vanishing refuge? Testing the forest refuge hypothesis in
+coastal East Africa using genome-wide sequence data for seven amphibians
+
+A southern African origin and cryptic structure in the highly mobile plains zebra
+* Rasmus is anchor
+
+High genetic diversity and low differentiation reflect the ecological
+versatility of the African leopard
+* Not sure if the files are available, but they have eems for lots of african animals
+
