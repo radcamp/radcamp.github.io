@@ -60,6 +60,59 @@ CATGC,AGCTT       ## [8] [restriction_overhang]: Restriction ovehang (cut1,) or 
 
 ## ipyrad assembly
 
+### Inside a 4 core vm with the subset R1 data
+
+```
+
+ -------------------------------------------------------------
+  ipyrad [v.0.9.92]
+  Interactive assembly and analysis of RAD-seq data
+ -------------------------------------------------------------
+  Parallel connection | osboxes: 4 cores
+
+  Step 1: Loading sorted fastq data to Samples
+  [####################] 100% 0:00:05 | loading reads
+  53 fastq files loaded to 53 Samples.
+
+  Step 2: Filtering and trimming reads
+  [####################] 100% 0:01:08 | processing reads
+
+  Step 3: Clustering/Mapping reads within samples
+  [####################] 100% 0:00:10 | dereplicating
+  [####################] 100% 0:05:41 | clustering/mapping
+  [####################] 100% 0:00:00 | building clusters
+  [####################] 100% 0:00:00 | chunking clusters
+  [####################] 100% 0:11:16 | aligning clusters
+  [####################] 100% 0:00:36 | concat clusters
+  [####################] 100% 0:00:03 | calc cluster stats
+
+  Step 4: Joint estimation of error rate and heterozygosity
+  [####################] 100% 0:01:01 | inferring [H, E]
+
+  Step 5: Consensus base/allele calling
+  Mean error  [0.00165 sd=0.00027]
+  Mean hetero [0.00172 sd=0.00029]
+  [####################] 100% 0:00:02 | calculating depths
+  [####################] 100% 0:00:03 | chunking clusters
+  [####################] 100% 0:05:19 | consens calling
+  [####################] 100% 0:00:12 | indexing alleles
+
+  Step 6: Clustering/Mapping across samples
+  [####################] 100% 0:00:02 | concatenating inputs
+  [####################] 100% 0:00:38 | clustering across
+  [####################] 100% 0:00:02 | building clusters
+  [####################] 100% 0:01:31 | aligning clusters
+
+  Step 7: Filtering and formatting output files
+  [####################] 100% 0:00:10 | applying filters
+  [####################] 100% 0:00:07 | building arrays
+  [####################] 100% 0:00:15 | writing conversions
+  [####################] 100% 0:00:14 | indexing vcf depths
+  [####################] 100% 0:00:06 | writing vcf output
+```
+
+### On a 50 core workstation with the full dataset
+
 ```
 -------------------------------------------------------------
   ipyrad [v.0.9.91]
