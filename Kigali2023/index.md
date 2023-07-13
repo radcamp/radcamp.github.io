@@ -49,7 +49,7 @@ Times       | Saturday (July 22) | Sunday (July 23) |
 12:00-13:00 | Lunch | Lunch |
 13:00-14:45 | [RADSeq Assembly w/ ipyrad part I](ipyrad-CLI-FullTutorial.md) | Spatial Popgen Analysis: EEMS |
 14:45-15:00 | Coffee Break | Coffee Break |
-15:00-17:00 | [RADSeq Assembly w/ ipyrad part II](ipyrad-CLI-FullTutorial.md) | Wrap up & Working on own data |
+15:00-17:00 | [RADSeq Assembly w/ ipyrad part II](ipyrad-CLI-FullTutorial.md) | Wrap-up and Working on own data |
 
 ## Additional ipyrad analysis cookbooks
 
