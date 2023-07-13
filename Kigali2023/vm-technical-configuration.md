@@ -57,7 +57,7 @@ git clone https://github.com/dereneaton/ipyrad.git
 git clone https://github.com/NovembreLab/feems.git
 ```
 
-## Install feems dependencies
+## Install feems dependencies (creates a new conda env 'feems')
 Fetch and install feems deps from here: [Issue #15](https://github.com/NovembreLab/feems/issues/15)
 ```
 wget https://github.com/NovembreLab/feems/files/11152453/feems.txt
@@ -66,6 +66,9 @@ conda activate feems
 
 # Install more feems deps from requirements.txt
 conda install -c conda-forge -c bioconda --file ~/src/feems/requirements.txt
+
+# Install h5py so we can pull the data out of the ipyrad snps.hdf5 file
+conda install -c conda-forge h5py -y
 
 # Install feems in developer mode
 pip install -e ~/src/feems/
