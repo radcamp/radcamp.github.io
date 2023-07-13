@@ -1406,7 +1406,9 @@ missingness in the assembly at both the sequence and the SNP level:
 snps matrix size: (53, 10655), 70.79% missing sites.
 sequence matrix size: (53, 2117428), 73.16% missing sites.
 ```
+
 > **Note on files in the project directory:** Sometimes you want to rerun a step that you've run before, and overwrite the results you already obtained. You can do that by adding the `-f` flag, **forcing** ipyrad to overwrite already existing files. Remember that if you don't want to overwrite existing data, you may want to use [branching](https://ipyrad.readthedocs.io/en/latest/8-branching.html).
+
 
 **Congratulations!** You've completed your first RAD-Seq assembly. Now you can try
 applying what you've learned to assemble your own real data. Please consult the
