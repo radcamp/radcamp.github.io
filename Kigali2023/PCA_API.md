@@ -34,15 +34,12 @@ conda install -c conda-forge scikit-learn
 
 ## Create a new notebook for the PCA
 In the file browser on the left of JupyterLab browse to the directory with the
-assembly of the simulated data: `/scratch/ipyrad-workshop`.
+assembly of the simulated data: `/ipyrad-workshop`.
 
-Open the launcher (the big blue *+* button) and open a new "Python 3" notebook.
+Similar how you've previously opened the Terminal, now open a new "Python 3" notebook by clicking on `New`.
 
 ### Import ipyrad.analysis module
-The `import` keyword directs python to load a module into the currently running
-context. This is very similar to the `library()` function in R. We begin by
-importing the ipyrad analysis module. Copy the code below into a
-notebook cell and click run. 
+For this analysis, we'll use python. The `import` keyword directs python to load a module into the currently running context. This is very similar to the `library()` function in R. We begin by importing the ipyrad analysis module. Copy the code below into a notebook cell and click run. 
 
 ```python
 import ipyrad.analysis as ipa
@@ -52,13 +49,13 @@ import ipyrad.analysis as ipa
 
 ## Quick guide (tl;dr)
 The following cell shows the quickest way to results using the small simulated
-dataset in `/scratch/ipyrad-workshop`. Complete explanation of all of the
+dataset in `/ipyrad-workshop`. Complete explanation of all of the
 features and options of the PCA module is the focus of the rest of this tutorial.
-Copy this code into a new notebook cell (small grey *+* button on the toolbar)
+Copy this code into a new notebook cell (you can add new cells with the *+* button on the toolbar)
 and run it.
 
 ```python
-data = "peddrad_outfiles/peddrad.snps.hdf5"
+data = "cheetah_outfiles/cheetah.snps.hdf5"
 ## Create the pca object
 pca = ipa.pca(data)
 ## Run the analysis
@@ -67,7 +64,7 @@ pca.run()
 pca.draw()
 ```
 
-![png](images/PCA-TLDRExample.png)
+![png](images/cheetah_PCA.png)
 
 > **Note:** In this block of code, the `#` at the beginning of a line indicates
 to python that this is a comment, so it doesn't try to run this line. This is a
@@ -83,11 +80,11 @@ output, remove any obvious outliers, and then redo the PCA.
 
 ```python
 ## Path to the input data in snps.hdf5 format 
-data = "peddrad_outfiles/peddrad.snps.hdf5"
+data = "cheetah_outfiles/cheetah.snps.hdf5"
 pca = ipa.pca(data)
 ```
 > **Note:** Here we use the hdf5 database file with SNPs generated with ipyrad from the
-simulated data. The database file contains the genotype calls information as well
+cheetah data. The database file contains the genotype calls information as well
 as linkage information that is used for subsampling unlinked SNPs and bootstrap resampling.
 
 > **Note:** The `ipyrad.analysis.pca` module can also read in data from
@@ -95,14 +92,13 @@ as linkage information that is used for subsampling unlinked SNPs and bootstrap 
 any dataset.
 
 Now construct the default plot, which shows all samples and PCs 1 and 2.
-By default all samples are assigned to one population, so everything will 
-be the same color.
 
 ```python
-pca.plot()
+pca.run()
+pca.draw()
 ```
 
-![png](images/PCA-TLDRExample.png)
+![png](images/cheetah_PCA.png)
 
 ### Population assignment for sample colors
 Typically it is useful to color points in a PCA by some a priori grouping, such
@@ -116,29 +112,17 @@ and type this:
 ```python
 pca.names
 ```
-```
-['1A_0',
- '1B_0',
- '1C_0',
- '1D_0',
- '2E_0',
- '2F_0',
- '2G_0',
- '2H_0',
- '3I_0',
- '3J_0',
- '3K_0',
- '3L_0']
-```
+This will show you a list of sample names.
 
 Here we create a python 'dictionary', which is a key/value pair data structure.
-The keys are the population names, and the values are the lists of samples that
+The keys are the population names, in our case cheetah subspecies, and the values are the lists of samples that
 belong to those populations. You can copy and paste this into a new cell in your
 notebook.
 ```python
-imap = {"pop1":['1A_0', '1B_0', '1C_0', '1D_0'],
-        "pop2":['2E_0', '2F_0', '2G_0', '2H_0'],
-        "pop3":['3I_0', '3J_0', '3K_0', '3L_0']}
+imap = {"A.j.jubatus":['SRR19760914','SRR19760915','SRR19760916','SRR19760917','SRR19760918','SRR19760920','SRR19760921','SRR19760922','SRR19760923','SRR19760924','SRR19760925','SRR19760926','SRR19760927','SRR19760928','SRR19760929','SRR19760931','SRR19760932','SRR19760933','SRR19760934','SRR19760935','SRR19760936','SRR19760937','SRR19760938','SRR19760939','SRR19760940','SRR19760941','SRR19760942','SRR19760943','SRR19760944','SRR19760945','SRR19760946','SRR19760947','SRR19760948','SRR19760952','SRR19760956'],
+        "A.j.soemmeringii":['SRR19760910','SRR19760911','SRR19760912','SRR19760913','SRR19760919','SRR19760930','SRR19760954','SRR19760955','SRR19760957','SRR19760958','SRR19760959','SRR19760960','SRR19760961','SRR19760962'],
+        "A.j.venaticus":['SRR19760950','SRR19760951','SRR19760953'],
+        "Outgroup":['SRR19760949']}
 ```
 Now create the `pca` object with the input data again, this time passing 
 in the new dictionary as the second argument and specifying this as the `imap`,
@@ -163,8 +147,8 @@ can often be attributed to poor sequence quality or sample misidentifcation.
 Samples with lots of missing data tend to pop way out on their own, causing
 distortion in the signal in the PCs. Normally it's best to evaluate the quality
 of the sample, and if it can be seen to be of poor quality, to remove it and
-replot the PCA. The simulated dataset is actually relatively nice, but for the
-sake of demonstration lets imagine the sample "1D_0" is 'bad'.
+replot the PCA. 
+In our dataset, we don't have bad samples, but we do have an outlier: the outgroup.
 
 > **Note:** We make a lot of use of the interactivity of jupyter notebooks in
 the ipyrad.analysis tools. In the PCA you can 'hover' over points to reveal
