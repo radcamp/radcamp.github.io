@@ -38,6 +38,10 @@ assembly of the simulated data: `/ipyrad-workshop`.
 
 Similar how you've previously opened the Terminal, now open a new "Python 3" notebook by clicking on `New`.
 
+![png](images/raxml-CreateNotebook.png)
+
+First things first, rename your new notebook to give it a meaningful name. Choose `File->Save Notebook` and rename your notebook to "cheetah_PCA.ipynb"
+
 ### Import ipyrad.analysis module
 For this analysis, we'll use python. The `import` keyword directs python to load a module into the currently running context. This is very similar to the `library()` function in R. We begin by importing the ipyrad analysis module. Copy the code below into a notebook cell and click run. 
 
