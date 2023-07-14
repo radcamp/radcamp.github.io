@@ -61,7 +61,7 @@ unnecessary)
 ![Jupyter Notebook Landing Page](images/VBox-JupyterNotebookLanding.png)
 
 We will be running through the quality control and assembly of the cheetah data using the ipyrad
-CLI, so in your Jupyter notebook environment, create a **new "Terminal"**
+CLI, so in your Jupyter notebook environment, create a new **"Terminal"**
 using the "New" button.
 
 ![png](images/ipyrad-NewTerminal.png)
