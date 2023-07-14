@@ -25,13 +25,6 @@ all code in cells of a jupyter notebook.
 
 # **PCA** analyses
 
-## A bit of setup
-Inside your CO capsule open a new terminal and install `scikit-learn`, which we
-use internally for some of the PCA functions.
-```bash
-conda install -c conda-forge scikit-learn
-```
-
 ## Create a new notebook for the PCA
 In the file browser on the left of JupyterLab browse to the directory with the
 assembly of the simulated data: `/ipyrad-workshop`.
