@@ -205,7 +205,7 @@ from the ['named colors' matplotlib documentation](https://matplotlib.org/stable
 ```python
 pca.draw(colors=["hotpink", "skyblue", "goldenrod"])
 ```
-![png](images/PCA-NamedColors.png)
+![png](images/cheetah_PCA_colors.png)
 
 ## Dealing with missing data in PCA
 PCA can be _extremely_ sensitive to missing data if there is any pattern
@@ -227,7 +227,7 @@ Here is an example of how to select an `impute_method`:
 pca1 = ipa.pca(
     data=data,
     imap=imap,
-    impute_method=`sample`,
+    impute_method='sample',
 )
 ```
 
