@@ -135,7 +135,7 @@ pca.run()
 pca.draw(label="Sims colored by pop")
 ```
 
-![png](images/PCA-ColoredByPop.png)
+![png](images/cheetah_PCA_pop.png)
 
 This is just much nicer looking now, and it's also much more straightforward
 to interpret.
@@ -148,7 +148,7 @@ Samples with lots of missing data tend to pop way out on their own, causing
 distortion in the signal in the PCs. Normally it's best to evaluate the quality
 of the sample, and if it can be seen to be of poor quality, to remove it and
 replot the PCA. 
-In our dataset, we don't have bad samples, but we do have an outlier: the outgroup.
+In our dataset, we don't really have bad samples, but we do have an outlier: the outgroup. Because we're intersted in cheetah only, let's remove the outgroup sample and rerun the PCA.
 
 > **Note:** We make a lot of use of the interactivity of jupyter notebooks in
 the ipyrad.analysis tools. In the PCA you can 'hover' over points to reveal
@@ -158,15 +158,16 @@ The easiest way to achieve this is to simply remove the sample from the `imap`
 file and run the PCA again.
 
 ```python
-imap = {"pop1":['1A_0', '1B_0', '1C_0'],
-        "pop2":['2E_0', '2F_0', '2G_0', '2H_0'],
-        "pop3":['3I_0', '3J_0', '3K_0', '3L_0']}
+```python
+imap = {"A.j.jubatus":['SRR19760914','SRR19760915','SRR19760916','SRR19760917','SRR19760918','SRR19760920','SRR19760921','SRR19760922','SRR19760923','SRR19760924','SRR19760925','SRR19760926','SRR19760927','SRR19760928','SRR19760929','SRR19760931','SRR19760932','SRR19760933','SRR19760934','SRR19760935','SRR19760936','SRR19760937','SRR19760938','SRR19760939','SRR19760940','SRR19760941','SRR19760942','SRR19760943','SRR19760944','SRR19760945','SRR19760946','SRR19760947','SRR19760948','SRR19760952','SRR19760956'],
+        "A.j.soemmeringii":['SRR19760910','SRR19760911','SRR19760912','SRR19760913','SRR19760919','SRR19760930','SRR19760954','SRR19760955','SRR19760957','SRR19760958','SRR19760959','SRR19760960','SRR19760961','SRR19760962'],
+        "A.j.venaticus":['SRR19760950','SRR19760951','SRR19760953']}
 pca = ipa.pca(data, imap=imap)
 pca.run()
-pca.draw(label="Sims colored by pop (no 1D_0)")
+pca.draw(label="Sims colored by pop (no outgroup)")
 ```
 
-![png](images/PCA-No1D.png)
+![png](images/cheetah_PCA_noout.png)
 
 ## Subsampling with replication
 By default `run()` will randomly subsample one SNP per RAD locus to reduce the
@@ -183,7 +184,7 @@ each sample is plotted as a black point.
 pca.run(nreplicates=25, seed=12345)
 pca.draw();
 ```
-![png](images/PCA-Replicates.png)
+![png](images/cheetah_PCA_rep.png)
 
 ## Plotting PCs other than 0 and 1
 Even though PC 0 and 1 by definition explain the most variance in the data,
@@ -191,7 +192,7 @@ it is still often useful to examine other PCs. You can do this by specifying
 which PCs to plot in in the call to `draw`.
 
 ```python
-pca.draw(0, 2)
+pca.draw(2,3)
 ```
 ![png](images/PCA-PC02.png)
 
