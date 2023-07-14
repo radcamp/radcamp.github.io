@@ -180,7 +180,7 @@ but there are a few parameters we *must* check and update:
 Because we're looking at population-level data, we suggest to increase the clustering threshold `[14] [clust_threshold]`. You can also change `[27] [output_formats]`. When you put `*`, ipyrad will automatically save your output in all available formats, see [the manual](https://ipyrad.readthedocs.io/en/master/output_formats.html#full-output-formats).
 
 If you return to the browser tab with your jupyter notebook interface you'll
-now see a new file `params-peddrad.txt` in the file browser.
+now see a new file `params-cheetah.txt` in the file browser.
 
 ![png](images/ipyrad-NewParams2.png)
 
