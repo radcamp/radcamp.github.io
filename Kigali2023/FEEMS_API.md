@@ -1,6 +1,5 @@
 # Spatial population genetic analysis: **FEEMS**
 
-# **NONE OF THIS IS DONE AT ALL YET**
 
 **Brief introduction to the idea of EEMS/FEEMS and maybe some examples**
 
