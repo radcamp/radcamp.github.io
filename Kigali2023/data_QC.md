@@ -11,7 +11,7 @@ The CLI provides a way to navigate a file system, move files around, and run com
 
 ```
 (ipyrad) osboxes@osboxes:~$ ls
-miniconda src subset-R1-raws.tgz
+miniconda src subset-R1-raws.tgz usr
 ```
 
 `ls` stands for **"list"** and in our home directory there is are two folders with related to the software we'll be using in the course, and the cheetah data we'll be looking at, called subset-R1-raws.tgz. Throughout the workshop we will be adding files and directories and by the time we're done, not only will you have a bunch of experience with RAD-Seq analysis, but you'll also have a ***ton*** of stuff in your home directory. We can start out by adding the first directory for this workshop:
@@ -24,7 +24,7 @@ miniconda src subset-R1-raws.tgz
 
 ```
 (ipyrad) osboxes@osboxes:~$ ls
-ipyrad-workshop miniconda src subset-R1-raws.tgz
+ipyrad-workshop miniconda src subset-R1-raws.tgz usr
 ```
 
 Throughout the workshop we will be introducing new commands as the need for them arises. We will pay special attention to highlighting and explaining new commands and giving examples to practice with. 
@@ -63,6 +63,47 @@ subset-R1-raws subset-R1-raws.tgz
 ![png](images/ls_raws.png)
 
 > **Special Note:** You'll see that every file contains `_R1_`. Most of the time, the data you will be working on are paired-end, meaning that each sample has a `_R1_` and `_R2_` file. For this workshop, and to ensure that the steps run quickly, we will only use `_R1_`. 
+
+## The `FASTQ` data file format
+
+Before we get started with the assembly, let's take a look at what the raw data
+looks like. We can use `zcat` and `head` to do this.
+
+Here we have our first look at a fastq formatted file. Each sequenced read is spread over four lines, one of which contains sequence and another the quality scores stored as ASCII characters. The other two lines are used as headers to store information about the read.
+
+```bash
+## zcat: unZip and conCATenate the file to the screen
+## head -n 20: Just take the first 20 lines of input
+
+(ipyrad) osboxes@osboxes:~/ipyrad-workshop$ zcat subset-R1-raws/SRR19760910_R1_.fastq.gz | head -n 20
+```
+```
+@SRR19760910.1 1 length=110
+CATGCACGTGCAGCATATAAGAAGGATGTTTGTCATGCATTATCTTATTTGATGTTTACGGAAGCCCCATGGTTATCCCCATTTTAGGGATGAAGAAACGCCACAGAGAT
++SRR19760910.1 1 length=110
+BFFFFFF<FBFFFFFF<FB//////<<FFFBFF//<FFFFFFBF/FBFFFFFFFFFFFFBB<F/BFFFFFFFFBFF/<<</BFBBFF/<FF<FF<7FFFF/7B/FF/B<7
+@SRR19760910.2 2 length=110
+CATGCAACTCTTGGTCTCGGGGTCTTGAGTTCGAGCCCCACGTTGGATTAGAGATTACTTAAATAAATAAAGTTCAAAAGTTTTAGAATGTTATCATTTTCTTTAACAGT
++SRR19760910.2 2 length=110
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+@SRR19760910.3 3 length=110
+CATGCCATTTCCCATGGGCAAGGATCTCAGGCTGTGCTCATTCCCAAGGACAAGACCAAGCCAATTCCCAATCCCCATATTTAAGGAGCTGCTTCCTGGGACCAATTCTG
++SRR19760910.3 3 length=110
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF<FFFFFFFFFFFFFFFBFFFFFFFFFFFFFFFFFFFFFFFFFFBFFFFFFFFFBFFFFFFFFFFFFFFFFFFFFFFF
+@SRR19760910.4 4 length=110
+CATGCAACTCTTGATCTCAGGGTCATGAGTTCAAGCCCCACATTGGGTATGGATCCTACTGAAAGAAAAGAAAAGAAAAGAAAAGAAAAGAAAAGAAAAGAAAAGACAAG
++SRR19760910.4 4 length=110
+FFBFFFFFFFFFFFFFBFFF<FFBFFBBFBFBF/B/BBFFBF<FFFB</BFBFB<BBFFFFFFBFFFBFFFFFF<FFF/FFFBFFF</FFBFFFFFFBFFFFFFFFFFFF
+@SRR19760910.5 5 length=110
+CATGCATTTGTGTTTGCTTCTATTTGTATGAAGAGTCGAGAAACCAGAAGCTAATACAAAGGGTTGCCCTTGGTAGGGGATGCTGACTGGATGGCTTTGGGGCAGGAGGA
++SRR19760910.5 5 length=110
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFBFFFFFFFFFFFFFFBFFFFFFFFFFBFFFFFFFFFFF<FFFFFFFFFBFFFFFFFFFFFB/7
+```
+
+The first is the name of the read (its location on the plate). The second line
+contains the sequence data. The third line is unused. And the fourth line is
+the quality scores for the base calls. The [FASTQ wikipedia](https://en.wikipedia.org/wiki/FASTQ_format)
+page has a good figure depicting the logic behind how quality scores are encoded.
 
 ## FastQC for quality control
 The first step of any RAD-Seq assembly is to inspect your raw data to estimate overall quality. At this stage you can then attempt to improve your dataset by identifying and removing samples with failed sequencing. Another key QC procedure involves inspecting average quality scores per base position and trimming read edges, which is where low quality base-calls tend to accumulate. In this figure, the X-axis shows the position on the read in base-pairs and the Y-axis depicts information about [Phred quality score](https://en.wikipedia.org/wiki/Phred_quality_score) per base for all reads, including median (center red line), IQR (yellow box), and 10%-90% (whiskers). As an example, here is a very clean base sequence quality report for a 75bp RAD-Seq library. These reads have generally high quality across their entire length, with only a slight (barely worth mentioning) dip toward the end of the reads:
