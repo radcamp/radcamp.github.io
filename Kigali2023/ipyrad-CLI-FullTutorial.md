@@ -208,23 +208,17 @@ are created in the `project_dir` directory and use the prefix specified by the
 `assembly_name` parameter. For this example assembly all the intermediate
 directories will be of the form: `/ipyrad-workshop/cheetah_*`. 
 
-# Input data format
+# Step 1: Loading/Demultiplexing the raw data
 
-Before we get started with the assembly, let's take a look at what the raw data
-looks like. We can use `zcat` and `head` to do this.
-
-```bash
-## zcat: unZip and conCATenate the file to the screen
-## head -n 20: Just take the first 20 lines of input
-
-(ipyrad) osboxes@osboxes:~/ipyrad-workshop$ zcat ipsimdata/pairddrad_example_R1_.fastq.gz | head -n 20
-```
-![png](images/zcat_fastq.png)
-
-# Step 1: Demultiplexing the raw data
-
-Sometimes, you'll receive your data as a huge pile of reads, and you'll need to split it up
-and assign each read to the sample it came from. This is called demultiplexing and is done by unique barcodes which allow you to recognize individual samples. In that case, you'll have to provide a path to the raw non-demultiplexed fastq files `[2]` and the path to the barcode file `[3]` in your params file. In our case, the samples are already demultiplexed and we have 1 file per sample. The path to these files is indicated in `[4]` in the params file. Even though we do not need to demultiplex our data here, we still need to run this step to import the data into ipyrad.
+Sometimes, you'll receive your data as a huge pile of reads, and you'll need to
+split it up and assign each read to the sample it came from. This is called
+demultiplexing and is done by unique barcodes which allow you to recognize
+individual samples. In that case, you'll have to provide a path to the raw
+non-demultiplexed fastq files `[2]` and the path to the barcode file `[3]` in
+your params file. In our case, the samples are already demultiplexed and we have
+1 file per sample. The path to these files is indicated in `[4]` in the params
+file. Even though we do not need to demultiplex our data here, we still need to
+run this step to import the data into ipyrad.
 
 > **Note on step 1:** If we would have data which need demultiplexing, Step 1 will create a new folder, called `cheetah_fastqs`. Because our data are already demultiplexed, this folder will not be created.
 
@@ -237,7 +231,7 @@ the `-c` flag. If you do not specify the number of cores ipyrad assumes you want
 ```bash
 ## -p    the params file we wish to use
 ## -s    the step to run
-## -c    run on 16 cores
+## -c    run on 4 cores
 (ipyrad) osboxes@osboxes:~/ipyrad-workshop$ ipyrad -p params-cheeteah.txt -s 1 -c 4
 
  -------------------------------------------------------------
@@ -354,12 +348,10 @@ point isn't very interesting, but we'll see stats for later steps are more verbo
 This step filters reads based on quality scores and maximum number of uncalled
 bases, and can be used to detect Illumina adapters in your reads, which is
 sometimes a problem under a couple different library prep scenarios. We know the
-our data are very clean (remember the FastQC results!), so lets just pretend like there is a
-little noise toward the 3' end of R1 reads. To account for this we will trim
-reads to 100bp. 
-
-> **Note:** Here, we are just trimming the reads for the sake of demonstration.
-In reality you'd want to be more careful about choosing these values.
+our data have an excess of low-quality bases toward the 5' end (remember the
+FastQC results!), so lets use this opportunity to trim off some of those low
+quality regions. To account for this we will trim reads to 100bp, removing the
+last 10bp of our 110bp reads. 
 
 Edit your params file again with and change the following two parameter settings:
 
@@ -461,6 +453,8 @@ You might also take a closer look at the filtered reads:
 
 ```bash
 (ipyrad) osboxes@osboxes:~/ipyrad-workshop$ zcat cheetah_edits/SRR19760910.trimmed_R1_.fastq.gz | head -n 12
+```
+```
 @SRR19760910.1 1 length=110
 CATGCACGTGCAGCATATAAGAAGGATGTTTGTCATGCATTATCTTATTTGATGTTTACGGAAGCCCCATGGTTATCCCCATTTTAGGGATGAAGAAACG
 +
@@ -483,16 +477,18 @@ applied parameters. All reads have been trimmed to 100bp.
 For a *de novo* assembly, step 3 de-replicates and then clusters reads within
 each sample by the set clustering threshold and then writes the clusters to new
 files in a directory called `cheetah_clust_0.9`. Intuitively, we are trying to
-identify all the reads that map to the same locus within each sample. You may remember the default value is 0.85, but we have increased if to 0.9 in our params file. This value dictates the percentage of sequence similarity that reads must
-have in order to be considered reads at the same locus. 
+identify all the reads that map to the same locus within each sample. You may
+remember the default value is 0.85, but we have increased if to 0.9 in our
+params file. This value dictates the percentage of sequence similarity that
+reads must have in order to be considered reads at the same locus. 
 
 > **NB:** The true name of this output directory will be dictated by the value
 you set for the `clust_threshold` parameter in the params file.
 
-You'll more than likely want to experiment with this value, but 0.85 is a
-reasonable default, balancing over-splitting of loci vs over-lumping. Don't mess
-with this until you feel comfortable with the overall workflow, and also until
-you've learned about [branching assemblies](https://ipyrad.readthedocs.io/en/latest/8-branching.html). We're increasing it here because we know that our dataset has relatively little variation, so we can apply a more strict clustering threshold.
+You'll more than likely want to experiment with this value, but 0.9 is a
+reasonable default for population genetic-scale data, balancing over-splitting
+of loci vs over-lumping. Don't mess with this until you feel comfortable with
+the overall workflow, and also until you've learned about [branching assemblies](https://ipyrad.readthedocs.io/en/latest/8-branching.html).
 
 > **NB:** What is the best clustering threshold to choose? "It depends."
 
@@ -536,10 +532,7 @@ Now lets run step 3:
   Parallel connection closed.
 ```
 
-In-depth operations of step 3 (the first two do not occur with our dataset):
-* concatenating - If multiple fastq edits per sample then pile them all together
-* join merged/unmerged pairs - For paired-end data merge overlapping reads per
-mate pair (R1/R2)
+In-depth operations of step 3:
 * dereplicating - Merge all identical reads
 * clustering - Find reads matching by sequence similarity threshold
 * building clusters - Group similar reads into clusters
@@ -669,7 +662,6 @@ above is *probably* homozygous with some sequencing error. The second cluster is
 and 'decide' by ourselves for each cluster, so thankfully, untangling this mess
 is what steps 4 & 5 are all about. 
 
-
 # Step 4: Joint estimation of heterozygosity and error rate
 
 In Step 3 reads that are sufficiently similar (based on the specified sequence
@@ -686,7 +678,8 @@ a2c441646bb25089cd933119f13fb687;size=1;+
 TGCATGTAGTGAAGTCCGCTGTGTACTTGCGAGAGAATGAGCAGTCCTTCATGCA
 ```
 
-Here's a probable heterozygote, or perhaps repetitive element -- a little bit messier (note the indels):
+Here's a probable heterozygote, or perhaps repetitive element -- a little bit
+messier (note the indels):
 ```
 0091f3b72bfc97c4705b4485c2208bdb;size=3;*
 TGCATACAC----GCACACA----GTAGTAGTACTACTTTTTGTTAACTGCAGCATGCA
@@ -839,7 +832,8 @@ step 7: None
 Illumina error rates are on the order of 0.1% per base, so your error rates
 will ideally be in this neighborhood. Also, under normal conditions error rate
 will be much, much lower than heterozygosity (on the order of 10x lower). If
-the error rate is >>0.1% then you might be using too permissive a clustering threshold. Just a thought.
+the error rate is >>0.1% then you might be using too permissive a clustering
+threshold. Just a thought.
 
 # Step 5: Consensus base calls
 
@@ -1407,7 +1401,11 @@ snps matrix size: (53, 10655), 70.79% missing sites.
 sequence matrix size: (53, 2117428), 73.16% missing sites.
 ```
 
-> **Note on files in the project directory:** Sometimes you want to rerun a step that you've run before, and overwrite the results you already obtained. You can do that by adding the `-f` flag, **forcing** ipyrad to overwrite already existing files. Remember that if you don't want to overwrite existing data, you may want to use [branching](https://ipyrad.readthedocs.io/en/latest/8-branching.html).
+> **Note on files in the project directory:** Sometimes you want to rerun a step
+that you've run before, and overwrite the results you already obtained. You can
+do that by adding the `-f` flag, **forcing** ipyrad to overwrite already
+existing files. Remember that if you don't want to overwrite existing data, you
+may want to use [branching](https://ipyrad.readthedocs.io/en/latest/8-branching.html).
 
 
 **Congratulations!** You've completed your first RAD-Seq assembly. Now you can try
