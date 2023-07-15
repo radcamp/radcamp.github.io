@@ -27,7 +27,7 @@ all code in cells of a jupyter notebook.
 
 ## Create a new notebook for the PCA
 In the file browser on the left of JupyterLab browse to the directory with the
-assembly of the simulated data: `/ipyrad-workshop`.
+assembly of the cheetah data: `/home/osboxes/ipyrad-workshop`.
 
 Similar how you've previously opened the Terminal, now open a new "Python 3" notebook by clicking on `New`.
 
@@ -127,7 +127,7 @@ and plot the new figure. We can also easily add a title to our PCA plots
 with the `label=` argument.
 
 ```python
-pca = ipa.pca(data, imap=pops_dict)
+pca = ipa.pca(data, imap=imap)
 pca.run()
 pca.draw(label="Sims colored by pop")
 ```
@@ -155,7 +155,6 @@ The easiest way to achieve this is to simply remove the sample from the `imap`
 file and run the PCA again.
 
 ```python
-```python
 imap = {"A.j.jubatus":['SRR19760914','SRR19760915','SRR19760916','SRR19760917','SRR19760918','SRR19760920','SRR19760921','SRR19760922','SRR19760923','SRR19760924','SRR19760925','SRR19760926','SRR19760927','SRR19760928','SRR19760929','SRR19760931','SRR19760932','SRR19760933','SRR19760934','SRR19760935','SRR19760936','SRR19760937','SRR19760938','SRR19760939','SRR19760940','SRR19760941','SRR19760942','SRR19760943','SRR19760944','SRR19760945','SRR19760946','SRR19760947','SRR19760948','SRR19760952','SRR19760956'],
         "A.j.soemmeringii":['SRR19760910','SRR19760911','SRR19760912','SRR19760913','SRR19760919','SRR19760930','SRR19760954','SRR19760955','SRR19760957','SRR19760958','SRR19760959','SRR19760960','SRR19760961','SRR19760962'],
         "A.j.venaticus":['SRR19760950','SRR19760951','SRR19760953']}
@@ -178,7 +177,7 @@ results are drawn with a lower opacity and the centroid of all the points for
 each sample is plotted as a black point. 
 
 ```python
-pca.run(nreplicates=25, seed=12345)
+pca.run(nreplicates=10, seed=12345)
 pca.draw();
 ```
 ![png](images/cheetah_PCA_rep.png)
