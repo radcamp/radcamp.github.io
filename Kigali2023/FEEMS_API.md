@@ -22,27 +22,23 @@ In order to get RAxML to run in a reasonable amount of time we need to create a
 a new "branch" of our assembly and re-run step 3 to generate new output files.
 
 ```bash
-(ipyrad) osboxes@osboxes:~/ipyrad-workshop$ ipyrad -p params-cheetah.txt -b minsamples30
+(ipyrad) osboxes@osboxes:~/ipyrad-workshop$ ipyrad -p params-minsamples30.txt -b no-outgroup - SRR19760949
 ```
 ```
-  loading Assembly: cheetah
-  from saved path: ~/ipyrad-workshop/cheetah.json
-  creating a new branch called 'minsamples30' with 53 Samples
-  writing new params file to params-minsamples30.txt
+  loading Assembly: minsamples30
+  from saved path: ~/ipyrad-workshop/minsamples30.json
+  dropping 1 samples
+  creating a new branch called 'no-outgroup' with 52 Samples
+  writing new params file to params-no-outgroup.txt
 ```
-
 This creates a new params file (as it says) which you should edit and modify
 to update the following parameter:
-
-```
-30              ## [21] [min_samples_locus]: Min # samples per locus for output
-```
 
 Now you can run step 7 again to generate the new output files with this new
 `min_samples_locus` setting:
 
 ```bash
-(ipyrad) osboxes@osboxes:~/ipyrad-workshop$ ipyrad -p params-minsamples30.txt -s 7 -c 4
+(ipyrad) osboxes@osboxes:~/ipyrad-workshop$ ipyrad -p params-no-outgroup.txt -s 7 -c 4
 ```
 
 This will create a new set of output files in `minsamples30_outfiles` which
