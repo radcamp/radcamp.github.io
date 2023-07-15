@@ -185,6 +185,9 @@ rtre.draw(tree_style="o", layout='c')
 
 Again, much more is available in the [toytree tree styling documentation](https://toytree.readthedocs.io/en/latest/8-styling.html).
 
+## Saving trees to pdf
+[Saving trees to pdf/svg/other output formats](https://toytree.readthedocs.io/en/latest/4-tutorial.html#Drawing:-saving-figures)
+
 ## More to explore
 If the RADSeq assembly was performed with mapping to a reference genome
 this creates the opportunity to perform phylogenetic inference within genomic
