@@ -5,10 +5,44 @@ RAxML is the most popular tool for inferring phylogenetic trees using maximum
 likelihood. It is fast even for very large data sets. The documentation for
 raxml is huge, and there are many options. However, we tend to use the same small
 number of options very frequently, which motivated us to write the `ipa.raxml()`
-tool to automate the process of generating RAxml command line strings, running
+tool to automate the process of generating RAxML command line strings, running
 them, and accessing the resulting tree files. The simplicity of this tool makes
 it easy to incorporate into other more complex tools, for example, to infer
 tress in sliding windows along the genome using the `ipa.treeslider` tool.
+
+## Input data
+The raxml tool takes a phylip formatted file as input. In addition you can set
+a number of analysis options either when you init the tool, or afterwards by
+accessing the `.params` dictionary. You can view the raxml command string that is
+generated from the input arguments and you can call `.run()` to start the tree inference.
+
+### Creating a new phylip file with `min_samples_locus` set to 30
+In order to get RAxML to run in a reasonable amount of time we need to create a
+a new "branch" of our assembly and re-run step 3 to generate new output files.
+
+```bash
+(ipyrad) osboxes@osboxes:~/ipyrad-workshop$ ipyrad -p params-cheetah.txt -b minsamples30
+```
+```
+  loading Assembly: cheetah
+  from saved path: ~/ipyrad-workshop/cheetah.json
+  creating a new branch called 'minsamples30' with 53 Samples
+  writing new params file to params-minsamples30.txt
+```
+
+This creates a new params file (as it says) which you should edit and modify
+the following parameter:
+
+```
+30                              ## [21] [min_samples_locus]: Min # samples per locus for output
+```
+
+Now you can run step 7 again to generate the new output files with this new
+`min_samples_locus` setting:
+
+```bash
+(ipyrad) osboxes@osboxes:~/ipyrad-workshop$ ipyrad -p params-minsamples30.txt -s 7 -c 4
+```
 
 ## A note on Jupyter/IPython
 [Jupyter notebooks](http://jupyter.org/) are primarily a way to generate
@@ -43,22 +77,16 @@ import toytree
 > The `as ipa` part here creates a short synonym so that we can refer to
 `ipyrad.analysis` **as** `ipa`, which is just faster to type.
 
-## Input data
-The raxml tool takes a phylip formatted file as input. In addition you can set
-a number of analysis options either when you init the tool, or afterwards by
-accessing the `.params` dictionary. You can view the raxml command string that is
-generated from the input arguments and you can call `.run()` to start the tree inference. 
-
 The following cell shows the quickest way to results using the small simulated
 peddrad dataset we assembled earlier. Copy this code into a new notebook cell
 (small grey *+* button on the toolbar) and run it.
 
 ```python
 # Path to the input phylip file
-phyfile = "peddrad_outfiles/peddrad.phy"
+phyfile = "minsamples30_outfiles/minsamples30.phy"
 
 # init raxml object with input data and (optional) parameter options
-rax = ipa.raxml(data=phyfile, T=16, N=2)
+rax = ipa.raxml(data=phyfile, T=4, N=2)
 
 # print the raxml command string for prosperity
 print(rax.command)
@@ -80,12 +108,12 @@ After inferring a tree you can then visualize it in a notebook using `toytree`.
 # load from the .trees attribute of the raxml object, or from the saved tree file
 tre = toytree.tree(rax.trees.bipartitions)
 
-# draw the tree rooting on population 3
-rtre = tre.root(wildcard="3")
+# draw the tree rooting on the P. concolor sample (SRR19760949)
+rtre = tre.root(wildcard="SRR19760949")
 rtre.draw(tip_labels_align=True, node_labels="support");
 ```
 
-![png](images/raxml-TLDRExample.png)
+![png](images/raxml-FirstTree.png)
 
 ## Setting parameters
 By default several parameters are pre-set in the raxml object. To remove those
@@ -98,16 +126,16 @@ the raxml object init, as below.
 rax.params
 ```
 ```
-N        2
-T        16
-binary   /opt/conda/bin/raxmlHPC-PTHREADS-AVX2
-f        a
-m        GTRGAMMA
-n        test
-p        54321
-s        /scratch/ipyrad-workshop/peddrad_outfiles/peddrad.phy
-w        /scratch/ipyrad-workshop/analysis-raxml
-x        12345
+N        2                   
+T        4                   
+binary   ~/miniconda3/envs/ipyrad/bin/raxmlHPC-PTHREADS-AVX2
+f        a                   
+m        GTRGAMMA            
+n        test                
+p        54321               
+s        ~/ipyrad-workshop/minsamples30_outfiles/minsamples30.phy
+w        ~/src/notebooks/analysis-raxml
+x        12345   
 ```
 
 ```python
@@ -137,11 +165,14 @@ rtre.draw(tree_style='d')          # dark-style
 rtre.draw(tree_style='o')          # umlaut-style
 ```
 
-![png](images/raxml-TreeStyles.png)
+![png](images/raxml-TreeStylesDark.png)
+![png](images/raxml-TreeStylesUmlaut.png)
 
 ```python
 # Change the orientation
 rtre.draw(tree_style="o", layout='d')
+# Circle plot orientation
+rtre.draw(tree_style="o", layout='c')
 ```
 
 ![png](images/raxml-TreeLayout.png)
