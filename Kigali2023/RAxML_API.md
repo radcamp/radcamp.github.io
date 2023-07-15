@@ -31,10 +31,10 @@ a new "branch" of our assembly and re-run step 3 to generate new output files.
 ```
 
 This creates a new params file (as it says) which you should edit and modify
-the following parameter:
+to update the following parameter:
 
 ```
-30                              ## [21] [min_samples_locus]: Min # samples per locus for output
+30              ## [21] [min_samples_locus]: Min # samples per locus for output
 ```
 
 Now you can run step 7 again to generate the new output files with this new
@@ -43,6 +43,11 @@ Now you can run step 7 again to generate the new output files with this new
 ```bash
 (ipyrad) osboxes@osboxes:~/ipyrad-workshop$ ipyrad -p params-minsamples30.txt -s 7 -c 4
 ```
+
+This will create a new set of output files in `minsamples30_outfiles` which
+have only retained loci present in 30 or more samples. Look at the stats file
+to see how many loci are retained in this dataset? Do you think it will be fewer
+or more than in the previous assembly with `min_samples_locus` set to 4?
 
 ## A note on Jupyter/IPython
 [Jupyter notebooks](http://jupyter.org/) are primarily a way to generate
@@ -56,7 +61,8 @@ all code in cells of a jupyter notebook.
 # **RAxML** analyses
 
 ## Create a new notebook for the RAxML analysis
-In the jupyter notebook browser interface create a "New->Python" Notebook.
+In the jupyter notebook browser interface navigate to your `ipyrad-workshop`
+directory and create a "New->Python" Notebook.
 
 ![png](images/raxml-CreateNotebook.png)
 
