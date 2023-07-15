@@ -104,6 +104,7 @@ G = imp.fit_transform(np.array(G).T)
 
 ## Load the coordinates and the global shp file
 ```python
+# GPS Coordinates per sample in the same order as the genotypes
 coord = np.loadtxt("./Cheetah.coords")
 outer = np.loadtxt("./Cheetah.outer")
 grid_path = "/home/osboxes/src/feems/feems/data/grid_250.shp"
