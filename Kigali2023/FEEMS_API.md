@@ -146,7 +146,7 @@ ax = fig.add_subplot(1, 1, 1, projection=projection)
 v = Viz(ax, sp_graph, projection=projection, edge_width=0.5, 
     edge_alpha=1, edge_zorder=100, sample_pt_size=20, 
     obs_node_size=7.5, sample_pt_color="black", 
-    cbar_font_size=10, abs_max=.05) 
+    cbar_font_size=10, abs_max=0.5) 
 v.draw_map() 
 v.draw_edges(use_weights=True) 
 v.draw_obs_nodes(use_ids=False) 
