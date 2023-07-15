@@ -48,7 +48,7 @@ in a separate conda environment with an isolated jupyter notebook server
 running on a different port. To access this environment open a new browser
 tab and navigate to:
 
-`https://localhost:8801`
+`http://localhost:8801`
 
 ## Create a new notebook for the FEEMS analysis
 In the jupyter notebook browser interface navigate to your `ipyrad-workshop`
