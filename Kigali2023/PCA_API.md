@@ -203,6 +203,20 @@ pca.draw(colors=["hotpink", "skyblue", "goldenrod"])
 ```
 ![png](images/cheetah_PCA_colors.png)
 
+## Saving a PCA plot to a file
+You can save the figure as a PDF or SVG automatically by passing an `outfile`
+argument to the `.draw()` function.
+
+```python
+# The outfile must end in either `.pdf` or `.svg`
+pca.draw(outfile="cheetah-pca.pdf")
+```
+
+This will save `cheetah-pca.pdf` into your notebook environment. You can open the
+jupyter file browser and open or download the pdf from there.
+
+![png](images/cheetah_PCA_DownloadPDF.png)
+
 ## Dealing with missing data in PCA
 PCA can be _extremely_ sensitive to missing data if there is any pattern
 at all in the missingness.

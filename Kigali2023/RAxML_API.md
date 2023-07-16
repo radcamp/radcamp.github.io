@@ -208,6 +208,34 @@ rtre.draw(tree_style="o", layout='c')
 
 ![png](images/raxml-TreeLayout.png)
 
+### Coloring tip labels by sub-species identity
+
+```python
+imap = {"A.j.jubatus":['SRR19760914','SRR19760915','SRR19760916','SRR19760917','SRR19760918','SRR19760920','SRR19760921','SRR19760922','SRR19760923','SRR19760924','SRR19760925','SRR19760926','SRR19760927','SRR19760928','SRR19760929','SRR19760931','SRR19760932','SRR19760933','SRR19760934','SRR19760935','SRR19760936','SRR19760937','SRR19760938','SRR19760939','SRR19760940','SRR19760941','SRR19760942','SRR19760943','SRR19760944','SRR19760945','SRR19760946','SRR19760947','SRR19760948','SRR19760952','SRR19760956'],
+        "A.j.soemmeringii":['SRR19760910','SRR19760911','SRR19760912','SRR19760913','SRR19760919','SRR19760930','SRR19760954','SRR19760955','SRR19760957','SRR19760958','SRR19760959','SRR19760960','SRR19760961','SRR19760962'],
+        "A.j.venaticus":['SRR19760950','SRR19760951','SRR19760953'],
+        "Outgroup":['SRR19760949']}
+
+colormap = {"A.j.jubatus":"red",
+           "A.j.soemmeringii":"blue",
+            "A.j.venaticus": "teal",
+           "Outgroup":"black"}
+
+colorlist = []
+for sample in rtre.get_tip_labels():
+    for species, samples in imap.items():
+        if sample in samples:
+            colorlist.append(colormap[species])
+```
+```python
+rtre.draw(
+    tip_labels_align=True,
+    tip_labels_colors=colorlist
+)
+```
+
+![png](images/raxml-ColorTipLabels.png)
+
 Again, much more is available in the [toytree tree styling documentation](https://toytree.readthedocs.io/en/latest/8-styling.html).
 
 ## Saving trees to pdf

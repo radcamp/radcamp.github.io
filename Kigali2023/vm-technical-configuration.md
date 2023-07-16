@@ -48,6 +48,7 @@ conda config --set solver libmamba
 conda install -c conda-forge -c bioconda ipyrad -y
 conda install -c conda-forge toytree scikit-learn -y
 conda install -c bioconda raxml -y
+conda install -c conda-forge -c bioconda fastqc vcftools -y
 ```
 
 ## Clone ipyrad and feems repositories
