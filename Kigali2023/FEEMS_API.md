@@ -124,6 +124,8 @@ outer, edges, grid, _ = prepare_graph_inputs(coord=coord, ggrid=grid_path, trans
 Note that the actual sampling locality is a small black dot, but for the analysis, it is locked to the grid and displayed as a grey circle (size depending on the number of samples). It is important to remember this, because it may look like sampling localities have changed. However, this is just because FEEMS makes it fit to the grid.
 
 ```python
+%%time
+sp_graph = SpatialGraph(G, coord, grid, edges, scale_snps=False)
 projection = ccrs.EquidistantConic(central_longitude=23, central_latitude=8) 
 fig = plt.figure(dpi=300) 
 ax = fig.add_subplot(1, 1, 1, projection=projection) 
