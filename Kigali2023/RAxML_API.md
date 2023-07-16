@@ -17,8 +17,7 @@ accessing the `.params` dictionary. You can view the raxml command string that i
 generated from the input arguments and you can call `.run()` to start the tree inference.
 
 ### Creating a new phylip file with `min_samples_locus` set to 30
-In order to get RAxML to run in a reasonable amount of time we need to create a
-a new "branch" of our assembly and re-run step 3 to generate new output files.
+In order to get RAxML to run in a reasonable amount of time we will repeat the final step of ipyrad, and adjust it so that we have fewer missing data. Remember that we've previously set `min_samples_locus` to 4, which means that ipyrad includes all SNPs which have data for at least 4 samples. This will result in a matrix which also includes lots of missing data, e.g. at positions where only 5 or 6 samples have data, but the SNP will still be included in the final output. To create an output file with fewer missing data (but also fewer SNPs!), we can increase `min_samples_locus`, e.g. to 30. However, we don't want to overwrite the existing output files, so we'll create a new "branch" of our assembly and re-run step 7 to generate new output files.
 
 ```bash
 (ipyrad) osboxes@osboxes:~/ipyrad-workshop$ ipyrad -p params-cheetah.txt -b minsamples30
