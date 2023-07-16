@@ -177,7 +177,7 @@ results are drawn with a lower opacity and the centroid of all the points for
 each sample is plotted as a black point. 
 
 ```python
-pca.run(nreplicates=10, seed=12345)
+pca.run(nreplicates=10)
 pca.draw();
 ```
 ![png](images/cheetah_PCA_rep.png)
