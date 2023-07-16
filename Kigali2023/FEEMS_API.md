@@ -92,7 +92,7 @@ raw_genotypes = np.apply_along_axis(np.sum, 2, data["genos"][:])
 
 G = np.where(raw_genotypes <= 2, raw_genotypes, np.nan*raw_genotypes)
 imp = SimpleImputer(missing_values=np.nan, strategy="mean") 
-G = imp.fit_transform(np.array(G).T) 
+genotypes = imp.fit_transform(np.array(G).T) 
 ```
 
 ## Fetch the GPS coordinates for the samples and the 'outer' points
@@ -125,7 +125,7 @@ Note that the actual sampling locality is a small black dot, but for the analysi
 
 ```python
 %%time
-sp_graph = SpatialGraph(G, coord, grid, edges, scale_snps=False)
+sp_graph = SpatialGraph(genotypes, coord, grid, edges, scale_snps=False)
 projection = ccrs.EquidistantConic(central_longitude=23, central_latitude=8) 
 fig = plt.figure(dpi=300) 
 ax = fig.add_subplot(1, 1, 1, projection=projection) 
