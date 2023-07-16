@@ -82,9 +82,8 @@ import toytree
 > The `as ipa` part here creates a short synonym so that we can refer to
 `ipyrad.analysis` **as** `ipa`, which is just faster to type.
 
-The following cell shows the quickest way to results using the small simulated
-peddrad dataset we assembled earlier. Copy this code into a new notebook cell
-(small grey *+* button on the toolbar) and run it.
+The following cell shows the quickest way to results using the small cheetah dataset (using `min-samples-locus` 30) we assembled earlier. Copy this code into a new notebook cell
+(or use the small grey *+* button on the toolbar) and run it.
 
 ```python
 # Path to the input phylip file
@@ -119,6 +118,31 @@ rtre.draw(tip_labels_align=True, node_labels="support");
 ```
 
 ![png](images/raxml-FirstTree.png)
+
+## Making the tree readable
+The tree you have now is pretty difficult to read, because all the cheetah samples have very low branch length. This is no surprise, because we know that cheetahs have very low diversity and are very similar to each other. However, it makes the interpretation of the tree difficult. We can, for now, also discard the information of the branch length, and just look at the topology of the tree.
+
+# draw the showing topology only
+rtre = tre.root(wildcard="SRR19760949")
+rtre.draw(tip_labels_align=True, node_labels="support",use_edge_lengths=False);
+```
+
+![png](images/cheetah_RAXML_topology.png)
+
+Now, we can actually see what samples group together. However, we don't know all the sample codes by heart. We can assign colors to the labels, similar as we did in the PCA. Try running the following code:
+
+```
+# draw the tree using colored labels
+colorlist = {"hotpink":['SRR19760914','SRR19760915','SRR19760916','SRR19760917','SRR19760918','SRR19760920','SRR19760921','SRR19760922','SRR19760923','SRR19760924','SRR19760925','SRR19760926','SRR19760927','SRR19760928','SRR19760929','SRR19760931','SRR19760932','SRR19760933','SRR19760934','SRR19760935','SRR19760936','SRR19760937','SRR19760938','SRR19760939','SRR19760940','SRR19760941','SRR19760942','SRR19760943','SRR19760944','SRR19760945','SRR19760946','SRR19760947','SRR19760948','SRR19760952','SRR19760956'],
+        "skyblue":['SRR19760910','SRR19760911','SRR19760912','SRR19760913','SRR19760919','SRR19760930','SRR19760954','SRR19760955','SRR19760957','SRR19760958','SRR19760959','SRR19760960','SRR19760961','SRR19760962'],
+        "goldenrod":['SRR19760950','SRR19760951','SRR19760953'],
+        "black":['SRR19760949']}
+
+colors = {label: color for color, labels in colorlist.items() for label in labels}
+
+rtre = tre.root(wildcard="SRR19760949")
+rtre.draw(tip_labels_align=True, node_labels="support",use_edge_lengths=False,tip_labels_style=colors);
+```
 
 ## Setting parameters
 By default several parameters are pre-set in the raxml object. To remove those
