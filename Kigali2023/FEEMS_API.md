@@ -90,7 +90,7 @@ data = h5py.File("/home/osboxes/ipyrad-workshop/no-outgroup_outfiles/no-outgroup
 
 raw_genotypes = np.apply_along_axis(np.sum, 2, data["genos"][:])
 
-G = np.where(genotypes <= 2 , genotypes, np.nan*genotypes)
+G = np.where(raw_genotypes <= 2, raw_genotypes, np.nan*raw_genotypes)
 imp = SimpleImputer(missing_values=np.nan, strategy="mean") 
 G = imp.fit_transform(np.array(G).T) 
 ```
