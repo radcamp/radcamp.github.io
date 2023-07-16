@@ -121,7 +121,7 @@ outer, edges, grid, _ = prepare_graph_inputs(coord=coord, ggrid=grid_path, trans
 ```
 
 ## Plot the region and the sample sites
-Note that the actual sampling locality is a small black dot, but for the analysis, it is locked to the grid and displayed as a grey circle (size depending on the number of samples). It is important to remember this, because it may look like sampling localities have changed. However, this is just because FEEMS makes it fit to the grid.
+Note that the actual sampling locality is a small black dot, but for the analysis, it is locked to the grid and displayed as a grey circle (size depending on the number of samples). It is important to remember this, because it may look like sampling localities have changed. However, this is just because FEEMS makes it fit to the grid. This step may take a minute or so.
 
 ```python
 %%time
@@ -142,7 +142,7 @@ v.draw_obs_nodes(use_ids=False)
 ![png](images/FEEMS-RegionPlot.png)
 
 ## Fit the FEEMS model to the data
-This step actually assesses to what degree genetic differentiation is higher or lower compared to what we can expect under IBD. This step may take a few minutes.
+This step actually assesses to what degree genetic differentiation is higher or lower compared to what we can expect under IBD. 
 
 ```python
 %%time 
