@@ -10,6 +10,8 @@ them, and accessing the resulting tree files. The simplicity of this tool makes
 it easy to incorporate into other more complex tools, for example, to infer
 tress in sliding windows along the genome using the `ipa.treeslider` tool.
 
+More information about RAxML can be found [here](https://cme.h-its.org/exelixis/web/software/raxml/) and the scientific paper [Stamatakis *et al.* (2014)](https://academic.oup.com/bioinformatics/article/30/9/1312/238053).
+
 ## Input data
 The raxml tool takes a phylip formatted file as input. In addition you can set
 a number of analysis options either when you init the tool, or afterwards by
