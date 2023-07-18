@@ -133,6 +133,11 @@ that's copied. In order to shrink the size of the image you need to **zero out**
 the free space and then use `VboxManage --compact` to recover the unused space.
 Very very very tedious.
 
+Useful:
+* [Oracle VBoxManage docs](https://docs.oracle.com/en/virtualization/virtualbox/6.0/user/vboxmanage-modifymedium.html)
+* [superuser post](https://superuser.com/questions/502887/shrink-size-of-ova-file-in-virtualbox)
+* [Ubuntu zerofree man page](https://manpages.ubuntu.com/manpages/lunar/en/man8/zerofree.8.html)
+
 On the running guest vm:
 * Open a terminal
 * `sudo su -`

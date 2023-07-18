@@ -27,9 +27,9 @@ assembly with `min_samples_locus` equal to 4.**
 ```
 ```
   loading Assembly: cheetah
-  from saved path: ~/ipyrad-workshop/minsamples30.json
+  from saved path: ~/ipyrad-workshop/cheetah.json
   dropping 1 samples
-  creating a new branch called 'no-outgroup' with 52 Samples
+  creating a new branch called 'no-outgroup' with 23 Samples
   writing new params file to params-no-outgroup.txt
 ```
 
