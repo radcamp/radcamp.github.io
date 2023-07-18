@@ -242,7 +242,7 @@ the `-c` flag. If you do not specify the number of cores ipyrad assumes you want
 
   Step 1: Loading sorted fastq data to Samples
   [####################] 100% 0:00:13 | loading reads
-  53 fastq files loaded to 52 Samples.
+  24 fastq files loaded to 24 Samples.
   Parallel connection closed.
 ```
 

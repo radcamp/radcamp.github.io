@@ -126,6 +126,37 @@ sudo apt clean
 
 Now shut down the running VM and File->Export Appliance.
 
+# Shrinking the size of the OVA
+So it turns out that if you **use** the VM, even if you clean up temp files,
+the disk image increases in size because the used space still contains data
+that's copied. In order to shrink the size of the image you need to **zero out**
+the free space and then use `VboxManage --compact` to recover the unused space.
+Very very very tedious.
+
+On the running guest vm:
+* Open a terminal
+* `sudo su -`
+* Switch to single user mode: `telinit 1`
+* Remount the /home partition ro: `mount -o remount,ro /dev/sda5`
+* Zero out the free space: `zerofree /dev/sda5`
+* Shut down the guest vm
+
+You can also do this from an ubuntu iso (better)
+* Boot to the iso
+* Choose the 'install/try' option
+* Go to the 'help' menu and enter the shell
+* `zerofree /dev/sda2` & `zerofree /dev/sda5`
+
+On the host machine:
+* Squash the newly zerod space: `VBoxManage modifyhd RC-Kigali-server-V5-disk001.vdi --compact`
+* Now you can export the OVA and it'll be a reasonable size
+
+# Convert the Mac M1/M2 UTM image
+Mac M1/M2 arm processors won't run VirtualBox so we have to use UTM. UTM
+uses qemu under the hood so we can export an OVA and convert it to qemu
+format. Following [this tutorial](https://medium.com/@hitoshi.shimomae/convert-ova-to-qcow2-and-start-it-with-utm-13fa3fc4c3db)
+* `apt isntall qemu system`
+
 ### For Ubuntu Desktop
 **This is not how it is set up for this workshop, but is from a first attempt.**
 
