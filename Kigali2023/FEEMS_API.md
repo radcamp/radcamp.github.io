@@ -95,6 +95,27 @@ imp = SimpleImputer(missing_values=np.nan, strategy="mean")
 genotypes = imp.fit_transform(np.array(G).T) 
 ```
 
+### What is 'imputation' and why do we need to do it?
+
+```python
+locus = 11
+print(G[locus])
+genotypes[:, locus]
+```
+```
+[nan  1. nan  1.  2. nan nan  0.  0. nan nan nan nan nan nan nan nan  1.
+ nan  0. nan nan  2.]
+array([0.875, 1.   , 0.875, 1.   , 2.   , 0.875, 0.875, 0.   , 0.   ,
+       0.875, 0.875, 0.875, 0.875, 0.875, 0.875, 0.875, 0.875, 1.   ,
+       0.875, 0.   , 0.875, 0.875, 2.   ])
+```
+```python
+locus = 11
+names = data["snps"].attrs["names"]
+pd.DataFrame([G[locus], genotypes[:, locus]], columns=names, index=["pre-imputation", "post-imputation"]).T
+```
+![png](images/FEEMS-ImputationDF.png)
+
 ## Fetch the GPS coordinates for the samples and the 'outer' points
 Typically, you will have information about the sampling localities of your data. FEEMS takes these data as a vector of GPS coördinates, and the file should have the extension `.coord`. We've already prepared this file for you, and you can simply download it. 
 
