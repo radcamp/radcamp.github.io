@@ -170,12 +170,16 @@ but it also works just fine to use the guest ip directly when connecting:
 
 `http://192.168.64.8:8800/tree`
 
+## RAxML binary
+With the default binary that gets chosen (RAxML-PTHREADS-AVX) the UTM ubuntu VM gives
+a core dump. Using `raxmlHPC-PTHREADS-SSE` instead seems to work fine, so I just removed all the
+other versions of raxml from the ~/miniconda3/envs/ipyrad/bin.
+
 # Mac image port of the vbox (None of this ever worked)
 **NONE OF THIS EVER WORKED** It is a good idea in theory to convert the
 virtualbox vm to UTM format, but I could never get it to actually work.
 
 ## Convert the Mac M1/M2 UTM image
-**These are still broken directions**
 
 Mac M1/M2 arm processors won't run VirtualBox so we have to use UTM. UTM
 uses qemu under the hood so we can export an OVA and convert it to qemu
