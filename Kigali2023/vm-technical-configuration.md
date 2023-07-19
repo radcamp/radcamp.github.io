@@ -31,7 +31,7 @@ bash Miniconda*
 ```
 conda create -n ipyrad
 # Set ipyrad as the default env in the .bashrc
-echo "conda activate ipyrad" > ~/.bashrc
+echo "conda activate ipyrad" >> ~/.bashrc
 ```
 
 * Install and set libmamba solver as default
