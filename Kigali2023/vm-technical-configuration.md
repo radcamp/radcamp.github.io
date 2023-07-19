@@ -69,7 +69,8 @@ conda activate feems
 conda install -c conda-forge -c bioconda --file ~/src/feems/requirements.txt
 
 # Install h5py so we can pull the data out of the ipyrad snps.hdf5 file
-conda install -c conda-forge h5py -y
+# and notebook so we can actually run jupyter notebook server
+conda install -c conda-forge h5py notebook -y
 
 # Install feems in developer mode
 pip install -e ~/src/feems/
