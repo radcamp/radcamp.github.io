@@ -157,7 +157,24 @@ On the host machine:
 * Squash the newly zerod space: `VBoxManage modifyhd RC-Kigali-server-V5-disk001.vdi --compact`
 * Now you can export the OVA and it'll be a reasonable size
 
-# Convert the Mac M1/M2 UTM image
+# Mac image build
+For the mac image I ended up reinstalling the whole software stack from scratch
+inside a new x86_64 UTM image installed with Ubuntu server. After installing
+ubuntu server in a VM i pretty much followed the above install instructions
+exactly (for the ipyrad/feems config). The only differences are:
+
+## Getting the network passthrough ports working
+This is maybe not easy or at least not straightforward on the UTM version
+I'm using. The docs are cryptic about what conditions this is possible under,
+but it also works just fine to use the guest ip directly when connecting:
+
+`http://192.168.64.8:8800/tree`
+
+# Mac image port of the vbox (None of this ever worked)
+**NONE OF THIS EVER WORKED** It is a good idea in theory to convert the
+virtualbox vm to UTM format, but I could never get it to actually work.
+
+## Convert the Mac M1/M2 UTM image
 **These are still broken directions**
 
 Mac M1/M2 arm processors won't run VirtualBox so we have to use UTM. UTM

@@ -56,7 +56,8 @@ to proceed.
 'Headless Start' because it doesn't open the VM in a new window, as it is
 unnecessary)
 ![Start RADCamp virtualbox image](images/VBox-StartImage.png)
-* Open a web browser on your computer and navigate to `http://localhost:8800`
+* Open a web browser on your computer and navigate to `http://localhost:8800`.
+  * **ONLY Mac M1/M2 users** should use `http://192.168.64.8:8800`
 * This should present you with a Jupyter notebook environment running inside the VM with all necessary packages installed (for the ipyrad/RADcamp part of the workshop)
 ![Jupyter Notebook Landing Page](images/VBox-JupyterNotebookLanding.png)
 
