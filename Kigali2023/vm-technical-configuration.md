@@ -157,10 +157,29 @@ On the host machine:
 * Now you can export the OVA and it'll be a reasonable size
 
 # Convert the Mac M1/M2 UTM image
+**These are still broken directions**
+
 Mac M1/M2 arm processors won't run VirtualBox so we have to use UTM. UTM
 uses qemu under the hood so we can export an OVA and convert it to qemu
-format. Following [this tutorial](https://medium.com/@hitoshi.shimomae/convert-ova-to-qcow2-and-start-it-with-utm-13fa3fc4c3db)
-* `apt isntall qemu system`
+format. Following [this tutorial (which was useful but didn't work)](https://medium.com/@hitoshi.shimomae/convert-ova-to-qcow2-and-start-it-with-utm-13fa3fc4c3db)
+and this [issue on the UTM github](https://github.com/utmapp/UTM/discussions/2521)
+* `apt install qemu-system`
+* Make a copy of the .ova so you don't mess it up
+* `tar -xvf RC-Kigali-server-V7.ova`
+* `qemu-img convert -O qcow2 RC-Kigali-server-V7-disk001.vmdk RC-Kigali-server-V7.qcow2`
+
+## Launch UTM
+* Create New -> Emulate
+* Choose Other
+* Check 'Skip ISO boot'
+* Add 16384 MB RAM and 4 CPU cores and 500 GB Storage
+* Skip shared path
+* Give a Name and then Save
+* Right click on the new VM and click Edit
+* In QEMU uncheck "UEFI Boot"
+* In the left nav choose Drives -> New, set Size to 500 GB, click "Import"
+and browse to the location of the saved `.qcow2` image
+* In the left nav drag the new qcow2 IDE Drive to the top of the list
 
 ### For Ubuntu Desktop
 **This is not how it is set up for this workshop, but is from a first attempt.**
