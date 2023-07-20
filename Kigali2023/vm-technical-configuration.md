@@ -181,7 +181,6 @@ popped right up fine, so they are filtering the hostname in a simple way. I upda
 i can apt install just fine. How weird. Fortinet is a security companty that sells firewall
 software and stuff.
 
-
 ## Getting the network passthrough ports working
 This is maybe not easy or at least not straightforward on the UTM version
 I'm using. The docs are cryptic about what conditions this is possible under,
@@ -194,6 +193,14 @@ With the default binary that gets chosen (RAxML-PTHREADS-AVX) the UTM ubuntu VM 
 a core dump. Using `raxmlHPC-PTHREADS-SSE` instead seems to work fine, so I just removed all the
 other versions of raxml from the ~/miniconda3/envs/ipyrad/bin.
 * This is very very slow inside the emulated x86 env. Maybe could fix it...
+
+## FEEMS install on the Ubuntu VM for Mac
+I think some of the monkeying around I did put some of the packages out of
+whack, so i had to put them back by hand.
+* pip install fiona==1.9.4
+* conda install -c conda-forge networkx<2.7 <- fixes this https://stackoverflow.com/questions/74175462/attributeerror-module-scipy-sparse-has-no-attribute-coo-array
+* conda install -c conda-forge matplotlib=3.5.2
+* pip uninstall pyarrow <- crashes pandas and seems not required
 
 # Mac image port of the vbox (None of this ever worked)
 **NONE OF THIS EVER WORKED** It is a good idea in theory to convert the
