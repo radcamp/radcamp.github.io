@@ -60,7 +60,7 @@ Times       | Saturday (July 22) | Sunday (July 23) |
 
 ## Source of Empirical Data for the Workshop
 * [Cheetah data from Prost *et al.* 2022](https://onlinelibrary.wiley.com/doi/10.1111/mec.16577)
-![png](images/cheetah brothers2.png)
+![png](images/cheetah_brothers2.png)
 ©Laura Bertola
 
 ## RADCamp Kigali 2023 co-sponsored by:
