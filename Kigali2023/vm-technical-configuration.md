@@ -199,7 +199,7 @@ I think some of the monkeying around I did put some of the packages out of
 whack, so i had to put them back by hand.
 * pip install fiona==1.9.4
 * conda install -c conda-forge networkx<2.7 <- fixes this https://stackoverflow.com/questions/74175462/attributeerror-module-scipy-sparse-has-no-attribute-coo-array
-* conda install -c conda-forge matplotlib=3.5.2
+* conda install -c conda-forge matplotlib=3.2.2 cartopy=0.18.0
 * pip uninstall pyarrow <- crashes pandas and seems not required
 
 # Mac image port of the vbox (None of this ever worked)
