@@ -1170,3 +1170,6 @@ mapping, assembly branching, and the extensive `analysis` toolkit, which
 includes extensive downstream analysis tools for such things as clustering and
 population assignment, phylogenetic tree inference, quartet-based species tree
 inference, and much more.
+
+![png](images/cheetah + cubs2.png)
+©Laura Bertola
