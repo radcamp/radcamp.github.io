@@ -162,6 +162,25 @@ For the mac image I ended up reinstalling the whole software stack from scratch
 inside a new x86_64 UTM image installed with Ubuntu server. After installing
 ubuntu server in a VM i pretty much followed the above install instructions
 exactly (for the ipyrad/feems config). The only differences are:
+* `apt install libpoppler-dev spice-vdagent` - libpoppler-dev is for feems/fiona and
+spice-vdagent gives clipboard sharing to the vm
+
+## Hacking Qatar airways captive portal
+I was trying to do some research and went to a random google [group page](https://groups.google.com/g/linux.debian.user/c/zxtMg9-qduY)
+and got a weird message about: `"Fortinet" wasn’t installed properly on your
+computer or the network:`. I had given up on trying to `apt install` anything on my ubuntu
+vm running on my laptop because it was hanging at `0% [waiting for headers]` and i figured the
+satalite internet provides are probably filtering heavy traffic. Anyway, I was like "why would
+they care about this google groups site?" and then i was like "maybe they are just doing
+something very dumb in the filtering, so i looked at the default apt repository which is
+us.archive.ubuntu.com/ubuntu, and I went to that site in a browser. Hangs. I opened up that site
+in elinks on a remote computer that I know is not firewalled and it popped right up. Then i tried
+dropping the 'us.' from the beginning (back on my laptop in a browser on the airplane) and it
+popped right up fine, so they are filtering the hostname in a simple way. I updated my
+/etc/apt/sources.list to remove the 'us.' from all the repos, did an `apt update` and now
+i can apt install just fine. How weird. Fortinet is a security companty that sells firewall
+software and stuff.
+
 
 ## Getting the network passthrough ports working
 This is maybe not easy or at least not straightforward on the UTM version
@@ -174,6 +193,7 @@ but it also works just fine to use the guest ip directly when connecting:
 With the default binary that gets chosen (RAxML-PTHREADS-AVX) the UTM ubuntu VM gives
 a core dump. Using `raxmlHPC-PTHREADS-SSE` instead seems to work fine, so I just removed all the
 other versions of raxml from the ~/miniconda3/envs/ipyrad/bin.
+* This is very very slow inside the emulated x86 env. Maybe could fix it...
 
 # Mac image port of the vbox (None of this ever worked)
 **NONE OF THIS EVER WORKED** It is a good idea in theory to convert the
