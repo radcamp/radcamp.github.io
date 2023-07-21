@@ -1,5 +1,9 @@
 # Configuration of the RADCamp Linux VM
 
+## Emergency backup plan
+* `ssh -L 8800:localhost:8800 -L 8801:localhost:8801 isaac@130.111.223.39`
+* Open browser window to `http://localhost:8800`
+
 ## Configure the VM and set up networking
 * Grab the ubuntu linux server image from [osboxes.org](https://www.osboxes.org/virtualbox-images/)
 * Create a new vm and add the osboxes image as the disk
