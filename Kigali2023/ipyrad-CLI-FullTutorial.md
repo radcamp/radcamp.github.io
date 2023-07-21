@@ -1171,5 +1171,5 @@ includes extensive downstream analysis tools for such things as clustering and
 population assignment, phylogenetic tree inference, quartet-based species tree
 inference, and much more.
 
-![png](images/cheetah_cubs2.png)
+![png](images/Cheetah_cubs2.png)
 ©Laura Bertola
