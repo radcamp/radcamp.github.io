@@ -52,9 +52,9 @@ VM image we've developed for this workshop:
 to proceed.
 ![Finalize RADCamp virtualbox appliance import](images/VBox-NewImageSettings.png)
 * The new image will appear in the left nav as `RC-Kigali-server`.
-* Right click, choose 'Start' and wait for it to fire up (alternatively I prefer
-'Headless Start' because it doesn't open the VM in a new window, as it is
-unnecessary)
+* Right click, choose 'Start->Headless Start' and wait for it to fire up. The 
+'Headless Start' will run the VM in the background, and since we will be accessing
+the vm through a web browser we do not need to log into it directly.
 ![Start RADCamp virtualbox image](images/VBox-StartImage.png)
 * Open a web browser on your computer and navigate to `http://localhost:8800`.
   * **ONLY Mac M1/M2 users** should use `http://192.168.64.8:8800`
@@ -71,6 +71,11 @@ Which, after you open it will look like this:
 ![png](images/ipyrad-CleanTerminal.png)
 
 Now, we're ready to look at the data and start the analyses!
+
+## Advanced VM access (for the curious)
+
+If you want to actually log in to the VM directly to mess with it yourself
+you can use 'Start->Normal Start' and then log in with this username/password.
 
 **Command Line Access to the VBox image:** If you want to actually log into
 the VM the username/password are:
