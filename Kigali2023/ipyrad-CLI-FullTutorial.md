@@ -232,7 +232,7 @@ the `-c` flag. If you do not specify the number of cores ipyrad assumes you want
 ## -p    the params file we wish to use
 ## -s    the step to run
 ## -c    run on 4 cores
-(ipyrad) osboxes@osboxes:~/ipyrad-workshop$ ipyrad -p params-cheeteah.txt -s 1 -c 4
+(ipyrad) osboxes@osboxes:~/ipyrad-workshop$ ipyrad -p params-cheetah.txt -s 1 -c 4
 
  -------------------------------------------------------------
   ipyrad [v.0.9.92]
