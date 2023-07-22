@@ -78,7 +78,8 @@ Times       | Saturday (July 22) | Sunday (July 23) |
 
 # RADCamp Kigali 2023 Group Photo
 
-**Don't forget a nice group photo!**
+![jpg](images/RADCamp-Kigali2023-GroupPhoto.jpg)
+![jpg](images/RADCamp-Kitali2023-Dinner.jpg)
 
 ## Acknowledgements
 RADCamp tutorial contributors (over the years): Isaac Overcast, Deren Eaton,
