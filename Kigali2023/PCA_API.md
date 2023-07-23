@@ -157,7 +157,7 @@ file and run the PCA again.
 ```python
 imap = {"A.j.jubatus":['SRR19760918','SRR19760920','SRR19760921','SRR19760924','SRR19760927','SRR19760928','SRR19760942','SRR19760946','SRR19760947','SRR19760956'],
         "A.j.soemmeringii":['SRR19760910','SRR19760912','SRR19760954','SRR19760955','SRR19760957','SRR19760958','SRR19760959','SRR19760960','SRR19760961','SRR19760962'],
-        "A.j.venaticus":['SRR19760950','SRR19760951','SRR19760953'])
+        "A.j.venaticus":['SRR19760950','SRR19760951','SRR19760953']}
 pca = ipa.pca(data, imap=imap)
 pca.run()
 pca.draw(label="Sims colored by pop (no outgroup)")
