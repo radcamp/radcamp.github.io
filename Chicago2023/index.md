@@ -1,6 +1,7 @@
 # Welcome to RADCamp 2023 - The Chicago Edition
 
-August 22-23, 2023  
+August 21-23, 2023  
+Stanley Classroom
 Field Museum of Natural History  
 Chicago, IL  
 
@@ -11,12 +12,16 @@ Chicago, IL
 
 # Schedule
 
-Times            | Tuesday | Wednesday (Phylogenetics) | Thursday (Population genetics)
------            | ------ | ------- | ---------
-8:30-9:00       | Check-in and refreshments | Check-in and refreshments | Check-in and refreshments
-9:00-12:30      | Intro to RAD-Seq data types | (Instruction) [Jupyter notebook setup](Jupyter_Notebook_Setup.md), [Tetrad - A Quartet-based species tree method](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-tetrad.ipynb), & [Phylogenetic inference: RAxML](06_RAxML_API.md) | (Instruction) [Clustering analysis: PCA](04_PCA_API.md), Demographic analysis ([momi2](07_momi2_API.md))
-12:30-14:00 | Lunch | Lunch | Lunch
-14:00-17:00 |[Cluster basics](01_cluster_basics.md) and [ipyrad parts I](02_ipyrad_partI_CLI.md) & [II](03_ipyrad_partII_CLI.md) | (Small Group work) [Targeted phylogenetics exercises](tba.md) | (Small Group work) [Targeted population genetics exercises](tba.md)
+Times        | Monday | Tuesday | Wednesday |
+-----        | ------ | ------- | --------- |
+8:30-9:00    |  N/A   | Check-in & Recap Day 1 | Check-in & Recap Day 2 |
+9:00-10:15   |  N/A   | RADSeq Data Assembly: ipyrad Part II | Open Work Session |
+10:15-10:30  |  N/A   | Coffee Break | Coffee Break |
+10:30-12:00  |  N/A   | Intro to Jupyter Notebooks | Open Work Session |
+12:00-13:00  |  Lunch | Lunch   | Lunch |
+13:00-15:15  | Welcome & Introductions; Intro to RADSeq data; Software Setup | Population Genetic Analysis: PCA | N/A |
+15:15-15:30  | Cofee Break | Coffee Break | N/A |
+15:30-17:00  | RADSeq Data Quality Control: FASTQC; RADSeq Data Assembly: ipyrad Part I | Phylognetic Inference: RAxML | N/A |
 
 ## Additional ipyrad analysis cookbooks
 
@@ -25,7 +30,7 @@ Times            | Tuesday | Wednesday (Phylogenetics) | Thursday (Population ge
 * [Bucky - Phylogenetic concordance analysis](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-bucky.ipynb)
 * [ABBA-BABA - Admixture analysis](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-abba-baba.ipynb)
 
-## RADCamp Chicago 2023 co-sponsored by:
+## RADCamp Chicago 2023 Sponsored by:
 
 ![The Ruane Lab @ FMNH](images/RuaneLab-logo.png)
 
