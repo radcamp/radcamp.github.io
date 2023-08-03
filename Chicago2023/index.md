@@ -39,4 +39,6 @@ Times        | Monday | Tuesday | Wednesday |
 **Don't forget a nice group photo!**
 
 ## Acknowledgements
-RADCamp tutorial contributors (over the years): Isaac Overcast, Deren Eaton, Mariana Vasconcellos, and Laura Bertola.
+RADCamp tutorial contributors and instructors (over the years): Isaac Overcast, Deren Eaton,
+Sandra Hoffberg, Natalia Bayona-Vasquez, Mariana Vasconcellos, Laura Bertola, Josiah Kuja, Anhubab Kahn,
+Arianna Kuhn.
