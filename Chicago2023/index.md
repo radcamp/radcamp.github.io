@@ -32,10 +32,9 @@ Times        | Monday | Tuesday | Wednesday |
 
 ## RADCamp Chicago 2023 Sponsored by:
 
-![The Ruane Lab @ FMNH](images/RuaneLab-logo.png)
-The Ruane Lab @ FMNH
+[The Ruane Lab @ FMNH](https://sararuane.com/)
 
-Grainger Bioinformatics Center @ FMNH
+[Grainger Bioinformatics Center @ FMNH](https://www.fieldmuseum.org/department/grainger-bioinformatics-center)
 
 # RADCamp Chicago 2023 Group Photo
 
