@@ -6,6 +6,12 @@ sure everyone has access to working software; and 2) preventing any foreseeable
 installation difficulties. More details on the 'Why?' are below, so first let's
 answer the 'What?' question:
 
+## Download the VM from a permanent link at Zenodo
+The Virtual Machine we are using for this workshop is uploaded to Zenodo and
+has a permanent DOI attached to it, so you can always download it in the future.
+Note that it is 4.5GB.
+* [RADCamp Kigali 2023 Virtualbox Image](https://doi.org/10.5281/zenodo.8212945)
+
 ## What is a Virtual Machine (VM)?
 A Virtual Machine (or 'VM') is an operating system running as an *application*
 on your computer. Think of a VM as a little computer running inside your own
