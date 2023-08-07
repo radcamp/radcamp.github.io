@@ -170,6 +170,8 @@ for research teams to standardize research workflow, plus track and reproduce al
 and discoveries. Research and development organizations benefit from lower IT costs, automation
 to operationalize reproducibility, and saving wasted researcher and collaboration time.
 
+## RADCampy NYC 2023 CO Press Release
+[Code Ocean Supports RADcamp Workshops at Columbia University](https://web.archive.org/web/20230801193030/https://www.codeocean.com/resources/blog/radcamp-columbia-university/)
 
 # RADCamp NYC 2023 Part I Group Photo
 ![RADCampNYC2023-PartI-picnic](images/RADCamp-NYC2023-Group-PartI.jpeg)
