@@ -15,13 +15,13 @@ Chicago, IL
 Times        | Monday | Tuesday | Wednesday |
 -----        | ------ | ------- | --------- |
 8:30-9:00    |  N/A   | Check-in & Recap Day 1 | Check-in & Recap Day 2 |
-9:00-10:15   |  N/A   | RADSeq Data Assembly: ipyrad Part II | Open Work Session |
+9:00-10:15   |  N/A   | [RADSeq Data Assembly: ipyrad Part II](ipyrad_CLI_partII.md) | Open Work Session |
 10:15-10:30  |  N/A   | Coffee Break | Coffee Break |
-10:30-12:00  |  N/A   | Intro to Jupyter Notebooks | Open Work Session |
+10:30-12:00  |  N/A   | [Intro to Jupyter Notebooks](Jupyter_Notebook_Setup.md) | Open Work Session |
 12:00-13:00  |  Lunch | Lunch   | Lunch |
-13:00-15:15  | Welcome & Introductions; Intro to RADSeq data; Software Setup | Population Genetic Analysis: PCA | N/A |
+13:00-15:15  | Welcome & Introductions; [Intro to RADSeq data](./radseq-intro); [Software Setup](setup_and_fastqc.md) | [Population Genetic Analysis: PCA](PCA_API.md) | N/A |
 15:15-15:30  | Cofee Break | Coffee Break | N/A |
-15:30-17:00  | RADSeq Data Quality Control: FASTQC; RADSeq Data Assembly: ipyrad Part I | Phylognetic Inference: RAxML | N/A |
+15:30-17:00  | [RADSeq Data Quality Control: FASTQC](setup_and_fastqc.md); [RADSeq Data Assembly: ipyrad Part I](ipyrad_CLI_partI.md) | [Phylognetic Inference: RAxML](RAxML_API.md) | N/A |
 
 ## Additional ipyrad analysis cookbooks
 
