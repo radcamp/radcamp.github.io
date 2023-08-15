@@ -1,15 +1,13 @@
-# RADCamp Marseille 2020 - Day 1
+# RADCamp Chicago 2023 - Day 1
 
-## Overview of the morning activities:
+## Overview of the afternoon activities:
 * [Intro to RADSeq (Brief)](#brief-intro-to-RADSeq)
 * [Intro to ipyrad documentation](#intro-ipyrad-docs)
 * [Connect to a binder instance](#intro-to-binder)
 * [RADseq data quality control (QC)](#data-qc)
 * [ipyrad CLI assembly of simulated data Part I](#ipyrad-cli-simulated-data-assembly-part-I)
 
-## Brief intro to RADSeq
-[Introduction to RAD](https://eaton-lab.org/slides/radcamp/#/11)
-
+## Intro ipyrad Docs
 [ipyrad documentation](https://ipyrad.readthedocs.io/en/latest/)
 
 ## Intro to binder
@@ -185,12 +183,12 @@ quality report for a 75bp RAD-Seq library. These reads have generally high
 quality across their entire length, with only a slight (barely worth
 mentioning) dip toward the end of the reads:
 
-![png](fastqc_files/fastqc-high-quality-example.png)
+![png](images/fastqc-high-quality-example.png)
 
 In contrast, here is a somewhat typical base sequence quality report for R1 of
 a 300bp paired-end Illumina run of ezRAD data:
 
-![png](fastqc_files/fastqc-quality-example.png)
+![png](images/fastqc-quality-example.png)
 
 This figure depicts a common artifact of current Illumina chemistry, whereby
 quality scores per base drop off precipitously toward the ends of reads, with
@@ -227,11 +225,11 @@ examination. We will only look at a few of these.
 **NB:** The simulated date is very boring and too clean, so the following
 figures illustrate FastQC results for a real dataset (Anolis; Prates et al 2016).
 
-![png](fastqc_files/anolis-fastq-main.png)
+![png](images/anolis-fastq-main.png)
 
 Lets start with Per base sequence quality.
 
-![png](fastqc_files/anolis-per-base-qual.png)
+![png](images/anolis-per-base-qual.png)
 
 For the Anolis data the sequence quality per base is uniformly quite high, with
 dips only in the first and last 5 bases (again, this is typical for Illumina
@@ -241,7 +239,7 @@ doesn't need any trimming, which is good.
 Now lets look at the `Per base sequece content`, which FastQC highlights with a
 scary red **X**.
 
-![png](fastqc_files/anolis-base-content.png)
+![png](images/anolis-base-content.png)
 
 The squiggles indicate base composition per base position averaged across the
 reads. It looks like the signal FastQC is concerned about here is related to
@@ -250,7 +248,7 @@ this is a result of the restriction enzyme overhang present in all reads
 (`TGCAT` in this case for the EcoT22I enzyme used), and so it is in fact of no
 concern. Now lets look at `Adapter Content`:
 
-![png](fastqc_files/anolis-adapters.png)
+![png](images/anolis-adapters.png)
 
 Here, we can see adapter contamination increases toward the tail of the reads,
 approaching 40% of total read content at the very end. The concern here is that
@@ -262,7 +260,7 @@ trimming and aggressive adapter filtering.
 
 ## ipyrad assembly part I
 
-[ipyrad CLI Part I](02_ipyrad_partI_CLI.html)
+[ipyrad CLI Part I](ipyrad_CLI_partI.md)
 
 # References
 Prates, I., Xue, A. T., Brown, J. L., Alvarado-Serrano, D. F., Rodrigues, M. T., Hickerson, M. J., & Carnaval, A. C. (2016). Inferring responses to climate dynamics from historical demography in neotropical forest lizards. Proceedings of the National Academy of Sciences, 113(29), 7978-7985.
