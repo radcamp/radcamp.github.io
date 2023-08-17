@@ -10,7 +10,7 @@ Chicago, IL
   - Arianna Kuhn - Virginia Museum of Natural History
   - Isaac Overcast - California Academy of Sciences
 
-# Schedule
+# Schedule (All times are Central Daylight; GMT-5)
 
 Times        | Monday | Tuesday | Wednesday |
 -----        | ------ | ------- | --------- |
