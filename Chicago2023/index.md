@@ -1,7 +1,7 @@
 # Welcome to RADCamp 2023 - The Chicago Edition
 
 August 21-23, 2023  
-Stanley Classroom
+Stanley Classroom  
 Field Museum of Natural History  
 Chicago, IL  
 

@@ -3,14 +3,14 @@
 ## Overview of the afternoon activities:
 * [Intro to RADSeq (Brief)](#brief-intro-to-RADSeq)
 * [Intro to ipyrad documentation](#intro-ipyrad-docs)
-* [Connect to a binder instance](#intro-to-binder)
+* [Software installation](#software-installation)
 * [RADseq data quality control (QC)](#data-qc)
 * [ipyrad CLI assembly of simulated data Part I](#ipyrad-cli-simulated-data-assembly-part-I)
 
 ## Intro ipyrad Docs
 [ipyrad documentation](https://ipyrad.readthedocs.io/en/latest/)
 
-## Intro to binder
+## Open ipyrad in 'Binder'
 We will perform the basic assembly and analysis of simulated data using
 [binder](https://mybinder.org/), to launch a working copy of the ipyrad github
 repository. The binder project allows the creation of shareable, interactive,

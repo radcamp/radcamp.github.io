@@ -37,7 +37,7 @@ Very roughly speaking, ipyrad exists to transform raw data coming off the
 sequencing instrument into output files that you can use for downstream 
 analysis. 
 
-![png](02_ipyrad_partI_CLI_files/02_ipyrad_partI_CLI_ipyrad_workflow.png)
+![png](images/ipyrad_workflow.png)
 
 The basic steps of this process are as follows:
 
@@ -151,7 +151,7 @@ Lets take a look at it.
 
 ``` 
 $ cat params-peddrad.txt
-------- ipyrad params file (v.0.9.13)-------------------------------------------
+------- ipyrad params file (v.0.9.93)-------------------------------------------
 peddrad                        ## [0] [assembly_name]: Assembly name. Used to name output directories for assembly steps
 /home/jovyan/ipyrad-workshop   ## [1] [project_dir]: Project dir (made in curdir if not present)
                                ## [2] [raw_fastq_path]: Location of raw non-demultiplexed fastq files
@@ -281,7 +281,7 @@ all ipyrad assembly steps.
 $ ipyrad -p params-peddrad.txt -s 1 -c 1
 
  -------------------------------------------------------------
-  ipyrad [v.0.9.59]
+  ipyrad [v.0.9.93]
   Interactive assembly and analysis of RAD-seq data
  -------------------------------------------------------------
   Parallel connection | jupyter-dereneaton-2dipyrad-2d975c3axu: 1 cores
@@ -402,7 +402,6 @@ Return to the tab with the params file open in the text editor (or open it
 again if you closed it and change the following two parameter settings:
 
 ```
-2                               ## [16] [filter_adapters]: Filter for adapters/primers (1 or 2=stricter)
 0, 75, 0, 0                     ## [25] [trim_reads]: Trim raw read edges (R1>, <R1, R2>, <R2) (see docs)
 ```
 
@@ -414,7 +413,7 @@ $ ipyrad -p params-peddrad.txt -s 2 -c 1
   from saved path: ~/ipyrad-workshop/peddrad.json
 
  -------------------------------------------------------------
-  ipyrad [v.0.9.59]
+  ipyrad [v.0.9.93]
   Interactive assembly and analysis of RAD-seq data
  -------------------------------------------------------------
   Parallel connection | jupyter-dereneaton-2dipyrad-2d975c3axu: 1 cores
@@ -517,13 +516,12 @@ $ ipyrad -p params-peddrad.txt -s 3 -c 1
   from saved path: ~/ipyrad-workshop/peddrad.json
 
  -------------------------------------------------------------
-  ipyrad [v.0.9.59]
+  ipyrad [v.0.9.93]
   Interactive assembly and analysis of RAD-seq data
  -------------------------------------------------------------
   Parallel connection | jupyter-dereneaton-2dipyrad-2d975c3axu: 1 cores
 
   Step 3: Clustering/Mapping reads within samples
-  [####################] 100% 0:00:11 | concatenating
   [####################] 100% 0:00:02 | join merged pairs
   [####################] 100% 0:00:03 | join unmerged pairs
   [####################] 100% 0:00:01 | dereplicating
@@ -538,7 +536,6 @@ $ ipyrad -p params-peddrad.txt -s 3 -c 1
 ```
 
 In-depth operations of step 3:
-* concatenating - If multiple fastq edits per sample then pile them all together
 * join merged/unmerged pairs - For pared-end data merge overlapping reads per mate pair
 * dereplicating - Merge all identical reads
 * clustering - Find reads matching by sequence similarity threshold
@@ -607,6 +604,4 @@ threshold) are grouped together in clusters separated by "//". The first cluster
 above is *probably* homozygous with some sequencing error. The second cluster is
 *probably* heterozygous with some sequencing error. We don't want to go through
 and 'decide' by ourselves for each cluster, so thankfully, untangling this mess
-is what steps 4 & 5 are all about. [ipyrad CLI Part II (steps 4-7) is here](03_ipyrad_partII_CLI.html).
-
-However, this is probably a good time for a coffee break. 
+is what steps 4 & 5 are all about. [ipyrad CLI Part II (steps 4-7) is here](ipyrad_CLI_partII.md).
