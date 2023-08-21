@@ -1,16 +1,15 @@
 # RADCamp Chicago 2023 - Day 1
 
 ## Overview of the afternoon activities:
-* [Intro to RADSeq (Brief)](#brief-intro-to-RADSeq)
 * [Intro to ipyrad documentation](#intro-ipyrad-docs)
-* [Software installation](#software-installation)
+* [Software setup](#open-ipyrad-in-binder)
 * [RADseq data quality control (QC)](#data-qc)
-* [ipyrad CLI assembly of simulated data Part I](#ipyrad-cli-simulated-data-assembly-part-I)
+* [ipyrad assembly of simulated data Part I](#ipyrad-assembly-part-I)
 
 ## Intro ipyrad Docs
 [ipyrad documentation](https://ipyrad.readthedocs.io/en/latest/)
 
-## Open ipyrad in 'Binder'
+## Open ipyrad in Binder
 We will perform the basic assembly and analysis of simulated data using
 [binder](https://mybinder.org/), to launch a working copy of the ipyrad github
 repository. The binder project allows the creation of shareable, interactive,
