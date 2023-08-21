@@ -7,7 +7,7 @@ be shared and published to the web. Here is a good examle of a notebook
 demonstrating the [ipyrad.analysis.pca module](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-PCA-pedicularis.ipynb). In this notebook you can see the benefit
 of intermingling expanatory text, with executable code, and results:
 
-![png](Jupyter_Notebook_Setup_files/Jupyter_notebook_example_page.png)
+![png](images/Jupyter_notebook_example_page.png)
 
 And this is not a static document! I can open this notebook and
 recreate my entire analysis, or even tweak things and rerun it

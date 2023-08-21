@@ -1,10 +1,11 @@
+
 # The ipyrad.analysis module: **PCA**
 
-As part of the `ipyrad.analysis` toolkit we've created a module for
+As part of the `ipyrad.analysis` toolkit we've created convenience functions for
 easily performing exploratory principal component analysis (PCA) on your data.
-PCA is a very standard dimension-reduction technique that is often used to get a
-general sense of how samples are related to one another. PCA has the advantage
-over STRUCTURE-type analyses in that it is very fast. Similar to STRUCTURE, PCA
+PCA is a very standard dimension-reduction technique that is often used to get
+a general sense of how samples are related to one another. PCA has the advantage
+over STRUCTURE type analyses in that it is very fast. Similar to STRUCTURE, PCA
 can be used to produce simple and intuitive plots that can be used to guide
 downstream analysis. These are three very nice papers that talk about the
 application and interpretation of PCA in the context of population genetics:
@@ -13,264 +14,128 @@ application and interpretation of PCA in the context of population genetics:
 * [Novembre & Stephens (2008) Interpreting principal component analyses of spatial population genetic variation](https://www.nature.com/articles/ng.139)
 * [McVean (2009) A genealogical interpretation of principal components analysis](http://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1000686)
 
+## A note on Jupyter/IPython
+[Jupyter notebooks](http://jupyter.org/) are primarily a way to generate
+reproducible scientific analysis workflows in python. ipyrad analysis tools are
+best run inside Jupyter notebooks, as the analysis can be monitored and tweaked
+and provides a self-documenting workflow.
+
+The rest of the materials in this part of the workshop assume you are running
+all code in cells of a jupyter notebook.
+
 # **PCA** analyses
 
-First begin by creating a new Jupyter notebook for your PCA analysis. From the
-Jupyter dashboard choose New->Python 3, and this will pop open a new tab with a
-new notebook. **The rest of the materials in this part of the workshop assume
-you are running all code in cells of a jupyter notebook** that is running inside
-the vm.
-
-* [Simple PCA from a VCF file](#simple-pca-from-vcf-file)
-* [Coloring by population assignment](#population-assignment-for-sample-colors)
-* [Removing "bad" samples and replotting](#removing-bad-samples-and-replotting)
-* [Specifying which PCs to plot](#looking-at-pcs-other-than-1--2)
-* [Multi-panel PCA](#multi-panel-pca)
-* [More to explore](#more-to-explore)
-
 ## Create a new notebook for the PCA
-First things first, rename your new notebook to give it a meaningful name:
-![png](04_PCA_API_files/04_PCA_API_Notebook_Rename.png)
+In the file browser on the left of JupyterLab browse to the directory with the
+assembly of the cheetah data: `/home/osboxes/ipyrad-workshop`.
 
-### Import Python libraries
-The `import` keyword directs python to load a module into the currently running
-context. This is very similar to the `library()` function in R. We begin by
-importing ipyrad, as well as the analysis module. Copy the code below into a
-notebook cell and click run. 
+Similar how you've previously opened the Terminal, now open a new "Python 3" notebook by clicking on `New`.
+
+![png](images/raxml-CreateNotebook.png)
+
+First things first, rename your new notebook to give it a meaningful name. Choose `File->Save Notebook` and rename your notebook to "cheetah_PCA.ipynb"
+
+### Import ipyrad.analysis module
+For this analysis, we'll use python. The `import` keyword directs python to load a module into the currently running context. This is very similar to the `library()` function in R. We begin by importing the ipyrad analysis module. Copy the code below into a notebook cell and click run. 
 
 ```python
-import ipyrad
-import ipyrad.analysis as ipa      ## ipyrad analysis toolkit
+import ipyrad.analysis as ipa
 ```
+> The `as ipa` part here creates a short synonym so that we can refer to
+`ipyrad.analysis` **as** `ipa`, which is just faster to type.
 
 ## Quick guide (tl;dr)
 The following cell shows the quickest way to results using the small simulated
-dataset we have assembled. Complete explanation of all of the features and
-options of the PCA module is the focus of the rest of this tutorial. Copy this
-code into a notebook cell and run it.
+dataset in `/ipyrad-workshop`. Complete explanation of all of the
+features and options of the PCA module is the focus of the rest of this tutorial.
+Copy this code into a new notebook cell (you can add new cells with the *+* button on the toolbar)
+and run it.
 
 ```python
-vcffile = "simdata_outfiles/simdata.vcf"
-# Create the pca object
-# `quiet=True` indicates we don't care about the details, at this point
-pca = ipa.pca(data=vcffile, quiet=True)
+data = "cheetah_outfiles/cheetah.snps.hdf5"
+## Create the pca object
+pca = ipa.pca(data)
+## Run the analysis
 pca.run()
+## Bam!
 pca.draw()
 ```
-```
-[####################] 100% 0:00:06 | converting VCF to HDF5 Samples: 12
-```
 
-![png](04_PCA_API_files/04_PCA_API_00_Simulated_Example.png)
+![png](images/cheetah_PCA.png)
 
-**BAM!**
-
-> **Note** The `#` at the beginning of a line indicates to python that this is
-a comment, so it doesn't try to run this line. This is a very handy thing if you
-want to add or remove lines of code from an analysis without deleting them.
-Simply comment them out with the `#`!
+> **Note:** In this block of code, the `#` at the beginning of a line indicates
+to python that this is a comment, so it doesn't try to run this line. This is a
+very handy thing if you want to add or remove lines of code from an analysis
+without deleting them. Simply comment them out with the `#`!
 
 ## Full guide
 
-### Simple PCA from vcf file
+### Simple PCA from ipyrad hdf5 file
 
 In the most common use, you'll want to plot the first two PCs, then inspect the
-output, remove any obvious outliers, and then redo the PCA. Here we'll use real
-data (note that __any__ vcf can be imported and plotted with the ipyrad PCA
-analysis tool).
+output, remove any obvious outliers, and then redo the PCA.
 
 ```python
-# Fetch the vcf for the subsampled Anolis data from Prates et al (2016)
-!wget https://radcamp.github.io/Yale2019/Prates_et_al_2016_example_data/anolis.vcf
+## Path to the input data in snps.hdf5 format 
+data = "cheetah_outfiles/cheetah.snps.hdf5"
+pca = ipa.pca(data)
 ```
-> **NB:** The `!` here indicates to the notebook that you want to run the
-folliwing command not as python, but directly at the terminal, it's a
-convenience.
+> **Note:** Here we use the hdf5 database file with SNPs generated with ipyrad from the
+cheetah data. The database file contains the genotype calls information as well
+as linkage information that is used for subsampling unlinked SNPs and bootstrap resampling.
 
-```python
-## Path to the input vcf.
-vcffile = "anolis.vcf"
-pca = ipa.pca(vcffile)
-```
-```
-Converting vcf to HDF5 using default ld_block_size: 20000
-Typical RADSeq data generated by ipyrad/stacks will ignore this value.
-You can use the ld_block_size parameter of the PCA() constructor to change
-this value.
-
-[####################] 100% 0:00:00 | converting VCF to HDF5 Samples: 10
-Sites before filtering: 1194
-Filtered (indels): 0
-Filtered (bi-allel): 7
-Filtered (mincov): 0
-Filtered (minmap): 0
-Filtered (combined): 7
-Sites after filtering: 1187
-Sites containing missing values: 1147 (96.63%)
-Missing values in SNP matrix: 6140 (51.73%)
-Imputation (null; sets to 0): 100.0%, 0.0%, 0.0%
-```
-
-## PCA and missing data
-Creation of the PCA object reports quite a bit of information, all of which is
-related to filtering and missing data. The underlying algorithm assumes
-a complete data matrix of bi-allelic sites, so missing data is not allowed.
-This is a fundamental property of the PCA algorithm, so this is true for any
-software that implements it (smartPCA, adegenet, plink, etc). The typical way
-of handling missing data is to recode it as 0 (ancestral state). RADSeq data is
-characterized by high levels of missingness, the anolis data matrix is 50%
-empty! This is totally normal, but coding 50% of the data as 0 will obviously
-not fly. Here we remove sites that are non-biallelic or that contain indels,
-we apply global and population-level minimum sampling thresholds, and then we
-set all missing data to 0 (the default). We will return to more sophisticated
-imputation methods in a little bit.
+> **Note:** The `ipyrad.analysis.pca` module can also read in data from
+*any* vcf file, so it's possible to quickly generate PCA plots for any vcf from
+any dataset.
 
 Now construct the default plot, which shows all samples and PCs 1 and 2.
-By default all samples are assigned to one population, so everything will 
-be the same color.
 
 ```python
-# First run the PCA
 pca.run()
-# Now draw the results
 pca.draw()
 ```
-```
-Subsampling SNPs: 508/1187
-(<toyplot.canvas.Canvas at 0x7f12b04a0b50>,
- <toyplot.coordinates.Cartesian at 0x7f12b04a0bd0>,
- <toyplot.mark.Point at 0x7f12b048f290>)
- <matplotlib.axes._subplots.AxesSubplot at 0x7fe0beb3a650>
-```
-![png](04_PCA_API_files/04_PCA_API_01_Anolis_PCA.png)
+
+![png](images/cheetah_PCA.png)
 
 ### Population assignment for sample colors
-By default all the samples are assigned to the same poplution, which is cool,
-but it's not very useful. Fortunately, we make it possible to specify
-population assignments in a dictionary. The format of the dictionary should
-have populations as keys and lists of samples as values. Sample names need to
-be identical to the names in the vcf file, which we can verify with the
-`names` property of the PCA object.
+Typically it is useful to color points in a PCA by some a priori grouping, such
+as presumed population, or by experimental treatment groups, etc. To facilitate
+this it is possible to specify population assignments in a `dictionary`. The
+format of the dictionary should have populations as keys and lists of samples
+as values. Sample names need to be identical to the names in the input dataset,
+which we can verify with the `names` property of the PCA object. Open a new cell
+and type this:
 
 ```python
-print(pca.names)
+pca.names
 ```
-```
-['punc_IBSPCRIB0361',
- 'punc_ICST764',
- 'punc_JFT773',
- 'punc_MTR05978',
- 'punc_MTR17744',
- 'punc_MTR21545',
- 'punc_MTR34414',
- 'punc_MTRX1468',
- 'punc_MTRX1478',
- 'punc_MUFAL9635']
-```
+This will show you a list of sample names.
 
 Here we create a python 'dictionary', which is a key/value pair data structure.
-The keys are the population names, and the values are the lists of samples that
+The keys are the population names, in our case cheetah subspecies, and the values are the lists of samples that
 belong to those populations. You can copy and paste this into a new cell in your
-notebook (saves typing and prevents copy/paste errors).
+notebook.
+```python
+imap = {"A.j.jubatus":['SRR19760918','SRR19760920','SRR19760921','SRR19760924','SRR19760927','SRR19760928','SRR19760942','SRR19760946','SRR19760947','SRR19760956'],
+        "A.j.soemmeringii":['SRR19760910','SRR19760912','SRR19760954','SRR19760955','SRR19760957','SRR19760958','SRR19760959','SRR19760960','SRR19760961','SRR19760962'],
+        "A.j.venaticus":['SRR19760950','SRR19760951','SRR19760953'],
+        "Outgroup":['SRR19760949']}
+```
+Now create the `pca` object with the input data again, this time passing 
+in the new dictionary as the second argument and specifying this as the `imap`,
+and plot the new figure. We can also easily add a title to our PCA plots
+with the `label=` argument.
 
 ```python
-# create the imap dict to map individuals to populations
-imap = {
-     "South":['punc_IBSPCRIB0361', 'punc_MTR05978','punc_MTR21545','punc_JFT773',
-             'punc_MTR17744', 'punc_MTR34414', 'punc_MTRX1478', 'punc_MTRX1468'],
-     "North":['punc_ICST764', 'punc_MUFAL9635']
-}
-```
-Now recreate the `pca` object with the vcf file again, this time passing 
-in the imap as the second argument, and plot the new figure.
-
-```python
-pca = ipa.pca(data=vcffile, imap=imap)
+pca = ipa.pca(data, imap=imap)
 pca.run()
-pca.draw()
-```
-```
-Converting vcf to HDF5 using default ld_block_size: 20000
-Typical RADSeq data generated by ipyrad/stacks will ignore this value.
-You can use the ld_block_size parameter of the PCA() constructor to change
-this value.
-
-[####################] 100% 0:00:00 | converting VCF to HDF5 Samples: 10
-Sites before filtering: 1194
-Filtered (indels): 0
-Filtered (bi-allel): 7
-Filtered (mincov): 0
-Filtered (minmap): 404
-Filtered (combined): 408
-Sites after filtering: 786
-Sites containing missing values: 746 (94.91%)
-Missing values in SNP matrix: 3548 (45.14%)
-Imputation (null; sets to 0): 100.0%, 0.0%, 0.0%
-Subsampling SNPs: 362/786
-    <matplotlib.axes._subplots.AxesSubplot at 0x7fe092fbbe50>
+pca.draw(label="Sims colored by pop")
 ```
 
-![png](04_PCA_API_files/04_PCA_API_02_Anolis_PCA_colored.png)
+![png](images/cheetah_PCA_pop.png)
 
-This is just much nicer looking now, and it's also much more straightforward to
-interpret. The plotting feature uses [toyplot](toyplot.rtft.io) on the backend,
-so it does a bunch of nice things for us automatically, like create a legend,
-and also it provides a nice 'hover' function so you can identify which samples
-are which. Hover one of the points in the figure and you'll see the name pop
-up:
-
-![png](04_PCA_API_files/04_PCA_API_02_Anolis_PCA_hover.png)
-
-Lets notice something really quick, in the previous call to `run()` we were told
-`Subsampling SNPs: 508/1187`, yet now we have `Subsampling SNPs: 362/786`. Why
-might this be? Lets investigate further. Make a new cell and run this a couple
-times:
-```
-pca.run()
-pca.draw()
-```
-![png](04_PCA_API_files/04_PCA_API_02_Anolis_PCA_rep1.png)
-![png](04_PCA_API_files/04_PCA_API_02_Anolis_PCA_rep2.png)
-
-Notice anything? The relationships between samples change a bit, but also the
-total number of SNPs retained was reduced from 1187 to 786. This is because we
-impose a default minimum of 1 sample with a variable site per SNP within each
-population. You can tune this, but it's an advanced feature we'll talk about
-later.
-
-## Subsampling SNPs
-By default run() will randomly subsample one SNP per RAD locus to reduce the
-effect of linkage on your results. This can be turned off by setting
-`subsample=False`. Try this:
-
-```
-pca.run(subsample=False)
-pca.draw()
-```
-
-![png](04_PCA_API_files/04_PCA_API_02_Anolis_PCA_unsampled.png)
-
-
-Running this will produce identical results every time, because the subsampling
-is disabled. Now we can use the subsampling to our advantage to generate an
-estimate of uncertainty in the results!
-
-## Subsampling with replication
-Subsampling unlinked SNPs is generally a good idea for PCA analyses since you
-want to remove the effects of linkage from your data. It also presents a
-convenient way to explore the confidence in your results. By using the option
-`nreplicates` you can run many replicate analyses that subsample a different
-random set of unlinked SNPs each time. The replicate results are drawn with a
-lower opacity and the centroid of all the points for each sample is plotted
-with full fill and black stroke. Again, you can hover over the points with
-your cursor to see the sample names pop-up.
-
-```
-pca.run(nreplicates=25)
-pca.draw()
-```
-
-![png](04_PCA_API_files/04_PCA_API_02_Anolis_PCA_replicates.png)
+This is just much nicer looking now, and it's also much more straightforward
+to interpret.
 
 ## Removing "bad" samples and replotting.
 In PC analysis, it's common for "bad" samples to dominate several of the first
@@ -279,195 +144,121 @@ can often be attributed to poor sequence quality or sample misidentifcation.
 Samples with lots of missing data tend to pop way out on their own, causing
 distortion in the signal in the PCs. Normally it's best to evaluate the quality
 of the sample, and if it can be seen to be of poor quality, to remove it and
-replot the PCA. Here's a good example from a study using RADSeq data from 161
-geckos:
+replot the PCA. 
+In our dataset, we don't really have bad samples, but we do have an outlier: the outgroup. Because we're intersted in cheetah only, let's remove the outgroup sample and rerun the PCA.
 
-![png](04_PCA_API_files/04_PCA_API_bad_geckos.png)
+> **Note:** We make a lot of use of the interactivity of jupyter notebooks in
+the ipyrad.analysis tools. In the PCA you can 'hover' over points to reveal
+their sample ID.
 
-Here, 5 samples from El Charco House are dominating the figure, with all the
-remaining samples crushed down into the little blue dot on the left. Removing
-those 5 samples gives a more reasonable looking result.
-
-![png](04_PCA_API_files/04_PCA_API_good_geckos.png)
-
-The Anolis dataset is actually relatively nice, but for the sake of
-demonstration lets imagine the "North" samples are "bad samples". From the
-figure we can see that "North" samples are distinguished by positive values
-on PC1. 
-
-![png](04_PCA_API_files/04_PCA_API_02_Anolis_PCA_unsampled.png)
-
-We can get a more quantitative view on this by accessing `pca.pcs()`, which is
-a property of the `pca` object that is populated after the `run()` function is
-called. It contains the first 10 PCs for each sample. Let's have a look at
-these values:
+The easiest way to achieve this is to simply remove the sample from the `imap`
+file and run the PCA again.
 
 ```python
-## Printing PCs to the screen
-pca.pcs().round(3)
-```
-> **NB:** The `.round(3) trick is a way to make dataframes print fewer
-significant digits, just to make it less messy looking.
-
-```
-## You can also save the PCs table to a .csv file
-pca.pcs().to_csv("Anolis_10PCs.csv")
+imap = {"A.j.jubatus":['SRR19760918','SRR19760920','SRR19760921','SRR19760924','SRR19760927','SRR19760928','SRR19760942','SRR19760946','SRR19760947','SRR19760956'],
+        "A.j.soemmeringii":['SRR19760910','SRR19760912','SRR19760954','SRR19760955','SRR19760957','SRR19760958','SRR19760959','SRR19760960','SRR19760961','SRR19760962'],
+        "A.j.venaticus":['SRR19760950','SRR19760951','SRR19760953']}
+pca = ipa.pca(data, imap=imap)
+pca.run()
+pca.draw(label="Sims colored by pop (no outgroup)")
 ```
 
-> **Note** It's always good practice to use informative file names, i.e. here
-we use the name of the dataset and the number of PCs retained.
+![png](images/cheetah_PCA_noout.png)
 
-![png](04_PCA_API_files/04_PCA_API_03_Anolis_PCA_PCS.png)
-
-You can see that indeed punc_ICST764 and punc_MUFAL9635 have positive values for
-PC1 and all the rest have negative values, so we can target them for removal in
-this way. We can construct a 'mask' based on the value of PC1, and then remove
-samples that don't pass this filter.
+## Subsampling with replication
+By default `run()` will randomly subsample one SNP per RAD locus to reduce the
+effect of linkage on your results. This can be turned off by setting
+`subsample=False`. However, subsampling *unlinked* SNPs is generally a good
+idea for PCA analyses since you want to remove the effects of linkage from your
+data. It also presents a convenient way to explore the confidence in your
+results. By using the option `nreplicates` you can run many replicate analyses
+that subsample a different random set of unlinked SNPs each time. The replicate
+results are drawn with a lower opacity and the centroid of all the points for
+each sample is plotted as a black point. 
 
 ```python
-pc1_column = 0
-mask = pca.pcs().values[:, pc1_column] > 0
-print(mask)
+pca.run(nreplicates=10)
+pca.draw();
 ```
-    [False  True False False False False False False False  True]
+![png](images/cheetah_PCA_rep.png)
 
-> **Note:** In this call we are "masking" all samples (i.e. rows of the data
-matrix) which have values greater than 0 for the first column, which here is the
-'0' in the `[:, 0]` fragment. This is somewhat confusing because python matrices
-are 0-indexed, whereas it's typical for PCs to be 1-indexed. It's a nomencalture
-issue, really, but it can bite us if we don't keep it in mind. In the `pca`
-analysis tool we adopt the convention of 0-indexing the PCs. 
-
-You can see above that the mask is a list of booleans that is the same length as
-the number of samples. We can use this mask to select just the samples we want
-to remove. First lets verify that we're removing the samples we think we're
-removing by applying the mask to the dataframe of PCs:
+## Plotting PCs other than 0 and 1
+Even though PC 0 and 1 by definition explain the most variance in the data,
+it is still often useful to examine other PCs. You can do this by specifying
+which PCs to plot in in the call to `draw`.
 
 ```python
-pca.pcs()[mask].index
+pca.draw(2,3)
 ```
-    array([u'punc_ICST764', u'punc_MUFAL9635'], dtype=object)
+![png](images/PCA-PC02.png)
 
-> **NB:** Here we apply the `mask` to the pcs dataframe, and then just print
-the index.
-
-Now we can use the mask to remove the samples from the PCA:
+## Custom color points
+Another nice feature of the `draw` method is the ability to pass in any custom
+color that you like for each population. You can do this in a couple different
+ways, but the most straightforward is just to pass in a list of valid color names
+from the ['named colors' matplotlib documentation](https://matplotlib.org/stable/gallery/color/named_colors.html).
 
 ```python
-pca_clean = pca.remove_samples(mask)
+pca.draw(colors=["hotpink", "skyblue", "goldenrod"])
 ```
+![png](images/cheetah_PCA_colors.png)
 
-> **Note:** The `remove_samples` function is non-destructive of the original
-`pca` object. This means that the function returns a **copy** of the original
-with specified samples removed which you'll have to assign to a new variable.
-Here we assign it to `pca_clean`
-```
-## Lets prove that the removed samples are gone now
-print(pca_clean.names)
-```
-    [u'punc_IBSPCRIB0361' u'punc_JFT773' u'punc_MTR05978' u'punc_MTR17744'
-     u'punc_MTR21545' u'punc_MTR34414' u'punc_MTRX1468' u'punc_MTRX1478']
-
-And now plot the new figure with the "bad" samples removed.
+## Saving a PCA plot to a file
+You can save the figure as a PDF or SVG automatically by passing an `outfile`
+argument to the `.draw()` function.
 
 ```python
-pca_clean.run()
-pca_clean.draw()
+# The outfile must end in either `.pdf` or `.svg`
+pca.draw(outfile="cheetah-pca.pdf")
 ```
 
-![png](04_PCA_API_files/04_PCA_API_04_Anolis_PCA_NoNorth.png)
+This will save `cheetah-pca.pdf` into your notebook environment. You can open the
+jupyter file browser and open or download the pdf from there.
 
-# Further advanced topics (if time allows)
+![png](images/cheetah_PCA_DownloadPDF.png)
 
-## Imputation
-They `ipyrad.analysis.pca` module offers three algorithms for imputing missing
-data:
-* sample: Randomly sample genotypes based on the frequency of alleles within
-(user-defined) populations (imap).
-* kmeans: Randomly sample genotypes based on the frequency of alleles in (kmeans
-cluster-generated) populations.
-* None: All missing values are imputed with zeros (ancestral allele).
+## Dealing with missing data in PCA
+PCA can be _extremely_ sensitive to missing data if there is any pattern
+at all in the missingness.
 
-We won't dive into the differences between these imputation methods here, but
-if you are interested you can find much more information on in the docs for the
-[pca module](https://ipyrad.readthedocs.io/en/latest/API-analysis/cookbook-pca.html#No-imputation-(None))
+We offer three algorithms for imputing missing data:
 
-## Looking at PCs other than 1 & 2
-PCs 1 and 2 by definition explain the most variation in the data, but sometimes
-PCs further down the chain can also be useful and informative. The plot function
-makes it simple to ask for PCs directly.
+* `sample`: Randomly sample genotypes based on the frequency of alleles within
+(user-defined) populations (`imap`).
+* `kmeans`: Randomly sample genotypes based on the frequency of alleles in
+(kmeans cluster-generated) populations.
+* 'random': This is less an imputation method than an attempt to reduce the bias
+of assigning all missing data to the ancestral state. Instead missing data
+are randomly assigned to ancestral or derived states.
+* `None` (default): All missing values are imputed with zeros (ancestral allele).
 
+Here is an example of how to select an `impute_method`:
 ```python
-## Lets reload the full dataset so we have all the samples
-pca = ipa.pca(data=vcffile, imap=imap)
-pca.plot(ax0=1, ax1=2)
+pca1 = ipa.pca(
+    data=data,
+    imap=imap,
+    impute_method='sample',
+)
 ```
 
-![png](04_PCA_API_files/04_PCA_API_05_Anolis_PCA_PC34.png)
+A fourth approach is to simply enforce an lower bound on missing data with
+the `mincov` parameter. `mincov` specifies the minimum coverage threshold
+below which a snp is excluded from the analysis.
 
-## Multi-panel PCA
-This is a last example of a couple of the nice features of the `pca` module,
-including the ability to pass in the axis to draw to, and toggling the legend.
-First, lets say we want to look at PCs 1/2 and 3/4 simultaneously. We can create
-a multi-panel figure with matplotlib, and pas in the axis for `pca` to plot to.
-We won't linger on the details of the matplotlib calls, but illustrate this here
-so you might have some example code to use in the future.
-
-> **NB:** This section is just a sketch to give some ideas how to do more
-sophisticated plotting with matplotlib. It hasn't been updated to the newest
-ipyrad.analysis.pca api yet, so it doesn't 100% work.
-
+This code will exclude any snp not present in 100% of samples, a very strict
+threshold.
 ```python
-import matplotlib.pyplot as plt
-
-## Create a new figure 12 inches wide by 5 inches high
-fig = plt.figure(figsize=(12, 5))
-
-## These two calls divide the figure evenly into left and right
-## halfs, and assigns the left half to `ax1` and the right half to `ax2`
-ax1 = fig.add_subplot(1, 2, 1)
-ax2 = fig.add_subplot(1, 2, 2)
-
-## Plot PCs 1 & 2 on the left half of the figure, and PCs 3 & 4 on the right
-pca.plot(ax=ax1, pcs=[1, 2], title="PCs 1 & 2")
-pca.plot(ax=ax2, pcs=[3, 4], title="PCs 3 & 4")
-
-## Saving the plot as a .png file
-plt.savefig("Anolis_2panel_PCs1-4.png", bbox_inches="tight")
+pca2 = ipa.pca(
+    data=data,
+    mincov=1.0,
+    impute_method=None,
+)
 ```
-    <matplotlib.axes._subplots.AxesSubplot at 0x7fa3d0a04290>
 
-> **Note** Saving the two panel figure is a little different, because we're making
-a composite of two different PCA plots. We need to use the native matplotlib
-`savefig()` function, to save the entire figure, not just one panel. `bbox_inches`
-is an argument that makes the output figure look nicer, it crops the bounding box
-more accurately.
-
-![png](04_PCA_API_files/04_PCA_API_06_Anolis_PCA_Multi.png)
-
-It's nice to see PCs 1-4 here, but it's kind of stupid to plot the legend twice, so we can just turn off the legend on the first plot.
-
-```python
-fig = plt.figure(figsize=(12, 5))
-ax1 = fig.add_subplot(1, 2, 1)
-ax2 = fig.add_subplot(1, 2, 2)
-
-## The difference here is we switch off the legend on the first PCA
-pca.plot(ax=ax1, pcs=[1, 2], title="PCs 1 & 2", legend=False)
-pca.plot(ax=ax2, pcs=[3, 4], title="PCs 3 & 4")
-
-## And save the plot as .png
-plt.savefig("My_PCA_plot_axis1-4.png", bbox_inches="tight")
-```
-    <matplotlib.axes._subplots.AxesSubplot at 0x7fa3d0a8db10>
-
-![png](04_PCA_API_files/04_PCA_API_07_Anolis_PCA_MultiNoLegend.png)
-
-Much better!
+We encourage you to experiment with different imputation schemes
+and missing data thresholds when analysing your own data later.
 
 ## More to explore
-The `ipyrad.analysis.pca` module has many more features that we just don't have time to go over, but you might be interested in checking them out later:
-* [Fine grained control of colors per populations](PCA_Advanced_Features.md#controlling-colors)
-* [Dealing with missing data](PCA_Advanced_Features.md#dealing-with-missing-data)
-* [Dealing with unequal sampling](PCA_Advanced_Features.md#dealing-with-unequal-sampling)
-* [Dealing with linked snps](PCA_Advanced_Features.md#dealing-with-linked-snps)
+The `ipyrad.analysis.pca` module has many more features that we just don't have
+time to go over, but you might be interested in checking them out later:
+* [Full ipyrad.analysis.pca cookbook](https://ipyrad.readthedocs.io/en/master/API-analysis/cookbook-pca.html)

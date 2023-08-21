@@ -222,7 +222,7 @@ FastQC generates an html file as output, and on the left you'll see a summary
 of all the results, which highlights areas FastQC indicates may be worth further
 examination. We will only look at a few of these.
 
-**NB:** The simulated date is very boring and too clean, so the following
+**NB:** The simulated data is very boring and too clean, so the following
 figures illustrate FastQC results for a real dataset (Anolis; Prates et al 2016).
 
 ![png](images/anolis-fastq-main.png)
