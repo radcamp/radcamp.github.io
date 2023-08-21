@@ -1,155 +1,216 @@
 
-## The ipyrad.analysis module: RAxML
+# The ipyrad.analysis module: **RAxML**
 
-As part of the `ipyrad.analysis` toolkit we've created convenience functions for easily running common [**RAxML**](https://sco.h-its.org/exelixis/web/software/raxml/index.html) commands, a maximum likelihood inference of phylogenetic trees. This can be useful when you want to run all of your analyses in a clean stream-lined way in a jupyter notebook to create a completely reproducible study. 
+RAxML is the most popular tool for inferring phylogenetic trees using maximum
+likelihood. It is fast even for very large data sets. The documentation for
+raxml is huge, and there are many options. However, we tend to use the same small
+number of options very frequently, which motivated us to write the `ipa.raxml()`
+tool to automate the process of generating RAxML command line strings, running
+them, and accessing the resulting tree files. The simplicity of this tool makes
+it easy to incorporate into other more complex tools, for example, to infer
+tress in sliding windows along the genome using the `ipa.treeslider` tool.
 
-### Install software
-There are many ways to install RAxML, the simplest of which is to use conda. This will install several RAxML binaries into your conda path. Open an ssh session on the cluster and run the following command:
+More information about RAxML can be found [here](https://cme.h-its.org/exelixis/web/software/raxml/) and the scientific paper [Stamatakis *et al.* (2014)](https://academic.oup.com/bioinformatics/article/30/9/1312/238053).
 
-```
-$ conda install raxml -c bioconda
-```
-# **RAxML** Phylogenetic Inference
+## Input data
+The raxml tool takes a phylip formatted file as input. In addition you can set
+a number of analysis options either when you init the tool, or afterwards by
+accessing the `.params` dictionary. You can view the raxml command string that is
+generated from the input arguments and you can call `.run()` to start the tree inference.
 
-Create a new notebook inside your `/home/<username>/ipyrad-workshop/` directory called `anolis-raxml.ipynb` (refer to the [jupyter notebook configuration page](Jupyter_Notebook_Setup.md) for a refresher on connecting to the notebook server). The rest of the materials in this part of the workshop assume you are running all code in cells of a jupyter notebook that is running on the USP cluster.
+## A note on Jupyter/IPython
+[Jupyter notebooks](http://jupyter.org/) are primarily a way to generate
+reproducible scientific analysis workflows in python. ipyrad analysis tools are
+best run inside Jupyter notebooks, as the analysis can be monitored and tweaked
+and provides a self-documenting workflow.
 
-## Create a RAxML Class object
-First, copy and paste the usual imports into a notebook cell and run it:
-```python
-import ipyrad.analysis as ipa    ## ipyrad analysis toolkit
-import toyplot                   ## plotting library
-import toytree                   ## tree plotting
-```
+The rest of the materials in this part of the workshop assume you are running
+all code in cells of a jupyter notebook.
 
-Now create a RAxML object. The only required argument to initialize the object is a phylip formatted sequence file. In this example we provide a name and working directory as well:
+# **RAxML** analyses
 
-```python
-rax = ipa.raxml(
-    data="./anolis_outfiles/anolis.phy",
-    name="anolis-tree", 
-    workdir="./anolis-raxml",
-    );
-```
+## Create a new notebook for the RAxML analysis
+In the jupyter notebook browser interface navigate to your `ipyrad-workshop`
+directory and create a "New->Python" Notebook.
 
-### Additional options
-RAxML has a **ton** of parameters for modifying how it behaves, and we will only explore just a fraction of these. For more info on RAxML parameters, look [here](https://sco.h-its.org/exelixis/resource/download/NewManual.pdf). You can also specify many of these parameters by setting values in the params dictionary of your RAxML object. In the following cell we modify the number of bootstrapping runs on distinct starting trees (`params.N`), the number of threads to use (`params.T`), and the outgroup samples (`params.o`). 
+![png](images/raxml-CreateNotebook.png)
 
-```python
-## Number of runs
-rax.params.N = 10
+First things first, rename your new notebook to give it a meaningful name. You can
+either click the small 'disk' icon in the upper left corner of the notebook or
+choose `File->Save Notebook` and rename your notebook to "RAxML-peddrad.ipynb"
 
-## Number of threads
-rax.params.T = 2
-
-## Set the outgroup. Because we don't have an outgroup for Anolis we use None.
-rax.params.o = None 
-
-## Alternatively, if we had an outgroup we could specify this with sample names
-## Here we could specify the Northern samples as the outgroup, this is just for illustration
-## rax.params.o = ['punc_ICST764', 'punc_MUFAL9635']
-```
-
-### Print the command string 
-It is good practice to always print the command string so that you know exactly what was called for your analysis and it is documented. 
+### Import ipyrad.analysis module
+The `import` keyword directs python to load a module into the currently running
+context. This is very similar to the `library()` function in R. We begin by
+importing the ipyrad analysis module. Copy the code below into a
+notebook cell and click run. 
 
 ```python
+import ipyrad.analysis as ipa
+import toytree
+```
+> The `as ipa` part here creates a short synonym so that we can refer to
+`ipyrad.analysis` **as** `ipa`, which is just faster to type.
+
+The following cell shows the quickest way to results using the simulated data we assembled earlier.
+Copy this code into a new notebook cell (or use the small grey *+* button on the toolbar) and run it.
+
+```python
+# Path to the input phylip file
+phyfile = "peddrad_outfiles/peddrad.phy"
+
+# init raxml object with input data and (optional) parameter options
+rax = ipa.raxml(data=phyfile, T=4, N=2)
+
+# print the raxml command string for prosperity
 print(rax.command)
-```
-    raxmlHPC-PTHREADS-SSE3 -f a -T 2 -m GTRGAMMA -N 10 -x 12345 -p 54321 -n anolis-tree -w /home/<username>/ipyrad-workshop/anolis-raxml -s /home/<username>/ipyrad-workshop/anolis_outfiles/anolis.phy
-    
-Explanation of RAxML arguments:
-* -f: selects the algorithm RAxML will execute. In this case, `-f a` will perform a rapid bootstrap analysis and search for best-scoring ML tree in a single run.
-* -T: specifies the number of threads you want to run. This should reflect the number of cores available in your machine, only 2 in our case.
-* -m: selects the model of nucleotide substitution. In this case, GTRGAMMA is the GTR (generalised time-reversible) + GAMMA model of rate heterogeneity. A complex, but standard model used in RAxML.
-* -N: specifies the number of alternative runs on distinct starting parsimony trees (bootstrapping).
-* -x: random seed number for the analysis.
-* -p: random seed number for the parsimony inference of starting trees.
-* -n: specifies the root name for the output files.
-* -w: specifies the name of the output directory where RAxML will write the output files. Note that you need to specify the full path.
-* -s: specifies the name of the input alignment file in PHYLIP format.
 
-### Run the job
-This will start the job running. The subsampled dataset we are using should run very quickly (~1-2 minutes).
+# run the command, (options: block until finishes; overwrite existing)
+rax.run(block=True, force=True)
+```
+> **Note:** In this block of code, the `#` at the beginning of a line indicates
+to python that this is a comment, so it doesn't try to run this line. This is a
+very handy thing if you want to add or remove lines of code from an analysis
+without deleting them. Simply comment them out with the `#`!
+
+This runs for a minute or two...
+
+### Draw the inferred tree
+After inferring a tree you can then visualize it in a notebook using `toytree`.
 
 ```python
-rax.run(force=True)
-```
-    job aligntest finished successfully
-
-> Note: We are running only 10 bootstraps, which takes very little time. In fact, when running a real analysis, we should run at least 500 or 1000 bootstraps. For real large datasets, running an alignment of the entire loci can be very time consumming. Because of that, you can explore RAxML using only SNPs in a PHYLIP format (e.g. anolis.snps.phy) and excluding the invariant sites. Using only variable sites should reduce considerably the running time. However, branch lenghts can be biased when using only variable sites, especially with high levels of missing data. See [Leaché et al 2015](https://www.ncbi.nlm.nih.gov/pubmed/26227865) for methods correcting for aquisition bias in RAxML when using SNP's only.
-
-### Access results
-One of the reasons it is so convenient to run your RAxML jobs this way is that the results files are easily accessible from your RAxML objects. 
-
-```python
-rax.trees
-```
-    bestTree                   ~/ipyrad-workshop/anolis-raxml/RAxML_bestTree.anolis-tree
-    bipartitions               ~/ipyrad-workshop/anolis-raxml/RAxML_bipartitions.anolis-tree
-    bipartitionsBranchLabels   ~/ipyrad-workshop/anolis-raxml/RAxML_bipartitionsBranchLabels.anolis-tree
-    bootstrap                  ~/ipyrad-workshop/anolis-raxml/RAxML_bootstrap.anolis-tree
-    info                       ~/ipyrad-workshop/anolis-raxml/RAxML_info.anolis-tree
-* bestTree - Exactly what it says, the single best ML tree.
-* bipartions - The ML tree with bootstrap support on nodes.
-* bipartionsBranchLabels - The ML tree with support values on branches rather than nodes.
-* bootstrap - All bootstraped trees.
-* info - RAxML command line parameters and run info
-
-### Plot the results
-Here we use toytree to plot the bootstrap results. 
-
-```python
+# load from the .trees attribute of the raxml object, or from the saved tree file
 tre = toytree.tree(rax.trees.bipartitions)
-tre.draw(
-    height=300,
-    width=800,
-    node_labels=tre.get_node_values("support"),
-);
+
+# draw the tree rooting on species 1
+rtre = tre.root(wildcard="1")
+rtre.draw(tip_labels_align=True, node_labels="support");
 ```
-> **Note:** Toytree is a simple yet flexible and powerful tree drawing program, which we will only briefly introduce. Extensive docs and a tutorial are available on the [toytree documentation site](https://toytree.readthedocs.io/en/latest/).
 
-![png](06_RAxML_API_files/06_RAxML_API_00_unrooted.png)
+![png](images/raxml-FirstTree.png)
 
-### Rooting the tree
-In the above figure the two Northern samples are nested deep within the Southern clade, but this tree is unrooted. Lets say we want to root the tree on the Northern samples and replot. This is accomplished by adding the `root` parameter to the `tree.draw()` function and specifying the samples to root the tree to:
+## Making the tree readable
+The tree you have now is pretty difficult to read, because all the cheetah samples
+have very low branch length. This is no surprise, because we know that cheetahs
+have very low diversity and are very similar to each other. However, it makes the
+interpretation of the tree difficult. We can, for now, also discard the
+information of the branch length, and just look at the topology of the tree.
+
+## draw the tree showing topology only
 ```
-tre = toytree.tree(rax.trees.bipartitions)
-tre.draw(
-    tre.root(["punc_ICST764", "punc_MUFAL9635"]),
-    width=600,
-    node_labels=tre.get_node_values("support"),
-);
+rtre = tre.root(wildcard="1")
+rtre.draw(tip_labels_align=True, node_labels="support",use_edge_lengths=False);
 ```
-![png](06_RAxML_API_files/06_RAxML_API_01_rooted.png)
 
-> **Note:** The `root()` function accepts a list of samples, so if you have multiple samples from the root taxon, you can include them like this: `tre.root(["punc_ICST764", "punc_MUFAL9635", "punc_MTR05978"])`
+![png](images/raxml-TopologyOnly.png)
 
-### Experimenting with the simulated data
-Tree rooting can also be accomplished with the `wildcard` parameter of the `tree.root()` function. This is somewhat more straightforward to demonstrate with the simulated data, so we can create a new `raxml` object with the simulated phylip file, rerun the RAxML tree inference, and then do some plotting:
+## Coloring tip labels by sub-species identity
+
+Now, we can actually see what samples group together. However, we don't know
+all the sample codes by heart. We can assign colors to the labels, similar as
+we did in the PCA. Try running the following code:
+
+```python
+imap = {"pop1":['1A_0', '1B_0', '1C_0', '1D_0'],
+        "pop2":['2E_0', '2F_0', '2G_0', '2H_0'],
+        "pop3":['3I_0', '3J_0', '3K_0', '3L_0']}
+
+colormap = {"pop1":"red",
+           "pop2":"blue",
+            "pop3": "teal"}
+
+colorlist = []
+for sample in rtre.get_tip_labels():
+    for species, samples in imap.items():
+        if sample in samples:
+            colorlist.append(colormap[species])
 ```
-rax = ipa.raxml(
-    data="/scratch/af-biota/simrad-example/simrad_outfiles/simrad.phy",
-    name="aligntest", 
-    workdir="./analysis-raxml",
-    );
+```python
+rtre.draw(
+    tip_labels_align=True,
+    tip_labels_colors=colorlist,
+    use_edge_lengths=False
+)
+```
+![png](images/raxml-ColorTipLabels.png)
 
+## Setting parameters
+By default several parameters are pre-set in the raxml object. To remove those
+parameters from the command string you can set them to `None`. Additionally, you
+can build complex raxml command line strings by adding almost any parameter to
+the raxml object init, as below.
+
+```python
+# parameter dictionary for a raxml object
+rax.params
+```
+```
+N        2                   
+T        4                   
+binary   ~/miniconda3/envs/ipyrad/bin/raxmlHPC-PTHREADS-AVX2
+f        a                   
+m        GTRGAMMA            
+n        test                
+p        54321               
+s        ~/ipyrad-workshop/minsamples10_outfiles/minsamples10.phy
+w        ~/src/notebooks/analysis-raxml
+x        12345   
+```
+
+```python
+# Demonstrating setting parameters
 rax.params.N = 10
-rax.params.T = 2
-rax.params.o = None 
-
-rax.run(force=True)
+rax.params.f = "d"
 ```
-Here the `wildcard="3"` argument specifies to root the tree using all the samples that include "3" in their names.
-```
-tre = toytree.tree(rax.trees.bipartitions)
-tre.draw(
-    tre.root(wildcard="3"),
-    width=600,
-    node_labels=tre.get_node_values("support"),
-);
-```
-![png](06_RAxML_API_files/06_RAxML_API_02_sim_rooted.png)
+This will perform 10 rapid hill-climbing ML analyses from random starting trees,
+with no bootstrap replicates. 10 is a small value so it will run fast.
 
-### Further exploration
+## Styling the tree
+The default plotted tree can be manipulated with `toytree`, which offers a huge
+number of options for styling phylogenetic trees. A complete overview is available
+in the [toytree tree styling documentation](https://toytree.readthedocs.io/en/latest/8-styling.html)
+here we'll just show a few of these.
 
-We provide a more thorough exploration of the `ipyrad.analysis.raxml` module in a notebook on the [ipyrad github site](https://github.com/dereneaton/ipyrad/blob/master/tests/cookbook-raxml-pedicularis.ipynb), including more details about how to take full advantage of running parallel RAxML processes on a cluster.
+```python
+# Add node labels showing node support
+rtre.draw(node_sizes=15, node_labels="support", use_edge_lengths=False)
+```
+
+![png](images/raxml-NodeSupport.png)
+
+```python
+# Change the tree style
+rtre.draw(tree_style='d')          # dark-style
+rtre.draw(tree_style='o')          # umlaut-style
+```
+
+![png](images/raxml-TreeStyles.png)
+
+```python
+# Change the orientation
+rtre.draw(tree_style="o", layout='d')
+# Circle plot orientation
+rtre.draw(tree_style="o", layout='c')
+```
+
+![png](images/raxml-TreeLayout.png)
+
+Again, much more is available in the [toytree tree styling documentation](https://toytree.readthedocs.io/en/latest/8-styling.html).
+
+## Saving trees to pdf
+[Saving trees to pdf/svg/other output formats](https://toytree.readthedocs.io/en/latest/4-tutorial.html#Drawing:-saving-figures)
+
+## More to explore
+If the RADSeq assembly was performed with mapping to a reference genome
+this creates the opportunity to perform phylogenetic inference within genomic
+windows using blocks of RAD loci mapped to contiguous regions of a reference
+chromosome. The ipyrad analysis toolkit provides `window_extracter` for doing
+this (and more).
+
+[ipyrad-analysis toolkit: window_extracter](https://ipyrad.readthedocs.io/en/latest/API-analysis/cookbook-window_extracter.html)
+
+Window extracter has several key features:
+* Automatically concatenates ref-mapped RAD loci in sliding windows.
+* Filter to remove sites by missing data.
+* Optionally remove samples from alignments.
+* Optionally use consensus seqs to represent clades of multiple samples.

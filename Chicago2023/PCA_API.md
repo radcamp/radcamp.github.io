@@ -85,7 +85,7 @@ output, remove any obvious outliers, and then redo the PCA.
 
 ```python
 ## Path to the input data in snps.hdf5 format 
-data = "cheetah_outfiles/cheetah.snps.hdf5"
+data = "cheetah.snps.hdf5"
 pca = ipa.pca(data)
 ```
 > **Note:** Here we use the hdf5 database file with SNPs generated with ipyrad from the
@@ -152,8 +152,9 @@ can often be attributed to poor sequence quality or sample misidentifcation.
 Samples with lots of missing data tend to pop way out on their own, causing
 distortion in the signal in the PCs. Normally it's best to evaluate the quality
 of the sample, and if it can be seen to be of poor quality, to remove it and
-replot the PCA. 
-In our dataset, we don't really have bad samples, but we do have an outlier: the outgroup. Because we're intersted in cheetah only, let's remove the outgroup sample and rerun the PCA.
+replot the PCA. In our dataset, we don't really have bad samples, but we do have
+an outlier: the outgroup (which in this case is *Puma concolor*). Because we're
+intersted in cheetah only, **let's remove the outgroup sample and rerun the PCA**.
 
 > **Note:** We make a lot of use of the interactivity of jupyter notebooks in
 the ipyrad.analysis tools. In the PCA you can 'hover' over points to reveal
