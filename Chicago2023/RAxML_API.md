@@ -89,14 +89,10 @@ rtre.draw(tip_labels_align=True, node_labels="support");
 
 ![png](images/raxml-FirstTree.png)
 
-## Making the tree readable
-The tree you have now is pretty difficult to read, because all the cheetah samples
-have very low branch length. This is no surprise, because we know that cheetahs
-have very low diversity and are very similar to each other. However, it makes the
-interpretation of the tree difficult. We can, for now, also discard the
-information of the branch length, and just look at the topology of the tree.
-
-## draw the tree showing topology only
+## Draw the tree showing topology only
+Sometimes we might be more interested in visualizing the topology itself,
+and ignoring branch lengths, so specify this with the `use_edge_lengths`
+parameter set to `False`.
 ```
 rtre = tre.root(wildcard="1")
 rtre.draw(tip_labels_align=True, node_labels="support",use_edge_lengths=False);
