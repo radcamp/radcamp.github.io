@@ -38,7 +38,7 @@ and it'll bring you right back up to speed!
 * Get a New>Terminal and execute these commands (takes ~5 minutes):
 
 ```bash
-$ wget https://radcamp.github.io/Marseille2020/binder-reinstall.sh
+$ wget https://radcamp.github.io/Chicago2023/binder-reinstall.sh
 $ bash binder-reinstall.sh
 ```
 
@@ -121,7 +121,7 @@ $ ipyrad -p params-peddrad.txt -s 4 -c 1
   from saved path: ~/ipyrad-workshop/peddrad.json
 
  -------------------------------------------------------------
-  ipyrad [v.0.9.59]
+  ipyrad [v.0.9.93]
   Interactive assembly and analysis of RAD-seq data
  -------------------------------------------------------------
   Parallel connection | jupyter-dereneaton-2dipyrad-2dqk37slac: 1 cores
@@ -177,7 +177,7 @@ $ ipyrad -p params-peddrad.txt -s 5 -c 1
   from saved path: ~/ipyrad-workshop/peddrad.json
 
  -------------------------------------------------------------
-  ipyrad [v.0.9.59]
+  ipyrad [v.0.9.93]
   Interactive assembly and analysis of RAD-seq data
  -------------------------------------------------------------
   Parallel connection | jupyter-dereneaton-2dipyrad-2dqk37slac: 1 cores
@@ -254,7 +254,7 @@ $ ipyrad -p params-peddrad.txt -s 6 -c 1
   from saved path: ~/ipyrad-workshop/peddrad.json
 
  -------------------------------------------------------------
-  ipyrad [v.0.9.59]
+  ipyrad [v.0.9.93]
   Interactive assembly and analysis of RAD-seq data
  -------------------------------------------------------------
   Parallel connection | jupyter-dereneaton-2dipyrad-2dpnwm5vfx: 1 cores
@@ -376,7 +376,7 @@ $ ipyrad -p params-peddrad.txt -s 7 -c 1
   from saved path: ~/ipyrad-workshop/peddrad.json
 
  -------------------------------------------------------------
-  ipyrad [v.0.9.59]
+  ipyrad [v.0.9.93]
   Interactive assembly and analysis of RAD-seq data
  -------------------------------------------------------------
   Parallel connection | jupyter-dereneaton-2dipyrad-2dpnwm5vfx: 1 cores
