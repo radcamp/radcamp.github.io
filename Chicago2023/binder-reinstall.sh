@@ -4,8 +4,7 @@ cd ~
 mkdir ipyrad-workshop
 cd ipyrad-workshop
 tar -xzf ~/tests/ipsimdata.tar.gz
-conda install nano matplotlib raxml -c bioconda -y
-echo "set nowrap" > ~/.nanorc
+conda install matplotlib raxml -c bioconda -y
 
 echo "------- ipyrad params file (v.0.9.93)-------------------------------------------
 peddrad                            ## [0] [assembly_name]: Assembly name. Used to name output directories for assembly steps
@@ -39,5 +38,5 @@ TGCAG, CGG                        ## [8] [restriction_overhang]: Restriction ove
                               ## [28] [pop_assign_file]: Path to population assignment file
                                ## [29] [reference_as_filter]: Reads mapped to this reference are removed in step 3" > params-peddrad.txt
 
-ipyrad -p params-rad.txt -s 123 -c 1
+ipyrad -p params-peddrad.txt -s 123 -c 1
 
