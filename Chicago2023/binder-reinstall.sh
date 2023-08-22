@@ -38,5 +38,5 @@ TGCAG, CGG                        ## [8] [restriction_overhang]: Restriction ove
                               ## [28] [pop_assign_file]: Path to population assignment file
                                ## [29] [reference_as_filter]: Reads mapped to this reference are removed in step 3" > params-peddrad.txt
 
-ipyrad -p params-peddrad.txt -s 123 -c 1
+ipyrad -p params-peddrad.txt -s 1234567 -c 1
 
