@@ -18,6 +18,11 @@ a number of analysis options either when you init the tool, or afterwards by
 accessing the `.params` dictionary. You can view the raxml command string that is
 generated from the input arguments and you can call `.run()` to start the tree inference.
 
+```
+!conda install -c bioconda raxml -y
+!wget https://radcamp.github.io/Chicago2023/peddrad.phy
+```
+
 ## A note on Jupyter/IPython
 [Jupyter notebooks](http://jupyter.org/) are primarily a way to generate
 reproducible scientific analysis workflows in python. ipyrad analysis tools are
