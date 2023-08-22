@@ -38,7 +38,7 @@ Times        | Monday | Tuesday | Wednesday |
 
 # RADCamp Chicago 2023 Group Photo
 
-**Don't forget a nice group photo!**
+![jpg](images/RADCamp-Chicago2023-GroupPhoto.jpg)
 
 ## Acknowledgements
 RADCamp tutorial contributors and instructors (over the years): Isaac Overcast, Deren Eaton,
