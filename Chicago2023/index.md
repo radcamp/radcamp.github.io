@@ -10,6 +10,12 @@ Chicago, IL
   - Arianna Kuhn - Virginia Museum of Natural History
   - Isaac Overcast - California Academy of Sciences
 
+## RADCamp Chicago 2023 Sponsored by:
+
+[The Ruane Lab @ FMNH](https://sararuane.com/)
+
+[Grainger Bioinformatics Center @ FMNH](https://www.fieldmuseum.org/department/grainger-bioinformatics-center)
+
 # Schedule (All times are Central Daylight; GMT-5)
 
 Times        | Monday | Tuesday | Wednesday |
@@ -29,12 +35,6 @@ Times        | Monday | Tuesday | Wednesday |
 * [BPP - Bayesian inference under a multi-species coalescent model](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-bpp-species-delimitation.ipynb)
 * [Bucky - Phylogenetic concordance analysis](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-bucky.ipynb)
 * [ABBA-BABA - Admixture analysis](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-abba-baba.ipynb)
-
-## RADCamp Chicago 2023 Sponsored by:
-
-[The Ruane Lab @ FMNH](https://sararuane.com/)
-
-[Grainger Bioinformatics Center @ FMNH](https://www.fieldmuseum.org/department/grainger-bioinformatics-center)
 
 # RADCamp Chicago 2023 Group Photo
 
