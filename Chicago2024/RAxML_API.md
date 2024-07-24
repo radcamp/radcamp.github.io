@@ -20,7 +20,7 @@ generated from the input arguments and you can call `.run()` to start the tree i
 
 ```
 !conda install -c bioconda raxml -y
-!wget https://radcamp.github.io/Chicago2023/peddrad.phy
+!wget https://radcamp.github.io/Chicago2024/peddrad.phy
 ```
 
 ## A note on Jupyter/IPython
