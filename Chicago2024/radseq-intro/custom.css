@@ -1,0 +1,50 @@
+
+.reveal .title {
+    margin-top: 5%;
+    color: #262626;
+    font-size: 1.5em;
+}
+
+/* my slide margin top div for all but title or exceptions */
+.reveal .standard {
+    margin-left: auto; 
+    margin-top: 2%;
+}
+
+/* my slide block text div class for p elements*/
+.textbox p {
+    font-size: 0.9em; 
+    text-align: left;
+    margin-left: 12%;
+    margin-right: 12%;
+}
+
+.reveal ul {
+    line-height: 1.75;
+    font-weight: 400;
+    margin-left: 20%;
+    margin-right: 15%;
+    margin-top: 7%;
+}
+
+.reveal ul li {
+    text-align: left;
+}
+
+.reval ul li::marker {
+  content: "\2714\0020  ";
+  color: #4ac1bb;
+  font-size: 1.5em;
+}
+
+/* my slide block text div class for p elements*/
+.textbox p {
+    font-size: 0.9em; 
+    text-align: left;
+    margin-left: 15%;
+    margin-right: 15%;
+}
+
+.reveal .equation {
+    margin-top: 3%;
+}
