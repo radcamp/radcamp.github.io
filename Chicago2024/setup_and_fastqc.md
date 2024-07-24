@@ -1,6 +1,6 @@
-# RADCamp Chicago 2023 - Day 1
+# RADCamp Chicago 2024 - Day 1
 
-## Overview of the afternoon activities:
+## Overview of the mornings activities:
 * [Intro to ipyrad documentation](#intro-ipyrad-docs)
 * [Software setup](#open-ipyrad-in-binder)
 * [RADseq data quality control (QC)](#data-qc)
