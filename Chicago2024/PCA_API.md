@@ -37,7 +37,7 @@ in real life than doing so with the simulated data would be. In a new cell in th
 this command and then click the 'Run' button:
 
 ```
-!wget https://radcamp.github.io/Chicago2024/subset_cheetah.snps.hdf5
+!wget https://radcamp.github.io/Chicago2024/cheetah.snps.hdf5
 ```
 
 This .hdf5 file is one of the results files writen to the `outputs` directory of ipyrad after step 7.
