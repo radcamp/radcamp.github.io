@@ -1,4 +1,4 @@
-# Welcome to RADCamp 2023 - The Chicago Edition
+# Welcome to RADCamp 2024 - The Chicago Edition
 
 August 6-7, 2024  
 Botany Classroom  
@@ -36,9 +36,9 @@ Times        | Tuesday | Wednesday |
 * [Bucky - Phylogenetic concordance analysis](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-bucky.ipynb)
 * [ABBA-BABA - Admixture analysis](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-abba-baba.ipynb)
 
-# RADCamp Chicago 2023 Group Photo
+# RADCamp Chicago 2024 Group Photo
 
-![jpg](images/RADCamp-Chicago2023-GroupPhoto.jpg)
+![jpg](images/RADCamp-Chicago2024-GroupPhoto.jpg)
 
 ## Acknowledgements
 RADCamp tutorial contributors and instructors (over the years): Isaac Overcast, Deren Eaton,
