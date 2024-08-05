@@ -38,6 +38,9 @@ this command and then click the 'Run' button:
 
 ```
 !wget https://radcamp.github.io/Chicago2024/cheetah.snps.hdf5
+
+# Also fix a temporary issue with a PCA dependency
+!conda install -c conda-forge pandas=2.0.3 -y
 ```
 
 This .hdf5 file is one of the results files writen to the `outputs` directory of ipyrad after step 7.

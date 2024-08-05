@@ -6,6 +6,8 @@ cd ipyrad-workshop
 tar -xzf ~/tests/ipsimdata.tar.gz
 conda install matplotlib raxml -c bioconda -y
 
+conda install -c conda-forge pandas=2.0.3 -y
+
 echo "------- ipyrad params file (v.0.9.93)-------------------------------------------
 peddrad                            ## [0] [assembly_name]: Assembly name. Used to name output directories for assembly steps
 /home/jovyan/ipyrad-workshop ## [1] [project_dir]: Project dir (made in curdir if not present)
