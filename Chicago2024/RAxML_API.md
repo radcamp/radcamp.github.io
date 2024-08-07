@@ -19,7 +19,7 @@ accessing the `.params` dictionary. You can view the raxml command string that i
 generated from the input arguments and you can call `.run()` to start the tree inference.
 
 ```
-!conda install -c conda-forge toytree=2.0.5
+!conda install -c conda-forge toytree=2.0.5 -y
 !conda install -c bioconda raxml -y
 !wget https://radcamp.github.io/Chicago2024/peddrad.phy
 ```
