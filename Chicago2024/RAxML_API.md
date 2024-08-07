@@ -216,3 +216,10 @@ Window extracter has several key features:
 * Filter to remove sites by missing data.
 * Optionally remove samples from alignments.
 * Optionally use consensus seqs to represent clades of multiple samples.
+
+
+## Another example phylip file
+```
+!wget https://radcamp.github.io/NYC2020/Prates_et_al_2016_example_data/anolis.phy
+```
+
