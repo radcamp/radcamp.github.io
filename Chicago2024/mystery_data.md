@@ -19,9 +19,7 @@ cd mystery
 tar -xvzf mystery_data.tgz
 ```
 
-## Create a new params file
-
-## Modify *at least* these three parameters
+## Create a new params file and modify *at least* these three parameters
 
 ```
 ddrad                          ## [7] [datatype]: Datatype (see docs): rad, gbs, ddrad, etc.
