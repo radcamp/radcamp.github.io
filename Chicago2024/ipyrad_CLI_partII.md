@@ -34,11 +34,11 @@ redo all the setup, config, and assembly up to the point where you paused. If
 your binder dies for whatever reason you can grab and run the binder-reinstall.sh
 and it'll bring you right back up to speed!
 
-* [Open a new binder instance](https://mybinder.org/v2/gh/dereneaton/ipyrad/master?filepath=newdocs%2FAPI-analysis)
+* [Launch ipyrad with binder.](https://mybinder.org/v2/gh/dereneaton/ipyrad/master)
 * Get a New>Terminal and execute these commands (takes ~5 minutes):
 
 ```bash
-$ wget https://radcamp.github.io/Chicago2023/binder-reinstall.sh
+$ wget https://radcamp.github.io/Chicago2024/binder-reinstall.sh
 $ bash binder-reinstall.sh
 ```
 

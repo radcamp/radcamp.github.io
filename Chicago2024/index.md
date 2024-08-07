@@ -18,12 +18,14 @@ Chicago, IL
 
 # Schedule (All times are Central Daylight; GMT-5)
 
+* [**Launch ipyrad with binder.**](https://mybinder.org/v2/gh/dereneaton/ipyrad/master)
+
 Times        | Tuesday | Wednesday |
 -----        | ------- | --------- |
 8:30-9:00    | Welcome & Introductions; [Intro to RADSeq data](./radseq-intro); [Software Setup](setup_and_fastqc.md) | Check-in & Recap Day 1 |
-9:00-10:15   | [RADSeq Data Quality Control: FASTQC](setup_and_fastqc.md) | [Intro to Jupyter Notebooks](Jupyter_Notebook_Setup.md) |
+9:00-10:15   | [RADSeq Data Quality Control: FASTQC](setup_and_fastqc.md) | [Assemble mystery data in small groups](mystery_data.md) & [Intro to Jupyter Notebooks](Jupyter_Notebook_Setup.md) |
 10:15-10:30  | Coffee Break | Coffee Break |
-10:30-12:00  | [RADSeq Data Assembly: ipyrad Part I](ipyrad_CLI_partI.md) | [Phylogenetic Inference: RAxML](RAxML_API.md) |
+10:30-12:00  | [RADSeq Data Assembly: ipyrad Part I](ipyrad_CLI_partI.md) | Take the group photo; [Phylogenetic Inference: RAxML](RAxML_API.md) |
 12:00-13:00  | Lunch   | Lunch |
 13:00-15:15  | [RADSeq Data Assembly: ipyrad Part II](ipyrad_CLI_partII.md) | [Population Genetic Analysis: PCA](PCA_API.md) |
 15:15-15:30  | N/A | Coffee Break |
