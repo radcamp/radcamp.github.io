@@ -270,6 +270,10 @@ pca2 = ipa.pca(
 We encourage you to experiment with different imputation schemes
 and missing data thresholds when analysing your own data later.
 
+## Practice running PCA on different datasets
+
+* [A variety of vcf files for running PCA](https://drive.google.com/drive/folders/10MQx1u0uGDqlEQRdOiUuQRPeP7ZTRLmF?usp=sharing)
+
 ## More to explore
 The `ipyrad.analysis.pca` module has many more features that we just don't have
 time to go over, but you might be interested in checking them out later:
