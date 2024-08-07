@@ -11,10 +11,10 @@ cd mystery
 ```
 
 ## Download the data to your computer and upload it to binder
-* [Download the mystery data from wetransfer](https://wetransfer.com/downloads/905dae3fc25d91ea1f238aea771f716020240807114837/16099c)
+* [Download the mystery data from wetransfer](https://wetransfer.com/downloads/a45314c838494f7237710f8c303fa68920240807121642/426cf2) (15MB)
 * Change to the `mystery` directory in the file browser (on the left)
 * Choose the `upload` (up arrow) button and upload the `mystery_data.tgz` file
-* Unpack the mystery_data.tgz like this:
+* Unpack the `mystery_data.tgz` like this:
 ```
 tar -xvzf mystery_data.tgz
 ```
@@ -34,3 +34,8 @@ CAATTC, TTA                    ## [8] [restriction_overhang]: Restriction overha
 ## Run the full assembly through step 7 and interpret the results
 
 * And have fun ;)
+
+### Smaller dataset
+If that 15MB dataset is too large and runs too slow you can try this one:
+
+[7MB mystery dataset on wetransfer](https://wetransfer.com/downloads/905dae3fc25d91ea1f238aea771f716020240807114837/16647eb94492ef3ac4695b5ee8f8edce20240807114915/959fa4?trk=TRN_TDL_01&utm_campaign=TRN_TDL_01&utm_medium=email&utm_source=sendgrid)
