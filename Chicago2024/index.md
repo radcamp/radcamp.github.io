@@ -40,7 +40,7 @@ Times        | Tuesday | Wednesday |
 
 # RADCamp Chicago 2024 Group Photo
 
-![jpg](images/RADCamp-Chicago2024-GroupPhoto.jpg)
+![jpg](images/RADCamp-Chicago2024.jpg)
 
 ## Acknowledgements
 RADCamp tutorial contributors and instructors (over the years): Isaac Overcast, Deren Eaton,

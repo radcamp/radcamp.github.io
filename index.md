@@ -29,10 +29,10 @@ Workshop attendees will need to bring a laptop computer.
 ## Current event:
 
 ## Future events:
-* [RADCamp2024-Chicago](Chicago2024/index.md) (August)
 * [RADCamp2024-SanFrancisco](SanFrancisco2024/index.md) (September)
 
 ## Past events:
+* [RADCamp2024-Chicago](Chicago2024/index.md)
 * [RADCamp2023-Chicago](Chicago2023/index.md)
 * [RADCamp2023-Kigali](Kigali2023/index.md)
 * [RADCamp2023-NYC](NYC2023/index.md)
