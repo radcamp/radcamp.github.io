@@ -1,6 +1,6 @@
 # Welcome to RadCamp 2024 - The Phoenix Edition
 
-<<!--<div style="float: right"><img src="logos/FCUL.png" /></div>-->
+<!--<div style="float: right"><img src="logos/FCUL.png" /></div>-->
 
 Saturday November 9, 2024
 
