@@ -10,6 +10,7 @@ Phoenix, AZ
 # Organisers, Instructors, and Facilitators
 
   - Isaac Overcast (California Academy of Sciences)
+  - Natalie Payne (University of Arizona)
   - Nathan Upham (Arizona State University)
 
 # Registration
