@@ -1,4 +1,4 @@
-# We acknowledge all the generous support for previous RADCamp workshop
+# We acknowledge all the generous support for previous RADCamp workshops
 
 ## RADCamp Chicago 2023/2024
 * [The Ruane Lab @ FMNH](https://sararuane.com/)
@@ -54,9 +54,7 @@
 
 ## RADCamp NYC 2019
 
-<img src="NYC2023/images/AGA-logo.jpg"/>
-    <p><b>American Genetics Association through the Special Event Awards program</b></p>
-
+![AGA](NYC2023/images/AGA-logo.jpg")
 ![SSE](NYC2019/images/SSE.png) 
 ![SSB](NYC2019/images/SSB.png)
 ![CUNY Graduate Center](NYC2019/images/GC-logo.png)
