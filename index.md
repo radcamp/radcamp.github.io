@@ -48,13 +48,14 @@ Workshop attendees will need to bring a laptop computer.
 
 [We acknowledge generous support from all our previous sponsors](funders.md)
 
+# RADCamp tutorial contributors and instructors (over the years)
+Isaac Overcast, Deren Eaton, Sandra Hoffberg, Natalia Bayona-Vasquez, Mariana
+Vasconcellos, Laura Bertola, Josiah Kuja, Anhubab Kahn, Arianna Kuhn, Edgar
+Benavides, Fransico Pina Martins
+
 # References
 * Andrews, K. R., Good, J. M., Miller, M. R., Luikart, G., & Hohenlohe, P. A. (2016). Harnessing the power of RADseq for ecological and evolutionary genomics. *Nature Reviews Genetics*, 17(2), 81.
 * Campbell, E. O., Brunet, B. M., Dupuis, J. R., & Sperling, F. A. (2018). Would an RRS by any other name sound as RAD?. *Methods in Ecology and Evolution*, 9(9), 1920-1927.
 
-# Other cool RAD-seq workshops with useful online resources:
-* [2017 Quito RADseq workshop](https://rdtarvin.github.io/RADseq_Quito_2017/)
-
 # Acknowledgements
-
 [PoreCamp](https://porecamp.github.io/) - Which inspired the design of this workshop and also of this site.

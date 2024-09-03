@@ -73,6 +73,3 @@ to Michael J. Hickerson  and Ana Carnaval), NASA through the Dimensions
 of Biodiversity Program (DOB 1343578) and the National Science
 Foundation (DEB-1253710 to MJH).
 
-# RADCamp tutorial contributors and instructors (over the years)
-Isaac Overcast, Deren Eaton, Sandra Hoffberg, Natalia Bayona-Vasquez, Mariana
-Vasconcellos, Laura Bertola, Josiah Kuja, Anhubab Kahn, Arianna Kuhn.
