@@ -8,7 +8,7 @@ San Francisco, CA
 ## Entrance and Location
 
 We will be meeting in the Boardroom at the Cal Academy. To enter, please use the
-Academy Staff/Business Entrance located at 75 Nancy Pelosi Drive [map](https://sanfranciscobazaar.org/wp-content/uploads/2012/08/Staff-and-Research-Entrance-Map.pdf). When you enter you will need to sign in at the reception
+Academy Staff/Business Entrance located at 75 Nancy Pelosi Drive ([map](https://sanfranciscobazaar.org/wp-content/uploads/2012/08/Staff-and-Research-Entrance-Map.pdf)). When you enter you will need to sign in at the reception
 desk. The desk staff are aware of our workshop and will be happy to help you get
 signed in and point you to the boardroom.
 
