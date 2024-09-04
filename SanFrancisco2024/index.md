@@ -1,8 +1,8 @@
 # Welcome to RADCamp 2024 - The San Francisco Edition
 
-September 12-13, 2024
-Boardroom (L1)
-California Academy of Sciences
+September 12-13, 2024  
+Boardroom (L1)  
+California Academy of Sciences  
 San Francisco, CA
 
 ## Entrance and Location
@@ -12,14 +12,14 @@ Academy Staff/Business Entrance located at 75 Nancy Pelosi Drive [map](https://s
 desk. The desk staff are aware of our workshop and will be happy to help you get
 signed in and point you to the boardroom.
 
-# Organisers, Instructors, and Facilitators
+## Organisers, Instructors, and Facilitators
 
   * Isaac Overcast - California Academy of Sciences
   * Arianna Kuhn - Virginia Museum of Natural History
 
 # Schedule
 
-* [**Launch ipyrad with binder.**](https://mybinder.org/v2/gh/dereneaton/ipyrad/master)
+* [**Launch ipyrad with binder**](https://mybinder.org/v2/gh/dereneaton/ipyrad/master)
 
 Times        | Thursday | Friday |
 -----        | -------- | ------ |
