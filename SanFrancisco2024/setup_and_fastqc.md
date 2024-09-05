@@ -1,13 +1,15 @@
-# RADCamp Chicago 2023 - Day 1
+# RADCamp San Francisco 2024 - Day 1
 
-## Overview of the afternoon activities:
-* [Intro to ipyrad documentation](#intro-ipyrad-docs)
+## Overview of the morning activities:
+* [Intro to ipyrad resources](#intro-ipyrad-resources)
 * [Software setup](#open-ipyrad-in-binder)
 * [RADseq data quality control (QC)](#data-qc)
-* [ipyrad assembly of simulated data Part I](#ipyrad-assembly-part-I)
+* [ipyrad assembly of simulated data Part I](ipyrad_CLI_partI.html)
 
-## Intro ipyrad Docs
-[ipyrad documentation](https://ipyrad.readthedocs.io/en/latest/)
+## Intro ipyrad Resources
+* [ipyrad documentation](https://ipyrad.readthedocs.io/en/latest/)
+* [ipyrad gitter channel](https://app.gitter.im/#/room/#dereneaton_ipyrad:gitter.im)
+* [ipyrad github repository](https://github.com/dereneaton/ipyrad)
 
 ## Open ipyrad in Binder
 We will perform the basic assembly and analysis of simulated data using
@@ -235,7 +237,7 @@ dips only in the first and last 5 bases (again, this is typical for Illumina
 reads). Based on information from this plot we can see that the Anolis data
 doesn't need any trimming, which is good.
 
-Now lets look at the `Per base sequece content`, which FastQC highlights with a
+Now lets look at the `Per base sequence content`, which FastQC highlights with a
 scary red **X**.
 
 ![png](images/anolis-base-content.png)
@@ -255,7 +257,7 @@ if adapters represent some significant fraction of the read pool, then they
 will be treated as "real" data, and potentially bias downstream analysis. In
 the Anolis data this looks like it might be a real concern so we shall keep
 this in mind during step 2 of the ipyrad analysis, and incorporate 3' read
-trimming and aggressive adapter filtering.
+trimming and illumina adapter filtering.
 
 ## ipyrad assembly part I
 

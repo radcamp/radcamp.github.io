@@ -23,8 +23,8 @@ signed in and point you to the boardroom.
 
 Times        | Thursday | Friday |
 -----        | -------- | ------ |
-8:30-9:00    | Welcome & Introductions; [Intro to RADSeq data](./radseq-intro); [Software Setup](setup_and_fastqc.md) | Check-in & Recap Day 1 |
-9:00-10:15   | [RADSeq Data Quality Control: FASTQC](setup_and_fastqc.md) | [Assemble mystery data in small groups](mystery_data.md) & [Intro to Jupyter Notebooks](Jupyter_Notebook_Setup.md) |
+8:30-9:00    | Welcome & Introductions | Check-in & Recap Day 1 |
+9:00-10:15   | [Intro to RADSeq data](./radseq-intro); [RADSeq Data Quality Control: FASTQC](setup_and_fastqc.md) | [Assemble mystery data in small groups](mystery_data.md) & [Intro to Jupyter Notebooks](Jupyter_Notebook_Setup.md) |
 10:15-10:30  | Coffee Break | Coffee Break |
 10:30-12:00  | [RADSeq Data Assembly: ipyrad Part I](ipyrad_CLI_partI.md) | Take the group photo & [Phylogenetic Inference: RAxML](RAxML_API.md) |
 12:00-13:30  | Lunch   | Lunch |
