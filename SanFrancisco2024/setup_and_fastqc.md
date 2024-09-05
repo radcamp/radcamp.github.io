@@ -7,9 +7,9 @@
 * [ipyrad assembly of simulated data Part I](ipyrad_CLI_partI.html)
 
 ## Intro ipyrad Resources
-* [ipyrad documentation](https://ipyrad.readthedocs.io/en/latest/)
-* [ipyrad gitter channel](https://app.gitter.im/#/room/#dereneaton_ipyrad:gitter.im)
-* [ipyrad github repository](https://github.com/dereneaton/ipyrad)
+* [ipyrad documentation (detailed explanations and tutorials)](https://ipyrad.readthedocs.io/en/latest/)
+* [ipyrad gitter channel (a chat room for getting help)](https://app.gitter.im/#/room/#dereneaton_ipyrad:gitter.im)
+* [ipyrad github repository (reporting issues)](https://github.com/dereneaton/ipyrad)
 
 ## Open ipyrad in Binder
 We will perform the basic assembly and analysis of simulated data using

@@ -26,8 +26,8 @@ Times        | Thursday | Friday |
 8:30-9:00    | Welcome & Introductions | Check-in & Recap Day 1 |
 9:00-10:15   | [Intro to RADSeq data](./radseq-intro); [RADSeq Data Quality Control: FASTQC](setup_and_fastqc.md) | [Assemble mystery data in small groups](mystery_data.md) & [Intro to Jupyter Notebooks](Jupyter_Notebook_Setup.md) |
 10:15-10:30  | Coffee Break | Coffee Break |
-10:30-12:00  | [RADSeq Data Assembly: ipyrad Part I](ipyrad_CLI_partI.md) | Take the group photo & [Phylogenetic Inference: RAxML](RAxML_API.md) |
-12:00-13:30  | Lunch   | Lunch |
+10:30-12:00  | [RADSeq Data Assembly: ipyrad Part I](ipyrad_CLI_partI.md) | [Phylogenetic Inference: RAxML](RAxML_API.md) |
+12:00-13:30  | Take a group photo & then Lunch   | Lunch |
 13:30-15:15  | [RADSeq Data Assembly: ipyrad Part II](ipyrad_CLI_partII.md) | [Population Genetic Analysis: PCA](PCA_API.md) |
 15:15-15:30  | N/A | Coffee Break |
 15:30-17:00  |  N/A | Open Work Session |
