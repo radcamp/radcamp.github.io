@@ -15,12 +15,6 @@ redo all the setup, config, and assembly up to the point where you paused. If
 your binder dies for whatever reason you can grab and run the binder-reinstall.sh
 and it'll bring you right back up to speed!
 
-* [Open a new binder instance](https://mybinder.org/v2/gh/dereneaton/ipyrad/master?filepath=newdocs%2FAPI-analysis)
-* Get a New>Terminal and execute these commands (takes ~5 minutes):
-
-```bash
-$ wget https://radcamp.github.io/Chicago2023/binder-reinstall.sh
-$ bash binder-reinstall.sh
 ```
 
 # Step 3: Recap
@@ -104,7 +98,7 @@ $ ipyrad -p params-peddrad.txt -s 4 -c 1
   ipyrad [v.0.9.93]
   Interactive assembly and analysis of RAD-seq data
  -------------------------------------------------------------
-  Parallel connection | jupyter-dereneaton-2dipyrad-2dqk37slac: 1 cores
+  Parallel connection | ibss-jupyterhub:: 1 cores
 
   Step 4: Joint estimation of error rate and heterozygosity
   [####################] 100% 0:00:12 | inferring [H, E]
@@ -160,7 +154,7 @@ $ ipyrad -p params-peddrad.txt -s 5 -c 1
   ipyrad [v.0.9.93]
   Interactive assembly and analysis of RAD-seq data
  -------------------------------------------------------------
-  Parallel connection | jupyter-dereneaton-2dipyrad-2dqk37slac: 1 cores
+  Parallel connection | ibss-jupyterhub:: 1 cores
 
   Step 5: Consensus base/allele calling
   Mean error  [0.00075 sd=0.00001]
@@ -237,7 +231,7 @@ $ ipyrad -p params-peddrad.txt -s 6 -c 1
   ipyrad [v.0.9.93]
   Interactive assembly and analysis of RAD-seq data
  -------------------------------------------------------------
-  Parallel connection | jupyter-dereneaton-2dipyrad-2dpnwm5vfx: 1 cores
+  Parallel connection | ibss-jupyterhub:: 1 cores
 
   Step 6: Clustering/Mapping across samples
   [####################] 100% 0:00:01 | concatenating inputs
@@ -359,7 +353,7 @@ $ ipyrad -p params-peddrad.txt -s 7 -c 1
   ipyrad [v.0.9.93]
   Interactive assembly and analysis of RAD-seq data
  -------------------------------------------------------------
-  Parallel connection | jupyter-dereneaton-2dipyrad-2dpnwm5vfx: 1 cores
+  Parallel connection | ibss-jupyterhub:: 1 cores
 
   Step 7: Filtering and formatting output files
   [####################] 100% 0:00:07 | applying filters

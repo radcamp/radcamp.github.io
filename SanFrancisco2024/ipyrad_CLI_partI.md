@@ -63,10 +63,6 @@ you don't mind if your assembly breaks.
 
 # Getting Started
 
-We will be running through the assembly of simulated data on a binder instance,
-so if you haven't already, please [launch the ipyrad repo](https://mybinder.org/v2/gh/dereneaton/ipyrad/master?filepath=newdocs%2FAPI-analysis),
-and open a New>Terminal.
-
 ## ipyrad help
 To better understand how to use ipyrad, let's take a look at the help argument.
 We will use some of the ipyrad arguments in this tutorial (for example: -n, -p,
@@ -280,7 +276,7 @@ $ ipyrad -p params-peddrad.txt -s 1 -c 1
   ipyrad [v.0.9.93]
   Interactive assembly and analysis of RAD-seq data
  -------------------------------------------------------------
-  Parallel connection | jupyter-dereneaton-2dipyrad-2d975c3axu: 1 cores
+  Parallel connection | ibss-jupyterhub:: 1 cores
 
   Step 1: Demultiplexing fastq data to Samples
   [####################] 100% 0:00:09 | sorting reads
@@ -294,8 +290,7 @@ Any time ipyrad is invoked it performs a few housekeeping operations:
 1. Load the assembly object - Since this is our first time running any steps we
 need to initialize our assembly.
 2. Start the parallel cluster - ipyrad uses a parallelization library called
-ipyparallel. Every time we start a step we fire up the parallel clients. This
-makes your assemblies go **smokin'** fast.
+ipyparallel, which can efficiently use (up to) all available cores on your computer.
 3. Do the work - Actually perform the work of the requested step(s) (in this
 case demultiplexing reads to samples).
 4. Save, clean up, and exit - Save the state of the assembly, and spin down
@@ -412,7 +407,7 @@ $ ipyrad -p params-peddrad.txt -s 2 -c 1
   ipyrad [v.0.9.93]
   Interactive assembly and analysis of RAD-seq data
  -------------------------------------------------------------
-  Parallel connection | jupyter-dereneaton-2dipyrad-2d975c3axu: 1 cores
+  Parallel connection | ibss-jupyterhub:: 1 cores
 
   Step 2: Filtering and trimming reads
   [####################] 100% 0:00:21 | processing reads
@@ -515,7 +510,7 @@ $ ipyrad -p params-peddrad.txt -s 3 -c 1
   ipyrad [v.0.9.93]
   Interactive assembly and analysis of RAD-seq data
  -------------------------------------------------------------
-  Parallel connection | jupyter-dereneaton-2dipyrad-2d975c3axu: 1 cores
+  Parallel connection | ibss-jupyterhub:: 1 cores
 
   Step 3: Clustering/Mapping reads within samples
   [####################] 100% 0:00:02 | join merged pairs
