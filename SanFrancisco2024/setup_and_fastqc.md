@@ -48,7 +48,7 @@ terminal. Your prompt should now look like this:
 (base) iovercast@ibss-jupyterhub:~$ 
 ```
 
-Now you can install ipyrad with conda like this:
+Now you can install ipyrad with conda like this (it will take 1-2 minutes):
 ```
 conda install -c conda-forge -c bioconda ipyrad -y
 ```
@@ -76,28 +76,15 @@ $ echo "wat"
 wat
 ```
 
-To start the terminal on the jupyter dashboard, choose New>Terminal.
+To start the terminal on the jupyter dashboard, click "Terminal" in the Launcher.
 ![png](images/Binder_Littleblackwindow.jpg)
 
 Here we'll use bash commands and command line arguments. If you have trouble
 remembering the different commands, you can find some very usefull commands on
 this [cheat sheet](https://www.git-tower.com/blog/command-line-cheat-sheet/).
-Take a look at the contents of the folder you're currently in.
-```bash
-$ ls
-```
-
-There are a bunch of folders. To keep things organized, we will create a new
-directory which we'll be using during this Workshop. Use `mkdir`. And then
-navigate into the new folder, using `cd`.
-
-```bash
-$ mkdir ipyrad-workshop
-$ cd ipyrad-workshop
-```
 
 ## Unpack the simulated example data
-For this workshop, we provide a example datasets, as well as toy genomes for
+For this workshop, we provide example datasets, as well as toy genomes for
 testing different assembly methods. For now we'll go forward with the `rad`
 example dataset. First we need to unpack the data, which are located in the tests
 folder.
@@ -130,21 +117,10 @@ estimate overall quality. Your input data will be in fastQ format, usually
 ending in `.fq`, `.fastq`, `.fq.gz`, or `.fastq.gz`. The file(s) may be
 compressed with gzip so that they have a .gz ending, but they do not need to be.
 
-We begin first with a visual inspection, but of course we can only visually 
-inspect a very tiny proportion of the total data. 
-
-Now, we will use the `zcat` command to read lines of data from this file and
-we will trim this to print only the first 20 lines by piping the output to the
-`head` command. Using a pipe (|) like this passes the output from one command to
-another and is a common trick in the command line.
-
-Here we have our first look at a **fastq formatted file**. Each sequenced
-read is spread over four lines, one of which contains sequence and another
-the quality scores stored as ASCII characters. The other two lines are used
-as headers to store information about the read.
+Now, we will use the `less` command to look at what's inside one of these files.
 
 ```bash
-$ zcat ipsimdata/rad_example_R1_.fastq.gz | head -n 20
+$ less ipsimdata/rad_example_R1_.fastq.gz
 @lane1_locus0_2G_0_0 1:N:0:
 CTCCAATCCTGCAGTTTAACTGTTCAAGTTGGCAAGATCAAGTCGTCCCTAGCCCCCGCGTCCGTTTTTACCTGGTCGCGGTCCCGACCCAGCTGCCCCC
 +
@@ -167,14 +143,21 @@ CTCCAATCCTGCAGTTTAACTGTTCAAGTTGGCAAGATCAAGTCGTCCCTAGCCCCCGCGTCCGTTTTTACCTGGTCGCG
 BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
 ```
 
-The first is the name of the read (its location on the plate). The second line
-contains the sequence data. The third line is unused. And the fourth line is
-the quality scores for the base calls. The [FASTQ wikipedia](https://en.wikipedia.org/wiki/FASTQ_format)
-page has a good figure depicting the logic behind how quality scores are encoded.
+Here we have our first look at a **fastq formatted file**. Each sequenced
+read is spread over four lines, one of which contains sequence and another
+the quality scores stored as ASCII characters. The other two lines are used
+as headers to store information about the read.
+* Line 1: Rhe name of the read (its location on the plate)
+* Line 2: The sequence data
+* Line 3: Unused
+* Line 4: Quality scores for the base calls (see the 
+[FASTQ wikipedia](https://en.wikipedia.org/wiki/FASTQ_format) for more details on this)
 
 In this case the restriction enzyme leaves a TGCAG overhang. Can you find this
-sequence in the raw data? What's going on with that other stuff at the beginning
-of each read?
+sequence in the raw data? Use `/TGCAG` to *search* for strings inside of `less`.
+What's going on with that other stuff at the beginning of each read?
+
+**NB:** Type 'q' to exit `less`.
 
 To get a better view of the data quality, without looking at individual reads,
 we use automated approaches to check the quality. We will use
@@ -217,6 +200,7 @@ Installing and running fastqc can be done like this:
 
 ```bash
 conda install -c bioconda fastqc -y
+# `-o .` will create output files in the current (.) directory
 fastqc ipsimdata/rad_example_R1_.fastq.gz -o .
 ```
 
@@ -224,10 +208,10 @@ FastQC will indicate its progress in the terminal. This toy data will run quite
 quickly, but real data can take somewhat longer to analyse (10s of minutes).
 
 FastQC will save the output as an html file in the folder you're currently in.
-You want to look at it in your browser window. So, go back to the jupyter
-dashboard and navigate to /home/ipyrad-workshop/ and click on `rad_example_R1__fastqc.html`.
-This will open the FastQC report which provides extensive information about the
-quality of the data, which we will briefly review here.
+You want to look at it in your browser window. So look in the file pane on the left
+and click on `rad_example_R1__fastqc.html`. This will open the FastQC report which
+provides extensive information about the quality of the data, which we will
+briefly review here.
 
 ### Inspecting and Interpreting FastQC Output
 
@@ -270,6 +254,8 @@ will be treated as "real" data, and potentially bias downstream analysis. In
 the Anolis data this looks like it might be a real concern so we shall keep
 this in mind during step 2 of the ipyrad analysis, and incorporate 3' read
 trimming and illumina adapter filtering.
+
+# Run fastqc on real data samples
 
 ## ipyrad assembly part I
 
