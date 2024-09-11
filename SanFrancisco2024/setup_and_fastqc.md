@@ -147,7 +147,7 @@ Here we have our first look at a **fastq formatted file**. Each sequenced
 read is spread over four lines, one of which contains sequence and another
 the quality scores stored as ASCII characters. The other two lines are used
 as headers to store information about the read.
-* Line 1: Rhe name of the read (its location on the plate)
+* Line 1: The name of the read (its location on the plate)
 * Line 2: The sequence data
 * Line 3: Unused
 * Line 4: Quality scores for the base calls (see the 

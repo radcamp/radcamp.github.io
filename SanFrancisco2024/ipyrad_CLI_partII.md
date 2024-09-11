@@ -113,12 +113,11 @@ alleles are good reads and the rest are probably junk. This step is pretty
 straightforward, and pretty fast. Run it like this:
 
 ```bash
-$ cd ipyrad-workshop
 $ ipyrad -p params-peddrad.txt -s 4 -c 1
 ```
 ```
   loading Assembly: peddrad
-  from saved path: ~/ipyrad-workshop/peddrad.json
+  from saved path: ~/peddrad.json
 
  -------------------------------------------------------------
   ipyrad [v.0.9.93]
@@ -174,7 +173,7 @@ $ ipyrad -p params-peddrad.txt -s 5 -c 1
 ```
 ```
   loading Assembly: peddrad
-  from saved path: ~/ipyrad-workshop/peddrad.json
+  from saved path: ~/peddrad.json
 
  -------------------------------------------------------------
   ipyrad [v.0.9.93]
@@ -205,7 +204,7 @@ $ ipyrad -p params-peddrad.txt -r
 ```
 ```
   loading Assembly: peddrad
-  from saved path: ~/ipyrad-workshop/peddrad.json
+  from saved path: ~/peddrad.json
 
 Summary stats of Assembly peddrad
 ------------------------------------------------
@@ -251,7 +250,7 @@ $ ipyrad -p params-peddrad.txt -s 6 -c 1
 ```
 ```
   loading Assembly: peddrad
-  from saved path: ~/ipyrad-workshop/peddrad.json
+  from saved path: ~/peddrad.json
 
  -------------------------------------------------------------
   ipyrad [v.0.9.93]
@@ -373,7 +372,7 @@ $ ipyrad -p params-peddrad.txt -s 7 -c 1
 ```
 ```
   loading Assembly: peddrad
-  from saved path: ~/ipyrad-workshop/peddrad.json
+  from saved path: ~/peddrad.json
 
  -------------------------------------------------------------
   ipyrad [v.0.9.93]

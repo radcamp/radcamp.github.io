@@ -35,7 +35,7 @@ all code in cells of a jupyter notebook.
 # **RAxML** analyses
 
 ## Create a new notebook for the RAxML analysis
-In the jupyter notebook browser interface navigate to your `ipyrad-workshop`
+In the jupyter notebook browser interface navigate to your home
 directory and create a "New->Python" Notebook.
 
 ![png](images/raxml-CreateNotebook.png)
@@ -153,7 +153,7 @@ f        a
 m        GTRGAMMA            
 n        test                
 p        54321               
-s        ~/ipyrad-workshop/minsamples10_outfiles/minsamples10.phy
+s        ~/minsamples10_outfiles/minsamples10.phy
 w        ~/src/notebooks/analysis-raxml
 x        12345   
 ```

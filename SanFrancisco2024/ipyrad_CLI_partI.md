@@ -138,9 +138,7 @@ more informative, like the name of your organism and some details on the
 settings.
 
 ```bash 
-# First, make sure you're in your workshop directory
-$ cd ~/ipyrad-workshop
-# Now create a new params file named 'peddrad'
+# Create a new params file named 'peddrad'
 $ ipyrad -n peddrad
 ```
 
@@ -153,7 +151,7 @@ Lets take a look at it.
 $ cat params-peddrad.txt
 ------- ipyrad params file (v.0.9.93)-------------------------------------------
 peddrad                        ## [0] [assembly_name]: Assembly name. Used to name output directories for assembly steps
-/home/jovyan/ipyrad-workshop   ## [1] [project_dir]: Project dir (made in curdir if not present)
+/home/iovercast   ## [1] [project_dir]: Project dir (made in curdir if not present)
                                ## [2] [raw_fastq_path]: Location of raw non-demultiplexed fastq files
                                ## [3] [barcodes_path]: Location of barcodes file
                                ## [4] [sorted_fastq_path]: Location of demultiplexed/sorted fastq files
@@ -188,10 +186,9 @@ In general the defaults are sensible, and we won't mess with them for now,
 but there are a few parameters we *must* change: the path to the raw data and
 the barcodes file, the dataype, and the restriction overhang sequence(s).
 
-Fortunately jupyter includes a simple text editor, so select the tab
-with the jupyter dashboard, and navigate to the `ipyrad-workshop` directory.
-You can now click on the `params-peddrad.txt` and it will open in the editor
-in a new tab.
+Fortunately jupyter includes a simple text editor, so click on the
+`params-peddrad.txt` in the file browser to the left  and it will open in
+the editor in a new tab.
 
 We need to specify where the raw data files are located, the type of data we
 are using (.e.g., 'gbs', 'rad', 'ddrad', 'pairddrad), and which enzyme cut site
@@ -211,7 +208,7 @@ Once we start running the analysis ipyrad will create several new directories to
 hold the output of each step for this assembly. By default the new directories
 are created in the `project_dir` directory and use the prefix specified by the
 `assembly_name` parameter. For this example assembly all the intermediate
-directories will be of the form: `~/ipyrad-workshop/peddrad_*`. 
+directories will be of the form: `~/peddrad_*`. 
 
 > **Note:** Again, the `~` notation indicates a shortcut for the user home
 directory, in this case `/home/jovyan`.
@@ -314,7 +311,7 @@ assembly) we want it to print stats for.
 ## -r fetches informative results from currently executed steps  
 $ ipyrad -p params-peddrad.txt -r
   loading Assembly: peddrad
-  from saved path: ~/ipyrad-workshop/peddrad.json
+  from saved path: ~/peddrad.json
 
 Summary stats of Assembly peddrad
 ------------------------------------------------
@@ -410,7 +407,7 @@ $ ipyrad -p params-peddrad.txt -s 2 -c 1
 ```
 ```
   loading Assembly: peddrad
-  from saved path: ~/ipyrad-workshop/peddrad.json
+  from saved path: ~/peddrad.json
 
  -------------------------------------------------------------
   ipyrad [v.0.9.93]
@@ -513,7 +510,7 @@ $ ipyrad -p params-peddrad.txt -s 3 -c 1
 ```
 ```
   loading Assembly: peddrad
-  from saved path: ~/ipyrad-workshop/peddrad.json
+  from saved path: ~/peddrad.json
 
  -------------------------------------------------------------
   ipyrad [v.0.9.93]

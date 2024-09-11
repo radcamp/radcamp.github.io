@@ -54,7 +54,7 @@ import ipyrad.analysis as ipa
 
 ## Quick guide (tl;dr)
 The following cell shows the quickest way to results using the small simulated
-dataset in `/ipyrad-workshop`. Complete explanation of all of the
+dataset. Complete explanation of all of the
 features and options of the PCA module is the focus of the rest of this tutorial.
 Copy this code into a new notebook cell (you can add new cells with the *+* button on the toolbar)
 and run it.
