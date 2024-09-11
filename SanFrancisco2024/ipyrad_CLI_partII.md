@@ -11,7 +11,7 @@ writing output in various useful formats.
 
 Recall that we clustered reads within samples in Step 3. Reads that are sufficiently 
 similar (based on the specified sequence similarity threshold) are grouped together 
-in clusters separated by "//". We examined the `head` of one of the sample cluster 
+in clusters separated by "//". We examined the head of one of the sample cluster 
 files at the end of the last exercise, but here we've cherry picked a couple 
 clusters with more pronounced features.
 
@@ -246,7 +246,7 @@ It might be more enlightening to consider the output of step 6 by examining the
 file that contains the reads clustered across samples:
 
 ```bash
-$ cat peddrad_across/peddrad_clust_database.fa | head -n 27
+$ less peddrad_across/peddrad_clust_database.fa
 ```
 ```
 #1A_0,@1B_0,@1C_0,@1D_0,@2E_0,@2F_0,@2G_0,@2H_0,@3I_0,@3J_0,@3K_0,@3L_0
@@ -316,9 +316,7 @@ The final output of step 6 is a file in `peddrad_across` called
 `peddrad_clust_database.fa`. This file contains all aligned reads across all
 samples. Executing the above command you'll see all the reads that align at
 each locus. You'll see the sample name of each read followed by the sequence of
-the read at that locus for that sample. If you wish to examine more loci you
-can increase the number of lines you want to view by increasing the value you
-pass to `head` in the above command (e.g. `... | head -n 300`).
+the read at that locus for that sample.
 
 # Step 7: Filter and write output files
 
