@@ -12,16 +12,18 @@ tress in sliding windows along the genome using the `ipa.treeslider` tool.
 
 More information about RAxML can be found [here](https://cme.h-its.org/exelixis/web/software/raxml/) and the scientific paper [Stamatakis *et al.* (2014)](https://academic.oup.com/bioinformatics/article/30/9/1312/238053).
 
+## Install RAxML
+Open a terminal and install RAxML using conda:
+
+```
+conda install -c bioconda raxml -y
+```
+
 ## Input data
 The raxml tool takes a phylip formatted file as input. In addition you can set
 a number of analysis options either when you init the tool, or afterwards by
 accessing the `.params` dictionary. You can view the raxml command string that is
 generated from the input arguments and you can call `.run()` to start the tree inference.
-
-```
-!conda install -c bioconda raxml -y
-!wget https://radcamp.github.io/Chicago2023/peddrad.phy
-```
 
 ## A note on Jupyter/IPython
 [Jupyter notebooks](http://jupyter.org/) are primarily a way to generate
@@ -33,16 +35,16 @@ The rest of the materials in this part of the workshop assume you are running
 all code in cells of a jupyter notebook.
 
 # **RAxML** analyses
-
 ## Create a new notebook for the RAxML analysis
-In the jupyter notebook browser interface navigate to your home
-directory and create a "New->Python" Notebook.
+In the file browser on the left of JupyterLab make sure you are in 
 
-![png](images/raxml-CreateNotebook.png)
+![png](images/CreateNotebook.png)
+
+Open the launcher (the big blue *+* button) and open a new "Python 3" notebook.
 
 First things first, rename your new notebook to give it a meaningful name. You can
-either click the small 'disk' icon in the upper left corner of the notebook or
-choose `File->Save Notebook` and rename your notebook to "RAxML-peddrad.ipynb"
+either click the small 'disk' icon in the upper left corner of the notebook or choose
+`File->Save Notebook` and rename your notebook to "RAxML-peddrad.ipynb"
 
 ### Import ipyrad.analysis module
 The `import` keyword directs python to load a module into the currently running

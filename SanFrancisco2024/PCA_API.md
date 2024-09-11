@@ -29,7 +29,7 @@ all code in cells of a jupyter notebook.
 
 Similar how you've previously opened the Terminal, now open a new "Python 3" notebook by clicking on `New`.
 
-![png](images/raxml-CreateNotebook.png)
+![png](images/CreateNotebook.png)
 
 ## Download an empirical dataset
 For this exercise we'll use empirical data, so it'll be more fun and also a bit more like running a PCA
