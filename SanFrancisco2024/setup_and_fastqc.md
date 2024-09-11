@@ -255,7 +255,16 @@ the Anolis data this looks like it might be a real concern so we shall keep
 this in mind during step 2 of the ipyrad analysis, and incorporate 3' read
 trimming and illumina adapter filtering.
 
-# Run fastqc on real data samples
+# **Exercise:** Run fastqc on real data samples
+
+There are several examples of real fastq files in the `/data/fastqs`
+directory. Practice running `fastqc` on these files and interpreting the
+results. See if you can answer these questions for each sample:
+* How does the per base sequence quality look? Would you trim this data and
+if so where would you trim to?
+* Can you identify the restriction enzyme recognition sequence from the
+per base sequence content report?
+* Is there adapter contamination and if so does it look significant?
 
 ## ipyrad assembly part I
 
