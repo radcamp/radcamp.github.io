@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta name="author" content="Deren Eaton">
+    <meta name="description" content="Evolutionary Biology">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>RADcamp-2024</title>
+
+    <!-- CSS styling -->
+    <link rel="stylesheet" href="./reveal/css/reveal.css">
+    <link rel="stylesheet" href="./eaton-lab.css">
+    <link rel="stylesheet" href="./reveal/lib/css/zenburn.css">    
+
+    <script>
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match( /print-pdf/gi ) ? './reveal/css/print/pdf.css' : './reveal/css/print/paper.css';
+            document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>    
+</head>
+
+<!-- Not sure yet of this transition effect -->
+<body style="transition: transform 0.8s ease 0s;"> 
+
+    <!-- set reveal defaults ... -->
+    <div class="reveal linear" data-transition-speed="default" data-background-transition="default">
+
+        <!-- By giving slides a dimension we can use pixels or % -->
+        <div class="slides" style="width:1600px; height:900px;">
+
+            <!-- SLIDE 0 (TITLE) -->
+            <section id="title" data-background="#262626" style="top:300.5px; display:block;" data-transition="none" class="present">
+                <div style="margin-left: auto; margin-top: 20%">
+                <h1 class="title" style="color:#5D9B84">
+                RADCamp Chicago</h1>
+                <h5 style="color: lightgrey"> Field Museum of Natural History, 2024</h5>
+                <h4 style="color: white">Lecture 1: Introduction to RADSeq</h4>
+                <br>
+                </div>
+            </section>
+
+
+            <section id="contents" data-transition="none" class="present">
+                <div style="margin-left: auto; margin-top: 5%">
+                <h2> Objectives of this workshop </h2>
+                <br>
+                <p style='font-size:1.0em; font-weight:400; color:#5D9B84; text-align:left; margin-left: 15%; margin-right:10%; line-height: 1.5'>
+                1. Understand and describe the structure and format of RAD-seq data. 
+                <br><br>
+                2. Assemble RAD-seq data sets using <i>ipyrad</i> to produce files for analyses.
+                <br><br>
+                3. Learn about conservation genetics applications of RAD-seq data.
+                <br><br>
+                4. Learn new bioinformatic skills: bash, linux, Python, jupyter.
+                </p>
+                </div>
+            </section>
+
+
+            <section id="schedule" data-transition="none" class="present">
+                <h3> Our schedule for today</h3>
+                <br>
+                <p> Please follow along:
+                <a href="https://radcamp.github.io/Chicago2024/">https://radcamp.github.io/Chicago2023/</a>
+                <br><br>
+                <img class=plain src="./data/radcamp-schedule-2023.png" style="width: 50%">
+            </section>
+
+
+            <!-- IPYRAD DOCUMENTATION -->
+            <section 
+                data-background-iframe="https://ipyrad.readthedocs.io/en/latest/1-ethos.html"
+                data-transition="none"
+                class="future" 
+                hidden="">       
+            </section>
+
+            <!-- HISTORY OF RAD-SEQ -->
+            <!-- phylo -->
+            <section data-transition="none" class="future">
+                <div class="standard">
+                    <h3> Restriction-site associated DNA sequencing (RAD-Seq) </h3>
+                    <br>
+                    <div class="textbox"><p>
+                        RAD-seq is a method for subsampling a reduced represenation of a 
+                        genome by selecting and sequencing genomic fragments near restriction
+                        enzyme recognition sites.
+                        The goal is to efficiently obtain orthologous genomic regions/loci 
+                        across many samples to identify genetic variation, without the need
+                        to sequence entire genomes.
+                    </p></div>
+                    <img src="./data/intro-RAD-diagram.svg" style="width:50%">
+                </div>
+            </section>
+
+
+            <section data-transition="none" class="future">
+                <div class="standard">
+                    <h3> A brief history of RAD-seq </h3>
+                    <br>
+                    <div class="textbox"><p>
+                        In 2010 Emerson et al. applied RAD-sequencing to identify variants in 
+                        natural populations of a mosquito to reconstruct recent phylogeography.
+                        This was the first application of RAD-seq to study natural variation, as
+                        opposed to genotyping crosses. They also introduced the <i>stacks</i>
+                        software tool to assemble RAD data.
+                    </p></div>
+                    <img src="./data/emerson-2010.png" style="width:40%">
+                    <img src="./data/emerson-2010-figure.png" style="width:40%">                    
+                </div>
+            </section>
+
+
+            <section data-transition="none" class="future">
+                <div class="standard">
+                    <h3> What is RAD-seq (and its variants)? </h3>
+                    <div class="textbox"><p>
+                        Variant methods differ in their cost, complexity, 
+                        and efficiency.
+                    </p></div>
+                    <img class=plain src="./data/RAD-variants.png" style="width: 55%">
+                </div>
+            </section>
+
+
+            <section data-transition="none" class="future">
+                <div class="standard">
+                    <h3> Frequently asked questions </h3>
+                    <br>
+                    <div class="textbox"><p>
+                        <span style="font-weight:400;"><i>Why not just sequence the entire genome at low-coverage?</i></span>
+                        <br>
+                        Low coverage whole genome sequencing (WGS) has had a resurgence in popularity
+                        as the cost of sequencing has decreased, and new imputation methods have been
+                        developed for genotyping very low coverage data.<br><br>
+
+                        However, many organisms have very large genomes which can make the cost prohibitive.
+                        Also, the analysis of WGS data requires a good reference genome, and imputation of
+                        low coverage data additionally requires a high quality/depth reference panel, which
+                        is a large additional cost.<br><br>
+
+                        For biodiversity research on non-model organisms it is faster, easier, and usually
+                        sufficient, to use RAD-seq rather than develop many other additional genetic resources.
+                    </p></div>
+                </div>
+            </section>
+
+
+            <section data-transition="none" class="future">
+                <div class="standard">
+                    <h3> Frequently asked questions </h3>
+                    <br>                    
+                    <div class="textbox"><p>
+                        <span style="font-weight:400;"><i>Why is missing data a problem in RAD-seq?</i></span>
+                        <br>
+                        Part of the efficiency of RAD-seq is accomplished through multiplexing samples, and 
+                        errors in this step can lead to variable coverage across samples. In addition, some 
+                        restriction fragments will be present in only some samples and not others. As a 
+                        consequence, assembled RAD data sets are often sparse, containing many loci that are
+                        present in only a subset of samples, and fewer loci present in every single sample.
+                        <br><br>
+                        This problem is not unique to RAD-seq, but has received significant attention. It
+                        does need to be accommodated in many downstream analyses.
+                        We will discuss methods for this tomorrow in our analysis
+                        workshop. 
+                    </p></div>
+                </div>
+            </section>
+
+
+            <section data-transition="none" class="future">
+                <div class="standard">
+                    <h3> Frequently asked questions </h3>
+                    <br>                    
+                    <div class="textbox"><p>
+                        <span style="font-weight:400;"><i>Can I detect selection, or perform GWAS using RAD-seq?</i></span>
+                        <br>
+                        Yes, RAD-seq can be used for both of these goals (e.g., Nadeau et al. 2013). 
+                        However, the goal of your study are important determinants of whether or not RAD-seq
+                        is more efficient than WGS. Detecting selection or trait associations is much better
+                        when mapping RAD or WGS to a reference genome, as opposed to anonymous de novo loci.
+                    </p></div>
+                    <img class=plain src="./data/Andrews-Box2.png" style="width: 35%">                    
+                </div>
+            </section>
+
+
+            <section data-transition="none" class="future">
+                <div class="standard">
+                    <h3> Frequently asked questions </h3>
+                    <br>                    
+                    <div class="textbox"><p>
+                        <span style="font-weight:400;"><i>At what phylogenetic scale can I use RAD-seq?</i></span>
+                        <br>
+                        RAD-seq data generated for distantly related samples are expected to share
+                        fewer orthologous fragments in common, leading to increased missing data. At what
+                        scale is RAD-seq no longer useful? It depends on many factors: rate of 
+                        substitutions and genome size change between samples; how many fragments, i.e.,
+                        which enzymes are used; the type of protocol (shearing vs digestion); and sequencing
+                        coverage.
+                        <br><br> However, RAD-seq has been successfully applied to phylogenetic 
+                        questions spanning >30 Mya (oaks; Eaton et al. 2015), >60 Mya (Viburnum; Eaton et al. 2017).
+                        <br><br>
+                        The efficiency of RAD vs. [others] depends on the scale and density of your taxon 
+                        sampling, and planned analyses.
+                    </p></div>
+                </div>
+            </section>
+
+
+        <!-- SLIDES CLASS ENDING -->
+        </div>
+
+    <!-- REVEAL LINEAR CENTER CLASS ENDING -->
+    </div>
+
+
+
+
+    <!-- <div class="slide-number"></div> -->
+    <!-- <div class="progress" style="display: block"><span style="width: 0px;"></span> -->
+    <!-- JAVASCRIPT -->
+    <script src="./reveal/lib/js/head.min.js"></script>        
+    <script src="./reveal/js/reveal.js"></script>
+    <script type="text/javascript" src="./reveal/plugin/highlight/highlight.js"></script>
+    <script>
+        Reveal.initialize({
+            controls:true, 
+            progress:false, 
+            loop:false, 
+            history:true,
+            center:false,
+            fragmentInURL:true,
+            margin:.05,
+            minScale:0.1,
+            maxScale:5,
+            width:1600,
+            height:900,
+            theme:Reveal.getQueryHash().theme,
+            transition:Reveal.getQueryHash().transition||"linear",
+            slideNumber: true,
+            // slideNumber: "h/v",
+
+            dependencies: [
+                //     { src: '../reveal/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                { src: './reveal/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+                // { src: '../reveal/plugin/zoom-js/zoom.js', async: !0, condition: function() {return!!document.body.classList }},
+                // { src: '../reveal/plugin/math/math.js', async: true }
+            ]
+        });
+
+        // Reveal.configure({ slideNumber: true })
+        // Reveal.configure({ slideNumber: "c/t" })            
+
+        // Reveal.initialize({controls:!1,progress:!0,history:!0,center:!0,margin:.05,minScale:.1,maxScale:5,width:960,height:720,theme:Reveal.getQueryHash().theme,transition:Reveal.getQueryHash().transition||"linear",math:{mathjax:"http://cdn.mathjax.org/mathjax/latest/MathJax.js",config:"TeX-AMS_HTML-full"},dependencies:[{src:"../reveal/lib/js/classList.js",condition:function(){return!document.body.classList}},{src:"../reveal/plugin/markdown/marked.js",condition:function(){return!!document.querySelector("[data-markdown]")}},{src:"../reveal/plugin/markdown/markdown.js",condition:function(){return!!document.querySelector("[data-markdown]")}},{src:"../reveal/plugin/highlight/highlight.js",async:!0,callback:function(){hljs.initHighlightingOnLoad()}},{src:"../reveal/plugin/zoom-js/zoom.js",async:!0,condition:function(){return!!document.body.classList}},{src:"../reveal/plugin/notes/notes.js",async:!0,condition:function(){return!!document.body.classList}},{src:"../reveal/plugin/math/math.js",async:!0}]});
+    </script>
+</body>
+</html>
