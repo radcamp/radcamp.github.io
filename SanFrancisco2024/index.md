@@ -19,8 +19,6 @@ signed in and point you to the boardroom.
 
 # Schedule
 
-* [**Launch ipyrad with binder**](https://mybinder.org/v2/gh/dereneaton/ipyrad/master)
-
 Times        | Thursday | Friday |
 -----        | -------- | ------ |
 8:30-9:00    | Welcome & Introductions | Check-in & Recap Day 1 |
