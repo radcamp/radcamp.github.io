@@ -269,14 +269,14 @@ all ipyrad assembly steps.
 ```bash
 ## -p    the params file we wish to use
 ## -s    the step to run
-## -c    run on 1 core
-$ ipyrad -p params-peddrad.txt -s 1 -c 1
+## -c    run on 2 cores
+$ ipyrad -p params-peddrad.txt -s 1 -c 2
 
  -------------------------------------------------------------
   ipyrad [v.0.9.93]
   Interactive assembly and analysis of RAD-seq data
  -------------------------------------------------------------
-  Parallel connection | ibss-jupyterhub:: 1 cores
+  Parallel connection | ibss-jupyterhub:: 2 cores
 
   Step 1: Demultiplexing fastq data to Samples
   [####################] 100% 0:00:09 | sorting reads
@@ -397,7 +397,7 @@ again if you closed it and change the following two parameter settings:
 ```
 
 ```bash
-$ ipyrad -p params-peddrad.txt -s 2 -c 1
+$ ipyrad -p params-peddrad.txt -s 2 -c 2
 ```
 ```
   loading Assembly: peddrad
@@ -407,7 +407,7 @@ $ ipyrad -p params-peddrad.txt -s 2 -c 1
   ipyrad [v.0.9.93]
   Interactive assembly and analysis of RAD-seq data
  -------------------------------------------------------------
-  Parallel connection | ibss-jupyterhub:: 1 cores
+  Parallel connection | ibss-jupyterhub:: 2 cores
 
   Step 2: Filtering and trimming reads
   [####################] 100% 0:00:21 | processing reads
@@ -500,7 +500,7 @@ data.
 Now lets run step 3:
 
 ```bash
-$ ipyrad -p params-peddrad.txt -s 3 -c 1
+$ ipyrad -p params-peddrad.txt -s 3 -c 2
 ```
 ```
   loading Assembly: peddrad
@@ -510,7 +510,7 @@ $ ipyrad -p params-peddrad.txt -s 3 -c 1
   ipyrad [v.0.9.93]
   Interactive assembly and analysis of RAD-seq data
  -------------------------------------------------------------
-  Parallel connection | ibss-jupyterhub:: 1 cores
+  Parallel connection | ibss-jupyterhub:: 2 cores
 
   Step 3: Clustering/Mapping reads within samples
   [####################] 100% 0:00:02 | join merged pairs

@@ -78,7 +78,7 @@ alleles are good reads and the rest are probably junk. This step is pretty
 straightforward, and pretty fast. Run it like this:
 
 ```bash
-$ ipyrad -p params-peddrad.txt -s 4 -c 1
+$ ipyrad -p params-peddrad.txt -s 4 -c 2
 ```
 ```
   loading Assembly: peddrad
@@ -88,7 +88,7 @@ $ ipyrad -p params-peddrad.txt -s 4 -c 1
   ipyrad [v.0.9.93]
   Interactive assembly and analysis of RAD-seq data
  -------------------------------------------------------------
-  Parallel connection | ibss-jupyterhub:: 1 cores
+  Parallel connection | ibss-jupyterhub:: 2 cores
 
   Step 4: Joint estimation of error rate and heterozygosity
   [####################] 100% 0:00:12 | inferring [H, E]
@@ -134,7 +134,7 @@ consensus of sequences within each cluster. Here we are identifying what we
 believe to be the real haplotypes at each locus within each sample.
 
 ```bash
-$ ipyrad -p params-peddrad.txt -s 5 -c 1
+$ ipyrad -p params-peddrad.txt -s 5 -c 2
 ```
 ```
   loading Assembly: peddrad
@@ -144,7 +144,7 @@ $ ipyrad -p params-peddrad.txt -s 5 -c 1
   ipyrad [v.0.9.93]
   Interactive assembly and analysis of RAD-seq data
  -------------------------------------------------------------
-  Parallel connection | ibss-jupyterhub:: 1 cores
+  Parallel connection | ibss-jupyterhub:: 2 cores
 
   Step 5: Consensus base/allele calling
   Mean error  [0.00075 sd=0.00001]
@@ -211,7 +211,7 @@ as the next longest running step. Fortunately, with the simulated data, step 6
 will actually be really fast.
 
 ```bash
-$ ipyrad -p params-peddrad.txt -s 6 -c 1
+$ ipyrad -p params-peddrad.txt -s 6 -c 2
 ```
 ```
   loading Assembly: peddrad
@@ -221,7 +221,7 @@ $ ipyrad -p params-peddrad.txt -s 6 -c 1
   ipyrad [v.0.9.93]
   Interactive assembly and analysis of RAD-seq data
  -------------------------------------------------------------
-  Parallel connection | ibss-jupyterhub:: 1 cores
+  Parallel connection | ibss-jupyterhub:: 2 cores
 
   Step 6: Clustering/Mapping across samples
   [####################] 100% 0:00:01 | concatenating inputs
@@ -331,7 +331,7 @@ conservative.
 To run step 7:
 
 ```bash
-$ ipyrad -p params-peddrad.txt -s 7 -c 1
+$ ipyrad -p params-peddrad.txt -s 7 -c 2
 ```
 ```
   loading Assembly: peddrad
@@ -341,7 +341,7 @@ $ ipyrad -p params-peddrad.txt -s 7 -c 1
   ipyrad [v.0.9.93]
   Interactive assembly and analysis of RAD-seq data
  -------------------------------------------------------------
-  Parallel connection | ibss-jupyterhub:: 1 cores
+  Parallel connection | ibss-jupyterhub:: 2 cores
 
   Step 7: Filtering and formatting output files
   [####################] 100% 0:00:07 | applying filters
@@ -544,7 +544,7 @@ to force overwriting the output files that were previously generated. More
 information about all supported output formats can be found in the [ipyrad docs](https://ipyrad.readthedocs.io/en/latest/6-params.html#output-formats).
 
 ```bash
-$ ipyrad -p params-peddrad.txt -s 7 -c 1 -f
+$ ipyrad -p params-peddrad.txt -s 7 -c 2 -f
 ```
 
 And now you can see the numerous new output formats that have been created:
