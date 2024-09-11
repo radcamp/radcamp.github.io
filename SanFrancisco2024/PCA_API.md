@@ -31,13 +31,12 @@ Similar how you've previously opened the Terminal, now open a new "Python 3" not
 
 ![png](images/CreateNotebook.png)
 
-## Download an empirical dataset
+## The empirical dataset (Cheetah)
 For this exercise we'll use empirical data, so it'll be more fun and also a bit more like running a PCA
-in real life than doing so with the simulated data would be. In a new cell in the notebook copy and paste
-this command and then click the 'Run' button:
+in real life than doing so with the simulated data would be. This data is accessible here:
 
 ```
-!wget https://radcamp.github.io/Chicago2023/subset_cheetah.snps.hdf5
+/data/subset_cheetah.snps.hdf5
 ```
 
 This .hdf5 file is one of the results files writen to the `outputs` directory of ipyrad after step 7.
@@ -60,7 +59,7 @@ Copy this code into a new notebook cell (you can add new cells with the *+* butt
 and run it.
 
 ```python
-data = "cheetah.snps.hdf5"
+data = "/data/subset_cheetah.snps.hdf5"
 ## Create the pca object
 pca = ipa.pca(data)
 ## Run the analysis
