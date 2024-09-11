@@ -7,16 +7,6 @@ we continue with the assembly, with the goal of calling bases, clustering
 across samples based on consensus sequence similarity, and then finally
 writing output in various useful formats.
 
-# Getting set up to continue the assembly
-As a reminder, we are running assembly of the simulated data inside binder
-instances running on "the cloud". A small headache is that if you let your
-binder sit long enough it'll time out and die, in which case you'll have to
-redo all the setup, config, and assembly up to the point where you paused. If
-your binder dies for whatever reason you can grab and run the binder-reinstall.sh
-and it'll bring you right back up to speed!
-
-```
-
 # Step 3: Recap
 
 Recall that we clustered reads within samples in Step 3. Reads that are sufficiently 
