@@ -2,8 +2,8 @@
 
 ## Overview of the morning activities:
 * [Intro to ipyrad resources](#intro-ipyrad-resources)
-* [Software setup](#open-ipyrad-in-binder)
-* [RADseq data quality control (QC)](#data-qc)
+* [Software setup](#accessing-ibss-jupyterhub)
+* [RADseq data quality control (QC)](#data-quality-control)
 * [ipyrad assembly of simulated data Part I](ipyrad_CLI_partI.html)
 
 ## Intro ipyrad Resources
@@ -11,39 +11,38 @@
 * [ipyrad gitter channel (a chat room for getting help)](https://app.gitter.im/#/room/#dereneaton_ipyrad:gitter.im)
 * [ipyrad github repository (reporting issues)](https://github.com/dereneaton/ipyrad)
 
-## Open ipyrad in Binder
-We will perform the basic assembly and analysis of simulated data using
-[binder](https://mybinder.org/), to launch a working copy of the ipyrad github
-repository. The binder project allows the creation of shareable, interactive,
-and reproducible environments by facilitating execution of jupyter notebooks
-in a simple, web-based format. More information about the binder project is
-available in the [binder documentation](https://mybinder.readthedocs.io/en/latest/introduction.html).
+## Acessing IBSS JupyterHub
+For this workshop we will use a cloud server hosted by CAS. You should be
+on either the CAS internal or Guest wifi. Open a browser window and go to:
 
-**NB:** The binder instance we will use here for the first day is a service
-to the community provided by the binder project, so it has limited computational
-capacity. This capacity is sufficient to assemble the very small simulated
-datasets we provide as examples, but it is in no way capable of assembling
-real data, so don't even think about it! We use binder here as a quick and
-easy way of demonstrating workflows and API mode interactions without all the
-hassle of going through the installation in a live environment. When you
-return to your home institution, if you wish to use ipyrad we provide
-[extensive documentation for setup and config for both local installs
-and installs on HPC systems](https://ipyrad.readthedocs.io/en/latest/3-installation.html).
+```
+http://ibss-jupyterhub:8000/
+```
 
-**NB:** Binder images are transient! Nothing you do inside this instance will
-be saved if you close your browser tab, so don't expect any results to be
-persistent. Save anything you generate here that you want to keep to your local
-machine.
+You will see a login screen. Your username is the *name* of the email
+address you registered with (everything before the '@'). The password
+is the same.
 
-**Get everyone on binder here:** [Launch ipyrad with binder.](https://mybinder.org/v2/gh/dereneaton/ipyrad/master)
-![png](images/Binder.jpg)
+![png](images/JupyterHubLogin.png)
 
-Have patience, this could take a few moments.
-If it's ready, it should look like this:
+Once logged in you'll see the JupyterHub File Browser and Launcher panes.
 
-![png](images/Binder_ready.jpg)
+![png](images/JupyterHubStart.png)
 
-## Data QC: Fastq format and FastQC
+**NB:** The IBSS JupyterHub server is only accessible on-site at CAS,
+and will be turned off after the workshop.
+
+## Installing ipyrad
+
+```
+wget https://repo.anaconda.com/miniconda/Miniconda3-py312_24.7.1-0-Linux-x86_64.sh
+bash Miniconda3-py312_24.7.1-0-Linux-x86_64.sh 
+conda install -c conda-forge -c bioconda ipyrad -y
+```
+
+* [Documentation for installation on laptops and HPC systems](https://ipyrad.readthedocs.io/en/latest/3-installation.html)
+
+## Data Quality Control: Fastq format and FastQC
 
 Each grey cell in this tutorial indicates a command line interaction. 
 Lines starting with `$ ` indicate a command that should be executed 
@@ -67,7 +66,9 @@ wat
 To start the terminal on the jupyter dashboard, choose New>Terminal.
 ![png](images/Binder_Littleblackwindow.jpg)
 
-Here we'll use bash commands and command line arguments. If you have trouble remembering the different commands, you can find some very usefull commands on this [cheat sheet](https://www.git-tower.com/blog/command-line-cheat-sheet/).
+Here we'll use bash commands and command line arguments. If you have trouble
+remembering the different commands, you can find some very usefull commands on
+this [cheat sheet](https://www.git-tower.com/blog/command-line-cheat-sheet/).
 Take a look at the contents of the folder you're currently in.
 ```bash
 $ ls
@@ -83,21 +84,19 @@ $ cd ipyrad-workshop
 ```
 
 ## Unpack the simulated example data
-For this workshop, we provide a bunch of different example datasets, as well as
-toy genomes for testing different assembly methods. For now we'll go forward
-with the `rad` example dataset. First we need to unpack the data, which are
-located in the tests folder.
+For this workshop, we provide a example datasets, as well as toy genomes for
+testing different assembly methods. For now we'll go forward with the `rad`
+example dataset. First we need to unpack the data, which are located in the tests
+folder.
 
 ```bash 
-# First, make sure you're in your workshop directory
-$ cd ~/ipyrad-workshop
 
-# Unpack the simulated data which is included in the ipyrad github repo
+# Unpack the simulated data is stored in the /data directory
 # `tar` is a program for reading and writing archive files, somewhat like zip
 #   -x eXtract from an archive
 #   -z unZip before extracting
 #   -f read from the File
-$ tar -xzf ~/tests/ipsimdata.tar.gz
+$ tar -xzf /data/ipsimdata.tar.gz
 
 # Take a look at what we just unpacked
 $ ls ipsimdata
