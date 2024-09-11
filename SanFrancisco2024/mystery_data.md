@@ -1,22 +1,11 @@
 # Assemble mystery data in small groups
 
-## Launch a new ipyrad binder instance
-* [**Launch ipyrad with binder.**](https://mybinder.org/v2/gh/dereneaton/ipyrad/master)
-
-## Make a new directory for the mystery assembly
+## Make a new directory and unpack the data
 
 ```
 mkdir mystery
 cd mystery
-```
-
-## Download the data to your computer and upload it to binder
-* [Download the mystery data from wetransfer](https://wetransfer.com/downloads/a45314c838494f7237710f8c303fa68920240807121642/426cf2) (15MB)
-* Change to the `mystery` directory in the file browser (on the left)
-* Choose the `upload` (up arrow) button and upload the `mystery_data.tgz` file
-* Unpack the `mystery_data.tgz` like this:
-```
-tar -xvzf mystery_data.tgz
+tar -xvzf /data/mystery_data.tgz
 ```
 
 ## Create a new params file and modify *at least* these four parameters
@@ -28,14 +17,19 @@ but you need to figure out what to put for parameter 4 by yourself :)
 ddrad                          ## [7] [datatype]: Datatype (see docs): rad, gbs, ddrad, etc.
 CAATTC, TTA                    ## [8] [restriction_overhang]: Restriction overhang (cut1,) or (cut1, cut2)
 0, 50, 0, 0                    ## [25] [trim_reads]: Trim raw read edges (R1>, <R1, R2>, <R2) (see docs)
+```
 
+Additionally, choose a value for parameter 14 (`clust_threshold`). This value
+should be between [0,1], but think about what values make the most sense and why.
+Try to choose values different from the other groups.
+
+```
+<EXERCISE FOR THE READER>      ## [14] [clust_threshold]: Clustering threshold for de novo assembly
 ```
 
 ## Run the full assembly through step 7 and interpret the results
 
-* And have fun ;)
+* For the assembly steps **please use `-c 4`**
+* Have fun ;)
 
-### Smaller dataset
-If that 15MB dataset is too large and runs too slow you can try this one:
-
-[7MB mystery dataset on wetransfer](https://wetransfer.com/downloads/905dae3fc25d91ea1f238aea771f716020240807114837/16647eb94492ef3ac4695b5ee8f8edce20240807114915/959fa4?trk=TRN_TDL_01&utm_campaign=TRN_TDL_01&utm_medium=email&utm_source=sendgrid)
+## Regroup and discuss the results of the different `clust_threshold` values
