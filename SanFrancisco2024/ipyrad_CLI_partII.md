@@ -7,25 +7,6 @@ we continue with the assembly, with the goal of calling bases, clustering
 across samples based on consensus sequence similarity, and then finally
 writing output in various useful formats.
 
-Each grey cell in this tutorial indicates a command line interaction. 
-Lines starting with `$ ` indicate a command that should be executed 
-in a terminal connected to the USP cluster, for example by copying and 
-pasting the text into your terminal. All lines in code cells beginning 
-with \#\# are comments and should not be copied and executed. Elements 
-in code cells surrounded by angle brackets (e.g. <username>) are variables 
-that need to be replaced by the user. All other lines should be 
-interpreted as output from the issued commands.
-
-```bash
-## Example Code Cell.
-## Create an empty file in my home directory called `watdo.txt`
-$ touch ~/watdo.txt
-
-## Print "wat" to the screen
-$ echo "wat"
-wat
-```
-
 # Getting set up to continue the assembly
 As a reminder, we are running assembly of the simulated data inside binder
 instances running on "the cloud". A small headache is that if you let your

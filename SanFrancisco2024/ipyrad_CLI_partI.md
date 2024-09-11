@@ -211,19 +211,18 @@ are created in the `project_dir` directory and use the prefix specified by the
 directories will be of the form: `~/peddrad_*`. 
 
 > **Note:** Again, the `~` notation indicates a shortcut for the user home
-directory, in this case `/home/jovyan`.
+directory, in this case `/home/iovercast`.
 
 # Input data format
 
 Before we get started, let's take a look at what the raw data looks like.
-Remember that you can use `zcat` and `head` to do this. Since we already looked
-at R1 in the last section, lets look at R2 this time:
+Remember that you can use `less` to do this (remember to use 'q' to quit out
+of less). Since we already looked at R1 in the last section, lets look at R2
+this time:
 
 ```bash
-## zcat: unZip and conCATenate the file to the screen
-## head -n 20: Just take the first 20 lines of input
 
-$ zcat ipsimdata/pairddrad_example_R2_.fastq.gz | head -n 20
+$ less ipsimdata/pairddrad_example_R2_.fastq.gz
 @lane1_locus0_2G_0_0 2:N:0:
 CGGGGTTAAGAGGCCAGTTAACTGCAGCGGGATCGCGCACCATAGCGGCCGTGCCTACGAGTCAGATGTCACTTTTCAGACGCTCATGGAAGTGAGTGCA
 +
@@ -453,7 +452,7 @@ $ ipyrad -p params-peddrad.txt -r
 You might also take a closer look at the filtered reads: 
 
 ```bash
-$ zcat peddrad_edits/1A_0.trimmed_R1_.fastq.gz | head -n 12
+$ less peddrad_edits/1A_0.trimmed_R1_.fastq.gz
 @lane1_locus0_1A_0_0 1:N:0:
 TGCAGTTTAACTGTTCAAGTTGGCAAGATCAAGTCGTCCCTAGCCCCCGCGTCCGTTTTTACCTGGTCGCGGTCC
 +
@@ -573,7 +572,7 @@ each sample in `./peddrad_clust_0.85/`. You can get a feel for what
 this looks like by examining a portion of one of the files. 
 
 ```bash
-$ zcat peddrad_clust_0.85/1A_0.clustS.gz | head -n 18
+$ less peddrad_clust_0.85/1A_0.clustS.gz
 ```
 ```
 0121ac19c8acb83e5d426007a2424b65;size=18;*
