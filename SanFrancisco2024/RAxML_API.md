@@ -36,7 +36,8 @@ all code in cells of a jupyter notebook.
 
 # **RAxML** analyses
 ## Create a new notebook for the RAxML analysis
-In the file browser on the left of JupyterLab make sure you are in 
+In the file browser on the left of JupyterLab make sure you are in your home directory.
+You can click the folder icon above the file browser to return Home.
 
 ![png](images/CreateNotebook.png)
 
@@ -88,9 +89,14 @@ After inferring a tree you can then visualize it in a notebook using `toytree`.
 ```python
 # load from the .trees attribute of the raxml object, or from the saved tree file
 tre = toytree.tree(rax.trees.bipartitions)
+tre.draw(tip_labels_align=True, node_labels="support");
+```
 
-# draw the tree rooting on species 1
-rtre = tre.root(wildcard="1")
+![png](images/raxml-UnrootedFirstTree.png)
+
+```
+# draw the tree rooting on all samples from species 1
+rtre = tre.root('1A_0', '1B_0', '1C_0', '1D_0')
 rtre.draw(tip_labels_align=True, node_labels="support");
 ```
 
@@ -101,8 +107,7 @@ Sometimes we might be more interested in visualizing the topology itself,
 and ignoring branch lengths, so specify this with the `use_edge_lengths`
 parameter set to `False`.
 ```
-rtre = tre.root(wildcard="1")
-rtre.draw(tip_labels_align=True, node_labels="support",use_edge_lengths=False);
+rtre.draw(tip_labels_align=True, node_labels="support", use_edge_lengths=False);
 ```
 
 ![png](images/raxml-TopologyOnly.png)
@@ -203,17 +208,9 @@ Again, much more is available in the [toytree tree styling documentation](https:
 ## Saving trees to pdf
 [Saving trees to pdf/svg/other output formats](https://toytree.readthedocs.io/en/latest/4-tutorial.html#Drawing:-saving-figures)
 
-## More to explore
-If the RADSeq assembly was performed with mapping to a reference genome
-this creates the opportunity to perform phylogenetic inference within genomic
-windows using blocks of RAD loci mapped to contiguous regions of a reference
-chromosome. The ipyrad analysis toolkit provides `window_extracter` for doing
-this (and more).
+# **Exercise:** Infer a phylogeny for the Mimophis data
 
-[ipyrad-analysis toolkit: window_extracter](https://ipyrad.readthedocs.io/en/latest/API-analysis/cookbook-window_extracter.html)
-
-Window extracter has several key features:
-* Automatically concatenates ref-mapped RAD loci in sliding windows.
-* Filter to remove sites by missing data.
-* Optionally remove samples from alignments.
-* Optionally use consensus seqs to represent clades of multiple samples.
+Make a new notebook titled 'Mimophis-RAxML.ipynb' and infer the
+phylogeny for the dataset in this file: `/data/mimophis.phy`. Feel
+free to copy commands directly from the other notebook.
+* Extra credit: Choose a set of samples to root on and plot the rooted tree.

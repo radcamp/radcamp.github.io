@@ -382,7 +382,7 @@ gives extensive and detailed stats about the final assembly. A quick overview
 of the different sections of this file:
 
 ```bash
-$ cat peddrad_outfiles/peddrad_stats.txt
+$ less peddrad_outfiles/peddrad_stats.txt
 ```
 ```
 ## The number of loci caught by each filter.

@@ -33,3 +33,6 @@ Try to choose values different from the other groups.
 * Have fun ;)
 
 ## Regroup and discuss the results of the different `clust_threshold` values
+* How does increasing clust_threshold change the values of `loci_in_assembly` in
+the step7 stats file?
+* How does it change the hetero_est/error_est?
