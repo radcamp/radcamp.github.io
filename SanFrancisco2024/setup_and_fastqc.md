@@ -15,9 +15,7 @@
 For this workshop we will use a cloud server hosted by CAS. You should be
 on either the CAS internal or Guest wifi. Open a browser window and go to:
 
-```
-http://ibss-jupyterhub:8000/
-```
+[http://ibss-jupyterhub:8000/](http://ibss-jupyterhub:8000/)
 
 You will see a login screen. Your username is the *name* of the email
 address you registered with (everything before the '@'). The password
@@ -34,9 +32,24 @@ and will be turned off after the workshop.
 
 ## Installing ipyrad
 
+ipyrad uses **conda**, which is a package manager for python. We downloaded
+the [minconda installer](https://docs.anaconda.com/miniconda/miniconda-other-installer-links/)
+and saved it in the `/data` directory, so you can run the installer from there.
+
 ```
-wget https://repo.anaconda.com/miniconda/Miniconda3-py312_24.7.1-0-Linux-x86_64.sh
-bash Miniconda3-py312_24.7.1-0-Linux-x86_64.sh 
+bash /data/Miniconda-Linux-x86_64.sh
+```
+During the miniconda installation push the space bar until prompted and
+then type 'yes' to acknowledge the license agreement, and 'yes' to
+initialize conda. After it's finished type 'exit' and then open another
+terminal. Your prompt should now look like this:
+
+```
+(base) iovercast@ibss-jupyterhub:~$ 
+```
+
+Now you can install ipyrad with conda like this:
+```
 conda install -c conda-forge -c bioconda ipyrad -y
 ```
 
@@ -203,8 +216,8 @@ noise toward the ends of reads.
 Installing and running fastqc can be done like this:
 
 ```bash
-$ conda install -c bioconda fastqc -y
-$ fastqc ipsimdata/rad_example_R1_.fastq.gz
+conda install -c bioconda fastqc -y
+fastqc ipsimdata/rad_example_R1_.fastq.gz -o .
 ```
 
 FastQC will indicate its progress in the terminal. This toy data will run quite
