@@ -273,7 +273,7 @@ time to go over, but you might be interested in checking them out later:
 
 # **Excercise:** Plot some PCAs for different gecko species
 
-There are several vcf files for different Galapagos gecko species in the
-`/data/vcfs` directory. See if you can plot some PCAs for some of these
-different species. Can you see one, two or more possible populations
-in each of these species?
+There are several vcf files for different Galapagos gecko species (and a few
+random other ones) in the `/data/vcfs` directory. See if you can plot some PCAs
+for some of these different species. Can you see one, two or more possible
+populations in each of these species?
