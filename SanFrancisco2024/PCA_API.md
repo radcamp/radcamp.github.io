@@ -84,7 +84,7 @@ output, remove any obvious outliers, and then redo the PCA.
 
 ```python
 ## Path to the input data in snps.hdf5 format 
-data = "cheetah.snps.hdf5"
+data = "/data/subset_cheetah.snps.hdf5"
 pca = ipa.pca(data)
 ```
 > **Note:** Here we use the hdf5 database file with SNPs generated with ipyrad from the
@@ -196,7 +196,7 @@ it is still often useful to examine other PCs. You can do this by specifying
 which PCs to plot in in the call to `draw`.
 
 ```python
-pca.draw(2,3)
+pca.draw(0,2)
 ```
 ![png](images/PCA-PC02.png)
 
@@ -270,3 +270,10 @@ and missing data thresholds when analysing your own data later.
 The `ipyrad.analysis.pca` module has many more features that we just don't have
 time to go over, but you might be interested in checking them out later:
 * [Full ipyrad.analysis.pca cookbook](https://ipyrad.readthedocs.io/en/master/API-analysis/cookbook-pca.html)
+
+# **Excercise:** Plot some PCAs for different gecko species
+
+There are several vcf files for different Galapagos gecko species in the
+`/data/vcfs` directory. See if you can plot some PCAs for some of these
+different species. Can you see one, two or more possible populations
+in each of these species?
