@@ -8,6 +8,10 @@ cd mystery
 tar -xvzf /data/mystery_data.tgz
 ```
 
+## Data QC
+As usual, use fastqc to inspect a couple of the samples. Do you see any noticeable
+features of the data?
+
 ## Create a new params file and modify *at least* these four parameters
 
 We will give you parameters 7, 8, and 25 (because they will be hard to figure out)
