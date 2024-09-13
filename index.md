@@ -1,5 +1,5 @@
 # Welcome to RADCamp
-Over the last 10 years biogeographers have increasingly transitioned from investigating
+Over the last 15 years biogeographers have increasingly transitioned from investigating
 phylogeographic patterns in space and time using datasets composed of one or only a handful
 of markers to massive datasets containing thousands or tens of thousands of "anonymous"
 nuclear loci generated using restriction site associated DNA sequencing (RAD-Seq). These
@@ -27,10 +27,10 @@ computational experience.
 Workshop attendees will need to bring a laptop computer.
 
 ## Future events:
-* [RADCamp2024-SanFrancisco](SanFrancisco2024/index.md) (September)
 * [RADCamp2024-Phoenix](Phoenix2024/index.md) (November)
 
 ## Past events:
+* [RADCamp2024-SanFrancisco](SanFrancisco2024/index.md)
 * [RADCamp2024-Chicago](Chicago2024/index.md)
 * [RADCamp2023-Chicago](Chicago2023/index.md)
 * [RADCamp2023-Kigali](Kigali2023/index.md)
