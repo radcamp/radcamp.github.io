@@ -32,8 +32,6 @@ Times        | Thursday | Friday |
 
 # RADCamp San Francisco 2024 Group Photo
 
-* Don't forget to take a group photo!
-
 ![jpg](images/RADCamp-SanFrancisco2024-GroupPhoto.jpg)
 
 # Exit Survey
