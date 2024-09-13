@@ -36,6 +36,10 @@ Times        | Thursday | Friday |
 
 ![jpg](images/RADCamp-SanFrancisco2024-GroupPhoto.jpg)
 
+# Exit Survey
+Please spend a few minutes to fill the [exit survey](https://docs.google.com/forms/d/1B_QIsatfB-okEXGOM_YaIiwdaqfsl0jl_Q-4nhowyKc/edit)
+to help us improve future RADCamps.
+
 ## Acknowledgements
 RADCamp tutorial contributors and instructors (over the years): Isaac Overcast, Deren Eaton,
 Sandra Hoffberg, Natalia Bayona-Vasquez, Mariana Vasconcellos, Laura Bertola, Josiah Kuja, Anhubab Kahn,
