@@ -4,10 +4,10 @@
 
 Saturday November 9, 2024
 
-Room 108
-[Urban Systems Engineering Building](https://maps.app.goo.gl/C3NnAvYG1je4KSJy6)
-Arizona State University
-Phoenix, AZ
+Room 108  
+[Urban Systems Engineering Building](https://maps.app.goo.gl/C3NnAvYG1je4KSJy6)  
+Arizona State University  
+Phoenix, AZ  
 
 # Organisers, Instructors, and Facilitators
 
