@@ -35,7 +35,3 @@ CAATTC, TTA                    ## [8] [restriction_overhang]: Restriction overha
 
 * And have fun ;)
 
-### Smaller dataset
-If that 15MB dataset is too large and runs too slow you can try this one:
-
-[7MB mystery dataset on wetransfer](https://wetransfer.com/downloads/905dae3fc25d91ea1f238aea771f716020240807114837/16647eb94492ef3ac4695b5ee8f8edce20240807114915/959fa4?trk=TRN_TDL_01&utm_campaign=TRN_TDL_01&utm_medium=email&utm_source=sendgrid)
