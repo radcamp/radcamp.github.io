@@ -13,10 +13,11 @@ The core concept of RADSeq is that we want to sequence a random subset of
 the total genomic DNA to obtain genome-wide variation at a fraction of the cost
 of whole-genome sequencing.
 
+![png](images/RADSeq-Cartoon.png)
+
 ### What does it look like?
 
 The "Original" RAD protocol looks something like this:
-
 ![png](images/RAD.png)
 
 > **Figure from Andrews et al 2016.**
