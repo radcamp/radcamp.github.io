@@ -1,4 +1,4 @@
-# RADCamp Chicago 2024 - Day 1
+# RADCamp Phoenix 2024 - Day 1
 
 ## Overview of the mornings activities:
 * [Intro to ipyrad documentation](#intro-ipyrad-docs)
