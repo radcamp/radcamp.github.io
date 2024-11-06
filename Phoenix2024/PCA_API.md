@@ -37,14 +37,13 @@ in real life than doing so with the simulated data would be. In a new cell in th
 this command and then click the 'Run' button:
 
 ```
-!wget https://radcamp.github.io/Chicago2024/cheetah.snps.hdf5
+!wget https://radcamp.github.io/data/cheetah.snps.hdf5
 
 # Also fix a temporary issue with a PCA dependency
 !conda install -c conda-forge pandas=2.0.3 -y
 ```
 
 This .hdf5 file is one of the results files writen to the `outputs` directory of ipyrad after step 7.
-
 
 ### Import ipyrad.analysis module
 For this analysis, we'll use python. The `import` keyword directs python to load a module into the currently running context. This is very similar to the `library()` function in R. We begin by importing the ipyrad analysis module. Copy the code below into a notebook cell and click run. 

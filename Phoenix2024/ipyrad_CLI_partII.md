@@ -37,11 +37,6 @@ and it'll bring you right back up to speed!
 * [Launch ipyrad with binder.](https://mybinder.org/v2/gh/dereneaton/ipyrad/master)
 * Get a New>Terminal and execute these commands (takes ~5 minutes):
 
-```bash
-$ wget https://radcamp.github.io/Chicago2024/binder-reinstall.sh
-$ bash binder-reinstall.sh
-```
-
 # Step 3: Recap
 
 Recall that we clustered reads within samples in Step 3. Reads that are sufficiently 

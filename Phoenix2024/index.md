@@ -39,6 +39,12 @@ Times           | Sat Nov 9 |
 15:30-15:45     | Coffee Break |
 15:45-17:00      | [Phylogenetic inference: RAxML](RAxML_API.md) |
 
+### Binder reinstall instructions
+```bash
+$ wget https://radcamp.github.io/Phoenix2024/binder-reinstall.sh
+$ bash binder-reinstall.sh
+```
+
 <!--
 * Refreshments provided and workshop sponsored by:
 <div align="center" markdown="1">
