@@ -19,9 +19,8 @@ accessing the `.params` dictionary. You can view the raxml command string that i
 generated from the input arguments and you can call `.run()` to start the tree inference.
 
 ```
-!conda install -c conda-forge toytree=2.0.5 -y
-!conda install -c bioconda raxml -y
-!wget https://radcamp.github.io/Chicago2024/peddrad.phy
+!conda install -c conda-forge -c bioconda raxml toytree=2.0.5 -y
+!wget https://radcamp.github.io/data/peddrad.phy
 ```
 
 ## A note on Jupyter/IPython
@@ -63,7 +62,7 @@ Copy this code into a new notebook cell (or use the small grey *+* button on the
 
 ```python
 # Path to the input phylip file
-phyfile = "peddrad_outfiles/peddrad.phy"
+phyfile = "peddrad.phy"
 
 # init raxml object with input data and (optional) parameter options
 rax = ipa.raxml(data=phyfile, T=4, N=2)
@@ -89,7 +88,7 @@ After inferring a tree you can then visualize it in a notebook using `toytree`.
 tre = toytree.tree(rax.trees.bipartitions)
 
 # draw the tree rooting on species 1
-rtre = tre.root(wildcard="1")
+rtre = tre.root("1A_0", "1B_0", "1C_0", "1D_0")
 rtre.draw(tip_labels_align=True, node_labels="support");
 ```
 
@@ -100,7 +99,6 @@ Sometimes we might be more interested in visualizing the topology itself,
 and ignoring branch lengths, so specify this with the `use_edge_lengths`
 parameter set to `False`.
 ```
-rtre = tre.root(wildcard="1")
 rtre.draw(tip_labels_align=True, node_labels="support",use_edge_lengths=False);
 ```
 
@@ -220,6 +218,7 @@ Window extracter has several key features:
 
 ## Another example phylip file
 ```
-!wget https://radcamp.github.io/NYC2020/Prates_et_al_2016_example_data/anolis.phy
+!wget https://radcamp.github.io/data/anolis.phy
+!wget https://radcamp.github.io/data/anolis_pops.phy
 ```
 
