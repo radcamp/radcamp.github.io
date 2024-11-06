@@ -38,9 +38,6 @@ this command and then click the 'Run' button:
 
 ```
 !wget https://radcamp.github.io/data/cheetah.snps.hdf5
-
-# Also fix a temporary issue with a PCA dependency
-!conda install -c conda-forge pandas=2.0.3 -y
 ```
 
 This .hdf5 file is one of the results files writen to the `outputs` directory of ipyrad after step 7.
@@ -119,18 +116,47 @@ and type this:
 ```python
 pca.names
 ```
-This will show you a list of sample names.
+This will show you a list of sample names. You can use your prior information
+about your system to assign sample IDs to population names in a file and
+load these in to the notebook. We'll use a pre-baked file for the Cheetah data, 
+which you can download like this:
 
-Here we create a python 'dictionary', which is a key/value pair data structure.
-The keys are the population names, in our case cheetah subspecies, and the values are the lists of samples that
-belong to those populations. You can copy and paste this into a new cell in your
-notebook.
+```bash
+!wget https://radcamp.github.io/data/cheetah_pops.txt
+``` 
+
 ```python
-imap = {"A.j.jubatus":['SRR19760918','SRR19760920','SRR19760921','SRR19760924','SRR19760927','SRR19760928','SRR19760942','SRR19760946','SRR19760947','SRR19760956'],
-        "A.j.soemmeringii":['SRR19760910','SRR19760912','SRR19760954','SRR19760955','SRR19760957','SRR19760958','SRR19760959','SRR19760960','SRR19760961','SRR19760962'],
-        "A.j.venaticus":['SRR19760950','SRR19760951','SRR19760953'],
-        "Outgroup":['SRR19760949']}
+imap = ipa.utils.read_popsfile("cheetah_pops.txt")
+imap
 ```
+```
+{'A.j.jubatus': ['SRR19760918',
+  'SRR19760920',
+  'SRR19760921',
+  'SRR19760924',
+  'SRR19760927',
+  'SRR19760928',
+  'SRR19760942',
+  'SRR19760946',
+  'SRR19760947',
+  'SRR19760956'],
+ 'A.j.soemmeringii': ['SRR19760910',
+  'SRR19760912',
+  'SRR19760954',
+  'SRR19760955',
+  'SRR19760957',
+  'SRR19760958',
+  'SRR19760959',
+  'SRR19760960',
+  'SRR19760961',
+  'SRR19760962'],
+ 'A.j.venaticus': ['SRR19760950', 'SRR19760951', 'SRR19760953'],
+ 'Outgroup': ['SRR19760949']}
+```
+Here we created a python 'dictionary', which is a key/value pair data structure.
+The keys are the population names, in our case cheetah subspecies, and the
+values are the lists of samples that belong to those populations.
+
 Now create the `pca` object with the input data again, this time passing 
 in the new dictionary as the second argument and specifying this as the `imap`,
 and plot the new figure. We can also easily add a title to our PCA plots
@@ -162,13 +188,17 @@ intersted in cheetah only, **let's remove the outgroup sample and rerun the PCA*
 the ipyrad.analysis tools. In the PCA you can 'hover' over points to reveal
 their sample ID.
 
-The easiest way to achieve this is to simply remove the sample from the `imap`
-file and run the PCA again.
+The easiest way to achieve this is to comment out the outgroup sample in the
+`cheetah_pops.txt` file. Open this file, find the line with the outgroup sample
+and add a `#` at the beginning of the line, to comment it out. This is better
+than deleting it because if you change your mind you can uncomment it later
+```
+#SRR19760949	Outgroup
+```
 
 ```python
-imap = {"A.j.jubatus":['SRR19760918','SRR19760920','SRR19760921','SRR19760924','SRR19760927','SRR19760928','SRR19760942','SRR19760946','SRR19760947','SRR19760956'],
-        "A.j.soemmeringii":['SRR19760910','SRR19760912','SRR19760954','SRR19760955','SRR19760957','SRR19760958','SRR19760959','SRR19760960','SRR19760961','SRR19760962'],
-        "A.j.venaticus":['SRR19760950','SRR19760951','SRR19760953']}
+# reload the new imap
+imap = ipa.utils.read_popsfile("cheetah_pops.txt")
 pca = ipa.pca(data, imap=imap)
 pca.run()
 pca.draw(label="Sims colored by pop (no outgroup)")
@@ -188,7 +218,7 @@ results are drawn with a lower opacity and the centroid of all the points for
 each sample is plotted as a black point. 
 
 ```python
-pca.run(nreplicates=10)
+pca.run(nreplicates=5)
 pca.draw();
 ```
 ![png](images/cheetah_PCA_rep.png)
@@ -199,7 +229,7 @@ it is still often useful to examine other PCs. You can do this by specifying
 which PCs to plot in in the call to `draw`.
 
 ```python
-pca.draw(2,3)
+pca.draw(0,2)
 ```
 ![png](images/PCA-PC02.png)
 
