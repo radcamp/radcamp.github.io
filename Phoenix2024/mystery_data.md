@@ -11,7 +11,7 @@ cd mystery
 ```
 
 ## Download the data to your computer and upload it to binder
-* [Download the mystery data from wetransfer](https://we.tl/t-cmd7WDxI7T) (15MB)
+* [Download the mystery data](https://drive.google.com/file/d/1PfDOsBcHr9yQsrethTUTI1_UwJUr5lC-/view?usp=drive_link) (15MB)
 * Change to the `mystery` directory in the file browser (on the left)
 * Choose the `upload` (up arrow) button and upload the `mystery_data.tgz` file
 * Unpack the `mystery_data.tgz` like this:
