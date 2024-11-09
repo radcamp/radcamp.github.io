@@ -59,11 +59,8 @@ $ bash binder-reinstall.sh
 * [Bucky - Phylogenetic concordance analysis](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-bucky.ipynb)
 * [ABBA-BABA - Admixture analysis](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-abba-baba.ipynb)
 
-## Group Photos
-<!--
-![Group photo with a missing participant](RADCampLisbon2020-1.jpg)
-![Group photo with a missing instructor](RADCampLisbon2020-2.jpg)
--->
+## Group Photo
+![Group photo](RADCampPhoenix2024.jpg)
 
 ## Acknowledgements
 RADCamp tutorial contributors and instructors (over the years): Isaac Overcast,
