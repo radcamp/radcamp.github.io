@@ -27,9 +27,9 @@ computational experience.
 Workshop attendees will need to bring a laptop computer.
 
 ## Future events:
-* [RADCamp2024-Phoenix](Phoenix2024/index.md) (November)
 
 ## Past events:
+* [RADCamp2024-Phoenix](Phoenix2024/index.md)
 * [RADCamp2024-SanFrancisco](SanFrancisco2024/index.md)
 * [RADCamp2024-Chicago](Chicago2024/index.md)
 * [RADCamp2023-Chicago](Chicago2023/index.md)
