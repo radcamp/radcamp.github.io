@@ -27,6 +27,7 @@ computational experience.
 Workshop attendees will need to bring a laptop computer.
 
 ## Future events:
+* [RADCamp2025-Brisbane](Brisbane2024/index.md)
 
 ## Past events:
 * [RADCamp2024-Phoenix](Phoenix2024/index.md)
