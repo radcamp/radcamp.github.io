@@ -45,7 +45,7 @@ Times       | Saturday (June 14) | Sunday (June 15) |
 
 ## Empirical Data for the Workshop
 * [Seadragon data from Klanten *et al.* 2020](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0243446)
-![png](images/seadragon.jpg)
+![png](images/seadragon.jpg){: width="50%"}
 
 ## RADCamp Kigali 2025 co-sponsored by:
 
