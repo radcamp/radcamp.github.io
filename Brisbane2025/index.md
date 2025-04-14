@@ -3,11 +3,11 @@
 In association with the The Society for Conservation Biology's<br>
 [**32nd International Congress for Conservation Biology (ICCB 2025)**](https://conbio.org/mini-sites/iccb-2025/)  
 
-![ICCB 2025](images/ICCB2025-logo.png){: width="75%"}  
+![ICCB 2025](images/ICCB2025-logo.png){: width="50%"}  
 
-**RADCamp 2023**<br>
+**RADCamp 2025**<br>
 June 14-15, 2025  
-University of Queensland
+University of Queensland<br>
 Exact Location TBD
 
 ## Arriving at the University
@@ -25,7 +25,7 @@ TBD
 
 # Schedule
 
-Times       | Saturday (July 22) | Sunday (July 23) |
+Times       | Saturday (June 14) | Sunday (June 15) |
 -----       | ------------------ | ---------------- | 
 8:30-9:00   | Check-in and Introductions | Check-in and Recap Day 1 |
 9:00-10:30  | [Intro to Conservation Genetics](./Kigali workshop intro FINAL.pdf) | [RADSeq Assembly w/ ipyrad part II](ipyrad-CLI-FullTutorial.md) |
@@ -43,10 +43,9 @@ Times       | Saturday (July 22) | Sunday (July 23) |
 * [Bucky - Phylogenetic concordance analysis](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-bucky.ipynb)
 * [ABBA-BABA - Admixture analysis](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-abba-baba.ipynb)
 
-## Source of Empirical Data for the Workshop
-* [Cheetah data from Prost *et al.* 2022](https://onlinelibrary.wiley.com/doi/10.1111/mec.16577)
-![png](images/Cheetah_brothers2.png)
-©Laura Bertola
+## Empirical Data for the Workshop
+* [Seadragon data from Klanten *et al.* 2020](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0243446)
+![png](images/seadragon.jpg)
 
 ## RADCamp Kigali 2025 co-sponsored by:
 
