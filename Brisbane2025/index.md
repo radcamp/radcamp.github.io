@@ -18,10 +18,12 @@ TBD
 
 # Organisers, Instructors, and Facilitators
 
-  - Isaac Overcast - Columbia University
   - Laura Bertola - National Centre for Biological Sciences
-  - Laura Tensen - University of Copenhagen
+  - Ilha Byrne - University of Queensland
   - Anubhab Khan - University of Glasgow
+  - Katherine Prata - Australian Institute of Marine Science
+  - Isaac Overcast - Columbia University
+  - Laura Tensen - University of Copenhagen
 
 # Schedule
 
