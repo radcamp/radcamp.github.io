@@ -31,10 +31,14 @@ Throughout the workshop we will be introducing new commands as the need for them
 
 > **Special Note:** Notice that the above directory we are making is not called `ipyrad workshop`. This is **very important**, as spaces in directory names are known to cause havoc on HPC systems. All linux based operating systems do not recognize file or directory names that include spaces because spaces act as default delimiters between arguments to commands. There are ways around this (for example Mac OS has half-baked "spaces in file names" support) but it will be so much for the better to get in the habit now of ***never including spaces in file or directory names***.
 
-## Exploring the cheetah data
-We will be reanalysing RAD-Seq data from cheetahs (*Acinonyx jubatus*) sampled from across their distribution in Africa and Iran and published in [Prost *et al.* 2022](https://onlinelibrary.wiley.com/doi/10.1111/mec.16577). 
-![png](images/Cheetah_brothers.png)
-©Laura Bertola
+## Exploring the seadragon data
+We will be reanalysing RAD-Seq data from seadragon (*Phyllopteryx taeniolatus*) 
+sampled from across their distribution in Africa and Iran and published in [Klanten *et
+al* 2020 - Genomic and morphological evidence of distinct populations in the endemic 
+common (weedy) seadragon *Phyllopteryx taeniolatus* (Syngnathidae) along the east coast 
+of Australia](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0243446)
+
+![png](images/seadragon.jpg){: width="50%"}
 
 This study used various datatypes, including whole genome sequencing (WGS), mitochondrial data, MHC data, minisatellites and RADseq data. For this workshop, we will focus only on (part of ) the RADseq data, which consists of 23 individuals from 6 populations, and one outgroup (puma; *Puma concolor*). The data were generated using a double-digest restriction-site associated DNA (ddRAD) sequencing approach [Peterson *et al.*, 2012](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0037135). Note that raw reads have been randomly downsampled to 125,000 reads per sample, in order to create a dataset that will be computationally tractable with the expectation of finishing in a reasonable time. 
 

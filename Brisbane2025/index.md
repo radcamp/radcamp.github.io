@@ -38,6 +38,14 @@ Times       | Saturday (June 14) | Sunday (June 15) |
 14:45-15:00 | Coffee Break | Coffee Break |
 15:00-17:00 | [RADSeq Assembly w/ ipyrad part I](ipyrad-CLI-FullTutorial.md) | [Spatial Popgen Analysis: FEEMS](FEEMS_API.md) |
 
+## Empirical Data for the Workshop
+
+Klanten et al 2020 - [Genomic and morphological evidence of distinct populations in the endemic common (weedy) seadragon *Phyllopteryx taeniolatus* (Syngnathidae) along the east coast of Australia](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0243446)
+
+[BioProject PRJNA655499](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA655499)
+
+![png](images/seadragon.jpg){: width="50%"}
+
 ## Additional ipyrad analysis cookbooks
 
 * [Clustering analysis: STRUCTURE](05_STRUCTURE_API.md)
@@ -45,14 +53,10 @@ Times       | Saturday (June 14) | Sunday (June 15) |
 * [Bucky - Phylogenetic concordance analysis](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-bucky.ipynb)
 * [ABBA-BABA - Admixture analysis](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-abba-baba.ipynb)
 
-## Empirical Data for the Workshop
-* [Seadragon data from Klanten *et al.* 2020](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0243446)
-![png](images/seadragon.jpg){: width="50%"}
-
-## RADCamp Kigali 2025 co-sponsored by:
+## RADCamp Brisbane 2025 co-sponsored by:
 
 
-# RADCamp Kigali 2025 Group Photo
+# RADCamp Brisbane 2025 Group Photo
 
 **Don't forget to get a group photo!**
 ![Group photo]()
