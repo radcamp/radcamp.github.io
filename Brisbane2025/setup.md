@@ -1,8 +1,8 @@
-# RADCamp San Francisco 2024 - Day 1
+# RADCamp ICCB Brisbane 2025 - Day 1
 
 ## Overview of the morning activities:
 * [Intro to ipyrad resources](#intro-ipyrad-resources)
-* [Software setup](#accessing-ibss-jupyterhub)
+* [Software setup](#accessing-cloud-computing-resources)
 * [RADseq data quality control (QC)](#data-quality-control)
 * [ipyrad assembly of simulated data Part I](ipyrad_CLI_partI.html)
 
@@ -11,11 +11,11 @@
 * [ipyrad gitter channel (a chat room for getting help)](https://app.gitter.im/#/room/#dereneaton_ipyrad:gitter.im)
 * [ipyrad github repository (reporting issues)](https://github.com/dereneaton/ipyrad)
 
-## Acessing IBSS JupyterHub
-For this workshop we will use a cloud server hosted by CAS. You should be
-on either the CAS internal or Guest wifi. Open a browser window and go to:
+## Accessing Cloud Computing Resources
+For this workshop we will use a cloud server hosted by the [Eaton Lab at Columbia
+University](https://eaton-lab.org/). To log in you will need a gmail account. Open a browser window and go to:
 
-[http://ibss-jupyterhub:8000/](http://ibss-jupyterhub:8000/)
+[https://pinky.eaton-lab.org/](https://pinky.eaton-lab.org/)
 
 You will see a login screen. Your username is the *name* of the email
 address you registered with (everything before the '@'). The password

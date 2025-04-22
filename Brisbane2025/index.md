@@ -21,6 +21,7 @@ TBD
   - Laura Bertola - National Centre for Biological Sciences
   - Ilha Byrne - University of Queensland
   - Anubhab Khan - University of Glasgow
+  - Matheus Mello Athayde - University of Queensland
   - Katherine Prata - Australian Institute of Marine Science
   - Isaac Overcast - Columbia University
   - Laura Tensen - University of Copenhagen
@@ -62,6 +63,6 @@ Klanten et al 2020 - [Genomic and morphological evidence of distinct populations
 ![Group photo]()
 
 ## Acknowledgements
-RADCamp tutorial contributors and instructors (over the years): Isaac Overcast, Deren Eaton,
-Sandra Hoffberg, Natalia Bayona-Vasquez, Mariana Vasconcellos, Laura Bertola, Josiah Kuja, Anhubab Kahn,
-Arianna Kuhn.
+RADCamp tutorial contributors and instructors (over the years): Isaac Overcast, 
+Deren Eaton, Sandra Hoffberg, Natalia Bayona-Vasquez, Mariana Vasconcellos, Laura 
+Bertola, Josiah Kuja, Anhubab Kahn, Arianna Kuhn.
