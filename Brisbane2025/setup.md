@@ -17,18 +17,25 @@ University](https://eaton-lab.org/). To log in you will need a gmail account. Op
 
 [https://pinky.eaton-lab.org/](https://pinky.eaton-lab.org/)
 
-You will see a login screen. Your username is the *name* of the email
-address you registered with (everything before the '@'). The password
-is the same.
+You will see a login screen prompting you to log in with gmail. Click this button,
+and you might need to confirm an authorization to verify your identity.
 
 ![png](images/JupyterHubLogin.png)
+
+The default view is the 'Classic' jupyter notebook view, but I prefer the newer
+JupyterLab view because it keeps everything in one place. Open JuptyerLab by going
+to View->Open JupyterLab
+
+![png](images/JupyterHubOpenLab.png)
 
 Once logged in you'll see the JupyterHub File Browser and Launcher panes.
 
 ![png](images/JupyterHubStart.png)
 
-**NB:** The IBSS JupyterHub server is only accessible on-site at CAS,
-and will be turned off after the workshop.
+!!! Warning
+	**NB:** The Eaton lab JupyterHub server is only accessible for your account for the
+	duration of this workshop. After the workshop we will delete user accounts and 
+	restrict access permissions, so don't save anything valuable here!
 
 ## Installing ipyrad
 
