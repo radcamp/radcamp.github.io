@@ -33,6 +33,7 @@ Once logged in you'll see the JupyterHub File Browser and Launcher panes.
 ![png](images/JupyterHubStart.png)
 
 !!! Warning
+
 	**NB:** The Eaton lab JupyterHub server is only accessible for your account for the
 	duration of this workshop. After the workshop we will delete user accounts and 
 	restrict access permissions, so don't save anything valuable here!
@@ -44,7 +45,7 @@ the [minconda installer](https://docs.anaconda.com/miniconda/miniconda-other-ins
 and saved it in the `/data` directory, so you can run the installer from there.
 
 ```
-bash /data/Miniconda-Linux-x86_64.sh
+bash ./work/BlackRockData2/Miniconda3-latest-Linux-x86_64.sh
 ```
 During the miniconda installation push the space bar until prompted and
 then type 'yes' to acknowledge the license agreement, and 'yes' to
