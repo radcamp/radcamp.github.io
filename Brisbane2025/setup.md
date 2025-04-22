@@ -3,8 +3,8 @@
 ## Overview of the morning activities:
 * [Intro to ipyrad resources](#intro-ipyrad-resources)
 * [Software setup](#accessing-cloud-computing-resources)
-* [RADseq data quality control (QC)](#data-quality-control)
-* [ipyrad assembly of simulated data Part I](ipyrad_CLI_partI.html)
+* [RADseq data quality control (QC)](data_QC)
+* [ipyrad assembly of simulated data Part I](ipyrad-CLI-FullTutorial.html)
 
 ## Intro ipyrad Resources
 * [ipyrad documentation (detailed explanations and tutorials)](https://ipyrad.readthedocs.io/en/latest/)
