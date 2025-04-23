@@ -202,6 +202,11 @@ CATGC                           ## [8] [restriction_overhang]: Restriction overh
 ```
 **NB:** Don't forget to choose "File->Save Text" after you are done editing!
 
+Seadragon data followed the ddRAD protocol of Peterson et al 2012 and used the
+restriction enzymes [PstI](https://www.neb.com/en-us/products/r0140-psti) & 
+[HpyCH4IV](https://www.neb.com/en-us/products/r0619-hpych4iv?srsltid=AfmBOoq-K9hCFJeDDKyKvOnIuK61fDPRicig9SRnzrYmQ1MzA6CraJHC) which leave overhang
+sequences of `TGCAG` and `ACG`, respectively.`
+
 Once we start running the analysis ipyrad will create several new directories to
 hold the output of each step for this assembly. By default the new directories
 are created in the `project_dir` directory and use the prefix specified by the

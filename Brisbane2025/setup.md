@@ -62,9 +62,10 @@ should now look like this:
 (base) jovyan@493222dbc32d:~$
 ```
 
-Now you can install ipyrad with conda like this (it will take 1-2 minutes):
+Now you can install ipyrad (and a few of the other necessary packages we'll be using)
+with conda like this (it will take 1-2 minutes):
 ```
-conda install -c conda-forge -c bioconda ipyrad -y
+conda install -c conda-forge -c bioconda ipyrad fastqc -y
 ```
 
 ### Installing ipyrad on your home system
