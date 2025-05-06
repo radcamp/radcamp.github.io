@@ -8,7 +8,8 @@ In association with the The Society for Conservation Biology's<br>
 **RADCamp 2025**<br>
 June 14-15, 2025  
 University of Queensland<br>
-Exact Location TBD
+St. Lucia Campus
+Forgan Smith Building 01-E303
 
 ## Arriving at the University
 TBD
@@ -28,16 +29,18 @@ TBD
 
 # Schedule
 
+[Organiser & Participant Intro Slides (Presented throughout the first day)](https://docs.google.com/presentation/d/1A1HyzV-50gjEywkx3L2HmqtLP0oeBbL1qguBe3cpO0s/edit#slide=id.g359940329b6_0_130)
+
 Times       | Saturday (June 14) | Sunday (June 15) |
 -----       | ------------------ | ---------------- | 
 8:30-9:00   | Check-in and Introductions | Check-in and Recap Day 1 |
-9:00-10:30  | [Intro to Conservation Genetics](./Kigali workshop intro FINAL.pdf) | [RADSeq Assembly w/ ipyrad part II](ipyrad-CLI-FullTutorial.md) |
+9:00-10:30  | [Intro to Conservation Genetics](https://docs.google.com/presentation/d/1pY-Qs6gBdLOob3SVtcPy7bFoCTVXEol4/edit?usp=sharing&ouid=104169659317553534133&rtpof=true&sd=true) | [RADSeq Assembly w/ ipyrad part II](ipyrad-CLI-FullTutorial.md) |
 10:30-10:45 | Coffee Break | Coffee Break |
-10:45-12:00 | [Software Setup](setup.md) | [Clustering Analysis: PCA](PCA_API.md) |
+10:45-12:00 | [Software Setup](setup.md) | [Clustering Analysis: PCA](PCA_API.md) & [Phylogenetic Inference: RAxML](RAxML_API.md) |
 12:00-13:00 | Lunch | Lunch |
-13:00-14:45 | [Intro to RADseq data](./radseq-intro) & [Data QC](data_QC.md) | [Phylogenetic Inference: RAxML](RAxML_API.md) |
+13:00-14:45 | [Intro to RADseq data](./radseq-intro) & [Data QC](data_QC.md) | [Spatial Popgen Analysis: FEEMS](FEEMS_API.md) |
 14:45-15:00 | Coffee Break | Coffee Break |
-15:00-17:00 | [RADSeq Assembly w/ ipyrad part I](ipyrad-CLI-FullTutorial.md) | [Spatial Popgen Analysis: FEEMS](FEEMS_API.md) |
+15:00-17:00 | [RADSeq Assembly w/ ipyrad part I](ipyrad-CLI-FullTutorial.md) | N/A (Ends at 3pm) |
 
 ## Empirical Data for the Workshop
 
