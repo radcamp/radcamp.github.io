@@ -13,26 +13,28 @@
 
 ## Accessing Cloud Computing Resources
 For this workshop we will use a cloud server hosted by the [Eaton Lab at Columbia
-University](https://eaton-lab.org/). To log in you will need a gmail account. Open a browser window and go to:
+University](https://eaton-lab.org/). To log in you will need a Gmail account. Open a browser window and go to:
 
 [https://pinky.eaton-lab.org/](https://pinky.eaton-lab.org/)
 
-You will see a login screen prompting you to log in with gmail. Click this button,
+You will see a login screen prompting you to log in with Gmail. Click this button,
 and you might need to confirm an authorization to verify your identity.
 
 ![png](images/JupyterHubLogin.png)
 
-The default view is the 'Classic' jupyter notebook view, but I prefer the newer
+The default view is the 'Classic' Jupyter notebook view, but I prefer the newer
 JupyterLab view because it keeps everything in one place. Open JuptyerLab by going
-to View->Open JupyterLab
+to View → Open JupyterLab
 
 ![png](images/JupyterHubOpenLab.png)
 
-Once logged in you'll see the JupyterHub File Browser and Launcher panes.
+Once logged in, you'll see the JupyterHub File Browser and Launcher panes.
 
 ![png](images/JupyterHubStart.png)
 
-**Note: These cloud resources will not persist past he workshop.** The Eaton lab 
+If you'd like to have more information about Jupyter, check out their [website](https://jupyter.org/).
+
+>**Important: These cloud resources will not persist past he workshop.** The Eaton lab 
 JupyterHub server is only accessible for your account for the duration of this 
 workshop. After the workshop we will delete user accounts and restrict access 
 permissions, so don't save anything valuable here!
