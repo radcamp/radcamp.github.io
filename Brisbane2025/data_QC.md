@@ -64,7 +64,7 @@ raw data.
 
 ## Exploring the seadragon data
 We will be reanalysing RAD-Seq data from seadragons (*Phyllopteryx taeniolatus*) 
-sampled from across across New South Wales, Victoria, and Tasmania and published in 
+sampled from across across New South Wales, Victoria and Tasmania, and published in 
 [Klanten *et al* 2020 - Genomic and morphological evidence of distinct populations 
 in the endemic common (weedy) seadragon *Phyllopteryx taeniolatus* (Syngnathidae) 
 along the east coast of Australia](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0243446)
