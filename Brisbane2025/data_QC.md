@@ -63,7 +63,7 @@ The `ls -l` command shows that the new `raws` shortcut indeed points to the shar
 raw data.
 
 ## Exploring the seadragon data
-We will be reanalysing RAD-Seq data from seadragon (*Phyllopteryx taeniolatus*) 
+We will be reanalysing RAD-Seq data from seadragons (*Phyllopteryx taeniolatus*) 
 sampled from across across New South Wales, Victoria, and Tasmania and published in 
 [Klanten *et al* 2020 - Genomic and morphological evidence of distinct populations 
 in the endemic common (weedy) seadragon *Phyllopteryx taeniolatus* (Syngnathidae) 
