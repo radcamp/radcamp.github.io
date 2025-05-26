@@ -52,7 +52,7 @@ Klanten _et al._ 2020 - [Genomic and morphological evidence of distinct populati
 
 ## Additional ipyrad analysis cookbooks
 
-* [Clustering analysis: STRUCTURE](05_STRUCTURE_API.md)
+* [Clustering analysis: STRUCTURE](https://nbviewer.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-structure-pedicularis.ipynb)
 * [BPP - Bayesian inference under a multi-species coalescent model](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-bpp-species-delimitation.ipynb)
 * [Bucky - Phylogenetic concordance analysis](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-bucky.ipynb)
 * [ABBA-BABA - Admixture analysis](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-abba-baba.ipynb)
