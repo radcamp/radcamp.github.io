@@ -4,8 +4,9 @@ This is the full tutorial for the command line interface (**CLI**) for ipyrad.
 In this tutorial we'll walk through the entire assembly, from raw data to output
 files for downstream analysis. This is meant as a broad introduction to
 familiarize users with the general workflow, and some of the parameters and
-terminology. We will use and empirical dataset of paired-end cheetah ddRAD data as an example in this
-tutorial. Of course, you can replicate the steps described here with your own data, or any other RADseq dataset. 
+terminology. We will use and empirical dataset of paired-end seadragon ddRAD data as 
+an example in this tutorial. Of course, you can replicate the steps described here 
+with your own data, or any other RADseq dataset. 
 
 If you are new to RADseq analyses, this tutorial will provide a simple
 overview of how to execute ipyrad, what the data files look like, how to
@@ -14,7 +15,8 @@ will be. We will also cover how to run ipyrad on a cluster and how to do so
 efficiently.
 
 Each grey cell in this tutorial indicates a command line interaction. 
-Lines starting with `$ ` indicate a command that should be executed in your terminal. All lines in code cells beginning with \#\# are 
+Lines starting with `$ ` indicate a command that should be executed in your 
+terminal. All lines in code cells beginning with \#\# are 
 comments and should not be copied and executed. All other lines should 
 be interpreted as output from the issued commands.
 
@@ -51,9 +53,8 @@ you don't mind if your assembly breaks.
 
 # Getting Started
 
-We will be running through the assembly of the cheetah data using the ipyrad
-CLI. So, if you don't have the terminal window open, please start your VM, open a browser
-window and navigate to `http://localhost:8800` and create a **new "Terminal"**
+We will be running through the assembly of the seadragon data using the ipyrad
+CLI. So, if you don't have the terminal window open, open a browser window and navigate to `https://pinky.eaton-lab.org/` and create a **new "Terminal"**
 using the "New" button.
 
 ## ipyrad help
@@ -202,10 +203,12 @@ CATGC                           ## [8] [restriction_overhang]: Restriction overh
 ```
 **NB:** Don't forget to choose "File->Save Text" after you are done editing!
 
-Seadragon data followed the ddRAD protocol of Peterson et al 2012 and used the
-restriction enzymes [PstI](https://www.neb.com/en-us/products/r0140-psti) & 
+The Seadragpon data were generated using a double-digest restriction-site associated 
+DNA (ddRAD) sequencing approach [Peterson *et al.*, 
+2012](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0037135) and 
+used the restriction enzymes [PstI](https://www.neb.com/en-us/products/r0140-psti) & 
 [HpyCH4IV](https://www.neb.com/en-us/products/r0619-hpych4iv?srsltid=AfmBOoq-K9hCFJeDDKyKvOnIuK61fDPRicig9SRnzrYmQ1MzA6CraJHC) which leave overhang
-sequences of `TGCAG` and `ACG`, respectively.`
+sequences of `TGCAG` and `ACG`, respectively.
 
 Once we start running the analysis ipyrad will create several new directories to
 hold the output of each step for this assembly. By default the new directories
