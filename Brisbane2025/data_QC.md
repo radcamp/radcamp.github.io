@@ -158,7 +158,7 @@ This figure depicts a common artifact of current Illumina chemistry, whereby qua
 ### Running FastQC on the seadragon data
 In preparation for running FastQC on our raw data we need to make an output directory 
 to keep the FastQC results organized. Make a new directory with
-`mkdir`.
+`mkdir`:
 
 ```bash
 (base) jovyan@493222dbc32d:~/ipyrad-workshop$ mkdir fastqc-results
