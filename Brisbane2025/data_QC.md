@@ -258,5 +258,10 @@ increasing to ~40% adapter sequence at the 3' end of the reads (which is a lot).
 ![png](images/fastqc-adaptercontamination.png)
 
 Either way, ipyrad will remove adapter contamination by default, it's just sometimes
-good to know about whether this is an issue with your data. At the end of the day, 
-the seadragon data look good and we can proceed with the ipyrad analysis.
+good to know about whether this is an issue with your data.
+
+**Take a moment to inspect a few more of the fastqc results files.** Do they all
+tell a pretty consistant story?
+
+At the end of the day, the seadragon data look good and we can proceed with the 
+ipyrad analysis.
