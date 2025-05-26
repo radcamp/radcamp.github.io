@@ -44,7 +44,7 @@ Times       | Saturday (June 14) | Sunday (June 15) |
 
 ## Empirical Data for the Workshop
 
-Klanten et al 2020 - [Genomic and morphological evidence of distinct populations in the endemic common (weedy) seadragon *Phyllopteryx taeniolatus* (Syngnathidae) along the east coast of Australia](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0243446)
+Klanten _et al._ 2020 - [Genomic and morphological evidence of distinct populations in the endemic common (weedy) seadragon *Phyllopteryx taeniolatus* (Syngnathidae) along the east coast of Australia](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0243446)
 
 [BioProject PRJNA655499](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA655499)
 
