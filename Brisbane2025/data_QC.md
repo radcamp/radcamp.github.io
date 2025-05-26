@@ -1,7 +1,12 @@
 # Empirical data & Quality Control (QC)
 
 ## Command line interface (CLI) basics
-The CLI provides a way to navigate a file system, move files around, and run commands all inside a little black window. The down side of CLI is that you have to learn many at first seemingly esoteric commands for doing all the things you would normally do with a mouse. However, there are several advantages of CLI: 1) you can use it on servers that don't have a GUI interface (such as HPC clusters); 2) it's scriptable, so you can write programs to execute common tasks or run analyses; 3) it's often faster and more efficient that click-and-drag GUI interfaces. For now we will start with 4 of the most common and useful commands:
+The CLI provides a way to navigate a file system, move files around, and run commands all inside a little black window. The down side of CLI is that you have to learn many at first seemingly esoteric commands for doing all the things you would normally do with a mouse. However, there are several advantages of CLI: 
+1) you can use it on servers that don't have a GUI interface (such as HPC clusters)
+2) it's scriptable, so you can write programs to execute common tasks or run analyses
+3) it's often faster and more efficient that click-and-drag GUI interfaces.
+  
+For now we will start with 4 of the most common and useful commands:
 
 ```
 (base) jovyan@493222dbc32d:~$ pwd
