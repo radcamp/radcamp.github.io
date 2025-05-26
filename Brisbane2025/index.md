@@ -62,8 +62,7 @@ Klanten _et al._ 2020 - [Genomic and morphological evidence of distinct populati
 
 # RADCamp Brisbane 2025 Group Photo
 
-**Don't forget to get a group photo!**
-![Group photo]()
+**Don't forget to get a group photo!**  
 
 ## Acknowledgements
 RADCamp tutorial contributors and instructors (over the years): Isaac Overcast, 
