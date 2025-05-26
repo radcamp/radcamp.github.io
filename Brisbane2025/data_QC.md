@@ -165,7 +165,7 @@ to keep the FastQC results organized. Make a new directory with
 (base) jovyan@493222dbc32d:~/ipyrad-workshop$ ls
 fastqc-results raws
 ```
-Now run fastqc on one of the samples:
+Now run FastQC on one of the samples:
 ```
 (base) jovyan@493222dbc32d:~/ipyrad-workshop$ fastqc -o fastqc-results raws/Bic1_R1_.fastq.gz 
 ```
