@@ -44,7 +44,7 @@ Times       | Saturday (June 14) | Sunday (June 15) |
 
 ## Empirical Data for the Workshop
 
-Klanten et al 2020 - [Genomic and morphological evidence of distinct populations in the endemic common (weedy) seadragon *Phyllopteryx taeniolatus* (Syngnathidae) along the east coast of Australia](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0243446)
+Klanten _et al._ 2020 - [Genomic and morphological evidence of distinct populations in the endemic common (weedy) seadragon *Phyllopteryx taeniolatus* (Syngnathidae) along the east coast of Australia](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0243446)
 
 [BioProject PRJNA655499](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA655499)
 
@@ -52,7 +52,7 @@ Klanten et al 2020 - [Genomic and morphological evidence of distinct populations
 
 ## Additional ipyrad analysis cookbooks
 
-* [Clustering analysis: STRUCTURE](05_STRUCTURE_API.md)
+* [Clustering analysis: STRUCTURE](https://nbviewer.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-structure-pedicularis.ipynb)
 * [BPP - Bayesian inference under a multi-species coalescent model](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-bpp-species-delimitation.ipynb)
 * [Bucky - Phylogenetic concordance analysis](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-bucky.ipynb)
 * [ABBA-BABA - Admixture analysis](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-abba-baba.ipynb)
@@ -60,10 +60,9 @@ Klanten et al 2020 - [Genomic and morphological evidence of distinct populations
 ## RADCamp Brisbane 2025 co-sponsored by:
 
 
-# RADCamp Brisbane 2025 Group Photo
+## RADCamp Brisbane 2025 Group Photo
 
-**Don't forget to get a group photo!**
-![Group photo]()
+**Don't forget to get a group photo!**  
 
 ## Acknowledgements
 RADCamp tutorial contributors and instructors (over the years): Isaac Overcast, 

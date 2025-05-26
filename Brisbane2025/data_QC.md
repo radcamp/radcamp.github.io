@@ -1,7 +1,12 @@
 # Empirical data & Quality Control (QC)
 
 ## Command line interface (CLI) basics
-The CLI provides a way to navigate a file system, move files around, and run commands all inside a little black window. The down side of CLI is that you have to learn many at first seemingly esoteric commands for doing all the things you would normally do with a mouse. However, there are several advantages of CLI: 1) you can use it on servers that don't have a GUI interface (such as HPC clusters); 2) it's scriptable, so you can write programs to execute common tasks or run analyses; 3) it's often faster and more efficient that click-and-drag GUI interfaces. For now we will start with 4 of the most common and useful commands:
+The CLI provides a way to navigate a file system, move files around, and run commands all inside a little black window. The down side of CLI is that you have to learn many at first seemingly esoteric commands for doing all the things you would normally do with a mouse. However, there are several advantages of CLI: 
+1) you can use it on servers that don't have a GUI interface (such as HPC clusters)
+2) it's scriptable, so you can write programs to execute common tasks or run analyses
+3) it's often faster and more efficient that click-and-drag GUI interfaces.
+  
+For now we will start with 4 of the most common and useful commands:
 
 ```
 (base) jovyan@493222dbc32d:~$ pwd
@@ -38,7 +43,7 @@ evolution  ipyrad-workshop  miniconda3  work
 
 Throughout the workshop we will be introducing new commands as the need for them arises. We will pay special attention to highlighting and explaining new commands and giving examples to practice with. 
 
-> **Special Note:** Notice that the above directory we are making is not called `ipyrad workshop`. This is **very important**, as spaces in directory names are known to cause problems on HPC systems. All linux based operating systems do not recognize file or directory names that include spaces because spaces act as default delimiters between arguments to commands. There are ways around this (for example Mac OS has half-baked "spaces in file names" support) but it will be so much for the better to get in the habit now of ***never including spaces in file or directory names***.
+> **Special Note:** Notice that the above directory we are making is not called `ipyrad workshop`. This is **very important**, as spaces in directory names are known to cause problems on HPC systems. All linux based operating systems do not recognize file or directory names that include spaces, because spaces act as default delimiters between arguments to commands. There are ways around this (for example Mac OS has half-baked "spaces in file names" support) but it will be so much for the better to get in the habit now of ***never including spaces in file or directory names***.
 
 The raw data lives in a directory called `raws` inside a nested set of
 directories in the `work` directory. It will be very convenient for us to create
@@ -58,8 +63,8 @@ The `ls -l` command shows that the new `raws` shortcut indeed points to the shar
 raw data.
 
 ## Exploring the seadragon data
-We will be reanalysing RAD-Seq data from seadragon (*Phyllopteryx taeniolatus*) 
-sampled from across across New South Wales, Victoria, and Tasmania and published in 
+We will be reanalysing RAD-Seq data from seadragons (*Phyllopteryx taeniolatus*) 
+sampled from across across New South Wales, Victoria and Tasmania, and published in 
 [Klanten *et al* 2020 - Genomic and morphological evidence of distinct populations 
 in the endemic common (weedy) seadragon *Phyllopteryx taeniolatus* (Syngnathidae) 
 along the east coast of Australia](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0243446)
@@ -146,21 +151,21 @@ The first step of any RAD-Seq assembly is to inspect your raw data to estimate o
 In contrast, here is a somewhat typical base sequence quality report for R1 of a 
 300bp paired-end Illumina run of another RADseq dataset:
 
-![png](images/fastqc-quality-example.png)
+![png](images/fastqc-low-quality-example.png)
 
 This figure depicts a common artifact of current Illumina chemistry, whereby quality scores per base drop off precipitously toward the ends of reads, with the effect being magnified for read lengths >150bp. The purpose of using FastQC to examine reads is to determine whether and how much to trim our reads to reduce sequencing error interfering with basecalling. In the above figure, as in most real dataset, we can see there is a tradeoff between throwing out data to increase overall quality by trimming for shorter length, and retaining data to increase value obtained from sequencing with the result of increasing noise toward the ends of reads.
 
 ### Running FastQC on the seadragon data
 In preparation for running FastQC on our raw data we need to make an output directory 
-to keep the FastQC results organized. ake a new directory with
-`mkdir`.
+to keep the FastQC results organized. Make a new directory with
+`mkdir`:
 
 ```bash
 (base) jovyan@493222dbc32d:~/ipyrad-workshop$ mkdir fastqc-results
 (base) jovyan@493222dbc32d:~/ipyrad-workshop$ ls
 fastqc-results raws
 ```
-Now run fastqc on one of the samples:
+Now run FastQC on one of the samples:
 ```
 (base) jovyan@493222dbc32d:~/ipyrad-workshop$ fastqc -o fastqc-results raws/Bic1_R1_.fastq.gz 
 ```
@@ -256,6 +261,8 @@ contamination per base position, so 10% of the data between bases 20-40 is adapt
 increasing to ~40% adapter sequence at the 3' end of the reads (which is a lot).
 
 ![png](images/fastqc-adaptercontamination.png)
+
+>**Note:** if you have a lot of samples, and therefore a lot of FastQC reports, it would be kind of annoying to look at them one by one. There is a tool called [MultiQC](https://seqera.io/multiqc/), which conveniently summarizes all FastQC results into a single report.
 
 Either way, ipyrad will remove adapter contamination by default, it's just sometimes
 good to know about whether this is an issue with your data.
