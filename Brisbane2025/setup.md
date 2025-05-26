@@ -24,7 +24,7 @@ and you might need to confirm an authorization to verify your identity.
 
 The default view is the 'Classic' Jupyter notebook view, but I prefer the newer
 JupyterLab view because it keeps everything in one place. Open JuptyerLab by going
-to View → Open JupyterLab
+to View → Open JupyterLab.
 
 ![png](images/JupyterHubOpenLab.png)
 
