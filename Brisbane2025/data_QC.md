@@ -262,6 +262,8 @@ increasing to ~40% adapter sequence at the 3' end of the reads (which is a lot).
 
 ![png](images/fastqc-adaptercontamination.png)
 
+>**Note:** if you have a lot of samples, and therefore a lot of FastQC reports, it would be kind of annoying to look at them one by one. There is a tool called [MultiQC](https://seqera.io/multiqc/), which conveniently summarizes all FastQC results into a single report.
+
 Either way, ipyrad will remove adapter contamination by default, it's just sometimes
 good to know about whether this is an issue with your data. At the end of the day, 
 the seadragon data look good and we can proceed with the ipyrad analysis.
