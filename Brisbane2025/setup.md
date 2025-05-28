@@ -65,9 +65,17 @@ Your prompt  should now look like this:
 ```
 
 Now you can install ipyrad (and a few of the other necessary packages we'll be using)
-with conda like this (it will take 1-2 minutes):
+with conda like this (it will take 1-2 minutes). We recommend to copy/paste this line
+into the terminal to avoid typos:
 ```
-conda install -c conda-forge -c bioconda ipyrad fastqc -y
+conda install -c conda-forge -c bioconda numpy=1.26.4 ipyrad fastqc scikit-learn toytree raxml -y
+```
+
+**ALSO IMPORTANT:** This is the last **setup** command that is necessary for 
+accessing the conda environment with these packages inside jupyter notebooks
+(which we will use extensively later in the course).
+```
+python -m ipykernel install --user --name=base
 ```
 
 ### Installing ipyrad on your home system
