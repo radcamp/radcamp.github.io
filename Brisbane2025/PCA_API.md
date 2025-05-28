@@ -26,14 +26,20 @@ all code in cells of a jupyter notebook.
 # **PCA** analyses
 
 ## Create a new notebook for the PCA
-In the file browser on the left of JupyterLab browse to the directory with the
-assembly of the cheetah data: `/home/osboxes/ipyrad-workshop`.
+In the file browser on the leftnav of JupyterLab browse to the seadragon assembly
+directory (if you aren't already there): `/home/jovyan/ipyrad-workshop`.
 
+Open the "Launcher" by clicking the blue **+** button in the upper left.
 Similar how you've previously opened the Terminal, now open a new "Python 3" notebook by clicking on `New`.
 
 ![png](images/raxml-CreateNotebook.png)
 
-First things first, rename your new notebook to give it a meaningful name. Choose `File->Save Notebook` and rename your notebook to "cheetah_PCA.ipynb"
+**NB:** If you do **NOT** see the 'base' option for opening a Notebook, go back to the
+[setup](./setup.md) page and make sure you have run the notebook kernel installation
+command. You can't proceed from here unless you see this option in the Launcher.
+
+First things first, rename your new notebook to give it a meaningful name. Choose 
+`File->Save Notebook` and rename your notebook to "seadragon_PCA.ipynb"
 
 ### Import ipyrad.analysis module
 For this analysis, we'll use python. The `import` keyword directs python to load a module into the currently running context. This is very similar to the `library()` function in R. We begin by importing the ipyrad analysis module. Copy the code below into a notebook cell and click run. 

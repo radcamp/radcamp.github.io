@@ -71,9 +71,9 @@ into the terminal to avoid typos:
 conda install -c conda-forge -c bioconda numpy=1.26.4 ipyrad fastqc scikit-learn toytree raxml -y
 ```
 
-**ALSO IMPORTANT:** This is the last **setup** command that is necessary for 
-accessing the conda environment with these packages inside jupyter notebooks
-(which we will use extensively later in the course).
+**Notebook kernel installation - IMPORTANT:** This is the last **setup** command
+that is necessary for accessing the conda environment with these packages inside 
+jupyter notebooks (which we will use extensively later in the course).
 ```
 python -m ipykernel install --user --name=base
 ```
