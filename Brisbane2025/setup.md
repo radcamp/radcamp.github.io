@@ -41,7 +41,7 @@ permissions, so don't save anything valuable here!
 
 ## Installing ipyrad
 
-To start the terminal on the jupyter dashboard, click "Terminal" in the Launcher.
+To start the terminal on the Jupyter dashboard, click "Terminal" in the Launcher.
 ![png](images/Binder_Littleblackwindow.jpg)
 
 ipyrad uses **conda**, which is a package manager for python. We downloaded
