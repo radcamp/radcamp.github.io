@@ -1063,13 +1063,13 @@ $ cat seadragon_outfiles/seadragon_stats.txt
 ## ipyrad API location: [assembly].stats_dfs.s7_filters
 
                            total_filters applied_order retained_loci
-total_prefiltered_loci                 0             0         22587
-filtered_by_rm_duplicates             21            21         22566
-filtered_by_max_indels                32            32         22534
-filtered_by_max_SNPs                   2             2         22532
-filtered_by_max_shared_het           105           105         22427
-filtered_by_min_sample              7275          7275         15152
-total_filtered_loci                 7435          7435         15152
+total_prefiltered_loci                 0             0         11009
+filtered_by_rm_duplicates            101           101         10908
+filtered_by_max_indels                28            28         10880
+filtered_by_max_SNPs                   2             1         10879
+filtered_by_max_shared_het            98            98         10781
+filtered_by_min_sample              3053          3053          7728
+total_filtered_loci                 3282          3281          7728
 ```
 
 This block indicates how filtering is impacting your final dataset. Each filter
@@ -1079,41 +1079,51 @@ of each filter is shown in the `applied_order` column. The total number of
 This is a good place for inspecting how your filtering thresholds are impacting
 your final dataset. For example, you might see that most loci are being filterd
 by `min_sample_locus` (a very common result), in which case you might reduce
-this threshold in your params file and re-run step 7 in order to retain more loci. You can use [branching](https://ipyrad.readthedocs.io/en/latest/8-branching.html), so you can re-run part of the analysis, without overwriting the output you already generated.
+this threshold in your params file and re-run step 7 in order to retain more loci. 
+You can use [branching](https://ipyrad.readthedocs.io/en/latest/8-branching.html), 
+so you can re-run part of the analysis, without overwriting the output you already 
+generated.
 
 The next block shows a simple summary of the number of loci retained for each
 sample in the final dataset. Pretty straightforward. If you have some samples
-that have very low sample_coverage here it might be good to remove them and
-re-run step 7. Also this can be done by using [branching](https://ipyrad.readthedocs.io/en/latest/8-branching.html).
+that have very low `sample_coverage` here it might be good to remove them and
+re-run step 7. Also this can be done by using 
+[branching](https://ipyrad.readthedocs.io/en/latest/8-branching.html).
 ```
 ## The number of loci recovered for each Sample.
 ## ipyrad API location: [assembly].stats_dfs.s7_samples
 
-             sample_coverage
-SRR19760910             5347
-SRR19760912             5275
-SRR19760918             5782
-SRR19760920             5807
-SRR19760921             5859
-SRR19760924             5783
-SRR19760927             5935
-SRR19760928             5909
-SRR19760942             5660
-SRR19760946             5033
-SRR19760947             4477
-SRR19760949             3831
-SRR19760950             4847
-SRR19760951             5556
-SRR19760953             5038
-SRR19760954             4289
-SRR19760955             4685
-SRR19760956             4946
-SRR19760957             5295
-SRR19760958             4727
-SRR19760959             5451
-SRR19760960             5429
-SRR19760961             5626
-SRR19760962             5903
+      sample_coverage
+Bic1             3464
+Bic2             3374
+Bic3             3397
+Bic4             3565
+Bic5             3584
+Bic6             3464
+Bot1             3903
+Bot2             3968
+Bot3             3300
+Bot4             3652
+Fli1             3353
+Fli2             3202
+Fli3             3375
+Fli4             3236
+Gue1             2860
+Hob1             3560
+Hob2             3454
+Jer1             3485
+Jer2             3359
+Jer3             3600
+Jer4             3478
+Por1             3488
+Por2             3595
+Por3             3431
+Por4             3541
+Por5             3203
+Syd1             3740
+Syd2             3375
+Syd3             3454
+Syd4             3483
 ```
 
 The next block is `locus_coverage`, which indicates the number of loci that
@@ -1135,27 +1145,33 @@ by definition these are being removed.
 1                0             0
 2                0             0
 3                0             0
-4             2498          2498
-5             2143          4641
-6             1783          6424
-7             1548          7972
-8             1310          9282
-9             1065         10347
-10             927         11274
-11             772         12046
-12             664         12710
-13             512         13222
-14             470         13692
-15             363         14055
-16             293         14348
-17             218         14566
-18             200         14766
-19             157         14923
-20             102         15025
-21              68         15093
-22              38         15131
-23              12         15143
-24               9         15152
+4              841           841
+5              665          1506
+6              569          2075
+7              476          2551
+8              426          2977
+9              347          3324
+10             341          3665
+11             310          3975
+12             267          4242
+13             242          4484
+14             228          4712
+15             237          4949
+16             227          5176
+17             200          5376
+18             194          5570
+19             178          5748
+20             175          5923
+21             164          6087
+22             157          6244
+23             185          6429
+24             151          6580
+25             170          6750
+26             165          6915
+27             168          7083
+28             150          7233
+29             249          7482
+30             246          7728
 ```
 
 Whereas the previous block indicated samples per locus, below we are looking at
@@ -1175,22 +1191,26 @@ The distribution of SNPs (var and pis) per locus.
 ## ipyrad API location: [assembly].stats_dfs.s7_snps
 ## The "reference" sample is included if present unless 'exclude_reference=True'
 
-      var  sum_var    pis  sum_pis
-0   10775        0  13802        0
-1    2793     2793   1163     1163
-2     917     4627    118     1399
-3     365     5722     39     1516
-4     155     6342     10     1556
-5      65     6667      8     1596
-6      37     6889      3     1614
-7      18     7015      5     1649
-8      11     7103      2     1665
-9       5     7148      1     1674
-10      2     7168      0     1674
-11      4     7212      0     1674
-12      1     7224      1     1686
-13      3     7263      0     1686
-14      1     7277      0     1686
+     var  sum_var    pis  sum_pis
+0   4927        0  5829        0
+1   1705     1705  1278     1278
+2    550     2805   355     1988
+3    197     3396   122     2354
+4    101     3800    50     2554
+5     68     4140    40     2754
+6     52     4452    27     2916
+7     35     4697     3     2937
+8     29     4929     6     2985
+9     16     5073     8     3057
+10    18     5253     6     3117
+11     7     5330     2     3139
+12     5     5390     1     3151
+13     7     5481     1     3164
+14     4     5537     0     3164
+15     3     5582     0     3164
+16     1     5598     0     3164
+17     2     5632     0     3164
+18     1     5650     0     3164
 ```
 
 The next block displays statistics for each sample in the final dataset.
@@ -1199,31 +1219,37 @@ view on how each sample is represented in the output. The one new stat here is
 `loci_in_assembly`, which indicates how many loci each sample has data for.
 ```
 ## Final Sample stats summary
-             state  reads_raw  reads_passed_filter  clusters_total  clusters_hidepth  hetero_est  error_est  reads_consens  loci_in_assembly
-SRR19760910      7     125000               124675           36092              6433    0.001586   0.001939           6355   5347
-SRR19760912      7     125000               124304           38568              6103    0.001574   0.001457           6036   5275
-SRR19760918      7     125000               124960           34586              6989    0.001941   0.001793           6905   5782
-SRR19760920      7     125000               124948           34759              6851    0.001958   0.001718           6766   5807
-SRR19760921      7     125000               124955           34423              7003    0.001757   0.001781           6930   5859
-SRR19760924      7     125000               124944           35112              6793    0.001780   0.001774           6724   5783
-SRR19760927      7     125000               124937           34872              6941    0.001694   0.001987           6867   5935
-SRR19760928      7     125000               124946           35102              6860    0.001663   0.001771           6793   5909
-SRR19760942      7     125000               124738           36514              6629    0.001523   0.001638           6566   5660
-SRR19760946      7     125000               124601           40697              6135    0.001910   0.001771           6072   5033
-SRR19760947      7     125000               124947           37190              6262    0.002124   0.001934           6182   4477
-SRR19760949      7     125000               124632           37495              6179    0.002958   0.001242           6090   3831
-SRR19760950      7     125000               124555           33231              6092    0.000969   0.001323           6043   4847
-SRR19760951      7     125000               124261           33844              6744    0.001339   0.001439           6677   5556
-SRR19760953      7     120739               120422           33549              6216    0.001850   0.002019           6142   5038
-SRR19760954      7     125000               124305           35873              6326    0.001581   0.001559           6255   4289
-SRR19760955      7     125000               124360           33113              6186    0.001643   0.001609           6102   4685
-SRR19760956      7     125000               124558           39780              5953    0.001578   0.001316           5897   4946
-SRR19760957      7     125000               124541           37946              6190    0.001664   0.001254           6124   5295
-SRR19760958      7     125000               124581           38539              6043    0.001611   0.001330           5976   4727
-SRR19760959      7     125000               124403           38225              6172    0.001353   0.001430           6117   5451
-SRR19760960      7     125000               124624           38138              6238    0.001306   0.001118           6178   5429
-SRR19760961      7     125000               124314           36710              6333    0.001388   0.001479           6269   5626
-SRR19760962      7     125000               124418           33510              7085    0.001505   0.001343           7018   5903
+      state  reads_raw  reads_passed_filter  clusters_total  clusters_hidepth  hetero_est  error_est  reads_consens  loci_in_assembly
+Bic1      7     125000               124859           47612              4100    0.005173   0.006077           3908              3464
+Bic2      7     125000               124824           48941              4017    0.005009   0.006952           3824              3374
+Bic3      7     125000               124827           48287              4013    0.005191   0.006619           3812              3397
+Bic4      7     125000               124830           47282              4211    0.005024   0.005970           3990              3565
+Bic5      7     125000               124863           46540              4215    0.005032   0.007178           4022              3584
+Bic6      7     125000               124867           47676              4089    0.005345   0.006683           3881              3464
+Bot1      7     125000               124969           42028              4706    0.004639   0.003464           4508              3903
+Bot2      7     125000               124949           41646              4890    0.004088   0.003160           4713              3968
+Bot3      7     125000               124884           48446              3858    0.005849   0.005025           3660              3300
+Bot4      7     125000               124862           45790              4282    0.004411   0.004392           4085              3652
+Fli1      7     125000               124839           48998              3992    0.005767   0.006960           3795              3353
+Fli2      7     125000               124835           49533              3915    0.006010   0.007096           3694              3202
+Fli3      7     125000               124854           47710              4125    0.005757   0.006959           3886              3375
+Fli4      7     125000               124858           49176              4041    0.005880   0.006990           3825              3236
+Gue1      7     125000               124860           52928              3539    0.006509   0.007064           3319              2860
+Hob1      7     125000               124856           47074              4270    0.004732   0.006482           4049              3560
+Hob2      7     125000               124841           47458              4194    0.004710   0.007908           3995              3454
+Jer1      7     125000               124859           46663              4107    0.005606   0.006512           3876              3485
+Jer2      7     125000               124855           47953              3985    0.005967   0.006701           3756              3359
+Jer3      7     125000               124859           46575              4275    0.005007   0.007066           4062              3600
+Jer4      7     125000               124848           47413              4066    0.004622   0.007322           3873              3478
+Por1      7     125000               124848           46505              4252    0.006397   0.006663           4016              3488
+Por2      7     125000               124869           46652              4342    0.005161   0.006732           4130              3595
+Por3      7     125000               124864           48687              4123    0.005569   0.007264           3913              3431
+Por4      7     125000               124861           47972              4187    0.005276   0.007008           3991              3541
+Por5      7     125000               124836           49674              3896    0.006077   0.007597           3674              3203
+Syd1      7     125000               124869           44755              4510    0.004418   0.005012           4311              3740
+Syd2      7     125000               124863           46884              4164    0.004828   0.005594           3959              3375
+Syd3      7     125000               124849           47788              4186    0.005774   0.005724           3980              3454
+Syd4      7     125000               124852           47547              4180    0.004631   0.005285           3978              3483
 ```
 
 The final block displays some very brief, but informative, summaries of
@@ -1231,8 +1257,8 @@ missingness in the assembly at both the sequence and the SNP level:
 
 ```bash
 ## Alignment matrix statistics:
-snps matrix size: (24, 7277), 62.27% missing sites.
-sequence matrix size: (24, 1571595), 65.34% missing sites.
+sequence matrix size: (30, 731788), 55.26% missing sites.
+snps matrix size: (30, 5650), 55.97% missing sites.
 ```
 
 > **Note on files in the project directory:** Sometimes you want to rerun a step
