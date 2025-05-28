@@ -209,15 +209,20 @@ results are drawn with a lower opacity and the centroid of all the points for
 each sample is plotted as a black point. 
 
 ```python
-pca.run(nreplicates=10)
-pca.draw(label="Seadragon 10 subsample replicates")
+pca.run(nreplicates=5)
+pca.draw(label="Seadragon 5 subsample replicates")
 ```
 ![png](images/seadragon_PCA_rep.png)
+
+Here each the points for each replicate are ghosted out and the centroid
+of each site across replicates is filled. This dataset has very little
+variation across replicates so we can be confident in the results.
 
 ## Plotting PCs other than 0 and 1
 Even though PC 0 and 1 by definition explain the most variance in the data,
 it is still often useful to examine other PCs. You can do this by specifying
-which PCs to plot in in the call to `draw`.
+which PCs to plot in the call to `draw`. Here we will plot PCs 0 and 2 (the
+first and third most important axes).
 
 ```python
 pca.draw(0,2)
