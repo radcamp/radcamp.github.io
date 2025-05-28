@@ -65,7 +65,7 @@ raw data.
 ## Exploring the seadragon data
 We will be reanalysing RAD-Seq data from seadragons (*Phyllopteryx taeniolatus*) 
 sampled from across across New South Wales, Victoria and Tasmania, and published in 
-[Klanten *et al* 2020 - Genomic and morphological evidence of distinct populations 
+[Klanten *et al.* 2020 - Genomic and morphological evidence of distinct populations 
 in the endemic common (weedy) seadragon *Phyllopteryx taeniolatus* (Syngnathidae) 
 along the east coast of Australia](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0243446)
 
@@ -262,13 +262,13 @@ increasing to ~40% adapter sequence at the 3' end of the reads (which is a lot).
 
 ![png](images/fastqc-adaptercontamination.png)
 
->**Note:** if you have a lot of samples, and therefore a lot of FastQC reports, it would be kind of annoying to look at them one by one. There is a tool called [MultiQC](https://seqera.io/multiqc/), which conveniently summarizes all FastQC results into a single report.
-
 Either way, ipyrad will remove adapter contamination by default, it's just sometimes
 good to know about whether this is an issue with your data.
 
 **Take a moment to inspect a few more of the fastqc results files.** Do they all
 tell a pretty consistant story?
+
+>**Note:** if you have a lot of samples, and therefore a lot of FastQC reports, it would be kind of annoying to look at them one by one. There is a tool called [MultiQC](https://seqera.io/multiqc/), which conveniently summarizes all FastQC results into a single report.
 
 At the end of the day, the seadragon data look good and we can proceed with the 
 ipyrad analysis.

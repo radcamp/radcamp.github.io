@@ -20,7 +20,7 @@ terminal. All lines in code cells beginning with \#\# are
 comments and should not be copied and executed. All other lines should 
 be interpreted as output from the issued commands.
 
-# Overview of Assembly Steps
+# Overview of assembly steps
 Very roughly speaking, ipyrad exists to transform raw data coming off the 
 sequencing instrument into output files that you can use for downstream 
 analysis. 
