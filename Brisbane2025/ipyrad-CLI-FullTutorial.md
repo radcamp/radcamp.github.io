@@ -37,7 +37,8 @@ The basic steps of this process are as follows:
 * Step 6 - Cluster across Samples
 * Step 7 - Apply filters and write output formats
 
-Detailed information about ipyrad, including instructions for installation and troubleshooting, can be found [here](https://ipyrad.readthedocs.io/en/master/).
+Detailed information about ipyrad, including instructions for installation and 
+troubleshooting, can be found [here](https://ipyrad.readthedocs.io/en/master/).
 
 > **Note on files in the project directory:** Assembling RADseq type 
 sequence data requires a lot of different steps, and these steps 
@@ -54,8 +55,13 @@ you don't mind if your assembly breaks.
 # Getting Started
 
 We will be running through the assembly of the seadragon data using the ipyrad
-CLI. So, if you don't have the terminal window open, open a browser window and navigate to `https://pinky.eaton-lab.org/` and create a **new "Terminal"**
-using the "New" button.
+CLI. So, if you don't have the terminal window open, open a browser window and navigate to 
+[https://pinky.eaton-lab.org/](https://pinky.eaton-lab.org/) and create a **new "Terminal"**
+using the "New" button. Begin by making sure you are in the `ipyrad-workshop` directory.
+
+```
+$ cd ~/ipyrad-workshop
+```
 
 ## ipyrad help
 To better understand how to use ipyrad, let's take a look at the help argument.
@@ -64,7 +70,7 @@ We will use some of the ipyrad arguments in this tutorial (for example: -n, -p,
 is below.
 
 ```
-(ipyrad) osboxes@osboxes:~/ipyrad-workshop$ ipyrad -h
+$ ipyrad -h
 
 usage: ipyrad [-h] [-v] [-r] [-f] [-q] [-d] [-n NEW] [-p PARAMS] [-s STEPS] [-b [BRANCH [BRANCH ...]]]
               [-m [MERGE [MERGE ...]]] [-c cores] [-t threading] [--MPI] [--ipcluster [IPCLUSTER]]
@@ -122,54 +128,56 @@ optional arguments:
 ipyrad uses a text file to hold all the parameters for a given assembly.
 Start by creating a new parameters file with the `-n` flag. This flag
 requires you to pass in a name for your assembly. In the example we use
-`cheetah` but the name can be anything at all. Once you start
+`seadragon` but the name can be anything at all. Once you start
 analysing your own data you might call your parameters file something
 more informative, including some details on the
 settings.
 
 ```bash
-# Now create a new params file named 'cheetah'
-(ipyrad) osboxes@osboxes:~/ipyrad-workshop$ ipyrad -n cheetah
+# Now create a new params file named 'seadragon'
+$ ipyrad -n seadragon
 ```
 
-This will create a file in the current directory called `params-cheetah.txt`.
+This will create a file in the current directory called `params-seadragon.txt`.
 The params file lists on each line one parameter followed by a \#\# mark,
 then the name of the parameter, and then a short description of its purpose.
 Lets take a look at it.
 
-``` 
-(ipyrad) osboxes@osboxes:~/ipyrad-workshop$ cat params-cheetah.txt
-------- ipyrad params file (v.0.9.92)-------------------------------------------
-cheetah                          ## [0] [assembly_name]: Assembly name. Used to name output directories for assembly steps
-/home/osboxes//ipyrad-workshop   ## [1] [project_dir]: Project dir (made in curdir if not present)
-                                 ## [2] [raw_fastq_path]: Location of raw non-demultiplexed fastq files
-                                 ## [3] [barcodes_path]: Location of barcodes file
-                                 ## [4] [sorted_fastq_path]: Location of demultiplexed/sorted fastq files
-denovo                           ## [5] [assembly_method]: Assembly method (denovo, reference)
-                                 ## [6] [reference_sequence]: Location of reference sequence file
-rad                              ## [7] [datatype]: Datatype (see docs): rad, gbs, ddrad, etc.
-TGCAG,                           ## [8] [restriction_overhang]: Restriction overhang (cut1,) or (cut1, cut2)
-5                                ## [9] [max_low_qual_bases]: Max low quality base calls (Q<20) in a read
-33                               ## [10] [phred_Qscore_offset]: phred Q score offset (33 is default and very standard)
-6                                ## [11] [mindepth_statistical]: Min depth for statistical base calling
-6                                ## [12] [mindepth_majrule]: Min depth for majority-rule base calling
-10000                            ## [13] [maxdepth]: Max cluster depth within samples
-0.85                             ## [14] [clust_threshold]: Clustering threshold for de novo assembly
-0                                ## [15] [max_barcode_mismatch]: Max number of allowable mismatches in barcodes
-0                                ## [16] [filter_adapters]: Filter for adapters/primers (1 or 2=stricter)
-35                               ## [17] [filter_min_trim_len]: Min length of reads after adapter trim
-2                                ## [18] [max_alleles_consens]: Max alleles per site in consensus sequences
-0.05                             ## [19] [max_Ns_consens]: Max N's (uncalled bases) in consensus (R1, R2)
-0.05                             ## [20] [max_Hs_consens]: Max Hs (heterozygotes) in consensus (R1, R2)
-4                                ## [21] [min_samples_locus]: Min # samples per locus for output
-0.2                              ## [22] [max_SNPs_locus]: Max # SNPs per locus (R1, R2)
-8                                ## [23] [max_Indels_locus]: Max # of indels per locus (R1, R2)
-0.5                              ## [24] [max_shared_Hs_locus]: Max # heterozygous sites per locus
-0, 0, 0, 0                       ## [25] [trim_reads]: Trim raw read edges (R1>, <R1, R2>, <R2) (see docs)
-0, 0, 0, 0                       ## [26] [trim_loci]: Trim locus edges (see docs) (R1>, <R1, R2>, <R2)
-p, s, l                          ## [27] [output_formats]: Output formats (see docs)
-                                 ## [28] [pop_assign_file]: Path to population assignment file
-                                 ## [29] [reference_as_filter]: Reads mapped to this reference are removed in step 3
+```bash 
+$ cat params-seadragon.txt
+```
+```
+------- ipyrad params file (v.0.9.105)------------------------------------------
+seadragon                      ## [0] [assembly_name]: Assembly name. Used to name output directories for assembly steps
+/home/jovyan/ipyrad-workshop   ## [1] [project_dir]: Project dir (made in curdir if not present)
+                               ## [2] [raw_fastq_path]: Location of raw non-demultiplexed fastq files
+                               ## [3] [barcodes_path]: Location of barcodes file
+                               ## [4] [sorted_fastq_path]: Location of demultiplexed/sorted fastq files
+denovo                         ## [5] [assembly_method]: Assembly method (denovo, reference)
+                               ## [6] [reference_sequence]: Location of reference sequence file
+rad                            ## [7] [datatype]: Datatype (see docs): rad, gbs, ddrad, etc.
+TGCAG,                         ## [8] [restriction_overhang]: Restriction overhang (cut1,) or (cut1, cut2)
+5                              ## [9] [max_low_qual_bases]: Max low quality base calls (Q<20) in a read
+33                             ## [10] [phred_Qscore_offset]: phred Q score offset (33 is default and very standard)
+6                              ## [11] [mindepth_statistical]: Min depth for statistical base calling
+6                              ## [12] [mindepth_majrule]: Min depth for majority-rule base calling
+10000                          ## [13] [maxdepth]: Max cluster depth within samples
+0.85                           ## [14] [clust_threshold]: Clustering threshold for de novo assembly
+0                              ## [15] [max_barcode_mismatch]: Max number of allowable mismatches in barcodes
+2                              ## [16] [filter_adapters]: Filter for adapters/primers (1 or 2=stricter)
+35                             ## [17] [filter_min_trim_len]: Min length of reads after adapter trim
+2                              ## [18] [max_alleles_consens]: Max alleles per site in consensus sequences
+0.05                           ## [19] [max_Ns_consens]: Max N's (uncalled bases) in consensus
+0.05                           ## [20] [max_Hs_consens]: Max Hs (heterozygotes) in consensus
+4                              ## [21] [min_samples_locus]: Min # samples per locus for output
+0.2                            ## [22] [max_SNPs_locus]: Max # SNPs per locus
+8                              ## [23] [max_Indels_locus]: Max # of indels per locus
+0.5                            ## [24] [max_shared_Hs_locus]: Max # heterozygous sites per locus
+0, 0, 0, 0                     ## [25] [trim_reads]: Trim raw read edges (R1>, <R1, R2>, <R2) (see docs)
+0, 0, 0, 0                     ## [26] [trim_loci]: Trim locus edges (see docs) (R1>, <R1, R2>, <R2)
+p, s, l                        ## [27] [output_formats]: Output formats (see docs)
+                               ## [28] [pop_assign_file]: Path to population assignment file
+                               ## [29] [reference_as_filter]: Reads mapped to this reference are removed in step 3
 ```
 
 In general the defaults are sensible, and we won't mess with them for now, 
@@ -178,10 +186,13 @@ but there are a few parameters we *must* check and update:
 * The dataype
 * The restriction overhang sequence(s)
 
-Because we're looking at population-level data, we suggest to increase the clustering threshold `[14] [clust_threshold]`. You can also change `[27] [output_formats]`. When you put `*`, ipyrad will automatically save your output in all available formats, see [the manual](https://ipyrad.readthedocs.io/en/master/output_formats.html#full-output-formats).
+Because we're looking at population-level data, we suggest to increase the 
+clustering threshold `[14] [clust_threshold]`. You can also change `[27] 
+[output_formats]`. When you put `*`, ipyrad will automatically save your output 
+in all available formats, see [the manual](https://ipyrad.readthedocs.io/en/master/output_formats.html#full-output-formats).
 
-If you return to the browser tab with your jupyter notebook interface you'll
-now see a new file `params-cheetah.txt` in the file browser.
+If you look in the file browser pane (to the left) you should
+now see a new file `params-seadragon.txt` in the file browser.
 
 ![png](images/ipyrad-NewParams2.png)
 
@@ -193,11 +204,13 @@ changes to this params file.
 We need to specify where the raw data files are located, the type of data we
 are using (.e.g., 'gbs', 'rad', 'ddrad', 'pairddrad), and which enzyme cut site
 overhangs are expected to be present on the reads. Change the following lines
-in your params files to look like this:
+in your params files to look like this (**Be careful to notice which lines
+of the params file you are modifying**):
 
 ```bash
-./subset-R1-raws/*.fastq.gz     ## [4] [sorted_fastq_path]: Location of demultiplexed/sorted fastq files
-CATGC                           ## [8] [restriction_overhang]: Restriction overhang (cut1,) or (cut1, cut2)
+./raws/*.fastq.gz               ## [4] [sorted_fastq_path]: Location of demultiplexed/sorted fastq files
+ddrad                            ## [7] [datatype]: Datatype (see docs): rad, gbs, ddrad, etc.
+TGCAG,ACG                           ## [8] [restriction_overhang]: Restriction overhang (cut1,) or (cut1, cut2)
 0.9                             ## [14] [clust_threshold]: Clustering threshold for de novo assembly
 *                               ## [27] [output_formats]: Output formats (see docs)
 ```
@@ -214,7 +227,7 @@ Once we start running the analysis ipyrad will create several new directories to
 hold the output of each step for this assembly. By default the new directories
 are created in the `project_dir` directory and use the prefix specified by the
 `assembly_name` parameter. For this example assembly all the intermediate
-directories will be of the form: `/ipyrad-workshop/cheetah_*`. 
+directories will be of the form: `/home/jovyan/ipyrad-workshop/seadragon_*`. 
 
 # Step 1: Loading/Demultiplexing the raw data
 
@@ -228,7 +241,9 @@ your params file. In our case, the samples are already demultiplexed and we have
 file. Even though we do not need to demultiplex our data here, we still need to
 run this step to import the data into ipyrad.
 
-> **Note on step 1:** If we would have data which need demultiplexing, Step 1 will create a new folder, called `cheetah_fastqs`. Because our data are already demultiplexed, this folder will not be created.
+> **Note on step 1:** If we would have data which need demultiplexing, Step 1 
+will create a new folder, called `seadragon_fastqs`. Because our data are already 
+demultiplexed, this folder will not be created.
 
 Now lets run step 1! 
 
@@ -240,17 +255,17 @@ the `-c` flag. If you do not specify the number of cores ipyrad assumes you want
 ## -p    the params file we wish to use
 ## -s    the step to run
 ## -c    run on 4 cores
-(ipyrad) osboxes@osboxes:~/ipyrad-workshop$ ipyrad -p params-cheetah.txt -s 1 -c 4
+$ ipyrad -p params-seadragon.txt -s 1 -c 4
 
  -------------------------------------------------------------
-  ipyrad [v.0.9.92]
+  ipyrad [v.0.9.105]
   Interactive assembly and analysis of RAD-seq data
  -------------------------------------------------------------
-  Parallel connection | osboxes: 4 cores
+  Parallel connection | 9aea44960942: 4 cores
 
   Step 1: Loading sorted fastq data to Samples
   [####################] 100% 0:00:13 | loading reads
-  24 fastq files loaded to 24 Samples.
+  30 fastq files loaded to 30 Samples.
   Parallel connection closed.
 ```
 
@@ -259,8 +274,8 @@ Any time ipyrad is invoked it performs a few housekeeping operations:
 1. Load the assembly object - Since this is our first time running any steps we
 need to initialize our assembly.
 2. Start the parallel cluster - ipyrad uses a parallelization library called
-ipyparallel. Every time we start a step we fire up the parallel clients. This
-makes your assemblies go **smokin'** fast.
+ipyparallel. Every time we start a step we launch the parallel clients. This
+makes your assemblies go **very** fast.
 3. Do the work - Actually perform the work of the requested step(s) (in this
 case demultiplexing reads to samples).
 4. Save, clean up, and exit - Save the state of the assembly, and spin down
@@ -272,43 +287,50 @@ flag. We also use the `-p` argument to tell it which params file (i.e., which
 assembly) we want it to print stats for.
 
 ```bash
-## -r fetches informative results from currently executed steps  
-(ipyrad) osboxes@osboxes:~/ipyrad-workshop$ ipyrad -p params-cheetah.txt -r
-  loading Assembly: cheetah
-  from saved path: ~/ipyrad-workshop/cheetah.json
+$ ipyrad -p params-seadragon.txt -r
+```
+```
+  loading Assembly: seadragon
+  from saved path: ~/ipyrad-workshop/seadragon.json
 
-Summary stats of Assembly cheetah
+Summary stats of Assembly seadragon
 ------------------------------------------------
-              state  reads_raw
-SRR19760910      1     125000
-SRR19760912      1     125000
-SRR19760918      1     125000
-SRR19760920      1     125000
-SRR19760921      1     125000
-SRR19760924      1     125000
-SRR19760927      1     125000
-SRR19760928      1     125000
-SRR19760942      1     125000
-SRR19760946      1     125000
-SRR19760947      1     125000
-SRR19760949      1     125000
-SRR19760950      1     125000
-SRR19760951      1     125000
-SRR19760953      1     120739
-SRR19760954      1     125000
-SRR19760955      1     125000
-SRR19760956      1     125000
-SRR19760957      1     125000
-SRR19760958      1     125000
-SRR19760959      1     125000
-SRR19760960      1     125000
-SRR19760961      1     125000
-SRR19760962      1     125000
+      state  reads_raw
+Bic1      1     125000
+Bic2      1     125000
+Bic3      1     125000
+Bic4      1     125000
+Bic5      1     125000
+Bic6      1     125000
+Bot1      1     125000
+Bot2      1     125000
+Bot3      1     125000
+Bot4      1     125000
+Fli1      1     125000
+Fli2      1     125000
+Fli3      1     125000
+Fli4      1     125000
+Gue1      1     125000
+Hob1      1     125000
+Hob2      1     125000
+Jer1      1     125000
+Jer2      1     125000
+Jer3      1     125000
+Jer4      1     125000
+Por1      1     125000
+Por2      1     125000
+Por3      1     125000
+Por4      1     125000
+Por5      1     125000
+Syd1      1     125000
+Syd2      1     125000
+Syd3      1     125000
+Syd4      1     125000
 
 
 Full stats files
 ------------------------------------------------
-step 1: ./cheetah_s1_demultiplex_stats.txt
+step 1: ./seadragon_s1_demultiplex_stats.txt
 step 2: None
 step 3: None
 step 4: None
@@ -327,7 +349,7 @@ point isn't very interesting, but we'll see stats for later steps are more verbo
 This step filters reads based on quality scores and maximum number of uncalled
 bases, and can be used to detect Illumina adapters in your reads, which is
 sometimes a problem under a couple different library prep scenarios. We know the
-our data have an excess of low-quality bases toward the 5' end (remember the
+our data have an excess of low-quality bases toward the distal end (remember the
 FastQC results!), so lets use this opportunity to trim off some of those low
 quality regions. To account for this we will trim reads to 100bp, removing the
 last 10bp of our 110bp reads. 
@@ -339,17 +361,17 @@ Edit your params file again with and change the following two parameter settings
 ```
 
 ```bash
-(ipyrad) osboxes@osboxes:~/ipyrad-workshop$ ipyrad -p params-cheetah.txt -s 2 -c 4
+$ ipyrad -p params-seadragon.txt -s 2 -c 4
 ```
 ```
-  loading Assembly: cheetah
-  from saved path: ~/ipyrad-workshop/cheetah.json
+  loading Assembly: seadragon
+  from saved path: ~/ipyrad-workshop/seadragon.json
 
  -------------------------------------------------------------
-  ipyrad [v.0.9.92]
+  ipyrad [v.0.9.105]
   Interactive assembly and analysis of RAD-seq data
  -------------------------------------------------------------
-  Parallel connection | osboxes: 4 cores
+  Parallel connection | 9aea44960942: 4 cores
 
   Step 2: Filtering and trimming reads
   [####################] 100% 0:01:29 | processing reads
@@ -357,66 +379,78 @@ Edit your params file again with and change the following two parameter settings
   Parallel connection closed.
 ```
 
-The filtered files are written to a new directory called `cheetah_edits`. Again, 
+The filtered files are written to a new directory called `seadragon_edits`. Again, 
 you can look at the results from this step and some handy stats tracked 
 for this assembly.
 
 ```bash
-## View the output of step 2
-(ipyrad) osboxes@osboxes:~/ipyrad-workshop$ cat cheetah_edits/s2_rawedit_stats.txt 
+$ cat seadragon_edits/s2_rawedit_stats.txt 
 ```
 ```
-      reads_raw  trim_adapter_bp_read1  trim_adapter_bp_read2  trim_quality_bp_read1  trim_quality_bp_read2  reads_filtered_by_Ns  reads_filtered_by_minlen  reads_passed_filter
-reads_raw  trim_adapter_bp_read1  trim_quality_bp_read1  reads_filtered_by_Ns  reads_filtered_by_minlen  reads_passed_filter
-SRR19760910     125000                   3907                 151184                    59                       266               124675
-SRR19760912     125000                   4316                 232833                    65                       631               124304
-SRR19760918     125000                   4029                  44448                     3                        37               124960
-SRR19760920     125000                   3981                  46216                     5                        47               124948
-SRR19760921     125000                   4140                  45663                    14                        31               124955
-SRR19760924     125000                   4355                  42285                     9                        47               124944
-SRR19760927     125000                   4120                  51549                    11                        52               124937
-SRR19760928     125000                   4068                  44598                     8                        46               124946
-SRR19760942     125000                   4210                  48041                    12                       250               124738
-SRR19760946     125000                   4538                  39388                     9                       390               124601
-SRR19760947     125000                   4335                  44185                    14                        39               124947
-SRR19760949     125000                   4383                 187211                    55                       313               124632
-SRR19760950     125000                   3757                 184015                    52                       393               124555
-SRR19760951     125000                   3956                 261547                    62                       677               124261
-SRR19760953     120739                   4097                 119160                    49                       268               120422
-SRR19760954     125000                   4176                 238676                    56                       639               124305
-SRR19760955     125000                   3783                 241923                    56                       584               124360
-SRR19760956     125000                   4290                 178120                    63                       379               124558
-SRR19760957     125000                   4068                 191626                    49                       410               124541
-SRR19760958     125000                   4290                 177849                    65                       354               124581
-SRR19760959     125000                   4027                 221129                    74                       523               124403
-SRR19760960     125000                   4127                 171203                    60                       316               124624
-SRR19760961     125000                   3976                 254342                    46                       640               124314
-SRR19760962     125000                   3948                 220764                    52                       530               124418
+      reads_raw  trim_adapter_bp_read1  trim_quality_bp_read1  reads_filtered_by_Ns  reads_filtered_by_minlen  reads_passed_filter
+Bic1     125000                   6822                 123182                    70                        73               124857
+Bic2     125000                   7052                 145012                    73                       104               124823
+Bic3     125000                   6713                 136459                    82                        92               124826
+Bic4     125000                   6183                 121220                    82                        88               124830
+Bic5     125000                   5717                 142688                    68                        69               124863
+Bic6     125000                   6522                 131647                    67                        66               124867
+Bot1     125000                   3973                  91566                     0                        31               124969
+Bot2     125000                   4078                  97461                     0                        51               124949
+Bot3     125000                   5747                 215901                    44                        75               124881
+Bot4     125000                   5756                 124134                    44                        95               124861
+Fli1     125000                   7283                 139372                    75                        86               124839
+Fli2     125000                   7080                 145392                    74                        91               124835
+Fli3     125000                   6124                 149969                    68                        78               124854
+Fli4     125000                   6857                 144414                    74                        68               124858
+Gue1     125000                   7472                 168010                    66                        75               124859
+Hob1     125000                   5763                 135579                    67                        78               124855
+Hob2     125000                   6038                 150287                    78                        84               124838
+Jer1     125000                   6564                 159943                    67                        76               124857
+Jer2     125000                   6788                 159088                    74                        75               124851
+Jer3     125000                   6595                 159819                    69                        75               124856
+Jer4     125000                   6584                 134476                    75                        77               124848
+Por1     125000                   6032                 143820                    83                        69               124848
+Por2     125000                   5787                 135904                    60                        71               124869
+Por3     125000                   6039                 148925                    69                        67               124864
+Por4     125000                   6875                 143668                    62                        77               124861
+Por5     125000                   6939                 153625                    71                        93               124836
+Syd1     125000                   6899                 125813                    61                        79               124860
+Syd2     125000                   7380                 153122                    69                        76               124855
+Syd3     125000                   7911                 128737                    63                        96               124841
+Syd4     125000                   7387                 133453                    68                        91               124841
 ```
 
 ```bash
 ## Get current stats including # raw reads and # reads after filtering.
-(ipyrad) osboxes@osboxes:~/ipyrad-workshop$ ipyrad -p params-cheetah.txt -r
+$ ipyrad -p params-seadragon.txt -r
 ```
 
 You might also take a closer look at the filtered reads: 
 
 ```bash
-(ipyrad) osboxes@osboxes:~/ipyrad-workshop$ zcat cheetah_edits/SRR19760910.trimmed_R1_.fastq.gz | head -n 12
+$ zcat seadragon_edits/Bic1.trimmed_R1_.fastq.gz | head -n 20
 ```
 ```
-@SRR19760910.1 1 length=110
-CATGCACGTGCAGCATATAAGAAGGATGTTTGTCATGCATTATCTTATTTGATGTTTACGGAAGCCCCATGGTTATCCCCATTTTAGGGATGAAGAAACG
+@SRR12395901.2 3_11401_6247_1055/1
+TGCAGGTCAGCGCTCAAGTGCGAGTTTTGCACCTCCAGTCGACTCGACATACCTTGAATCTGAGCCACCTGCAATGAAGAAGACAGATGTGACGCTCTAA
 +
-BFFFFFF<FBFFFFFF<FB//////<<FFFBFF//<FFFFFFBF/FBFFFFFFFFFFFFBB<F/BFFFFFFFFBFF/<<</BFBBFF/<FF<FF<7FFFF
-@SRR19760910.2 2 length=110
-CATGCAACTCTTGGTCTCGGGGTCTTGAGTTCGAGCCCCACGTTGGATTAGAGATTACTTAAATAAATAAAGTTCAAAAGTTTTAGAATGTTATCATTTT
+EEEEEEEEEEEEEEEEEEEEEAEE6EEEEEAEEEEA/EEAA/EAEE<AAE<EE</</AEE<</EEE/EEAEAAEEAEAE/<EEAEE/EEEE//EE/E<E/
+@SRR12395901.3 3_11401_9855_1058/1
+TGCAGATTCTTCTATGAAAATAGAGCCCCTTGTCTTCGTCTTGTTTGGTTTTGACAATCATACAGCGTGAGCGCTTCAATTGTTAGCTTTGGCTTTCCAT
 +
-FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-@SRR19760910.3 3 length=110
-CATGCCATTTCCCATGGGCAAGGATCTCAGGCTGTGCTCATTCCCAAGGACAAGACCAAGCCAATTCCCAATCCCCATATTTAAGGAGCTGCTTCCTGGG
+EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEAEEE<EAEEEEEAEEEEEEEEEAEEEEEEAEEEEEEEEEEEEEAE/EEEEEE/EEEEEEEEEEEAAEA
+@SRR12395901.4 3_11401_4121_1059/1
+TGCAGCAGCCTAGAAACCCTCCGGAGTGGAACTGAAAGTTCAGCGGGATGCGTCATAGCCCACGGGACCACGCAGCGGGTGTTCCCCTTCATGCTTATTA
 +
-FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF<FFFFFFFFFFFFFFFBFFFFFFFFFFFFFFFFFFFFFFFFFFBFFFFFFFFFBFFFFFFFFFFFFF 
+EEEEEE6EEEEEEEAEEEEEEAAAEE/EEE/EEEEEEEE/EAEEEEAEEEEEAAEA<EAAE/EEEE/AE</EEAEEAE//A/A6E/EAAAE<AAE6A<AE
+@SRR12395901.5 3_11401_17757_1060/1
+TGCAGCATTTTGGAATTACCGTAAACAAAACTCAGAGGAAACACAAAAGAAATCGAAAACCACCGTCCACAATTAAGTGTTTGTTGAGCAAACAAGATTT
++
+EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEAEEEEEEEEEAEEEE6AEEAEEAAEAEEEEEEEEEEEEEEAEEEAE<EEAEEEEEE
+@SRR12395901.6 3_11401_20812_1064/1
+TGCAGTGATGCGGACTTTGTATCGGTCCGTTGTGGTAAAGAAGGAGCTAAGCCGAAAGGCGATGCTCTTGATTTACCAGACAGAACGAAAGTACACTGGC
++
+EEEEEEEEEEEEEEEEEEEEEEEEEEEAEEEEEEEEEAEEEEEEEEEEAEAE6EEEEEEEEEEE6EEEEEEEEEEEEEEEEEEEEAEAEAE<E<E<E<EA
 ```
 
 This is actually really cool, because we can already see the results of our
@@ -426,7 +460,7 @@ applied parameters. All reads have been trimmed to 100bp.
 
 For a *de novo* assembly, step 3 de-replicates and then clusters reads within
 each sample by the set clustering threshold and then writes the clusters to new
-files in a directory called `cheetah_clust_0.9`. Intuitively, we are trying to
+files in a directory called `seadragon_clust_0.9`. Intuitively, we are trying to
 identify all the reads that map to the same locus within each sample. You may
 remember the default value is 0.85, but we have increased if to 0.9 in our
 params file. This value dictates the percentage of sequence similarity that
@@ -458,24 +492,29 @@ data.
 Now lets run step 3:
 
 ```bash
-(ipyrad) osboxes@osboxes:~/ipyrad-workshop$ ipyrad -p params-cheetah.txt -s 3 -c 4
+$ ipyrad -p params-seadragon.txt -s 3 -c 4
 ```
+
+**TIME FOR A COFFEE BREAK:** Step 3 will run for about 20 minutes on the
+cloud server, so this might be a good time for a coffee break once everyone
+gets this step running.
+
 ```
-  loading Assembly: cheetah
-  from saved path: ~/ipyrad-workshop/cheetah.json
+  loading Assembly: seadragon
+  from saved path: ~/ipyrad-workshop/seadragon.json
 
  -------------------------------------------------------------
-  ipyrad [v.0.9.92]
+  ipyrad [v.0.9.105]
   Interactive assembly and analysis of RAD-seq data
  -------------------------------------------------------------
-  Parallel connection | osboxes: 4 cores
+  Parallel connection | 9aea44960942: 4 cores
 
   Step 3: Clustering/Mapping reads within samples
   [####################] 100% 0:00:13 | dereplicating
-  [####################] 100% 0:09:46 | clustering/mapping
+  [####################] 100% 0:07:46 | clustering/mapping
   [####################] 100% 0:00:00 | building clusters
   [####################] 100% 0:00:00 | chunking clusters
-  [####################] 100% 0:16:25 | aligning clusters
+  [####################] 100% 0:10:25 | aligning clusters
   [####################] 100% 0:00:59 | concat clusters
   [####################] 100% 0:00:05 | calc cluster stats
 
@@ -498,42 +537,48 @@ thresholds ('clusters_hidepth'). We'll go into more detail about mindepth settin
 in some of the advanced tutorials.
 
 ```bash
-(ipyrad) osboxes@osboxes:~/ipyrad-workshop$ ipyrad -p params-cheetah.txt -r
+$ ipyrad -p params-seadragon.txt -r
 ```
 ```
-Summary stats of Assembly cheetah
+Summary stats of Assembly seadragon
 ------------------------------------------------
-             state  reads_raw  reads_passed_filter  clusters_total  clusters_hidepth
-SRR19760910      3     125000               124675           36092              6433
-SRR19760912      3     125000               124304           38568              6103
-SRR19760918      3     125000               124960           34586              6989
-SRR19760920      3     125000               124948           34759              6851
-SRR19760921      3     125000               124955           34423              7003
-SRR19760924      3     125000               124944           35112              6793
-SRR19760927      3     125000               124937           34872              6941
-SRR19760928      3     125000               124946           35102              6860
-SRR19760942      3     125000               124738           36514              6629
-SRR19760946      3     125000               124601           40697              6135
-SRR19760947      3     125000               124947           37190              6262
-SRR19760949      3     125000               124632           37495              6179
-SRR19760950      3     125000               124555           33231              6092
-SRR19760951      3     125000               124261           33844              6744
-SRR19760953      3     120739               120422           33549              6216
-SRR19760954      3     125000               124305           35873              6326
-SRR19760955      3     125000               124360           33113              6186
-SRR19760956      3     125000               124558           39780              5953
-SRR19760957      3     125000               124541           37946              6190
-SRR19760958      3     125000               124581           38539              6043
-SRR19760959      3     125000               124403           38225              6172
-SRR19760960      3     125000               124624           38138              6238
-SRR19760961      3     125000               124314           36710              6333
-SRR19760962      3     125000               124418           33510              7085
+      state  reads_raw  reads_passed_filter  clusters_total  clusters_hidepth
+Bic1      3     125000               124859           47612              4100
+Bic2      3     125000               124824           48941              4017
+Bic3      3     125000               124827           48287              4013
+Bic4      3     125000               124830           47282              4211
+Bic5      3     125000               124863           46540              4215
+Bic6      3     125000               124867           47676              4089
+Bot1      3     125000               124969           42028              4706
+Bot2      3     125000               124949           41646              4890
+Bot3      3     125000               124884           48446              3858
+Bot4      3     125000               124862           45790              4282
+Fli1      3     125000               124839           48998              3992
+Fli2      3     125000               124835           49533              3915
+Fli3      3     125000               124854           47710              4125
+Fli4      3     125000               124858           49176              4041
+Gue1      3     125000               124860           52928              3539
+Hob1      3     125000               124856           47074              4270
+Hob2      3     125000               124841           47458              4194
+Jer1      3     125000               124859           46663              4107
+Jer2      3     125000               124855           47953              3985
+Jer3      3     125000               124859           46575              4275
+Jer4      3     125000               124848           47413              4066
+Por1      3     125000               124848           46505              4252
+Por2      3     125000               124869           46652              4342
+Por3      3     125000               124864           48687              4123
+Por4      3     125000               124861           47972              4187
+Por5      3     125000               124836           49674              3896
+Syd1      3     125000               124869           44755              4510
+Syd2      3     125000               124863           46884              4164
+Syd3      3     125000               124849           47788              4186
+Syd4      3     125000               124852           47547              4180
 
 Full stats files
 ------------------------------------------------
-step 1: ./cheetah_s1_demultiplex_stats.txt
-step 2: ./cheetah_edits/s2_rawedit_stats.txt
-step 3: ./cheetah_clust_0.9/s3_cluster_stats.txt
+step 1: ./seadragon_s1_demultiplex_stats.txt
+step 2: ./seadragon_edits/s2_rawedit_stats.txt
+step 3: ./seadragon_clust_0.9/s3_cluster_stats.txt
 step 4: None
 step 5: None
 step 6: None
@@ -541,44 +586,50 @@ step 7: None
 ```
 
 Again, the final output of step 3 is dereplicated, clustered files for
-each sample in `./cheetah_clust_0.9/`. You can get a feel for what
+each sample in `./seadragon_clust_0.9/`. You can get a feel for what
 this looks like by examining a portion of one of the files. 
 
 ```bash
-## Same as above, `zcat` unzips and prints to the screen and 
-## `head -n 18` means just show me the first 18 lines. 
-(ipyrad) osboxes@osboxes:~/ipyrad-workshop$t zcat cheetah_clust_0.9/SRR19760910.clustS.gz | head -n 18
+$ zcat seadragon_clust_0.9/Jer3.clustS.gz | head -n 24
 ```
 
-You'll see something similar to what is printed below:
+You'll see something similar to what is printed below. **Note:** The value
+of `size=` in the header of each sequence indicates the number of identical
+copies of this read that were dereplicated at the start of step 3.
 
 ```
-0121ac19c8acb83e5d426007a2424b65;size=18;*
-TGCAGTTGGGATGGCGATGCCGTACATTGGCGCATCCAGCCTCGGTCATTGTCGGAGATCTCACCTTTCAACGGTnnnnTGAATGGTCGCGACCCCCAACCACAATCGGCTTTGCCAAGGCAAGGCTAGAGACGTGCTAAAAAAACTCGCTCCG
-521031ed2eeb3fb8f93fd3e8fdf05a5f;size=1;+
-TGCAGTTGGGATGGCGATGCCGTACATTGGCGCATCCAGCCTCGGTCATTGTCGGAGATCTCACCTTTCAACGGTnnnnTGAATGGTCGCGACCCCCAACCACAATCGGCTTTGCCAAGGCAAGGCTAGAGAAGTGCTAAAAAAACTCGCTCCG
+0001e61f40f4261603dbbb248208b917;size=5;*
+TGCAGATAGGTGGTTTATGGATAGCAAAATCAGGGAGAATTGAAAGAAAGGGTGAAGAGAGGATATGTTACATTAGCAAGAATCTGGTACAAGACAGTGC
+a49f2166e08e8133baa32665157bbc89;size=2;+
+TGCAGATAGGTGGTTTATGGATAGCAAAATCAGGGAGAATTGAAAGAAAGGGTGAAGAGAGGATATGTTACATTAGAAAGAATCTGGTACAAGACAGTGC
 //
 //
-014947fbb43ef09f5388bbd6451bdca0;size=12;*
-TGCAGGACTGCGAATGACGGTGGCTAGTACTCGAGGAAGGGTCGCACCGCAGTAAGCTAATCTGACCCTCTGGAGnnnnACCAGTGGTGGGTAAACACCTCCGATTAAGTATAACGCTACGTGAAGCTAAACGGCACCTATCACATAGACCCCG
-072588460dac78e9da44b08f53680da7;size=8;+
-TGCAGGTCTGCGAATGACGGTGGCTAGTACTCGAGGAAGGGTCGCACCGCAGTAAGCTAATCTGACCCTCTGGAGnnnnACCAGTGGTGGGTAAACACCTCCGATTAAGTATAACGCTACGTGAAGCTAAACGGCACCTATCACATAGACCCCG
-fce2e729af9ea5468bafbef742761a4b;size=1;+
-TGCAGGACTGCGAATGACGGTGGCTAGTACTCGAGGAAGGGTCGCACCGCAGCAAGCTAATCTGACCCTCTGGAGnnnnACCAGTGGTGGGTAAACACCTCCGATTAAGTATAACGCTACGTGAAGCTAAACGGCACCTATCACATAGACCCCG
-24d23e93688f17ab0252fe21f21ce3a7;size=1;+
-TGCAGGTCTGCGAATGACGGTGGCTAGTACTCGAGGAAGGGTCGCACCGCAGAAAGCTAATCTGACCCTCTGGAGnnnnACCAGTGGTGGGTAAACACCTCCGATTAAGTATAACGCTACGTGAAGCTAAACGGCACCTATCACATAGACCCCG
-ef2c0a897eb5976c40f042a9c3f3a8ba;size=1;+
-TGCAGGTCTGCGAATGACGGTGGCTAGTACTCGAGGAAGGGTCGCACCGCAGTAAGCTAATCTGACCCTCTGGAGnnnnACCAGTGGTGGGTAAACACCTCCGATTAAGTATAACGCTACGTGAAGCTAAACGGCACCTATCACATCGACCCCG
+0008bb12d45464a3e8142a543ac62744;size=4;*
+TGCAGACCTGGACTTCCTGTTCAACCAGCCGGAGCAGAGCGACAACTTCCAGTTCCTCTTCACCTCCGAGAGCCCCACGGATAACAAGGATACCACCACC
+9f616141ecb8356eb82ca072af6732d2;size=1;+
+TGCAGACCTGGACTTCCTGTTCAACCAGCCCGAGCAAAGCGACAACTTCAAGTTCCTCATCACCACCGAGAGCCCCACGCATAACAAAGAAACCACCACC
+cdf61c7f79359cc2468a3cbcd9c42b7d;size=1;+
+TGCAGACCTGGACTTCCTGTTCAACCAGCCGGAGCAGAGCGACAACTTCCAGTTCCTCTTCACCTCCGAGAGCCCCACGGATACCAAGGATACCACCCCC
+4f3c5723eb97bcd357ab798c67b516de;size=1;+
+TGCAGACCTGGACTTCCTGTTCAACCAGCCGGAGCAGAGCGACAACTTCCTGTTCCTCTTCACCTCCGAGAGCCCCACGGATAACAAGGATACCACCACC
+e6497766697220afd91c23dbc3f70710;size=1;+
+TGCAGACCTGGACTTCCTGTTCAACCAGCCGGAGCAGAGCGACAACTTCCAGTTCCTCTTCACCTCCGAGAGCCCCACGGATAACAAGGATACCCCCACC
+//
+//
+0013f0cc71e034a26d60f0bdba31cd2f;size=1;*
+TGCAGCCTATCTGGTACTTGACACCCCTTGAAAGAAGGCAACATGTAGCTTAATGCAAGCATTGTATTACTGTTATCTCACTGTTGCGCATGGTGTCTAC
+db5cfa9d18f0c9fec6921bfa24ee1267;size=1;+
+TGCAGCCTATCTGGTACTTGACACCCCTTGAAAGAAGGCAACATGAAGCTTAATGCAAGCATTGTATTACTGTTATCTCACTGTTGCGCATGGTGTCTAC
 //
 //
 ```
 
 Reads that are sufficiently similar (based on the above sequence similarity
 threshold) are grouped together in clusters separated by "//". The first cluster
-above is *probably* homozygous with some sequencing error. The second cluster is
-*probably* heterozygous with some sequencing error. We don't want to go through
-and 'decide' by ourselves for each cluster, so thankfully, untangling this mess
-is what steps 4 & 5 are all about. 
+above is *probably* heterozygous. The second cluster is *probably* homozygous
+with some sequencing error. The third cluster is ambiguous. We don't want to go
+through and 'decide' by ourselves for each cluster, so thankfully, untangling
+this mess is what steps 4 & 5 are all about. 
 
 # Step 4: Joint estimation of heterozygosity and error rate
 
@@ -650,20 +701,20 @@ alleles are the good reads and the rest are probably junk. This step is pretty
 straightforward, and pretty fast. Run it like this:
 
 ```bash
-(ipyrad) osboxes@osboxes:~/ipyrad-workshop$ ipyrad -p params-cheetah.txt -s 4 -c 4
+$ ipyrad -p params-seadragon.txt -s 4 -c 4
 ```
 ```
-  loading Assembly: cheetah
-  from saved path: ~/ipyrad-workshop/cheetah.json
+  loading Assembly: seadragon
+  from saved path: ~/ipyrad-workshop/seadragon.json
 
  -------------------------------------------------------------
-  ipyrad [v.0.9.92]
+  ipyrad [v.0.9.105]
   Interactive assembly and analysis of RAD-seq data
  -------------------------------------------------------------
-  Parallel connection | osboxes: 4 cores
+  Parallel connection | 9aea44960942: 4 cores
 
   Step 4: Joint estimation of error rate and heterozygosity
-  [####################] 100% 0:01:46 | inferring [H, E]
+  [####################] 100% 0:00:46 | inferring [H, E]
 
   Parallel connection closed.
 ```
@@ -673,44 +724,50 @@ you can invoke the `-r` flag to see the estimated heterozygosity and error rate
 per sample.
 
 ```bash
-(ipyrad) osboxes@osboxes:~/ipyrad-workshop$ ipyrad -p params-cheetah.txt -r
+$ ipyrad -p params-seadragon.txt -r
 ```
 ```
-Summary stats of Assembly cheetah
+Summary stats of Assembly seadragon
 ------------------------------------------------
-             state  reads_raw  reads_passed_filter  clusters_total  clusters_hidepth  hetero_est  error_est
-SRR19760910      4     125000               124675           36092              6433    0.001586   0.001939
-SRR19760912      4     125000               124304           38568              6103    0.001574   0.001457
-SRR19760918      4     125000               124960           34586              6989    0.001941   0.001793
-SRR19760920      4     125000               124948           34759              6851    0.001958   0.001718
-SRR19760921      4     125000               124955           34423              7003    0.001757   0.001781
-SRR19760924      4     125000               124944           35112              6793    0.001780   0.001774
-SRR19760927      4     125000               124937           34872              6941    0.001694   0.001987
-SRR19760928      4     125000               124946           35102              6860    0.001663   0.001771
-SRR19760942      4     125000               124738           36514              6629    0.001523   0.001638
-SRR19760946      4     125000               124601           40697              6135    0.001910   0.001771
-SRR19760947      4     125000               124947           37190              6262    0.002124   0.001934
-SRR19760949      4     125000               124632           37495              6179    0.002958   0.001242
-SRR19760950      4     125000               124555           33231              6092    0.000969   0.001323
-SRR19760951      4     125000               124261           33844              6744    0.001339   0.001439
-SRR19760953      4     120739               120422           33549              6216    0.001850   0.002019
-SRR19760954      4     125000               124305           35873              6326    0.001581   0.001559
-SRR19760955      4     125000               124360           33113              6186    0.001643   0.001609
-SRR19760956      4     125000               124558           39780              5953    0.001578   0.001316
-SRR19760957      4     125000               124541           37946              6190    0.001664   0.001254
-SRR19760958      4     125000               124581           38539              6043    0.001611   0.001330
-SRR19760959      4     125000               124403           38225              6172    0.001353   0.001430
-SRR19760960      4     125000               124624           38138              6238    0.001306   0.001118
-SRR19760961      4     125000               124314           36710              6333    0.001388   0.001479
-SRR19760962      4     125000               124418           33510              7085    0.001505   0.001343
+      state  reads_raw  reads_passed_filter  clusters_total  clusters_hidepth  hetero_est  error_est
+Bic1      4     125000               124859           47612              4100    0.005173   0.006077
+Bic2      4     125000               124824           48941              4017    0.005009   0.006952
+Bic3      4     125000               124827           48287              4013    0.005191   0.006619
+Bic4      4     125000               124830           47282              4211    0.005024   0.005970
+Bic5      4     125000               124863           46540              4215    0.005032   0.007178
+Bic6      4     125000               124867           47676              4089    0.005345   0.006683
+Bot1      4     125000               124969           42028              4706    0.004639   0.003464
+Bot2      4     125000               124949           41646              4890    0.004088   0.003160
+Bot3      4     125000               124884           48446              3858    0.005849   0.005025
+Bot4      4     125000               124862           45790              4282    0.004411   0.004392
+Fli1      4     125000               124839           48998              3992    0.005767   0.006960
+Fli2      4     125000               124835           49533              3915    0.006010   0.007096
+Fli3      4     125000               124854           47710              4125    0.005757   0.006959
+Fli4      4     125000               124858           49176              4041    0.005880   0.006990
+Gue1      4     125000               124860           52928              3539    0.006509   0.007064
+Hob1      4     125000               124856           47074              4270    0.004732   0.006482
+Hob2      4     125000               124841           47458              4194    0.004710   0.007908
+Jer1      4     125000               124859           46663              4107    0.005606   0.006512
+Jer2      4     125000               124855           47953              3985    0.005967   0.006701
+Jer3      4     125000               124859           46575              4275    0.005007   0.007066
+Jer4      4     125000               124848           47413              4066    0.004622   0.007322
+Por1      4     125000               124848           46505              4252    0.006397   0.006663
+Por2      4     125000               124869           46652              4342    0.005161   0.006732
+Por3      4     125000               124864           48687              4123    0.005569   0.007264
+Por4      4     125000               124861           47972              4187    0.005276   0.007008
+Por5      4     125000               124836           49674              3896    0.006077   0.007597
+Syd1      4     125000               124869           44755              4510    0.004418   0.005012
+Syd2      4     125000               124863           46884              4164    0.004828   0.005594
+Syd3      4     125000               124849           47788              4186    0.005774   0.005724
+Syd4      4     125000               124852           47547              4180    0.004631   0.005285
 
 
 Full stats files
 ------------------------------------------------
-step 1: ./cheetah_s1_demultiplex_stats.txt
-step 2: ./cheetah_edits/s2_rawedit_stats.txt
-step 3: ./cheetah_clust_0.9/s3_cluster_stats.txt
-step 4: ./cheetah_clust_0.9/s4_joint_estimate.txt
+step 1: ./seadragon_s1_demultiplex_stats.txt
+step 2: ./seadragon_edits/s2_rawedit_stats.txt
+step 3: ./seadragon_clust_0.9/s3_cluster_stats.txt
+step 4: ./seadragon_clust_0.9/s4_joint_estimate.txt
 step 5: None
 step 6: None
 step 7: None     
@@ -720,7 +777,7 @@ Illumina error rates are on the order of 0.1% per base, so your error rates
 will ideally be in this neighborhood. Also, under normal conditions error rate
 will be much, much lower than heterozygosity (on the order of 10x lower). If
 the error rate is >>0.1% then you might be using too permissive a clustering
-threshold. Just a thought.
+threshold.
 
 # Step 5: Consensus base calls
 
@@ -729,24 +786,24 @@ consensus of sequences within each cluster. Here we are identifying what we
 believe to be the real haplotypes at each locus within each sample.
 
 ```bash
-(ipyrad) osboxes@osboxes:~/ipyrad-workshop$ ipyrad -p params-cheetah.txt -s 5 -c 4
+$ ipyrad -p params-seadragon.txt -s 5 -c 4
 ```
 ```
-  loading Assembly: cheetah
-  from saved path: ~/ipyrad-workshop/cheetah.json
+  loading Assembly: seadragon
+  from saved path: ~/ipyrad-workshop/seadragon.json
 
  -------------------------------------------------------------
-  ipyrad [v.0.9.92]
+  ipyrad [v.0.9.105]
   Interactive assembly and analysis of RAD-seq data
  -------------------------------------------------------------
-  Parallel connection | osboxes: 4 cores
+  Parallel connection | 9aea44960942: 4 cores
 
   Step 5: Consensus base/allele calling
-  Mean error  [0.00158 sd=0.00026]
-  Mean hetero [0.00168 sd=0.00037]
+  Mean error  [0.00632 sd=0.00116]
+  Mean hetero [0.00528 sd=0.00062]
   [####################] 100% 0:00:04 | calculating depths
   [####################] 100% 0:00:05 | chunking clusters
-  [####################] 100% 0:10:05 | consens calling
+  [####################] 100% 0:02:05 | consens calling
   [####################] 100% 0:00:19 | indexing alleles
 
   Parallel connection closed.
@@ -760,55 +817,60 @@ parallelization
 * indexing alleles - Cleaning up and re-joining chunked data
 
 ```bash
-(ipyrad) osboxes@osboxes:~/ipyrad-workshop$ ipyrad -p params-cheetah.txt -r
+$ ipyrad -p params-seadragon.txt -r
 ```
 ```
-  loading Assembly: cheetah
-  from saved path: ~/ipyrad-workshop/cheetah.json
+  loading Assembly: seadragon
+  from saved path: ~/ipyrad-workshop/seadragon.json
 
-Summary stats of Assembly cheetah
+Summary stats of Assembly seadragon
 ------------------------------------------------
-             state  reads_raw  reads_passed_filter  clusters_total  clusters_hidepth  hetero_est  error_est  reads_consens
-SRR19760910      5     125000               124675           36092              6433    0.001586   0.001939           6355
-SRR19760912      5     125000               124304           38568              6103    0.001574   0.001457           6036
-SRR19760918      5     125000               124960           34586              6989    0.001941   0.001793           6905
-SRR19760920      5     125000               124948           34759              6851    0.001958   0.001718           6766
-SRR19760921      5     125000               124955           34423              7003    0.001757   0.001781           6930
-SRR19760924      5     125000               124944           35112              6793    0.001780   0.001774           6724
-SRR19760927      5     125000               124937           34872              6941    0.001694   0.001987           6867
-SRR19760928      5     125000               124946           35102              6860    0.001663   0.001771           6793
-SRR19760942      5     125000               124738           36514              6629    0.001523   0.001638           6566
-SRR19760946      5     125000               124601           40697              6135    0.001910   0.001771           6072
-SRR19760947      5     125000               124947           37190              6262    0.002124   0.001934           6182
-SRR19760949      5     125000               124632           37495              6179    0.002958   0.001242           6090
-SRR19760950      5     125000               124555           33231              6092    0.000969   0.001323           6043
-SRR19760951      5     125000               124261           33844              6744    0.001339   0.001439           6677
-SRR19760953      5     120739               120422           33549              6216    0.001850   0.002019           6142
-SRR19760954      5     125000               124305           35873              6326    0.001581   0.001559           6255
-SRR19760955      5     125000               124360           33113              6186    0.001643   0.001609           6102
-SRR19760956      5     125000               124558           39780              5953    0.001578   0.001316           5897
-SRR19760957      5     125000               124541           37946              6190    0.001664   0.001254           6124
-SRR19760958      5     125000               124581           38539              6043    0.001611   0.001330           5976
-SRR19760959      5     125000               124403           38225              6172    0.001353   0.001430           6117
-SRR19760960      5     125000               124624           38138              6238    0.001306   0.001118           6178
-SRR19760961      5     125000               124314           36710              6333    0.001388   0.001479           6269
-SRR19760962      5     125000               124418           33510              7085    0.001505   0.001343           7018
-
+      state  reads_raw  reads_passed_filter  clusters_total  clusters_hidepth  hetero_est  error_est  reads_consens
+Bic1      5     125000               124859           47612              4100    0.005173   0.006077           3908
+Bic2      5     125000               124824           48941              4017    0.005009   0.006952           3824
+Bic3      5     125000               124827           48287              4013    0.005191   0.006619           3812
+Bic4      5     125000               124830           47282              4211    0.005024   0.005970           3990
+Bic5      5     125000               124863           46540              4215    0.005032   0.007178           4022
+Bic6      5     125000               124867           47676              4089    0.005345   0.006683           3881
+Bot1      5     125000               124969           42028              4706    0.004639   0.003464           4508
+Bot2      5     125000               124949           41646              4890    0.004088   0.003160           4713
+Bot3      5     125000               124884           48446              3858    0.005849   0.005025           3660
+Bot4      5     125000               124862           45790              4282    0.004411   0.004392           4085
+Fli1      5     125000               124839           48998              3992    0.005767   0.006960           3795
+Fli2      5     125000               124835           49533              3915    0.006010   0.007096           3694
+Fli3      5     125000               124854           47710              4125    0.005757   0.006959           3886
+Fli4      5     125000               124858           49176              4041    0.005880   0.006990           3825
+Gue1      5     125000               124860           52928              3539    0.006509   0.007064           3319
+Hob1      5     125000               124856           47074              4270    0.004732   0.006482           4049
+Hob2      5     125000               124841           47458              4194    0.004710   0.007908           3995
+Jer1      5     125000               124859           46663              4107    0.005606   0.006512           3876
+Jer2      5     125000               124855           47953              3985    0.005967   0.006701           3756
+Jer3      5     125000               124859           46575              4275    0.005007   0.007066           4062
+Jer4      5     125000               124848           47413              4066    0.004622   0.007322           3873
+Por1      5     125000               124848           46505              4252    0.006397   0.006663           4016
+Por2      5     125000               124869           46652              4342    0.005161   0.006732           4130
+Por3      5     125000               124864           48687              4123    0.005569   0.007264           3913
+Por4      5     125000               124861           47972              4187    0.005276   0.007008           3991
+Por5      5     125000               124836           49674              3896    0.006077   0.007597           3674
+Syd1      5     125000               124869           44755              4510    0.004418   0.005012           4311
+Syd2      5     125000               124863           46884              4164    0.004828   0.005594           3959
+Syd3      5     125000               124849           47788              4186    0.005774   0.005724           3980
+Syd4      5     125000               124852           47547              4180    0.004631   0.005285           3978
 
 Full stats files
 ------------------------------------------------
-step 1: ./cheetah_s1_demultiplex_stats.txt
-step 2: ./cheetah_edits/s2_rawedit_stats.txt
-step 3: ./cheetah_clust_0.9/s3_cluster_stats.txt
-step 4: ./cheetah_clust_0.9/s4_joint_estimate.txt
-step 5: ./cheetah_consens/s5_consens_stats.txt
+step 1: ./seadragon_s1_demultiplex_stats.txt
+step 2: ./seadragon_edits/s2_rawedit_stats.txt
+step 3: ./seadragon_clust_0.9/s3_cluster_stats.txt
+step 4: ./seadragon_clust_0.9/s4_joint_estimate.txt
+step 5: ./seadragon_consens/s5_consens_stats.txt
 step 6: None
 step 7: None
 ```
 
 And here the important information is the number of `reads_consens`. This is
-the number of retained reads within each sample that we'll send on to the next
-step. Retained reads must pass filters on read depth tolerance (both
+the number of retained consensus sequences within each sample that we'll send on to the next
+step. Retained consensus sequences must pass filters on read depth tolerance (both
 `mindepth_majrule` and `maxdepth`), maximum number of uncalled bases
 (`max_Ns_consens`) and maximum number of heterozygous sites (`max_Hs_consens`)
 per consensus sequence. This number will almost always be lower than
@@ -826,23 +888,23 @@ based on sequence similarity.
 for large empirical datasets, but it's normally faster than step 3.
 
 ```bash
-(ipyrad) osboxes@osboxes:~/ipyrad-workshop$ ipyrad -p params-cheetah.txt -s 6 -c 4
+$ ipyrad -p params-seadragon.txt -s 6 -c 4
 ```
 ```
-  loading Assembly: cheetah
-  from saved path: ~/ipyrad-workshop/cheetah.json
+  loading Assembly: seadragon
+  from saved path: ~/ipyrad-workshop/seadragon.json
 
  -------------------------------------------------------------
-  ipyrad [v.0.9.92]
+  ipyrad [v.0.9.105]
   Interactive assembly and analysis of RAD-seq data
  -------------------------------------------------------------
-  Parallel connection | osboxes: 4 cores
+  Parallel connection | 9aea44960942: 4 cores
 
   Step 6: Clustering/Mapping across samples
   [####################] 100% 0:00:03 | concatenating inputs
-  [####################] 100% 0:01:18 | clustering across
+  [####################] 100% 0:00:18 | clustering across
   [####################] 100% 0:00:06 | building clusters
-  [####################] 100% 0:02:55 | aligning clusters
+  [####################] 100% 0:00:45 | aligning clusters
 
   Parallel connection closed.
 ```
@@ -861,58 +923,70 @@ It might be more enlightening to consider the output of step 6 by examining the
 file that contains the reads clustered across samples:
 
 ```bash
-(ipyrad) osboxes@osboxes:~/ipyrad-workshop$ cat cheetah_across/cheetah_clust_database.fa | head -n 27
+$ cat seadragon_across/seadragon_clust_database.fa | head -n 51
 ```
 ```
->SRR19760910_0
-CATGCATCTAAAATTATAGAGTACTCATGTTTTACAAAGGAATTCAGCCTGTTTTACAAACACATCAGGTGAGCATCACCCACCTTAGCTAATGTTATGG
->SRR19760912_0
-CATGCATCTAAAATTATAGAGTACTCATGTTTTACAAAGGAATTCAGCCTGTTTTACAAACACATCAGGTGAGCATCACCCACCTTAGCTAATGTTATGG
->SRR19760919_1
-CATGCATCTAAAATTATAGAGTACTCATGTTTTACAAAGGAATTCAGCCTGTTTTACAAACACATCAGGTGAGCATCACCCACCTTAGCTAATGTTATGG
->SRR19760947_0
-CATGCATCTAAAATTATAGAGTACTCATGTTTTACAAAGGAATTCAGCCTGTTTTACAAACACATCAGGTGAGCATCACCCACCTTAGCTAATGTTATGG
->SRR19760951_1
-CATGCATCTAAAATTATAGAGTACTCATGTTTTACAAAGGAATTCAGCCTGTTTTACAAACACATCAGGTGAGCATCACCCACCTTAGCTAATGTTATGG
->SRR19760954_5064
-CATGCATCTAAAATTATAGAGTACTCATGTTTTACAAAGGAATTCAGCCTGTTTTACAAACACATCAGGTGAGCATCACCCACCTTAGCTAATGTTATGG
->SRR19760957_5406
-CATGCATCTAAAATTATAGAGTACTCATGTTTTACAAAGGAATTCAGCCTGTTTTACAAACACATCAGGTGAGCATCACCCACCTTAGCTAATGTTATGG
->SRR19760961_5265
-CATGCATCTAAAATTATAGAGTACTCATGTTTTACAAAGGAATTCAGCCTGTTTTACAAACACATCAGGTGAGCATCACCCACCTTAGCTAATGTTATGG
-//
-//
->SRR19760910_10
-CATGCTCTGCTCTGCAGCCTGCAGTCTTTATGTTTGCTCTATGTCATAAGAATTCTGGCATACTTGTTTCTGTGAAATACCTGTATTTAGAGAACAGACG
->SRR19760911_4305
-CATGCTCTGCTCTGCAGCCTGCAGTCTTTATGTTTGCTCTATGTCATAAGAATTCTGGCATACTTGTTTCTGTGAAATACCTGTATTTAGAGAACAGACG
->SRR19760913_9
-CATGCTCTGCTCTGCAGCCTGCAGTCTTTATGTTTGCTCTATGTCATAAGAATTCTGGCATACTTGTTTCTGTGAAATACCTGTATTTAGAGAACAGACG
->SRR19760920_12
-CATGCTCTGCTCTGCAGCCTGCAGTCTTTATGTTTGCTCTATGTCATAAGAATTCTGGCATACTTGTTTCTGTGAAATACCTGTATTTAGAGAACAGACG
->SRR19760921_14
-CATGCTCTGCTCTGCAGCCTGCAGTCTTTATGTTTGCTCTATGTCATAAGAATTCTGGCATACTTGTTTCTGTGAAATACCTGTATTTAGAGAACAGACG
->SRR19760951_11
-CATGCTCTGCTCTGCAGCCTGCAGTCTTTATGTTTGCTCTATGTCATAAGAATTCTGGCATACTTGTTTCTGTGAAATACCTGTATTTAGAGAACAGACG
->SRR19760952_11
-CATGCTCTGCTCTGCAGCCTGCAGTCTTTATGTTTGCTCTATGTCATAAGAATTCTGGCATACTTGTTTCTGTGAAATACCTGTATTTAGAGAACAGACG
->SRR19760957_12
-CATGCTCTGCTCTGCAGCCTGCAGTCTTTATGTTTGCTCTATGTCATAAGAATTCTGGCATACTTGTTTCTGTGAAATACCTGTATTTAGAGAACAGACG
->SRR19760958_8
-CATGCTCTGCTCTGCAGCCTGCAGTCTTTATGTTTGCTCTATGTCATAAGAATTCTGGCATACTTGTTTCTGTGAAATACCTGTATTTAGAGAACAGACG
->SRR19760962_9
-CATGCTCTGCTCTGCAGCCTGCAGTCTTTATGTTTGCTCTATGTCATAAGAATTCTGGCATACTTGTTTCTGTGAAATACCTGTATTTAGAGAACAGACG
+#Bic1,@Bic2,@Bic3,@Bic4,@Bic5,@Bic6,@Bot1,@Bot2,@Bot3,@Bot4,@Fli1,@Fli2,@Fli3,@Fli4,@Gue1,@Hob1,@Hob2,@Jer1,@Jer2,@Jer3,@Jer4,@Por1,@Por2,@Por3,@Por4,@Por5,@Syd1,@Syd2,@Syd3,@Syd4
+>Bic1_0
+TGCAGATAGGTGGTTTATGGATAGCAAAATCAGGGAGAATTGAAAGAAAGGGTGAAGAGAGGATATGTTACATTAGCAAGAATCTGGTACAAGACAGTGC
+>Bic2_0
+TGCAGATAGGTGGTTTATGGATAGCAAAATCAGGGAGAATTGAAAGAAAGGGTGAAGAGAGGATATGTTACATTAGCAAGAATCTGGTACAAGACAGTGC
+>Bic3_0
+TGCAGATAGGTGGTTTATGGATAGCAAAATCAGGGAGAATTGAAAGAAAGGGTGAAGAGAGGATATGTTACATTAGCAAGAATCTGGTACAAGACAGTGC
+>Bic4_0
+TGCAGATAGGTGGTTTATGGATAGCAAAATCAGGGAGAATTGAAAGAAAGGGTGAAGAGAGGATATGTTACATTAGCAAGAATCTGGTACAAGACAGTGC
+>Bic6_0
+TGCAGATAGGTGGTTTATGGATAGCAAAATCAGGGAGAATTGAAAGAAAGGGTGAAGAGAGGATATGTTACATTAGCAAGAATCTGGTACAAGACAGTGC
+>Bot1_0
+TGCAGATAGGTGGTTTATGGATAGCAAAATCAGGGAGAATTGAAAGAAAGGGTGAAGAGAGGATATGTTACATTAGCAAGAATCTGGTACAAGACAGTGC
+>Bot2_4545
+TGCAGATAGGTGGTTTATGGATAGCAAAATCAGGGAGAATTGAAAGAAAGGGTGAAGAGAGGATATGTTACATTAGCAAGAATCTGGTACAAGACAGTGC
+>Bot3_0
+TGCAGATAGGTGGTTTATGGATAGCAAAATCAGGGAGAATTGAAAGAAAGGGTGAAGAGAGGATATGTTACATTAGCAAGAATCTGGTACAAGACAGTGC
+>Fli1_0
+TGCAGATAGGTGGTTTATGGATAGCAAAATCAGGGAGAATTGAAAGAAAGGGTGAAGAGAGGATATGTTACATTAGCAAGAATCTGGTACAAGACAGTGC
+>Fli2_3408
+TGCAGATAGGTGGTTTATGGATAGCAAAATCAGGGAGAATTGAAAGAAAGGGTGAAGAGAGGATATGTTACATTAGCAAGAATCTGGTACAAGACAGTGC
+>Fli4_0
+TGCAGATAGGTGGTTTATGGATAGCAAAATCAGGGAGAATTGAAAGAAAGGGTGAAGAGAGGATATGTTACATTAGCAAGAATCTGGTACAAGACAGTGC
+>Gue1_0
+TGCAGATAGGTGGTTTATGGATAGCAAAATCAGGGAGAATTGAAAGAAAGGGTGAAGAGAGGATATGTTACATTAGCAAGAATCTGGTACAAGACAGTGC
+>Hob1_3663
+TGCAGATAGGTGGTTTATGGATAGCAAAATCAGGGAGAATTGAAAGAAAGGGTGAAGAGAGGATATGTTACATTAGCAAGAATCTGGTACAAGACAGTGC
+>Hob2_0
+TGCAGATAGGTGGTTTATGGATAGCAAAATCAGGGAGAATTGAAAGAAAGGGTGAAGAGAGGATATGTTACATTAGCAAGAATCTGGTACAAGACAGTGC
+>Jer1_0
+TGCAGATAGGTGGTTTATGGATAGCAAAATCAGGGAGAATTGAAAGAAAGGGTGAAGAGAGGATATGTTACATTAGCAAGAATCTGGTACAAGACAGTGC
+>Jer3_0
+TGCAGATAGGTGGTTTATGGATAGCAAAATCAGGGAGAATTGAAAGAAAGGGTGAAGAGAGGATATGTTACATTAGNAAGAATCTGGTACAAGACAGTGC
+>Jer4_0
+TGCAGATAGGTGGTTTATGGATAGCAAAATCAGGGAGAATTGAAAGAAAGGGTGAAGAGAGGATATGTTACATTAGCAAGAATCTGGTACAAGACAGTGC
+>Por1_0
+TGCAGATAGGTGGTTTATGGATAGCAAAATCAGGGAGAATTGAAAGAAAGGGTGAAGAGAGGATATGTTACATTAGCAAGAATCTGGTACAAGACAGTGC
+>Por2_0
+TGCAGATAGGTGGTTTATGGATAGCAAAATCAGGGAGAATTGAAAGAAAGGGTGAAGAGAGGATATGTTACATTAGCAAGAATCTGGTACAAGACAGTGC
+>Por4_0
+TGCAGATAGGTGGTTTATGGATAGCAAAATCAGGGAGAATTGAAAGAAAGGGTGAAGAGAGGATATGTTACATTAGCAAGAATCTGGTACAAGACAGTGC
+>Syd1_0
+TGCAGATAGGTGGTTTATGGATAGCAAAATCAGGGAGAATTGAAAGAAAGGGTGAAGAGAGGATATGTTACATTAGCAAGAATCTGGTACAAGACAGTGC
+>Syd2_0
+TGCAGATAGGTGGTTTATGGATAGCAAAATCAGGGAGAATTGAAAGAAAGGGTGAAGAGAGGATATGTTACATTAGCAAGAATCTGGTACAAGACAGTGC
+>Syd3_0
+TGCAGATAGGTGGTTTATGGATAGCAAAATCAGGGAGAATTGAAAGAAAGGGTGAAGAGAGGATATGTTACATTAGCAAGAATCTGGTACAAGACAGTGC
+>Syd4_0
+TGCAGATAGGTGGTTTATGGATAGCAAAATCAGGGAGAATTGAAAGAAAGGGTGAAGAGAGGATATGTTACATTAGCAAGAATCTGGTACAAGACAGTGM
 //
 //
 ```
 
-The final output of step 6 is a file in `cheetah_across` called
-`cheetah_clust_database.fa`. This file contains all aligned reads across all
+The final output of step 6 is a file in `seadragon_across` called
+`seadragon_clust_database.fa`. This file contains all aligned reads across all
 samples. Executing the above command you'll see all the reads that align at
-each locus. You'll see the sample name of each read followed by the sequence of
-the read at that locus for that sample. If you wish to examine more loci you
-can increase the number of lines you want to view by increasing the value you
-pass to `head` in the above command (e.g. `... | head -n 300`).
+each locus, again with each locus separated by pairs of "//". You'll see the 
+sample name of each read followed by the sequence of the read at that locus for 
+that sample. If you wish to examine more loci you can increase the number of 
+lines you want to view by increasing the value you pass to `head` in the above 
+command (e.g. `... | head -n 300`).
 
 # Step 7: Filter and write output files
 
@@ -927,17 +1001,17 @@ conservative.
 To run step 7:
 
 ```bash
-(ipyrad) osboxes@osboxes:~/ipyrad-workshop$ ipyrad -p params-cheetah.txt -s 7 -c 4
+(ipyrad) osboxes@osboxes:~/ipyrad-workshop$ ipyrad -p params-seadragon.txt -s 7 -c 4
 ```
 ```
-  loading Assembly: cheetah
-  from saved path: ~/ipyrad-workshop/cheetah.json
+  loading Assembly: seadragon
+  from saved path: ~/ipyrad-workshop/seadragon.json
 
  -------------------------------------------------------------
-  ipyrad [v.0.9.92]
+  ipyrad [v.0.9.105]
   Interactive assembly and analysis of RAD-seq data
  -------------------------------------------------------------
-  Parallel connection | osboxes:: 4 cores
+  Parallel connection | 9aea44960942: 4 cores
 
   Step 7: Filtering and formatting output files
   [####################] 100% 0:00:16 | applying filters
@@ -955,36 +1029,34 @@ minimum # of samples per locus
 * building arrays - Construct the final output data in hdf5 format
 * writing conversions - Write out all designated output formats
 
-Step 7 generates output files in the `cheetah_outfiles` directory. All the
+Step 7 generates output files in the `seadragon_outfiles` directory. All the
 output formats specified by the `output_formats` parameter will be generated
 here. Let's see what's been created:
 
 ```bash
-(ipyrad) osboxes@osboxes:~/ipyrad-workshop$ ls cheetah_outfiles/
+$ ls seadragon_outfiles/
 ```
 ```
-cheetah.alleles  cheetah.nex        cheetah.snpsmap    cheetah.usnps
-cheetah.geno     cheetah.phy        cheetah_stats.txt  cheetah.ustr
-cheetah.gphocs   cheetah.seqs.hdf5  cheetah.str        cheetah.vcf
-cheetah.loci     cheetah.snps       cheetah.treemix
-cheetah.migrate  cheetah.snps.hdf5  cheetah.ugeno
+seadragon.alleles  seadragon.loci     seadragon.phy        seadragon.snps.hdf5  seadragon.str      seadragon.usnps
+seadragon.geno     seadragon.migrate  seadragon.seqs.hdf5  seadragon.snpsmap    seadragon.treemix  seadragon.ustr
+seadragon.gphocs   seadragon.nex      seadragon.snps       seadragon_stats.txt  seadragon.ugeno    seadragon.vcf
 ```
 
-ipyrad always creates the `cheetah.loci` file, as this is our internal format,
-as well as the `cheetah_stats.txt` file, which reports final statistics for the
-assembly (more below). The other files created fall in to 2 categories: files
-that contain the full sequence (i.e. the `cheetah.phy` and `cheetah.seqs.hdf5`
-files) and files that contain only variable sites (i.e. the `cheetah.snps` and
-`cheetah.snps.hdf5` files). The `cheetah.snpsmap` is a file which maps SNPs to
+ipyrad always creates the `seadragon.loci` file, as this is our internal format,
+as well as the `seadragon_stats.txt` file, which reports final statistics for the
+assembly (more below). The other files created fall in to two categories: files
+that contain the full sequence (i.e. the `seadragon.phy` and `seadragon.seqs.hdf5`
+files) and files that contain only variable sites (i.e. the `seadragon.snps` and
+`seadragon.snps.hdf5` files). The `seadragon.snpsmap` is a file which maps SNPs to
 loci, which is used downstream in the analysis toolkit for sampling unlinked
 SNPs.
 
-The most informative, human-readable file here is `cheetah_stats.txt` which
+The most informative, human-readable file here is `seadragon_stats.txt` which
 gives extensive and detailed stats about the final assembly. A quick overview
 of the different sections of this file:
 
 ```bash
-(ipyrad) osboxes@osboxes:~/ipyrad-workshop$ cat cheetah_outfiles/cheetah_stats.txt
+$ cat seadragon_outfiles/seadragon_stats.txt
 ```
 ```
 ## The number of loci caught by each filter.
@@ -1179,5 +1251,4 @@ includes extensive downstream analysis tools for such things as clustering and
 population assignment, phylogenetic tree inference, quartet-based species tree
 inference, and much more.
 
-![png](images/Cheetah_cubs2.png)
-©Laura Bertola
+![png](images/seadragon.jpg)

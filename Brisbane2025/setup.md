@@ -42,9 +42,14 @@ ipyrad uses **conda**, which is a package manager for python. We downloaded
 the [minconda installer](https://docs.anaconda.com/miniconda/miniconda-other-installer-links/)
 and saved it in the `work` directory, so you can run the installer from there.
 
+**IMPORTANT:** The cloud server has conda installed already but we need to deactivate
+that version before we can install the new version. DO NOT SKIP THIS STEP!
+
 ```
+conda deactivate
 bash ./work/Miniconda3-latest-Linux-x86_64.sh
 ```
+
 During the miniconda installation follow these directions:
 * Push Enter at the first prompt
 * Push `q` to exit the license agreement

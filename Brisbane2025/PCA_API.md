@@ -116,10 +116,10 @@ The keys are the population names, in our case cheetah subspecies, and the value
 belong to those populations. You can copy and paste this into a new cell in your
 notebook.
 ```python
-imap = {"A.j.jubatus":['SRR19760918','SRR19760920','SRR19760921','SRR19760924','SRR19760927','SRR19760928','SRR19760942','SRR19760946','SRR19760947','SRR19760956'],
-        "A.j.soemmeringii":['SRR19760910','SRR19760912','SRR19760954','SRR19760955','SRR19760957','SRR19760958','SRR19760959','SRR19760960','SRR19760961','SRR19760962'],
-        "A.j.venaticus":['SRR19760950','SRR19760951','SRR19760953'],
-        "Outgroup":['SRR19760949']}
+imap = {'NSW': ['Bot1', 'Bot2', 'Bot3', 'Bot4', 'Syd1', 'Syd2', 
+                'Syd3', 'Syd4', 'Jer1', 'Jer2', 'Jer3', 'Jer4', 'Gue1'],
+        'TAS': ['Bic1', 'Bic2', 'Bic3', 'Bic4', 'Bic5', 'Bic6', 'Hob1', 'Hob2'], 
+        'VIC': ['Fli1', 'Fli2', 'Fli3', 'Fli4', 'Por1', 'Por2', 'Por3', 'Por4', 'Por5']}
 ```
 Now create the `pca` object with the input data again, this time passing 
 in the new dictionary as the second argument and specifying this as the `imap`,

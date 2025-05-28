@@ -4,6 +4,9 @@
 `sudo /home/deren/miniconda3/envs/jhub/bin/jupyterhub --config /etc/jupyterhub/jupyterhub_config.py`
 
 ## Resetting a user container
+
+Docker containers live here: `/var/lib/docker/containers`
+
 Jhub uses docker images under the hood and it appears that when a user logs in for the first time it
 spins up a container and applies layers to it that 'stick' across logins. Specifically, the `read_only_volumes`
 don't get updated after first container creation (it appears). If you make changes to the mounted volumes

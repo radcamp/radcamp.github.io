@@ -53,11 +53,11 @@ command, then make the shortcut with `ln` (just copy/paste this command).
 
 ```bash
 (base) jovyan@493222dbc32d:~$ cd ipyrad-workshop
-(base) jovyan@493222dbc32d:~/ipyrad-workshop$ ln -s /home/jovyan/work/BlackRockData2/SeadragonData/raws ./raws
+(base) jovyan@493222dbc32d:~/ipyrad-workshop$ ln -s /home/jovyan/work/SeadragonData/raws ./raws
 (base) jovyan@493222dbc32d:~/ipyrad-workshop$ ls -l
 ```
 ```
-lrwxrwxrwx 1 jovyan users   51 Apr 23 14:51 raws -> /home/jovyan/work/BlackRockData2/SeadragonData/raws
+lrwxrwxrwx 1 jovyan users   51 Apr 23 14:51 raws -> /home/jovyan/work/SeadragonData/raws
 ```
 The `ls -l` command shows that the new `raws` shortcut indeed points to the shared
 raw data.
