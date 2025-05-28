@@ -29,6 +29,8 @@ TBD
 
 # Schedule
 
+Quick Link to the Cloud Compute Jupyterhub: [https://pinky.eaton-lab.org/](https://pinky.eaton-lab.org/)
+
 [Organiser & Participant Intro Slides (Presented throughout the first day)](https://docs.google.com/presentation/d/1A1HyzV-50gjEywkx3L2HmqtLP0oeBbL1qguBe3cpO0s/edit#slide=id.g359940329b6_0_130)
 
 Times       | Saturday (June 14) | Sunday (June 15) |
