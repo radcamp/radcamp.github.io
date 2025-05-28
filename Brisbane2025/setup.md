@@ -22,12 +22,6 @@ and you might need to confirm an authorization to verify your identity.
 
 ![png](images/JupyterHubLogin.png)
 
-The default view is the 'Classic' Jupyter notebook view, but I prefer the newer
-JupyterLab view because it keeps everything in one place. Open JuptyerLab by going
-to View → Open JupyterLab.
-
-![png](images/JupyterHubOpenLab.png)
-
 Once logged in, you'll see the JupyterHub File Browser and Launcher panes.
 
 ![png](images/JupyterHubStart.png)
@@ -49,16 +43,17 @@ the [minconda installer](https://docs.anaconda.com/miniconda/miniconda-other-ins
 and saved it in the `work` directory, so you can run the installer from there.
 
 ```
-bash ./work/BlackRockData2/Miniconda3-latest-Linux-x86_64.sh
+bash ./work/Miniconda3-latest-Linux-x86_64.sh
 ```
-During the miniconda installation push the space bar until prompted and
-then:
+During the miniconda installation follow these directions:
+* Push Enter at the first prompt
+* Push `q` to exit the license agreement
 * Type 'yes' to acknowledge the license agreement
-* Push 'enter' to confirm the install location (`/home/jovyan/miniconda3`)
+* Push Enter to confirm the install location (`/home/jovyan/miniconda3`)
 * Type 'yes' to initialize conda
+* After it's finished type 'exit' and then open another terminal.
 
-After it's finished type 'exit' and then open another terminal. Your prompt 
-should now look like this:
+Your prompt  should now look like this:
 
 ```
 (base) jovyan@493222dbc32d:~$
