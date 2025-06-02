@@ -1,10 +1,50 @@
 # Spatial population genetic analysis: **FEEMS**
 
-Through methods like PCA and phylogenetic trees, you can gain some insight into how populations cluster together, and which population may be more diverged from each other. But it's always nice to also look at this in a spatial context, e.g. on a map. FEEMS is a faster version of the statistical method Estimating Effective Migration Surfaces (EEMS), and it is based on the notion of "isolation-by-distance" (IBD). This is the idea that individuals who live near eachother tend to be more similar to individuals who live far apart. EEMS is a good method to visualize deviations from IBD on a map, hereby finding areas where gene flow is less than expected (i.e. barriers; indicated in orange) or areas where gene flow is higher than expected (i.e. increased connectivity; indicated in blue). Below you can see an example for a dataset of lions. The red dots are sampling localities, and you can see some orange shading where EEMS inferred reduced gene flow. For example, in the central African rain forest, the Zambezi valley and the Arabian peninsula.
+Through methods like PCA and phylogenetic trees, you can gain some insight into 
+how populations cluster together, and which population may be more diverged from 
+each other. But it's always nice to also look at this in a spatial context, e.g. 
+on a map. FEEMS is a faster version of the statistical method Estimating 
+Effective Migration Surfaces (EEMS), and it is based on the notion of 
+"isolation-by-distance" (IBD). This is the idea that individuals who live near 
+each other tend to be more similar to individuals who live far apart. EEMS is a 
+good method to visualize deviations from IBD on a map, hereby finding areas where 
+gene flow is less than expected (i.e. barriers; indicated in orange) or areas 
+where gene flow is higher than expected (i.e. increased connectivity; indicated 
+in blue). Below you can see an example for a dataset of lions. The red dots are 
+sampling localities, and you can see some orange shading where EEMS inferred 
+reduced gene flow. For example, in the central African rain forest, the Zambezi 
+valley and the Arabian peninsula.
 
 ![png](images/lions_EEMS.png)
 
-For more information about EEMS, check out [Petkova *et al* (2016)](https://www.nature.com/articles/ng.3464), and for FEEMS, check out [Marcus *et al* (2021)](https://elifesciences.org/articles/61927).
+For more information about EEMS, check out [Petkova *et al* 
+(2016)](https://www.nature.com/articles/ng.3464), and for FEEMS, check out 
+[Marcus *et al* (2021)](https://elifesciences.org/articles/61927).
+
+## FEEMS install/configuration
+FEEMS can be a bit tricky to install, so for the purpose of this workshop
+we wrote all the steps into a script that you can simply execute (to save
+time). You can see the details of what the script is actually doing
+in the [RADCamp technical configuration document.](./technical-configuration.md)
+
+```
+cd ipyrad-workshop
+conda create -n feems python=3.9
+
+conda install -c conda-forge -c bioconda feems notebook h5py matplotlib=3.5.2 shapely=1.8 -y
+
+# Skip these because we
+#git clone https://github.com/NovembreLab/feems.git
+#sed -i '221 s/^/#/' feems/feems/viz.py 
+#sed -i '240 s/^/#/' feems/feems/viz.py
+
+mkdir /home/jovyan/src
+cd /home/jovyan/src
+cp -Rf /home/jovyan/work/feems .
+pip install -e feems
+
+python -m ipykernel install --user --name=feems
+```
 
 ## Input data
 What is the necessary input data for FEEMS?
@@ -12,34 +52,6 @@ What is the necessary input data for FEEMS?
 * latlongs (= localities of your samples)
 * bounding area for plotting
 * .shp file (global map)
-
-### Creating new output files w/o the P. concolor sample
-The *P. concolor* sample was included in the RAxML analysis as an outgroup
-to root the tree. For this spatial analysis with FEEMS we need to remove
-this sample because we are interested in gene flow between cheetah populations, and not the outgroup.
-
-We can use the ipyrad branching strategy again to remove this outgroup sample
-('SRR19760949'). **Notice here that we are branching from the original
-assembly with `min_samples_locus` equal to 4.**
-
-```bash
-(ipyrad) osboxes@osboxes:~/ipyrad-workshop$ ipyrad -p params-cheetah.txt -b no-outgroup - SRR19760949
-```
-```
-  loading Assembly: cheetah
-  from saved path: ~/ipyrad-workshop/cheetah.json
-  dropping 1 samples
-  creating a new branch called 'no-outgroup' with 23 Samples
-  writing new params file to params-no-outgroup.txt
-```
-
-Now you can run step 7 again to generate the new output files with this sample
-removed:
-```bash
-(ipyrad) osboxes@osboxes:~/ipyrad-workshop$ ipyrad -p params-no-outgroup.txt -s 7 -c 4
-```
-
-This will create a new set of output files in `no-outgroup_outfiles`.
 
 # **FEEMS** analyses
 
