@@ -28,7 +28,7 @@ Once logged in, you'll see the JupyterHub File Browser and Launcher panes.
 
 If you'd like to have more information about Jupyter, check out their [website](https://jupyter.org/).
 
->**Important: These cloud resources will not persist past he workshop.** The Eaton lab 
+>**IMPORTANT: These cloud resources will not persist past he workshop.** The Eaton lab 
 JupyterHub server is only accessible for your account for the duration of this 
 workshop. After the workshop we will delete user accounts and restrict access 
 permissions, so don't save anything valuable here!
@@ -43,7 +43,8 @@ the [minconda installer](https://docs.anaconda.com/miniconda/miniconda-other-ins
 and saved it in the `work` directory, so you can run the installer from there.
 
 **IMPORTANT:** The cloud server has conda installed already but we need to deactivate
-that version before we can install the new version. DO NOT SKIP THIS STEP!
+that version before we can install the new version.   
+DO NOT SKIP THIS STEP!
 
 ```
 conda deactivate
