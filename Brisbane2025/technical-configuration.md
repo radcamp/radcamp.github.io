@@ -31,14 +31,15 @@ magic to make the install not a nightmare at runtime.
 
 * On pinky: `cd /mnt/pinky/isaac; git clone https://github.com/NovembreLab/feems.git`. This
 dir is mounted inside the docker container at `/home/jovyan/work` so it's accessible
+
+* Commented out lines 221 and 240 in feems/feems/viz.py to work around some version bugs:
 ```
 # Equivalent to doing this inside a script but by hand and only once is easier
 #sed -i '221 s/^/#/' feems/feems/viz.py
 #sed -i '240 s/^/#/' feems/feems/viz.py
 ```
-* Commented out lines 221 and 240 in feems/feems/viz.py to work around some version bugs
 
-
+The `install_FEEMS.sh` script does all this:
 ```
 # Create/activate a new environment and install all the necessary deps for feems
 conda create -n feems python=3.9 -y

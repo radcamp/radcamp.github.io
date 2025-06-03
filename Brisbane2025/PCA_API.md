@@ -32,7 +32,7 @@ directory (if you aren't already there): `/home/jovyan/ipyrad-workshop`.
 Open the "Launcher" by clicking the blue **+** button in the upper left.
 Similar how you've previously opened the Terminal, now open a new "Python 3" notebook by clicking on `New`.
 
-![png](images/raxml-CreateNotebook.png)
+![png](images/jupyter-NewNotebook.png)
 
 **NB:** If you do **NOT** see the 'base' option for opening a Notebook, go back to the
 [setup](./setup.md) page and make sure you have run the notebook kernel installation

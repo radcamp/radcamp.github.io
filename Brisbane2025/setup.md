@@ -28,7 +28,7 @@ Once logged in, you'll see the JupyterHub File Browser and Launcher panes.
 
 If you'd like to have more information about Jupyter, check out their [website](https://jupyter.org/).
 
->**IMPORTANT: These cloud resources will not persist past he workshop.** The Eaton lab 
+>**IMPORTANT: These cloud resources will not persist past the workshop.** The Eaton lab 
 JupyterHub server is only accessible for your account for the duration of this 
 workshop. After the workshop we will delete user accounts and restrict access 
 permissions, so don't save anything valuable here!
@@ -48,18 +48,11 @@ DO NOT SKIP THIS STEP!
 
 ```
 conda deactivate
-bash ./work/Miniconda3-latest-Linux-x86_64.sh
+bash ./work/Miniconda3-latest-Linux-x86_64.sh -b
 ```
 
-During the miniconda installation follow these directions:
-* Push Enter at the first prompt
-* Push `q` to exit the license agreement
-* Type 'yes' to acknowledge the license agreement
-* Push Enter to confirm the install location (`/home/jovyan/miniconda3`)
-* Type 'yes' to initialize conda
-* After it's finished type 'exit' and then open another terminal.
-
-Your prompt  should now look like this:
+After it's finished type 'exit' and then open another terminal. Your prompt 
+should now look like this:
 
 ```
 (base) jovyan@493222dbc32d:~$
@@ -76,7 +69,7 @@ conda install -c conda-forge -c bioconda numpy=1.26.4 ipyrad fastqc scikit-learn
 that is necessary for accessing the conda environment with these packages inside 
 jupyter notebooks (which we will use extensively later in the course).
 ```
-python -m ipykernel install --user --name=base
+python -m ipykernel install --user --name=ipyrad
 ```
 
 ### Installing ipyrad on your home system

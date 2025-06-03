@@ -77,7 +77,7 @@ all code in cells of a jupyter notebook.
 In the jupyter notebook browser interface navigate to your `ipyrad-workshop`
 directory and create a new Noteook using the `base` image as we did previously.
 
-![png](images/raxml-CreateNotebook.png)
+![png](images/jupyter-NewNotebook.png)
 
 First things first, rename your new notebook to give it a meaningful name. You can
 either click the small 'disk' icon in the upper left corner of the notebook or
