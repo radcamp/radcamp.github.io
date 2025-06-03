@@ -38,38 +38,29 @@ permissions, so don't save anything valuable here!
 To start the terminal on the Jupyter dashboard, click "Terminal" in the Launcher.
 ![png](images/Binder_Littleblackwindow.jpg)
 
-ipyrad uses **conda**, which is a package manager for python. We downloaded
-the [minconda installer](https://docs.anaconda.com/miniconda/miniconda-other-installer-links/)
-and saved it in the `work` directory, so you can run the installer from there.
+ipyrad is easy to install, but there are some additional steps needed inside this
+cloud environment, so for the purpose of this workshop we wrote all the steps 
+into a script that you can execute (to save time and prevent typos). You can see 
+the details of what the script is actually doing in the RADCamp 
+[technical configuration document](./technical-configuration.md).
 
-**IMPORTANT:** The cloud server has conda installed already but we need to deactivate
-that version before we can install the new version.   
-DO NOT SKIP THIS STEP!
-
+In your terminal type this command:
 ```
-conda deactivate
-bash ./work/Miniconda3-latest-Linux-x86_64.sh -b
+./work/scripts/install_ipyrad.sh
 ```
 
 After it's finished type 'exit' and then open another terminal. Your prompt 
 should now look like this:
 
 ```
-(base) jovyan@493222dbc32d:~$
+(ipyrad) jovyan@493222dbc32d:~$
 ```
 
-Now you can install ipyrad (and a few of the other necessary packages we'll be using)
-with conda like this (it will take 1-2 minutes). We recommend to copy/paste this line
-into the terminal to avoid typos:
-```
-conda install -c conda-forge -c bioconda numpy=1.26.4 ipyrad fastqc scikit-learn toytree raxml -y
-```
+Verify your install by checking the ipyrad version (ignore the deprecation warning).
 
-**Notebook kernel installation - IMPORTANT:** This is the last **setup** command
-that is necessary for accessing the conda environment with these packages inside 
-jupyter notebooks (which we will use extensively later in the course).
 ```
-python -m ipykernel install --user --name=ipyrad
+(ipyrad) jovyan@f87cdd4c4f18:~$ ipyrad -v
+ipyrad 0.9.105
 ```
 
 ### Installing ipyrad on your home system

@@ -93,7 +93,51 @@ docker container id). It will look like a big ugly string of hex values, call it
 * `ssh -L 8800:localhost:8800 -L 8801:localhost:8801 isaac@130.111.223.39`
 * Open browser window to `http://localhost:8800`
 
-## Setup for FEEMS
+### Setup for ipyrad
+
+**THIS IS THE BY-HAND INSTRUCTIONS THAT I REMOVED WHEN I WROTE THE INSTALL SCRIPT.**
+
+ipyrad uses **conda**, which is a package manager for python. We downloaded
+the [minconda installer](https://docs.anaconda.com/miniconda/miniconda-other-installer-links/)
+and saved it in the `work` directory, so you can run the installer from there.
+
+**IMPORTANT:** The cloud server has conda installed already but we need to deactivate
+that version before we can install the new version.   
+DO NOT SKIP THIS STEP!
+
+```
+conda deactivate
+bash ./work/Miniconda3-latest-Linux-x86_64.sh
+```
+
+During the miniconda installation follow these directions:
+* Push Enter at the first prompt
+* Push `q` to exit the license agreement
+* Type 'yes' to acknowledge the license agreement
+* Push Enter to confirm the install location (`/home/jovyan/miniconda3`)
+* Type 'yes' to initialize conda
+* After it's finished type 'exit' and then open another terminal.
+
+Your prompt  should now look like this:
+
+```
+(base) jovyan@493222dbc32d:~$
+```
+
+Now you can install ipyrad (and a few of the other necessary packages we'll be using)
+with conda like this (it will take 1-2 minutes). We recommend to copy/paste this line
+into the terminal to avoid typos:
+```
+conda install -c conda-forge -c bioconda numpy=1.26.4 ipyrad fastqc scikit-learn toytree raxml -y
+```
+
+**Notebook kernel installation - IMPORTANT:** This is the last **setup** command
+that is necessary for accessing the conda environment with these packages inside
+jupyter notebooks (which we will use extensively later in the course).
+```
+python -m ipykernel install --user --name=ipyrad
+
+### Setup for FEEMS
 FEEMS is a _huge_ pain to get working so I had to do a bunch of back-office black
 magic to make the install not a nightmare at runtime.
 
