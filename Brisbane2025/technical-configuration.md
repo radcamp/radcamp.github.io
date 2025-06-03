@@ -1,3 +1,71 @@
+# Installation scripts for participants
+
+## ipyrad install script
+Contents of `/home/jovyan/work/scripts/install_ipyrad.sh`
+```
+#!/bin/bash
+
+echo "**************************"
+echo "Updating conda environment"
+echo "**************************"
+
+bash /home/jovyan/work/Miniconda3-latest-Linux-x86_64.sh -b -u -p /opt/conda
+
+echo "***************************"
+echo "Creating ipyrad environment"
+echo "***************************"
+
+conda create -n ipyrad -y
+source /opt/conda/bin/activate
+conda activate ipyrad
+
+conda env list
+
+echo "*****************"
+echo "Installing ipyrad"
+echo "*****************"
+
+conda install -c conda-forge -c bioconda numpy=1.26.4 ipyrad fastqc scikit-learn toytree raxml -y
+
+echo "*************************"
+echo "Installing jupyter kernel"
+echo "*************************"
+
+python -m ipykernel install --user --name=ipyrad
+
+echo "conda activate ipyrad" >> ~/.bashrc
+```
+
+## FEEMS install script
+Contents of `/home/jovyan/work/scripts/install_feems.sh`
+```
+#!/bin/bash
+
+echo "**************************"
+echo "Creating FEEMS environment"
+echo "**************************"
+# Create/activate a new environment and install all the necessary deps for feems
+conda create -n feems python=3.9 -y
+source /opt/conda/bin/activate
+conda activate feems
+
+echo "*****************************"
+echo "Installing FEEMS dependencies"
+echo "*****************************"
+conda install -c conda-forge -c bioconda feems notebook h5py matplotlib=3.5.2 shapely=1.8 -y
+
+echo "****************"
+echo "Installing FEEMS"
+echo "****************"
+# Copy the feems src code and pip install it with the changes
+mkdir /home/jovyan/src
+cp -Rf /home/jovyan/work/feems /home/jovyan/src
+pip install -e /home/jovyan/src/feems
+
+# Install the notebook kernel
+python -m ipykernel install --user --name=feems
+```
+
 # Configuration of the RADCamp Jupyterhub Server
 
 ## Launching the jhub server
@@ -37,22 +105,6 @@ dir is mounted inside the docker container at `/home/jovyan/work` so it's access
 # Equivalent to doing this inside a script but by hand and only once is easier
 #sed -i '221 s/^/#/' feems/feems/viz.py
 #sed -i '240 s/^/#/' feems/feems/viz.py
-```
-
-The `install_FEEMS.sh` script does all this:
-```
-# Create/activate a new environment and install all the necessary deps for feems
-conda create -n feems python=3.9 -y
-conda activate feems
-conda install -c conda-forge -c bioconda feems notebook h5py matplotlib=3.5.2 shapely=1.8 -y
-
-# Copy the feems src code and pip install it with the changes
-mkdir /home/jovyan/src
-cp -Rf /home/jovyan/work/feems /home/jovyan/src
-pip install -e /home/jovyan/src/feems
-
-# Install the notebook kernel
-python -m ipykernel install --user --name=feems
 ```
 
 ### Setting disks on pinky/brain to automount

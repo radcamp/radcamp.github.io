@@ -27,25 +27,6 @@ we wrote all the steps into a script that you can simply execute (to save
 time). You can see the details of what the script is actually doing
 in the [RADCamp technical configuration document.](./technical-configuration.md)
 
-```
-cd ipyrad-workshop
-conda create -n feems python=3.9
-
-conda install -c conda-forge -c bioconda feems notebook h5py matplotlib=3.5.2 shapely=1.8 -y
-
-# Skip these because we
-#git clone https://github.com/NovembreLab/feems.git
-#sed -i '221 s/^/#/' feems/feems/viz.py 
-#sed -i '240 s/^/#/' feems/feems/viz.py
-
-mkdir /home/jovyan/src
-cd /home/jovyan/src
-cp -Rf /home/jovyan/work/feems .
-pip install -e feems
-
-python -m ipykernel install --user --name=feems
-```
-
 ## Input data
 What is the necessary input data for FEEMS?
 * genotypes
