@@ -42,7 +42,7 @@ ipyrad is easy to install, but there are some additional steps needed inside thi
 cloud environment, so for the purpose of this workshop we wrote all the steps 
 into a script that you can execute (to save time and prevent typos). You can see 
 the details of what the script is actually doing in the RADCamp 
-[technical configuration document](./technical-configuration.md).
+[technical configuration document](./technical-configuration.html#ipyrad-install-script).
 
 In your terminal type this command:
 ```

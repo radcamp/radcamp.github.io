@@ -25,7 +25,7 @@ For more information about EEMS, check out [Petkova *et al*
 FEEMS can be a bit tricky to install, so for the purpose of this workshop
 we wrote all the steps into a script that you can simply execute (to save
 time). You can see the details of what the script is actually doing
-in the [RADCamp technical configuration document.](./technical-configuration.md)
+in the [RADCamp technical configuration document.](./technical-configuration.html#feems-install-script)
 
 ## Input data
 What is the necessary input data for FEEMS?
