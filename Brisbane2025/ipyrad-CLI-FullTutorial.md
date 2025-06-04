@@ -180,16 +180,7 @@ p, s, l                        ## [27] [output_formats]: Output formats (see doc
                                ## [29] [reference_as_filter]: Reads mapped to this reference are removed in step 3
 ```
 
-In general the defaults are sensible, and we won't mess with them for now, 
-but there are a few parameters we *must* check and update:
-* The path to the raw data
-* The dataype
-* The restriction overhang sequence(s)
 
-Because we're looking at population-level data, we suggest to increase the 
-clustering threshold `[14] [clust_threshold]`. You can also change `[27] 
-[output_formats]`. When you put `*`, ipyrad will automatically save your output 
-in all available formats, see [the manual](https://ipyrad.readthedocs.io/en/master/output_formats.html#full-output-formats).
 
 If you look in the file browser pane (to the left) you should
 now see a new file `params-seadragon.txt` in the file browser.
@@ -201,11 +192,27 @@ changes to this params file.
 
 ![png](images/ipyrad-EditParams2.png)
 
+In general the defaults are sensible, and we won't mess with them for now, 
+but there are a few parameters we *must* check and update:
+* The path to the raw data (`sorted_fastq_path`)
+* The dataype (`datatype`)
+* The restriction overhang sequence(s) (`restriction_overhang`)
+
 We need to specify where the raw data files are located, the type of data we
 are using (.e.g., 'gbs', 'rad', 'ddrad', 'pairddrad), and which enzyme cut site
-overhangs are expected to be present on the reads. Change the following lines
-in your params files to look like this (**Be careful to notice which lines
-of the params file you are modifying**):
+site overhangs are expected to be present on the reads.
+
+There are a couple parameters that have defaults that are optional to change:
+* The clustering threshold (`clust_threshold`)
+* The output formats to generate (`output_formats`)
+
+Becuase we're looking at population-level data, we suggest to increase the 
+clustering threshold `[14] [clust_threshold]` to 0.9 or a bit greater. You can also change `[27] 
+[output_formats]`. When you put `*`, ipyrad will automatically save your output 
+in all available formats, see [the manual](https://ipyrad.readthedocs.io/en/master/output_formats.html#full-output-formats).
+
+Change the following lines in your params files to look like this (**Be careful 
+to notice which lines of the params file you are modifying**):
 
 ```bash
 ./raws/*.fastq.gz               ## [4] [sorted_fastq_path]: Location of demultiplexed/sorted fastq files
@@ -256,7 +263,8 @@ the `-c` flag. If you do not specify the number of cores ipyrad assumes you want
 ## -s    the step to run
 ## -c    run on 4 cores
 $ ipyrad -p params-seadragon.txt -s 1 -c 4
-
+```
+```
  -------------------------------------------------------------
   ipyrad [v.0.9.105]
   Interactive assembly and analysis of RAD-seq data

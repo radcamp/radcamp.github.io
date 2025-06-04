@@ -44,12 +44,12 @@ into a script that you can execute (to save time and prevent typos). You can see
 the details of what the script is actually doing in the RADCamp 
 [technical configuration document](./technical-configuration.html#ipyrad-install-script).
 
-In your terminal type this command:
+In your terminal type this command (it will run for 3-4 minutes):
 ```
-./work/scripts/install_ipyrad.sh
+/home/jovyan/work/scripts/install_ipyrad.sh
 ```
 
-After it's finished type 'exit' and then open another terminal. Your prompt 
+**After it's finished type 'exit' and then open another terminal**. Your prompt 
 should now look like this:
 
 ```
@@ -64,4 +64,5 @@ ipyrad 0.9.105
 ```
 
 ### Installing ipyrad on your home system
-* [Documentation for installation on laptops and HPC systems](https://ipyrad.readthedocs.io/en/latest/3-installation.html)
+For your convenience here is a link to performing the 
+[ipyrad installation on laptops and HPC systems](https://ipyrad.readthedocs.io/en/latest/3-installation.html)

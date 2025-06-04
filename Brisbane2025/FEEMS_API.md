@@ -17,9 +17,9 @@ valley and the Arabian peninsula.
 
 ![png](images/lions_EEMS.png)
 
-For more information about EEMS, check out [Petkova *et al* 
-(2016)](https://www.nature.com/articles/ng.3464), and for FEEMS, check out 
-[Marcus *et al* (2021)](https://elifesciences.org/articles/61927).
+For more information on these methods see the original manuscripts:
+* EEMS - [Petkova *et al* (2016)](https://www.nature.com/articles/ng.3464)
+* FEEMS - [Marcus *et al* (2021)](https://elifesciences.org/articles/61927).
 
 ## FEEMS install/configuration
 FEEMS can be a bit tricky to install, so for the purpose of this workshop
@@ -27,31 +27,22 @@ we wrote all the steps into a script that you can simply execute (to save
 time). You can see the details of what the script is actually doing
 in the [RADCamp technical configuration document.](./technical-configuration.html#feems-install-script)
 
-## Input data
-What is the necessary input data for FEEMS?
-* genotypes
-* latlongs (= localities of your samples)
-* bounding area for plotting
-* .shp file (global map)
-
-# **FEEMS** analyses
-
-## Access the FEEMS environment
-The FEEMS module requires a substantially different configuration than the
-other analysis tools in this workshop, so we have installed this software
-in a separate conda environment with an isolated jupyter notebook server
-running on a different port. To access this environment open a new browser
-tab and navigate to:
-
-`http://localhost:8801`
+Open a new Terminal and type:
+```
+/home/jovyan/work/scripts/install_feems.sh
+```
+This will run for a few minutes, writing progress to the screen. After it finishes
+you can proceed with the rest of this tutorial.
 
 ## Create a new notebook for the FEEMS analysis
 In the jupyter notebook browser interface navigate to your `ipyrad-workshop`
-directory and create a "New->Python" Notebook.
+directory and use the Launcher to create a new Notebook using the 'feems' 
+environment.
 
-![png](images/raxml-CreateNotebook.png)
+![png](images/jupyter-NewNotebook-feemsEnv.png)
 
-First things first, rename your new notebook to give it a meaningful name. Choose `File->Save Notebook` and rename your notebook to "cheetah-FEEMS.ipynb"
+First things first, rename your new notebook to give it a meaningful name. 
+Choose `File->Save Notebook` and rename your notebook to "seadragon-FEEMS.ipynb"
 
 ## Import FEEMS and other necessary modules
 The `import` keyword directs python to load a module into the currently running
@@ -60,22 +51,25 @@ importing the ipyrad analysis module. Copy the code below into a
 notebook cell and click run. 
 
 ```python
-%matplotlib inline
-
-# base
-import h5py
-import numpy as np
-import pandas as pd
-from sklearn.impute import SimpleImputer 
-# viz 
-import matplotlib.pyplot as plt 
 import cartopy.crs as ccrs 
-# feems 
-from feems.utils import prepare_graph_inputs 
+import h5py
+import matplotlib.pyplot as plt 
+import numpy as np
+
 from feems import SpatialGraph, Viz 
+from feems.utils import prepare_graph_inputs 
+from sklearn.impute import SimpleImputer 
 ```
 
-## Import the data and impute missing values
+## Input data types
+What is the necessary input data for FEEMS? We will briefly walk through these 
+different datatypes and where to geth these from.
+* Genotype data for all samples
+* Latitude/Longitude coordinates for samples
+* Coordinates of a polygon circumscribing your focal region
+* A vector file of a global-scale triangular grid (.shp file)
+
+### Import the genotype data and impute missing values
 
 ```python
 # Path to the input phylip file
@@ -88,40 +82,70 @@ imp = SimpleImputer(missing_values=np.nan, strategy="mean")
 genotypes = imp.fit_transform(np.array(G).T) 
 ```
 
-### What is 'imputation' and why do we need to do it?
+> **What is 'imputation' and why do we need to do it?** FEEMS can't deal with
+missing data. Here we are filling missing genotypes with the mean value at
+a given site.
 
-```python
-locus = 11
-print(G[locus])
-genotypes[:, locus]
-```
-```
-[nan  1. nan  1.  2. nan nan  0.  0. nan nan nan nan nan nan nan nan  1.
- nan  0. nan nan  2.]
-array([0.875, 1.   , 0.875, 1.   , 2.   , 0.875, 0.875, 0.   , 0.   ,
-       0.875, 0.875, 0.875, 0.875, 0.875, 0.875, 0.875, 0.875, 1.   ,
-       0.875, 0.   , 0.875, 0.875, 2.   ])
-```
-```python
-locus = 11
-names = data["snps"].attrs["names"]
-pd.DataFrame([G[locus], genotypes[:, locus]], columns=names, index=["pre-imputation", "post-imputation"]).T
-```
-![png](images/FEEMS-ImputationDF.png)
+### Latitude/Longitude coordinates for samples
+Typically, you will have information about the sampling localities of your data. 
+FEEMS takes this data as a vector of Longitude/Latitude coordinates. To save time 
+we've already prepared this file for you, and you can look at the structure of 
+the file and the first few lines:
 
-## Fetch the GPS coordinates for the samples and the 'outer' points
-Typically, you will have information about the sampling localities of your data. FEEMS takes these data as a vector of GPS coördinates, and the file should have the extension `.coord`. We've already prepared this file for you, and you can simply download it. 
+```bash
+head ~/work/SeadragonData/seadragon_coords.txt
+```
+```
+148.308428 -41.869351
+148.308428 -41.869351
+148.308428 -41.869351
+148.308428 -41.869351
+148.308428 -41.869351
+148.308428 -41.869351
+151.219347 -34.002666
+151.219347 -34.002666
+151.219347 -34.002666
+151.219347 -34.002666
+```
 
-You also need to provide FEEMS with an outline of the area you want to include in your analysis, and provide this as a file with the extension `.outer`. You can use the following [website](http://www.birdtheme.org/useful/v3tool.html) to create one, simply by clicking on the map and then copy-pasting the coördinates to a new file. 
+### Coordinates of a polygon circumscribing your focal region
+You also need to provide FEEMS with an 'outline' of the area you want to include 
+in your analysis. The format of the 'outer' file should be a plain text file
+with a list of Longitude/Latitude points describing a polygon of your bounding
+region. You can use the following [website](http://www.birdtheme.org/useful/v3tool.html) to 
+create one of these, by clicking on the map and then copy-pasting the coordinates 
+to a new file. 
 
 ![png](images/FEEMS_outer.png)
 
-To save time, we've also prepare this file for you, and for this workshop you can simply download it.
+To save time, we've also prepared this file for you and you can look at the
+structure of the file and the first few lines:
 
+```bash
+$ head ~/work/SeadragonData/seadragon_outer.txt
 ```
-!wget https://raw.githubusercontent.com/radcamp/radcamp.github.io/master/Kigali2023/Cheetah.coords
-!wget https://raw.githubusercontent.com/radcamp/radcamp.github.io/master/Kigali2023/Cheetah.outer
 ```
+143.410519 -38.771531
+145.036496 -37.597144
+146.310910 -38.668671
+147.761105 -37.666749
+149.694699 -37.457739
+150.441769 -35.120239
+151.046018 -33.806874
+151.403073 -33.105685
+151.757382 -32.706762
+152.419309 -32.417407
+```
+
+### A vector file of a global-scale triangular grid (.shp file)
+Another necessary input file is a shape file containing a triangular grid
+at a given resolution. It's easiest to use one of the `.shp` files
+provided in the [FEEMS github repository](https://github.com/NovembreLab/feems/tree/main/feems/data),
+which are at 100km and 250km resolution. If you need finer resolution you can use
+a python package called [`pygplates`](https://www.gplates.org/docs/pygplates/),
+or in R you can use the [`sf`](https://r-spatial.github.io/sf/) package. Again,
+to save time we provide a grid file scaled for the Seadragon data within the
+cloud instance `work/grid` directory.
 
 ## Load the coordinates of the samples, the outline and the global shp file
 ```python

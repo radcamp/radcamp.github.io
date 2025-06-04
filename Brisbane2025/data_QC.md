@@ -9,13 +9,13 @@ The CLI provides a way to navigate a file system, move files around, and run com
 For now we will start with 4 of the most common and useful commands:
 
 ```
-(base) jovyan@493222dbc32d:~$ pwd
+(ipyrad) jovyan@493222dbc32d:~$ pwd
 /home/jovyan
 ```
 `pwd` stands for **"print working directory"**, which literally means "where am I now in this filesystem". Just like when you open a file browser with windows or mac, when you open a new terminal the command line will start you out in your "home" directory. Ok, now we know where we are, lets take a look at what's in this directory:
 
 ```
-(base) jovyan@493222dbc32d:~$ ls
+(ipyrad) jovyan@493222dbc32d:~$ ls
 evolution  miniconda3  work
 ```
 
@@ -31,13 +31,13 @@ analysis, but you'll also have a ***ton*** of stuff in your home directory.
 We can start out by adding the first directory for this workshop:
 
 ```
-(base) jovyan@493222dbc32d:~$ mkdir ipyrad-workshop
+(ipyrad) jovyan@493222dbc32d:~$ mkdir ipyrad-workshop
 ```
 
 `mkdir` stands for **"make directory"**, and unlike the other two commands, this command takes an "argument". This argument is the name of the directory you wish to create, so here we direct mkdir to create a new directory called "ipyrad-workshop". Now you can use `ls` again, to look at the contents of your home directory and you should see this new directory now:
 
 ```
-(base) jovyan@493222dbc32d:~$ ls
+(ipyrad) jovyan@493222dbc32d:~$ ls
 evolution  ipyrad-workshop  miniconda3  work
 ```
 
@@ -52,9 +52,9 @@ thing. First **Change Directory** into your `ipyrad-workshop` directory with the
 command, then make the shortcut with `ln` (just copy/paste this command).
 
 ```bash
-(base) jovyan@493222dbc32d:~$ cd ipyrad-workshop
-(base) jovyan@493222dbc32d:~/ipyrad-workshop$ ln -s /home/jovyan/work/SeadragonData/raws ./raws
-(base) jovyan@493222dbc32d:~/ipyrad-workshop$ ls -l
+(ipyrad) jovyan@493222dbc32d:~$ cd ipyrad-workshop
+(ipyrad) jovyan@493222dbc32d:~/ipyrad-workshop$ ln -s /home/jovyan/work/SeadragonData/raws ./raws
+(ipyrad) jovyan@493222dbc32d:~/ipyrad-workshop$ ls -l
 ```
 ```
 lrwxrwxrwx 1 jovyan users   51 Apr 23 14:51 raws -> /home/jovyan/work/SeadragonData/raws
@@ -80,7 +80,7 @@ You can see the fastq files for these samples by listing (`ls`) the directory wh
 they are stored, the `raws` shortcut we created earlier:
 
 ```
-(base) jovyan@493222dbc32d:~/ipyrad-workshop$ ls raws
+(ipyrad) jovyan@493222dbc32d:~/ipyrad-workshop$ ls raws
 Bic1_R1_.fastq.gz  Bic6_R1_.fastq.gz  Fli1_R1_.fastq.gz  Hob1_R1_.fastq.gz  Jer4_R1_.fastq.gz  Por5_R1_.fastq.gz
 Bic2_R1_.fastq.gz  Bot1_R1_.fastq.gz  Fli2_R1_.fastq.gz  Hob2_R1_.fastq.gz  Por1_R1_.fastq.gz  Syd1_R1_.fastq.gz
 Bic3_R1_.fastq.gz  Bot2_R1_.fastq.gz  Fli3_R1_.fastq.gz  Jer1_R1_.fastq.gz  Por2_R1_.fastq.gz  Syd2_R1_.fastq.gz
@@ -102,7 +102,7 @@ use `zcat` to read the gzip format and `head` to carve off a small part of the d
 ## zcat: unZip and conCATenate the file to the screen
 ## head -n 20: Just take the first 20 lines of input
 
-(base) jovyan@493222dbc32d:~/ipyrad-workshop$ zcat raws/Bic1_R1_.fastq.gz | head -n 20
+(ipyrad) jovyan@493222dbc32d:~/ipyrad-workshop$ zcat raws/Bic1_R1_.fastq.gz | head -n 20
 ```
 ```
 @SRR12395901.1 3_11401_20767_1041/1
@@ -161,13 +161,13 @@ to keep the FastQC results organized. Make a new directory with
 `mkdir`:
 
 ```bash
-(base) jovyan@493222dbc32d:~/ipyrad-workshop$ mkdir fastqc-results
-(base) jovyan@493222dbc32d:~/ipyrad-workshop$ ls
+(ipyrad) jovyan@493222dbc32d:~/ipyrad-workshop$ mkdir fastqc-results
+(ipyrad) jovyan@493222dbc32d:~/ipyrad-workshop$ ls
 fastqc-results raws
 ```
 Now run FastQC on one of the samples:
 ```
-(base) jovyan@493222dbc32d:~/ipyrad-workshop$ fastqc -o fastqc-results raws/Bic1_R1_.fastq.gz 
+(ipyrad) jovyan@493222dbc32d:~/ipyrad-workshop$ fastqc -o fastqc-results raws/Bic1_R1_.fastq.gz 
 ```
 > **Note:** The `-o` flag tells fastqc where to write output files.
 
@@ -202,7 +202,7 @@ Analysis complete for Bic1_R1_.fastq.gz
 
 If you feel so inclined you can QC all the raw data using a wildcard substitution:
 ```
-(base) jovyan@493222dbc32d:~/ipyrad-workshop$ fastqc -o fastqc-results raws/*
+(ipyrad) jovyan@493222dbc32d:~/ipyrad-workshop$ fastqc -o fastqc-results raws/*
 ```
 > **Note:** The `*` here is a special command line character that means "Everything 
 that matches this pattern". So here `raws/*` matches _everything_ in the raws 
