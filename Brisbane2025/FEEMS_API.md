@@ -47,8 +47,8 @@ Choose `File->Save Notebook` and rename your notebook to "seadragon-FEEMS.ipynb"
 ## Import FEEMS and other necessary modules
 The `import` keyword directs python to load a module into the currently running
 context. This is very similar to the `library()` function in R. We begin by
-importing the ipyrad analysis module. Copy the code below into a
-notebook cell and click run. 
+importing several `feems` functions and other needed libraries. Copy the code
+below into a notebook cell and click run:
 
 ```python
 import cartopy.crs as ccrs 
@@ -62,8 +62,9 @@ from sklearn.impute import SimpleImputer
 ```
 
 ## Input data types
-What is the necessary input data for FEEMS? We will briefly walk through these 
-different datatypes and where to geth these from.
+What is the necessary input data for FEEMS? It needs several different
+input data streams and we will briefly walk through these different datatypes
+and where to get these from.
 * Genotype data for all samples
 * Latitude/Longitude coordinates for samples
 * Coordinates of a polygon circumscribing your focal region
@@ -71,29 +72,40 @@ different datatypes and where to geth these from.
 
 ### Import the genotype data and impute missing values
 
-```python
-# Path to the input phylip file
-data = h5py.File("/home/osboxes/ipyrad-workshop/no-outgroup_outfiles/no-outgroup.snps.hdf5")
+FEEMS uses SNP data (not the full sequence). Within the
+[FEEMS tutorial](https://github.com/NovembreLab/feems/blob/main/docsrc/notebooks/getting-started.ipynb)
+the use data from PLINK, but this is complicated to obtain, and we can actually import
+the SNP data directly from an ipyrad output file. Open a new cell in your notebook
+and copy/paste this text and run it:
 
+```python
+# Import the seadragon SNP data in hdf5 format
+data = h5py.File("/home/jovyan/ipyrad-workshop/seadragon_outfiles/seadragon.snps.hdf5")
+
+# Convert the ipyrad SNP format for FEEMS input
 raw_genotypes = np.apply_along_axis(np.sum, 2, data["genos"][:])
 
+# Impute missing values (required by FEEMS)
 G = np.where(raw_genotypes <= 2, raw_genotypes, np.nan*raw_genotypes)
 imp = SimpleImputer(missing_values=np.nan, strategy="mean") 
-genotypes = imp.fit_transform(np.array(G).T) 
+genotypes = imp.fit_transform(np.array(G).T)
 ```
 
 > **What is 'imputation' and why do we need to do it?** FEEMS can't deal with
 missing data. Here we are filling missing genotypes with the mean value at
-a given site.
+a given SNP position, a standard method.
 
 ### Latitude/Longitude coordinates for samples
 Typically, you will have information about the sampling localities of your data. 
-FEEMS takes this data as a vector of Longitude/Latitude coordinates. To save time 
-we've already prepared this file for you, and you can look at the structure of 
-the file and the first few lines:
+FEEMS takes this data as a vector of Longitude/Latitude coordinates. When running
+FEEMS on your own data it's **very important** to ensure the order of the samples 
+in the genotypes and the order of the samples in the coords file are identical.
+
+To save time we've already prepared this file for you (with correct ordering of
+samples), and you can look at the structure of the file and the first few lines:
 
 ```bash
-head ~/work/SeadragonData/seadragon_coords.txt
+!head ~/work/SeadragonData/seadragon_coords.txt
 ```
 ```
 148.308428 -41.869351
@@ -107,6 +119,9 @@ head ~/work/SeadragonData/seadragon_coords.txt
 151.219347 -34.002666
 151.219347 -34.002666
 ```
+> The `!` at the beginning of this line tells the notebook to run this command
+using bash instead of python. It's a trick for running command line commands inside
+of the notebook cell context.
 
 ### Coordinates of a polygon circumscribing your focal region
 You also need to provide FEEMS with an 'outline' of the area you want to include 
@@ -122,7 +137,7 @@ To save time, we've also prepared this file for you and you can look at the
 structure of the file and the first few lines:
 
 ```bash
-$ head ~/work/SeadragonData/seadragon_outer.txt
+!head ~/work/SeadragonData/seadragon_outer.txt
 ```
 ```
 143.410519 -38.771531
@@ -147,24 +162,34 @@ or in R you can use the [`sf`](https://r-spatial.github.io/sf/) package. Again,
 to save time we provide a grid file scaled for the Seadragon data within the
 cloud instance `work/grid` directory.
 
-## Load the coordinates of the samples, the outline and the global shp file
-```python
-# GPS Coordinates per sample in the same order as the genotypes
-coord = np.loadtxt("./Cheetah.coords")
-outer = np.loadtxt("./Cheetah.outer")
-grid_path = "/home/osboxes/src/feems/feems/data/grid_250.shp"
+## Load sample coordinates, the 'outer' bounding polygon, and the global grid file
 
-# graph input files
-outer, edges, grid, _ = prepare_graph_inputs(coord=coord, ggrid=grid_path, translated=False, buffer=0, outer=outer)
-```
-
-## Plot the region and the sample sites
-Note that the actual sampling locality is a small black dot, but for the analysis, it is locked to the grid and displayed as a grey circle (size depending on the number of samples). It is important to remember this, because it may look like sampling localities have changed. However, this is just because FEEMS makes it fit to the grid. This step may take a minute or so.
+In the next cell we will read in the 'outer', 'coords', and grid file data, and
+then call `prepare_graph_inputs` which is a FEEMS function for preparing the data.
 
 ```python
 %%time
-sp_graph = SpatialGraph(genotypes, coord, grid, edges, scale_snps=False)
-projection = ccrs.EquidistantConic(central_longitude=23, central_latitude=8) 
+grid_path = "/home/jovyan/work/grid/world_triangle_res8.shp"
+outer = np.loadtxt("/home/jovyan/work/SeadragonData/seadragon_outer.txt")
+coords = np.loadtxt("/home/jovyan/work/SeadragonData/seadragon_coords.txt")
+
+outer, edges, grid, _ = prepare_graph_inputs(coord=coords, ggrid=grid_path, translated=False, buffer=0, outer=outer)
+```
+> The `%%time` directive at the top of this cell is a jupyter 'magic command'
+that will track the amount of time it takes to run the code in the cell. It can
+be useful, and you'll see `Wall time` for this cell is around 1 minute.
+
+## Plot the region and the sample sites
+Note that the actual sampling locality is a small black dot, but for the analysis, 
+it is locked to the grid and displayed as a grey circle (size depending on the 
+number of samples). It is important to remember this, because it may look like 
+sampling localities have changed. However, this is just because FEEMS makes it 
+fit to the grid. This step may take a minute or so.
+
+```python
+%%time
+sp_graph = SpatialGraph(genotypes, coords, grid, edges, scale_snps=False)
+projection = ccrs.EquidistantConic(central_longitude=138, central_latitude=-40, standard_parallels=-40) 
 fig = plt.figure(dpi=300) 
 ax = fig.add_subplot(1, 1, 1, projection=projection) 
 v = Viz(ax, sp_graph, projection=projection, edge_width=.5, 
@@ -174,20 +199,37 @@ v = Viz(ax, sp_graph, projection=projection, edge_width=.5,
 v.draw_map() 
 v.draw_samples() 
 v.draw_edges(use_weights=False) 
-v.draw_obs_nodes(use_ids=False) 
+v.draw_obs_nodes(use_ids=False)
 ```
 
 ![png](images/FEEMS-RegionPlot.png)
 
 ## Fit the FEEMS model to the data
-This step actually assesses to what degree genetic differentiation is higher or lower compared to what we can expect under IBD. 
+This step actually assesses to what degree genetic differentiation is higher or 
+lower compared to what we can expect under an IBD model. 
 
 ```python
 %%time 
 sp_graph.fit(lamb = 20.0) 
 ```
 
+> The `lamb` parameter (lambda) determines the similararity of neighboring migration 
+edges. With higher values neighboring migration edges are more similar, and with
+lower values they can be more different.
+
+Through experimentation we chose `20.0` for this tutorial, but in practice you
+would implement a cross-validation procedure over a range of lambda values and
+then select the best for your data. A notebook showing this process is avalailble
+on the FEEMS github: [FEEMS Cross-Validation](https://github.com/NovembreLab/feems/blob/main/docsrc/notebooks/cross-validation.ipynb)
+
 ## Plot the fitted model
+
+Finally, we can replot the fitted model using the inferred edge weights to
+show patterns of spatial connectivity. Darker edges show migration that
+departs from a model of Isolation by Distance with brown edges indicating 'barriers',
+blue edges indicate 'corridors', and white edges showing regions that fit
+a model isolation by distance.
+
 ```
 fig = plt.figure(dpi=300) 
 
@@ -199,8 +241,11 @@ v = Viz(ax, sp_graph, projection=projection, edge_width=0.5,
 v.draw_map() 
 v.draw_edges(use_weights=True) 
 v.draw_obs_nodes(use_ids=False) 
-v.draw_edge_colorbar() 
 ```
 
 ![png](images/FEEMS-Fitted.png)
 
+## Experiment with different lambda values
+With any remaining time you may try changing the value of `lamb`, 
+rerunning the call to `sp_graph.fit()` and then replotting, to check
+by eye how different lambda values change the spatial migration patterns.
