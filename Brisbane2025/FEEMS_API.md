@@ -74,7 +74,7 @@ and where to get these from.
 
 FEEMS uses SNP data (not the full sequence). Within the
 [FEEMS tutorial](https://github.com/NovembreLab/feems/blob/main/docsrc/notebooks/getting-started.ipynb)
-the use data from PLINK, but this is complicated to obtain, and we can actually import
+they use data from PLINK, but this is complicated to obtain, and we can actually import
 the SNP data directly from an ipyrad output file. Open a new cell in your notebook
 and copy/paste this text and run it:
 
@@ -93,7 +93,7 @@ genotypes = imp.fit_transform(np.array(G).T)
 
 > **What is 'imputation' and why do we need to do it?** FEEMS can't deal with
 missing data. Here we are filling missing genotypes with the mean value at
-a given SNP position, a standard method.
+a given SNP position, a standard imputation method.
 
 ### Latitude/Longitude coordinates for samples
 Typically, you will have information about the sampling localities of your data. 
@@ -203,6 +203,9 @@ v.draw_obs_nodes(use_ids=False)
 ```
 
 ![png](images/FEEMS-RegionPlot.png)
+
+> For your own data you will need to set appropriate values for `central_longitude`,
+`central_latitude`, and `standard_parallel` to reduce distortion in the figures.
 
 ## Fit the FEEMS model to the data
 This step actually assesses to what degree genetic differentiation is higher or 
