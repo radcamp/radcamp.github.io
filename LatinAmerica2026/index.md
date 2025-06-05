@@ -175,5 +175,10 @@ Old unformatted logo images:
 -->
 
 ## Acknowledgements
-RADcamp Part I materials are prepared by Sandra Hoffberg, Natalia Bayona Vasquez, and Travis Glenn. Many things we reference can be found on [badDNA.uga.edu](https://baddna.uga.edu).
-RADCamp Part II tutorial contributors (over the years): Deren Eaton, Isaac Overcast, Mariana Vasconcellos, and Laura Bertola.
+RADcamp Part I tutorial contributors: Sandra Hoffberg, Natalia Bayona Vasquez, 
+and Travis Glenn. Many things we reference can be found on 
+[badDNA.uga.edu](https://baddna.uga.edu)
+
+RADCamp Part II tutorial contributors (over the years): Isaac Overcast, Deren 
+Eaton, Sandra Hoffberg, Natalia Bayona-Vasquez, Mariana Vasconcellos, Laura 
+Bertola, Josiah Kuja, Anhubab Kahn, Arianna Kuhn.
