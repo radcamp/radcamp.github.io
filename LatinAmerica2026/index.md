@@ -6,7 +6,7 @@ Date TBD
 Part II - Bioinformatics (ipyrad)  
 Date TBD
 
-Tecnológico de Monterrey
+Tecnológico de Monterrey  
 Monterrey, Mexico
 
 # Summary
