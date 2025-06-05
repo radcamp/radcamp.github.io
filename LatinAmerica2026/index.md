@@ -55,7 +55,11 @@ of Maine.
   - Deren Eaton (Columbia)
   - Isaac Overcast (Columbia University)
   - Sandra Hoffberg (Code Ocean)
-  
+  - Rocio Alejandra Chavez-Santoscoy (Tec Monterrey)
+  - Erika Magallón-Gayón (Tec Monterrey)
+  - Silvia A. Hinojosa Alvarez (Tec Monterrey)
+  - Jesús Hernandez Perez (Tec Monterrey)
+  - Andrea Felix Ceniceros (Tec Monterrey)
 
 # Application/Registration
 
