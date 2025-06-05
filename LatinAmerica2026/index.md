@@ -6,7 +6,7 @@ Date TBD
 Part II - Bioinformatics (ipyrad)  
 Date TBD
 
-Tecnológico de Monterrey  
+Tecnológico de Monterrey
 Monterrey, Mexico
 
 # Summary
@@ -52,14 +52,14 @@ of Maine.
 # Organisers, Instructors, and Facilitators
 
   - Natalia Bayona Vasquez (Emory University)
-  - Deren Eaton (Columbia)
+  - Deren Eaton (Columbia University)
   - Isaac Overcast (Columbia University)
   - Sandra Hoffberg (Code Ocean)
-  - Rocio Alejandra Chavez-Santoscoy (Tec Monterrey)
-  - Erika Magallón-Gayón (Tec Monterrey)
-  - Silvia A. Hinojosa Alvarez (Tec Monterrey)
-  - Jesús Hernandez Perez (Tec Monterrey)
-  - Andrea Felix Ceniceros (Tec Monterrey)
+  - Rocio Alejandra Chavez-Santoscoy (Tec)
+  - Erika Magallón-Gayón (Tec)
+  - Silvia A. Hinojosa Alvarez (Tec)
+  - Jesús Hernandez Perez (Tec)
+  - Andrea Felix Ceniceros (Tec)
 
 # Application/Registration
 
