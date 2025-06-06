@@ -21,15 +21,16 @@ TBD
 
   - Laura Bertola - National Centre for Biological Sciences
   - Ilha Byrne - University of Queensland
-  - Anubhab Khan - University of Glasgow
+  - Anubhab Khan - Indian Institute of Science
   - Matheus Mello Athayde - University of Queensland
   - Katherine Prata - Australian Institute of Marine Science
   - Isaac Overcast - Columbia University
   - Laura Tensen - University of Copenhagen
 
-# Schedule
+### Quick Link to the Cloud Compute Jupyterhub
+Cloud server - [https://pinky.eaton-lab.org/](https://pinky.eaton-lab.org/)
 
-Quick Link to the Cloud Compute Jupyterhub: [https://pinky.eaton-lab.org/](https://pinky.eaton-lab.org/)
+# Schedule
 
 [Organiser & Participant Intro Slides (Presented throughout the first day)](https://docs.google.com/presentation/d/1A1HyzV-50gjEywkx3L2HmqtLP0oeBbL1qguBe3cpO0s/edit#slide=id.g359940329b6_0_130)
 
