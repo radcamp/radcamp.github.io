@@ -71,4 +71,4 @@ Klanten _et al._ 2020 - [Genomic and morphological evidence of distinct populati
 ## Acknowledgements
 RADCamp tutorial contributors and instructors (over the years): Isaac Overcast, 
 Deren Eaton, Sandra Hoffberg, Natalia Bayona-Vasquez, Mariana Vasconcellos, Laura 
-Bertola, Josiah Kuja, Anhubab Kahn, Arianna Kuhn.
+Bertola, Josiah Kuja, Anubhab Kahn, Arianna Kuhn.
