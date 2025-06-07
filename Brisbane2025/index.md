@@ -62,7 +62,7 @@ Klanten _et al._ 2020 - [Genomic and morphological evidence of distinct populati
 * [ABBA-BABA - Admixture analysis](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-abba-baba.ipynb)
 
 ## RADCamp Brisbane 2025 co-sponsored by:
-
+![logos](images/logos.jpg)
 
 ## RADCamp Brisbane 2025 Group Photo
 
