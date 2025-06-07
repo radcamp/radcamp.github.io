@@ -61,7 +61,7 @@ Klanten _et al._ 2020 - [Genomic and morphological evidence of distinct populati
 * [Bucky - Phylogenetic concordance analysis](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-bucky.ipynb)
 * [ABBA-BABA - Admixture analysis](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-abba-baba.ipynb)
 
-## RADCamp Brisbane 2025 co-sponsored by:
+## RADCamp Brisbane 2025 is co-sponsored by:
 ![logos](images/Logos.jpg)
 
 ## RADCamp Brisbane 2025 Group Photo
