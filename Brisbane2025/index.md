@@ -3,7 +3,7 @@
 In association with the The Society for Conservation Biology's<br>
 [**32nd International Congress for Conservation Biology (ICCB 2025)**](https://conbio.org/mini-sites/iccb-2025/)  
 
-<img src="images/ICCB2025-logo.png" alt="ICCB 2025" width="50%">
+<img src="images/ICCB2025-logo.png" alt="ICCB 2025" width="80%">
 
 **RADCamp 2025**<br>
 June 14-15, 2025  
