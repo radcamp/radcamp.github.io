@@ -23,6 +23,9 @@ Uber from the city, or Taxi, will be >$20.
 Navigating Campus: UQ Maps App
 Please download the App “UQ Maps” now. The UQ campus is vast but the App is comprehensive. To help you more, there will be a few helpers wearing “teal coloured” volunteer jackets around the campus. Talk to them.
 
+## Internet and Wifi
+You and the attendees can use free wireless via “Eduroam” or “UQ guest”. Instructions on how to connect are found [here](https://my.uq.edu.au/information-and-services/information-technology/internet-and-wifi/connecting-wifi). The latter takes a little while to get into. Please connect early, arrive early.
+
 ## Lunch Options,  Water Coolers, Snacks & Coffee
 These events are free, there is no food or coffee provided. However, nearby options are available, with some suggestions below. If in doubt, bring a sandwich and/or muesli bars and some bottled water.
 
