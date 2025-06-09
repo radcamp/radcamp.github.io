@@ -12,10 +12,30 @@ St. Lucia Campus
 Forgan Smith Building 01-E303
 
 ## Arriving at the University
-TBD
+The University campus is 5km from the city centre – either a short bus ride, or a slightly longer ferry ride. All buses and trains use either a credit card or “Go Card.” You must tap ON and OFF with the SAME card. It only costs 50c per ride regardless of the distance but if you forget to tap off you will be charged $10AUD and if you forget to tap on you may get a fine.
+
+The fastest bus to UQ (Lakes bus stop) from the city is the M2 which takes 15-20 minutes from South Brisbane or the city. Or you can use various buses like the 105, connecting to 29, 169 etc. An alternative is the 412 which takes you to the other side of campus (Chancellors Place), also 20 mins. These all go every 5 or 10 minutes. You can also take various buses from Chancellors Place that will connect you to Toowong or Indooroopilly train stations which have trains every 5-15 mins.
+
+If you open “Maps” or “Google Maps” and select the St Lucia campus of The University of Queensland they will give you the fastest public transport alternative. You can also download the Translink app which is for all Brisbane Transport and free. Plan your trips carefully and early.
+
+Uber from the city, or Taxi, will be >$20.
+
+Navigating Campus: UQ Maps App
+Please download the App “UQ Maps” now. The UQ campus is vast but the App is comprehensive. To help you more, there will be a few helpers wearing “teal coloured” volunteer jackets around the campus. Talk to them.
 
 ## Lunch Options,  Water Coolers, Snacks & Coffee
-TBD
+These events are free, there is no food or coffee provided. However, nearby options are available, with some suggestions below. If in doubt, bring a sandwich and/or muesli bars and some bottled water.
+
+On Saturday we expect the following food and coffee venues to be open during the hours noted, but hours are subject to change:  
+Brewpoint The Pool, in the UQ Aquatic Centre: 6am – 5pm  
+Merlo’s Café, in the Great Court: 7am – 3pm  
+On a Roll, a cafe operated by the UQ Union: 7am - 12pm (hours may be extended)  
+St. Lucy’s Cafe, 7am - 9pm
+
+On Sunday we expect the following food and coffee venues to be open, but hours are subject to change:  
+Brewpoint The Pool, in the UQ Aquatic Centre: 7am – 3pm  
+Merlo’s Café, in the Great Court: 7am – 3pm
+St. Lucy’s Cafe, 7am - 3pm  
 
 # Organisers, Instructors, and Facilitators
 
