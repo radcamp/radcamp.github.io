@@ -3,7 +3,7 @@
 In association with the The Society for Conservation Biology's<br>
 [**32nd International Congress for Conservation Biology (ICCB 2025)**](https://conbio.org/mini-sites/iccb-2025/)  
 
-![ICCB 2025](images/ICCB2025-logo.png){: width="80%"}  
+![ICCB 2025](images/ICCB2025-logo.png){: width="50%"}  
 
 **RADCamp 2025**<br>
 June 14-15, 2025  
@@ -30,15 +30,15 @@ You and the attendees can use free wireless via “Eduroam” or “UQ guest”.
 These events are free, there is no food or coffee provided. However, nearby options are available, with some suggestions below. If in doubt, bring a sandwich and/or muesli bars and some bottled water.
 
 On Saturday we expect the following food and coffee venues to be open during the hours noted, but hours are subject to change:  
-Brewpoint The Pool, in the UQ Aquatic Centre: 6am – 5pm  
-Merlo’s Café, in the Great Court: 7am – 3pm  
-On a Roll, a cafe operated by the UQ Union: 7am - 12pm (hours may be extended)  
-St. Lucy’s Cafe, 7am - 9pm
+- Brewpoint The Pool, in the UQ Aquatic Centre: 6am – 5pm  
+- Merlo’s Café, in the Great Court: 7am – 3pm  
+- On a Roll, a cafe operated by the UQ Union: 7am - 12pm (hours may be extended)  
+- St. Lucy’s Cafe, 7am - 9pm
 
 On Sunday we expect the following food and coffee venues to be open, but hours are subject to change:  
-Brewpoint The Pool, in the UQ Aquatic Centre: 7am – 3pm  
-Merlo’s Café, in the Great Court: 7am – 3pm
-St. Lucy’s Cafe, 7am - 3pm  
+- Brewpoint The Pool, in the UQ Aquatic Centre: 7am – 3pm  
+- Merlo’s Café, in the Great Court: 7am – 3pm
+- St. Lucy’s Cafe, 7am - 3pm  
 
 # Organisers, Instructors, and Facilitators
 
