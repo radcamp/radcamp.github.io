@@ -34,7 +34,7 @@ Similar how you've previously opened the Terminal, now open a new "Python 3" not
 
 ![png](images/jupyter-NewNotebook.png)
 
-**NB:** If you do **NOT** see the 'base' option for opening a Notebook, go back to the
+> **NB:** If you do **NOT** see the 'base' option for opening a Notebook, go back to the
 [setup](./setup.md) page and make sure you have run the notebook kernel installation
 command. **You can't proceed from here unless you see this option in the Launcher.**
 
@@ -43,7 +43,7 @@ Once you open the new notebook you should see 'base' in the upper right hand cor
 ![png](images/BlankNotebook-base.png)
 
 First things first, rename your new notebook to give it a meaningful name. Choose 
-`File->Save Notebook` and rename your notebook to "seadragon_PCA.ipynb"
+`File → Save Notebook` and rename your notebook to "seadragon_PCA.ipynb"
 
 ### Import ipyrad.analysis module
 For this analysis, we'll use python. The `import` keyword directs python to load 
@@ -61,7 +61,7 @@ import ipyrad.analysis as ipa
 The following cell shows the quickest way to results using the seadragon
 dataset in `~/ipyrad-workshop`. Complete explanation of all of the
 features and options of the PCA module is the focus of the rest of this tutorial.
-Copy this code into a new notebook cell (you can add new cells with the *+* button on the toolbar)
+Copy this code into a new notebook cell (you can add new cells with the + button on the toolbar)
 and run it.
 
 ```python
@@ -264,7 +264,7 @@ We offer three algorithms for imputing missing data:
 (user-defined) populations (`imap`).
 * `kmeans`: Randomly sample genotypes based on the frequency of alleles in
 (kmeans cluster-generated) populations.
-* 'random': This is less an imputation method than an attempt to reduce the bias
+* `random`: This is less an imputation method than an attempt to reduce the bias
 of assigning all missing data to the ancestral state. Instead missing data
 are randomly assigned to ancestral or derived states.
 * `None` (default): All missing values are imputed with zeros (ancestral allele).
@@ -281,7 +281,7 @@ pca1.draw(width=500, height=400, label="Seadragon w/ sample imputation")
 
 ![png](images/seadragon_PCA_imputed.png)
 
-**NOTE:** Notice that the `sample` imputation will tend to create tighter
+> **NOTE:** Notice that the `sample` imputation will tend to create tighter
 clusters within the user defined populations. This isn't necessarily bad,
 but it's something to be aware of and careful about.
 
