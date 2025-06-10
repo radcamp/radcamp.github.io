@@ -75,7 +75,7 @@ python -m ipykernel install --user --name=feems
 
 Docker containers live here: `/var/lib/docker/containers`
 
-Jhub uses docker images under the hood and it appears that when a user logs in for the first time it
+Jupyter hub uses docker images under the hood and it appears that when a user logs in for the first time it
 spins up a container and applies layers to it that 'stick' across logins. Specifically, the `read_only_volumes`
 don't get updated after first container creation (it appears). If you make changes to the mounted volumes
 that you want to see applied to a user that has already logged in you have to delete the user and the
@@ -83,7 +83,7 @@ container and start them from scratch. Do it like this:
 
 * Log in to the Admin panel, find the target user.
 * `Stop Server` if it is running
-* Fold down the menu containing the user info and copy the Server->state->object_id (which is the 
+* Fold down the menu containing the user info and copy the Server → state → object_id (which is the 
 docker container id). It will look like a big ugly string of hex values, call it UUID here.
 * `Edit user` and then 'Delete user'
 * Get a terminal on pinky and delete the container: `sudo docker container rm <UUID>`
@@ -116,7 +116,7 @@ During the miniconda installation follow these directions:
 * Type 'yes' to acknowledge the license agreement
 * Push Enter to confirm the install location (`/home/jovyan/miniconda3`)
 * Type 'yes' to initialize conda
-* After it's finished type 'exit' and then open another terminal.
+* After it's finished type 'exit' and then open another terminal
 
 Your prompt  should now look like this:
 
@@ -143,7 +143,7 @@ FEEMS is a _huge_ pain to get working so I had to do a bunch of back-office blac
 magic to make the install not a nightmare at runtime.
 
 * On pinky: `cd /mnt/pinky/isaac; git clone https://github.com/NovembreLab/feems.git`. This
-dir is mounted inside the docker container at `/home/jovyan/work` so it's accessible
+dir is mounted inside the docker container at `/home/jovyan/work` so it's accessible.
 
 * Commented out lines 221 and 240 in feems/feems/viz.py to work around some version bugs:
 ```
