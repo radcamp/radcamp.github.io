@@ -16,15 +16,15 @@ For now we will start with 4 of the most common and useful commands:
 
 ```
 (ipyrad) jovyan@493222dbc32d:~$ ls
-evolution  miniconda3  work
+evolution  work
 ```
 
-`ls` stands for **"list"** and in our home directory there are three folders: 
-`miniconda3` which we just created with the conda install, `evolution` which we will
-**ignore**, and `work` which is a directory that holds the seadragon data we'll be 
-working with. Throughout the workshop we will be adding files and directories and by 
-the time we're done, not only will you have a bunch of experience with RAD-Seq 
-analysis, but you'll also have a ***ton*** of stuff in your home directory.
+`ls` stands for **"list"** and in our home directory there are two folders: 
+`evolution` which we will **ignore**, and `work` which is a directory that holds 
+the seadragon data we'll be working with. Throughout the workshop we will be adding 
+files and directories and by the time we're done, not only will you have a bunch 
+of experience with RAD-Seq analysis, but you'll also have a ***ton*** of stuff 
+in your home directory.
 
 ### Setting up working directories
 
@@ -34,14 +34,20 @@ We can start out by adding the first directory for this workshop:
 (ipyrad) jovyan@493222dbc32d:~$ mkdir ipyrad-workshop
 ```
 
-`mkdir` stands for **"make directory"**, and unlike the other two commands, this command takes an "argument". This argument is the name of the directory you wish to create, so here we direct mkdir to create a new directory called "ipyrad-workshop". Now you can use `ls` again, to look at the contents of your home directory and you should see this new directory now:
+`mkdir` stands for **"make directory"**, and unlike the other two commands, this 
+command takes an "argument". This argument is the name of the directory you wish 
+to create, so here we direct mkdir to create a new directory called 
+"ipyrad-workshop". Now you can use `ls` again, to look at the contents of your 
+home directory and you should see this new directory now:
 
 ```
 (ipyrad) jovyan@493222dbc32d:~$ ls
-evolution  ipyrad-workshop  miniconda3  work
+evolution  ipyrad-workshop  work
 ```
 
-Throughout the workshop we will be introducing new commands as the need for them arises. We will pay special attention to highlighting and explaining new commands and giving examples to practice with. 
+Throughout the workshop we will be introducing new commands as the need for them 
+arises. We will pay special attention to highlighting and explaining new commands 
+and giving examples to practice with. 
 
 > **Special Note:** Notice that the above directory we are making is not called `ipyrad workshop`. This is **very important**, as spaces in directory names are known to cause problems on HPC systems. All linux based operating systems do not recognize file or directory names that include spaces, because spaces act as default delimiters between arguments to commands. There are ways around this (for example Mac OS has half-baked "spaces in file names" support) but it will be so much for the better to get in the habit now of ***never including spaces in file or directory names***.
 

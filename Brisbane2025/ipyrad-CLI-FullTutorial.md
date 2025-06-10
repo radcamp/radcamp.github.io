@@ -360,7 +360,11 @@ sometimes a problem under a couple different library prep scenarios. We know the
 our data have an excess of low-quality bases toward the distal end (remember the
 FastQC results!), so lets use this opportunity to trim off some of those low
 quality regions. To account for this we will trim reads to 100bp, removing the
-last 10bp of our 110bp reads. 
+last 50bp of our 150bp reads. 
+
+> **Note on trimming in Step 2:** The trimming we are doing here is for demonstration 
+purposes and to make it assembly run faster. Typically you would want to evaluate 
+your fastqc results and decide a trim length based on your own quality scores.
 
 Edit your params file again with and change the following two parameter settings:
 
@@ -787,6 +791,13 @@ will be much, much lower than heterozygosity (on the order of 10x lower). If
 the error rate is >>0.1% then you might be using too permissive a clustering
 threshold.
 
+> **Note on the Seadragon error rates:** The error rates are quite high in this data,
+~0.5%. In this situation it's common to hypothesize that the `clust_threshold`
+is too low, and clusters are being 'over-merged' leading to inflated error and
+heterozygosity rates. If there is time remaining you can test this hypothesis
+by re-running step 3 with a higher `clust_threshold` to see if it reduces these
+values.
+
 # Step 5: Consensus base calls
 
 Step 5 uses the inferred error rate and heterozygosity per sample to call the
@@ -883,6 +894,11 @@ step. Retained consensus sequences must pass filters on read depth tolerance (bo
 (`max_Ns_consens`) and maximum number of heterozygous sites (`max_Hs_consens`)
 per consensus sequence. This number will almost always be lower than
 `clusters_hidepth`.
+
+> **In Depth Anaylsis:** In fact `reads_consens` will **always** be lower than
+`clusters_hidepth`, and may only ever be equal to it in the condition that
+all of the clusters passed the ipyrad filters that apply at this step: 
+`max_alleles_consens`, `max_Ns_consens`, and `max_Hs_consens`.
 
 # Step 6: Cluster across samples
 
@@ -1137,8 +1153,8 @@ Syd4             3483
 The next block is `locus_coverage`, which indicates the number of loci that
 contain exactly a given number of samples, and `sum_coverage` is just the
 running total of these in ascending order. So here, if it weren't being
-filtered, locus coverage in the `1` column would indicate singletons (only
-one sample at this locus), and locus coverage in the `10` column indicates
+filtered, locus coverage in the `1` row would indicate singletons (only
+one sample at this locus), and locus coverage in the `30` row indicates
 loci with full coverage  (all samples have data at these loci).
 
 > **Note:** It's important to notice that locus coverage below your 
