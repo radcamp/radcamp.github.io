@@ -221,10 +221,10 @@ TGCAG,ACG                           ## [8] [restriction_overhang]: Restriction o
 0.9                             ## [14] [clust_threshold]: Clustering threshold for de novo assembly
 *                               ## [27] [output_formats]: Output formats (see docs)
 ```
-**NB:** Don't forget to choose "File->Save Text" after you are done editing!
+**NB:** Don't forget to choose "File → Save Text" after you are done editing!
 
 The Seadragpon data were generated using a double-digest restriction-site associated 
-DNA (ddRAD) sequencing approach [Peterson *et al.*, 
+DNA (ddRAD) sequencing approach from [Peterson *et al.*, 
 2012](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0037135) and 
 used the restriction enzymes [PstI](https://www.neb.com/en-us/products/r0140-psti) & 
 [HpyCH4IV](https://www.neb.com/en-us/products/r0619-hpych4iv?srsltid=AfmBOoq-K9hCFJeDDKyKvOnIuK61fDPRicig9SRnzrYmQ1MzA6CraJHC) which leave overhang
@@ -350,7 +350,7 @@ step 7: None
 If you want to get even **more** info, ipyrad tracks all kinds of wacky stats and
 saves them to a file inside the directories it creates for each step. For
 instance, to see full stats for step 1 (the wackyness of the step 1 stats at this
-point isn't very interesting, but we'll see stats for later steps are more verbose):
+point isn't very interesting, but we'll see stats for later steps are more verbose).
 
 # Step 2: Filter reads
 
@@ -598,7 +598,7 @@ each sample in `./seadragon_clust_0.9/`. You can get a feel for what
 this looks like by examining a portion of one of the files. 
 
 ```bash
-$ zcat seadragon_clust_0.9/Jer3.clustS.gz | head -n 24
+$ zcat seadragon_clust_0.9/Jer2.clustS.gz | head -n 24
 ```
 
 You'll see something similar to what is printed below. **Note:** The value
@@ -918,7 +918,7 @@ $ ipyrad -p params-seadragon.txt -s 6 -c 4
 ```
 In-depth operations of step 6:
 * concatenating inputs - Gathering all consensus files and preprocessing to
-improve performance.
+improve performance
 * clustering across - Cluster by similarity threshold across samples
 * building clusters - Group similar reads into clusters
 * aligning clusters - Align within each cluster
