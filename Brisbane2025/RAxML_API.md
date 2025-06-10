@@ -13,9 +13,9 @@ tress in sliding windows along the genome using the `ipa.treeslider` tool.
 More information about RAxML can be found [here](https://cme.h-its.org/exelixis/web/software/raxml/) and the scientific paper [Stamatakis *et al.* (2014)](https://academic.oup.com/bioinformatics/article/30/9/1312/238053).
 
 ## Input data
-The raxml tool takes a phylip formatted file as input. In addition you can set
+The RAxML tool takes a phylip formatted file as input. In addition you can set
 a number of analysis options either when you init the tool, or afterwards by
-accessing the `.params` dictionary. You can view the raxml command string that is
+accessing the `.params` dictionary. You can view the RAxML command string that is
 generated from the input arguments and you can call `.run()` to start the tree inference.
 
 ### Creating a new phylip file with `min_samples_locus` set to 20
@@ -44,7 +44,7 @@ $ ipyrad -p params-seadragon.txt -b minsamples20
 
 This creates a new params file (as it says) which you should edit by double-clicking
 on `params-minsamples20.txt` in the leftnav file-browser and modifying it
-to update the following parameter (don't forget to File->Save Text):
+to update the following parameter (don't forget to File → Save Text):
 
 ```
 20              ## [21] [min_samples_locus]: Min # samples per locus for output
@@ -81,7 +81,7 @@ directory and create a new Noteook using the `base` image as we did previously.
 
 First things first, rename your new notebook to give it a meaningful name. You can
 either click the small 'disk' icon in the upper left corner of the notebook or
-choose `File->Save Notebook` and rename your notebook to "seadragon_raxml.ipynb"
+choose `File → Save Notebook` and rename your notebook to "seadragon_raxml.ipynb"
 
 ### Import ipyrad.analysis module
 The `import` keyword directs python to load a module into the currently running
@@ -178,9 +178,9 @@ imap = {'NSW': ['Bot1', 'Bot2', 'Bot3', 'Bot4', 'Syd1', 'Syd2',
         'TAS': ['Bic1', 'Bic2', 'Bic3', 'Bic4', 'Bic5', 'Bic6', 'Hob1', 'Hob2'], 
         'VIC': ['Fli1', 'Fli2', 'Fli3', 'Fli4', 'Por1', 'Por2', 'Por3', 'Por4', 'Por5']}
 
-colormap = {"NSW":"red",
-           "TAS":"blue",
-            "VIC": "teal"}
+colormap = {"NSW":"hotpink", 
+           "TAS":"skyblue",
+            "VIC": "goldenrod"}
 
 colorlist = []
 for sample in rtre.get_tip_labels():
@@ -193,7 +193,7 @@ rtre.draw(tip_labels_align=True,
           use_edge_lengths=False)
 ```
 
-![png](images/raxml-ColorTipLabels.png)
+![png](images/raxml-ColorTipLabels2.png)
 
 
 ## Setting parameters
@@ -241,7 +241,7 @@ rtre.draw(node_sizes=15,
           tip_labels_colors=colorlist)
 ```
 
-![png](images/raxml-NodeSupport.png)
+![png](images/raxml-NodeSupport2.png)
 
 ```python
 # Change the tree style
@@ -266,7 +266,7 @@ Again, much more is available in the [toytree tree styling documentation](https:
 
 ## Saving trees to pdf
 The toytree figures can be saved to a file in hi-resolution in many different
-formats. [Saving trees to pdf/svg/other output formats](https://eaton-lab.org/toytree/quick_guide/#saving-tree-drawings)
+formats: [Saving trees to pdf/svg/other output formats](https://eaton-lab.org/toytree/quick_guide/#saving-tree-drawings)
 
 ```python
 canvas, _, _ = rtre.draw()
