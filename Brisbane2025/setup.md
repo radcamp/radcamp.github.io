@@ -4,7 +4,7 @@
 * [Intro to ipyrad resources](#intro-ipyrad-resources)
 * [Software setup](#accessing-cloud-computing-resources)
 * [RADseq data quality control (QC)](data_QC)
-* [ipyrad assembly of simulated data Part I](ipyrad-CLI-FullTutorial.html)
+* [ipyrad assembly of simulated data Part I](ipyrad-CLI-FullTutorial.md)
 
 ## Intro ipyrad Resources
 * [ipyrad documentation (detailed explanations and tutorials)](https://ipyrad.readthedocs.io/en/latest/)
