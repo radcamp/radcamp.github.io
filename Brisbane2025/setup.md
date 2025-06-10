@@ -65,4 +65,4 @@ ipyrad 0.9.105
 
 ### Installing ipyrad on your home system
 For your convenience here is a link to performing the 
-[ipyrad installation on laptops and HPC systems](https://ipyrad.readthedocs.io/en/latest/3-installation.html)
+[ipyrad installation on laptops and HPC systems](https://ipyrad.readthedocs.io/en/latest/3-installation.html).
