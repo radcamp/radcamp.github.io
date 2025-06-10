@@ -34,6 +34,9 @@ Open a new Terminal and type:
 This will run for a few minutes, writing progress to the screen. After it finishes
 you can proceed with the rest of this tutorial.
 
+> **Safe to ignore the warning:** You can ignore the warning that says `DEPRECATION: 
+Legacy editable install of feems==1.0.1 ...`, it is does not impact the FEEMS install.
+
 ## Create a new notebook for the FEEMS analysis
 In the jupyter notebook browser interface navigate to your `ipyrad-workshop`
 directory and use the Launcher to create a new Notebook using the 'feems' 

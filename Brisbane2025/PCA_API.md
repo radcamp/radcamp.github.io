@@ -29,16 +29,16 @@ all code in cells of a jupyter notebook.
 In the file browser on the leftnav of JupyterLab browse to the seadragon assembly
 directory (if you aren't already there): `/home/jovyan/ipyrad-workshop`.
 
-Open the "Launcher" by clicking the blue **+** button in the upper left.
-Similar how you've previously opened the Terminal, now open a new "Python 3" notebook by clicking on `New`.
+Open the "Launcher" by clicking the blue **+** button in the upper left, and open a 
+new "ipyrad" Notebook.
 
 ![png](images/jupyter-NewNotebook.png)
 
-> **NB:** If you do **NOT** see the 'base' option for opening a Notebook, go back to the
+> **NB:** If you do **NOT** see the 'ipyrad' option for opening a Notebook, go back to the
 [setup](./setup.md) page and make sure you have run the notebook kernel installation
 command. **You can't proceed from here unless you see this option in the Launcher.**
 
-Once you open the new notebook you should see 'base' in the upper right hand corner.
+Once you open the new notebook you should see 'ipyrad' in the upper right hand corner.
 
 ![png](images/BlankNotebook-base.png)
 
@@ -205,8 +205,9 @@ idea for PCA analyses since you want to remove the effects of linkage from your
 data. It also presents a convenient way to explore the confidence in your
 results. By using the option `nreplicates` you can run many replicate analyses
 that subsample a different random set of unlinked SNPs each time. The replicate
-results are drawn with a lower opacity and the centroid of all the points for
-each sample is plotted as a black point. 
+results are drawn as 'ghost' points (slightly transparent), and the centroid of 
+all the replicates for each sample is plotted with full opacity and black border
+(the most visually apparent point). 
 
 ```python
 pca.run(nreplicates=5)
