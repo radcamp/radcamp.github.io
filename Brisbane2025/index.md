@@ -50,7 +50,7 @@ On Sunday we expect the following food and coffee venues to be open, but hours a
   - Isaac Overcast - Columbia University
   - Laura Tensen - University of Copenhagen
 
-### Quick Link to the Cloud Compute Jupyterhub
+# Quick Link to the Cloud Compute Jupyterhub
 Cloud server - [https://pinky.eaton-lab.org/](https://pinky.eaton-lab.org/)
 
 # Schedule
