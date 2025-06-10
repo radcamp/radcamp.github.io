@@ -193,7 +193,9 @@ rtre.draw(tip_labels_align=True,
           use_edge_lengths=False)
 ```
 
-![png](images/raxml-ColorTipLabels2.png)
+<p align="center">
+  <img src="images/raxml-ColorTipLabels2.png" alt="png" width="400"/>
+</p>
 
 
 ## Setting parameters
@@ -241,7 +243,9 @@ rtre.draw(node_sizes=15,
           tip_labels_colors=colorlist)
 ```
 
-![png](images/raxml-NodeSupport2.png)
+<p align="center">
+  <img src="images/raxml-NodeSupport2.png" alt="png" width="400"/>
+</p>
 
 ```python
 # Change the tree style
