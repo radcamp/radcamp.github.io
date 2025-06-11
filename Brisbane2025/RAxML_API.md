@@ -279,6 +279,14 @@ toytree.save(canvas, "tree-plot.pdf")
 
 ![png](images/raxml-TreeDownload.png)
 
+If you want to style the saved tree as we have practiced, you'll need to
+add whatever styling you want to the `rtre.draw()` call, like this:
+
+```python
+canvas, _, _ = rtre.draw(tree_style="o", layout='c')
+toytree.save(canvas, "tree-plot-styled.pdf")
+```
+
 ## More to explore
 If the RADSeq assembly was performed with mapping to a reference genome
 this creates the opportunity to perform phylogenetic inference within genomic

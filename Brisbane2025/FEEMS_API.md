@@ -251,6 +251,18 @@ v.draw_obs_nodes(use_ids=False)
 
 ![png](images/FEEMS-Fitted.png)
 
+## Save the FEEMS result to a file
+You can use the matplotlib fuction [`savefig()`](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.savefig.html)
+to save the FEEMS results to a file. `savefig()` supports several different common
+formats (like .svg, .pdf, .png and some others) and it determines the
+appropriate file type to save as based on the file extension that you specify.
+So for example to save the results as a .png you can say:
+
+```python
+fig.savefig("Seadragon-Feems.png")
+```
+And this will save the .png into your `ipyrad-workshop` directory.
+
 ## Experiment with different lambda values
 With any remaining time you may try changing the value of `lamb`, 
 rerunning the call to `sp_graph.fit()` and then replotting, to check

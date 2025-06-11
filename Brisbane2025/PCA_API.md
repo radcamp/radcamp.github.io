@@ -247,7 +247,10 @@ argument to the `.draw()` function.
 
 ```python
 # The outfile must end in either `.pdf` or `.svg`
-pca.draw(outfile="seadragon-pca.pdf")
+# The pca object doesn't 'remember' the colors from the last call to draw()
+# so if you want to output a figure with the chosen colors you need to add them
+# here as well.
+pca.draw(outfile="seadragon-pca.pdf", colors=["hotpink", "skyblue", "goldenrod"])
 ```
 
 This will save `seadragon-pca.pdf` into your notebook environment. You can open the
