@@ -19,7 +19,7 @@ valley and the Arabian peninsula.
 
 For more information on these methods see the original manuscripts:
 * EEMS - [Petkova *et al* (2016)](https://www.nature.com/articles/ng.3464)
-* FEEMS - [Marcus *et al* (2021)](https://elifesciences.org/articles/61927).
+* FEEMS - [Marcus *et al* (2021)](https://elifesciences.org/articles/61927)
 
 ## FEEMS install/configuration
 FEEMS can be a bit tricky to install, so for the purpose of this workshop
@@ -45,7 +45,7 @@ environment.
 ![png](images/jupyter-NewNotebook-feemsEnv.png)
 
 First things first, rename your new notebook to give it a meaningful name. 
-Choose `File->Save Notebook` and rename your notebook to "seadragon-FEEMS.ipynb"
+Choose `File → Save Notebook` and rename your notebook to "seadragon-FEEMS.ipynb"
 
 ## Import FEEMS and other necessary modules
 The `import` keyword directs python to load a module into the currently running
