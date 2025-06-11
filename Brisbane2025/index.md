@@ -11,7 +11,7 @@ University of Queensland<br>
 St. Lucia Campus
 Forgan Smith Building 01-E303
 
-## Arriving at the University
+## Arriving at the venue
 The University campus is 5km from the city centre – either a short bus ride, or a slightly longer ferry ride. All buses and trains use either a credit card or “Go Card.” You must tap ON and OFF with the SAME card. It only costs 50c per ride regardless of the distance but if you forget to tap off you will be charged $10AUD and if you forget to tap on you may get a fine.
 
 The fastest bus to UQ (Lakes bus stop) from the city is the M2 which takes 15-20 minutes from South Brisbane or the city. Or you can use various buses like the 105, connecting to 29, 169 etc. An alternative is the 412 which takes you to the other side of campus (Chancellors Place), also 20 mins. These all go every 5 or 10 minutes. You can also take various buses from Chancellors Place that will connect you to Toowong or Indooroopilly train stations which have trains every 5-15 mins.
@@ -22,6 +22,9 @@ Uber from the city, or Taxi, will be >$20.
 
 Navigating Campus: UQ Maps App
 Please download the App “UQ Maps” now. The UQ campus is vast but the App is comprehensive. To help you more, there will be a few helpers wearing “teal coloured” volunteer jackets around the campus. Talk to them.
+
+The workshop will take place the Forgan Smith Building, room 01-E303. See the map below:
+![map](Hands-on genomic analyses course 1-E303.png)
 
 ## Internet and Wifi
 You and the attendees can use free wireless via “Eduroam” or “UQ guest”. Instructions on how to connect are found [here](https://my.uq.edu.au/information-and-services/information-technology/internet-and-wifi/connecting-wifi). The latter takes a little while to get into. Please connect early, arrive early.
