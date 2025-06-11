@@ -24,7 +24,7 @@ Navigating Campus: UQ Maps App
 Please download the App “UQ Maps” now. The UQ campus is vast but the App is comprehensive. To help you more, there will be a few helpers wearing “teal coloured” volunteer jackets around the campus. Talk to them.
 
 The workshop will take place the Forgan Smith Building, room 01-E303. See the map below:  
-![map](images/Hands-on genomic analyses course 1-E303.png)
+![map](images/map_workshop.png)
 
 ## Internet and Wifi
 You and the attendees can use free wireless via “Eduroam” or “UQ guest”. Instructions on how to connect are found [here](https://my.uq.edu.au/information-and-services/information-technology/internet-and-wifi/connecting-wifi). The latter takes a little while to get into. Please connect early, arrive early.
