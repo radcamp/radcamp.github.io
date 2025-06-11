@@ -1025,7 +1025,7 @@ conservative.
 To run step 7:
 
 ```bash
-(ipyrad) osboxes@osboxes:~/ipyrad-workshop$ ipyrad -p params-seadragon.txt -s 7 -c 4
+$ ipyrad -p params-seadragon.txt -s 7 -c 4
 ```
 ```
   loading Assembly: seadragon
