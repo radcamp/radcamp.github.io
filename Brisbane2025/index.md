@@ -91,6 +91,7 @@ Klanten _et al._ 2020 - [Genomic and morphological evidence of distinct populati
 ![logos](images/Logos.jpg)
 
 ## RADCamp Brisbane 2025 Group Photo
+<img src="images/group_photo.jpg" alt="group_photo" width="100%">
 
 **Don't forget to get a group photo!**  
 
