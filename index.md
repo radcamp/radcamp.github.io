@@ -52,8 +52,9 @@ Workshop attendees will need to bring a laptop computer.
 
 # RADCamp tutorial contributors and instructors (over the years)
 Isaac Overcast, Deren Eaton, Sandra Hoffberg, Natalia Bayona-Vasquez, Mariana
-Vasconcellos, Laura Bertola, Josiah Kuja, Anhubab Kahn, Arianna Kuhn, Edgar
-Benavides, Fransico Pina Martins
+Vasconcellos, Laura Bertola, Josiah Kuja, Anubhab Kahn, Arianna Kuhn, Edgar
+Benavides, Fransico Pina Martins, Natalie Payne, Ilha Byrne, Matheus Mello 
+Athayde, Katherine Prata, Laura Tensen
 
 # References
 * Andrews, K. R., Good, J. M., Miller, M. R., Luikart, G., & Hohenlohe, P. A. (2016). Harnessing the power of RADseq for ecological and evolutionary genomics. *Nature Reviews Genetics*, 17(2), 81.
