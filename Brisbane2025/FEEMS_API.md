@@ -134,6 +134,8 @@ region. You can use the following [website](http://www.birdtheme.org/useful/v3to
 create one of these, by clicking on the map and then copy-pasting the coordinates 
 to a new file. 
 
+**NB: This site is way better for selecting latlongs on a map: [geojson.io](https://geojson.io/)**
+
 ![png](images/FEEMS_outer.png)
 
 To save time, we've also prepared this file for you and you can look at the
