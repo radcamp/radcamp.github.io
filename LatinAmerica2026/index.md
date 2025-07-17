@@ -51,7 +51,7 @@ of Maine.
 
 # Organisers, Instructors, and Facilitators
 
-  - Natalia Bayona Vasquez (Emory University)
+  - Natalia Bayona Vásquez (Oxford College Emory University)
   - Deren Eaton (Columbia University)
   - Isaac Overcast (Columbia University)
   - Sandra Hoffberg (Code Ocean)
@@ -86,7 +86,7 @@ Times            | Day 1 | Day 2 |
 9:00-12:30      | Lecture | Library amplification |
 12:30-13:45 | Lunch | Lunch |
 13:45-18:00 | Digestion, Ligation, Clean up | Clean up and QC |
-18:00-20:00 | Casual evening        | Code Ocean Networking dinner |
+18:00-20:00 | Casual evening        | Networking dinner |
 
 ## 3RAD resources
 * [Inner barcode sequences in ipyrad format](Part_I_files/plate_inner_barcodes.txt)
@@ -153,7 +153,6 @@ Old unformatted logo images:
 * __Columbia University's Ecology, Evolution and Environmental Biology Department__  
 * __Maine Center for Genetics in the Environment & The University of Maine__  
 * __Society of Systematic Biologists__  
-* __Code Ocean__  
 
 ![Columbia E3B](images/E3B-logo.jpg){: width="25%"}  
 
@@ -163,7 +162,6 @@ Old unformatted logo images:
 
 ![Society of Systematic Biologists](images/SSB.png){: width="25%"}  
 
-![Code Ocean](images/CodeOcean-VerticalLogo.png){: width="25%"}
 
 # RADCamp NYC 2023 Part I Group Photo
 ![RADCampNYC2023-PartI-picnic](images/RADCamp-NYC2023-Group-PartI.jpeg)
