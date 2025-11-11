@@ -135,27 +135,28 @@ Times            | Day 6 | Day 7 | Day 8 |
 
 ## RADCamp Latin America 2026 co-sponsored by:
 
-<!--
 <table width="100%">
   <tr> <td width="50%" align="center">
-<img src="images/E3B-logo.jpg"/>
-    <p><b>Columbia University's Ecology, Evolution and Environmental Biology Department</b></p>
+<img src="images/logo-CoreLab.jpg"/>
+    <p><b>Core Lab: Genomics, Tecnológico de Monterrey</b></p>
   </td> <td width="50%" align="center">
-<img src="images/AGA-logo.jpg"/>
+<img src="images/logo-AGA.jpg"/>
     <p><b>American Genetics Association through the Special Event Awards program</b></p>
   </td> </tr>
   <tr> <td width="50%" align="center">
-<img src="images/MAINE_crest_4c.png" width="50%"/>
-    <p><b>Maine Center for Genetics in the Environment & The University of Maine</b></p>
+<img src="images/logo-ISCB.png" width="50%"/>
+    <p><b>International Society for Computational Biology</b></p>
   </td> <td width="50%" align="center">
-<img src="images/SSB.png"/>
-    <p><b>Society of Systematic Biologists</b></p>
+<img src="images/logo-SSE.png"/>
+    <p><b>Society of the Study of Evolution</b></p>
   </td> </tr>
   <tr> <td width="50%" align="center">
-<img src="images/CodeOcean-VerticalLogo.png"/>
-  </td> </tr>
+<img src="images/logo-IBS.jpg"/>
+  </td>The International Biogeography Society</tr>
 </table>
 
+logo-AGA.jpg        logo-CoreLab.jpg    logo-ExpedFemsa.png logo-IBS.jpg        logo-ISCB.png       logo-SSE-full.png   logo-SSE.png
+<!--
 Old unformatted logo images:
 
 * __American Genetics Association through the Special Event Awards program__  
