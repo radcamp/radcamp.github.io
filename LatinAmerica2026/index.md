@@ -140,7 +140,7 @@ Times            | Day 6 | Day 7 | Day 8 |
 <img src="images/logo-CoreLab.jpg"/>
     <p><b>Core Lab: Genomics, Tecnológico de Monterrey</b></p>
   </td> <td width="50%" align="center">
-<img src="images/ExpedFemsa.png"/>
+<img src="images/logo-ExpedFemsa.png"/>
     <p><b>Expedition FEMSA</b></p>
   </td> </tr>
 
