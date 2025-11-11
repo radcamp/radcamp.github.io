@@ -140,22 +140,27 @@ Times            | Day 6 | Day 7 | Day 8 |
 <img src="images/logo-CoreLab.jpg"/>
     <p><b>Core Lab: Genomics, Tecnológico de Monterrey</b></p>
   </td> <td width="50%" align="center">
+<img src="images/ExpedFemsa.png"/>
+    <p><b>Expedition FEMSA</b></p>
+  </td> </tr>
+
+  <tr> <td width="50%" align="center">
 <img src="images/logo-AGA.jpg"/>
     <p><b>American Genetics Association through the Special Event Awards program</b></p>
-  </td> </tr>
-  <tr> <td width="50%" align="center">
+  </td> <td width="50%" align="center">
 <img src="images/logo-ISCB.png" width="50%"/>
     <p><b>International Society for Computational Biology</b></p>
+  </td> </tr>
+
+  <tr> <td width="50%" align="center">
+<img src="images/logo-IBS.jpg"/>
+    <p><b>The International Biogeography Society</b></p>
   </td> <td width="50%" align="center">
 <img src="images/logo-SSE.png"/>
     <p><b>Society of the Study of Evolution</b></p>
-  </td> </tr>
-  <tr> <td width="50%" align="center">
-<img src="images/logo-IBS.jpg"/>
-  </td>The International Biogeography Society</tr>
+  </td></tr>
 </table>
 
-logo-AGA.jpg        logo-CoreLab.jpg    logo-ExpedFemsa.png logo-IBS.jpg        logo-ISCB.png       logo-SSE-full.png   logo-SSE.png
 <!--
 Old unformatted logo images:
 
