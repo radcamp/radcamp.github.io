@@ -7,17 +7,14 @@ Tecnológico de Monterrey
 Monterrey, Mexico
 
 # Application/Registration
-Please visit this form if you want to apply: [RADCamp Latin America 2026 Application](https://forms.gle/iSBGyLhcDYRp5KfN6) 
+~~Please visit this form if you want to apply: [RADCamp Latin America 2026 Application](https://forms.gle/iSBGyLhcDYRp5KfN6)~~
 
-Decisions on workshop participation will be communicated to all applicants January 2026.
+**Applications for RADCamp Latin America 2026 are now Closed.** Decisions on 
+workshop participation will be communicated to all applicants **early February 2026**.
 
 __Fees:__ There will be a nomial registration fee due upon acceptance.
 Need-based fee waivers will be considered, and well qualified applicants will not be
 turned away for lack of funds.
-
-Partial, need-based support for travel and accommodations will also available! 
-Please indicate your request for travel/lodging support in the online application.
-We will provide coffee and snacks during breaks.
 
 # Summary
 This workshop is designed to guide participants through a full RADseq pilot
