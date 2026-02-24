@@ -10,7 +10,7 @@ Champaign, IL 61820
 
   - Dr Isaac Overcast (Columbia University; INHS)
   - Dr Arianna Kuhn (INHS)
-  - Jordyn Chase (NRES)
+  - Jordyn Chace (NRES)
   - Nick Iacaruso (NRES)
 
 # Registration
