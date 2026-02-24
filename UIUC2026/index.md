@@ -2,9 +2,8 @@
 
 Tuesday March 10, 2026
 
-[Natural Resources Building](https://maps.app.goo.gl/Deskz6WVp9Fj5Mvb6)  
-Room 439  
-University of Illinois, Urbana-Champaign
+[Natural Resources Building](https://maps.app.goo.gl/Deskz6WVp9Fj5Mvb6), Room 439  
+University of Illinois, Urbana-Champaign  
 Champaign, IL 61820
 
 # Organisers, Instructors, and Facilitators
@@ -47,7 +46,7 @@ $ bash binder-reinstall.sh
 
 * Refreshments provided and workshop sponsored by:
 <div align="center" markdown="1">
-![INHS](logos/INHS-Logo.png)
+![INHS](images/INHS-Logo.png)
 </div>
 
 ## Group Photo
