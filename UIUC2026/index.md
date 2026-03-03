@@ -44,7 +44,7 @@ $ wget https://radcamp.github.io/UIUC2026/binder-reinstall.sh
 $ bash binder-reinstall.sh
 ```
 
-* Refreshments provided and workshop sponsored by:
+## Refreshments provided and workshop sponsored by:
 <div align="center" markdown="1">
 ![INHS](images/INHS-Logo.png)
 </div>
