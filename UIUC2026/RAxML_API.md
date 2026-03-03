@@ -88,7 +88,7 @@ After inferring a tree you can then visualize it in a notebook using `toytree`.
 tre = toytree.tree(rax.trees.bipartitions)
 
 # draw the tree rooting on species 1
-rtre = tre.root("1A_0", "1B_0", "1C_0", "1D_0")
+rtre = tre.root(["1A_0", "1B_0", "1C_0", "1D_0"])
 rtre.draw(tip_labels_align=True, node_labels="support");
 ```
 
@@ -219,6 +219,6 @@ Window extracter has several key features:
 ## Another example phylip file
 ```
 !wget https://radcamp.github.io/data/anolis.phy
-!wget https://radcamp.github.io/data/anolis_pops.phy
+!wget https://radcamp.github.io/data/anolis_pops.txt
 ```
 
