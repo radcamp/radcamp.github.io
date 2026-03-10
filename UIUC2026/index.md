@@ -49,10 +49,13 @@ $ bash binder-reinstall.sh
 ![INHS](images/INHS-Logo.png)
 </div>
 
+## Exit Survey
+[RADCamp UIUC 2026 Exit Survey](https://docs.google.com/forms/d/1RJ5HRDczQGQkIfNv1QEtk6fbTULx8i6yg2cJ5nFGFCE/edit)
+
 ## Group Photo
-<!--
-![Group photo](RADCampPhoenix2024.jpg)
--->
+
+![Group photo](RADCampUIUC2026.jpg)
+
 
 ## Acknowledgements
 RADCamp tutorial contributors and instructors (over the years): Isaac Overcast,
