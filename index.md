@@ -27,10 +27,10 @@ computational experience.
 Workshop attendees will need to bring a laptop computer.
 
 ## Future events:
-* [RADCamp2026-UIUC](UIUC2026/index.md) (March 2026)
 * [RADCamp2026-LatinAmerica](LatinAmerica2026/index.md) (July 2026)
 
 ## Past events:
+* [RADCamp2026-UIUC](UIUC2026/index.md)
 * [RADCamp2025-Brisbane](Brisbane2025/index.md)
 * [RADCamp2024-Phoenix](Phoenix2024/index.md)
 * [RADCamp2024-SanFrancisco](SanFrancisco2024/index.md)
