@@ -156,6 +156,14 @@ Times            | Day 6 | Day 7 | Day 8 |
 <img src="images/logo-SSE.png"/>
     <p><b>Society of the Study of Evolution</b></p>
   </td></tr>
+
+  <tr> <td width="50%" align="center">
+<img src="images/logo-ASN.jpg"/>
+    <p><b>The American Society of Naturalists</b></p>
+  </td> <td width="50%" align="center">
+<img src="images/logo-EatonLab.png"/>
+    <p><b>The Eaton Lab</b></p>
+  </td></tr>
 </table>
 
 <!--
