@@ -167,7 +167,8 @@ Times            | Day 6 | Day 7 | Day 8 |
 
   <tr> <td width="50%" align="center">
 <img src="images/logo-BES.png"/>
-    <p><b>The British Ecological Society (Award #EF26/1051)</b></p>
+    <p><b>The British Ecological Society</b></p>
+    <p><b>(Award #EF26/1051)</b></p>
   </td> <td width="50%" align="center">
     <p><b>... And viewers like you.</b></p>
   </td></tr>
