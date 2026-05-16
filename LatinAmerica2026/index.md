@@ -164,6 +164,13 @@ Times            | Day 6 | Day 7 | Day 8 |
 <img src="images/logo-EatonLab.png"/>
     <p><b>The Eaton Lab</b></p>
   </td></tr>
+
+  <tr> <td width="50%" align="center">
+<img src="images/logo-BES.jpg"/>
+    <p><b>The British Ecological Society (Award #EF26/1051)</b></p>
+  </td> <td width="50%" align="center">
+    <p><b>... And viewers like you.</b></p>
+  </td></tr>
 </table>
 
 <!--
