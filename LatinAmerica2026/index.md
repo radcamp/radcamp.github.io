@@ -6,16 +6,6 @@ July 20-27, 2026
 Tecnológico de Monterrey  
 Monterrey, Mexico
 
-# Application/Registration
-~~Please visit this form if you want to apply: [RADCamp Latin America 2026 Application](https://forms.gle/iSBGyLhcDYRp5KfN6)~~
-
-**Applications for RADCamp Latin America 2026 are now Closed.** Decisions on 
-workshop participation will be communicated to all applicants **early February 2026**.
-
-__Fees:__ There will be a nomial registration fee due upon acceptance.
-Need-based fee waivers will be considered, and well qualified applicants will not be
-turned away for lack of funds.
-
 # Summary
 This workshop is designed to guide participants through a full RADseq pilot
 study. Although it will take place over eight days, it is structured into two parts.
@@ -61,14 +51,15 @@ for Advancing Bioinformatics, and the CoreLab Genomics from Tecnólogico de Mont
 # Organizers, Instructors, and Facilitators
 
   - Natalia Bayona Vásquez (Oxford College Emory University)
-  - Deren Eaton (Columbia University)
   - Isaac Overcast (Columbia University)
-  - Sandra Hoffberg
-  - Rocio Alejandra Chavez-Santoscoy (Tecnólogico de Monterrey)
   - Erika Magallón-Gayón (Tecnólogico de Monterrey)
+  - Deren Eaton (Columbia University)
+  - Sandra Hoffberg
+  - Todd Pierson (Kennesaw State University)
   - Silvia A. Hinojosa Alvarez (Tecnólogico de Monterrey)
   - Jesús Hernandez Perez (Tecnólogico de Monterrey)
   - Andrea Felix Ceniceros (Tecnólogico de Monterrey)
+  - Rocio Alejandra Chavez-Santoscoy (Tecnólogico de Monterrey)
 
 Please contact us at __radcamp.nyc+LatinAmerica@gmail.com__ with any questions.
 
