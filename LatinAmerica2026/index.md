@@ -3,8 +3,13 @@
 Wet lab (3RAD protocol) & Bioinformatics (ipyrad)  
 July 20-27, 2026
 
-Tecnológico de Monterrey  
-Monterrey, Mexico
+Hosted by Tecnológico de Monterrey at:
+Core Lab Genomics, Expedition FEMSA, 501  
+Avenida Eugenio Garza Sada No. 2445,  
+Colonia Tecnológico,  
+64700 Monterrey, N.L., México  
+
+[Map of the area highlighting Expedition FEMSA](https://drive.google.com/file/d/1Gf9l1IntQ4YLSEcQjrbwM32Z_Ff9SrDF/view?usp=sharing) & [a Google maps link](https://maps.app.goo.gl/EPJxSFTeFv5ppcTv5)
 
 # Summary
 This workshop is designed to guide participants through a full RADseq pilot
