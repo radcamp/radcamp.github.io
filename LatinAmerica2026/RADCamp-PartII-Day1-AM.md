@@ -1,8 +1,8 @@
-# RADCamp Latin America 2026 Part II (Bioinformatics)
-# Day 1 (AM)
+# RADCamp Latin America 2026 Part II (Bioinformatics) - Day 1 (AM)
 
-# TODO (July 2026):
+# TODO:
 * Potentially remove the intro to cli/filesystem stuff from the intro radseq lecture
+* Is there going to be a shared drive mounted on all the compute nodes that we can access? Or can we potentially set one of these up if we need to?
 
 ## Overview of the morning activities:
 * [RADCamp Part II Learning Objectives](#learning-objectives)
@@ -10,7 +10,6 @@
 * [Exercise 1: HPC system access & setup (Isaac)](#hpc-system-setup)
 * [Exercise 1.1: Intro to FASTQC format and quality control (Isaac)](./exercises/fastq-qc)
 * Coffee Break (10:30-10:50)
-## ipyrad history, philosophy, and workflow
 * [Lecture: ipyrad history, philosophy and workflow (Deren)](#https://ipyrad.readthedocs.io/en/latest)
 * [Exercise 2: ipyrad CLI assembly of simulated data](#ipyrad-cli-simulated-data-assembly)
 * Break for Lunch (12:45-1:30)
@@ -36,9 +35,7 @@ Lead: Deren
 * When to use RAD-seq and comparison to alternatives.  
 * Brief introduction to the command-line and filesystems.  
 
-## Intro to CLI and FASTQ
-Lead: Isaac
-
+### HPC System Setup
 * Genomics/Bioinformatics requires computing resources. Specifically, CPUs,
 RAM, and a lot of disk space. Options: workstation, HPC, or cloud computing.
 * A server is simply a program running on a remote (different) computer with
@@ -48,45 +45,9 @@ very intensive code on a larger remote machine.
 * For this workshop we are going to use compute infrastructure provided by
 Tec de Monterrey.
 
-### HPC System Setup
 **Get everyone on Tec HPC here: [Link to Node/IP address assignments when available](wat)**
 
-* Log in with ssh
-* Download and install miniconda
-* Create a new conda environment and install all needed software
-* Launch jupyter lab (including setting a password first)
-* Access your jupyter lab instance at your personal node IP address
 
-### Accessing a command line interface on Tec HPC
-Our first goal will be to use gain access to a command line interface to view RAD-seq data
-as way to become familiar with the format of the raw data that we will analyze, 
-while also learning about basic command line programs.
-
-```bash
-## Example Code Cell.
-## Create an empty file in my home directory called `watdo.txt`
-$ touch ~/watdo.txt
-
-## Print "wat" to the screen
-$ echo "wat"
-wat
-```
-
-[Bash command line cheat sheet](https://www.git-tower.com/blog/command-line-cheat-sheet/).
-
-Take a look at the contents of the folder you're currently in.
-```bash
-$ ls
-```
-
-To keep things organized, please create a new directory which we'll be using 
-during this Workshop. Use `mkdir`. And then navigate into the new folder, using `cd`.
-```bash
-$ mkdir ipyrad-workshop
-$ cd ipyrad-workshop
-```
-
-* Unix tools: cd, ls, less, cat, nano, grep.
 
 ### First view of FASTQ data
 Goals of this module:
