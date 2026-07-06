@@ -1,4 +1,16 @@
-# Tec de Monterrey HPC System Setup
+# HPC System Setup
+* Genomics/Bioinformatics requires computing resources. Specifically, CPUs,
+RAM, and a lot of disk space. Options: workstation, HPC, or cloud computing.
+* A server is simply a program running on a remote (different) computer with
+which you can interact over the internet. You send it instructions/code, it
+runs the code and sends a response. This way you can use your laptop to run
+very intensive code on a larger remote machine.
+* For this workshop we are going to use compute infrastructure provided by
+Tec de Monterrey.
+
+**Get everyone on Tec HPC here: [Link to Node/IP address assignments when available](wat)**
+
+## Tec de Monterrey HPC System Setup
 
 * Log in with ssh
 * Download and install miniconda
@@ -36,3 +48,7 @@ $ cd ipyrad-workshop
 ```
 
 * Unix tools: cd, ls, less, cat, nano, grep.
+
+## Web-based working environment: Jupyter Lab
+
+Launching and accessing jupyter lab on your compute node

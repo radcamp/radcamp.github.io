@@ -7,11 +7,11 @@
 ## Overview of the morning activities:
 * [RADCamp Part II Learning Objectives](#learning-objectives)
 * [Lecture: Intro to RADSeq (Brief)](https://eaton-lab.org/slides/radcamp)
-* [Exercise 1: HPC system access & setup (Isaac)](#hpc-system-setup)
-* [Exercise 1.1: Intro to FASTQC format and quality control (Isaac)](./exercises/fastq-qc)
+* [Exercise 0: HPC system access & setup (Isaac)](./exercises/hpc-setup)
+* [Exercise 1: Intro to FASTQC format and quality control (Isaac)](./exercises/fastq-qc)
 * Coffee Break (10:30-10:50)
-* [Lecture: ipyrad history, philosophy and workflow (Deren)](#https://ipyrad.readthedocs.io/en/latest)
-* [Exercise 2: ipyrad CLI assembly of simulated data](#ipyrad-cli-simulated-data-assembly)
+* [Lecture: ipyrad history, philosophy and workflow (Deren)](https://ipyrad.readthedocs.io/en/latest)
+* [Exercise 2: ipyrad CLI assembly of simulated data](./exercises/ipyrad-CLI-FullTutorial.html)
 * Break for Lunch (12:45-1:30)
 
 ## Welcome and Introductions
@@ -34,19 +34,6 @@ Lead: Deren
 * History of RAD-seq.  
 * When to use RAD-seq and comparison to alternatives.  
 * Brief introduction to the command-line and filesystems.  
-
-### HPC System Setup
-* Genomics/Bioinformatics requires computing resources. Specifically, CPUs,
-RAM, and a lot of disk space. Options: workstation, HPC, or cloud computing.
-* A server is simply a program running on a remote (different) computer with
-which you can interact over the internet. You send it instructions/code, it
-runs the code and sends a response. This way you can use your laptop to run
-very intensive code on a larger remote machine.
-* For this workshop we are going to use compute infrastructure provided by
-Tec de Monterrey.
-
-**Get everyone on Tec HPC here: [Link to Node/IP address assignments when available](wat)**
-
 
 
 ### First view of FASTQ data
@@ -128,7 +115,7 @@ Lead: Deren
 ## ipyrad CLI simulated data assembly
 Lead: Isaac
 
-[Exercise: ipyrad command line assembly with simulated data](ipyrad-CLI-FullTutorial.html)
+[Exercise: ipyrad command line assembly with simulated data](./exercises/ipyrad-CLI-FullTutorial.html)
 
 
 ## Break for lunch (12:45-1:30)
