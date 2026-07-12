@@ -1,7 +1,7 @@
 # The FASTQ data format & Quality Control (QC)
 
-# TODO:
-* Figure out which dataset we will use for the fastqc & 'light' analysis walkthrough. It could be we use real data for fastqc because it's less boring, but still use the simulated data for the analysis, but lets see.
+# **TODO:**
+* Get some part of the seadragon data distributed or available on the Tec cluster.
 
 ## Command line interface (CLI) basics
 The CLI provides a way to navigate a file system, move files around, and run commands all inside a little black window. The down side of CLI is that you have to learn many at first seemingly esoteric commands for doing all the things you would normally do with a mouse. However, there are several advantages of CLI: 
