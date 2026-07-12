@@ -81,6 +81,36 @@ $ git clone https://github.com/eaton-lab/ipyrad2.git
 $ pip install -e ipyrad2 --no-deps
 ```
 
+## Unpack the simulated data
+
+```bash
+# First, make sure you're in your workshop directory
+$ cd ~/ipyrad-workshop
+
+# Unpack the simulated data which is included in the ipyrad github repo
+# `tar` is a program for reading and writing archive files, somewhat like zip
+#   -x eXtract from an archive
+#   -z unZip before extracting
+#   -f read from the File
+$ tar -xzf ~/ipyrad2/tests/ipsimdata.tar.gz
+
+# Take a look at what we just unpacked
+$ ls ipsimdata
+gbs_example_barcodes.txt         pairddrad_example_R2_.fastq.gz         pairgbs_wmerge_example_genome.fa
+gbs_example_genome.fa            pairddrad_wmerge_example_barcodes.txt  pairgbs_wmerge_example_R1_.fastq.gz
+gbs_example_R1_.fastq.gz         pairddrad_wmerge_example_genome.fa     pairgbs_wmerge_example_R2_.fastq.gz
+pairddrad_example_barcodes.txt   pairddrad_wmerge_example_R1_.fastq.gz  rad_example_barcodes.txt
+pairddrad_example_genome.fa      pairddrad_wmerge_example_R2_.fastq.gz  rad_example_genome.fa
+pairddrad_example_genome.fa.fai  pairgbs_example_barcodes.txt           rad_example_genome.fa.fai
+pairddrad_example_genome.fa.sma  pairgbs_example_R1_.fastq.gz           rad_example_genome.fa.sma
+pairddrad_example_genome.fa.smi  pairgbs_example_R2_.fastq.gz           rad_example_genome.fa.smi
+pairddrad_example_R1_.fastq.gz   pairgbs_wmerge_example_barcodes.txt    rad_example_R1_.fastq.gz
+```
+You can see that we provide a bunch of different example datasets, as well as
+toy genomes for testing different assembly methods. For now we'll go forward
+with the `pairddrad` example dataset, which is a paired-end datatype similar
+to what our 3RAD empirical data will look like.
+
 ## ipyrad2 classic mode
 One of the main differences from the previous ipyrad interface is that ipyrad2
 centers the command line around named subcommands with clearer inputs, outputs,
@@ -136,33 +166,6 @@ analysing your own data you might call your parameters file something
 more informative, like the name of your organism and some details on the
 settings.
 
-```bash
-# First, make sure you're in your workshop directory
-$ cd ~/ipyrad-workshop
-
-# Unpack the simulated data which is included in the ipyrad github repo
-# `tar` is a program for reading and writing archive files, somewhat like zip
-#   -x eXtract from an archive
-#   -z unZip before extracting
-#   -f read from the File
-$ tar -xzf ~/ipyrad2/tests/ipsimdata.tar.gz
-
-# Take a look at what we just unpacked
-$ ls ipsimdata
-gbs_example_barcodes.txt         pairddrad_example_R2_.fastq.gz         pairgbs_wmerge_example_genome.fa
-gbs_example_genome.fa            pairddrad_wmerge_example_barcodes.txt  pairgbs_wmerge_example_R1_.fastq.gz
-gbs_example_R1_.fastq.gz         pairddrad_wmerge_example_genome.fa     pairgbs_wmerge_example_R2_.fastq.gz
-pairddrad_example_barcodes.txt   pairddrad_wmerge_example_R1_.fastq.gz  rad_example_barcodes.txt
-pairddrad_example_genome.fa      pairddrad_wmerge_example_R2_.fastq.gz  rad_example_genome.fa
-pairddrad_example_genome.fa.fai  pairgbs_example_barcodes.txt           rad_example_genome.fa.fai
-pairddrad_example_genome.fa.sma  pairgbs_example_R1_.fastq.gz           rad_example_genome.fa.sma
-pairddrad_example_genome.fa.smi  pairgbs_example_R2_.fastq.gz           rad_example_genome.fa.smi
-pairddrad_example_R1_.fastq.gz   pairgbs_wmerge_example_barcodes.txt    rad_example_R1_.fastq.gz
-```
-You can see that we provide a bunch of different example datasets, as well as
-toy genomes for testing different assembly methods. For now we'll go forward
-with the `pairddrad` example dataset, which is a paired-end datatype similar
-to what our 3RAD empirical data will look like.
 
 ```bash
 # Now create a new params file named 'peddrad'
