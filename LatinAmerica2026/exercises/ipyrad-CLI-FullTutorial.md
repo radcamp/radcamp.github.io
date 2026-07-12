@@ -37,7 +37,7 @@ Very roughly speaking, ipyrad exists to transform raw data coming off the
 sequencing instrument into output files that you can use for downstream 
 analysis. 
 
-![png](images/ipyrad_workflow.png)
+![png](../images/ipyrad_workflow.png)
 
 The basic steps of this process are as follows:
 
@@ -64,8 +64,25 @@ you don't mind if your assembly breaks.
 # Getting Started
 
 We will be running through the assembly of simulated data using the ipyrad
-CLI, so if you haven't already done so please access the CodeOcean
-[RADCamp instance](https://radcamp.codeocean.com) and launch a new terminal.
+CLI, so if you haven't already done so please make sure you have jupyter lab
+running on your compute node, you have connected to it through your browser,
+and you have opened a new terminal.
+
+## Clone the ipyrad2 repository
+You will not typically need to do this, but because ipyrad2 is still in
+development we will clone the repository and install it locally in developer
+mode so that if necessary we can quickly apply changes to address bug fixes.
+
+```bash 
+# Make sure you are in your home directory
+$ cd ~
+
+# Clone the ipyrad2 repository
+$ git clone https://github.com/eaton-lab/ipyrad2.git
+
+# Install ipyrad2 in developer mode
+$ pip install -e ipyrad2 --no-deps
+```
 
 ## ipyrad help
 To better understand how to use ipyrad, let's take a look at the help argument.
@@ -74,58 +91,34 @@ We will use some of the ipyrad arguments in this tutorial (for example: -n, -p,
 is below.
 
 ```
-$ ipyrad -h
+$ ipyrad2-classic -h
 
-usage: ipyrad [-h] [-v] [-r] [-f] [-q] [-d] [-n NEW] [-p PARAMS] [-s STEPS] [-b [BRANCH [BRANCH ...]]]
-              [-m [MERGE [MERGE ...]]] [-c cores] [-t threading] [--MPI] [--ipcluster [IPCLUSTER]]
-              [--download [DOWNLOAD [DOWNLOAD ...]]]
+usage: ipyrad [-n NEW] [-p PARAMS] [-s STEPS] [-c CORES] [-t THREADS] [-l str] [-f] [-d] [-v]
 
-optional arguments:
-  -h, --help            show this help message and exit
-  -v, --version         show program's version number and exit
-  -r, --results         show results summary for Assembly in params.txt and exit
-  -f, --force           force overwrite of existing data
-  -q, --quiet           do not print to stderror or stdout.
-  -d, --debug           print lots more info to ipyrad_log.txt.
-  -n NEW                create new file 'params-{new}.txt' in current directory
-  -p PARAMS             path to params file for Assembly: params-{assembly_name}.txt
-  -s STEPS              Set of assembly steps to run, e.g., -s 123
-  -b [BRANCH [BRANCH ...]]
-                        create new branch of Assembly as params-{branch}.txt, and can be used to drop samples from
-                        Assembly.
-  -m [MERGE [MERGE ...]]
-                        merge multiple Assemblies into one joint Assembly, and can be used to merge Samples into one
-                        Sample.
-  -c cores              number of CPU cores to use (Default=0=All)
-  -t threading          tune threading of multi-threaded binaries (Default=2)
-  --MPI                 connect to parallel CPUs across multiple nodes
-  --ipcluster [IPCLUSTER]
-                        connect to running ipcluster, enter profile name or profile='default'
-  --download [DOWNLOAD [DOWNLOAD ...]]
-                        download fastq files by accession (e.g., SRP or SRR)
+-------------------------------------------------------------
+ipyrad [v.0.1.11]
+Interactive assembly and analysis of RAD-seq data
+-------------------------------------------------------------
+ipyrad2 classic command line tool.
 
-  * Example command-line usage:
-    ipyrad -n data                       ## create new file called params-data.txt
-    ipyrad -p params-data.txt -s 123     ## run only steps 1-3 of assembly.
-    ipyrad -p params-data.txt -s 3 -f    ## run step 3, overwrite existing data.
+options:
+  -n NEW               create new file 'params-{new}.txt' in current directory
+  -p PARAMS            path to params file for Assembly
+  -s STEPS             Set of assembly steps to run, e.g., -s 123
+  -c CORES             number of CPU cores to use (Default=8)
+  -t THREADS           tune threading of multi-threaded binaries (Default=2)
+  -l, --log-level str  Log level (DEBUG, INFO, SUCCESS, WARN, ERROR) [default=SUCCESS]
+  -f, --force          force overwrite of existing data
+  -d, --debug          Print debug information
+  -v, --version        show program's version number and exit
 
-  * HPC parallelization across 32 cores
-    ipyrad -p params-data.txt -s 3 -c 32 --MPI
+Examples
+--------
+ipyrad2-classic -n data                       ## create new file called params-data.txt 
+ipyrad2-classic -p params-data.txt -s 123     ## run only steps 1-3 of assembly.
+ipyrad2-classic -p params-data.txt -s 3 -f    ## run step 3, overwrite existing data.
 
-  * Print results summary
-    ipyrad -p params-data.txt -r
-
-  * Branch/Merging Assemblies
-    ipyrad -p params-data.txt -b newdata
-    ipyrad -m newdata params-1.txt params-2.txt [params-3.txt, ...]
-
-  * Subsample taxa during branching
-    ipyrad -p params-data.txt -b newdata taxaKeepList.txt
-
-  * Download sequence data from SRA into directory 'sra-fastqs/'
-    ipyrad --download SRP021469 sra-fastqs/
-
-  * Documentation: http://ipyrad.readthedocs.io
+  * Documentation: http://ipyrad2.github.io
 ```
 
 ## Create a new parameters file
@@ -137,16 +130,16 @@ analysing your own data you might call your parameters file something
 more informative, like the name of your organism and some details on the
 settings.
 
-```bash 
+```bash
 # First, make sure you're in your workshop directory
-$ cd /scratch/ipyrad-workshop
+$ cd ~/ipyrad-workshop
 
 # Unpack the simulated data which is included in the ipyrad github repo
 # `tar` is a program for reading and writing archive files, somewhat like zip
 #   -x eXtract from an archive
 #   -z unZip before extracting
 #   -f read from the File
-$ tar -xzf /ipyrad/tests/ipsimdata.tar.gz
+$ tar -xzf ~/ipyrad2/tests/ipsimdata.tar.gz
 
 # Take a look at what we just unpacked
 $ ls ipsimdata
@@ -166,7 +159,7 @@ with the `pairddrad` example dataset.
 
 ```bash
 # Now create a new params file named 'peddrad'
-$ ipyrad -n peddrad
+$ ipyrad2-classic -n peddrad
 ```
 
 This will create a file in the current directory called `params-peddrad.txt`.
@@ -176,61 +169,46 @@ Lets take a look at it.
 
 ``` 
 $ cat params-peddrad.txt
-------- ipyrad params file (v.0.9.92)-------------------------------------------
-peddrad                        ## [0] [assembly_name]: Assembly name. Used to name output directories for assembly steps
-/scratch/ipyrad-workshop   ## [1] [project_dir]: Project dir (made in curdir if not present)
-                               ## [2] [raw_fastq_path]: Location of raw non-demultiplexed fastq files
-                               ## [3] [barcodes_path]: Location of barcodes file
-                               ## [4] [sorted_fastq_path]: Location of demultiplexed/sorted fastq files
-denovo                         ## [5] [assembly_method]: Assembly method (denovo, reference)
-                               ## [6] [reference_sequence]: Location of reference sequence file
-rad                            ## [7] [datatype]: Datatype (see docs): rad, gbs, ddrad, etc.
-TGCAG,                         ## [8] [restriction_overhang]: Restriction overhang (cut1,) or (cut1, cut2)
-5                              ## [9] [max_low_qual_bases]: Max low quality base calls (Q<20) in a read
-33                             ## [10] [phred_Qscore_offset]: phred Q score offset (33 is default and very standard)
-6                              ## [11] [mindepth_statistical]: Min depth for statistical base calling
-6                              ## [12] [mindepth_majrule]: Min depth for majority-rule base calling
-10000                          ## [13] [maxdepth]: Max cluster depth within samples
-0.85                           ## [14] [clust_threshold]: Clustering threshold for de novo assembly
-0                              ## [15] [max_barcode_mismatch]: Max number of allowable mismatches in barcodes
-0                              ## [16] [filter_adapters]: Filter for adapters/primers (1 or 2=stricter)
-35                             ## [17] [filter_min_trim_len]: Min length of reads after adapter trim
-2                              ## [18] [max_alleles_consens]: Max alleles per site in consensus sequences
-0.05                           ## [19] [max_Ns_consens]: Max N's (uncalled bases) in consensus (R1, R2)
-0.05                           ## [20] [max_Hs_consens]: Max Hs (heterozygotes) in consensus (R1, R2)
-4                              ## [21] [min_samples_locus]: Min # samples per locus for output
-0.2                            ## [22] [max_SNPs_locus]: Max # SNPs per locus (R1, R2)
-8                              ## [23] [max_Indels_locus]: Max # of indels per locus (R1, R2)
-0.5                            ## [24] [max_shared_Hs_locus]: Max # heterozygous sites per locus
-0, 0, 0, 0                     ## [25] [trim_reads]: Trim raw read edges (R1>, <R1, R2>, <R2) (see docs)
-0, 0, 0, 0                     ## [26] [trim_loci]: Trim locus edges (see docs) (R1>, <R1, R2>, <R2)
-p, s, l                        ## [27] [output_formats]: Output formats (see docs)
-                               ## [28] [pop_assign_file]: Path to population assignment file
-                               ## [29] [reference_as_filter]: Reads mapped to this reference are removed in step 3
+# ------- ipyrad params file (v.0.1.11)-----------------------------------------
+
+[main]
+name = "peddrad"
+project_dir = "./"
+raw_fastq_path = "/path/to/fastqs/*.gz"
+barcodes_path = "/path/to/bcodes.txt"
+sorted_fastq_path = "/path/to/sorted_fastqs/*.gz"
+reference_sequence = "/path/to/ref.fa"
+pop_assign_file = "/path/to/pops.txt"
+
+[demux]
+i7 = false
+max_mismatch = 0
+
+<clip>
+
+subsample = -1
+populations = -1
+rename = -1
+masks = -1
+keep_tmpdir = false
 ```
 
 In general the defaults are sensible, and we won't mess with them for now, 
-but there are a few parameters we *must* change:
+but there are a two parameters we *must* change:
 * The path to the raw data
 * The barcodes file
-* The dataype
-* The restriction overhang sequence(s)
 
 Open the new params file by double-clicking on `params-peddrad.txt` in the
 left-nav file browser (you might need to navigate to this directory first).
 
-![png](images/CO-EditParams.png)
+![png](images/tutorial_EditParams.png)
 
-We need to specify where the raw data files are located, the type of data we
-are using (.e.g., 'gbs', 'rad', 'ddrad', 'pairddrad), and which enzyme cut site
-overhangs are expected to be present on the reads. Change the following lines
-in your params files to look like this:
+We need to specify where the raw data files and barcodes are located. 
+Change the following lines in your params files to look like this:
 
 ```bash
-ipsimdata/pairddrad_example_R*.fastq.gz     ## [2] [raw_fastq_path]: Location of raw non-demultiplexed fastq files
-ipsimdata/pairddrad_example_barcodes.txt    ## [3] [barcodes_path]: Location of barcodes file
-pairddrad                                   ## [7] [datatype]: Datatype (see docs): rad, gbs, ddrad, etc.
-TGCAG, CGG                                  ## [8] [restriction_overhang]: Restriction overhang (cut1,) or (cut1, cut2)
+raw_fastq_path = "ipsimdata/pairddrad_example_R*.fastq.gz"
+barcodes_path = "ipsimdata/pairddrad_example_barcodes.txt"
 ```
 **NB:** Don't forget to choose "File->Save Text" after you are done editing!
 
@@ -238,7 +216,7 @@ Once we start running the analysis ipyrad will create several new directories to
 hold the output of each step for this assembly. By default the new directories
 are created in the `project_dir` directory and use the prefix specified by the
 `assembly_name` parameter. For this example assembly all the intermediate
-directories will be of the form: `/scratch/ipyrad-workshop/peddrad_*`. 
+directories will be of the form: `~/ipyrad-workshop/peddrad_*`. 
 
 # Input data format
 
@@ -286,16 +264,16 @@ directory called `peddrad_fastqs` with two `.gz` files per sample, one for
 R1 and one for R2.
 
 > **Note on step 1:** Sometimes, rather than returning the raw data, sequencing
-facilities will give the data pre-demultiplexed to samples. This situation only
-slightly modifies step 1, and does not modify further steps, so we will refer
-you to the [full ipyrad tutorial](http://ipyrad.readthedocs.io/tutorial_intro_cli.html)
-for guidance in this case.
+facilities will give the data pre-demultiplexed to samples. In this case you would
+use `sorted_fastq_path` instead of `raw_fastq_path`/`barcodes_path`, and you would
+also be able to __skip step 1__. That's not what we are doing here so we do have
+to run step 1
 
 Now lets run step 1! For the simulated data this will take just a few moments.
 
 > **Special Note:** In some cases it's useful to specify the number of cores with
 the `-c` flag. If you do not specify the number of cores ipyrad assumes you want
-**all** of them. Our CO capsules have 16 cores so we'll practice that here.
+**all** of them. Our compute nodes have 16 cores so we'll practice that here.
 
 ```bash
 ## -p    the params file we wish to use

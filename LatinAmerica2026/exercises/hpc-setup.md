@@ -13,9 +13,11 @@ Tec de Monterrey.
 ## Tec de Monterrey HPC System Setup
 
 * Log in with ssh
+ * Windows gotcha: Settings > Apps > Optional features > Add a feature > search for OpenSSH Client and choose "Install"
 * Download and install miniconda
 * Create a new conda environment and install all needed software
 * Launch jupyter lab (including setting a password first)
+ * Set jupyter server password: `jupyter server password`
 * Access your jupyter lab instance at your personal node IP address
 
 ### Accessing a command line interface on Tec HPC

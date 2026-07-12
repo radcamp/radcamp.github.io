@@ -14,11 +14,7 @@
 * [Exercise 2: ipyrad CLI assembly of simulated data](./exercises/ipyrad-CLI-FullTutorial.html)
 * Break for Lunch (12:45-1:30)
 
-## Welcome and Introductions
-
-[Instructor introduction slides](https://docs.google.com/presentation/d/1rOKSssEsz7TMOGMQAvOVx64nD8aAVuRj4dnB2WSbUmA/edit#slide=id.g25093f4cab7_0_13)
-
-### Learning objectives.
+## Learning objectives.
 By the end of this workshop you will gain experience with:
 * More efficiently use tools for reproducible bioinformatics (unix, jupyter, ipyrad, CodeOcean, etc)
 * Using HPC infrastructure to run genomic analyses
