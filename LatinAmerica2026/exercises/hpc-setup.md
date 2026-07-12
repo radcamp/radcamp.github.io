@@ -16,6 +16,7 @@ Tec de Monterrey.
  * Windows gotcha: Settings > Apps > Optional features > Add a feature > search for OpenSSH Client and choose "Install"
 * Download and install miniconda
 * Create a new conda environment and install all needed software
+ * Include analysis tools and streamlit for `inspect`
 * Launch jupyter lab (including setting a password first)
  * Set jupyter server password: `jupyter server password`
 * Access your jupyter lab instance at your personal node IP address
