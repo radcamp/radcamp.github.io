@@ -37,17 +37,15 @@ Very roughly speaking, ipyrad exists to transform raw data coming off the
 sequencing instrument into output files that you can use for downstream 
 analysis. 
 
-![png](../images/ipyrad_workflow.png)
+![png](images/ipyrad_workflow.png)
 
 The basic steps of this process are as follows:
 
-* Step 1 - Demultiplex/Load Raw Data
-* Step 2 - Trim and Quality Control
-* Step 3 - Cluster or reference-map within Samples
-* Step 4 - Calculate Error Rate and Heterozygosity
-* Step 5 - Call consensus sequences/alleles
-* Step 6 - Cluster across Samples
-* Step 7 - Apply filters and write output formats
+* Step 1 - demux: Demultiplex/Load Raw Data
+* Step 2 - trim: Trim and Quality Control
+* Step 3 - denovo: Construct pseudo-reference sequence
+* Step 4 - map: Map trimmed reads to external reference or denovo pseudoreference
+* Step 5 - assemble: Define loci, calls variants, and write assembled outputs
 
 > **Note on files in the project directory:** Assembling RADseq type 
 sequence data requires a lot of different steps, and these steps 
@@ -56,8 +54,7 @@ into directories, and it prepends the name of your assembly to each
 directory with data that belongs to it. One result of this is that 
 you can have multiple assemblies of the same raw data with different 
 parameter settings and you don't have to manage all the files yourself! 
-(See [Branching assemblies](https://ipyrad.readthedocs.io/en/latest/8-branching.html) for more info). Another
-result is that **you should not rename or move any of the directories
+Another result is that **you should not rename or move any of the directories
 inside your project directory**, unless you know what you're doing or
 you don't mind if your assembly breaks.
 
@@ -120,6 +117,15 @@ ipyrad2-classic -p params-data.txt -s 3 -f    ## run step 3, overwrite existing 
 
   * Documentation: http://ipyrad2.github.io
 ```
+
+## ipyrad2 classic mode
+One of the main differences from the previous ipyrad interface is that ipyrad2
+centers the command line around named subcommands with clearer inputs, outputs,
+logs, and stats. This new interface is more powerful and more expressive, but it
+also has a steeper learning curve. To facilitate ease of use we have implemented
+the older ipyrad CLI format, which uses a single command and a params
+file through a companion tool `ipyrad2-classic`. We will focus on `ipyrad2-classic`
+for the moment, but will return to the new ipyrad2 subcommand interface later on.
 
 ## Create a new parameters file
 ipyrad uses a text file to hold all the parameters for a given assembly.
