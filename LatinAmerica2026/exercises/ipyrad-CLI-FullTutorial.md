@@ -505,6 +505,7 @@ BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
 
 The goal of denovo is to construct a pseudo-reference that is representative for the samples in hand so that later read mapping and assembly steps can proceed against locus references that are empirically supported. In the case that a suitable reference sequence already exists, this step may be skipped.
 
+**TODO:** Do we want to show people here how to do the imap to select samples for denovo?
 
 Now lets run step 3:
 
