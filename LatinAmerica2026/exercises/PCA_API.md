@@ -26,15 +26,11 @@ all code in cells of a jupyter notebook.
 # **PCA** analyses
 
 ## A bit of setup
-Inside your CO capsule open a new terminal and install `scikit-learn`, which we
-use internally for some of the PCA functions.
-```bash
-conda install -c conda-forge scikit-learn
-```
+**TODO:** Ensure all needed packages are installed during HPC setup.
 
 ## Create a new notebook for the PCA
 In the file browser on the left of JupyterLab browse to the directory with the
-assembly of the simulated data: `/scratch/ipyrad-workshop`.
+assembly of the simulated data: `~/ipyrad-workshop`.
 
 ![png](images/PCA-WorkshopDirectory.png)
 
@@ -52,10 +48,8 @@ importing the ipyrad analysis module. Copy the code below into a
 notebook cell and click run. 
 
 ```python
-import ipyrad.analysis as ipa
+from ipyrad2.analysis.methods.pca import PCA
 ```
-> The `as ipa` part here creates a short synonym so that we can refer to
-`ipyrad.analysis` **as** `ipa`, which is just faster to type.
 
 ## Quick guide (tl;dr)
 The following cell shows the quickest way to results using the small simulated
@@ -65,11 +59,8 @@ Copy this code into a new notebook cell (small grey *+* button on the toolbar)
 and run it.
 
 ```python
-data = "peddrad_outfiles/peddrad.snps.hdf5"
-## Create the pca object
-pca = ipa.pca(data)
-## Run the analysis
-pca.run()
+## Create the pca object with the simulated hdf5 data
+pca = PCA.run(data="peddrad_outfiles/peddrad.hdf5")
 ## Bam!
 pca.draw()
 ```
@@ -90,10 +81,10 @@ output, remove any obvious outliers, and then redo the PCA.
 
 ```python
 ## Path to the input data in snps.hdf5 format 
-data = "peddrad_outfiles/peddrad.snps.hdf5"
-pca = ipa.pca(data)
+data = "peddrad_outfiles/peddrad.hdf5"
+pca = PCA(data)
 ```
-> **Note:** Here we use the hdf5 database file with SNPs generated with ipyrad from the
+> **Note:** Here we use the hdf5 database file generated with ipyrad from the
 simulated data. The database file contains the genotype calls information as well
 as linkage information that is used for subsampling unlinked SNPs and bootstrap resampling.
 
@@ -106,22 +97,21 @@ By default all samples are assigned to one population, so everything will
 be the same color.
 
 ```python
-pca.plot()
+pca.draw()
 ```
 
 ![png](images/PCA-TLDRExample.png)
 
 ### Population assignment for sample colors
 Typically it is useful to color points in a PCA by some a priori grouping, such
-as presumed population, or by experimental treatment groups, etc. To facilitate
-this it is possible to specify population assignments in a `dictionary`. The
-format of the dictionary should have populations as keys and lists of samples
-as values. Sample names need to be identical to the names in the input dataset,
-which we can verify with the `names` property of the PCA object. Open a new cell
+as presumed population, or by experimental treatment groups, etc. 
+this it is possible to specify population assignments in a text file.
+Sample names need to be identical to the names in the input dataset,
+which we can verify with the `samples` property of the PCA object. Open a new cell
 and type this:
 
 ```python
-pca.names
+pca.result.samples
 ```
 ```
 ['1A_0',
@@ -138,23 +128,30 @@ pca.names
  '3L_0']
 ```
 
-Here we create a python 'dictionary', which is a key/value pair data structure.
-The keys are the population names, and the values are the lists of samples that
-belong to those populations. You can copy and paste this into a new cell in your
-notebook.
-```python
-imap = {"pop1":['1A_0', '1B_0', '1C_0', '1D_0'],
-        "pop2":['2E_0', '2F_0', '2G_0', '2H_0'],
-        "pop3":['3I_0', '3J_0', '3K_0', '3L_0']}
+In the file browser on the left, left-click and create a new empty text file
+by choosing "New File". The format of the population assignment file (or pops file)
+is a simple two column and whitespace separated (can be spaces or tabs). The first
+column is sample ID (must be identical to the results of `pca.results.samples`
+and the second column is Population. To save time, the first population looks like
+this. Copy this into your new file and finish filling out the rest of the population
+assignments for samples `2E_0` through `3L_0` (the populations they belong to
+are keyed by the first integer index of the sample ID).
+
 ```
+1A_0 pop1
+1B_0      pop1
+1C_0    pop1
+1D_0    pop1
+```
+
+When you are done click File->Save As and save this as `sim_pops.txt`.
 Now create the `pca` object with the input data again, this time passing 
-in the new dictionary as the second argument and specifying this as the `imap`,
+in the new file name as the second argument and specifying this as the `imap`,
 and plot the new figure. We can also easily add a title to our PCA plots
 with the `label=` argument.
 
 ```python
-pca = ipa.pca(data, imap=pops_dict)
-pca.run()
+pca = PCA.run(data=data, imap="sim_pops.txt")
 pca.draw(label="Sims colored by pop")
 ```
 
@@ -173,19 +170,15 @@ of the sample, and if it can be seen to be of poor quality, to remove it and
 replot the PCA. The simulated dataset is actually relatively nice, but for the
 sake of demonstration lets imagine the sample "1D_0" is 'bad'.
 
-> **Note:** We make a lot of use of the interactivity of jupyter notebooks in
+> **Hover points in the PCA plot:** We make a lot of use of the interactivity of jupyter notebooks in
 the ipyrad.analysis tools. In the PCA you can 'hover' over points to reveal
 their sample ID.
 
 The easiest way to achieve this is to simply remove the sample from the `imap`
-file and run the PCA again.
-
+file and run the PCA again. Go to your `sim_pops.txt` file and remove "1D_0"
+then choose File->Save Text As and save this new pops file as `subset_pops.txt`.
 ```python
-imap = {"pop1":['1A_0', '1B_0', '1C_0'],
-        "pop2":['2E_0', '2F_0', '2G_0', '2H_0'],
-        "pop3":['3I_0', '3J_0', '3K_0', '3L_0']}
-pca = ipa.pca(data, imap=imap)
-pca.run()
+pca = PCA.run(data=data, imap="subset_pops.txt")
 pca.draw(label="Sims colored by pop (no 1D_0)")
 ```
 
@@ -208,6 +201,8 @@ pca.draw();
 ```
 ![png](images/PCA-Replicates.png)
 
+**TODO:** This still doesn't work in ip2 pca
+
 ## Plotting PCs other than 0 and 1
 Even though PC 0 and 1 by definition explain the most variance in the data,
 it is still often useful to examine other PCs. You can do this by specifying
@@ -220,15 +215,24 @@ pca.draw(0, 2)
 
 ## Custom color points
 Another nice feature of the `draw` method is the ability to pass in any custom
-color that you like for each population. You can do this in a couple different
-ways, but the most straightforward is just to pass in a list of valid color names
+color that you like for each population. You can do this by passing in another
+tsv file this time mapping population IDs to python colors (either hexadecimal
+or named colors). The most straightforward is just to pass in a list of valid color names
 from the ['named colors' matplotlib documentation](https://matplotlib.org/stable/gallery/color/named_colors.html).
 
+Open a new text file and save this as `pop_colors.txt`:
+```
+pop1	hotpink
+pop2	skyblue
+pop3	goldenrod
+```
+
 ```python
-pca.draw(colors=["hotpink", "skyblue", "goldenrod"])
+pca.draw(colors='pop_colors.txt')
 ```
 ![png](images/PCA-NamedColors.png)
 
+**TODO:** Done w/ PCA to here
 ## Dealing with missing data in PCA
 PCA can be _extremely_ sensitive to missing data if there is any pattern
 at all in the missingness.
