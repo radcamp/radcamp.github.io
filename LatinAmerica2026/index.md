@@ -113,20 +113,10 @@ TBD
 Times            | Day 6 | Day 7 | Day 8 |
 -----            | ----- | ----- | ----- |
 8:30-9:00       | Check-in and refreshments | Check-in and refreshments | Check-in and refreshments |
-9:00-12:30      | QC Empirical Data (start API tools if empirical data isn't ready) | Review Assembly results & [ipyrad API and analysis tools](RADCamp-PartII-Day2-AM.md) | Symposium |
+9:00-12:30      | [Demux/QC Empirical Data](./RADCamp-PartII-Day2-AM.md) (start API tools if empirical data isn't ready) | Review Assembly results & [ipyrad API and analysis tools](RADCamp-PartII-Day3-AM.md) | Symposium |
 12:30-13:45 | Lunch | Lunch | Lunch |
-13:45-18:00 | Begin Empirical Assembly [Part I](RADCamp-PartII-Day1-PM.md) |  Empirical analysis w/ API tools [Part II](RADCamp-PartII-Day2-PM.md) | Q&As Genomics Core-Instructors- Participants & Farewell Dinner (optional) |
+13:45-18:00 | [Begin Empirical Assembly](RADCamp-PartII-Day2-PM.md) |  [Empirical analysis w/ API tools](RADCamp-PartII-Day3-PM.md) | Q&As Genomics Core-Instructors- Participants & Farewell Dinner (optional) |
 
-## Additional ipyrad analysis cookbooks
-
-* [Tetrad - A Quartet-based species tree method](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-tetrad.ipynb)
-* [Phylogenetic inference: RAxML](06_RAxML_API.md)
-* [Clustering analysis: PCA](04_PCA_API.md)
-* [Clustering analysis: STRUCTURE](05_STRUCTURE_API.md)
-* [BPP - Bayesian inference under a multi-species coalescent model](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-bpp-species-delimitation.ipynb)
-* [Bucky - Phylogenetic concordance analysis](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-bucky.ipynb)
-* [ABBA-BABA - Admixture analysis](https://nbviewer.jupyter.org/github/dereneaton/ipyrad/blob/master/tests/cookbook-abba-baba.ipynb)
-* [Demographic analysis ([momi2](07_momi2_API.md))
 
 ## RADCamp Latin America 2026 co-sponsored by:
 
@@ -171,32 +161,6 @@ Times            | Day 6 | Day 7 | Day 8 |
     <p><b>... And viewers like you.</b></p>
   </td></tr>
 </table>
-
-<!--
-Old unformatted logo images:
-
-* __American Genetics Association through the Special Event Awards program__  
-* __Columbia University's Ecology, Evolution and Environmental Biology Department__  
-* __Maine Center for Genetics in the Environment & The University of Maine__  
-* __Society of Systematic Biologists__  
-
-![Columbia E3B](images/E3B-logo.jpg){: width="25%"}  
-
-![American Genetics Association](images/AGA-logo.jpg){: width="25%"}  
-
-![Maine Center for Genetics in the Environment and University of Maine](images/MAINE_crest_4c.png){: width="25%"}  
-
-![Society of Systematic Biologists](images/SSB.png){: width="25%"}  
-
-
-# RADCamp NYC 2023 Part I Group Photo
-![RADCampNYC2023-PartI-picnic](images/RADCamp-NYC2023-Group-PartI.jpeg)
-![RADCampNYC2023-PartI-picnic](images/RADCampNYC2023-PartI.jpeg)
-
-# RADCamp NYC 2023 Part II Group Photo
-![RADCampNYC2023-PartII](images/RADCamp-NYC2023-Group-PartII.jpeg)
-
--->
 
 ## Acknowledgements
 RADcamp Part I tutorial contributors: Sandra Hoffberg, Natalia Bayona Vasquez, 
