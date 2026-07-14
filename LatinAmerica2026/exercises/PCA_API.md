@@ -174,9 +174,22 @@ sake of demonstration lets imagine the sample "1D_0" is 'bad'.
 the ipyrad.analysis tools. In the PCA you can 'hover' over points to reveal
 their sample ID.
 
-The easiest way to achieve this is to simply remove the sample from the `imap`
-file and run the PCA again. Go to your `sim_pops.txt` file and remove "1D_0"
+The easiest way to achieve this is to use the `exclude` parameter when calling
+`PCA.run()` to remove samples before running the PCA. This parameter takes a `list`
+of sample names (which is a comma separated group of strings enclosed in square
+brackets). Use it to exclude two samples like this:
+
+```python
+pca = PCA.run(data=data, imap="sim_pops.txt", exclude=["1D_0", "2E_0"])
+pca.draw(label="Exclude two samples")
+```
+
+![png](images/PCA-Exclude.png)
+
+If you have many samples to exclude it might be easiert to simply remove these from 
+the `imap` file and run the PCA again. Go to your `sim_pops.txt` file and remove "1D_0"
 then choose File->Save Text As and save this new pops file as `subset_pops.txt`.
+
 ```python
 pca = PCA.run(data=data, imap="subset_pops.txt")
 pca.draw(label="Sims colored by pop (no 1D_0)")
@@ -190,28 +203,17 @@ effect of linkage on your results. This can be turned off by setting
 `subsample=False`. However, subsampling *unlinked* SNPs is generally a good
 idea for PCA analyses since you want to remove the effects of linkage from your
 data. It also presents a convenient way to explore the confidence in your
-results. By using the option `nreplicates` you can run many replicate analyses
+results. By using the option `replicates` you can run many replicate analyses
 that subsample a different random set of unlinked SNPs each time. The replicate
 results are drawn with a lower opacity and the centroid of all the points for
 each sample is plotted as a black point. 
 
 ```python
-pca.run(nreplicates=25, seed=12345)
+pca = PCA.run(data=data, imap="sim_pops.txt", replicates=25)
 pca.draw();
 ```
 ![png](images/PCA-Replicates.png)
 
-**TODO:** This still doesn't work in ip2 pca
-
-## Plotting PCs other than 0 and 1
-Even though PC 0 and 1 by definition explain the most variance in the data,
-it is still often useful to examine other PCs. You can do this by specifying
-which PCs to plot in in the call to `draw`.
-
-```python
-pca.draw(0, 2)
-```
-![png](images/PCA-PC02.png)
 
 ## Custom color points
 Another nice feature of the `draw` method is the ability to pass in any custom
@@ -232,49 +234,166 @@ pca.draw(colors='pop_colors.txt')
 ```
 ![png](images/PCA-NamedColors.png)
 
-**TODO:** Done w/ PCA to here
-## Dealing with missing data in PCA
-PCA can be _extremely_ sensitive to missing data if there is any pattern
-at all in the missingness.
+## Data imputation: Dealing with missing data in PCA
+All PCA-family methods in ipyrad2 require a fully imputed genotype matrix. Missing 
+genotypes are not allowed to remain in the numerical matrix passed to PCA, t-SNE, or UMAP.
 
-We offer three algorithms for imputing missing data:
+Supported imputation modes are:
+* `sample`: sample missing diploid genotypes from allele frequencies within each imputation group
+* `zero-fill`: replace missing genotypes with homozygous reference calls
 
-* `sample`: Randomly sample genotypes based on the frequency of alleles within
-(user-defined) populations (`imap`).
-* `kmeans`: Randomly sample genotypes based on the frequency of alleles in
-(kmeans cluster-generated) populations.
-* 'random': This is less an imputation method than an attempt to reduce the bias
-of assigning all missing data to the ancestral state. Instead missing data
-are randomly assigned to ancestral or derived states.
-* `None` (default): All missing values are imputed with zeros (ancestral allele).
+`sample` is the default and generally the preferred choice. If you provide imap, 
+sample-mode imputation uses those groups. If you do not provide imap, all 
+retained samples are treated as one imputation group.
 
-Here is an example of how to select an `impute_method`:
+zero-fill is usually a poor default for exploratory structure analyses because 
+it can pull missing-heavy samples toward the reference state. Since none 
+currently behaves the same way, users should not treat it as “leave missing data 
+unchanged.”
+
+Users should inspect `sample_data_summary.tsv` after every run and consider 
+dropping samples that require too much imputation before trusting the structure. 
+Heavy imputation is often a warning that missingness, rather than biology, may 
+be shaping the ordination.
+
+Here is an example of how to select the zero-fill `impute_method` (for
+the simulated data the results don't change much):
 ```python
-pca1 = ipa.pca(
-    data=data,
-    imap=imap,
-    impute_method=`sample`,
-)
+pca = PCA.run(data=data, imap='sim_pops.txt', impute_method='zero-fill')
+pca.draw()
 ```
 
-A fourth approach is to simply enforce an lower bound on missing data with
-the `mincov` parameter. `mincov` specifies the minimum coverage threshold
-below which a snp is excluded from the analysis.
+![png](images/PCA-ZeroImputation.png)
+
+## Filtering data
+
+Another approach is to simply enforce a lower bound on missing data with
+the `min_sample_coverage` parameter. This parameter specifies the minimum 
+coverage threshold below which a snp is excluded from the analysis.
 
 This code will exclude any snp not present in 100% of samples, a very strict
-threshold.
+threshold. Here we print the INFO again, so we can see how many SNPs were
+removed by this minimum sample coverage threshold.
+
 ```python
-pca2 = ipa.pca(
-    data=data,
-    mincov=1.0,
-    impute_method=None,
-)
+pca = PCA.run(data=data, min_sample_coverage=12, log_level="INFO")
 ```
+```
+SNP extraction summary
+  filter statistic samples: 12
+  filter statistic pre_filter_snps: 9425
+  filter statistic pre_filter_percent_missing: 0.057 (linked genotype cells missing before site filtering)
+  filter statistic masked_genotypes_by_min_depth: 0
+  filter statistic filter_by_indels_present: 0
+  filter statistic filter_by_non_biallelic: 169
+  filter statistic filter_by_mincov: 61
+  filter statistic filter_by_minmap: 0
+  filter statistic filter_by_min_site_qual: 0
+  filter statistic filter_by_invariant_after_subsampling: 0
+  filter statistic filter_by_minor_allele_frequency: 0
+  filter statistic post_filter_snps: 9196
+  filter statistic post_filter_snp_containing_linkage_blocks: 989
+```
+
+The INFO log level shows detailed information about all the filters
+that are applied prior to running the PCA. Some of these are required
+(indels, biallelic, invariant after subsampling), but others can also
+be controlled by parameters like `min_minor_allele_frequency` (MAF filters
+are common) and `max_sample_missing` (removing samples that exceed a given
+missingness threshold).
 
 We encourage you to experiment with different imputation schemes
 and missing data thresholds when analysing your own data later.
 
+## Running ipyrad2 PCI CLI tool
+
+The PCA notebook API tool we have been using is really just a wrapper
+around the command line version of the tool. The API mode makes it
+a bit easier to explore different plotting methods, but the underlying
+CLI tool has many more features that we don't expose in the API.
+
+```bash
+$ ipyrad2 pca -h
+```
+```
+usage: ipyrad2 pca -d Path [-n str] [-o Path] [-M str] [--replicates int] [--no-subsample] [--seed int] [--perplexity float]
+                   [--max-iter int] [--n-neighbors int] [--plot] [--plot-width int] [--plot-height int] [--plot-marker-size int]
+                   [--plot-colors Path] [-m int] [-r float] [-a float] [--min-genotype-depth int] [--min-site-qual float] [-I str]
+                   [-e [str ...]] [-R] [-i Path] [-g Path] [-c int] [-f] [-l str] [-h]
+
+-------------------------------------------------------------
+ipyrad2 [v.0.1.11]
+Interactive assembly and analysis of RAD-seq data
+-------------------------------------------------------------
+ipyrad2 pca: run PCA, t-SNE, or UMAP on SNP HDF5 data
+
+Core inputs:
+  -d, --data Path                         Path to an SNP-capable HDF5 file. Convert VCF first with `ipyrad2 vcf2hdf5`.
+  -n, --name str                          Prefix name for output files. [default=pca]
+  -o, --out Path                          Directory to write numerical outputs and stats. [default=output-pca]
+
+Method and linkage:
+  -M, --method str                        Method to run: pca, tsne, or umap. [default=pca]
+  --replicates int                        Number of PCA replicate runs. Only valid with `-M pca`. [default=1]
+  --no-subsample                          Keep linked SNPs. By default pca subsamples one SNP per RAD locus.
+  --seed int                              Random seed for SNP subsampling, imputation, and serial method initialization.
+  --perplexity float                      t-SNE perplexity. Used only with `-M tsne`. [default=5.0]
+  --max-iter int                          t-SNE maximum iterations. Used only with `-M tsne`. [default=1000]
+  --n-neighbors int                       UMAP neighbor count. Used only with `-M umap`. [default=15]
+
+Plotting:
+  --plot                                  Write an SVG plot for PCA results. Only supported with `-M pca`.
+  --plot-width int                        SVG width in pixels for `--plot`. [default=400]
+  --plot-height int                       SVG height in pixels for `--plot`. [default=300]
+  --plot-marker-size int                  Marker size for `--plot`. [default=10]
+  --plot-colors Path                      Whitespace-delimited population color file for PCA plot marker colors.
+
+Filtering and samples:
+  -m, --min-sample-coverage int           Minimum number of samples that must have data at a SNP. [default=4]
+  -r, --max-sample-missing float          Maximum missing-data frequency allowed in a sample. [default=1.0]
+  -a, --min-minor-allele-frequency float  Minimum minor allele frequency required to retain a SNP. [default=0.0]
+  --min-genotype-depth int                Mask sample genotypes with FORMAT/DP below this threshold before site filtering. [default=0]
+  --min-site-qual float                   Minimum VCF QUAL score required to retain a SNP site. [default=0.0]
+  -I, --impute-method str                 Impute missing genotypes with `sample` or `zero`. [default=sample]
+  -e, --exclude [str ...]                 Exclude one or more samples by name. This takes precedence over IMAP membership and `-R`.
+  -R, --include-reference                 Include `assembly_reference_sequence`. By default it is excluded unless IMAP already contains it.
+  -i, --imap Path                         Sample-to-population mapping file w/ `sample<TAB>population` or `glob<TAB>population` per line.
+  -g, --minmap Path                       Population-to-minimum-coverage mapping file with `population<TAB>min` on each line. Adds per-
+                                          population minimum coverage checks on top of `-m` when `imap` is used.
+
+Performance and overwrite:
+  -c, --cores int                         Number of cores to use during chunked SNP filtering and UMAP embedding. [default=1]
+  -f, --force                             Overwrite existing output files with identical names.
+
+Logging:
+  -l, --log-level str                     Log level (TRACE, DEBUG, INFO, WARNING, ERROR) [default=INFO]
+  -h, --help                              Show this help message and exit.
+
+Examples
+--------
+$ ipyrad2 pca -d snps.hdf5 -o OUT/
+$ ipyrad2 pca -d snps.hdf5 -o OUT/ --plot
+$ ipyrad2 pca -d snps.hdf5 -o OUT/ --plot --plot-width 520 --plot-height 360
+$ ipyrad2 pca -d snps.hdf5 -o OUT/ --plot -i imap.tsv --plot-colors colors.tsv
+$ ipyrad2 pca -d snps.hdf5 -o OUT/ -M tsne --perplexity 8
+$ ipyrad2 pca -d snps.hdf5 -o OUT/ -M umap --n-neighbors 10
+$ ipyrad2 pca -d snps.hdf5 -o OUT/ --no-subsample --impute-method zero
+```
+
 ## More to explore
-The `ipyrad.analysis.pca` module has many more features that we just don't have
+The `ipyrad.analysis.methods.pca` module has many more features that we just don't have
 time to go over, but you might be interested in checking them out later:
-* [Full ipyrad.analysis.pca cookbook](https://ipyrad.readthedocs.io/en/master/API-analysis/cookbook-pca.html)
+* [Full ipyrad PCA documentation](https://eaton-lab.org/ipyrad2/analyses/pca/)
+
+
+**TODO:** This still doesn't work in ip2 pca
+## Plotting PCs other than 0 and 1
+Even though PC 0 and 1 by definition explain the most variance in the data,
+it is still often useful to examine other PCs. You can do this by specifying
+which PCs to plot in in the call to `draw`.
+
+```python
+pca.draw(0, 2)
+```
+![png](images/PCA-PC02.png)
+
