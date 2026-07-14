@@ -12,6 +12,7 @@
 * Coffee Break (10:30-10:50)
 * [Lecture: ipyrad history, philosophy and workflow (Deren)](https://ipyrad.readthedocs.io/en/latest)
 * [Exercise 2: ipyrad CLI assembly of simulated data](./exercises/ipyrad-CLI-FullTutorial.html)
+* [Exercise 3: Assemble mystery data](./exercises/mystery_data.md)
 * Break for Lunch (12:45-1:30)
 
 ## Learning objectives.
