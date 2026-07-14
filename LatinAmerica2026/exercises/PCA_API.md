@@ -305,6 +305,21 @@ missingness threshold).
 We encourage you to experiment with different imputation schemes
 and missing data thresholds when analysing your own data later.
 
+## Plotting PCs other than the first and second
+Even though PC 1 and 2 by definition explain the most variance in the data,
+it is still often useful to examine other PCs. You can do this by specifying
+which PCs to plot in in the call to `draw`.
+
+> * **PC values are 0-indexed:** We call it "PC 1" but because python is
+a zero-indexed for lists/arrays the first column of a matrix has index 0. We
+know it is confusing, and it is not just for you.
+
+```python
+pca = PCA.run(data, imap="sim_pops.txt", replicates=3)
+pca.draw(PC0=0, PC1=2)
+```
+![png](images/PCA-PC02.png)
+
 ## Running ipyrad2 PCI CLI tool
 
 The PCA notebook API tool we have been using is really just a wrapper
@@ -384,16 +399,4 @@ $ ipyrad2 pca -d snps.hdf5 -o OUT/ --no-subsample --impute-method zero
 The `ipyrad.analysis.methods.pca` module has many more features that we just don't have
 time to go over, but you might be interested in checking them out later:
 * [Full ipyrad PCA documentation](https://eaton-lab.org/ipyrad2/analyses/pca/)
-
-
-**TODO:** This still doesn't work in ip2 pca
-## Plotting PCs other than 0 and 1
-Even though PC 0 and 1 by definition explain the most variance in the data,
-it is still often useful to examine other PCs. You can do this by specifying
-which PCs to plot in in the call to `draw`.
-
-```python
-pca.draw(0, 2)
-```
-![png](images/PCA-PC02.png)
 
