@@ -210,7 +210,7 @@ each sample is plotted as a black point.
 
 ```python
 pca = PCA.run(data=data, imap="sim_pops.txt", replicates=25)
-pca.draw();
+pca.draw(label="3 Replicates");
 ```
 ![png](images/PCA-Replicates.png)
 
