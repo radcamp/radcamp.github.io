@@ -160,6 +160,10 @@ pca.draw(label="Sims colored by pop")
 This is just much nicer looking now, and it's also much more straightforward
 to interpret.
 
+## Evaluating applied filters and sample quality
+
+**TODO:** Add stuff for pca.sample_summary() and pca.filter_summary() here
+
 ## Removing "bad" samples and replotting.
 In PC analysis, it's common for "bad" samples to dominate several of the first
 PCs, and thus "pop out" in a degenerate looking way. Bad samples of this kind
