@@ -1,6 +1,16 @@
+## HPC compute node configuration
+* [ ] Nail down the ipyrad2 installation process
+  * [ ] Get ipyrad2 in conda-forge
+* [ ] When available, make a page with compute node IP addresses and participant names and
+link to it on `exercises/hpc-setup.md`
 
 ## Fastqc Exercise
 * [ ] Figure out how to distribute the Seadragon data for the fastqc exercise  
 
+## ipyrad2 simulated tutorial
+* [ ] Do we want to show the ipyrad2 CLI after the classic mode walkthrough? If so
+where does this happen?
+
 ## Empirical data analysis
+* [ ] Remember to get basespace to demux on i7 for us when we pull the raw data
 * [ ] Figure out how to distribute the empirical data to the participant compute nodes

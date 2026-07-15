@@ -13,9 +13,15 @@ Tec de Monterrey.
 ## Tec de Monterrey HPC System Setup
 
 * Log in with ssh
- * Windows gotcha: Settings > Apps > Optional features > Add a feature > search for OpenSSH Client and choose "Install"
+  * On Mac or Linux you can open a Terminal and type `ssh`
+  * On windows you should be able to open PowerShell and use `ssh` from there.
+    * Windows gotcha: Settings > Apps > Optional features > Add a feature > search for OpenSSH Client and choose "Install"
 * Download and install miniconda
+  * `wget https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh`
+  * `bash Miniforge3-Linux-x86_64.sh` <- And follow the prompts
 * Create a new conda environment and install all needed software
+  * `conda create -n ipyrad2`
+  * `conda activate ipyrad2`
  * Include analysis tools and streamlit for `inspect`
 * Launch jupyter lab (including setting a password first)
  * Set jupyter server password: `jupyter server password`
