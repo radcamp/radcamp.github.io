@@ -1,3 +1,6 @@
+## Prerequisites
+* [ ] When do we want them to prepare their barcodes files?
+
 ## HPC compute node configuration
 * [ ] Nail down the ipyrad2 installation process
   * [ ] Get ipyrad2 in conda-forge
