@@ -42,6 +42,10 @@ Lead: Isaac (30')
 ## Phylogenetic inference with treeslider and astral
 Lead: Deren (**TODO: duration**)
 
+## Brief intro to other analysis tools
+Lead: **TODO**
+
+[ipyrad2 analysis tools documentation](https://eaton-lab.org/ipyrad2/analyses/)
 
 ## Lunch (12:30-1:15)
 
