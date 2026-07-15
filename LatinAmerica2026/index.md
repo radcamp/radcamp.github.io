@@ -113,7 +113,7 @@ TBD
 Times            | Day 6 | Day 7 | Day 8 |
 -----            | ----- | ----- | ----- |
 8:30-9:00       | Check-in and refreshments | Check-in and refreshments | Check-in and refreshments |
-9:00-12:30      | [Demux/QC Empirical Data](./RADCamp-PartII-Day2-AM.md) (start API tools if empirical data isn't ready) | Review Assembly results & [ipyrad API and analysis tools](RADCamp-PartII-Day3-AM.md) | Symposium |
+9:00-12:30      | [Demux/QC Empirical Data](./RADCamp-PartII-Day2-AM.md) (start API tools if empirical data isn't ready) | Review Assembly results & [ipyrad API and analysis tools](RADCamp-PartII-Day3-AM.md) | [Symposium](https://drive.google.com/drive/folders/1TeDLweZlBW7VOdF-oGX_igBiP46GlvE0?usp=drive_link) |
 12:30-13:45 | Lunch | Lunch | Lunch |
 13:45-18:00 | [Begin Empirical Assembly](RADCamp-PartII-Day2-PM.md) |  [Empirical analysis w/ API tools](RADCamp-PartII-Day3-PM.md) | Q&As Genomics Core-Instructors- Participants & Farewell Dinner (optional) |
 
