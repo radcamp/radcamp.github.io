@@ -12,14 +12,14 @@ The CLI provides a way to navigate a file system, move files around, and run com
 For now we will start with 4 of the most common and useful commands:
 
 ```
-(ipyrad) jovyan@493222dbc32d:~$ pwd
+(ipyrad) ~$ pwd
 /home/jovyan
 ```
 `pwd` stands for **"print working directory"**, which literally means "where am I now in this filesystem". Just like when you open a file browser with windows or mac, when you open a new terminal the command line will start you out in your "home" directory. Ok, now we know where we are, lets take a look at what's in this directory:
 
 ```
-(ipyrad) jovyan@493222dbc32d:~$ ls
-evolution  work
+(ipyrad) ~$ ls
+miniconda3
 ```
 
 `ls` stands for **"list"** and in our home directory there are two folders: 
@@ -34,7 +34,7 @@ in your home directory.
 We can start out by adding the first directory for this workshop:
 
 ```
-(ipyrad) jovyan@493222dbc32d:~$ mkdir ipyrad-workshop
+(ipyrad) ~$ mkdir SeadragonData
 ```
 
 `mkdir` stands for **"make directory"**, and unlike the other two commands, this 
@@ -44,8 +44,8 @@ to create, so here we direct mkdir to create a new directory called
 home directory and you should see this new directory now:
 
 ```
-(ipyrad) jovyan@493222dbc32d:~$ ls
-evolution  ipyrad-workshop  work
+(ipyrad) ~$ ls
+miniconda3  SeadragonData
 ```
 
 Throughout the workshop we will be introducing new commands as the need for them 
@@ -61,9 +61,9 @@ thing. First **Change Directory** into your `ipyrad-workshop` directory with the
 command, then make the shortcut with `ln` (just copy/paste this command).
 
 ```bash
-(ipyrad) jovyan@493222dbc32d:~$ cd ipyrad-workshop
-(ipyrad) jovyan@493222dbc32d:~/ipyrad-workshop$ ln -s /home/jovyan/work/SeadragonData/raws ./raws
-(ipyrad) jovyan@493222dbc32d:~/ipyrad-workshop$ ls -l
+(ipyrad) ~$ cd SeadragonData
+(ipyrad) ~/SeadragonData$ ln -s /home/jovyan/work/SeadragonData/raws ./raws
+(ipyrad) ~/SeadragonData$ ls -l
 ```
 ```
 lrwxrwxrwx 1 jovyan users   51 Apr 23 14:51 raws -> /home/jovyan/work/SeadragonData/raws
@@ -72,7 +72,7 @@ The `ls -l` command shows that the new `raws` shortcut indeed points to the shar
 raw data.
 
 ## Exploring the seadragon data
-We will be reanalysing RAD-Seq data from seadragons (*Phyllopteryx taeniolatus*) 
+We will be looking at data quality for RAD-Seq data from seadragons (*Phyllopteryx taeniolatus*) 
 sampled from across across New South Wales, Victoria and Tasmania, and published in 
 [Klanten *et al.* 2020 - Genomic and morphological evidence of distinct populations 
 in the endemic common (weedy) seadragon *Phyllopteryx taeniolatus* (Syngnathidae) 
@@ -89,7 +89,7 @@ You can see the fastq files for these samples by listing (`ls`) the directory wh
 they are stored, the `raws` shortcut we created earlier:
 
 ```
-(ipyrad) jovyan@493222dbc32d:~/ipyrad-workshop$ ls raws
+(ipyrad) ~/SeadragonData$ ls raws
 Bic1_R1_.fastq.gz  Bic6_R1_.fastq.gz  Fli1_R1_.fastq.gz  Hob1_R1_.fastq.gz  Jer4_R1_.fastq.gz  Por5_R1_.fastq.gz
 Bic2_R1_.fastq.gz  Bot1_R1_.fastq.gz  Fli2_R1_.fastq.gz  Hob2_R1_.fastq.gz  Por1_R1_.fastq.gz  Syd1_R1_.fastq.gz
 Bic3_R1_.fastq.gz  Bot2_R1_.fastq.gz  Fli3_R1_.fastq.gz  Jer1_R1_.fastq.gz  Por2_R1_.fastq.gz  Syd2_R1_.fastq.gz
@@ -111,7 +111,7 @@ use `zcat` to read the gzip format and `head` to carve off a small part of the d
 ## zcat: unZip and conCATenate the file to the screen
 ## head -n 20: Just take the first 20 lines of input
 
-(ipyrad) jovyan@493222dbc32d:~/ipyrad-workshop$ zcat raws/Bic1_R1_.fastq.gz | head -n 20
+(ipyrad) ~/SeadragonData$ zcat raws/Bic1_R1_.fastq.gz | head -n 20
 ```
 ```
 @SRR12395901.1 3_11401_20767_1041/1
@@ -170,13 +170,13 @@ to keep the FastQC results organized. Make a new directory with
 `mkdir`:
 
 ```bash
-(ipyrad) jovyan@493222dbc32d:~/ipyrad-workshop$ mkdir fastqc-results
-(ipyrad) jovyan@493222dbc32d:~/ipyrad-workshop$ ls
+(ipyrad) ~/SeadragonData$ mkdir fastqc-results
+(ipyrad) ~/SeadragonData$ ls
 fastqc-results raws
 ```
 Now run FastQC on one of the samples:
 ```
-(ipyrad) jovyan@493222dbc32d:~/ipyrad-workshop$ fastqc -o fastqc-results raws/Bic1_R1_.fastq.gz 
+(ipyrad) ~/SeadragonData$ fastqc -o fastqc-results raws/Bic1_R1_.fastq.gz 
 ```
 > **Note:** The `-o` flag tells fastqc where to write output files.
 
@@ -211,7 +211,7 @@ Analysis complete for Bic1_R1_.fastq.gz
 
 If you feel so inclined you can QC all the raw data using a wildcard substitution:
 ```
-(ipyrad) jovyan@493222dbc32d:~/ipyrad-workshop$ fastqc -o fastqc-results raws/*
+(ipyrad) ~/SeadragonData$ fastqc -o fastqc-results raws/*
 ```
 > **Note:** The `*` here is a special command line character that means "Everything 
 that matches this pattern". So here `raws/*` matches _everything_ in the raws 
@@ -230,7 +230,7 @@ the html files by double clicking on them.
 
 ![png](images/notebook-fastqc.png)
 
-### Instpecting and Interpreting FastQC Output
+### Inspecting and Interpreting FastQC Output
 
 Just taking a random one, lets spend a moment looking at the results from 
 `Bic1_R1_.fastq.gz`. Opening up this html file, on the left you'll see a summary of 
@@ -279,6 +279,5 @@ tell a pretty consistant story?
 
 >**Note:** if you have a lot of samples, and therefore a lot of FastQC reports, it would be kind of annoying to look at them one by one. There is a tool called [MultiQC](https://seqera.io/multiqc/), which conveniently summarizes all FastQC results into a single report.
 
-At the end of the day, the seadragon data look good and we can proceed with the 
-ipyrad analysis.
+At the end of the day, the seadragon data look pretty good, hopefully your data will look nice as well.
 
