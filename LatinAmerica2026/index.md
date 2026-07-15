@@ -163,6 +163,18 @@ Times            | Day 6 | Day 7 | Day 8 |
 </table>
 
 ## Acknowledgements
+RADCamp Latin America would not have been possible without important 
+contributions to the workshop in providing us with facilities (classrooms), 
+technological infrastructure (servers), and in general supportive camaraderie 
+necessary to make such a huge undertaking a success. We gratefully acknowledge
+support of the following individuals:
+* Juan Arturo Nolazco Flores
+* Hugo Miguel González Hernández (RIP)
+* Enrique Pablos Gutiérrez
+* Manuel Francisco Daniel Flores
+* Luis Fernando Santiesteban Moreno 
+* Pedro Manuel Cortés Esparza
+
 RADcamp Part I tutorial contributors: Sandra Hoffberg, Natalia Bayona Vasquez, 
 and Travis Glenn. Many things we reference can be found on 
 [badDNA.uga.edu](https://baddna.uga.edu)
