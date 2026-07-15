@@ -1,5 +1,9 @@
 # The FASTQ data format & Quality Control (QC)
 
+## Goals of this exercise
+* Become more comfortable with command line interface (CLI)
+* View and understand the fastq format
+* Be able to locate the restriction enzyme recognition sequence in raw data
 
 ## Command line interface (CLI) basics
 The CLI provides a way to navigate a file system, move files around, and run commands all inside a little black window. The down side of CLI is that you have to learn many at first seemingly esoteric commands for doing all the things you would normally do with a mouse. However, there are several advantages of CLI: 
