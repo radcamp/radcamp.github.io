@@ -1,8 +1,5 @@
 # Assemble mystery data in small groups
 
-## Launch a new ipyrad binder instance
-* [**Launch ipyrad with binder.**](https://mybinder.org/v2/gh/dereneaton/ipyrad/master)
-
 ## Make a new directory for the mystery assembly
 
 To keep things organized you should first create a new directory in your
@@ -32,3 +29,14 @@ sorted_fastq_path = "/path/to/sorted_fastqs/*.gz" <- You need to change this!
 
 * And have fun ;)
 
+# Assemble the Seadragon data (optional)
+
+If you finish the mystery data you might try running an assembly of the
+Seadragon data we used for the fastqc exercise, which you will recall
+lives in `~/SeadragonData`, so you can:
+
+```
+cd ~/SeadragonData
+```
+
+And the rest of that assembly will be up to you!
