@@ -5,7 +5,7 @@
 * [Exercise 1: Demultiplex your raw data](#demultiplex-empirical-data)
 * [Look at the real data](#Look-at-the-real-data-we-generate)
 * [Exercise 2: RADseq data quality control (QC)](#empirical-data-qc)
-* Coffee break (3:30-3:45)
+* Coffee break
 * [Assemble real data](#empirical-assembly)
 
 ## Demultiplex Empirical Data
