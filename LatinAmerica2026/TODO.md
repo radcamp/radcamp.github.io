@@ -17,3 +17,7 @@ where does this happen?
 ## Empirical data analysis
 * [ ] Remember to get basespace to demux on i7 for us when we pull the raw data
 * [ ] Figure out how to distribute the empirical data to the participant compute nodes
+* [ ] When do we want to distribute flash drives and DL the raw data for takehome?
+I suggest at the end of [Day 2](https://radcamp.github.io/LatinAmerica2026/RADCamp-PartII-Day2-PM.html)
+ after assemblies are all running.
+* [ ] Do we want to keep a backup copy of the raw data for ourselves? If so where?
