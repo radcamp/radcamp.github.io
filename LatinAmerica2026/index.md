@@ -174,6 +174,7 @@ support of the following individuals:
 * Manuel Francisco Daniel Flores
 * Luis Fernando Santiesteban Moreno 
 * Pedro Manuel Cortés Esparza
+* Ana Laura Lara Rivera
 
 RADcamp Part I tutorial contributors: Sandra Hoffberg, Natalia Bayona Vasquez, 
 and Travis Glenn. Many things we reference can be found on 
