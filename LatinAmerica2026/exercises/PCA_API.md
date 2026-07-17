@@ -25,9 +25,6 @@ all code in cells of a jupyter notebook.
 
 # **PCA** analyses
 
-## A bit of setup
-**TODO:** Ensure all needed packages are installed during HPC setup.
-
 ## Create a new notebook for the PCA
 In the file browser on the left of JupyterLab browse to the directory with the
 assembly of the simulated data: `~/ipyrad-workshop`.
@@ -161,6 +158,32 @@ This is just much nicer looking now, and it's also much more straightforward
 to interpret.
 
 ## Evaluating applied filters and sample quality
+
+```python
+pca.sample_summary()
+```
+![png](images/PCA-SampleSummary.png)
+
+
+```python
+pca.filter_summary()
+```
+```
+samples                                        12.000
+pre_filter_snps                              9425.000
+pre_filter_percent_missing                      0.057
+masked_genotypes_by_min_depth                   0.000
+filter_by_indels_present                        0.000
+filter_by_non_biallelic                       169.000
+filter_by_mincov                                0.000
+filter_by_minmap                                0.000
+filter_by_min_site_qual                         0.000
+filter_by_invariant_after_subsampling           0.000
+filter_by_minor_allele_frequency                0.000
+post_filter_snps                             9256.000
+post_filter_snp_containing_linkage_blocks     996.000
+post_filter_percent_missing                     0.058
+```
 
 **TODO:** Add stuff for pca.sample_summary() and pca.filter_summary() here
 
