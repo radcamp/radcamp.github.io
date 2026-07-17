@@ -25,8 +25,26 @@ Lets take some time to look at results of the assembly process for some of the
 real datasets. Did they all work perfectly? Why did some work, why did some
 break? Look at runtimes: How long did they take to run?
 
+### Use `ipyrad inspect` to view assembly results
+* `ipyrad2 inspect <assembly_name>_outfiles/`
+
 ## ipyrad analysis tools
-* A brief overview of ipyrad analysis tools
+A brief overview of ipyrad analysis tools.
+
+```bash
+$ ipyrad2 -h
+```
+```
+analysis subcommands
+    pca                                      Infer population structure from pca, tsne, or umap on filtered SNPs
+    dapc                                     Infer population genetic clustering by discriminant analysis of principal components
+    snmf                                     Infer population genetic clustering by non-negative matrix factorization
+    admixture                                Infer population genetic clustering with external ADMIXTURE
+    popgen                                   Infer population genetic statistics for one or more populations
+    bpp                                      Infer species tree; species delim; or MSC+ model from multi-locus data
+    baba                                     Infer admixture metrics from ABBA/BABA and related SNP patterns
+    treeslider                               Infer gene trees for each qualified locus or refmapped genomic window of loci
+```
 
 ## ipyrad API and Jupyter Notebooks
 Lead: **TODO:**
