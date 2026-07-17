@@ -940,10 +940,111 @@ Samples with data  RAD loci before min sample coverage  RAD loci after min sampl
 12                 1,000                                1,000                               998                               1,000                  0.998000
 ```
 
-**TODO:** Talk here about `inspect`
+# Inspecting assembly results with `ipyrad2 inspect`
 
-**TODO:** Do we want to talk about wex/lex/snpex here or no?
+Looking at stats files is very important, but stats files are static and they don't
+help you understand how your data will change with under different filtering schemes.
+To simplify this (and also make it visual) we include a graphical assembly browser
+called `ipyrad2 inspect`. Run it on the simulated data like this:
 
+```bash
+$ ipyrad2 inspect peddrad_outfiles
+```
+This will launch a browser-based tool on your compute node, and it will tell you
+how to access it.
+```
+Collecting usage statistics. To deactivate, set browser.gatherUsageStats to false.
+
+2026-07-17 16:56:00.800 Uvicorn server started on :::8501
+
+  You can now view your Streamlit app in your browser.
+
+  Local URL: http://localhost:8501
+  Network URL: http://130.111.205.17:8501
+  External URL: http://130.111.205.17:8501
+```
+Copy the `Network URL` value and paste it into a new browser tab and you should
+see something like this:
+
+![png](images/tutorial_InspectIntro.png)
+
+The left panel primarily contains a sample selection window (for experimentally
+removing samples) and numerous sliders and input boxes for changing different
+filters to see how assembly results will change under different filtering regimes.
+
+The main center panel displays all the information about the assembly pre- and post-
+filtering. The first row of information shows the key pre-filtering assembly stats 
+for this dataset, in other words these are the raw values of the assembly output. 
+The second row of information shows assembly stats with currently applied filtering. 
+These values will change as you experiment with different filtering and sample 
+removal strategies. Below this is a tabbed interface  which we will go through 
+one pane at a time.
+
+### Overview
+
+The Overview pane has two sub-panes, Assembly Summary on the left, which shows
+the unfiltered assembly results and which never changes during experimental
+filtering, and the Current Filter Summary on the right which reflects how the
+assembly would change as you apply different filters.
+
+Set `min_sample_coverage` to 1.0 and you'll see in the Current Filter Summary
+that `below_min_sample_coverage` changes from 0 to 61, indicating that there
+are 61 SNPs that do not have complete sample coverage.
+
+![png](images/tutorial_InspectOverview.png)
+
+### Filter Impact
+
+![png](images/tutorial_InspectFilter.png)
+
+### Samples
+
+This pane is great for looking at the distribution of missgness by sample.
+You can use this to identify samples that have too much missing data and
+should be excluded from downstream analysis. The Sample missingness bar
+plot shows all your samples in rank order of most to least missigness, and
+as you apply filters the Dropped Samples pane will populate with the sample
+IDs of samples removed for a given filtering regime.
+
+![png](images/tutorial_InspectSamples.png)
+
+If you change `max_sample_missing` to 0.00, you'll see the Dropped Samples
+pane populate with 8 sample IDs and the Sample missingness plot for the
+remaining 4 samples is not very interesting because they all have complete
+data.
+
+### Loci
+
+This pane shows the distribution of SNPs per locus (pre- and post-filtering).
+Set `min_minor_allele_frequency` to 0.10 and you can see on the right there
+is a big reduction in the maximum value of retained SNPs per locus (from a 
+bit more than 20 to 9) indicating that many of the SNPs in highly variable
+loci were at <10% frequency. (MAF cutoffs of 0.05 or less are more common, 0.10
+is used here only for illustration and shouldn't be used in practice on real
+data).
+
+![png](images/tutorial_InspectLoci.png)
+
+### Sites
+
+This pane shows two different lenses on missigness. On the left is a histogram
+showing the count of SNPs with a given amount of missingness, and on the right
+is the number of called samples per site. This panel isn't very interesting
+for the simulated data because there is little missing data. For empirical
+data this will be a very informative visualization of missingness.
+
+![png](images/tutorial_InspectSites.png)
+
+### Export
+
+The Export pane allows you to download csv files with the current filtering
+scheme applied. So for example if you set `max_sample_missing` to zero, this will
+exclude all but 4 samples and your downloaded `peddrad.sample-summary.csv` will
+only contain samples 1C, 2E, 2H, and 2G.
+
+![png](images/tutorial_InspectExport.png)
+
+# Conclusion
 Congratulations! You've completed your first RAD-Seq assembly. Now you can try
 applying what you've learned to assemble your own real data. Please consult the
 [ipyrad2 online documentation](https://eaton-lab.org/ipyrad2) for details about
