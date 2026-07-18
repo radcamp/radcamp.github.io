@@ -1,3 +1,7 @@
+## Logistics
+* [ ] We need to figure out how/when/who for key return on the 28th. Who is departing
+when on the 28th?
+
 ## Prerequisites
 * [ ] When do we want them to prepare their barcodes files?
 
