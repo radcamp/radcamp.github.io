@@ -995,6 +995,10 @@ are 61 SNPs that do not have complete sample coverage.
 
 ### Filter Impact
 
+This plot shows a user friendly histogram of applied filters and retained snps,
+as well as a histogram of minor allele frequencies per SNP. You can change the
+`Min minor allele frequency` filter and see this sub-panel change.
+
 ![png](images/tutorial_InspectFilter.png)
 
 ### Samples

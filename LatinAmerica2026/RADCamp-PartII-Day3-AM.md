@@ -1,4 +1,4 @@
-# RADCamp NYC 2023 Part II (Bioinformatics)
+# RADCamp Latin America 2026 Part II (Bioinformatics)
 # Day 3 (AM)
 
 Now that your assemblies have completed, what are the next steps?

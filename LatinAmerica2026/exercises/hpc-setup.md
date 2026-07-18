@@ -20,9 +20,14 @@ Tec de Monterrey.
   * `wget https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh`
   * `bash Miniforge3-Linux-x86_64.sh` <- And follow the prompts
 * Create a new conda environment and install all needed software
-  * `conda create -n ipyrad2`
-  * `conda activate ipyrad2`
- * Include analysis tools and streamlit for `inspect`
+```
+git clone https://github.com/eaton-lab/ipyrad2.git
+cd ipyrad2
+conda env create -f environment.yml -n ipyrad2
+conda activate ipyrad2
+# Install all analysis tools dependencies
+pip install ipyrad2[analysis]
+```
 * Launch jupyter lab (including setting a password first)
  * Set jupyter server password: `jupyter server password`
 * Access your jupyter lab instance at your personal node IP address

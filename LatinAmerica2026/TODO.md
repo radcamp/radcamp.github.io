@@ -3,7 +3,7 @@
 
 ## HPC compute node configuration
 * [ ] Nail down the ipyrad2 installation process
-  * [ ] Get ipyrad2 in conda-forge
+  * [ ] Get ipyrad2 in bioconda
 * [ ] When available, make a page with compute node IP addresses and participant names and
 link to it on `exercises/hpc-setup.md`
 
@@ -20,4 +20,5 @@ where does this happen?
 * [ ] When do we want to distribute flash drives and DL the raw data for takehome?
 I suggest at the end of [Day 2](https://radcamp.github.io/LatinAmerica2026/RADCamp-PartII-Day2-PM.html)
  after assemblies are all running.
-* [ ] Do we want to keep a backup copy of the raw data for ourselves? If so where?
+* [x] Do we want to keep a backup copy of the raw data for ourselves? If so where?
+  * Sounds like we do NOT want to keep a backup copy of the data
