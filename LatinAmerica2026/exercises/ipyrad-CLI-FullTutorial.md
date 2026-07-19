@@ -503,9 +503,41 @@ BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
 
 # Step 3 (denovo): Construct pseudo-reference sequence
 
-The goal of denovo is to construct a pseudo-reference that is representative for the samples in hand so that later read mapping and assembly steps can proceed against locus references that are empirically supported. In the case that a suitable reference sequence already exists, this step may be skipped.
+The goal of denovo is to construct a pseudo-reference that is representative for 
+the samples in hand so that later read mapping and assembly steps can proceed 
+against locus references that are empirically supported. In the case that a 
+suitable reference sequence already exists, this step may be skipped.
 
-**TODO:** Do we want to show people here how to do the imap to select samples for denovo?
+## Selecting samples for denovo reference construction
+By default ipyrad2 selects 10 random samples for construction of the pseudo-reference.
+There is a tradeoff between pseudo-reference completeness and computational burden, 
+and we find that 10 samples is often a good compromise. However, using random samples is
+only a good idea if your samples are all drawn from one or a few populations. Samples
+should be selected to capture phylogenetic diversity of the total dataset, and if the 
+selected samples are not representative then the resulting pseudo-reference will work 
+better for some than other taxa (not a good result).
+
+The solution is to create an `imap` (individual map) file to specify which individuals
+to select to include in step 3. Create a new blank text file ('File->New->Text File'),
+For this exercise we will select 2 inviduals for each of the 3 simulated 
+populations, so add the following text to your new file, then choose "File->Save 
+Text as" and call this file `step3_samples.txt`.
+
+```
+1A_0 pop1
+1B_0      pop1
+2E_0    pop2
+2F_0    pop2
+3I_0    pop3
+3J_0    pop3
+```
+
+Now open your `params-peddrad.txt` file and edit the `imap` parameter in the `[denovo]`
+table (make sure to do File->Save Text):
+```
+[denovo]
+imap = "step3_samples.txt"
+```
 
 Now lets run step 3:
 
@@ -518,23 +550,24 @@ ipyrad [v.0.1.11]
 Interactive assembly and analysis of RAD-seq data
 -------------------------------------------------------------
 Step 3 (denovo): Construct denovo locus reference library
-[####################] 100% | Clustering within samples - total jobs: 10 
+[####################] 100% | Clustering within samples - total jobs: 6
 [####################] 100% | Across-sample clustering 
 [####################] 100% | Splitting global clusters - total jobs: 1000 
 [####################] 100% | Aligning loci - total jobs: 1000
 ```
 
-**TODO**: Explain each of the steps a bit better (poached from the docs)
 In-depth operations of step 3:
 * Clustering within samples - Find reads matching by sequence similarity threshold,
 includes a dereplication step to collapse all identical sequences (for efficiency).
-Reads are first clustered within samples at a high threshold (--similarity-within) to dereplicate and group reads representing alleles at the same locus into a consensus sequence. 
-* Clustering across samples - 
-The consensus sequences are then clustered across samples at a lower thresholds (--similarity-across) to group homologous loci, putatively including orthologs and paralogs. 
-* Splitting clusters - 
-Using a similarity graph among samples, we then apply a graph-splitting algorithm to construct
-* Aligning clusters - Align all clusters
-**TODO**: Explain each of the steps a bit.
+Reads are first clustered within samples at a high threshold (--similarity-within) 
+to dereplicate and group reads representing alleles at the same locus into a 
+consensus sequence. 
+* Clustering across samples - The consensus sequences are then clustered across 
+samples at a lower thresholds (--similarity-across) to group homologous loci, 
+putatively including orthologs and paralogs. 
+* Splitting clusters - Using a similarity graph among samples, we then apply a 
+graph-splitting algorithm to identify and remediate merged paralogs.
+* Aligning clusters - Perform a multiple-sequence align within each cluster (locus)
 
 Again we can examine the results. The stats output tells you the parameters that
 were used for this step, how many loci were found and locus coverage stats. Use 
@@ -546,11 +579,16 @@ any of the stats that are less interesting or relevant for beginners.
 ```bash
 $ less peddrad_reference/denovo.stats.txt
 ```
+## Record of parameters and input data
+
+This section is primarily for reproducibility, to show what data and what
+parameter settings were used to generate this pseudo-reference.
+
 ```
 CMD: ipyrad2 -p params-peddrad.txt -s 3 -c 8
 
 # Inputs
-FASTQ files            20
+FASTQ files            12
 Selected samples       10
 Total input samples    12
 Sample selection mode  top-half-random
@@ -565,7 +603,11 @@ Minimum read length             35
 Minimum merge overlap           20
 Maximum merge differences       4
 Allow reverse complement        False
+```
 
+## Pseudo-reference statistics
+
+```
 # Denovo Summary
 Consensus records                     9,999
 Loci written                          1,000
@@ -612,6 +654,11 @@ p90       0            0
 p99       0            0               
 max       0            0               
 
+```
+
+## Per sample summary
+
+```
 # Selected Sample Summary
 Sample  Consensus records  Read count  Joined records  Merged records  Single records
 1B_0    1,000              17,420      1,000           0               0             
@@ -638,7 +685,11 @@ Samples with data  Loci  Fraction of final loci
 8                  0     0.000000              
 9                  1     0.001000              
 10                 999   0.999000              
+```
 
+## Output files
+
+```
 # Runtime
 Cores                     8
 VSEARCH threads per job   2
@@ -660,10 +711,9 @@ Audit directory       /home/isaac_tmp/ipyrad-workshop/peddrad_reference/denovo.a
 Intermediate files    cleaned on success
 ```
 
-At the end of the stats file you can see the outputs that are generated by Step 3.
-
-**TODO:** Detail the interesting denovo outputs
-
+At the end of the stats file you can see the outputs that are generated by Step 3. 
+The most immediately relevant output file is `denovo_reference.fa`. You can look at
+this with `head`:
 
 ```bash
 head -n 8 peddrad_reference/denovo_reference.fa 
@@ -679,8 +729,7 @@ GAAACTGTGTCCGTCGAGAGGTTGATCGTTCTTCCAAGTTATTTTAAATCAGGCGCCATAGCCTAATCCAAGGCGGTGAT
 CTCCGTAACCAAGTGGGAACTCTATACGTACAACTATGTGACCCAGGCGTAAGCATTCAGCACCACCGTTGGTGTAGGCAGACATTNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNGTCACACGGTCGTTACCGCAGTGCTACTCGGAAAATGCGTTAGATTGATTCTAGCCTGCGACGACCTGACATCGTAAAGTGTCCATGCCGGAGCATT
 ```
 
-**TODO:** Talk about any of the other properties of the psuedoreference that are interesting
-like the poly-N spacer for example.
+What do you think is going on with all those `N`'s in the middle of each locus?
 
 # Step 4 (map): Map trimmed reads to external reference or denovo pseudoreference
 
