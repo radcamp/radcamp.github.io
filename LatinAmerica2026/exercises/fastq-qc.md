@@ -15,7 +15,7 @@ For now we will start with 4 of the most common and useful commands:
 
 ```
 (ipyrad) ~$ pwd
-/home/jovyan
+/home/admin1
 ```
 `pwd` stands for **"print working directory"**, which literally means "where am I now in this filesystem". Just like when you open a file browser with windows or mac, when you open a new terminal the command line will start you out in your "home" directory. Ok, now we know where we are, lets take a look at what's in this directory:
 
@@ -33,45 +33,13 @@ in your home directory.
 
 ### Setting up working directories
 
-We can start out by adding the first directory for this workshop:
+We copied some sample empirical fastq files to each of the compute nodes in
+advance of this workshop, so we will use these files for exploring fastq
+sequence quality.
 
 ```
-(ipyrad) ~$ mkdir SeadragonData
+(ipyrad) ~$ cd test-data/SeadragonData
 ```
-
-`mkdir` stands for **"make directory"**, and unlike the other two commands, this 
-command takes an "argument". This argument is the name of the directory you wish 
-to create, so here we direct mkdir to create a new directory called 
-"ipyrad-workshop". Now you can use `ls` again, to look at the contents of your 
-home directory and you should see this new directory now:
-
-```
-(ipyrad) ~$ ls
-miniconda3  SeadragonData
-```
-
-Throughout the workshop we will be introducing new commands as the need for them 
-arises. We will pay special attention to highlighting and explaining new commands 
-and giving examples to practice with. 
-
-> **Special Note:** Notice that the above directory we are making is not called `ipyrad workshop`. This is **very important**, as spaces in directory names are known to cause problems on HPC systems. All linux based operating systems do not recognize file or directory names that include spaces, because spaces act as default delimiters between arguments to commands. There are ways around this (for example Mac OS has half-baked "spaces in file names" support) but it will be so much for the better to get in the habit now of ***never including spaces in file or directory names***.
-
-The raw data lives in a directory called `raws` inside a nested set of
-directories in the `work` directory. It will be very convenient for us to create
-a shortcut to the raw data inside our ipyrad work directory, so we'll do this first
-thing. First **Change Directory** into your `ipyrad-workshop` directory with the `cd` 
-command, then make the shortcut with `ln` (just copy/paste this command).
-
-```bash
-(ipyrad) ~$ cd SeadragonData
-(ipyrad) ~/SeadragonData$ ln -s /home/jovyan/work/SeadragonData/raws ./raws
-(ipyrad) ~/SeadragonData$ ls -l
-```
-```
-lrwxrwxrwx 1 jovyan users   51 Apr 23 14:51 raws -> /home/jovyan/work/SeadragonData/raws
-```
-The `ls -l` command shows that the new `raws` shortcut indeed points to the shared
-raw data.
 
 ## Exploring the seadragon data
 We will be looking at data quality for RAD-Seq data from seadragons (*Phyllopteryx taeniolatus*) 
@@ -91,7 +59,7 @@ You can see the fastq files for these samples by listing (`ls`) the directory wh
 they are stored, the `raws` shortcut we created earlier:
 
 ```
-(ipyrad) ~/SeadragonData$ ls raws
+(ipyrad) ~/test-data/SeadragonData$ ls raws
 Bic1_R1_.fastq.gz  Bic6_R1_.fastq.gz  Fli1_R1_.fastq.gz  Hob1_R1_.fastq.gz  Jer4_R1_.fastq.gz  Por5_R1_.fastq.gz
 Bic2_R1_.fastq.gz  Bot1_R1_.fastq.gz  Fli2_R1_.fastq.gz  Hob2_R1_.fastq.gz  Por1_R1_.fastq.gz  Syd1_R1_.fastq.gz
 Bic3_R1_.fastq.gz  Bot2_R1_.fastq.gz  Fli3_R1_.fastq.gz  Jer1_R1_.fastq.gz  Por2_R1_.fastq.gz  Syd2_R1_.fastq.gz
@@ -113,7 +81,7 @@ use `zcat` to read the gzip format and `head` to carve off a small part of the d
 ## zcat: unZip and conCATenate the file to the screen
 ## head -n 20: Just take the first 20 lines of input
 
-(ipyrad) ~/SeadragonData$ zcat raws/Bic1_R1_.fastq.gz | head -n 20
+(ipyrad) ~/test-data/SeadragonData$ zcat raws/Bic1_R1_.fastq.gz | head -n 20
 ```
 ```
 @SRR12395901.1 3_11401_20767_1041/1
@@ -172,13 +140,13 @@ to keep the FastQC results organized. Make a new directory with
 `mkdir`:
 
 ```bash
-(ipyrad) ~/SeadragonData$ mkdir fastqc-results
-(ipyrad) ~/SeadragonData$ ls
+(ipyrad) ~/test-data/SeadragonData$ mkdir fastqc-results
+(ipyrad) ~/test-data/SeadragonData$ ls
 fastqc-results raws
 ```
 Now run FastQC on one of the samples:
 ```
-(ipyrad) ~/SeadragonData$ fastqc -o fastqc-results raws/Bic1_R1_.fastq.gz 
+(ipyrad) ~/test-data/SeadragonData$ fastqc -o fastqc-results raws/Bic1_R1_.fastq.gz 
 ```
 > **Note:** The `-o` flag tells fastqc where to write output files.
 
@@ -213,7 +181,7 @@ Analysis complete for Bic1_R1_.fastq.gz
 
 If you feel so inclined you can QC all the raw data using a wildcard substitution:
 ```
-(ipyrad) ~/SeadragonData$ fastqc -o fastqc-results raws/*
+(ipyrad) ~/test-data/SeadragonData$ fastqc -o fastqc-results raws/*
 ```
 > **Note:** The `*` here is a special command line character that means "Everything 
 that matches this pattern". So here `raws/*` matches _everything_ in the raws 

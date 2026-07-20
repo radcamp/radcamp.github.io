@@ -6,13 +6,13 @@ when on the 28th?
 * [ ] When do we want them to prepare their barcodes files?
 
 ## HPC compute node configuration
-* [ ] Nail down the ipyrad2 installation process
-  * [ ] Get ipyrad2 in bioconda
-* [ ] When available, make a page with compute node IP addresses and participant names and
+* [X] Nail down the ipyrad2 installation process
+  * [X] Get ipyrad2 in bioconda
+* [X] When available, make a page with compute node IP addresses and participant names and
 link to it on `exercises/hpc-setup.md`
 
 ## Fastqc Exercise
-* [ ] Figure out how to distribute the Seadragon data for the fastqc exercise  
+* [X] Figure out how to distribute the Seadragon data for the fastqc exercise  
 
 ## ipyrad2 simulated tutorial
 * [ ] Do we want to show the ipyrad2 CLI after the classic mode walkthrough? If so
