@@ -8,7 +8,7 @@ very intensive code on a larger remote machine.
 * For this workshop we are going to use compute infrastructure provided by
 Tec de Monterrey.
 
-**Get everyone on Tec HPC here: [Link to Node/IP address assignments when available](wat)**
+**Get everyone on Tec HPC here: [Link to Node/IP address assignments](../hpc-ip-info.txt)**
 
 ## Tec de Monterrey HPC System Setup
 
