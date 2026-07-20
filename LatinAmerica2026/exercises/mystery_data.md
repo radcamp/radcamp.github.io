@@ -33,10 +33,10 @@ sorted_fastq_path = "/path/to/sorted_fastqs/*.gz" <- You need to change this!
 
 If you finish the mystery data you might try running an assembly of the
 Seadragon data we used for the fastqc exercise, which you will recall
-lives in `~/SeadragonData`, so you can:
+lives in `~/test-data/SeadragonData`, so you can:
 
 ```
-cd ~/SeadragonData
+cd ~/test-data/SeadragonData
 ```
 
 And the rest of that assembly will be up to you!

@@ -11,8 +11,8 @@
 * [Exercise 1: Intro to FASTQC format and quality control (Isaac)](./exercises/fastq-qc)
 * Coffee Break (10:30-10:50)
 * [Lecture: ipyrad history, philosophy and workflow (Deren)](https://eaton-lab.org/ipyrad2/getting-started/what-is-ipyrad/)
-* [Exercise 2: ipyrad CLI assembly of simulated data](./exercises/ipyrad-CLI-FullTutorial.html)
-* [Exercise 3: Assemble mystery data](./exercises/mystery_data.md)
+* [Exercise 2: ipyrad CLI assembly of simulated data](./exercises/ipyrad-CLI-FullTutorial)
+* [Exercise 3: Assemble mystery data](./exercises/mystery_data)
 * Break for Lunch (12:45-1:30)
 
 ## Learning objectives.
@@ -43,6 +43,12 @@ Lead: Deren
 Lead: Isaac
 
 [Exercise: ipyrad command line assembly with simulated data](./exercises/ipyrad-CLI-FullTutorial.html)
+
+## Assemble mystery data
+Practice the ipyrad2-classic assembly workflow using a mystery dataset
+and also the Seadragon data (if time).
+
+* [Assemble mystery data](./exercises/mystery_data)
 
 
 ## Break for lunch (12:45-1:30)
