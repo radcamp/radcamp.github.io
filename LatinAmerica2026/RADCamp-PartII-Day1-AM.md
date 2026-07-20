@@ -1,9 +1,5 @@
 # RADCamp Latin America 2026 Part II (Bioinformatics) - Day 1 (AM)
 
-# TODO:
-* Potentially remove the intro to cli/filesystem stuff from the intro radseq lecture
-* Is there going to be a shared drive mounted on all the compute nodes that we can access? Or can we potentially set one of these up if we need to?
-
 ## Overview of the morning activities:
 * [RADCamp Part II Learning Objectives](#learning-objectives)
 * [Lecture: Intro to RADSeq (Brief)](https://eaton-lab.org/slides/radcamp)
