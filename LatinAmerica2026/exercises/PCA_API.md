@@ -159,11 +159,23 @@ to interpret.
 
 ## Evaluating applied filters and sample quality
 
+It's always important to keep an eye on the quality and completeness
+of your dataset during both the assembly and analysis steps. In particular
+missing data can cause weird patterns in PCA (with samples clustering by 
+missingness rather than by meaningful biological variation) so it's
+good to check for samples with excess missing data to potentially remove them.
+
+You can ask PCA for a sample summary to check missingness stats:
+
 ```python
 pca.sample_summary()
 ```
 ![png](images/PCA-SampleSummary.png)
 
+You can also inspect pre- and post-filtering stats to see the effect
+of each applied filter. This can be useful for tuning mincov/minmap
+filters to achieve a balance between reducing missing data and retaining
+enough SNPs to be informative.
 
 ```python
 pca.filter_summary()
@@ -184,8 +196,6 @@ post_filter_snps                             9256.000
 post_filter_snp_containing_linkage_blocks     996.000
 post_filter_percent_missing                     0.058
 ```
-
-**TODO:** Add stuff for pca.sample_summary() and pca.filter_summary() here
 
 ## Removing "bad" samples and replotting.
 In PC analysis, it's common for "bad" samples to dominate several of the first
