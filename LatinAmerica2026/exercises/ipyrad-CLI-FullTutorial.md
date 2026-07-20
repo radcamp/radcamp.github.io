@@ -885,8 +885,6 @@ Step 5 (assemble): Delimit loci, call variants, and write outputs
 [####################] 100% | Summarizing final sample depth - total jobs: 12 
 ```
 
-**TODO:** Detailed breakdown of each substep
-
 **TODO:** Explain the output files
 ```bash
 $ ls peddrad_outfiles/
@@ -896,12 +894,14 @@ peddrad.bed  peddrad.hdf5  peddrad.loci.gz  peddrad.stats.json  peddrad.stats.tx
 ```
 
 ipyrad always creates the `peddrad.loci.gz` file, as this is our internal format,
-as well as the `peddradxstats.txt` file, which reports final statistics for the
-assembly (more below). The other files created fall in to 3 categories: files
-that contain the full sequence (i.e. the `peddrad.loci.gz` and `peddrad.seqs.hdf5`
-files), files that contain only variable sites (i.e. the `peddrad.vcf.gz`
-file), and auxiliary files (`peddrad.bed` which contains genomic coordinates for
-the output mapped loci).
+as well as the `peddrad_stats.txt` file, which reports final statistics for the
+assembly (more below). The other files created are:
+* `peddrad.seqs.hdf5` another ipyrad2 internal format which contains the full sequence
+information in an optimized binary format. This optimized representation is used for
+all downstream ipyrad2 analysis tools.
+* `peddrad.vcf.gz` a standard file format recording genotypes, genomic coordinates,
+depth information, and quality scores for variable sites.
+* `peddrad.bed` which contains genomic coordinates for the output mapped loci.
 
 The most informative, human-readable file here is `peddrad.stats.txt` which
 gives extensive and detailed stats about the final assembly. A quick overview
@@ -1013,8 +1013,8 @@ Collecting usage statistics. To deactivate, set browser.gatherUsageStats to fals
   You can now view your Streamlit app in your browser.
 
   Local URL: http://localhost:8501
-  Network URL: http://130.111.205.17:8501
-  External URL: http://130.111.205.17:8501
+  Network URL: http://10.14.255.198:8501
+  External URL: http://10.14.255.198:8501
 ```
 Copy the `Network URL` value and paste it into a new browser tab and you should
 see something like this:
