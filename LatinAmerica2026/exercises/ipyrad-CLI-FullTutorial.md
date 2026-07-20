@@ -557,9 +557,6 @@ Again we can examine the results. The stats output tells you the parameters that
 were used for this step, how many loci were found and locus coverage stats. Use 
 `less` to open the stats file.
 
-**TODO**: Break this up with explanation between each section. Potentially skip
-any of the stats that are less interesting or relevant for beginners.
-
 ```bash
 $ less peddrad_reference/denovo.stats.txt
 ```
@@ -735,14 +732,37 @@ Step 4 (map): Map reads to reference assembly
 [####################] 100% | Gathering mapping stats - total jobs: 12 
 ```
 
-**TODO:** Brief information about what each step has done.
+Step 4 generates sorted/mapped BAM files for each sample in `peddrad_mapped`.
+
+```bash
+$ ls peddrad_mapped/
+```
+```
+ls
+1A_0.trimmed.sorted.bam      1D_0.trimmed.sorted.bam      2G_0.trimmed.sorted.bam      3J_0.trimmed.sorted.bam      ipyrad_map_stats_0.json
+1A_0.trimmed.sorted.bam.csi  1D_0.trimmed.sorted.bam.csi  2G_0.trimmed.sorted.bam.csi  3J_0.trimmed.sorted.bam.csi  ipyrad_map_stats_0.txt
+1B_0.trimmed.sorted.bam      2E_0.trimmed.sorted.bam      2H_0.trimmed.sorted.bam      3K_0.trimmed.sorted.bam      tmpdir
+1B_0.trimmed.sorted.bam.csi  2E_0.trimmed.sorted.bam.csi  2H_0.trimmed.sorted.bam.csi  3K_0.trimmed.sorted.bam.csi
+1C_0.trimmed.sorted.bam      2F_0.trimmed.sorted.bam      3I_0.trimmed.sorted.bam      3L_0.trimmed.sorted.bam
+1C_0.trimmed.sorted.bam.csi  2F_0.trimmed.sorted.bam.csi  3I_0.trimmed.sorted.bam.csi  3L_0.trimmed.sorted.bam.csi
+```
+
+In case you aren't familiar with the SAM/BAM file format let's take a look at one:
+
+```bash
+$ samtools view peddrad_mapped/1A_0.trimmed.sorted.bam | head -n 5
+```
+```
+lane1_locus647_1A_0_0   99      locus_1_1       1       60      86M     =       137     233     CTGCACAAGCTTTGAGCACGGGAGAGCCCGAGACAAGCTAAGGCAATATACGTCCAGTACTTAAGACTCATACAACCGTACATCCG   BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB  NM:i:0  MD:Z:86 MC:Z:97M        AS:i:86  XS:i:0  RG:Z:1A_0
+lane1_locus647_1A_0_1   99      locus_1_1       1       60      86M     =       137     233     CTGCACAAGCTTTGAGCACGGGAGAGCCCGAGACAAGCTAAGGCAATATACGTCCAGTACTTAAGACTCATACAACCGTACATCCG   BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB  NM:i:0  MD:Z:86 MC:Z:97M        AS:i:86  XS:i:0  RG:Z:1A_0
+lane1_locus647_1A_0_2   99      locus_1_1       1       60      86M     =       137     233     CTGCACAAGCTTTGAGCACGGGAGAGCCCGAGACAAGCTAAGGCAATATACGTCCAGTACTTAAGACTCATACAACCGTACATCCG   BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB  NM:i:0  MD:Z:86 MC:Z:97M        AS:i:86  XS:i:0  RG:Z:1A_0
+lane1_locus647_1A_0_3   99      locus_1_1       1       60      86M     =       137     233     CTGCACAAGCTTTGAGCACGGGAGAGCCCGAGACAAGCTAAGGCAATATACGTCCAGTACTTAAGACTCATACAACCGTACATCCG   BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB  NM:i:0  MD:Z:86 MC:Z:97M        AS:i:86  XS:i:0  RG:Z:1A_0
+lane1_locus647_1A_0_4   99      locus_1_1       1       60      86M     =       137     233     CTGCACAAGCTTTGAGCACGGGAGAGCCCGAGACAAGCTAAGGCAATATACGTCCAGTACTTAAGACTCATACAACCGTACATCCG   BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB  NM:i:0  MD:Z:86 MC:Z:97M        AS:i:86  XS:i:0  RG:Z:1A_0
+```
 
 Once again useful information about the results of Step 4 (map) are stored
 in a new directory called `peddrad_mapped`. Let's take a look at the stats
 file.
-
-**TODO:** Split up the walk-through of these results with brief explanations.
-Focus on the most relevant details for beginners.
 
 ```bash
 $ less peddrad_mapped/ipyrad_map_stats_0.txt
