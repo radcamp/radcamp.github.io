@@ -74,7 +74,6 @@ the results indicate.
 
 ## Briefly report back on fastqc results
 * Were there any significant problems with any of the samples?
-* Will you choose to use `trim_reads` to remove low quality regions? If so what values?
 * Was there noticeable adapter contamination?
 * Other things you noticed? Any other questions?
 
@@ -83,5 +82,12 @@ You already started your empirical assembly when you ran Step 1 to demux
 your raw data to samples, so now you can continue with steps 2-5 to complete
 the assembly.
 * Open a terminal window on your compute node and `cd ~/<your_empirical_assembly>`
-* Launch ipyrad2-classic steps 2-5 `ipyrad -p params-wat.txt -s 2345 -c 16`
+* Run ipyrad2-classic step 2 `ipyrad -p params-wat.txt -s 2 -c 16` to trim and filter
+* While step 2 is running make an imap file for the samples you will want to use
+to for construction of the pseudo-reference in step 3.
+  * Aim for broad and even taxonomic coverage
+  * More samples means longer runtimes. The default will choose 10 random samples, but
+10 may be more than enough if all samples are from a single panmictic population.
+  * Make sure in your params file within the `[denovo]` block to set the `imap` value to point to this file.
+* Launch ipyrad2-classic steps 3-5 `ipyrad -p params-wat.txt -s 345 -c 16`
 * After you verify that the assembly is running you may close your browser tab
