@@ -11,8 +11,11 @@ Tec de Monterrey.
 **Get everyone on Tec HPC here: [Link to Node/IP address assignments](../hpc-ip-info.txt)**
 
 ## Tec de Monterrey HPC System Setup
+* **Connect to the Tec Wifi** <- This is important because otherwise you won't be able to see the HPC compute nodes.
+  * Username: `radcamp.mty` / password is on the whiteboard
 
-* Log in with ssh. The format of the command is the same for all OS: `ssh admin1@<your_ip_address>`
+* Log in with ssh to [your compute node IP](../hpc-ip-info.txt)
+  * The format of the command is the same for all OS: `ssh admin1@<your_ip_address>`
   * On Mac or Linux you can open a Terminal and type `ssh`
   * On windows you should be able to open PowerShell and use `ssh` from there.
     * Windows gotcha: Settings > Apps > Optional features > Add a feature > search for OpenSSH Client and choose "Install"
