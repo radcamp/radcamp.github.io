@@ -12,10 +12,11 @@ Tec de Monterrey.
 
 ## Tec de Monterrey HPC System Setup
 
-* Log in with ssh
+* Log in with ssh. The format of the command is the same for all OS: `ssh admin1@<your_ip_address>`
   * On Mac or Linux you can open a Terminal and type `ssh`
   * On windows you should be able to open PowerShell and use `ssh` from there.
     * Windows gotcha: Settings > Apps > Optional features > Add a feature > search for OpenSSH Client and choose "Install"
+  * Username is `admin1` for all compute nodes. Password is the same for all nodes.
 * Download and install miniconda
   * `wget https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh`
   * `bash Miniforge3-Linux-x86_64.sh` <- And follow the prompts
