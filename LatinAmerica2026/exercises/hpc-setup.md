@@ -19,18 +19,35 @@ Tec de Monterrey.
 * Download and install miniconda
   * `wget https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh`
   * `bash Miniforge3-Linux-x86_64.sh` <- And follow the prompts
+* Now log out with `exit` and log back in and you should see your prompt change to have `(base)` at the beginning.
+* Install `git` so we can clone the ipyrad2 repository
+  * `sudo apt install git` then type in your password
 * Create a new conda environment and install all needed software
 ```
 git clone https://github.com/eaton-lab/ipyrad2.git
 cd ipyrad2
-conda env create -f environment.yml -n ipyrad2
+conda env create -f workshop_environment.yml -n ipyrad2
 conda activate ipyrad2
-# Install all analysis tools dependencies
-pip install ipyrad2[analysis]
 ```
-* Launch jupyter lab (including setting a password first)
- * Set jupyter server password: `jupyter server password`
+
+You will not typically need to do this, but because ipyrad2 is still in 
+development we will clone the repository and install it locally in developer 
+mode so that if necessary we can quickly apply changes to address bug fixes.
+```
+# Install ipyrad2 in developer mode
+pip install -e . --no-deps
+```
+
+### Launch and access Jupyter lab web interface
+* Set jupyter server password: `jupyter server password`
+  * I recommend to set this the same as your login password, for simplicity.
+* Launch jupyter lab: `jupyter lab --ip="*" &`  
 * Access your jupyter lab instance at your personal node IP address
+  * Open a new browser tab. For me, my personal node is: `http://10.14.255.198:8888`
+
+You should see the jupyter lab web interface like this:
+
+![png](images/hpc_jupyter.png)
 
 ### Accessing a command line interface on Tec HPC
 Our first goal will be to use gain access to a command line interface to view RAD-seq data

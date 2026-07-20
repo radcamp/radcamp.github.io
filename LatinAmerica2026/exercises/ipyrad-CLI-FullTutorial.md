@@ -65,22 +65,6 @@ CLI, so if you haven't already done so please make sure you have jupyter lab
 running on your compute node, you have connected to it through your browser,
 and you have opened a new terminal.
 
-## Clone the ipyrad2 repository
-You will not typically need to do this, but because ipyrad2 is still in
-development we will clone the repository and install it locally in developer
-mode so that if necessary we can quickly apply changes to address bug fixes.
-
-```bash 
-# Make sure you are in your home directory
-$ cd ~
-
-# Clone the ipyrad2 repository
-$ git clone https://github.com/eaton-lab/ipyrad2.git
-
-# Install ipyrad2 in developer mode
-$ pip install -e ipyrad2 --no-deps
-```
-
 ## Unpack the simulated data
 
 ```bash
