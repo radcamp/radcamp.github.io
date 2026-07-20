@@ -11,18 +11,46 @@
 ## Demultiplex Empirical Data
 Lead: Isaac (Could take all morning)
 
+The first step in a RADSeq assembly is to evaluate the quality
+of the raw data. It is typically more useful to do quality control
+on a per-sample basis rather than on the full undemultiplexed raw
+data file, so before we run `fastqc` we need to run `ipyrad2` step 1
+to demux raw data to samples.
+
 * **TODO:** Where does the empirical data live?
 * **TODO:** When are the barcodes files prepared?
-* Make a new directory for your empirical assembly:
 
+### Make a new directory and a new ipyrad2 params file for your empirical assembly
 ```
 cd ~
 mkdir <your_assembly_name>
 cd <your_assembly_name>
 ipyrad2-classic -n <your_assembly_name>
-# Edit params file to point to raw fastq data and barcodes file
+```
+
+### Edit params file to point to raw fastq data and barcodes file
+Edit your new params file and set `raw_fastq_path` and
+`barcodes_path` to the full path where these files are found.
+
+### Run step 1 to demultiplex your data
+```
 ipyrad2-classic -p params-<your_assembly_name> -s 1 -c 16
 ```
+
+### Quick check of demux process
+Demux fastq files are stored in the `*_fastqs` directory, so take a look
+in this directory to get a quick feel for how the data is distributed
+among samples:
+
+```bash
+# `-l` gives a detailed (long) list
+# `-h` shows file sizes in human readable format 
+ls -lh <your_assmbly_name>_fastqs
+```
+
+**Question:** Do most of your R1/R2 files for each sample show about
+the same size? Or are some much bigger or much smaller than average?
+
 **TODO FINISH**
 
 ## Empirical Data QC
