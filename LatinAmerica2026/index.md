@@ -162,6 +162,10 @@ Times            | Day 6 (Sat) | Day 7 (Sun) | Day 8 (Mon) |
   </td></tr>
 </table>
 
+# RADCamp Latin America 2026 Group Photos
+![RADCampLatinAmerica-PartI-Day2](images/RADCamp-LatinAmerica2026-GroupPhoto1.jpg)
+
+
 ## Acknowledgements
 RADCamp Latin America would not have been possible without important 
 contributions to the workshop in providing us with facilities (classrooms), 
@@ -175,6 +179,9 @@ support of the following individuals:
 * Luis Fernando Santiesteban Moreno 
 * Pedro Manuel Cortés Esparza
 * Ana Laura Lara Rivera
+
+## Special thanks to the unofficial RADCamp Latin America Mascot: The Screaming Goat!
+![RADCamp-Mascot-2026](images/RADCamp-LatinAmerica2026-Macot.jpg)
 
 RADcamp Part I tutorial contributors: Sandra Hoffberg, Natalia Bayona Vasquez, 
 and Travis Glenn. Many things we reference can be found on 
