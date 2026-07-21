@@ -3,6 +3,7 @@
 ## Overview of the afternoon activities:
 * [Prepare empirical barcodes files](#prepare-barcodes-files)
 * [Finding reference sequences](#finding-reference-sequences)
+* [Into ipyrad2 subcommand mode](#intro-to-ipyrad2-subcommand-mode)
 * Break for dinner and bowling activity
 
 ## Prepare barcodes files
@@ -45,6 +46,11 @@ that are appropriate for each participant's system.
 **Fill the [reference sequence tracking google sheet](https://docs.google.com/spreadsheets/d/1xJOYiNZhX47xge2FsxVS3y8885vNg7R2/edit?gid=1330803043#gid=1330803043)
  with information about the taxa of your samples and a link to the most appropriate 
 reference sequence you can find.**
+
+## Intro to ipyrad2 subcommand mode
+
+Walk through the subcommand mode here particulary for a reference based
+WGS + RADSeq dataset (perhaps using Amaranthus data).
 
 ## Break for dinner and bowling activity
 
