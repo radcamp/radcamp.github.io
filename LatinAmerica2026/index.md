@@ -72,7 +72,7 @@ Please contact us at __radcamp.nyc+LatinAmerica@gmail.com__ with any questions.
 
 # Wet Lab (3RAD) Schedule
 
-Times            | Day 1 | Day 2 | Day 3 |
+Times            | Day 1 (Mon) | Day 2 (Tue) | Day 3 (Wed) |
 -----            | ----- | ----- | ----- |
 8:30-9:00       | Check-in and refreshments | Check-in and refreshments | Check-in and refreshments |
 9:00-12:30      | [Introduction slides](https://docs.google.com/presentation/d/1rOKSssEsz7TMOGMQAvOVx64nD8aAVuRj4dnB2WSbUmA/edit#slide=id.g25093f4cab7_0_13) & Lecture | Library amplification | Pooling (Lecture & Practice |
@@ -97,12 +97,12 @@ Additionally these files may be found in the [RADCamp Part I Google Drive](https
 
 # Sequencing Schedule
 
-Times            | Day 4 | Day 5 |
+Times            | Day 4 (Thu) | Day 5 (Fri) |
 -----            | ----- | ----- |
 8:30-9:00        | Check-in and refreshments | Check-in and refreshments |
 9:00-12:30       | Lecture on sequencing | [Introductions and iPyrad Assembly Tutorial](RADCamp-PartII-Day1-AM.md) |
 12:30-13:45      | Lunch | Lunch |
-13:45-18:00      | Set up sequencing run | Optional excursion to the bowling alley |
+13:45-18:00      | Set up sequencing run | [ipyrad assembly preparation](RADCamp-PartII-Day1-PM.md) |
 18:00-20:00      | Free Time | Optional bowling activity (cont); Casual discussion topics: science, genomics, bioinformatics, jobs in research, jobs in teaching, etc. |
 
 ## Sequencing Resources
@@ -110,7 +110,7 @@ TBD
 
 # Bioinformatics (ipyrad) Schedule
 
-Times            | Day 6 | Day 7 | Day 8 |
+Times            | Day 6 (Sat) | Day 7 (Sun) | Day 8 (Mon) |
 -----            | ----- | ----- | ----- |
 8:30-9:00       | Check-in and refreshments | Check-in and refreshments | Check-in and refreshments |
 9:00-12:30      | [Demux/QC Empirical Data](./RADCamp-PartII-Day2-AM.md) (start API tools if empirical data isn't ready) | [Review Assembly results & ipyrad API and analysis tools](RADCamp-PartII-Day3-AM.md) | [Symposium](https://drive.google.com/drive/folders/1TeDLweZlBW7VOdF-oGX_igBiP46GlvE0?usp=drive_link) |
