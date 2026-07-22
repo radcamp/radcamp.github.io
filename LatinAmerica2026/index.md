@@ -183,6 +183,11 @@ support of the following individuals:
 ## Special thanks to the unofficial RADCamp Latin America Mascot: The Screaming Goat!
 ![RADCamp-Mascot-2026](images/RADCamp-LatinAmerica2026-Macot.jpg)
 
+<audio controls>
+  <source src="audio/screaming-goat.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
+
 RADcamp Part I tutorial contributors: Sandra Hoffberg, Natalia Bayona Vasquez, 
 and Travis Glenn. Many things we reference can be found on 
 [badDNA.uga.edu](https://baddna.uga.edu)
