@@ -75,9 +75,9 @@ Please contact us at __radcamp.nyc+LatinAmerica@gmail.com__ with any questions.
 Times            | Day 1 (Mon) | Day 2 (Tue) | Day 3 (Wed) |
 -----            | ----- | ----- | ----- |
 8:30-9:00       | Check-in and refreshments | Check-in and refreshments | Check-in and refreshments |
-9:00-12:30      | [Introduction slides](https://docs.google.com/presentation/d/1rOKSssEsz7TMOGMQAvOVx64nD8aAVuRj4dnB2WSbUmA/edit#slide=id.g25093f4cab7_0_13) & Lecture | Library amplification | Pooling (Lecture & Practice |
+9:00-12:30      | [Introduction slides](https://docs.google.com/presentation/d/1rOKSssEsz7TMOGMQAvOVx64nD8aAVuRj4dnB2WSbUmA/edit#slide=id.g25093f4cab7_0_13) & Lecture | Library amplification | Lecture on Sequencing |
 12:30-13:45 | Lunch | Lunch | Lunch |
-13:45-18:00 | Digestion, Ligation, Clean up | Clean up and Gel | Troubleshooting Session |
+13:45-18:00 | Digestion, Ligation, Clean up | Clean up and Gel | Another round of clean up and Gel |
 18:00-20:00 | Casual evening        | Size-selection & Quantification | Networking dinner |
 
 ## 3RAD resources
@@ -99,11 +99,11 @@ Additionally these files may be found in the [RADCamp Part I Google Drive](https
 
 Times            | Day 4 (Thu) | Day 5 (Fri) |
 -----            | ----- | ----- |
-8:30-9:00        | Check-in and refreshments | Check-in and refreshments |
-9:00-12:30       | Lecture on sequencing | [Introductions and iPyrad Assembly Tutorial](RADCamp-PartII-Day1-AM.md) |
+8:30-9:00        | Final gel & Pooling | Free Day |
+9:00-12:30       | Coffee & [Introductions and iPyrad Assembly Tutorial](RADCamp-PartII-Day1-AM.md) | Free Day |
 12:30-13:45      | Lunch | Lunch |
-13:45-18:00      | Set up sequencing run | [ipyrad assembly preparation](RADCamp-PartII-Day1-PM.md) |
-18:00-20:00      | Free Time | Optional bowling activity (cont); Casual discussion topics: science, genomics, bioinformatics, jobs in research, jobs in teaching, etc. |
+13:45-18:00      | Set up sequencing run & [ipyrad assembly preparation](RADCamp-PartII-Day1-PM.md) | Free Day |
+18:00-20:00      | Dinner on own | Free Day |
 
 ## Sequencing Resources
 TBD
@@ -115,8 +115,8 @@ Times            | Day 6 (Sat) | Day 7 (Sun) | Day 8 (Mon) |
 8:30-9:00       | Check-in and refreshments | Check-in and refreshments | Check-in and refreshments |
 9:00-12:30      | [Demux/QC Empirical Data](./RADCamp-PartII-Day2-AM.md) (start API tools if empirical data isn't ready) | [Review Assembly results & ipyrad API and analysis tools](RADCamp-PartII-Day3-AM.md) | [Symposium](https://drive.google.com/drive/folders/1TeDLweZlBW7VOdF-oGX_igBiP46GlvE0?usp=drive_link) |
 12:30-13:45 | Lunch | Lunch | Lunch |
-13:45-18:00 | [Begin Empirical Assembly](RADCamp-PartII-Day2-PM.md) |  [Empirical analysis w/ API tools](RADCamp-PartII-Day3-PM.md) | Q&As Genomics Core-Instructors- Participants & Farewell Dinner (optional) |
-
+13:45-18:00 | [Begin Empirical Assembly](RADCamp-PartII-Day2-PM.md) |  [Empirical analysis w/ API tools](RADCamp-PartII-Day3-PM.md) | Q&As Genomics Core-Instructors Participants |
+18:00-20:00 | Optional bowling activity; Casual discussion topics: science, genomics, bioinformatics, jobs in research, jobs in teaching, etc. | Dinner on own | Farewell Dinner (optional) |
 
 ## RADCamp Latin America 2026 co-sponsored by:
 
