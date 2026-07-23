@@ -2,7 +2,7 @@
 
 ## Overview of the morning activities:
 * [RADCamp Part II Learning Objectives](#learning-objectives)
-* [Lecture: Intro to RADSeq (Brief)](https://eaton-lab.org/slides/radcamp)
+* [Lecture: Intro to RADSeq (Brief)](./Bioinformatics-Lecture-1.pdf)
 * [Exercise 0: HPC system access & setup (Isaac)](./exercises/hpc-setup)
 * [Exercise 1: Intro to FASTQC format and quality control (Isaac)](./exercises/fastq-qc)
 * Coffee Break (10:30-10:50)
