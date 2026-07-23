@@ -100,10 +100,10 @@ Additionally these files may be found in the [RADCamp Part I Google Drive](https
 Times            | Day 4 (Thu) | Day 5 (Fri) |
 -----            | ----- | ----- |
 8:30-9:00        | Final gel & Pooling | Free Day |
-9:00-12:30       | Coffee & [Introductions and iPyrad Assembly Tutorial](RADCamp-PartII-Day1-AM.md) | Free Day |
-12:30-13:45      | Lunch | Lunch |
+9:00-12:30       | Coffee & [HPC Setup and iPyrad Assembly Tutorial](RADCamp-PartII-Day1-AM.md) | Free Day |
+12:30-13:45      | Lunch | Free Lunch |
 13:45-18:00      | Set up sequencing run & [ipyrad assembly preparation](RADCamp-PartII-Day1-PM.md) | Free Day |
-18:00-20:00      | Dinner on own | Free Day |
+18:00-20:00      | Dinner on own | Free Dinner |
 
 ## Sequencing Resources
 TBD
