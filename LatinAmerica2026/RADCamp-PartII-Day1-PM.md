@@ -15,22 +15,49 @@ sample ID (no white space in sample ID names) and the second and third columns
 being the inner barcode sequences:
 
 ```
-Sample	CCGAAT   	CTAACG
-Sample	TTAGGCA	    CTAACG
-Sample	AACTCGTC	CTAACG
-Sample	GGTCTACGT	CTAACG
-Sample	GATACC		CTAACG
-Sample	AGCGTTG	    CTAACG
-Sample	CTGCAACT	CTAACG
-Sample	TCATGGTCA	CTAACG
-Sample	CCGAAT  	TCGGTAC
+Sample1	CCGAAT   	CTAACG
+Sample2	TTAGGCA	    CTAACG
+Sample3	AACTCGTC	CTAACG
+Sample4	GGTCTACGT	CTAACG
+Sample5	GATACC		CTAACG
+Sample6	AGCGTTG	    CTAACG
+Sample7	CTGCAACT	CTAACG
+Sample8	TCATGGTCA	CTAACG
+Sample9	CCGAAT  	TCGGTAC
 ```
 
 **When you have your barcode file ready please upload a copy to the
 shared google drive for [Participant Barcode Files](https://drive.google.com/drive/folders/1qiXHBS9q97pac7IhmIGXROWuG39hbjo8?usp=sharing).**
 
-## Finding reference sequences
+## Prepare other metadata files as needed
+It could also be useful if you have other metadata to create a metadata.tsv file
+mapping sample IDs to whatever metadata you have, like sample site or region
+or morphological data, or latlongs, or whatever else you have. It should be
+formatted similar to the pops file, with the first column being sample ID and
+remaining columns containing metadata info. For the metadata file it will be useful
+to have the first row be reserved for column headers (no spaces in column header
+names, use underscore (`_`), like this:
 
+```
+SampleID    latitude    longitude   tarsus_length
+1A          xxx         yyy         zzz
+```
+
+## Finding reference sequences and/or alternate RADSeq data
+
+In this activity, folks who don't have data will search online for some
+interesting and relevant RADSeq data to download and re-assemble. For people
+_with_ data you will search online for a relevant reference sequence to use
+during part of the assembly.
+
+### Finding RADSeq datasets
+Look on [sra](https://www.ncbi.nlm.nih.gov/sra) and when you find a dataset, 
+locate the BioProject number which looks like this `PRJNA1499259`. With the
+PRJ number follow the instructions on the ipyrad2 docs to [Download the 
+dataset](https://eaton-lab.org/ipyrad2/assembly/tutorial-pedic/#download-the-dataset).
+
+
+### Finding reference sequences
 In ipyrad2 there are two modes of assembly: 1) *denovo* where loci shared
 among samples are identified without need of a reference sequence; and 2)
 reference-based where an external reference sequence can be used to facilitate
