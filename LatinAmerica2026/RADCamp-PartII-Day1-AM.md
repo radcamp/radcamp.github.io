@@ -28,6 +28,11 @@ Lead: Deren
 * When to use RAD-seq and comparison to alternatives.  
 * Brief introduction to the command-line and filesystems.  
 
+## Straw poll: [How are we feeling about bioinformatics?](https://strawpoll.com/wAg3Q4JEdy8)
+
+## [Exercise 0: HPC system access & setup (Isaac)](./exercises/hpc-setup)
+
+## [Exercise 1: Intro to FASTQC format and quality control (Isaac)](./exercises/fastq-qc)
 
 ## Coffee break (10:30-10:50)
 
