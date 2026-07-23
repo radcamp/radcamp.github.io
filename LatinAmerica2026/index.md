@@ -165,6 +165,8 @@ Times            | Day 6 (Sat) | Day 7 (Sun) | Day 8 (Mon) |
 # RADCamp Latin America 2026 Group Photos
 ![RADCampLatinAmerica-PartI-Day2](images/RADCamp-LatinAmerica2026-GroupPhoto1.jpg)
 
+[After Lab Work Photo](images/RADCamp-LatinAmerica2026-AfterLabWork.png)
+
 ![RADCampLatinAmerica-PartI-Day3](images/RADCamp-LatinAmerica2026-GroupPhoto2.jpg)
 
 ![RADCampLatinAmerica-PartI-Day3](images/RADCamp-LatinAmerica2026-GroupPhoto3.jpg)
